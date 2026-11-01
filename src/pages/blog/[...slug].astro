@@ -1,0 +1,21 @@
+---
+import { type CollectionEntry, getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+export async function getStaticPaths(){const posts=await getCollection('blog');return posts.map(post=>({params:{slug:post.slug},props:{post}}));}
+interface Props { post: CollectionEntry<'blog'>; }
+const {post}=Astro.props as Props;
+const {Content}=await post.render();
+const fmt=(date:Date)=>date.toLocaleDateString('ja-JP',{year:'numeric',month:'long',day:'numeric'});
+---
+<Layout title={`${post.data.title} | たかブロ`} description={post.data.description} image={post.data.heroImage}>
+  <article class="post">
+    <a class="back" href="/#articles">← 記事一覧に戻る</a>
+    <header><div class="meta"><time datetime={post.data.pubDate.toISOString()}>{fmt(post.data.pubDate)}</time><i></i><span>{post.data.category}</span>{post.data.updatedDate&&<><i></i><span>更新：{fmt(post.data.updatedDate)}</span></>}</div><h1>{post.data.title}</h1><p>{post.data.description}</p></header>
+    {post.data.heroImage&&<img class="hero-image" src={post.data.heroImage} alt="" />}
+    <div class="content"><Content /></div>
+    <aside class="post-end"><span>✳</span><p>最後まで読んでくれてありがとう。</p><a href="/#articles">ほかの記事も読んでみる →</a></aside>
+  </article>
+</Layout>
+<style>
+.post{max-width:760px;margin:0 auto;padding:43px 0 20px}.back{display:inline-block;margin-bottom:34px;color:#91a3bb;font-size:11px;font-weight:700}.back:hover{color:var(--blue)}header{padding-bottom:29px;border-bottom:1px solid var(--line)}.meta{display:flex;align-items:center;flex-wrap:wrap;gap:10px;color:#8fa0b7;font-size:10px;font-weight:600}.meta i{width:3px;height:3px;border-radius:50%;background:var(--blue)}h1{margin:21px 0 13px;font-size:clamp(30px,5vw,47px);line-height:1.4;letter-spacing:-.065em;font-weight:900}header p{margin:0;color:var(--muted);font-size:13px;line-height:2}.hero-image{display:block;width:100%;max-height:410px;margin:30px 0 38px;border-radius:17px;object-fit:cover}.content{color:#c4cedc;font-size:15px;line-height:2.15;overflow-wrap:anywhere}.content :global(h2){margin:2.2em 0 .8em;padding-left:15px;border-left:3px solid var(--blue);color:var(--text);font-size:23px;line-height:1.5;letter-spacing:-.04em}.content :global(h3){margin:2em 0 .65em;color:var(--text);font-size:18px}.content :global(p){margin:1.15em 0}.content :global(a){color:#91baff;text-decoration:underline;text-underline-offset:4px}.content :global(ul),.content :global(ol){padding-left:1.5em}.content :global(li){padding-left:.25em;margin:.35em 0}.content :global(blockquote){margin:1.8em 0;padding:5px 20px;border-left:2px solid #547db8;color:#9eafc5;background:#1522388c}.content :global(code){padding:.15em .4em;border:1px solid var(--line);border-radius:5px;background:#142137;color:#b9d4ff;font-size:.88em}.content :global(pre){overflow-x:auto;padding:18px;border:1px solid var(--line);border-radius:12px;background:#080e18;line-height:1.7}.content :global(pre code){padding:0;border:0;background:transparent;color:inherit}.content :global(hr){margin:2.5em 0;border:0;border-top:1px solid var(--line)}.post-end{margin-top:65px;padding:28px;border:1px solid var(--line);border-radius:16px;background:#111c2e99;text-align:center}.post-end>span{color:var(--blue);font-size:23px}.post-end p{color:var(--muted);font-size:12px}.post-end a{display:inline-block;margin-top:8px;color:#a9caff;font-size:12px;font-weight:700}@media(max-width:600px){.post{padding-top:30px}.content{font-size:14px}.content :global(h2){font-size:21px}.hero-image{margin:22px 0 28px}}
+</style>
