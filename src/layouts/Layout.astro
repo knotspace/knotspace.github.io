@@ -4,8 +4,15 @@ interface Props {
   description?: string;
   image?: string;
 }
-const { title, description = '日々の発見や好きなことを発信する、たかブロ。', image } = Astro.props;
-const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
+
+const {
+  title,
+  description = '日々の発見や好きなことを発信する、たかブロ。',
+  image,
+} = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
+const pageImage = image ? new URL(image, Astro.url).href : undefined;
+const BASE = import.meta.env.BASE_URL;
 ---
 <!doctype html>
 <html lang="ja">
@@ -14,7 +21,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0b1220" />
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    <link rel="canonical" href={canonicalURL} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -22,22 +29,73 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
     <meta property="og:site_name" content="たかブロ" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
-    {image && <meta property="og:image" content={image} />}
+    <meta property="og:url" content={canonicalURL} />
+    {pageImage && <meta property="og:image" content={pageImage} />}
     <title>{title}</title>
   </head>
   <body>
-    <div class="shell">
-      <header class="header">
-        <a class="brand" href="/" aria-label="たかブロ ホーム"><span class="brand-icon">T</span><span>たかブロ<span class="blue">.</span></span></a>
-        <nav aria-label="メインナビゲーション"><a href="/">ホーム</a><a href="/#articles">記事一覧</a><a class="nav-pill" href="https://github.com/" target="_blank" rel="noreferrer">GitHub ↗</a></nav>
+    <div class="site-shell">
+      <header class="site-header">
+        <a class="brand" href={BASE} aria-label="たかブロ ホーム">
+          <span class="brand-mark">T</span>
+          <span>たかブロ<span class="brand-dot">.</span></span>
+        </a>
+        <nav aria-label="メインナビゲーション">
+          <a href={BASE}>ホーム</a>
+          <a href={`${BASE}#articles`}>記事一覧</a>
+          <a class="nav-cta" href="https://github.com/Shiratakihot/Astro" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+        </nav>
       </header>
-      <main><slot /></main>
-      <footer class="footer"><a href="/" class="footer-brand">たかブロ<span class="blue">.</span></a><span>好きなことを、好きなように。</span><small>© {new Date().getFullYear()} Taka Blog. Built with Astro.</small></footer>
+      <main>
+        <slot />
+      </main>
+      <footer class="site-footer">
+        <a class="footer-brand" href={BASE}>たかブロ<span class="brand-dot">.</span></a>
+        <p>好きなことを、好きなように。</p>
+        <span>© {new Date().getFullYear()} たかブロ. Built with Astro.</span>
+      </footer>
     </div>
   </body>
 </html>
+
 <style is:global>
-  :root{color-scheme:dark;--bg:#0b1220;--panel:#111c2e;--line:rgba(148,163,184,.15);--text:#f3f6fc;--muted:#9aa9bd;--blue:#83b3ff}
-  *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:25px}body{margin:0;background:radial-gradient(ellipse at 50% -18%,rgba(65,116,194,.19),transparent 42rem),var(--bg);color:var(--text);font-family:'DM Sans','Noto Sans JP',sans-serif;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}.shell{width:min(100% - 48px,1080px);margin:auto}.header{height:86px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:11px;font-size:21px;font-weight:900;letter-spacing:-.06em}.brand-icon{display:grid;place-items:center;width:35px;height:35px;border-radius:11px;background:linear-gradient(135deg,#b5d4ff,#5c98f6);color:#091322;font-size:17px;box-shadow:0 5px 22px #4f8df733}.blue{color:var(--blue)}nav{display:flex;align-items:center;gap:27px;color:var(--muted);font-size:13px;font-weight:600}nav a:hover{color:white}.nav-pill{padding:9px 14px;border:1px solid var(--line);border-radius:99px;color:var(--text)}main{min-height:65vh}.footer{margin-top:100px;padding:27px 0 34px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:15px;color:#7889a1;font-size:11px}.footer-brand{font-size:15px;font-weight:900;color:var(--text)}.footer small{font-size:10px}@media(max-width:620px){.shell{width:min(100% - 32px,1080px)}.header{height:72px}nav{gap:15px;font-size:12px}.nav-pill{display:none}.footer{margin-top:70px;align-items:flex-start;flex-direction:column;gap:8px}}
+  :root {
+    color-scheme: dark;
+    --bg: #0b1220;
+    --surface: #111c2e;
+    --line: rgba(148, 163, 184, .14);
+    --text: #f4f7fb;
+    --muted: #9aa9bd;
+    --accent: #82b2ff;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: radial-gradient(ellipse at 50% -18%, rgba(61,112,190,.18), transparent 42rem), var(--bg);
+    color: var(--text);
+    font-family: "DM Sans", "Noto Sans JP", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  .site-shell { width: min(100% - 48px, 1080px); margin: 0 auto; }
+  .site-header { min-height: 88px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--line); }
+  .brand { display:inline-flex; align-items:center; gap:11px; font-size:21px; font-weight:900; letter-spacing:-.06em; }
+  .brand-mark { display:grid; place-items:center; width:34px; height:34px; border-radius:11px; color:#081322; background:linear-gradient(135deg,#b5d3ff,#5c98f6); font-size:17px; box-shadow:0 5px 22px rgba(79,141,247,.25); }
+  .brand-dot { color:var(--accent); }
+  nav { display:flex; align-items:center; gap:29px; color:var(--muted); font-size:13px; font-weight:600; }
+  nav a { transition:color .2s ease; }
+  nav a:hover { color:var(--text); }
+  nav .nav-cta { color:var(--text); border:1px solid var(--line); padding:9px 14px; border-radius:999px; }
+  main { min-height:65vh; }
+  .site-footer { margin-top:100px; padding:27px 0 34px; border-top:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; gap:18px; color:#718198; font-size:11px; }
+  .footer-brand { color:var(--text); font-size:15px; font-weight:900; }
+  .site-footer p { margin:0; }
+  @media (max-width:620px) {
+    .site-shell { width:min(100% - 32px,1080px); }
+    .site-header { min-height:72px; }
+    nav { gap:15px; font-size:12px; }
+    nav .nav-cta { display:none; }
+    .site-footer { margin-top:70px; flex-direction:column; align-items:flex-start; gap:8px; }
+  }
 </style>

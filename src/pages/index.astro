@@ -1,41 +1,153 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
-const posts = (await getCollection('blog')).sort((a,b)=>b.data.pubDate.valueOf()-a.data.pubDate.valueOf());
-const featured = posts[0];
-const rest = posts.slice(1);
-const fmt = (date: Date) => date.toLocaleDateString('ja-JP',{year:'numeric',month:'long',day:'numeric'});
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+const [featured, ...rest] = posts;
+const BASE = import.meta.env.BASE_URL;
+const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
+  year: 'numeric', month: 'long', day: 'numeric'
+});
 ---
 <Layout title="たかブロ | 好きなことを、好きなように。" description="日々の発見や好きなことを発信する、たかブロ。">
   <section class="hero">
     <div class="hero-copy">
-      <span class="eyebrow"><i></i> PERSONAL BLOG / EST. 2026</span>
+      <span class="eyebrow"><span class="eyebrow-dot"></span> PERSONAL BLOG / SINCE 2026</span>
       <h1>好きなことを、<br /><span>好きなように。</span></h1>
-      <p>日々の出来事、気になったこと、好きなもの。<br class="pc" />自分のペースで、いろいろ書いていくブログです。</p>
-      <a class="hero-button" href="#articles">記事を読む <span>↓</span></a>
+      <p>日々の出来事、気になったこと、好きなもの。<br class="desktop-break" />自分のペースで、いろいろ書いていくブログです。</p>
+      <a class="hero-link" href="#articles">記事を読む <span aria-hidden="true">↓</span></a>
     </div>
-    <div class="visual" aria-hidden="true"><div class="orbit o1"></div><div class="orbit o2"></div><div class="note"><small>TAKA'S NOTE / 001</small><strong>THINK.<br />WRITE.<br /><em>SHARE.</em></strong><b></b><span>A little corner of the internet.</span></div><i class="spark s1">✳</i><i class="spark s2">✦</i></div>
+    <div class="hero-art" aria-hidden="true">
+      <div class="art-orbit orbit-one"></div>
+      <div class="art-orbit orbit-two"></div>
+      <div class="art-card">
+        <span class="art-label">TAKA'S NOTE</span>
+        <strong>THINK.<br />WRITE.<br /><em>SHARE.</em></strong>
+        <span class="art-line"></span>
+        <span class="art-caption">A little corner of the internet.</span>
+      </div>
+      <span class="art-spark spark-one">✳</span>
+      <span class="art-spark spark-two">✦</span>
+    </div>
   </section>
-  {#if featured}
-    <section class="featured">
-      <div class="section-head"><div><span class="kicker">PICK UP</span><h2>最新の記事</h2></div><span class="count">01 / FEATURED</span></div>
-      <a class="feature-card" href={`/blog/${featured.slug}/`}>
-        {featured.data.heroImage ? <img src={featured.data.heroImage} alt="" /> : <div class="feature-placeholder">TAKA BLOG</div>}
-        <div class="feature-copy"><div class="meta"><time datetime={featured.data.pubDate.toISOString()}>{fmt(featured.data.pubDate)}</time><i></i><span>{featured.data.category}</span></div><h3>{featured.data.title}</h3><p>{featured.data.description}</p><span class="read">記事を読む <b>↗</b></span></div>
+
+  {featured && (
+    <section class="featured-section" aria-labelledby="featured-title">
+      <div class="section-heading">
+        <div><span class="section-kicker">PICK UP</span><h2 id="featured-title">最新の記事</h2></div>
+        <span class="section-count">01 / FEATURED</span>
+      </div>
+      <a class="featured-card" href={`${BASE}blog/${featured.slug}/`}>
+        {featured.data.heroImage ? (
+          <div class="featured-image"><img src={featured.data.heroImage} alt="" loading="eager" /></div>
+        ) : (
+          <div class="featured-image image-placeholder"><span>TAKA BLOG</span></div>
+        )}
+        <div class="featured-content">
+          <div class="post-meta"><time datetime={featured.data.pubDate.toISOString()}>{dateFormat(featured.data.pubDate)}</time><span class="meta-divider"></span><span>{featured.data.category}</span></div>
+          <h3>{featured.data.title}</h3>
+          <p>{featured.data.description}</p>
+          <span class="read-more">記事を読む <span aria-hidden="true">↗</span></span>
+        </div>
       </a>
     </section>
-  {/if}
-  <section class="articles" id="articles">
-    <div class="section-head"><div><span class="kicker">THE JOURNAL</span><h2>記事一覧</h2></div><span class="count">{String(posts.length).padStart(2,'0')} ARTICLES</span></div>
-    {#if posts.length === 0}
-      <div class="empty"><span>✳</span><h3>記事はまだありません。</h3><p>最初の記事を公開すると、ここに表示されます。</p></div>
-    {:else if rest.length === 0}
-      <p class="hint">記事を追加すると、ここに新しい記事が並びます。</p>
-    {:else}
-      <div class="grid">{rest.map((post,index)=><a class="card" href={`/blog/${post.slug}/`}><div class="card-top"><span>{String(index+2).padStart(2,'0')}</span><b>↗</b></div>{post.data.heroImage?<img class="thumb" src={post.data.heroImage} alt="" loading="lazy"/>:<div class="thumb placeholder">TAKA BLOG</div>}<div class="card-copy"><div class="meta"><time datetime={post.data.pubDate.toISOString()}>{fmt(post.data.pubDate)}</time><i></i><span>{post.data.category}</span></div><h3>{post.data.title}</h3><p>{post.data.description}</p></div></a>)}</div>
-    {/if}
+  )}
+
+  <section class="articles-section" id="articles" aria-labelledby="articles-title">
+    <div class="section-heading">
+      <div><span class="section-kicker">THE JOURNAL</span><h2 id="articles-title">記事一覧</h2></div>
+      <span class="section-count">{String(posts.length).padStart(2, '0')} ARTICLES</span>
+    </div>
+    {posts.length === 0 ? (
+      <div class="empty-state"><span>✳</span><h3>記事はまだありません。</h3><p>最初の記事を公開すると、ここに表示されます。</p></div>
+    ) : rest.length === 0 ? (
+      <p class="single-note">記事を追加すると、ここに新しい記事が並びます。</p>
+    ) : (
+      <div class="article-grid">
+        {rest.map((post, index) => (
+          <a class="article-card" href={`${BASE}blog/${post.slug}/`}>
+            <div class="card-topline"><span class="card-number">{String(index + 2).padStart(2, '0')}</span><span class="card-arrow">↗</span></div>
+            {post.data.heroImage ? <img class="card-image" src={post.data.heroImage} alt="" loading="lazy" /> : <div class="card-image image-placeholder"><span>TAKA BLOG</span></div>}
+            <div class="card-body">
+              <div class="post-meta"><time datetime={post.data.pubDate.toISOString()}>{dateFormat(post.data.pubDate)}</time><span class="meta-divider"></span><span>{post.data.category}</span></div>
+              <h3>{post.data.title}</h3>
+              <p>{post.data.description}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    )}
   </section>
 </Layout>
+
 <style>
-.hero{min-height:450px;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:30px;padding:65px 0 72px}.eyebrow,.kicker{color:var(--blue);font-size:10px;font-weight:800;letter-spacing:.17em}.eyebrow{display:flex;align-items:center;gap:9px}.eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--blue);box-shadow:0 0 12px var(--blue)}h1{margin:22px 0 17px;font-size:clamp(39px,5.5vw,62px);line-height:1.23;letter-spacing:-.075em;font-weight:900}h1 span{color:#8db9ff}.hero-copy>p{color:var(--muted);font-size:14px;line-height:2.1}.hero-button{display:inline-flex;gap:20px;align-items:center;margin-top:19px;padding:12px 18px;border:1px solid #83b3ff66;border-radius:99px;color:#c5dcff;font-size:12px;font-weight:700;transition:.2s}.hero-button:hover{background:#72a7ff1f;transform:translateY(-2px)}.visual{min-height:320px;position:relative;display:grid;place-items:center}.orbit{position:absolute;border:1px solid #72a7ff2e;border-radius:50%}.o1{width:300px;height:300px}.o2{width:380px;height:215px;transform:rotate(-35deg)}.note{z-index:1;width:270px;padding:27px 29px;border:1px solid #abc7ef40;border-radius:19px;background:linear-gradient(145deg,#233754f2,#0f1a2bf5);box-shadow:0 30px 80px #0006;transform:rotate(5deg)}.note small,.note>span{color:#9fb3cf;font-size:8px;letter-spacing:.16em}.note strong{display:block;margin:26px 0 21px;font-size:37px;line-height:1.05;letter-spacing:-.06em}.note em{color:#8db9ff;font-style:normal}.note b{display:block;width:38px;height:3px;border-radius:3px;background:var(--blue);margin-bottom:14px}.spark{position:absolute;color:var(--blue);font-style:normal}.s1{top:33px;right:17%;font-size:27px}.s2{bottom:35px;left:14%;font-size:20px}.section-head{display:flex;align-items:end;justify-content:space-between;margin-bottom:22px}.section-head h2{margin:7px 0 0;font-size:25px;letter-spacing:-.06em}.count{color:#718198;font-size:9px;font-weight:700;letter-spacing:.13em}.feature-card{display:grid;grid-template-columns:1.05fr .95fr;min-height:250px;overflow:hidden;border:1px solid var(--line);border-radius:20px;background:#111c2eb8;transition:.2s}.feature-card:hover,.card:hover{border-color:#72a7ff88;transform:translateY(-3px)}.feature-card>img,.feature-placeholder{width:100%;height:100%;min-height:250px;object-fit:cover}.feature-copy{align-self:center;padding:30px 34px}.meta{display:flex;align-items:center;gap:10px;color:#8fa0b7;font-size:10px;font-weight:600}.meta i{width:3px;height:3px;border-radius:50%;background:var(--blue)}.feature-copy h3{margin:17px 0 9px;font-size:25px;line-height:1.45;letter-spacing:-.05em}.feature-copy p,.card-copy p{margin:0;color:var(--muted);font-size:12px;line-height:1.9}.read{display:inline-flex;gap:14px;margin-top:22px;color:#a9caff;font-size:11px;font-weight:700}.articles{padding-top:76px}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.card{overflow:hidden;border:1px solid var(--line);border-radius:17px;background:#111c2ea6;transition:.2s}.card-top{display:flex;justify-content:space-between;padding:15px 17px 10px;color:#72839b;font-size:10px;font-weight:800;letter-spacing:.12em}.card-top b{color:var(--blue);font-size:15px}.thumb{display:block;width:calc(100% - 34px);height:150px;margin:0 17px;border-radius:10px;object-fit:cover}.card-copy{padding:17px 19px 22px}.card-copy h3{margin:11px 0 7px;font-size:17px;line-height:1.5;letter-spacing:-.04em}.placeholder,.feature-placeholder{display:grid;place-items:center;background:linear-gradient(135deg,#1b3150,#111c2e);color:#8db9ff;font-size:12px;font-weight:900;letter-spacing:.2em}.empty{padding:45px 20px;border:1px dashed var(--line);border-radius:18px;text-align:center;color:var(--muted)}.empty>span{color:var(--blue);font-size:25px}.empty h3{color:var(--text);font-size:16px}.empty p,.hint{color:var(--muted);font-size:12px}@media(max-width:700px){.hero{grid-template-columns:1fr;padding:55px 0 48px;gap:8px}.visual{min-height:270px}.note{width:245px}.o1{width:265px;height:265px}.feature-card{grid-template-columns:1fr}.feature-card>img,.feature-placeholder{height:190px;min-height:190px}.feature-copy{padding:24px}.feature-copy h3{font-size:21px}.articles{padding-top:58px}}@media(max-width:480px){.grid{grid-template-columns:1fr}h1{font-size:42px}.section-head h2{font-size:22px}.count{font-size:8px}}
+  .hero { min-height:470px; display:grid; grid-template-columns:1.1fr .9fr; align-items:center; gap:35px; padding:70px 0 76px; }
+  .eyebrow,.section-kicker { color:var(--accent); font-size:10px; font-weight:800; letter-spacing:.17em; }
+  .eyebrow { display:inline-flex; align-items:center; gap:9px; }
+  .eyebrow-dot { width:7px; height:7px; border-radius:50%; background:var(--accent); box-shadow:0 0 12px var(--accent); }
+  h1 { margin:22px 0 17px; font-size:clamp(38px,5.5vw,62px); line-height:1.22; letter-spacing:-.075em; font-weight:900; }
+  h1 span { color:#8db9ff; }
+  .hero-copy > p { color:var(--muted); font-size:14px; line-height:2.1; }
+  .hero-link { display:inline-flex; gap:20px; align-items:center; margin-top:20px; padding:12px 18px; border:1px solid rgba(141,185,255,.38); border-radius:999px; color:#c5dcff; font-size:12px; font-weight:700; transition:.2s; }
+  .hero-link:hover { background:rgba(114,167,255,.12); transform:translateY(-2px); }
+  .hero-art { min-height:320px; position:relative; display:grid; place-items:center; }
+  .art-card { position:relative; z-index:1; width:min(280px,85%); padding:27px 29px; border:1px solid rgba(171,199,239,.25); border-radius:19px; background:linear-gradient(145deg,rgba(35,55,84,.94),rgba(15,26,43,.96)); box-shadow:0 30px 80px rgba(0,0,0,.35); transform:rotate(5deg); }
+  .art-label,.art-caption { color:#9fb3cf; font-size:8px; letter-spacing:.16em; }
+  .art-card strong { display:block; margin:27px 0 22px; font-size:37px; line-height:1.05; letter-spacing:-.06em; }
+  .art-card em { color:#8db9ff; font-style:normal; }
+  .art-line { display:block; width:38px; height:3px; border-radius:3px; background:var(--accent); margin-bottom:15px; }
+  .art-orbit { position:absolute; border:1px solid rgba(114,167,255,.18); border-radius:50%; }
+  .orbit-one { width:310px; height:310px; }
+  .orbit-two { width:390px; height:220px; transform:rotate(-35deg); }
+  .art-spark { position:absolute; color:#8db9ff; }
+  .spark-one { top:35px; right:18%; font-size:27px; }
+  .spark-two { bottom:38px; left:15%; font-size:20px; }
+  .featured-section,.articles-section { padding-top:28px; }
+  .section-heading { display:flex; justify-content:space-between; align-items:end; margin-bottom:22px; }
+  .section-heading h2 { margin:7px 0 0; font-size:25px; letter-spacing:-.06em; }
+  .section-count { color:#718198; font-size:9px; font-weight:700; letter-spacing:.13em; }
+  .featured-card { display:grid; grid-template-columns:1.05fr .95fr; min-height:260px; overflow:hidden; border:1px solid var(--line); border-radius:20px; background:rgba(17,28,46,.72); transition:border-color .2s,transform .2s; }
+  .featured-card:hover,.article-card:hover { border-color:rgba(114,167,255,.55); transform:translateY(-3px); }
+  .featured-image { min-height:260px; overflow:hidden; background:#172740; }
+  .featured-image img { width:100%; height:100%; min-height:260px; object-fit:cover; transition:transform .5s; }
+  .featured-card:hover .featured-image img { transform:scale(1.04); }
+  .featured-content { align-self:center; padding:30px 34px; }
+  .post-meta { display:flex; align-items:center; gap:10px; color:#8fa0b7; font-size:10px; font-weight:600; }
+  .meta-divider { width:3px; height:3px; border-radius:50%; background:var(--accent); }
+  .featured-content h3 { margin:18px 0 10px; font-size:25px; line-height:1.45; letter-spacing:-.05em; }
+  .featured-content p,.card-body p { margin:0; color:var(--muted); font-size:12px; line-height:1.9; }
+  .read-more { display:inline-flex; gap:14px; margin-top:23px; color:#a9caff; font-size:11px; font-weight:700; }
+  .articles-section { padding-top:78px; }
+  .article-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+  .article-card { overflow:hidden; border:1px solid var(--line); border-radius:17px; background:rgba(17,28,46,.65); transition:border-color .2s,transform .2s; }
+  .card-topline { display:flex; justify-content:space-between; padding:15px 17px 10px; color:#72839b; font-size:10px; }
+  .card-number { font-weight:800; letter-spacing:.12em; }
+  .card-arrow { color:var(--accent); font-size:15px; }
+  .card-image { display:block; width:calc(100% - 34px); height:150px; margin:0 17px; border-radius:10px; object-fit:cover; }
+  .card-body { padding:17px 19px 22px; }
+  .card-body h3 { margin:11px 0 7px; font-size:17px; line-height:1.5; letter-spacing:-.04em; }
+  .image-placeholder { display:grid; place-items:center; background:linear-gradient(135deg,#1b3150,#111c2e); color:#8db9ff; font-size:12px; font-weight:900; letter-spacing:.2em; }
+  .empty-state { padding:48px 20px; border:1px dashed var(--line); border-radius:18px; text-align:center; color:var(--muted); }
+  .empty-state > span { color:var(--accent); font-size:25px; }
+  .empty-state h3 { color:var(--text); font-size:16px; }
+  .empty-state p,.single-note { font-size:12px; color:var(--muted); }
+  @media (max-width:700px) {
+    .hero { grid-template-columns:1fr; padding:58px 0 50px; gap:10px; }
+    .hero-art { min-height:270px; }
+    .art-card { width:245px; }
+    .orbit-one { width:270px; height:270px; }
+    .featured-card { grid-template-columns:1fr; }
+    .featured-image,.featured-image img { min-height:190px; height:190px; }
+    .featured-content { padding:24px; }
+    .featured-content h3 { font-size:21px; }
+    .articles-section { padding-top:60px; }
+  }
+  @media (max-width:480px) {
+    .article-grid { grid-template-columns:1fr; }
+    h1 { font-size:42px; }
+    .section-heading h2 { font-size:22px; }
+    .section-count { font-size:8px; }
+  }
 </style>
