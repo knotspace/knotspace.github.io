@@ -1,3 +1,4 @@
+
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
@@ -5,13 +6,23 @@ import Layout from '../layouts/Layout.astro';
 const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
-const [featured, ...rest] = posts;
-const BASE = import.meta.env.BASE_URL;
+
+const [featured] = posts;
+
+// GitHub PagesのベースURL
+const BASE = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+
 const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
-  year: 'numeric', month: 'long', day: 'numeric'
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
 });
 ---
+
 <Layout title="たかブロ | 好きなことを、好きなように。" description="日々の発見や好きなことを発信する、たかブロ。">
+
   <section class="hero">
     <div class="hero-copy">
       <span class="eyebrow"><span class="eyebrow-dot"></span> PERSONAL BLOG / SINCE 2026</span>
@@ -19,6 +30,7 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
       <p>日々の出来事、気になったこと、好きなもの。<br class="desktop-break" />自分のペースで、いろいろ書いていくブログです。</p>
       <a class="hero-link" href="#articles">記事を読む <span aria-hidden="true">↓</span></a>
     </div>
+
     <div class="hero-art" aria-hidden="true">
       <div class="art-orbit orbit-one"></div>
       <div class="art-orbit orbit-two"></div>
@@ -36,17 +48,28 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
   {featured && (
     <section class="featured-section" aria-labelledby="featured-title">
       <div class="section-heading">
-        <div><span class="section-kicker">PICK UP</span><h2 id="featured-title">最新の記事</h2></div>
+        <div>
+          <span class="section-kicker">PICK UP</span>
+          <h2 id="featured-title">最新の記事</h2>
+        </div>
         <span class="section-count">01 / FEATURED</span>
       </div>
+
       <a class="featured-card" href={`${BASE}blog/${featured.slug}/`}>
         {featured.data.heroImage ? (
-          <div class="featured-image"><img src={featured.data.heroImage} alt="" loading="eager" /></div>
+          <div class="featured-image">
+            <img src={featured.data.heroImage} alt="" loading="eager" />
+          </div>
         ) : (
           <div class="featured-image image-placeholder"><span>TAKA BLOG</span></div>
         )}
+
         <div class="featured-content">
-          <div class="post-meta"><time datetime={featured.data.pubDate.toISOString()}>{dateFormat(featured.data.pubDate)}</time><span class="meta-divider"></span><span>{featured.data.category}</span></div>
+          <div class="post-meta">
+            <time datetime={featured.data.pubDate.toISOString()}>{dateFormat(featured.data.pubDate)}</time>
+            <span class="meta-divider"></span>
+            <span>{featured.data.category}</span>
+          </div>
           <h3>{featured.data.title}</h3>
           <p>{featured.data.description}</p>
           <span class="read-more">記事を読む <span aria-hidden="true">↗</span></span>
@@ -57,21 +80,40 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
 
   <section class="articles-section" id="articles" aria-labelledby="articles-title">
     <div class="section-heading">
-      <div><span class="section-kicker">THE JOURNAL</span><h2 id="articles-title">記事一覧</h2></div>
+      <div>
+        <span class="section-kicker">THE JOURNAL</span>
+        <h2 id="articles-title">記事一覧</h2>
+      </div>
       <span class="section-count">{String(posts.length).padStart(2, '0')} ARTICLES</span>
     </div>
+
     {posts.length === 0 ? (
-      <div class="empty-state"><span>✳</span><h3>記事はまだありません。</h3><p>最初の記事を公開すると、ここに表示されます。</p></div>
-    ) : rest.length === 0 ? (
-      <p class="single-note">記事を追加すると、ここに新しい記事が並びます。</p>
+      <div class="empty-state">
+        <span>✳</span>
+        <h3>記事はまだありません。</h3>
+        <p>最初の記事を公開すると、ここに表示されます。</p>
+      </div>
     ) : (
       <div class="article-grid">
-        {rest.map((post, index) => (
+        {posts.map((post, index) => (
           <a class="article-card" href={`${BASE}blog/${post.slug}/`}>
-            <div class="card-topline"><span class="card-number">{String(index + 2).padStart(2, '0')}</span><span class="card-arrow">↗</span></div>
-            {post.data.heroImage ? <img class="card-image" src={post.data.heroImage} alt="" loading="lazy" /> : <div class="card-image image-placeholder"><span>TAKA BLOG</span></div>}
+            <div class="card-topline">
+              <span class="card-number">{String(index + 1).padStart(2, '0')}</span>
+              <span class="card-arrow">↗</span>
+            </div>
+
+            {post.data.heroImage ? (
+              <img class="card-image" src={post.data.heroImage} alt="" loading="lazy" />
+            ) : (
+              <div class="card-image image-placeholder"><span>TAKA BLOG</span></div>
+            )}
+
             <div class="card-body">
-              <div class="post-meta"><time datetime={post.data.pubDate.toISOString()}>{dateFormat(post.data.pubDate)}</time><span class="meta-divider"></span><span>{post.data.category}</span></div>
+              <div class="post-meta">
+                <time datetime={post.data.pubDate.toISOString()}>{dateFormat(post.data.pubDate)}</time>
+                <span class="meta-divider"></span>
+                <span>{post.data.category}</span>
+              </div>
               <h3>{post.data.title}</h3>
               <p>{post.data.description}</p>
             </div>
@@ -133,6 +175,7 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
   .empty-state > span { color:var(--accent); font-size:25px; }
   .empty-state h3 { color:var(--text); font-size:16px; }
   .empty-state p,.single-note { font-size:12px; color:var(--muted); }
+
   @media (max-width:700px) {
     .hero { grid-template-columns:1fr; padding:58px 0 50px; gap:10px; }
     .hero-art { min-height:270px; }
@@ -144,6 +187,7 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
     .featured-content h3 { font-size:21px; }
     .articles-section { padding-top:60px; }
   }
+
   @media (max-width:480px) {
     .article-grid { grid-template-columns:1fr; }
     h1 { font-size:42px; }
@@ -151,3 +195,4 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
     .section-count { font-size:8px; }
   }
 </style>
+
