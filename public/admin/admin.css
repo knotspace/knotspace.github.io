@@ -1,12 +1,26 @@
-/* KNOT Admin — light styling without overlays on the Decap CMS interface */
+/* KNOT Admin — WordPress-inspired CMS styling */
 :root {
   color-scheme: light;
   --knot-admin-blue: #2271b1;
   --knot-admin-blue-dark: #135e96;
   --knot-admin-bg: #f0f0f1;
+  --knot-admin-surface: #fff;
   --knot-admin-text: #1d2327;
   --knot-admin-muted: #646970;
   --knot-admin-border: #c3c4c7;
+  --knot-admin-shadow: 0 2px 8px rgb(0 0 0 / 8%);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --knot-admin-blue: #72aee6;
+  --knot-admin-blue-dark: #9bc8f2;
+  --knot-admin-bg: #15191d;
+  --knot-admin-surface: #20262c;
+  --knot-admin-text: #e6e8eb;
+  --knot-admin-muted: #a5adb5;
+  --knot-admin-border: #414a53;
+  --knot-admin-shadow: 0 2px 10px rgb(0 0 0 / 24%);
 }
 
 * { box-sizing: border-box; }
@@ -20,25 +34,40 @@ html, body {
   text-rendering: optimizeLegibility;
 }
 
-/* No fixed KNOT toolbar and no top padding: Decap owns the full viewport. */
-#nc-root {
-  min-height: 100vh;
-  padding-top: 0;
+#nc-root { min-height: 100vh; padding-top: 0; }
+
+/* Theme switch stays out of the CMS action header. */
+#knot-theme-toggle {
+  position: fixed;
+  z-index: 9000;
+  right: 18px;
+  bottom: 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 15px;
+  border: 1px solid var(--knot-admin-border);
+  border-radius: 999px;
+  background: var(--knot-admin-surface);
+  color: var(--knot-admin-text);
+  box-shadow: var(--knot-admin-shadow);
+  font: 600 13px/1 inherit;
+  cursor: pointer;
+  transition: transform .15s ease, background .15s ease;
 }
+#knot-theme-toggle:hover { transform: translateY(-2px); }
+#knot-theme-toggle span:first-child { font-size: 17px; }
 
 #nc-root nav,
 #nc-root [role="navigation"],
-#nc-root aside {
-  scrollbar-width: thin;
-}
+#nc-root aside { scrollbar-width: thin; }
 
 #nc-root nav a,
-#nc-root [role="navigation"] a {
-  text-decoration: none;
-}
+#nc-root [role="navigation"] a { text-decoration: none; }
 
 #nc-root button {
-  border-radius: 3px;
+  border-radius: 5px;
   font-family: inherit;
   transition: background-color .12s ease, border-color .12s ease;
 }
@@ -47,8 +76,10 @@ html, body {
 #nc-root textarea,
 #nc-root select {
   max-width: 100%;
-  border-radius: 3px;
-  border-color: var(--knot-admin-border);
+  border: 1px solid var(--knot-admin-border);
+  border-radius: 5px;
+  background: var(--knot-admin-surface);
+  color: var(--knot-admin-text);
   font-family: inherit;
 }
 
@@ -57,7 +88,7 @@ html, body {
 #nc-root select:focus {
   border-color: var(--knot-admin-blue);
   outline: 1px solid var(--knot-admin-blue);
-  box-shadow: 0 0 0 1px var(--knot-admin-blue);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--knot-admin-blue) 18%, transparent);
 }
 
 #nc-root [role="navigation"],
@@ -65,39 +96,29 @@ html, body {
   background: #1d2327;
   color: #f0f0f1;
 }
-
 #nc-root [role="navigation"] a,
-#nc-root aside a {
-  color: #f0f0f1;
-}
-
+#nc-root aside a { color: #f0f0f1; }
 #nc-root [role="navigation"] a:hover,
-#nc-root aside a:hover {
-  background: #2c3338;
-  color: #72aee6;
-}
+#nc-root aside a:hover { background: #2c3338; color: #72aee6; }
 
-#nc-root [role="main"] {
-  background: var(--knot-admin-bg);
-}
+#nc-root [role="main"] { background: var(--knot-admin-bg); }
 
 #nc-root button {
-  min-height: 32px;
-  padding: 6px 12px;
+  min-height: 34px;
+  padding: 7px 13px;
   border: 1px solid var(--knot-admin-border);
-  background: #fff;
+  background: var(--knot-admin-surface);
   color: var(--knot-admin-text);
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
 }
-
 #nc-root button:hover {
   border-color: var(--knot-admin-blue);
   color: var(--knot-admin-blue-dark);
 }
-
 #nc-root button:focus-visible,
-#nc-root a:focus-visible {
+#nc-root a:focus-visible,
+#knot-theme-toggle:focus-visible {
   outline: 2px solid var(--knot-admin-blue);
   outline-offset: 2px;
 }
@@ -105,12 +126,53 @@ html, body {
 #nc-root input,
 #nc-root textarea,
 #nc-root select {
-  min-height: 34px;
-  padding: 6px 9px;
-  background: #fff;
+  min-height: 36px;
+  padding: 7px 10px;
+  background: var(--knot-admin-surface);
   color: var(--knot-admin-text);
   font-size: 13px;
 }
-
-#nc-root textarea { line-height: 1.65; }
+#nc-root textarea { line-height: 1.7; }
 #nc-root img { max-width: 100%; }
+
+/* Dark theme: cover CMS surfaces, forms, dialogs, and preview panes. */
+:root[data-theme="dark"] #nc-root,
+:root[data-theme="dark"] #nc-root [role="main"],
+:root[data-theme="dark"] #nc-root main,
+:root[data-theme="dark"] #nc-root section,
+:root[data-theme="dark"] #nc-root article {
+  background-color: var(--knot-admin-bg);
+  color: var(--knot-admin-text);
+}
+:root[data-theme="dark"] #nc-root [role="dialog"],
+:root[data-theme="dark"] #nc-root [role="menu"],
+:root[data-theme="dark"] #nc-root [role="listbox"],
+:root[data-theme="dark"] #nc-root [data-testid],
+:root[data-theme="dark"] #nc-root input,
+:root[data-theme="dark"] #nc-root textarea,
+:root[data-theme="dark"] #nc-root select {
+  background-color: var(--knot-admin-surface);
+  color: var(--knot-admin-text);
+  border-color: var(--knot-admin-border);
+}
+:root[data-theme="dark"] #nc-root button {
+  background-color: #293139;
+  color: var(--knot-admin-text);
+  border-color: var(--knot-admin-border);
+}
+:root[data-theme="dark"] #nc-root button:hover {
+  background-color: #35414b;
+  border-color: var(--knot-admin-blue);
+}
+:root[data-theme="dark"] #nc-root a { color: var(--knot-admin-blue); }
+:root[data-theme="dark"] #nc-root p,
+:root[data-theme="dark"] #nc-root label,
+:root[data-theme="dark"] #nc-root h1,
+:root[data-theme="dark"] #nc-root h2,
+:root[data-theme="dark"] #nc-root h3,
+:root[data-theme="dark"] #nc-root span { color: inherit; }
+
+@media (max-width: 600px) {
+  #knot-theme-toggle { right: 12px; bottom: 12px; min-height: 40px; }
+  #knot-theme-toggle .knot-theme-label { display: none; }
+}
