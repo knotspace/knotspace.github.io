@@ -1,0 +1,29 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+const posts = await getCollection('blog');
+const bookmarkData = posts.map((post) => ({ slug: post.slug, title: post.data.title, description: post.data.description, category: post.data.category }));
+const BASE = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+---
+<Layout title="あとで読む | KNOT" description="保存した記事を一覧で確認できます。">
+  <main class="saved-page">
+    <a class="back" href={`${BASE}blog/`}>← 記事一覧に戻る</a>
+    <span class="eyebrow">YOUR READING LIST</span><h1>あとで読む</h1>
+    <p class="intro">気になった記事を保存して、あとから読み返せます。</p>
+    <div id="saved-list" class="saved-list" aria-live="polite"></div>
+  </main>
+  <script define:vars={{ bookmarkData, base: BASE }}>
+    const root = document.querySelector('#saved-list'); const key = 'knot-bookmarks';
+    let saved = []; try { saved = JSON.parse(localStorage.getItem(key) || '[]'); } catch { saved = []; }
+    const escapeHtml = (v) => String(v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const render = () => {
+      const entries = bookmarkData.filter(p => saved.includes(p.slug));
+      if (!entries.length) { root.innerHTML = '<div class="empty"><strong>まだ保存した記事はありません。</strong><p>記事ページの「☆ あとで読む」から保存できます。</p><a href="'+base+'blog/">記事を探す →</a></div>'; return; }
+      root.innerHTML = entries.map(p => `<article class="saved-card"><div><span>${escapeHtml(p.category)}</span><h2><a href="${base}blog/${encodeURIComponent(p.slug)}/">${escapeHtml(p.title)}</a></h2><p>${escapeHtml(p.description)}</p></div><button type="button" data-remove="${escapeHtml(p.slug)}">保存解除</button></article>`).join('');
+    };
+    render(); root.addEventListener('click', e => { const b=e.target.closest('[data-remove]'); if(!b)return; saved=saved.filter(s=>s!==b.dataset.remove); localStorage.setItem(key,JSON.stringify(saved)); render(); });
+  </script>
+</Layout>
+<style>
+.saved-page{max-width:850px;margin:0 auto;padding:58px 0 90px}.back{display:inline-block;color:var(--muted);font-size:12px;margin-bottom:35px}.eyebrow{color:var(--accent);font-size:10px;font-weight:800;letter-spacing:.18em}.saved-page h1{margin:10px 0;font-size:clamp(32px,6vw,48px);letter-spacing:-.06em;color:var(--text)}.intro{color:var(--muted);font-size:13px;margin:0 0 30px}.saved-list{display:grid;gap:12px}.saved-card,.empty{border:1px solid var(--line);background:var(--surface);border-radius:16px;padding:20px}.saved-card{display:flex;justify-content:space-between;align-items:center;gap:18px}.saved-card span{font-size:10px;color:var(--accent);font-weight:700}.saved-card h2{font-size:17px;margin:7px 0;color:var(--text)}.saved-card h2 a{color:inherit}.saved-card p,.empty p{font-size:12px;color:var(--muted);line-height:1.8;margin:0}.saved-card button{flex:none;border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:999px;padding:8px 12px;font-size:11px;cursor:pointer}.empty{text-align:center;padding:38px 20px}.empty strong{color:var(--text)}.empty a{display:inline-block;margin-top:15px;color:var(--accent);font-size:12px;font-weight:700}@media(max-width:600px){.saved-page{padding:38px 0 65px}.saved-card{align-items:flex-start}.saved-card button{font-size:10px;padding:7px 9px}}
+</style>

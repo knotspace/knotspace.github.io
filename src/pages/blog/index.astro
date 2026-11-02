@@ -28,7 +28,10 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
     <span class="eyebrow">THE JOURNAL</span>
     <h1>記事一覧</h1>
     <p>これまでに書いた記事をまとめています。</p>
-    <span class="post-count">{posts.length} ARTICLES</span>
+    <div class="archive-actions">
+      <span class="post-count">{posts.length} ARTICLES</span>
+      <button type="button" id="random-article" class="random-button">✦ ランダムに読む</button>
+    </div>
   </section>
 
   <div class="content-layout">
@@ -201,9 +204,22 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
   });
 
   searchInput?.addEventListener('input', filterPosts);
+  const randomButton = document.querySelector<HTMLButtonElement>('#random-article');
+  randomButton?.addEventListener('click', () => {
+    const visibleCards = cards.filter((card) => !card.hidden);
+    if (!visibleCards.length) return;
+    const selected = visibleCards[Math.floor(Math.random() * visibleCards.length)];
+    if (selected) window.location.href = (selected as HTMLAnchorElement).href;
+  });
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('focus') === 'search' && searchInput) { searchInput.focus(); searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+
 </script>
 
 <style>
+  .archive-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px}
+  .random-button{border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:999px;padding:9px 14px;font-size:11px;font-weight:700;cursor:pointer;transition:border-color .2s,transform .2s}
+  .random-button:hover{border-color:var(--accent);transform:translateY(-1px)}
   .archive-header {
     padding: 44px 0 25px;
     border-bottom: 1px solid var(--line);
