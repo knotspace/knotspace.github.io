@@ -14,7 +14,7 @@ const {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 const pageImage = image ? new URL(image, Astro.url).href : undefined;
-const BASE = import.meta.env.BASE_URL;
+const BASE = '/';
 ---
 
 <!doctype html>
@@ -24,16 +24,22 @@ const BASE = import.meta.env.BASE_URL;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0b1220" />
     <meta name="description" content={description} />
+
     <link rel="canonical" href={canonicalURL} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="KNOT" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
     {pageImage && <meta property="og:image" content={pageImage} />}
+
     <title>{title}</title>
   </head>
 
@@ -47,7 +53,12 @@ const BASE = import.meta.env.BASE_URL;
         <nav aria-label="メインナビゲーション">
           <a href={BASE}>ホーム</a>
           <a href={`${BASE}#articles`}>記事一覧</a>
-          <a class="nav-cta" href="https://github.com/Shiratakihot/Astro" target="_blank" rel="noreferrer">
+          <a
+            class="nav-cta"
+            href="https://github.com/Shiratakihot/Astro"
+            target="_blank"
+            rel="noreferrer"
+          >
             GitHub <span aria-hidden="true">↗</span>
           </a>
         </nav>
@@ -58,7 +69,9 @@ const BASE = import.meta.env.BASE_URL;
       </main>
 
       <footer class="site-footer">
-        <a class="footer-brand" href={BASE}>KNOT<span class="brand-dot">.</span></a>
+        <a class="footer-brand" href={BASE}>
+          KNOT<span class="brand-dot">.</span>
+        </a>
         <p>中学3年生の日々感じたことを書いていく、備忘録的なブログです。</p>
         <span>© {new Date().getFullYear()} KNOT. Built with Astro.</span>
       </footer>
@@ -87,7 +100,9 @@ const BASE = import.meta.env.BASE_URL;
 
   body {
     margin: 0;
-    background: radial-gradient(ellipse at 50% -18%, rgba(61,112,190,.12), transparent 42rem), var(--bg);
+    background:
+      radial-gradient(ellipse at 50% -18%, rgba(61,112,190,.12), transparent 42rem),
+      var(--bg);
     color: var(--text);
     font-family: "DM Sans", "Noto Sans JP", sans-serif;
     -webkit-font-smoothing: antialiased;
