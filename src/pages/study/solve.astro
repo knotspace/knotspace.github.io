@@ -23,7 +23,7 @@ const socialCount = bank.filter((q) => q.subject === 'social').length;
 <footer class="footer">KNOT Study · 学習記録はこの端末に保存されます</footer></div>
 <script>
 import bank from '../../data/study-questions.json';
-const $=id=>document.getElementById(id),root=document.documentElement,THEME_KEY='knot-study-solve-theme-v1',RECORD_KEY='knot-study-solve-record-v1';
+const $=id=>document.getElementById(id),root=document.documentElement,THEME_KEY='knot-theme',RECORD_KEY='knot-study-solve-record-v1';
 let subject='science',list=[],index=0,done=false,record={answered:0,correct:0,wrong:[]};
 try{record={...record,...JSON.parse(localStorage.getItem(RECORD_KEY)||'{}')};}catch{}
 const setTheme=t=>{root.dataset.theme=t;localStorage.setItem(THEME_KEY,t);$('theme').textContent=t==='dark'?'☀ ライトモード':'☾ ダークモード';};
