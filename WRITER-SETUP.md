@@ -1,28 +1,16 @@
-# KNOT 投稿者アカウントの有効化
+# KNOT 投稿者アカウント設定（CLI不要）
 
-投稿者権限はSupabase側で検証します。ブラウザに管理者キーやGitHubトークンを置かない設計です。
+投稿者は通常のKNOTアカウントを自分で作成し、管理者がSQL Editorで投稿者権限を付与します。Supabase CLI、Edge Functionのデプロイ、追加サービスは不要です。
 
-## 1. データベース設定（必須・一度だけ）
+## 1. データベース設定（初回のみ）
 
 1. Supabase Dashboardでプロジェクト `rtzorqaigpeechqywjie` を開く
 2. **SQL Editor** → **New query**
 3. リポジトリ直下の `supabase-writer-setup.sql` の内容を貼り付けて実行
 
-## 2. 招待機能のデプロイ（必須・一度だけ）
+## 2. 管理者アカウントの確認
 
-Supabase CLIを使い、リポジトリのルートで実行します。
-
-```bash
-supabase login
-supabase link --project-ref rtzorqaigpeechqywjie
-supabase functions deploy invite-writer
-```
-
-Edge FunctionはSupabaseの `SUPABASE_URL`、`SUPABASE_ANON_KEY`、`SUPABASE_SERVICE_ROLE_KEY` をサーバー環境変数から読みます。通常はSupabaseが自動で設定するため、キーをGitHubやこのリポジトリに登録しないでください。
-
-## 3. 管理者アカウントの確認
-
-既存の管理者アカウントが `knot_admins` テーブルに登録されている必要があります。未登録の場合は、Supabase Dashboard → Authentication → Users で自分のユーザーUUIDを確認し、SQL Editorで実行します。
+管理者アカウントが `knot_admins` テーブルに登録されている必要があります。未登録の場合は、Supabase Dashboard → Authentication → Users で自分のユーザーUUIDを確認し、SQL Editorで実行します。
 
 ```sql
 insert into public.knot_admins (user_id)
@@ -30,17 +18,22 @@ values ('自分のユーザーUUID')
 on conflict (user_id) do nothing;
 ```
 
-## 4. 使い方
+## 3. 投稿者を追加
 
-- 管理者：KNOTにログイン → マイページ →「投稿者を招待」でメールアドレスを入力
-- 招待された人：メールのリンクからアカウントを有効化 → マイページ →「記事を書く」
-- 投稿者：記事を下書き保存、または「確認を依頼」
-- 管理者：マイページ下部の投稿一覧で本文を確認し、MarkdownをコピーしてCMSへ登録
+1. 投稿者に `https://knotspace.github.io/account/` から通常のアカウント登録をしてもらう（メール確認が有効なら確認も完了してもらう）
+2. 管理者がKNOTにログインし、マイページの「投稿者を招待」に登録メールアドレスを入力
+3. 「権限付与SQLを作成」→「SQLをコピー」
+4. Supabase DashboardのSQL Editorに貼り付けて実行
+5. 投稿者はログアウト・再ログインし、マイページの「記事を書く」から利用
 
-投稿者には公開・削除・管理者招待の権限を付与しません。記事データはRLSで本人のものに限定し、管理者のみ全件を確認できます。
+## 権限
 
-## 無料利用について
+- 投稿者：自分の記事の下書き作成・編集・確認依頼
+- 投稿者にできないこと：公開、削除、他人の記事の閲覧、管理者招待、設定変更
+- 管理者：全投稿の確認、Markdownコピー、CMSへの登録・公開
 
-この機能はSupabase Auth / Database / Edge Functionsの無料枠内で動かす想定です。利用量やSupabaseのプラン条件はアカウント側の最新条件に従います。メール送信数などが無料枠を超えた場合は制限される可能性があります。
+権限はSupabaseのRow Level Security（RLS）で制限します。ブラウザに管理者キーやGitHubトークンは置きません。
 
-**注意:** SQLの実行とEdge Functionの初回デプロイは、プロジェクト所有者のSupabaseアカウントで一度だけ行う必要があります。こちらからSupabaseの管理画面にログインしたり、秘密鍵を設定したりはできないため、コードを置いただけでは招待機能はまだ有効になりません。
+## 無料利用
+
+Supabase Auth / Databaseの無料枠で動かす構成です。メール送信やデータベースの利用量などはSupabaseの無料枠・利用条件に従います。
