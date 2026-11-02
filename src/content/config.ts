@@ -1,3 +1,4 @@
+
 import { defineCollection, z } from 'astro:content';
 
 const blog = defineCollection({
@@ -8,7 +9,7 @@ const blog = defineCollection({
     pubDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),
     category: z.string().default('BLOG'),
-    heroImage: z.string().url().optional(),
+    heroImage: z.string().url().or(z.string().startsWith('/')).optional(),
   }),
 });
 
