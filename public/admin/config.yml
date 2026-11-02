@@ -54,6 +54,14 @@ collections:
         date_format: "YYYY-MM-DD"
         time_format: false
         required: true
+      - label: 予約公開日時
+        name: publishAt
+        widget: datetime
+        required: false
+        format: "YYYY-MM-DDTHH:mm:ssZ"
+        date_format: "YYYY-MM-DD"
+        time_format: "HH:mm"
+        hint: "指定した日時まではサイトに表示されず、時刻になると自動公開されるよ。空欄なら通常公開。"
       - label: 更新日
         name: updatedDate
         widget: datetime
