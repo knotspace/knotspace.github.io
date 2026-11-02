@@ -1,8 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
-const posts = await getCollection('blog');
-const randomPost = posts.length ? posts[Math.floor(Math.random()*posts.length)] : null;
+const now = new Date();
+const posts = (await getCollection('blog')).filter((post) => !post.data.publishAt || post.data.publishAt <= now);
+const randomPost = posts.length ? posts[Math.floor(Math.random() * posts.length)] : null;
 const BASE = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
 <Layout title="ページが見つかりません | KNOT" description="お探しのページは見つかりませんでした。" noindex>
