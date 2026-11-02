@@ -1,11 +1,23 @@
 
 ---
-import { getCollection } from 'astro:content';
+import { type CollectionEntry, getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 
-const posts = (await getCollection('blog')).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-);
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props as Props;
+const { Content } = await post.render();
 
 const BASE = import.meta.env.BASE_URL.endsWith('/')
   ? import.meta.env.BASE_URL
@@ -19,133 +31,78 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
 ---
 
 <Layout
-  title="記事一覧 | KNOT"
-  description="KNOTで公開している記事の一覧です。"
+  title={`${post.data.title} | KNOT`}
+  description={post.data.description}
+  image={post.data.heroImage}
 >
-  <section class="archive-header">
-    <span class="eyebrow">THE JOURNAL</span>
-    <h1>記事一覧</h1>
-    <p>これまでに書いた記事をまとめています。</p>
-    <span class="post-count">{posts.length} ARTICLES</span>
-  </section>
+  <article class="post">
+    <a class="back-link" href={`${BASE}blog/`}>
+      ← 記事一覧に戻る
+    </a>
 
-  <section class="archive-content">
-    {posts.length === 0 ? (
-      <div class="empty-state">
-        <h2>記事はまだありません。</h2>
-        <p>最初の記事を公開すると、ここに表示されます。</p>
+    <header class="post-header">
+      <div class="post-meta">
+        <time datetime={post.data.pubDate.toISOString()}>
+          {dateFormat(post.data.pubDate)}
+        </time>
+
+        <span class="meta-divider"></span>
+        <span>{post.data.category}</span>
+
+        {post.data.updatedDate && (
+          <>
+            <span class="meta-divider"></span>
+            <span>更新：{dateFormat(post.data.updatedDate)}</span>
+          </>
+        )}
       </div>
-    ) : (
-      <div class="post-list">
-        {posts.map((post, index) => (
-          <a class="post-item" href={`${BASE}blog/${post.slug}/`}>
-            <div class="post-thumbnail">
-              {post.data.heroImage ? (
-                <img src={post.data.heroImage} alt="" loading="lazy" />
-              ) : (
-                <span>{String(index + 1).padStart(2, '0')}</span>
-              )}
-            </div>
 
-            <div class="post-info">
-              <div class="post-meta">
-                <time datetime={post.data.pubDate.toISOString()}>
-                  {dateFormat(post.data.pubDate)}
-                </time>
-                <span class="meta-divider"></span>
-                <span>{post.data.category}</span>
-              </div>
+      <h1>{post.data.title}</h1>
+      <p class="description">{post.data.description}</p>
+    </header>
 
-              <h2>{post.data.title}</h2>
-              <p>{post.data.description}</p>
-              <span class="read-more">続きを読む ↗</span>
-            </div>
-          </a>
-        ))}
-      </div>
+    {post.data.heroImage && (
+      <img class="hero-image" src={post.data.heroImage} alt="" />
     )}
-  </section>
 
-  <div class="back-home">
-    <a href={BASE}>← トップページに戻る</a>
-  </div>
+    <div class="article-content">
+      <Content />
+    </div>
+
+    <div class="post-end">
+      <span class="end-mark">✳</span>
+      <p>最後まで読んでくれてありがとう。</p>
+      <a href={`${BASE}blog/`}>
+        ほかの記事も読んでみる
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </article>
 </Layout>
 
 <style>
-  .archive-header {
-    padding: 65px 0 35px;
-    border-bottom: 1px solid var(--line);
+  .post {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 45px 0 20px;
   }
 
-  .eyebrow {
-    color: var(--accent);
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: .17em;
-  }
-
-  .archive-header h1 {
-    margin: 15px 0 10px;
-    font-size: 38px;
-    letter-spacing: -.06em;
-  }
-
-  .archive-header p {
-    margin: 0;
-    color: var(--muted);
-    font-size: 13px;
-    line-height: 1.9;
-  }
-
-  .post-count {
+  .back-link {
     display: inline-block;
-    margin-top: 21px;
-    color: #718198;
-    font-size: 10px;
+    margin-bottom: 34px;
+    color: #91a3bb;
+    font-size: 11px;
     font-weight: 700;
-    letter-spacing: .13em;
+    transition: color .2s;
   }
 
-  .archive-content {
-    padding-top: 15px;
+  .back-link:hover {
+    color: var(--accent);
   }
 
-  .post-list {
-    border-top: 1px solid var(--line);
-  }
-
-  .post-item {
-    display: grid;
-    grid-template-columns: 180px minmax(0, 1fr);
-    gap: 25px;
-    align-items: center;
-    padding: 23px 8px;
+  .post-header {
+    padding-bottom: 29px;
     border-bottom: 1px solid var(--line);
-    transition: background .2s;
-  }
-
-  .post-item:hover {
-    background: rgba(255,255,255,.025);
-  }
-
-  .post-thumbnail {
-    display: grid;
-    place-items: center;
-    width: 180px;
-    height: 115px;
-    overflow: hidden;
-    border-radius: 10px;
-    background: #172740;
-    color: #8db9ff;
-    font-size: 13px;
-    font-weight: 800;
-    letter-spacing: .15em;
-  }
-
-  .post-thumbnail img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
   }
 
   .post-meta {
@@ -165,87 +122,154 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
     background: var(--accent);
   }
 
-  .post-info h2 {
-    margin: 12px 0 8px;
-    font-size: 19px;
+  h1 {
+    margin: 21px 0 13px;
+    font-size: clamp(30px, 5vw, 47px);
+    line-height: 1.4;
+    letter-spacing: -.065em;
+    font-weight: 900;
+  }
+
+  .description {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 2;
+  }
+
+  .hero-image {
+    display: block;
+    width: 100%;
+    max-height: 410px;
+    margin: 30px 0 38px;
+    border-radius: 17px;
+    object-fit: cover;
+  }
+
+  .article-content {
+    color: #c4cedc;
+    font-size: 15px;
+    line-height: 2.15;
+    overflow-wrap: anywhere;
+  }
+
+  .article-content :global(h2) {
+    margin: 2.2em 0 .8em;
+    padding-left: 15px;
+    border-left: 3px solid var(--accent);
+    color: var(--text);
+    font-size: 23px;
     line-height: 1.5;
     letter-spacing: -.04em;
   }
 
-  .post-info p {
-    margin: 0;
-    color: var(--muted);
-    font-size: 12px;
-    line-height: 1.9;
+  .article-content :global(h3) {
+    margin: 2em 0 .65em;
+    color: var(--text);
+    font-size: 18px;
   }
 
-  .read-more {
+  .article-content :global(p) {
+    margin: 1.15em 0;
+  }
+
+  .article-content :global(a) {
+    color: #91baff;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .article-content :global(ul),
+  .article-content :global(ol) {
+    padding-left: 1.5em;
+  }
+
+  .article-content :global(li) {
+    padding-left: .25em;
+    margin: .35em 0;
+  }
+
+  .article-content :global(blockquote) {
+    margin: 1.8em 0;
+    padding: 5px 20px;
+    border-left: 2px solid #547db8;
+    color: #9eafc5;
+    background: rgba(21,34,56,.55);
+  }
+
+  .article-content :global(code) {
+    padding: .15em .4em;
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    background: #142137;
+    color: #b9d4ff;
+    font-size: .88em;
+  }
+
+  .article-content :global(pre) {
+    overflow-x: auto;
+    padding: 18px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: #080e18;
+    line-height: 1.7;
+  }
+
+  .article-content :global(pre code) {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+  }
+
+  .article-content :global(hr) {
+    margin: 2.5em 0;
+    border: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .post-end {
+    margin-top: 65px;
+    padding: 28px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: rgba(17,28,46,.6);
+    text-align: center;
+  }
+
+  .end-mark {
+    color: var(--accent);
+    font-size: 23px;
+  }
+
+  .post-end p {
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  .post-end a {
     display: inline-block;
-    margin-top: 13px;
+    margin-top: 8px;
     color: #a9caff;
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 700;
   }
 
-  .empty-state {
-    margin-top: 20px;
-    padding: 45px 20px;
-    border: 1px dashed var(--line);
-    border-radius: 14px;
-    text-align: center;
-    color: var(--muted);
-  }
-
-  .empty-state h2 {
-    color: var(--text);
-    font-size: 17px;
-  }
-
-  .empty-state p {
-    font-size: 12px;
-  }
-
-  .back-home {
-    padding-top: 30px;
-    text-align: center;
-  }
-
-  .back-home a {
-    color: #a9caff;
-    font-size: 12px;
-  }
-
-  @media (max-width: 580px) {
-    .archive-header {
-      padding-top: 48px;
+  @media (max-width: 600px) {
+    .post {
+      padding-top: 30px;
     }
 
-    .archive-header h1 {
-      font-size: 32px;
-    }
-
-    .post-item {
-      grid-template-columns: 105px minmax(0, 1fr);
-      gap: 14px;
-      padding: 16px 3px;
-    }
-
-    .post-thumbnail {
-      width: 105px;
-      height: 85px;
-    }
-
-    .post-info h2 {
-      margin: 8px 0 5px;
+    .article-content {
       font-size: 14px;
     }
 
-    .post-info p {
-      display: none;
+    .article-content :global(h2) {
+      font-size: 21px;
     }
 
-    .read-more {
-      margin-top: 9px;
+    .hero-image {
+      margin: 22px 0 28px;
     }
   }
 </style>
