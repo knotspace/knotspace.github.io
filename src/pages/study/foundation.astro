@@ -67,4 +67,16 @@ button.answer:nth-child(4),button.answer:nth-child(4):disabled{background-color:
 .explanation{margin-top:17px;padding:15px;border-radius:9px;background:var(--surface-soft);line-height:1.8}.explanation p{font-size:12px;color:var(--muted);margin:6px 0 0}.quiz-actions{margin-top:20px}.score strong{font-size:48px}.score span{font-size:13px;color:var(--muted)}.result{text-align:center}.coverage{margin-top:42px}.coverage .eyebrow{margin-bottom:8px}.topic-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.topic-grid div{display:grid;gap:5px;padding:13px;border:1px solid var(--line);border-radius:9px;background:var(--surface)}.topic-grid span,.topic-grid small{font-size:10px;color:var(--muted)}.topic-grid b{font-size:13px}.quiz[hidden],.result[hidden]{display:none!important}
 @media(max-width:620px){.foundation{padding:22px 0 40px}.panel{padding:17px}.filters{grid-template-columns:1fr}.answers{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(2,minmax(82px,auto));gap:9px}.answer{min-height:82px;padding:11px 10px;gap:8px;font-size:12px;border-radius:13px}.letter{width:24px;height:24px}.topic-grid{grid-template-columns:repeat(2,1fr)}.hero{padding:30px 0 20px}}
 </style>
+<style is:global>
+/* Quiz answers are created by JavaScript, so their styles must be global. */
+#answers > button.answer:nth-of-type(1){background:#fff0d9!important;border:1px solid #f0bd78!important;color:#69451d!important;border-radius:16px!important}
+#answers > button.answer:nth-of-type(2){background:#dff7e9!important;border:1px solid #8bd4aa!important;color:#205c3b!important;border-radius:16px!important}
+#answers > button.answer:nth-of-type(3){background:#e2efff!important;border:1px solid #91b9ed!important;color:#244d80!important;border-radius:16px!important}
+#answers > button.answer:nth-of-type(4){background:#fbe5f1!important;border:1px solid #e6a5c8!important;color:#783c5d!important;border-radius:16px!important}
+#answers > button.answer .letter{background:rgba(255,255,255,.72)!important;border-radius:10px!important;color:inherit!important}
+#answers > button.answer.correct,#answers > button.answer.correct:disabled{background:#d9f7e5!important;border:2px solid #28a36a!important;color:#185b36!important}
+#answers > button.answer.incorrect,#answers > button.answer.incorrect:disabled{background:#ffe1e3!important;border:2px solid #d94c59!important;color:#842b35!important}
+#answers > button.answer{box-shadow:0 2px 0 rgba(0,0,0,.05)!important}
+</style>
+
 </Layout>
