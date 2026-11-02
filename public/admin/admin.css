@@ -176,3 +176,67 @@ html, body {
   #knot-theme-toggle { right: 12px; bottom: 12px; min-height: 40px; }
   #knot-theme-toggle .knot-theme-label { display: none; }
 }
+
+
+/* KNOT comfort palette: soften the contrast and keep editor surfaces consistent. */
+:root {
+  --knot-admin-bg: #e9edf0;
+  --knot-admin-surface: #f7f8f8;
+  --knot-admin-text: #263238;
+  --knot-admin-muted: #59666d;
+  --knot-admin-border: #cbd3d8;
+  --knot-admin-blue: #3979ad;
+  --knot-admin-blue-dark: #285f8c;
+  --knot-admin-shadow: 0 2px 8px rgb(34 48 56 / 7%);
+}
+:root[data-theme="dark"] {
+  --knot-admin-bg: #20272c;
+  --knot-admin-surface: #2b343a;
+  --knot-admin-text: #e0e6e9;
+  --knot-admin-muted: #b0bbc1;
+  --knot-admin-border: #46535b;
+  --knot-admin-blue: #8bbce2;
+  --knot-admin-blue-dark: #b1d2ed;
+  color-scheme: dark;
+}
+html, body, #nc-root, #nc-root [role="main"] {
+  background-color: var(--knot-admin-bg) !important;
+  color: var(--knot-admin-text);
+}
+#nc-root input, #nc-root textarea, #nc-root select,
+#nc-root [role="textbox"], #nc-root [contenteditable="true"] {
+  background: var(--knot-admin-surface) !important;
+  color: var(--knot-admin-text) !important;
+  border-color: var(--knot-admin-border) !important;
+  caret-color: var(--knot-admin-text);
+}
+#nc-root input::placeholder, #nc-root textarea::placeholder {
+  color: var(--knot-admin-muted) !important;
+  opacity: 1;
+}
+#nc-root label, #nc-root [class*="label"], #nc-root [class*="Label"] {
+  color: var(--knot-admin-text) !important;
+}
+#nc-root [class*="Pane"], #nc-root [class*="pane"],
+#nc-root [class*="Card"], #nc-root [class*="card"],
+#nc-root [class*="control"], #nc-root [class*="Control"],
+#nc-root [class*="preview"], #nc-root [class*="Preview"] {
+  border-color: var(--knot-admin-border);
+}
+#nc-root [role="dialog"], #nc-root [role="menu"], #nc-root [role="listbox"] {
+  background: var(--knot-admin-surface) !important;
+  color: var(--knot-admin-text) !important;
+}
+#nc-root [role="navigation"], #nc-root aside {
+  background: #273238 !important;
+  color: #e7edf0 !important;
+}
+#nc-root [role="navigation"] a, #nc-root aside a {
+  color: #e7edf0 !important;
+}
+#knot-theme-toggle {
+  background: var(--knot-admin-surface);
+  color: var(--knot-admin-text);
+  border-color: var(--knot-admin-border);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 12%);
+}
