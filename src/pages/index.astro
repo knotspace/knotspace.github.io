@@ -30,7 +30,7 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', { year: 'num
     <section class="directory">
       <div class="section-label"><span>CONTENTS</span><small>WHAT'S HERE?</small></div>
       <a class="directory-row" href={`${BASE}blog/`}><span class="number">01</span><div><h2>Blog</h2><p>読書、日常、勉強。考えたことを文章に残す。</p></div><span class="row-arrow">↗</span></a>
-      <a class="directory-row" href={`${BASE}study/`}><span class="number">02</span><div><h2>Study</h2><p>理科と社会の問題を、好きな分野から解いてみよう。</p></div><span class="row-arrow">↗</span></a>
+      <a class="study-text-link" href={`${BASE}study/`}>Studyも使ってみる <span>↗</span></a>
     </section>
 
     <section class="latest">
@@ -66,6 +66,7 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', { year: 'num
 .section-label{margin-bottom:8px}.section-label a{color:var(--accent)}
 .directory-row{display:grid;grid-template-columns:55px 1fr 25px;gap:12px;align-items:center;padding:20px 4px;border-top:1px solid var(--line);transition:padding .18s,color .18s}
 .directory-row:hover{padding-left:11px;color:var(--accent)}
+.study-text-link{display:inline-flex;gap:12px;align-items:center;margin:12px 4px 17px 71px;color:var(--muted);font-size:11px;transition:color .2s}.study-text-link:hover{color:var(--accent)}.study-text-link span{color:var(--accent)}
 .number,.post-no{font:11px ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--muted)}
 .directory-row h2{margin:0;font-size:21px;letter-spacing:-.05em}.directory-row p{margin:4px 0 0;color:var(--muted);font-size:11px;line-height:1.7}.row-arrow{justify-self:end;color:var(--accent);font-size:18px}
 .latest{margin-top:52px}.post-list{border-top:1px solid var(--line)}.post{display:grid;grid-template-columns:40px 1fr 22px;gap:12px;align-items:center;padding:17px 4px;border-bottom:1px solid var(--line);transition:background .15s}.post:hover{background:var(--surface-soft)}.post-info{display:grid;gap:5px}.post-info small{font-size:10px;color:var(--muted)}.post-info strong{font-size:13px;line-height:1.6}.post-info em{font-size:11px;line-height:1.6;color:var(--muted);font-style:normal}.post-arrow{justify-self:end;color:var(--accent)}.empty{font-size:12px;color:var(--muted)}
