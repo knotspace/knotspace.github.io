@@ -40,14 +40,14 @@ const social = foundation.filter(q => q.subject === 'social').length;
   </section>
   <section class="notification-card">
     <div><p class="eyebrow">STUDY REMINDER</p><h2>KNOTからのお知らせ</h2><p id="notification-status">通知を許可すると、このブラウザで学習リマインダーを表示できるよ。</p></div>
-    <div class="notification-actions"><button id="enable-notifications" type="button">通知を有効にする</button><button id="test-notification" type="button" hidden>テスト通知</button></div>
+    <div class="reminder-settings"><label><input type="checkbox" id="reminder-morning" /> 朝 <input type="time" id="time-morning" value="07:00" /></label><label><input type="checkbox" id="reminder-noon" /> 昼 <input type="time" id="time-noon" value="12:30" /></label><label><input type="checkbox" id="reminder-evening" /> 夜 <input type="time" id="time-evening" value="19:00" /></label><div class="notification-actions"><button id="enable-notifications" type="button">通知を許可する</button><button id="save-reminders" type="button">設定を保存</button><button id="test-notification" type="button" hidden>テスト通知</button></div></div>
   </section>
   <p class="back"><a href="../">← KNOTトップへ戻る</a></p>
 </main>
 <style>
 .notification-card{margin-top:20px;padding:21px;border:1px solid var(--line);border-radius:13px;background:var(--surface);display:flex;align-items:center;justify-content:space-between;gap:18px}
 .notification-card .eyebrow{margin:0 0 7px}.notification-card h2{font-size:17px;margin:0 0 6px}.notification-card p:not(.eyebrow){font-size:11px;line-height:1.7;color:var(--muted);margin:0;max-width:500px}
-.notification-actions{display:flex;gap:8px;flex-wrap:wrap}.notification-actions button{border:1px solid var(--line);border-radius:9px;padding:10px 12px;background:var(--accent);color:#fff;font-size:11px;font-weight:800;cursor:pointer}.notification-actions button[hidden]{display:none}
+.reminder-settings{display:grid;gap:9px;min-width:240px}.reminder-settings>label{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--text)}.reminder-settings input[type=time]{margin-left:auto;padding:7px;border:1px solid var(--line);border-radius:7px;background:var(--bg);color:var(--text)}.notification-actions{display:flex;gap:8px;flex-wrap:wrap}.notification-actions button{border:1px solid var(--line);border-radius:9px;padding:10px 12px;background:var(--accent);color:#fff;font-size:11px;font-weight:800;cursor:pointer}.notification-actions button[hidden]{display:none}
 @media(max-width:620px){.notification-card{align-items:flex-start;flex-direction:column}.notification-actions{width:100%}}
 
 .beta-notice{display:flex;gap:12px;align-items:center;margin:0 0 22px;padding:13px 15px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}.beta-notice>span{display:grid;place-items:center;width:30px;height:30px;border-radius:8px;background:var(--accent);color:#fff;font-size:11px;font-weight:900}.beta-notice strong{font-size:12px}.beta-notice p{font-size:10px;color:var(--muted);margin:3px 0 0;line-height:1.6}.study-home{max-width:900px;margin:0 auto;padding:40px 0 35px}.intro{padding:10px 0 35px}.eyebrow{font:10px ui-monospace,monospace;letter-spacing:.14em;color:var(--accent);font-weight:800;margin:0 0 12px}.intro h1{font-size:clamp(34px,6vw,54px);font-weight:900;letter-spacing:-.065em;margin:0}.intro h1 span{color:var(--accent)}.intro>p:not(.eyebrow){font-size:13px;color:var(--muted);line-height:1.8}.stats{display:grid;grid-template-columns:repeat(4,1fr);margin-top:25px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface)}.stats div{padding:13px 17px;border-right:1px solid var(--line);display:grid;gap:3px}.stats div:last-child{border:0}.stats b{font-size:23px}.stats small{font-size:10px;color:var(--muted)}.section{margin-top:34px}.section-title{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:13px}.section-title .eyebrow{margin:0 0 5px}.section-title h2{font-size:21px;margin:0}.section-title p:last-child{font-size:11px;color:var(--muted);margin:5px 0 0}.status{font-size:9px;font-weight:800;letter-spacing:.08em;padding:7px 9px;border-radius:5px;white-space:nowrap}.active{color:#25895e;background:color-mix(in srgb,#25895e 12%,var(--surface))}.soon{color:var(--muted);border:1px solid var(--line)}.main-card,.soon-card{display:flex;align-items:flex-start;gap:18px;padding:23px;border:1px solid var(--line);border-radius:13px;background:var(--surface)}.main-card{transition:border-color .15s,transform .15s}.main-card:hover{border-color:var(--accent);transform:translateY(-2px)}.card-icon{display:grid;place-items:center;flex:none;width:48px;height:48px;border-radius:11px;background:var(--surface-soft);color:var(--accent);font-size:21px;font-weight:900}.main-card small,.soon-card small{font:9px ui-monospace,monospace;color:var(--muted);letter-spacing:.1em}.main-card h3,.soon-card h3{font-size:20px;margin:6px 0}.main-card p,.soon-card p{font-size:12px;line-height:1.8;color:var(--muted);margin:0 0 13px}.main-card b{font-size:11px}.main-card b span,.quote-banner a span{color:var(--accent);margin-left:10px}.soon-card{background:var(--surface-soft);opacity:.85}.soon-label{display:inline-block;font:9px ui-monospace,monospace;letter-spacing:.1em;color:var(--muted);border:1px solid var(--line);padding:6px 8px;border-radius:4px}.daily-quote{margin-top:42px;padding:24px;border:1px solid var(--line);border-radius:13px;background:var(--surface)}.daily-quote .eyebrow{margin:0 0 12px}.daily-quote-label{font-size:11px;color:var(--muted);margin:0 0 8px}.daily-quote blockquote{font-size:clamp(19px,3.5vw,27px);font-weight:800;line-height:1.7;letter-spacing:-.03em;margin:0 0 12px}.daily-quote-author{font-size:12px;font-weight:750;margin:0 0 5px}.daily-quote-note{font-size:11px;line-height:1.7;color:var(--muted);margin:0 0 15px}.daily-quote>a{font-size:11px;font-weight:750}.daily-quote>a span{color:var(--accent);margin-left:8px}.back{margin-top:30px;font-size:11px;color:var(--muted)}@media(max-width:620px){.study-home{padding:25px 0}.stats div{padding:11px 8px}.stats b{font-size:19px}.section-title h2{font-size:18px}.main-card,.soon-card{padding:17px;gap:12px}.card-icon{width:40px;height:40px}.daily-quote{padding:19px}}
@@ -87,6 +87,34 @@ const social = foundation.filter(q => q.subject === 'social').length;
       notificationStatus.textContent = 'テスト通知を送ったよ。';
     } catch { notificationStatus.textContent = '通知を表示できなかったよ。ブラウザの設定を確認してね。'; }
   });
+</script>
+<script define:vars={{ quotes }}>
+  const quote = quotes[Math.floor(Math.random() * quotes.length)];
+  document.getElementById('daily-quote-text').textContent = `「${quote.text}」`;
+  document.getElementById('daily-quote-author').textContent = `— ${quote.name} / ${quote.era}`;
+  document.getElementById('daily-quote-note').textContent = quote.note;
+</script>
+</Layout<script>
+(() => {
+  const enableNotifications=document.getElementById('enable-notifications');
+  const testNotification=document.getElementById('test-notification');
+  const saveButton=document.getElementById('save-reminders');
+  const status=document.getElementById('notification-status');
+  const slots=['morning','noon','evening'];
+  const defaults={morning:{enabled:false,time:'07:00'},noon:{enabled:false,time:'12:30'},evening:{enabled:false,time:'19:00'}};
+  let settings=defaults;
+  try{const saved=JSON.parse(localStorage.getItem('knot-study-reminders')||'null');if(saved)settings={...defaults,...saved};}catch{}
+  function apply(){slots.forEach(slot=>{document.getElementById('reminder-'+slot).checked=!!settings[slot].enabled;document.getElementById('time-'+slot).value=settings[slot].time||defaults[slot].time;});}
+  function read(){const next={};slots.forEach(slot=>next[slot]={enabled:document.getElementById('reminder-'+slot).checked,time:document.getElementById('time-'+slot).value||defaults[slot].time});return next;}
+  function update(){if(!('Notification'in window)){status.textContent='このブラウザは通知に対応していません。';enableNotifications.disabled=true;return;}if(Notification.permission==='granted'){enableNotifications.hidden=true;testNotification.hidden=false;status.textContent='通知許可済み。設定した時刻に、このStudyページを開いている間リマインダーを表示します。';}else if(Notification.permission==='denied'){status.textContent='通知がブロックされています。ブラウザのサイト設定から許可してください。';enableNotifications.disabled=true;}else{status.textContent='朝・昼・夜の時刻を設定し、通知を許可してください。';}}
+  async function notify(title,body){const reg=await navigator.serviceWorker.ready;await reg.showNotification(title,{body,icon:'/favicon.svg',badge:'/favicon.svg',tag:'knot-study-'+title,renotify:false});}
+  function scheduleCheck(){if(Notification.permission!=='granted')return;const now=new Date(),date=[now.getFullYear(),String(now.getMonth()+1).padStart(2,'0'),String(now.getDate()).padStart(2,'0')].join('-'),clock=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');slots.forEach(slot=>{const item=settings[slot],key='knot-reminder-sent-'+date+'-'+slot;if(item.enabled&&item.time===clock&&localStorage.getItem(key)!=='1'){localStorage.setItem(key,'1');notify('KNOT Study',({morning:'おはよう！今日の学習を始めよう。',noon:'お昼の学習リマインダーだよ。少しだけ進めよう！',evening:'今日の学習を振り返って、あと少し頑張ろう！'})[slot]).catch(()=>{});}});}
+  apply();update();
+  enableNotifications.addEventListener('click',async()=>{const permission=await Notification.requestPermission();update();if(permission==='granted')status.textContent='通知を許可しました。朝・昼・夜の設定を保存してね。';});
+  saveButton.addEventListener('click',()=>{settings=read();localStorage.setItem('knot-study-reminders',JSON.stringify(settings));status.textContent='朝・昼・夜の設定を保存しました。ページを開いている間、設定時刻に通知します。';scheduleCheck();});
+  testNotification.addEventListener('click',async()=>{try{await notify('KNOT Study テスト','テスト通知が届いたよ！');status.textContent='テスト通知を表示しました。';}catch{status.textContent='通知を表示できませんでした。ブラウザの設定を確認してください。';}});
+  scheduleCheck();setInterval(scheduleCheck,15000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)scheduleCheck();});
+})();
 </script>
 <script define:vars={{ quotes }}>
   const quote = quotes[Math.floor(Math.random() * quotes.length)];
