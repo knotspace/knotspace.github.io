@@ -109,6 +109,11 @@ html[data-theme="light"]{--quiz-answer-bg:#e8efff;--quiz-answer-border:#a9c0ed;-
 @media(max-width:620px){.foundation{padding:22px 0 40px}.panel{padding:17px}.filters{grid-template-columns:1fr}.answers{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(2,minmax(82px,auto));gap:9px}.answer{min-height:82px;padding:11px 10px;gap:8px;font-size:12px;border-radius:13px}.letter{width:24px;height:24px}.topic-grid{grid-template-columns:repeat(2,1fr)}.hero{padding:30px 0 20px}}
 </style>
 <style is:global>
+:root{--quiz-answer-bg:#26364f;--quiz-answer-border:#526b91;--quiz-answer-ink:#f4f7ff;--quiz-answer-chip:#405779}
+html[data-theme="light"]{--quiz-answer-bg:#e8efff;--quiz-answer-border:#a9c0ed;--quiz-answer-ink:#243b61;--quiz-answer-chip:#d1e0ff}
+</style>
+
+<style is:global>
 html.quiz-active,html.quiz-active body{width:100%;height:100%;overflow:hidden}
 html.quiz-active body{background:var(--bg)!important}
 html.quiz-active .site-shell{width:100%;max-width:none;margin:0;padding:0}
