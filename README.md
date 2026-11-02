@@ -29,6 +29,11 @@ https://knotspace.github.io/
 
 ## ✍️ KNOT Admin
 
+- 管理画面の日本語ロケール（Decap CMS公式 `ja`）
+- WordPress風の黒い管理バー、サイドナビ、青い操作色
+- 記事カテゴリー・タグ・アイキャッチ画像の編集
+- CSSとCMS本体を分離し、CMS本体はバージョン固定で読み込み
+
 `/admin/` にWordPress風の記事管理画面を追加。Decap CMSを使い、GitHub上のMarkdown記事を管理します。
 
 - 記事の新規作成・編集・削除
