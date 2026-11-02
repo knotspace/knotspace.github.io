@@ -240,3 +240,14 @@ html, body, #nc-root, #nc-root [role="main"] {
   border-color: var(--knot-admin-border);
   box-shadow: 0 2px 8px rgb(0 0 0 / 12%);
 }
+
+#knot-ai-link {
+  position: fixed; z-index: 9000; left: 18px; bottom: 18px;
+  display: inline-flex; align-items: center; min-height: 42px;
+  padding: 0 16px; border: 1px solid var(--knot-admin-border);
+  border-radius: 999px; background: var(--knot-admin-surface);
+  color: var(--knot-admin-text); text-decoration: none;
+  font-size: 13px; font-weight: 650; box-shadow: var(--knot-admin-shadow);
+}
+#knot-ai-link:hover { border-color: var(--knot-admin-blue); color: var(--knot-admin-blue-dark); }
+@media (max-width: 600px) { #knot-ai-link { left: 12px; bottom: 12px; min-height: 40px; } }
