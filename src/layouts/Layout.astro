@@ -147,13 +147,13 @@ const BASE = import.meta.env.BASE_URL;
 
           icon.textContent = isDark ? '☀' : '☾';
 
-          button.setAttribute(
-            'aria-label',
-            isDark ? 'ライトモードに切り替える' : 'ダークモードに切り替える'
-          );
-
-          document.querySelector('meta[name="theme-color"]')
-            ?.setAttribute('content', isDark ? '#0b1220' : '#f7f8fa');
+          if (isDark) {
+            button.setAttribute('aria-label', 'ライトモードに切り替える');
+            document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#0b1220');
+          } else {
+            button.setAttribute('aria-label', 'ダークモードに切り替える');
+            document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#f7f8fa');
+          }
         };
 
         updateIcon();
