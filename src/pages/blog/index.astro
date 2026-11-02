@@ -7,6 +7,8 @@ const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 
+const categories = [...new Set(posts.map((post) => post.data.category))];
+
 const BASE = import.meta.env.BASE_URL.endsWith('/')
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
@@ -29,16 +31,41 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
     <span class="post-count">{posts.length} ARTICLES</span>
   </section>
 
-  <section class="archive-content">
-    {posts.length === 0 ? (
-      <div class="empty-state">
-        <h2>記事はまだありません。</h2>
-        <p>最初の記事を公開すると、ここに表示されます。</p>
+  <div class="content-layout">
+    <section class="main-column">
+      <div class="filter-area">
+        <input
+          id="article-search"
+          type="search"
+          placeholder="記事を検索..."
+          aria-label="記事を検索"
+        />
+
+        <div class="category-filters">
+          <button class="filter-button active" type="button" data-filter="all">
+            すべて
+          </button>
+          {categories.map((category) => (
+            <button
+              class="filter-button"
+              type="button"
+              data-filter={category}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
       </div>
-    ) : (
-      <div class="post-list">
+
+      <div class="archive-list" id="archive-list">
         {posts.map((post, index) => (
-          <a class="post-item" href={`${BASE}blog/${post.slug}/`}>
+          <a
+            class="post-card"
+            href={`${BASE}blog/${post.slug}/`}
+            data-category={post.data.category}
+            data-title={post.data.title}
+            data-description={post.data.description}
+          >
             <div class="post-thumbnail">
               {post.data.heroImage ? (
                 <img src={post.data.heroImage} alt="" loading="lazy" />
@@ -52,28 +79,133 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
                 <time datetime={post.data.pubDate.toISOString()}>
                   {dateFormat(post.data.pubDate)}
                 </time>
-                <span class="meta-divider"></span>
-                <span>{post.data.category}</span>
+                <span class="category-label">{post.data.category}</span>
               </div>
 
               <h2>{post.data.title}</h2>
               <p>{post.data.description}</p>
-              <span class="read-more">続きを読む ↗</span>
+              <span class="read-more">続きを読む →</span>
             </div>
           </a>
         ))}
       </div>
-    )}
-  </section>
+
+      <p class="no-results" id="no-results" hidden>
+        該当する記事はありません。
+      </p>
+    </section>
+
+    <aside class="sidebar">
+      <section class="widget">
+        <h2 class="widget-title">このブログについて</h2>
+        <div class="profile-logo">KNOT<span>.</span></div>
+        <p>
+          中学3年生の日々感じたことを書いていく、備忘録的なブログです。
+          日常や勉強のことなどを記録しています。
+        </p>
+      </section>
+
+      <section class="widget">
+        <h2 class="widget-title">カテゴリー</h2>
+        <ul class="category-list">
+          {categories.map((category) => (
+            <li>
+              <button type="button" data-sidebar-filter={category}>
+                {category} <span>→</span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="widget">
+        <h2 class="widget-title">記事数</h2>
+        <p class="total-count">{posts.length} 件の記事を公開中</p>
+      </section>
+    </aside>
+  </div>
 
   <div class="back-home">
     <a href={BASE}>← トップページに戻る</a>
   </div>
 </Layout>
 
+<script>
+  const searchInput = document.querySelector<HTMLInputElement>('#article-search');
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('.post-card'));
+  const filterButtons = Array.from(
+    document.querySelectorAll<HTMLButtonElement>('[data-filter]')
+  );
+  const sidebarButtons = Array.from(
+    document.querySelectorAll<HTMLButtonElement>('[data-sidebar-filter]')
+  );
+  const noResults = document.querySelector<HTMLElement>('#no-results');
+
+  let activeCategory = 'all';
+
+  function filterPosts() {
+    const keyword = searchInput?.value.trim().toLowerCase() ?? '';
+    let visibleCount = 0;
+
+    cards.forEach((card) => {
+      const category = card.dataset.category ?? '';
+      const title = card.dataset.title ?? '';
+      const description = card.dataset.description ?? '';
+
+      const matchesCategory =
+        activeCategory === 'all' || category === activeCategory;
+
+      const matchesSearch =
+        `${title} ${description} ${category}`.toLowerCase().includes(keyword);
+
+      const visible = matchesCategory && matchesSearch;
+      card.hidden = !visible;
+
+      if (visible) visibleCount++;
+    });
+
+    if (noResults) {
+      noResults.hidden = visibleCount > 0;
+    }
+  }
+
+  filterButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      activeCategory = button.dataset.filter ?? 'all';
+
+      filterButtons.forEach((item) => {
+        item.classList.toggle('active', item === button);
+      });
+
+      filterPosts();
+    });
+  });
+
+  sidebarButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      activeCategory = button.dataset.sidebarFilter ?? 'all';
+
+      filterButtons.forEach((item) => {
+        item.classList.toggle(
+          'active',
+          item.dataset.filter === activeCategory
+        );
+      });
+
+      filterPosts();
+      document.querySelector('#archive-list')?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    });
+  });
+
+  searchInput?.addEventListener('input', filterPosts);
+</script>
+
 <style>
   .archive-header {
-    padding: 65px 0 35px;
+    padding: 44px 0 25px;
     border-bottom: 1px solid var(--line);
   }
 
@@ -81,64 +213,114 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
     color: var(--accent);
     font-size: 10px;
     font-weight: 800;
-    letter-spacing: .17em;
+    letter-spacing: .16em;
   }
 
   .archive-header h1 {
-    margin: 15px 0 10px;
-    font-size: 38px;
+    margin: 12px 0 8px;
+    font-size: 34px;
     letter-spacing: -.06em;
   }
 
   .archive-header p {
     margin: 0;
     color: var(--muted);
-    font-size: 13px;
-    line-height: 1.9;
+    font-size: 12px;
+    line-height: 1.8;
   }
 
   .post-count {
     display: inline-block;
-    margin-top: 21px;
+    margin-top: 13px;
     color: #718198;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: .13em;
   }
 
-  .archive-content {
-    padding-top: 15px;
+  .content-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 285px;
+    gap: 35px;
+    align-items: start;
+    padding-top: 30px;
   }
 
-  .post-list {
+  .filter-area {
+    margin-bottom: 20px;
+  }
+
+  #article-search {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    outline: none;
+    background: var(--surface);
+    color: var(--text);
+    font: inherit;
+    font-size: 12px;
+  }
+
+  #article-search:focus {
+    border-color: var(--accent);
+  }
+
+  .category-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .filter-button {
+    padding: 7px 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--muted);
+    font-size: 10px;
+    cursor: pointer;
+  }
+
+  .filter-button.active,
+  .filter-button:hover {
+    border-color: var(--accent);
+    background: rgba(130,178,255,.1);
+    color: #c5dcff;
+  }
+
+  .archive-list {
     border-top: 1px solid var(--line);
   }
 
-  .post-item {
+  .post-card {
     display: grid;
-    grid-template-columns: 180px minmax(0, 1fr);
-    gap: 25px;
-    align-items: center;
-    padding: 23px 8px;
+    grid-template-columns: 165px minmax(0, 1fr);
+    gap: 19px;
+    padding: 18px 5px;
     border-bottom: 1px solid var(--line);
-    transition: background .2s;
   }
 
-  .post-item:hover {
+  .post-card:hover {
     background: rgba(255,255,255,.025);
+  }
+
+  .post-card[hidden] {
+    display: none;
   }
 
   .post-thumbnail {
     display: grid;
     place-items: center;
-    width: 180px;
-    height: 115px;
+    width: 165px;
+    height: 110px;
     overflow: hidden;
-    border-radius: 10px;
+    border-radius: 9px;
     background: #172740;
     color: #8db9ff;
-    font-size: 13px;
-    font-weight: 800;
+    font-size: 12px;
+    font-weight: 900;
     letter-spacing: .15em;
   }
 
@@ -148,86 +330,153 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
     object-fit: cover;
   }
 
-  .post-meta {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    color: #8fa0b7;
-    font-size: 10px;
-    font-weight: 600;
-  }
-
-  .meta-divider {
-    width: 3px;
-    height: 3px;
-    border-radius: 50%;
-    background: var(--accent);
-  }
-
   .post-info h2 {
-    margin: 12px 0 8px;
-    font-size: 19px;
-    line-height: 1.5;
-    letter-spacing: -.04em;
+    margin: 9px 0 7px;
+    font-size: 16px;
+    line-height: 1.55;
+    letter-spacing: -.035em;
   }
 
   .post-info p {
     margin: 0;
     color: var(--muted);
-    font-size: 12px;
-    line-height: 1.9;
+    font-size: 11px;
+    line-height: 1.8;
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 9px;
+    color: #8fa0b7;
+    font-size: 10px;
+  }
+
+  .category-label {
+    padding: 3px 8px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    color: #a9caff;
   }
 
   .read-more {
     display: inline-block;
-    margin-top: 13px;
+    margin-top: 9px;
     color: #a9caff;
     font-size: 10px;
     font-weight: 700;
   }
 
-  .empty-state {
-    margin-top: 20px;
-    padding: 45px 20px;
-    border: 1px dashed var(--line);
-    border-radius: 14px;
-    text-align: center;
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .widget {
+    padding: 20px;
+    border: 1px solid var(--line);
+    border-radius: 11px;
+    background: rgba(17,28,46,.58);
+  }
+
+  .widget-title {
+    margin: 0 0 16px;
+    padding-bottom: 11px;
+    border-bottom: 1px solid var(--line);
+    font-size: 14px;
+  }
+
+  .profile-logo {
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: -.09em;
+  }
+
+  .profile-logo span {
+    color: var(--accent);
+  }
+
+  .widget p {
     color: var(--muted);
+    font-size: 11px;
+    line-height: 1.9;
   }
 
-  .empty-state h2 {
-    color: var(--text);
-    font-size: 17px;
+  .category-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
   }
 
-  .empty-state p {
+  .category-list li {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .category-list li:last-child {
+    border-bottom: 0;
+  }
+
+  .category-list button {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    font: inherit;
+    font-size: 11px;
+    cursor: pointer;
+  }
+
+  .category-list button:hover {
+    color: var(--accent);
+  }
+
+  .total-count {
+    margin: 0;
+  }
+
+  .no-results {
+    padding: 30px 10px;
+    color: var(--muted);
+    text-align: center;
     font-size: 12px;
   }
 
   .back-home {
-    padding-top: 30px;
+    margin-top: 30px;
     text-align: center;
   }
 
   .back-home a {
     color: #a9caff;
-    font-size: 12px;
+    font-size: 11px;
   }
 
-  @media (max-width: 580px) {
-    .archive-header {
-      padding-top: 48px;
+  @media (max-width: 780px) {
+    .content-layout {
+      grid-template-columns: 1fr;
+      gap: 25px;
     }
 
-    .archive-header h1 {
-      font-size: 32px;
+    .sidebar {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .post-item {
+    .sidebar .widget:first-child {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .post-card {
       grid-template-columns: 105px minmax(0, 1fr);
-      gap: 14px;
-      padding: 16px 3px;
+      gap: 12px;
+      padding: 14px 2px;
     }
 
     .post-thumbnail {
@@ -236,16 +485,22 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
     }
 
     .post-info h2 {
-      margin: 8px 0 5px;
-      font-size: 14px;
+      margin: 7px 0;
+      font-size: 13px;
     }
 
-    .post-info p {
+    .post-info p,
+    .read-more {
       display: none;
     }
 
-    .read-more {
-      margin-top: 9px;
+    .post-meta {
+      gap: 6px;
+      font-size: 9px;
+    }
+
+    .sidebar {
+      display: flex;
     }
   }
 </style>
