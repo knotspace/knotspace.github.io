@@ -3,9 +3,10 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 
-const posts = (await getCollection('blog')).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-);
+const now = new Date();
+const posts = (await getCollection('blog'))
+  .filter((post) => !post.data.publishAt || post.data.publishAt <= now)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const categories = [...new Set(posts.map((post) => post.data.category))];
 
