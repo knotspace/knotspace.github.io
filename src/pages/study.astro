@@ -5,7 +5,7 @@ import kosen from '../data/kosen-questions.json';
 const science = foundation.filter(q => q.subject === 'science').length;
 const social = foundation.filter(q => q.subject === 'social').length;
 ---
-<Layout title="Study｜KNOT" description="基礎網羅問題、高専入試対策、公式過去問模試。入試本番まで一緒に学ぶKNOT Study。">
+<Layout studyMode title="Study｜KNOT" description="基礎網羅問題、高専入試対策、公式過去問模試。入試本番まで一緒に学ぶKNOT Study。">
 <main class="study-home">
   <header class="intro">
     <p class="eyebrow">KNOT / LEARNING SPACE</p>
@@ -15,21 +15,21 @@ const social = foundation.filter(q => q.subject === 'social').length;
   </header>
   <section class="section">
     <div class="section-title"><div><p class="eyebrow">01 / FOUNDATION</p><h2>基礎網羅問題</h2><p>理科・社会の重要語句と基本事項を分野別に確認。</p></div><span class="status active">公開中</span></div>
-    <a class="main-card" href="foundation/"><span class="card-icon">基</span><div><small>FOUNDATION PRACTICE</small><h3>まずは基礎を完璧に。</h3><p>{foundation.length}問を収録。分野・問題数を選び、苦手問題を繰り返し演習できる。</p><b>基礎問題を解く <span>→</span></b></div></a>
+    <a class="main-card" href={`${import.meta.env.BASE_URL}study/foundation/`}><span class="card-icon">基</span><div><small>FOUNDATION PRACTICE</small><h3>まずは基礎を完璧に。</h3><p>{foundation.length}問を収録。分野・問題数を選び、苦手問題を繰り返し演習できる。</p><b>基礎問題を解く <span>→</span></b></div></a>
   </section>
   <section class="section">
     <div class="section-title"><div><p class="eyebrow">02 / KO SEN EXAM</p><h2>高専入試特化</h2><p>資料読解・思考力を鍛えるオリジナル演習。</p></div><span class="status active">公開中</span></div>
-    <a class="main-card" href="kosen/"><span class="card-icon">専</span><div><small>EXAM PREPARATION</small><h3>知識を使って、考える。</h3><p>{kosen.length}問を収録。高専入試を意識した問題で実戦力を磨こう。</p><b>高専対策を始める <span>→</span></b></div></a>
+    <a class="main-card" href={`${import.meta.env.BASE_URL}study/kosen/`}><span class="card-icon">専</span><div><small>EXAM PREPARATION</small><h3>知識を使って、考える。</h3><p>{kosen.length}問を収録。高専入試を意識した問題で実戦力を磨こう。</p><b>高専対策を始める <span>→</span></b></div></a>
   </section>
   <section class="section">
     <div class="section-title"><div><p class="eyebrow">03 / MOCK EXAM</p><h2>過去問で模試</h2><p>国立高専機構の公式過去問で本番形式の演習。</p></div><span class="status active">利用可能</span></div>
-    <a class="main-card" href="mock/"><span class="card-icon">模</span><div><small>OFFICIAL PAST PAPERS</small><h3>高専過去問 模試モード</h3><p>令和8・7年度の公式問題を教科別または5教科で挑戦。制限時間・解答確認に対応。</p><b>模試を始める <span>→</span></b></div></a>
+    <a class="main-card" href={`${import.meta.env.BASE_URL}study/mock/`}><span class="card-icon">模</span><div><small>OFFICIAL PAST PAPERS</small><h3>高専過去問 模試モード</h3><p>令和8・7年度の公式問題を教科別または5教科で挑戦。制限時間・解答確認に対応。</p><b>模試を始める <span>→</span></b></div></a>
   </section>
   <section class="section">
     <div class="section-title"><div><p class="eyebrow">04 / FOCUS TOOLS</p><h2>学習ツール</h2><p>時間を管理して、集中力を高めよう。</p></div><span class="status active">利用可能</span></div>
-    <a class="main-card" href="tools/"><span class="card-icon">⏱</span><div><small>POMODORO / STOPWATCH</small><h3>ポモドーロタイマー・ストップウォッチ</h3><p>25分集中・5分休憩のタイマーと、ラップ対応のストップウォッチ。</p><b>学習ツールを開く <span>→</span></b></div></a>
+    <a class="main-card" href={`${import.meta.env.BASE_URL}study/tools/`}><span class="card-icon">⏱</span><div><small>POMODORO / STOPWATCH</small><h3>ポモドーロタイマー・ストップウォッチ</h3><p>25分集中・5分休憩のタイマーと、ラップ対応のストップウォッチ。</p><b>学習ツールを開く <span>→</span></b></div></a>
   </section>
-  <a class="why-link" href="why/"><span><small>WHY WE LEARN / FEATURE</small><strong>なぜ勉強するのか？</strong><em>勉強が未来の選択肢を広げる理由を読む</em></span><b>特集を読む ↗</b></a>
+  <a class="why-link" href={`${import.meta.env.BASE_URL}study/why/`}><span><small>WHY WE LEARN / FEATURE</small><strong>なぜ勉強するのか？</strong><em>勉強が未来の選択肢を広げる理由を読む</em></span><b>特集を読む ↗</b></a>
   <p class="back"><a href="../">← KNOTトップへ戻る</a></p>
 </main>
 <style>
