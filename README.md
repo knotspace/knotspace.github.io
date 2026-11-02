@@ -27,6 +27,27 @@ https://knotspace.github.io/
 - 解答数・正解数・苦手問題の端末内保存
 - ライト／ダークテーマ切り替え
 
+## ✍️ KNOT Admin
+
+`/admin/` にWordPress風の記事管理画面を追加。Decap CMSを使い、GitHub上のMarkdown記事を管理します。
+
+- 記事の新規作成・編集・削除
+- Markdown本文編集
+- アイキャッチ画像アップロード
+- 下書き・プレビュー・レビュー・公開のワークフロー
+- 公開済み記事の更新
+
+### 初回セットアップ（認証）
+
+管理画面を安全に使うには、Decap Turbo側でGitHub接続とサイト登録が必要です。
+
+1. Decap Turboにサインインし、GitHubを接続する
+2. `knotspace/knotspace.github.io` を対象リポジトリにしてサイトを登録する
+3. 管理画面URLに `https://knotspace.github.io/admin/` を登録する
+4. 発行されたSite IDを `public/admin/config.yml` の `turbo_site_id` に設定する
+
+Site ID設定前は管理画面の認証・記事保存は利用できません。GitHubのアクセストークンや秘密鍵をブラウザ側へ直接置かないでください。
+
 ## 🛠️ Development
 
 - Astro 4
@@ -90,3 +111,10 @@ npm run preview
 - 教科・分野・難易度・問題数を選ぶ設定画面を整理
 - 回答後の正誤表示、解説、進捗、結果画面を作り直し
 - 苦手問題と学習記録の保存処理を新しい形式に分離
+
+### 2026-11-02 — KNOT Adminを追加
+- `/admin/` にDecap CMSの記事管理画面を追加
+- ブログ記事の新規作成・編集・削除とMarkdown編集に対応
+- アイキャッチ画像アップロードと下書き・プレビュー・公開ワークフローを設定
+- 認証はDecap Turboを利用する構成にし、初回セットアップ手順をREADMEに記載
+- 認証情報やアクセストークンをフロントエンドへ埋め込まない方針を明記
