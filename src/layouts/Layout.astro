@@ -5,6 +5,7 @@ interface Props {
   description?: string;
   image?: string;
   noindex?: boolean;
+  studyMode?: boolean;
   structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
@@ -13,6 +14,7 @@ const {
   description = 'Web制作や日々の興味、ランニングなどを記録する個人ブログ。',
   image,
   noindex = false,
+  studyMode = false,
   structuredData,
 } = Astro.props;
 
@@ -81,8 +83,8 @@ const BASE = import.meta.env.BASE_URL;
   </head>
 
   <body>
-    <div class="site-shell">
-      <header class="site-header">
+    <div class:list={["site-shell", { "study-shell": studyMode }]}>
+      {!studyMode && <header class="site-header">
         <a class="brand" href={BASE} aria-label="KNOT ホーム">
           KNOT<span class="brand-dot">.</span>
         </a>
@@ -117,7 +119,7 @@ const BASE = import.meta.env.BASE_URL;
             ↗
           </a>
         </nav>
-      </header>
+      </header>}
 
       <main>
         <slot />
@@ -128,13 +130,14 @@ const BASE = import.meta.env.BASE_URL;
         <button id="pwa-install-button" type="button">インストール</button>
         <button id="pwa-install-close" type="button" aria-label="閉じる">×</button>
       </aside>
-      <footer class="site-footer">
+      {!studyMode && <footer class="site-footer">
         <a class="footer-brand" href={BASE}>
           KNOT<span class="brand-dot">.</span>
         </a>
         <p>Web制作や日々の興味を記録する個人ブログ。</p>
         <span>© {new Date().getFullYear()} KNOT. Built with Astro.</span>
-      </footer>
+      </footer>}
+      {studyMode && <nav class="study-bottom-nav" aria-label="Study navigation"><a href={`${BASE}`}><span aria-hidden="true">⌂</span> HOMEへ戻る</a></nav>}
     </div>
 
     <script is:inline>
@@ -252,6 +255,10 @@ const BASE = import.meta.env.BASE_URL;
 </html>
 
 <style is:global>
+  .study-shell{width:min(100% - 36px,1080px);padding-bottom:82px}
+  .study-bottom-nav{position:fixed;z-index:1000;left:0;right:0;bottom:0;display:flex;justify-content:center;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(18px);border-top:1px solid var(--line)}
+  .study-bottom-nav a{display:flex;align-items:center;justify-content:center;gap:9px;width:min(520px,100%);min-height:44px;border-radius:12px;background:var(--surface);border:1px solid var(--line);color:var(--text);font-size:12px;font-weight:800}
+  .study-bottom-nav a span{font-size:18px;color:var(--accent)}
   .pwa-prompt{position:fixed;z-index:9999;left:50%;bottom:22px;transform:translateX(-50%);width:min(560px,calc(100% - 28px));display:flex;align-items:center;gap:14px;padding:15px 16px;border:1px solid var(--line);border-radius:15px;background:var(--surface);color:var(--text);box-shadow:0 16px 50px rgba(0,0,0,.28)}
   .pwa-prompt[hidden]{display:none}
   .pwa-prompt>div{flex:1;min-width:0}.pwa-prompt strong{font-size:13px}.pwa-prompt p{font-size:11px;color:var(--muted);line-height:1.6;margin:4px 0 0}
