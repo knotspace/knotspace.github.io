@@ -29,7 +29,6 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
   day: 'numeric'
 });
 
-// H2・H3だけを目次に表示
 const toc = headings.filter((heading) =>
   heading.depth === 2 || heading.depth === 3
 );
@@ -117,7 +116,7 @@ const date = dateFormat(post.data.pubDate);
   .back-link {
     display: inline-block;
     margin-bottom: 34px;
-    color: #91a3bb;
+    color: var(--muted);
     font-size: 11px;
     font-weight: 700;
     transition: color .2s;
@@ -137,7 +136,7 @@ const date = dateFormat(post.data.pubDate);
     align-items: center;
     flex-wrap: wrap;
     gap: 10px;
-    color: #8fa0b7;
+    color: var(--muted);
     font-size: 10px;
     font-weight: 600;
   }
@@ -155,6 +154,7 @@ const date = dateFormat(post.data.pubDate);
     line-height: 1.4;
     letter-spacing: -.065em;
     font-weight: 900;
+    color: var(--text);
   }
 
   .description {
@@ -179,7 +179,7 @@ const date = dateFormat(post.data.pubDate);
     padding: 23px 26px;
     border: 1px solid var(--line);
     border-radius: 14px;
-    background: rgba(17, 28, 46, .65);
+    background: var(--surface);
   }
 
   .toc-heading {
@@ -200,7 +200,7 @@ const date = dateFormat(post.data.pubDate);
 
   .toc-count {
     margin-left: auto;
-    color: #8192aa;
+    color: var(--muted);
     font-size: 10px;
     font-weight: 500;
   }
@@ -219,7 +219,7 @@ const date = dateFormat(post.data.pubDate);
   .toc li a {
     display: block;
     padding: 7px 0;
-    color: #aebdd0;
+    color: var(--article-text);
     font-size: 12px;
     line-height: 1.7;
     text-decoration: none;
@@ -233,7 +233,7 @@ const date = dateFormat(post.data.pubDate);
   }
 
   .toc li a:hover {
-    color: #fff;
+    color: var(--accent);
     transform: translateX(3px);
   }
 
@@ -242,12 +242,13 @@ const date = dateFormat(post.data.pubDate);
   }
 
   .toc .toc-level-3 a {
-    color: #8192aa;
+    color: var(--muted);
     font-size: 11px;
   }
 
+  /* 記事本文 */
   .article-content {
-    color: #c4cedc;
+    color: var(--text);
     font-size: 15px;
     line-height: 2.15;
     overflow-wrap: anywhere;
@@ -273,10 +274,16 @@ const date = dateFormat(post.data.pubDate);
 
   .article-content :global(p) {
     margin: 1.15em 0;
+    color: var(--article-text);
+  }
+
+  .article-content :global(strong) {
+    color: var(--text);
+    font-weight: 800;
   }
 
   .article-content :global(a) {
-    color: #91baff;
+    color: var(--accent);
     text-decoration: underline;
     text-underline-offset: 4px;
   }
@@ -284,6 +291,7 @@ const date = dateFormat(post.data.pubDate);
   .article-content :global(ul),
   .article-content :global(ol) {
     padding-left: 1.5em;
+    color: var(--article-text);
   }
 
   .article-content :global(li) {
@@ -294,17 +302,21 @@ const date = dateFormat(post.data.pubDate);
   .article-content :global(blockquote) {
     margin: 1.8em 0;
     padding: 5px 20px;
-    border-left: 2px solid #547db8;
-    color: #9eafc5;
-    background: rgba(21,34,56,.55);
+    border-left: 2px solid var(--accent);
+    color: var(--article-text);
+    background: var(--surface);
+  }
+
+  .article-content :global(blockquote p) {
+    color: var(--article-text);
   }
 
   .article-content :global(code) {
     padding: .15em .4em;
     border: 1px solid var(--line);
     border-radius: 5px;
-    background: #142137;
-    color: #b9d4ff;
+    background: var(--code-bg);
+    color: var(--accent);
     font-size: .88em;
   }
 
@@ -313,7 +325,8 @@ const date = dateFormat(post.data.pubDate);
     padding: 18px;
     border: 1px solid var(--line);
     border-radius: 12px;
-    background: #080e18;
+    background: var(--code-bg);
+    color: var(--text);
     line-height: 1.7;
   }
 
@@ -330,12 +343,13 @@ const date = dateFormat(post.data.pubDate);
     border-top: 1px solid var(--line);
   }
 
+  /* 記事の最後 */
   .post-end {
     margin-top: 65px;
     padding: 28px;
     border: 1px solid var(--line);
     border-radius: 16px;
-    background: rgba(17,28,46,.6);
+    background: var(--surface);
     text-align: center;
   }
 
@@ -345,14 +359,15 @@ const date = dateFormat(post.data.pubDate);
   }
 
   .post-end p {
-    color: var(--muted);
-    font-size: 12px;
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 600;
   }
 
   .post-end a {
     display: inline-block;
     margin-top: 8px;
-    color: #a9caff;
+    color: var(--accent);
     font-size: 12px;
     font-weight: 700;
   }
