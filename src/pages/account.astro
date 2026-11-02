@@ -16,7 +16,6 @@ const supabaseKey = 'sb_publishable_-yhc0QqTEEZTBWi9jTcFRA_-AVi-iP6';
         <button type="button" class="tab" id="signup-tab">新規登録</button>
       </div>
       <form id="account-form">
-        <label id="name-wrap" hidden>表示名<input id="display-name" type="text" maxlength="30" autocomplete="nickname" placeholder="KNOTユーザー" /></label>
         <label>メールアドレス<input id="email" type="email" autocomplete="email" required placeholder="you@example.com" /></label>
         <label>パスワード<input id="password" type="password" minlength="8" autocomplete="current-password" required placeholder="8文字以上" /></label>
         <button class="submit" id="submit" type="submit">ログイン</button>
@@ -63,7 +62,6 @@ const supabaseKey = 'sb_publishable_-yhc0QqTEEZTBWi9jTcFRA_-AVi-iP6';
       mode = next;
       $('login-tab').classList.toggle('active', mode === 'login');
       $('signup-tab').classList.toggle('active', mode === 'signup');
-      $('name-wrap').hidden = mode !== 'signup';
       $('form-title').textContent = mode === 'login' ? 'KNOTにログイン' : 'アカウントを作成';
       $('form-intro').textContent = mode === 'login' ? '登録したメールアドレスとパスワードでログイン。' : 'メールアドレスとパスワードを登録して、KNOTをもっと便利に。';
       $('submit').textContent = mode === 'login' ? 'ログイン' : '新規登録';
@@ -89,7 +87,7 @@ const supabaseKey = 'sb_publishable_-yhc0QqTEEZTBWi9jTcFRA_-AVi-iP6';
         let data;
         if (mode === 'signup') {
           const redirectTo = 'https://knotspace.github.io/account/';
-          data = await api('/auth/v1/signup?redirect_to=' + encodeURIComponent(redirectTo), { email, password, data: { display_name: $('display-name').value.trim() } });
+          data = await api('/auth/v1/signup?redirect_to=' + encodeURIComponent(redirectTo), { email, password, data: {} });
           if (!data.access_token) {
             $('message').textContent = '確認メールを送信しました。メール内のリンクから登録を完了してね。';
             return;
