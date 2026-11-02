@@ -57,7 +57,9 @@
       "川が必ず流れていない"
     ],
     "answer": 0,
-    "explanation": "等高線の間隔が狭いほど、短い水平距離で標高が大きく変化するため、傾斜が急である。"
+    "explanation": "等高線の間隔が狭いほど、短い水平距離で標高が大きく変化するため、傾斜が急である。",
+    "figure": "/study-data/contour-map.svg",
+    "figureAlt": "等高線が同心状に並ぶ山の模式図"
   },
   {
     "id": "kos-social-005",
@@ -327,7 +329,9 @@
       "葉緑体が消えるから"
     ],
     "answer": 1,
-    "explanation": "光は光合成に必要な条件。遮光部分ではデンプンがつくられにくい。"
+    "explanation": "光は光合成に必要な条件。遮光部分ではデンプンがつくられにくい。",
+    "figure": "/study-data/water-cycle.svg",
+    "figureAlt": "太陽、雲、降水、蒸発を示す水循環の模式図"
   },
   {
     "id": "kos-extra-011",
@@ -387,7 +391,9 @@
       "三角州"
     ],
     "answer": 1,
-    "explanation": "閉じた等高線の内側ほど標高が高ければ山を表す。"
+    "explanation": "閉じた等高線の内側ほど標高が高ければ山を表す。",
+    "figure": "/study-data/contour-map.svg",
+    "figureAlt": "等高線が同心状に並ぶ山の模式図"
   },
   {
     "id": "kos-extra-015",
@@ -522,7 +528,9 @@
       "変わらない"
     ],
     "answer": 1,
-    "explanation": "圧力＝力÷面積。力が一定で面積が半分なら圧力は2倍。"
+    "explanation": "圧力＝力÷面積。力が一定で面積が半分なら圧力は2倍。",
+    "figure": "/study-data/river-landforms.svg",
+    "figureAlt": "山地から下流へ続く川と地形の模式図"
   },
   {
     "id": "kos-extra-024",
