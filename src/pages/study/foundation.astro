@@ -50,8 +50,49 @@ function updateRecord() { $('total').textContent = record.answered; $('correctTo
 function fillTopics() { const subject = $('subject').value, select = $('topic'), previous = select.value; select.replaceChildren(new Option('すべての分野', 'all')); [...new Set(bank.filter(q => subject === 'all' || q.subject === subject).map(q => q.topic))].forEach(topic => select.add(new Option(topic, topic))); if ([...select.options].some(option => option.value === previous)) select.value = previous; }
 $('subject').addEventListener('change', fillTopics); fillTopics(); updateRecord();
 function start() { lastConfig = { subject: $('subject').value, topic: $('topic').value, amount: $('amount').value }; let pool = bank.filter(q => (lastConfig.subject === 'all' || q.subject === lastConfig.subject) && (lastConfig.topic === 'all' || q.topic === lastConfig.topic)); if (lastConfig.amount === 'wrong') pool = pool.filter(q => record.wrong.includes(q.id)); if (!pool.length) { alert('この条件の問題はまだありません。別の分野を選んでね。'); return; } pool = [...pool].sort(() => Math.random() - .5); if (lastConfig.amount !== 'all' && lastConfig.amount !== 'wrong') pool = pool.slice(0, Number(lastConfig.amount)); questions = pool; index = 0; score = 0; $('settings').hidden = true; $('result').hidden = true; $('quiz').hidden = false; render(); }
-function render() { selected = false; const q = questions[index]; $('meta').textContent = (q.subject === 'science' ? '理科' : '社会') + ' / ' + q.topic + ' / ' + q.term; $('progressText').textContent = (index + 1) + ' / ' + questions.length; $('progress').style.width = (index / questions.length * 100) + '%'; $('prompt').textContent = q.prompt; $('answers').replaceChildren(); $('explanation').hidden = true; $('next').disabled = true; $('next').textContent = index === questions.length - 1 ? '結果を見る' : '次の問題'; q.options.forEach((option, i) => { const button = document.createElement('button'); button.type = 'button'; button.className = 'answer'; const letter = document.createElement('span'); letter.className = 'letter'; letter.textContent = ['A','B','C','D'][i]; const label = document.createElement('span'); label.textContent = option; button.append(letter, label); button.addEventListener('click', () => choose(i)); $('answers').append(button); }); }
-function choose(choice) { if (selected) return; selected = true; const q = questions[index], isCorrect = choice === q.correct; if (isCorrect) { score++; record.correct++; record.wrong = record.wrong.filter(id => id !== q.id); } else if (!record.wrong.includes(q.id)) record.wrong.push(q.id); record.answered++; save(); updateRecord(); [...$('answers').children].forEach((button, i) => { button.disabled = true; if (i === q.correct) button.classList.add('correct'); else if (i === choice) button.classList.add('incorrect'); }); const box = $('explanation'); box.replaceChildren(); box.hidden = false; const title = document.createElement('strong'); title.textContent = isCorrect ? '正解！ ' + q.term : '不正解 — 正解は「' + q.term + '」'; const body = document.createElement('p'); body.textContent = q.explanation; box.append(title, body); $('next').disabled = false; }
+function render() { selected = false; const q = questions[index]; $('meta').textContent = (q.subject === 'science' ? '理科' : '社会') + ' / ' + q.topic + ' / ' + q.term; $('progressText').textContent = (index + 1) + ' / ' + questions.length; $('progress').style.width = (index / questions.length * 100) + '%'; $('prompt').textContent = q.prompt; $('answers').replaceChildren(); $('explanation').hidden = true; $('next').disabled = true; $('next').textContent = index === questions.length - 1 ? '結果を見る' : '次の問題'; q.options.forEach((option, i) => {
+  const palettes = [
+    { bg: '#FFF1D9', border: '#F4C77E', ink: '#704817', chip: '#FFD99B' },
+    { bg: '#E4F7EA', border: '#9ADBB0', ink: '#245D39', chip: '#B9EAC8' },
+    { bg: '#E6F0FF', border: '#A4C5F2', ink: '#294F80', chip: '#C7DCFF' },
+    { bg: '#FBE8F2', border: '#EAB2CF', ink: '#783D5D', chip: '#F5C9DF' }
+  ];
+  const palette = palettes[i];
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'answer';
+  button.style.setProperty('background', palette.bg, 'important');
+  button.style.setProperty('border', '2px solid ' + palette.border, 'important');
+  button.style.setProperty('border-radius', '18px', 'important');
+  button.style.setProperty('color', palette.ink, 'important');
+  button.style.setProperty('box-shadow', '0 4px 0 ' + palette.border, 'important');
+  button.style.setProperty('font-weight', '700');
+  button.style.setProperty('justify-content', 'flex-start');
+  button.style.setProperty('padding', '18px 20px');
+  button.style.setProperty('transition', 'transform .15s, box-shadow .15s');
+  const letter = document.createElement('span');
+  letter.className = 'letter';
+  letter.textContent = ['A','B','C','D'][i];
+  letter.style.setProperty('width', '34px');
+  letter.style.setProperty('height', '34px');
+  letter.style.setProperty('display', 'grid');
+  letter.style.setProperty('place-items', 'center');
+  letter.style.setProperty('flex', '0 0 34px');
+  letter.style.setProperty('border-radius', '12px');
+  letter.style.setProperty('background', palette.chip, 'important');
+  letter.style.setProperty('color', palette.ink, 'important');
+  letter.style.setProperty('font-weight', '800');
+  const label = document.createElement('span');
+  label.textContent = option;
+  label.style.setProperty('text-align', 'left');
+  label.style.setProperty('line-height', '1.55');
+  button.append(letter, label);
+  button.addEventListener('mouseenter', () => { if (!button.disabled) { button.style.transform = 'translateY(-2px)'; button.style.boxShadow = '0 6px 0 ' + palette.border; } });
+  button.addEventListener('mouseleave', () => { button.style.transform = ''; button.style.boxShadow = '0 4px 0 ' + palette.border; });
+  button.addEventListener('click', () => choose(i));
+  $('answers').append(button);
+}); }
+function choose(choice) { if (selected) return; selected = true; const q = questions[index], isCorrect = choice === q.correct; if (isCorrect) { score++; record.correct++; record.wrong = record.wrong.filter(id => id !== q.id); } else if (!record.wrong.includes(q.id)) record.wrong.push(q.id); record.answered++; save(); updateRecord(); [...$('answers').children].forEach((button, i) => { button.disabled = true; if (i === q.correct) { button.classList.add('correct'); button.style.setProperty('background', '#DDF7E7', 'important'); button.style.setProperty('border', '2px solid #35A66A', 'important'); button.style.setProperty('color', '#185B36', 'important'); button.style.setProperty('box-shadow', 'none', 'important'); } else if (i === choice) { button.classList.add('incorrect'); button.style.setProperty('background', '#FFE5E7', 'important'); button.style.setProperty('border', '2px solid #DF5964', 'important'); button.style.setProperty('color', '#842B35', 'important'); button.style.setProperty('box-shadow', 'none', 'important'); } else { button.style.setProperty('opacity', '.58'); button.style.setProperty('box-shadow', 'none', 'important'); } }); const box = $('explanation'); box.replaceChildren(); box.hidden = false; const title = document.createElement('strong'); title.textContent = isCorrect ? '正解！ ' + q.term : '不正解 — 正解は「' + q.term + '」'; const body = document.createElement('p'); body.textContent = q.explanation; box.append(title, body); $('next').disabled = false; }
 function finish() { $('quiz').hidden = true; $('result').hidden = false; $('score').textContent = score; $('max').textContent = questions.length; $('resultMessage').textContent = score === questions.length ? '全問正解！この調子で次の分野も進めよう。' : '間違えた語句は「苦手だけ」から復習できるよ。'; }
 $('start').addEventListener('click', start); $('next').addEventListener('click', () => { if (!selected) return; if (index === questions.length - 1) finish(); else { index++; render(); } }); $('quit').addEventListener('click', () => { $('quiz').hidden = true; $('settings').hidden = false; }); $('backSettings').addEventListener('click', () => { $('result').hidden = true; $('settings').hidden = false; }); $('retry').addEventListener('click', () => { $('result').hidden = true; $('settings').hidden = false; if (lastConfig) { $('subject').value = lastConfig.subject; fillTopics(); $('topic').value = lastConfig.topic; $('amount').value = lastConfig.amount; } start(); });
 </script>
