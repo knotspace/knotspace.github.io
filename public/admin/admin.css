@@ -383,57 +383,37 @@ html, body, #nc-root, #nc-root > div,
 }
 
 
-/* KNOT fixed calm palette — no light/dark switching or high-contrast cards. */
-:root, :root[data-theme="dark"] {
-  color-scheme: light !important;
-  --knot-admin-bg: #edf0f1 !important;
-  --knot-admin-surface: #f5f6f5 !important;
-  --knot-admin-surface-raised: #f8f9f8 !important;
-  --knot-admin-text: #3f4b50 !important;
-  --knot-admin-muted: #737f84 !important;
-  --knot-admin-border: #d5dcde !important;
-  --knot-admin-blue: #718c9b !important;
-  --knot-admin-blue-dark: #526d7b !important;
-  --knot-admin-nav: #e5eaeb !important;
-  --knot-admin-shadow: none !important;
+
+/* KNOT low-glare themes: consistent surfaces, restrained contrast. */
+:root {
+ color-scheme:light;
+ --knot-admin-bg:#e9edef; --knot-admin-surface:#f1f3f3; --knot-admin-surface-raised:#f5f6f5;
+ --knot-admin-text:#465157; --knot-admin-muted:#7a858a; --knot-admin-border:#cfd7da;
+ --knot-admin-blue:#718c9b; --knot-admin-blue-dark:#526d7b; --knot-admin-nav:#e1e7e9;
+ --knot-admin-shadow:none;
 }
-html, body, #nc-root, #nc-root [role="main"] {
-  background: #edf0f1 !important;
-  color: #3f4b50 !important;
+:root[data-theme="dark"] {
+ color-scheme:dark;
+ --knot-admin-bg:#252c30; --knot-admin-surface:#30393e; --knot-admin-surface-raised:#354046;
+ --knot-admin-text:#d2dadd; --knot-admin-muted:#a5b0b5; --knot-admin-border:#465258;
+ --knot-admin-blue:#91aebb; --knot-admin-blue-dark:#a9c0ca; --knot-admin-nav:#2b3439;
+ --knot-admin-shadow:none;
 }
-#nc-root header, #nc-root [role="banner"], #nc-root nav,
-#nc-root aside, #nc-root [role="navigation"] {
-  background: #e5eaeb !important;
-  color: #3f4b50 !important;
-  border-color: #d5dcde !important;
+html,body,#nc-root,#nc-root [role="main"] {background:var(--knot-admin-bg)!important;color:var(--knot-admin-text)!important}
+#nc-root header,#nc-root [role="banner"],#nc-root nav,#nc-root aside,#nc-root [role="navigation"] {
+ background:var(--knot-admin-nav)!important;color:var(--knot-admin-text)!important;border-color:var(--knot-admin-border)!important
 }
-#nc-root a, #nc-root [role="main"] a {
-  color: #526d7b !important;
+#nc-root a,#nc-root [role="main"] a {color:var(--knot-admin-blue-dark)!important}
+#nc-root [role="main"] [role="listitem"],#nc-root [role="main"] [class*="ListCard"],#nc-root [role="main"] [class*="EntryCard"],#nc-root [role="main"] [class*="CollectionCard"] {
+ background:var(--knot-admin-surface)!important;color:var(--knot-admin-text)!important;border:1px solid var(--knot-admin-border)!important;box-shadow:none!important
 }
-#nc-root [role="main"] a:hover {
-  color: #3f4b50 !important;
-  background-color: #e7ecec !important;
+#nc-root button,#nc-root input,#nc-root textarea,#nc-root select,#nc-root [role="textbox"],#nc-root [contenteditable="true"] {
+ background:var(--knot-admin-surface-raised)!important;color:var(--knot-admin-text)!important;border-color:var(--knot-admin-border)!important;box-shadow:none!important
 }
-#nc-root [role="main"] [role="listitem"],
-#nc-root [role="main"] [class*="ListCard"],
-#nc-root [role="main"] [class*="EntryCard"],
-#nc-root [role="main"] [class*="collection-card"],
-#nc-root [role="main"] [class*="CollectionCard"] {
-  background: #f5f6f5 !important;
-  color: #3f4b50 !important;
-  border: 1px solid #d5dcde !important;
-  box-shadow: none !important;
+#nc-root button:hover {background:var(--knot-admin-nav)!important;color:var(--knot-admin-text)!important}
+#nc-root * {transition:none!important;animation:none!important}
+#knot-theme-toggle {
+ position:fixed;right:18px;bottom:18px;z-index:99999;padding:10px 16px;border:1px solid var(--knot-admin-border);
+ border-radius:999px;background:var(--knot-admin-surface)!important;color:var(--knot-admin-text)!important;
+ font:600 13px system-ui;cursor:pointer;box-shadow:none!important
 }
-#nc-root button, #nc-root input, #nc-root textarea, #nc-root select,
-#nc-root [role="textbox"], #nc-root [contenteditable="true"] {
-  background: #f8f9f8 !important;
-  color: #3f4b50 !important;
-  border-color: #d5dcde !important;
-  box-shadow: none !important;
-}
-#nc-root button:hover {
-  background: #e5eaeb !important;
-  color: #3f4b50 !important;
-  border-color: #c7d1d5 !important;
-}
-#nc-root * { transition: none !important; animation: none !important; }
