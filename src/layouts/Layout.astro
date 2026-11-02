@@ -15,7 +15,7 @@ const {
 const BASE = import.meta.env.BASE_URL;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 const pageImage = image ? new URL(image, Astro.url).href : undefined;
-const faviconURL = `${BASE}favicon.svg?v=3`;
+const faviconURL = `${BASE}favicon.svg?v=4`;
 ---
 
 <!doctype html>
@@ -28,7 +28,6 @@ const faviconURL = `${BASE}favicon.svg?v=3`;
 
     <link rel="canonical" href={canonicalURL} />
     <link rel="icon" type="image/svg+xml" href={faviconURL} />
-    <link rel="shortcut icon" type="image/svg+xml" href={faviconURL} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -94,7 +93,6 @@ const faviconURL = `${BASE}favicon.svg?v=3`;
     color-scheme: dark;
     --bg: #0b1220;
     --surface: #111c2e;
-    --surface-light: #152238;
     --line: rgba(148, 163, 184, .16);
     --text: #f4f7fb;
     --muted: #9aa9bd;
@@ -112,7 +110,7 @@ const faviconURL = `${BASE}favicon.svg?v=3`;
   body {
     margin: 0;
     background:
-      radial-gradient(ellipse at 50% -18%, rgba(61,112,190,.10), transparent 42rem),
+      radial-gradient(ellipse at 50% -18%, rgba(61,112,190,.08), transparent 42rem),
       var(--bg);
     color: var(--text);
     font-family: "DM Sans", "Noto Sans JP", sans-serif;
@@ -125,12 +123,12 @@ const faviconURL = `${BASE}favicon.svg?v=3`;
   }
 
   .site-shell {
-    width: min(100% - 48px, 1120px);
+    width: min(100% - 48px, 1100px);
     margin: 0 auto;
   }
 
   .site-header {
-    min-height: 82px;
+    min-height: 76px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -140,10 +138,10 @@ const faviconURL = `${BASE}favicon.svg?v=3`;
   .brand {
     display: inline-flex;
     align-items: center;
-    font-size: 25px;
+    font-size: 26px;
     font-weight: 900;
     letter-spacing: -.09em;
-    transition: opacity .2s ease;
+    transition: opacity .2s;
   }
 
   .brand:hover {
@@ -160,15 +158,10 @@ const faviconURL = `${BASE}favicon.svg?v=3`;
     gap: 28px;
     color: var(--muted);
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 700;
   }
 
-  nav a {
-    transition: color .2s ease;
-  }
-
-  nav a:hover,
-  nav a[aria-current="page"] {
+  nav a:hover {
     color: var(--text);
   }
 
@@ -177,7 +170,7 @@ const faviconURL = `${BASE}favicon.svg?v=3`;
   }
 
   .site-footer {
-    margin-top: 90px;
+    margin-top: 80px;
     padding: 28px 0 24px;
     border-top: 1px solid var(--line);
   }
@@ -186,8 +179,7 @@ const faviconURL = `${BASE}favicon.svg?v=3`;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
-    margin-bottom: 28px;
+    margin-bottom: 25px;
   }
 
   .footer-brand {
@@ -199,7 +191,7 @@ const faviconURL = `${BASE}favicon.svg?v=3`;
   .footer-main p {
     margin: 0;
     color: var(--muted);
-    font-size: 12px;
+    font-size: 11px;
   }
 
   .footer-bottom {
@@ -211,7 +203,6 @@ const faviconURL = `${BASE}favicon.svg?v=3`;
 
   .copyright-link {
     color: inherit;
-    transition: color .2s ease;
   }
 
   .copyright-link:hover {
@@ -220,20 +211,20 @@ const faviconURL = `${BASE}favicon.svg?v=3`;
 
   @media (max-width: 620px) {
     .site-shell {
-      width: min(100% - 32px, 1120px);
+      width: min(100% - 32px, 1100px);
     }
 
     .site-header {
-      min-height: 70px;
+      min-height: 68px;
     }
 
     nav {
-      gap: 19px;
+      gap: 18px;
       font-size: 12px;
     }
 
     .site-footer {
-      margin-top: 65px;
+      margin-top: 60px;
     }
   }
 </style>
