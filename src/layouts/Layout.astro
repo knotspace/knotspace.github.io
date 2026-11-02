@@ -88,9 +88,10 @@ const BASE = import.meta.env.BASE_URL;
         <nav aria-label="メインナビゲーション">
           <a href={BASE}>ホーム</a>
           <a href={`${BASE}blog/`}>記事一覧</a>
-          <a href={`${BASE}study/`}>Study</a>
           <a href={`${BASE}bookmarks/`}>あとで読む</a>
           <a href={`${BASE}about/`}>プロフィール</a>
+
+          <a class="account-link" href={`${BASE}account/`} aria-label="アカウント" title="アカウント">♙</a>
 
           <button
             class="theme-toggle"
@@ -329,6 +330,9 @@ const BASE = import.meta.env.BASE_URL;
   nav a:hover {
     color: var(--text);
   }
+
+  .account-link{display:grid;place-items:center;width:32px;height:32px;border:1px solid var(--line);border-radius:50%;color:var(--muted);font-size:17px;transition:color .2s,border-color .2s}
+  .account-link:hover{color:var(--accent);border-color:var(--accent)}
 
   .theme-toggle {
     display: grid;
