@@ -8,6 +8,8 @@ const supabaseKey = 'sb_publishable_-yhc0QqTEEZTBWi9jTcFRA_-AVi-iP6';
   <main class="mypage">
     <header class="welcome"><span class="eyebrow">YOUR SPACE</span><h1>マイページ</h1><p id="user-email">ログイン情報を確認しています...</p></header>
     <section id="admin-panel" class="panel" hidden><span class="eyebrow">KNOT ADMIN</span><h2>管理人アカウント</h2><p>管理人権限が有効です。このアカウントはKNOTの管理者として登録されています。</p></section>
+    <section id="writer-link" class="panel" hidden><span class="eyebrow">KNOT WRITER</span><h2>投稿者ワークスペース</h2><p>記事の下書きを作成・編集できます。公開操作はできません。</p><a href={BASE + 'writer/'}>記事を書く →</a></section>
+    <section id="invite-panel" class="panel" hidden><span class="eyebrow">WRITER MANAGEMENT</span><h2>投稿者を招待</h2><p>招待した相手は記事の下書き作成・編集だけができます。公開・削除・管理設定はできません。</p><form id="invite-form"><label>メールアドレス<input id="invite-email" type="email" required placeholder="writer@example.com" /></label><button type="submit">招待メールを送る</button></form><p id="invite-message" role="status"></p><h3>投稿者から届いた記事</h3><div id="admin-submissions">読み込み中...</div></section>
     <section class="profile panel">
       <div><span class="eyebrow">PROFILE</span><h2>プロフィール</h2></div>
       <label>表示名<input id="display-name" maxlength="30" placeholder="表示名" /></label>
@@ -34,7 +36,13 @@ const supabaseKey = 'sb_publishable_-yhc0QqTEEZTBWi9jTcFRA_-AVi-iP6';
         const user = await request('/auth/v1/user');
         $('user-email').textContent = user.email || '';
         const adminRows = await request('/rest/v1/knot_admins?select=user_id&user_id=eq.' + encodeURIComponent(user.id));
-        if (adminRows.length) $('admin-panel').hidden = false;
+        if (adminRows.length) {
+          $('admin-panel').hidden = false;
+          $('invite-panel').hidden = false;
+          loadAdminSubmissions();
+        }
+        const writerRows = await request('/rest/v1/knot_writer_roles?select=user_id&user_id=eq.' + encodeURIComponent(user.id));
+        if (writerRows.length) $('writer-link').hidden = false;
         const rows = await request('/rest/v1/knot_profiles?select=display_name&user_id=eq.' + encodeURIComponent(user.id));
         if (rows[0]) $('display-name').value = rows[0].display_name || '';
         else {
@@ -44,6 +52,34 @@ const supabaseKey = 'sb_publishable_-yhc0QqTEEZTBWi9jTcFRA_-AVi-iP6';
         $('profile-message').textContent = error.message + '。再ログインしてね。';
       }
     };
+    async function loadAdminSubmissions() {
+      try {
+        const rows = await request('/rest/v1/knot_submissions?select=id,title,description,category,body,status,updated_at,author_id&order=updated_at.desc');
+        const root = $('admin-submissions'); root.replaceChildren();
+        if (!rows.length) { root.textContent = 'まだ投稿はありません。'; return; }
+        rows.forEach(item => {
+          const card = document.createElement('article'); card.className = 'submission';
+          const title = document.createElement('strong'); title.textContent = item.title;
+          const meta = document.createElement('p'); meta.textContent = (item.category || 'その他') + ' ・ ' + ({draft:'下書き',submitted:'確認依頼',reviewed:'確認済み'}[item.status] || item.status);
+          const preview = document.createElement('pre'); preview.textContent = item.body;
+          const copy = document.createElement('button'); copy.type='button'; copy.textContent='Markdownをコピー';
+          copy.addEventListener('click', async () => { const md = '---\\ntitle: "'+item.title.replace(/"/g,'\\"')+'"\\ndescription: "'+(item.description||'').replace(/"/g,'\\"')+'"\\ncategory: "'+item.category+'"\\npubDate: "'+new Date().toISOString()+'"\\n---\\n\\n'+item.body; await navigator.clipboard.writeText(md); copy.textContent='コピーしました'; });
+          const reviewed = document.createElement('button'); reviewed.type='button'; reviewed.textContent='確認済みにする';
+          reviewed.addEventListener('click', async()=>{try{await request('/rest/v1/knot_submissions?id=eq.'+encodeURIComponent(item.id),{method:'PATCH',headers:{Prefer:'return=minimal'},body:JSON.stringify({status:'reviewed'})});loadAdminSubmissions();}catch(e){$('invite-message').textContent=e.message;}});
+          card.append(title,meta,preview,copy,reviewed); root.append(card);
+        });
+      } catch(error) { $('admin-submissions').textContent = error.message; }
+    }
+    $('invite-form').addEventListener('submit', async event => {
+      event.preventDefault();
+      const button = $('invite-form').querySelector('button'); button.disabled=true; $('invite-message').textContent='招待中...';
+      try {
+        const response = await fetch(supabaseUrl + '/functions/v1/invite-writer', {method:'POST',headers:{apikey:supabaseKey,Authorization:'Bearer '+session.access_token,'Content-Type':'application/json'},body:JSON.stringify({email:$('invite-email').value.trim()})});
+        const data=await response.json(); if(!response.ok) throw new Error(data.error || '招待に失敗しました。');
+        $('invite-message').textContent=data.message; $('invite-email').value='';
+      } catch(error) { $('invite-message').textContent=error.message; }
+      finally { button.disabled=false; }
+    });
     load();
     $('save-profile').addEventListener('click', async () => {
       const name = $('display-name').value.trim();
@@ -64,5 +100,5 @@ const supabaseKey = 'sb_publishable_-yhc0QqTEEZTBWi9jTcFRA_-AVi-iP6';
   </script>
 </Layout>
 <style>
-.mypage{max-width:760px;margin:0 auto;padding:52px 0 80px}.welcome{margin-bottom:28px}.eyebrow{color:var(--accent);font-size:10px;font-weight:800;letter-spacing:.16em}.welcome h1{margin:9px 0;color:var(--text);font-size:clamp(32px,6vw,46px);letter-spacing:-.06em}.welcome p{color:var(--muted);font-size:13px}.panel{margin:14px 0;padding:25px;border:1px solid var(--line);border-radius:16px;background:var(--surface)}.panel h2{margin:7px 0 18px;color:var(--text);font-size:19px}.profile label{display:grid;gap:7px;color:var(--muted);font-size:12px}.profile input{max-width:420px;padding:12px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--text)}button{cursor:pointer}.profile button,.actions button{margin-top:12px;padding:10px 16px;border:0;border-radius:9px;background:var(--accent);color:white;font-size:12px;font-weight:800}.profile p{color:var(--accent);font-size:12px}.feature-list{display:grid;gap:0}.feature-list div{display:flex;justify-content:space-between;gap:20px;padding:14px 0;border-top:1px solid var(--line)}.feature-list strong{color:var(--text);font-size:13px}.feature-list span{color:var(--muted);font-size:11px}.actions{display:flex;justify-content:space-between;align-items:center;margin-top:25px}.actions a{color:var(--muted);font-size:12px}.actions button{margin:0;background:transparent;border:1px solid var(--line);color:var(--muted)}@media(max-width:600px){.mypage{padding:35px 0 60px}.panel{padding:20px}.feature-list div{flex-direction:column;gap:5px}}
+.mypage{max-width:760px;margin:0 auto;padding:52px 0 80px}.welcome{margin-bottom:28px}.eyebrow{color:var(--accent);font-size:10px;font-weight:800;letter-spacing:.16em}.welcome h1{margin:9px 0;color:var(--text);font-size:clamp(32px,6vw,46px);letter-spacing:-.06em}.welcome p{color:var(--muted);font-size:13px}.panel{margin:14px 0;padding:25px;border:1px solid var(--line);border-radius:16px;background:var(--surface)}.panel h2{margin:7px 0 18px;color:var(--text);font-size:19px}.panel a{color:var(--accent);font-size:13px;font-weight:700}.panel form{display:grid;gap:10px;max-width:420px}.panel input{padding:11px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--text)}.panel form button,.submission button{padding:9px 13px;border:0;border-radius:8px;background:var(--accent);color:white;font-size:12px;font-weight:700}.submission{padding:15px 0;border-top:1px solid var(--line)}.submission strong{color:var(--text)}.submission p{color:var(--muted);font-size:11px}.submission pre{max-height:180px;overflow:auto;white-space:pre-wrap;padding:12px;border-radius:8px;background:var(--bg);color:var(--text);font-size:11px;line-height:1.7}.submission button{margin-right:8px;margin-top:8px}.profile label{display:grid;gap:7px;color:var(--muted);font-size:12px}.profile input{max-width:420px;padding:12px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--text)}button{cursor:pointer}.profile button,.actions button{margin-top:12px;padding:10px 16px;border:0;border-radius:9px;background:var(--accent);color:white;font-size:12px;font-weight:800}.profile p{color:var(--accent);font-size:12px}.feature-list{display:grid;gap:0}.feature-list div{display:flex;justify-content:space-between;gap:20px;padding:14px 0;border-top:1px solid var(--line)}.feature-list strong{color:var(--text);font-size:13px}.feature-list span{color:var(--muted);font-size:11px}.actions{display:flex;justify-content:space-between;align-items:center;margin-top:25px}.actions a{color:var(--muted);font-size:12px}.actions button{margin:0;background:transparent;border:1px solid var(--line);color:var(--muted)}@media(max-width:600px){.mypage{padding:35px 0 60px}.panel{padding:20px}.feature-list div{flex-direction:column;gap:5px}}
 </style>
