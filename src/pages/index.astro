@@ -1,15 +1,100 @@
 ---
+import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
-import '../styles/study.css';
-const structuredData={"@context":"https://schema.org","@type":"WebApplication",name:'KNOT Study',applicationCategory:'EducationalApplication',operatingSystem:'Any'};
+
+const posts = (await getCollection('blog'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+const BASE = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', { year: 'numeric', month: 'short', day: 'numeric' });
 ---
-<Layout title="KNOT Study | 学習アプリ" description="中学生向け理科・社会の一問一答" structuredData={structuredData}>
-<main class="study-app">
-<header class="site-header"><div class="brand">KNOT<span> Study</span></div><div class="header-note">毎日の積み重ねを、確かな力に。</div></header>
-<section class="hero"><h1>今日の学習を、ここから。</h1><p>理科・社会の問題に挑戦して、苦手を克服しよう。</p></section>
-<section class="stats-grid"><div class="stat-card"><div class="stat-label">回答した問題</div><div class="stat-value" id="total-answered">0</div></div><div class="stat-card"><div class="stat-label">正解数</div><div class="stat-value" id="total-correct">0</div></div><div class="stat-card"><div class="stat-label">正答率</div><div class="stat-value" id="accuracy">—</div></div><div class="stat-card"><div class="stat-label">苦手問題</div><div class="stat-value" id="wrong-count">0</div></div></section>
-<h2 class="section-title">科目を選択</h2><div class="subjects"><button class="subject active" data-subject="理科">🔬 理科</button><button class="subject" data-subject="社会">🌏 社会</button></div>
-<section class="panel"><h2 class="section-title">学習設定</h2><div class="controls"><div class="field"><label for="grade">学年</label><select id="grade"><option value="all">全学年</option><option value="1">中学1年</option><option value="2">中学2年</option><option value="3">中学3年</option></select></div><div class="field"><label for="mode">モード</label><select id="mode"><option value="all">全問題</option><option value="topic">分野別</option><option value="mock">ランダム20問</option><option value="wrong">苦手問題</option></select></div><div class="field" id="topic-wrap" hidden><label for="topic">分野</label><select id="topic"><option value="all">すべて</option></select></div><button class="primary-btn" id="start-btn">学習スタート →</button></div><div class="controls"><button class="secondary-btn" id="review-btn">苦手問題を復習（<span id="review-total">0問</span>）</button><button class="danger-btn" id="reset-btn">記録をリセット</button></div></section>
-<section class="panel" id="quiz-panel" hidden><div class="quiz-top"><span id="quiz-subtitle">理科</span><span id="question-counter">1 / 20</span></div><h2 id="quiz-title">理科の問題</h2><div class="quiz-meta"><span class="pill" id="question-grade">中1</span><span class="pill" id="question-topic">植物</span></div><p id="question-text"></p><div class="answer-list" id="answer-list"></div><div class="explanation" id="explanation" hidden></div><div class="quiz-actions"><button class="secondary-btn" id="quit-btn">終了</button><button class="primary-btn" id="next-btn" disabled>次の問題 →</button></div></section>
-<footer class="footer">© KNOT Study</footer></main><script>import '../scripts/app.js';</script>
+
+<Layout title="KNOT | 好きと学びをつなぐ場所" description="日々の興味や学びを記録する個人ブログ。読書、勉強、Web制作など。">
+  <main class="home">
+    <section class="hero">
+      <span class="eyebrow">A PERSONAL JOURNAL & LEARNING SPACE</span>
+      <p class="hero-mark">KNOT<span>.</span></p>
+      <h1>自分の「好き」と「学び」を、<br />少しずつつないでいく。</h1>
+      <p class="hero-copy">日々感じたこと、読んだ本、勉強、Web制作。<br />興味を持ったことを自分のペースで記録する場所。</p>
+      <div class="hero-actions">
+        <a class="button primary" href={`${BASE}blog/`}>ブログを読む <span>→</span></a>
+        <a class="button secondary" href={`${BASE}study/`}>KNOT Study <span>↗</span></a>
+      </div>
+    </section>
+
+    <section class="portal-grid" aria-label="コンテンツ">
+      <a class="portal blog-portal" href={`${BASE}blog/`}>
+        <span class="portal-kicker">01 / JOURNAL</span>
+        <span class="portal-icon">✎</span>
+        <h2>Blog<span>.</span></h2>
+        <p>日常のこと、本の感想、勉強やWeb制作の記録。</p>
+        <span class="portal-link">記事一覧を見る <b>→</b></span>
+      </a>
+      <a class="portal study-portal" href={`${BASE}study/`}>
+        <span class="portal-kicker">02 / LEARNING</span>
+        <span class="portal-icon">⌁</span>
+        <h2>Study<span>.</span></h2>
+        <p>中学理科・社会の知識を、問題演習で身につける。</p>
+        <span class="portal-link">学習を始める <b>→</b></span>
+      </a>
+    </section>
+
+    <section class="latest">
+      <div class="section-heading">
+        <div><span class="eyebrow">LATEST JOURNAL</span><h2>新着記事</h2></div>
+        <a href={`${BASE}blog/`}>すべての記事 <span>→</span></a>
+      </div>
+      {posts.length ? <div class="post-grid">
+        {posts.map((post) => <a class="post" href={`${BASE}blog/${post.slug}/`}>
+          <span class="post-date">{dateFormat(post.data.pubDate)}　/　{post.data.category}</span>
+          <h3>{post.data.title}</h3>
+          <p>{post.data.description}</p>
+          <span class="read-more">続きを読む →</span>
+        </a>)}
+      </div> : <p class="empty">記事は準備中です。</p>}
+    </section>
+
+    <section class="about-strip">
+      <span class="eyebrow">ABOUT THIS SITE</span>
+      <p>中学3年生の日々感じたことを書いていく、備忘録的なブログです。</p>
+      <a href={`${BASE}about/`}>KNOTについて <span>→</span></a>
+    </section>
+  </main>
 </Layout>
+
+<style>
+  .home{max-width:960px;margin:0 auto;padding:44px 0 30px;color:var(--text)}
+  .hero{padding:58px 0 62px}
+  .eyebrow{color:var(--muted);font-size:10px;font-weight:800;letter-spacing:.18em}
+  .hero-mark{margin:18px 0 22px;font-size:clamp(48px,9vw,82px);font-weight:950;letter-spacing:-.105em;line-height:.95}
+  .hero-mark span,.portal h2 span{color:var(--accent)}
+  .hero h1{margin:0;font-size:clamp(26px,4.7vw,43px);line-height:1.55;letter-spacing:-.055em}
+  .hero-copy{margin:18px 0 0;color:var(--muted);font-size:14px;line-height:2}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+  .button{display:inline-flex;align-items:center;gap:22px;padding:13px 17px;border-radius:10px;font-size:12px;font-weight:800;transition:transform .18s,opacity .18s}
+  .button:hover,.portal:hover,.post:hover{transform:translateY(-3px)}
+  .button.primary{background:var(--text);color:var(--bg)}
+  .button.secondary{border:1px solid var(--line);background:var(--surface);color:var(--text)}
+  .portal-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .portal{position:relative;display:flex;min-height:255px;flex-direction:column;padding:24px;border:1px solid var(--line);border-radius:18px;background:var(--surface);transition:transform .18s,border-color .18s}
+  .portal:hover{border-color:var(--accent)}
+  .portal-kicker{color:var(--muted);font-size:10px;font-weight:800;letter-spacing:.15em}
+  .portal-icon{margin-top:23px;color:var(--accent);font-size:27px}
+  .portal h2{margin:4px 0 5px;font-size:30px;letter-spacing:-.07em}
+  .portal p{margin:0;color:var(--muted);font-size:12px;line-height:1.8}
+  .portal-link{display:flex;justify-content:space-between;margin-top:auto;padding-top:22px;color:var(--text);font-size:11px;font-weight:800}
+  .latest{margin-top:76px}
+  .section-heading{display:flex;align-items:end;justify-content:space-between;gap:15px;margin-bottom:18px}
+  .section-heading h2{margin:7px 0 0;font-size:24px;letter-spacing:-.05em}
+  .section-heading>a,.about-strip>a{color:var(--muted);font-size:11px;font-weight:750}
+  .post-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+  .post{display:flex;min-height:190px;flex-direction:column;padding:19px;border:1px solid var(--line);border-radius:14px;background:var(--surface);transition:transform .18s}
+  .post-date{color:var(--muted);font-size:10px}
+  .post h3{margin:17px 0 8px;font-size:15px;line-height:1.65}
+  .post p{margin:0;color:var(--muted);font-size:11px;line-height:1.8}
+  .read-more{margin-top:auto;padding-top:15px;color:var(--accent);font-size:10px;font-weight:800}
+  .empty{color:var(--muted);font-size:13px}
+  .about-strip{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:65px;padding:23px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .about-strip p{flex:1;min-width:230px;margin:0;color:var(--muted);font-size:12px;line-height:1.8}
+  @media(max-width:650px){.home{padding-top:20px}.hero{padding:42px 0 46px}.portal-grid{grid-template-columns:1fr}.portal{min-height:220px}.post-grid{grid-template-columns:1fr}.post{min-height:150px}.latest{margin-top:55px}}
+</style>
