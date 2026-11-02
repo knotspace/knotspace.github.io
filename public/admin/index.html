@@ -4,24 +4,27 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, nofollow" />
-    <meta name="theme-color" content="#f7f8fa" />
-    <title>KNOT Admin</title>
-    <link rel="icon" href="/favicon.svg" />
-    <style>
-      html,body{margin:0;min-height:100%;background:#f7f8fa;color:#20242b;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
-      #cms-loading{max-width:560px;margin:18vh auto;padding:28px 24px;text-align:center}
-      #cms-loading h1{font-size:26px;font-weight:850;letter-spacing:-.06em}
-      #cms-loading p{color:#697586;font-size:14px;line-height:1.8}
-      #cms-loading a{color:#315fba}
-    </style>
+    <meta name="theme-color" content="#1d2327" />
+    <title>KNOT Admin | 管理画面</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="stylesheet" href="/admin/admin.css" />
   </head>
   <body>
-    <div id="cms-loading">
-      <h1>KNOT Admin</h1>
-      <p>記事管理画面を読み込んでいます。</p>
-      <p>初回利用時は管理者認証のセットアップが必要です。</p>
-      <a href="/">← KNOTトップへ戻る</a>
+    <div id="knot-admin-bar">
+      <a class="knot-admin-brand" href="/" aria-label="KNOTトップページ">KNOT</a>
+      <span class="knot-admin-divider">/</span>
+      <span>管理画面</span>
+      <a class="knot-admin-view-site" href="/">サイトを表示 <span aria-hidden="true">↗</span></a>
     </div>
-    <script src="https://unpkg.com/decap-cms@^3.8.3/dist/decap-cms.js"></script>
+
+    <div id="cms-loading" role="status" aria-live="polite">
+      <div class="knot-loading-mark">K</div>
+      <h1>KNOT Admin</h1>
+      <p>管理画面を読み込んでいます。</p>
+      <a href="/">サイトトップへ戻る</a>
+    </div>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/decap-cms@3.8.3/dist/decap-cms.js"></script>
   </body>
 </html>
