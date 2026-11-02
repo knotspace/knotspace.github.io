@@ -28,6 +28,36 @@ const supabaseKey = 'sb_publishable_-yhc0QqTEEZTBWi9jTcFRA_-AVi-iP6';
   <script define:vars={{ supabaseUrl, supabaseKey, base: BASE }}>
     const $ = (id) => document.getElementById(id);
     const form = $('account-form');
+    // Supabaseの確認メールから戻ったとき、URLフラグメントの認証情報を保存する
+    const callbackParams = new URLSearchParams(location.hash.replace(/^#/, ''));
+    const callbackError = callbackParams.get('error_description') || callbackParams.get('error');
+    if (callbackError) {
+      $('message').textContent = 'メール確認エラー: ' + callbackError.replace(/\\+/g, ' ');
+      history.replaceState(null, '', location.pathname + location.search);
+    } else if (callbackParams.get('access_token') && callbackParams.get('refresh_token')) {
+      const callbackSession = {
+        access_token: callbackParams.get('access_token'),
+        refresh_token: callbackParams.get('refresh_token'),
+        expires_at: Date.now() + Number(callbackParams.get('expires_in') || 3600) * 1000,
+        user: null
+      };
+      localStorage.setItem('knot-auth', JSON.stringify(callbackSession));
+      history.replaceState(null, '', location.pathname);
+      $('message').textContent = 'メール確認が完了しました。ログイン情報を確認しています...';
+      fetch(supabaseUrl + '/auth/v1/user', {
+        headers: { apikey: supabaseKey, Authorization: 'Bearer ' + callbackSession.access_token }
+      }).then((response) => {
+        if (!response.ok) throw new Error('認証情報を確認できませんでした');
+        return response.json();
+      }).then((user) => {
+        callbackSession.user = user;
+        localStorage.setItem('knot-auth', JSON.stringify(callbackSession));
+        location.replace(base + 'mypage/');
+      }).catch(() => {
+        localStorage.removeItem('knot-auth');
+        $('message').textContent = 'メール確認は完了しました。ログイン画面からログインしてください。';
+      });
+    }
     let mode = 'login';
     const setMode = (next) => {
       mode = next;
@@ -58,7 +88,8 @@ const supabaseKey = 'sb_publishable_-yhc0QqTEEZTBWi9jTcFRA_-AVi-iP6';
         const password = $('password').value;
         let data;
         if (mode === 'signup') {
-          data = await api('/auth/v1/signup', { email, password, data: { display_name: $('display-name').value.trim() } });
+          const redirectTo = 'https://knotspace.github.io/account/';
+          data = await api('/auth/v1/signup?redirect_to=' + encodeURIComponent(redirectTo), { email, password, data: { display_name: $('display-name').value.trim() } });
           if (!data.access_token) {
             $('message').textContent = '確認メールを送信しました。メール内のリンクから登録を完了してね。';
             return;
