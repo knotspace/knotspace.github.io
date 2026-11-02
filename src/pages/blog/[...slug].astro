@@ -103,7 +103,7 @@ const recommendations = relatedPosts.length ? relatedPosts : allPosts.slice(0, 3
     <div class="article-reaction">
       <p>この記事がよかったら、リアクションしてね。</p>
       <button id="like-button" type="button" aria-pressed="false">♡ <span id="like-label">いいね</span></button>
-      <small>※リアクションはこのブラウザ内に保存されます。</small>
+      <small><span id="like-count">読み込み中...</span> ・ 閲覧 <span id="view-count">読み込み中...</span></small>
     </div>
 
     <div class="post-end">
@@ -165,19 +165,95 @@ const recommendations = relatedPosts.length ? relatedPosts : allPosts.slice(0, 3
     });
   }
   if (likeButton && article) {
-    const key = `knot-liked:${article.dataset.postSlug}`;
+    const SUPABASE_URL = 'https://rtzorqaigpeechqywjie.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_-yhc0QqTEEZTBWi9jTcFRA_-AVi-iP6';
+    const slug = article.dataset.postSlug;
+    const likedKey = `knot-liked:${slug}`;
+    const visitorKey = 'knot-visitor-id';
     const label = document.getElementById('like-label');
+    const likeCount = document.getElementById('like-count');
+    const viewCount = document.getElementById('view-count');
+
+    const getVisitorId = () => {
+      let id = localStorage.getItem(visitorKey);
+      if (!id) {
+        id = crypto.randomUUID();
+        localStorage.setItem(visitorKey, id);
+      }
+      return id;
+    };
+
+    const headers = {
+      apikey: SUPABASE_KEY,
+      Authorization: `Bearer ${SUPABASE_KEY}`,
+      'Content-Type': 'application/json',
+    };
+
     const paintLike = () => {
-      const liked = localStorage.getItem(key) === '1';
+      const liked = localStorage.getItem(likedKey) === '1';
       likeButton.setAttribute('aria-pressed', String(liked));
       likeButton.classList.toggle('liked', liked);
+      likeButton.disabled = liked;
       if (label) label.textContent = liked ? 'ありがとう！' : 'いいね';
       likeButton.firstChild.textContent = liked ? '♥ ' : '♡ ';
     };
+
+    const loadStats = async () => {
+      try {
+        const response = await fetch(
+          `${SUPABASE_URL}/rest/v1/article_stats?slug=eq.${encodeURIComponent(slug)}&select=views,likes`,
+          { headers }
+        );
+        if (!response.ok) throw new Error('stats request failed');
+        const rows = await response.json();
+        const stats = rows[0] || { views: 0, likes: 0 };
+        if (likeCount) likeCount.textContent = `${Number(stats.likes).toLocaleString('ja-JP')} いいね`;
+        if (viewCount) viewCount.textContent = `${Number(stats.views).toLocaleString('ja-JP')} 回`;
+      } catch {
+        if (likeCount) likeCount.textContent = 'いいね数を取得できません';
+        if (viewCount) viewCount.textContent = '閲覧数を取得できません';
+      }
+    };
+
+    const countView = async () => {
+      const viewedKey = `knot-viewed:${slug}:${new Date().toISOString().slice(0, 10)}`;
+      if (sessionStorage.getItem(viewedKey)) return;
+      sessionStorage.setItem(viewedKey, '1');
+      try {
+        const response = await fetch(`${SUPABASE_URL}/rest/v1/rpc/increment_article_view`, {
+          method: 'POST',
+          headers,
+          body: JSON.stringify({ article_slug: slug }),
+        });
+        if (!response.ok) throw new Error('view count failed');
+      } catch {}
+      await loadStats();
+    };
+
     paintLike();
-    likeButton.addEventListener('click', () => {
-      localStorage.setItem(key, localStorage.getItem(key) === '1' ? '0' : '1');
-      paintLike();
+    loadStats();
+    countView();
+
+    likeButton.addEventListener('click', async () => {
+      if (localStorage.getItem(likedKey) === '1') return;
+      likeButton.disabled = true;
+      try {
+        const response = await fetch(`${SUPABASE_URL}/rest/v1/rpc/like_article`, {
+          method: 'POST',
+          headers,
+          body: JSON.stringify({
+            article_slug: slug,
+            visitor_id: getVisitorId(),
+          }),
+        });
+        if (!response.ok) throw new Error('like request failed');
+        localStorage.setItem(likedKey, '1');
+        paintLike();
+        await loadStats();
+      } catch {
+        likeButton.disabled = false;
+        if (label) label.textContent = '通信エラー・再試行';
+      }
     });
   }
   if (button && article) {

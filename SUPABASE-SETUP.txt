@@ -1,0 +1,17 @@
+KNOT Supabase接続手順
+====================
+
+1. Supabase Dashboard → SQL Editor → New query を開く
+2. 同梱の supabase-setup.sql を全て貼り付けて Run
+   ※最初に作った article_stats / article_likes テーブルが必要です。
+3. このプロジェクトをGitHub Pagesへデプロイします。
+
+設定済み:
+- Project URL: https://rtzorqaigpeechqywjie.supabase.co
+- Publishable key: ブラウザ用公開キー（ソースに設定済み）
+
+注意:
+- Publishable keyは公開用ですが、Secret / service_role keyは絶対にフロントへ置かないでください。
+- いいねはブラウザごとのランダムIDで重複を抑止します。ログイン認証ではないため、端末やブラウザを変えると別ユーザーとして扱われます。
+- 閲覧数は同じブラウザ・同じ記事について、同じタブセッション中の同日再読込を抑制します。IP単位の厳密なユニーク集計ではありません。
+- RPC関数にはレート制限がないため、公開後に不正アクセス対策を追加する余地があります。
