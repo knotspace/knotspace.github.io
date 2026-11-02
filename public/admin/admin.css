@@ -130,3 +130,67 @@ html, body {
   #knot-admin-bar { padding: 0 10px; }
   #nc-root { padding-top: 36px; }
 }
+
+/* WordPress-like admin workspace */
+.knot-admin-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.knot-admin-brand img {
+  display: block;
+  width: 21px;
+  height: 21px;
+  border-radius: 5px;
+}
+#nc-root [role="navigation"],
+#nc-root aside {
+  background: #1d2327;
+  color: #f0f0f1;
+}
+#nc-root [role="navigation"] a,
+#nc-root aside a {
+  color: #f0f0f1;
+}
+#nc-root [role="navigation"] a:hover,
+#nc-root aside a:hover {
+  background: #2c3338;
+  color: #72aee6;
+}
+#nc-root [role="main"] {
+  background: var(--knot-admin-bg);
+}
+#nc-root button {
+  min-height: 32px;
+  padding: 6px 12px;
+  border: 1px solid var(--knot-admin-border);
+  background: #fff;
+  color: var(--knot-admin-text);
+  font-size: 13px;
+  font-weight: 500;
+}
+#nc-root button:hover {
+  border-color: var(--knot-admin-blue);
+  color: var(--knot-admin-blue-dark);
+}
+#nc-root button:focus-visible,
+#nc-root a:focus-visible {
+  outline: 2px solid var(--knot-admin-blue);
+  outline-offset: 2px;
+}
+#nc-root input,
+#nc-root textarea,
+#nc-root select {
+  min-height: 34px;
+  padding: 6px 9px;
+  background: #fff;
+  color: var(--knot-admin-text);
+  font-size: 13px;
+}
+#nc-root textarea { line-height: 1.65; }
+#nc-root img { max-width: 100%; }
+@media (max-width: 600px) {
+  #cms-loading { margin-top: 12vh; padding: 26px 18px; }
+  #knot-admin-bar { height: 40px; }
+  #nc-root { padding-top: 40px; }
+}
