@@ -1,0 +1,67 @@
+---
+import Layout from '../../layouts/Layout.astro';
+const years = [
+ {year:'2026',label:'令和8年度',subjects:[
+  {name:'国語',problem:'https://www.kosen-k.go.jp/wp/wp-content/uploads/2026/02/01_2026_kokugo_mondai2.pdf',answer:'https://www.kosen-k.go.jp/wp/wp-content/uploads/2026/02/01_2026_kokugo_seikai.pdf'},
+  {name:'社会',problem:'https://www.kosen-k.go.jp/wp/wp-content/uploads/2026/02/02_2026_syakai_mondai2.pdf',answer:'https://www.kosen-k.go.jp/wp/wp-content/uploads/2026/02/02_2026_syakai_seikai.pdf'},
+  {name:'数学',problem:'https://www.kosen-k.go.jp/wp/wp-content/uploads/2026/02/03_2026_sugaku_mondai.pdf',answer:'https://www.kosen-k.go.jp/wp/wp-content/uploads/2026/02/03_2026_sugaku_seikai.pdf'},
+  {name:'理科',problem:'https://www.kosen-k.go.jp/wp/wp-content/uploads/2026/02/04_2026_rika_mondai.pdf',answer:'https://www.kosen-k.go.jp/wp/wp-content/uploads/2026/02/04_2026_rika_seikai.pdf'},
+  {name:'英語',problem:'https://www.kosen-k.go.jp/wp/wp-content/uploads/2026/02/05_2026_eigo_mondai.pdf',answer:'https://www.kosen-k.go.jp/wp/wp-content/uploads/2026/02/05_2026_eigo_seikai.pdf'}
+ ]},
+ {year:'2025',label:'令和7年度',subjects:[
+  {name:'国語',problem:'https://www.kosen-k.go.jp/wp/wp-content/uploads/2025/02/01_2025_kokugo_mondai.pdf',answer:'https://www.kosen-k.go.jp/wp/wp-content/uploads/2025/02/01_2025_kokugo_seikai.pdf'},
+  {name:'社会',problem:'https://www.kosen-k.go.jp/wp/wp-content/uploads/2025/02/02_2025_syakai_mondai.pdf',answer:'https://www.kosen-k.go.jp/wp/wp-content/uploads/2025/02/02_2025_syakai_seikai.pdf'},
+  {name:'数学',problem:'https://www.kosen-k.go.jp/wp/wp-content/uploads/2025/02/03_2025_sugaku_mondai.pdf',answer:'https://www.kosen-k.go.jp/wp/wp-content/uploads/2025/02/03_2025_sugaku_seikai.pdf'},
+  {name:'理科',problem:'https://www.kosen-k.go.jp/wp/wp-content/uploads/2025/02/04_2025_rika_mondai.pdf',answer:'https://www.kosen-k.go.jp/wp/wp-content/uploads/2025/02/04_2025_rika_seikai.pdf'},
+  {name:'英語',problem:'https://www.kosen-k.go.jp/wp/wp-content/uploads/2025/02/05_2025_eigo_mondai.pdf',answer:'https://www.kosen-k.go.jp/wp/wp-content/uploads/2025/02/05_2025_eigo_seikai.pdf'}
+ ]}
+];
+---
+<Layout title="高専過去問 模試モード｜KNOT Study" description="国立高専機構が公開する入試過去問で模試に挑戦。">
+<main class="mock-page">
+<a class="back" href="../">← Studyに戻る</a>
+<header><p class="eyebrow">KNOT / MOCK EXAM</p><h1>過去問で模試</h1><p>公式公開の高専入試問題を使って、本番を想定した演習に挑戦しよう。</p><span class="beta">STUDY β版</span></header>
+<section class="setup">
+<h2>模試を設定</h2>
+<div class="fields">
+<label>年度<select id="year">{years.map(y=><option value={y.year}>{y.label}</option>)}</select></label>
+<label>受験形式<select id="subject"><option value="all">5教科通し</option>{years[0].subjects.map(s=><option value={s.name}>{s.name}</option>)}</select></label>
+<label>制限時間<select id="duration"><option value="250">5教科（250分）</option><option value="50">1教科（50分）</option><option value="none">時間制限なし</option></select></label>
+</div>
+<p class="hint">※時間は演習用の目安。実際の試験時間・休憩・実施要項は年度の公式案内を確認してください。</p>
+<button id="begin">模試を開始する →</button>
+</section>
+<section class="exam" id="exam" hidden>
+<div class="exam-head"><div><p class="eyebrow">EXAM IN PROGRESS</p><h2 id="exam-title">令和8年度 / 5教科</h2></div><div class="clock" id="clock">04:10:00</div></div>
+<div class="timer-actions"><button id="pause" class="secondary">一時停止</button><button id="finish" class="finish">模試を終了する</button></div>
+<div id="papers" class="papers"></div>
+<p class="hint">問題PDFは国立高専機構の公式サイトから直接開きます。解答・正解は終了後に表示されます。</p>
+<div id="answers" hidden class="answers"><h3>解答・正解</h3><div id="answer-links"></div></div>
+</section>
+<section class="source"><strong>出典・著作権について</strong><p>問題・正解の掲載元は、独立行政法人 国立高等専門学校機構「入試過去問」です。KNOTは問題PDFを転載・再配布せず、公式公開ページへのリンクを提供しています。出典を記載するだけで著作物の複製・転載が自由になるわけではないため、問題本文は公式PDFで閲覧してください。</p><a href="https://www.kosen-k.go.jp/kosen_navi" target="_blank" rel="noopener noreferrer">国立高専機構・入試過去問（公式） ↗</a></section>
+<p class="back"><a href="../kosen/">← 高専対策に戻る</a></p>
+</main>
+<script define:vars={{ years }}>
+const $=id=>document.getElementById(id);let chosen=[],remaining=0,interval=null,paused=false,started=false;
+function fmt(n){const h=Math.floor(n/3600),m=Math.floor(n%3600/60),s=n%60;return [h,m,s].map(v=>String(v).padStart(2,'0')).join(':')}
+function drawClock(){ $('clock').textContent=remaining===null?'∞':fmt(remaining);}
+function stopTimer(){if(interval){clearInterval(interval);interval=null;}}
+function finish(){stopTimer();$('answers').hidden=false;$('answer-links').replaceChildren();chosen.forEach(s=>{const a=document.createElement('a');a.href=s.answer;a.target='_blank';a.rel='noopener noreferrer';a.textContent=s.name+' 解答・正解 PDF ↗';$('answer-links').append(a);});$('finish').disabled=true;$('pause').disabled=true;}
+$('begin').addEventListener('click',()=>{
+const year=years.find(y=>y.year===$('year').value),subject=$('subject').value;
+chosen=subject==='all'?year.subjects:year.subjects.filter(s=>s.name===subject);
+if(!chosen.length)return;
+$('exam-title').textContent=year.label+' / '+(subject==='all'?'5教科':subject);
+$('papers').replaceChildren();
+chosen.forEach(s=>{const card=document.createElement('article');card.className='paper';const h=document.createElement('h3');h.textContent=s.name;const p=document.createElement('a');p.href=s.problem;p.target='_blank';p.rel='noopener noreferrer';p.textContent='問題PDFを開く ↗';card.append(h,p);$('papers').append(card);});
+$('setup').hidden=true;$('exam').hidden=false;$('answers').hidden=true;$('finish').disabled=false;$('pause').disabled=false;
+const duration=$('duration').value;remaining=duration==='none'?null:Number(duration)*60;paused=false;started=true;drawClock();stopTimer();
+if(remaining!==null){interval=setInterval(()=>{if(paused)return;if(remaining>0){remaining--;drawClock();}else{finish();}},1000);}
+});
+$('pause').addEventListener('click',()=>{paused=!paused;$('pause').textContent=paused?'再開する':'一時停止';});
+$('finish').addEventListener('click',finish);
+</script>
+<style>
+.mock-page{max-width:850px;margin:0 auto;padding:30px 0 55px}.back{font-size:12px;color:var(--accent)}header{position:relative;padding:30px 0 25px;border-bottom:1px solid var(--line)}.eyebrow{font:10px ui-monospace,monospace;letter-spacing:.14em;color:var(--accent);font-weight:800;margin:0 0 10px}h1{font-size:clamp(32px,6vw,46px);letter-spacing:-.06em;margin:0;font-weight:900}header>p:not(.eyebrow){font-size:13px;color:var(--muted);line-height:1.8}.beta{display:inline-block;font:10px ui-monospace,monospace;color:var(--accent);border:1px solid var(--line);border-radius:5px;padding:6px 8px}.setup,.exam,.source{margin-top:20px;padding:22px;border:1px solid var(--line);border-radius:13px;background:var(--surface)}h2{font-size:19px;margin:0 0 17px}.fields{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.fields label{display:grid;gap:6px;font-size:11px;color:var(--muted)}select{width:100%;padding:11px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--text)}button{cursor:pointer;border:0;border-radius:9px;padding:12px 16px;background:var(--accent);color:white;font-size:12px;font-weight:800}.setup>button{margin-top:17px}.hint{font-size:10px;line-height:1.7;color:var(--muted);margin:13px 0 0}.exam[hidden],.answers[hidden]{display:none}.exam-head{display:flex;justify-content:space-between;align-items:center;gap:15px}.exam-head h2{margin:0}.clock{font:700 25px ui-monospace,monospace;font-variant-numeric:tabular-nums}.timer-actions{display:flex;gap:8px;margin:17px 0}.secondary{background:var(--surface-soft);color:var(--text);border:1px solid var(--line)}.finish{background:#b84c58}.papers{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.paper{padding:15px;border:1px solid var(--line);border-radius:9px;background:var(--bg)}.paper h3{font-size:14px;margin:0 0 8px}.paper a,.answers a,.source a{font-size:11px;color:var(--accent);font-weight:750}.answers{margin-top:20px;padding-top:18px;border-top:1px solid var(--line)}.answers h3{font-size:14px}.answers>div{display:flex;gap:12px;flex-wrap:wrap}.source strong{font-size:12px}.source p{font-size:11px;color:var(--muted);line-height:1.8}.source a{display:inline-block;margin-top:4px}@media(max-width:620px){.fields{grid-template-columns:1fr}.setup,.exam,.source{padding:17px}.papers{grid-template-columns:1fr}.clock{font-size:20px}}
+</style>
+</Layout>
