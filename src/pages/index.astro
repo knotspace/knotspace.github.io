@@ -7,7 +7,9 @@ const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 
-const recentPosts = posts.slice(0, 4);
+const recentPosts = posts.slice(0, 5);
+
+const categories = [...new Set(posts.map((post) => post.data.category))];
 
 const BASE = import.meta.env.BASE_URL.endsWith('/')
   ? import.meta.env.BASE_URL
@@ -25,209 +27,170 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
   description="中学3年生の日々感じたことを書いていく、備忘録的なブログです。"
 >
   <section class="welcome">
-    <div class="welcome-main">
-      <span class="eyebrow">PERSONAL BLOG / 2026</span>
+    <div class="welcome-copy">
+      <span class="eyebrow">PERSONAL BLOG</span>
       <h1>日々のことを、<br /><span>少しずつ。</span></h1>
       <p>
         中学3年生の日々感じたことを書いていく、<br class="desktop-break" />
         備忘録的なブログです。
       </p>
-      <a class="welcome-link" href={`${BASE}blog/`}>
-        記事一覧を見る <span aria-hidden="true">→</span>
-      </a>
     </div>
-
-    <aside class="about-card">
-      <span class="side-label">ABOUT THIS BLOG</span>
-      <h2>このブログについて</h2>
-      <p>
-        日常のこと、勉強のこと、そのとき考えたこと。
-        忘れないように、少しずつ記録していきます。
-      </p>
-      <div class="about-divider"></div>
-      <div class="about-detail">
-        <span>ブログ名</span>
-        <strong>KNOT</strong>
-      </div>
-      <div class="about-detail">
-        <span>スタート</span>
-        <strong>2026年</strong>
-      </div>
-    </aside>
   </section>
 
-  <section class="recent-section" aria-labelledby="recent-title">
-    <div class="section-heading">
-      <div>
-        <span class="section-kicker">RECENT POSTS</span>
-        <h2 id="recent-title">最近の記事</h2>
+  <div class="content-layout">
+    <section class="main-column">
+      <div class="section-heading">
+        <div>
+          <span class="section-kicker">LATEST ARTICLES</span>
+          <h2>新着記事</h2>
+        </div>
+        <a class="more-link" href={`${BASE}blog/`}>記事一覧 →</a>
       </div>
-      <a class="view-all" href={`${BASE}blog/`}>
-        すべて見る <span aria-hidden="true">→</span>
-      </a>
-    </div>
 
-    {recentPosts.length === 0 ? (
-      <div class="empty-state">
-        <h3>記事はまだありません。</h3>
-        <p>最初の記事を公開すると、ここに表示されます。</p>
+      {recentPosts.length === 0 ? (
+        <div class="empty-state">
+          <h3>記事はまだありません。</h3>
+          <p>最初の記事を公開すると、ここに表示されます。</p>
+        </div>
+      ) : (
+        <div class="post-list">
+          {recentPosts.map((post) => (
+            <a class="post-card" href={`${BASE}blog/${post.slug}/`}>
+              <div class="post-thumbnail">
+                {post.data.heroImage ? (
+                  <img src={post.data.heroImage} alt="" loading="lazy" />
+                ) : (
+                  <span>KNOT</span>
+                )}
+              </div>
+
+              <div class="post-info">
+                <div class="post-meta">
+                  <time datetime={post.data.pubDate.toISOString()}>
+                    {dateFormat(post.data.pubDate)}
+                  </time>
+                  <span class="category-label">{post.data.category}</span>
+                </div>
+                <h3>{post.data.title}</h3>
+                <p>{post.data.description}</p>
+                <span class="read-more">続きを読む →</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      )}
+
+      <div class="all-posts">
+        <a href={`${BASE}blog/`}>すべての記事を見る →</a>
       </div>
-    ) : (
-      <div class="post-list">
-        {recentPosts.map((post) => (
-          <a class="post-item" href={`${BASE}blog/${post.slug}/`}>
-            <div class="post-thumbnail">
-              {post.data.heroImage ? (
-                <img src={post.data.heroImage} alt="" loading="lazy" />
-              ) : (
-                <span>KNOT</span>
-              )}
-            </div>
+    </section>
 
-            <div class="post-info">
-              <div class="post-meta">
+    <aside class="sidebar">
+      <section class="widget profile-widget">
+        <h2 class="widget-title">このブログについて</h2>
+        <div class="profile-logo">KNOT<span>.</span></div>
+        <p>
+          中学3年生の日々感じたことを書いていく、備忘録的なブログです。
+          日常や勉強のことなどを、気ままに記録しています。
+        </p>
+        <div class="profile-info">
+          <span>ブログ開設</span>
+          <strong>2026年</strong>
+        </div>
+      </section>
+
+      <section class="widget">
+        <h2 class="widget-title">カテゴリー</h2>
+        {categories.length > 0 ? (
+          <ul class="category-list">
+            {categories.map((category) => (
+              <li>
+                <a href={`${BASE}blog/`}>
+                  <span>{category}</span>
+                  <span>→</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="widget-note">カテゴリーはまだありません。</p>
+        )}
+      </section>
+
+      <section class="widget">
+        <h2 class="widget-title">最近の記事</h2>
+        <ul class="recent-list">
+          {recentPosts.slice(0, 3).map((post) => (
+            <li>
+              <a href={`${BASE}blog/${post.slug}/`}>
+                <span>{post.data.title}</span>
                 <time datetime={post.data.pubDate.toISOString()}>
                   {dateFormat(post.data.pubDate)}
                 </time>
-                <span class="meta-divider"></span>
-                <span>{post.data.category}</span>
-              </div>
-              <h3>{post.data.title}</h3>
-              <p>{post.data.description}</p>
-            </div>
-
-            <span class="post-arrow" aria-hidden="true">↗</span>
-          </a>
-        ))}
-      </div>
-    )}
-
-    <div class="bottom-link">
-      <a href={`${BASE}blog/`}>記事をもっと見る →</a>
-    </div>
-  </section>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </aside>
+  </div>
 </Layout>
 
 <style>
   .welcome {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 310px;
-    gap: 65px;
-    align-items: center;
-    padding: 85px 0 75px;
-  }
-
-  .welcome-main {
-    padding: 10px 0;
+    padding: 42px 0 35px;
+    border-bottom: 1px solid var(--line);
   }
 
   .eyebrow,
-  .section-kicker,
-  .side-label {
+  .section-kicker {
     color: var(--accent);
     font-size: 10px;
     font-weight: 800;
-    letter-spacing: .16em;
+    letter-spacing: .15em;
   }
 
-  h1 {
-    margin: 24px 0 18px;
-    font-size: clamp(43px, 5.5vw, 62px);
-    line-height: 1.3;
-    letter-spacing: -.075em;
+  .welcome h1 {
+    margin: 15px 0 12px;
+    font-size: clamp(34px, 5vw, 48px);
+    line-height: 1.35;
     font-weight: 900;
+    letter-spacing: -.07em;
   }
 
-  h1 span {
+  .welcome h1 span {
     color: #8db9ff;
   }
 
-  .welcome-main > p {
-    color: var(--muted);
-    font-size: 14px;
-    line-height: 2.1;
-  }
-
-  .welcome-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 22px;
-    margin-top: 21px;
-    padding: 12px 18px;
-    border: 1px solid rgba(141,185,255,.38);
-    border-radius: 999px;
-    color: #c5dcff;
-    font-size: 12px;
-    font-weight: 700;
-    transition: .2s;
-  }
-
-  .welcome-link:hover {
-    background: rgba(114,167,255,.12);
-    transform: translateY(-2px);
-  }
-
-  .about-card {
-    padding: 26px;
-    border: 1px solid var(--line);
-    border-radius: 15px;
-    background: rgba(17,28,46,.58);
-  }
-
-  .about-card h2 {
-    margin: 15px 0 12px;
-    font-size: 19px;
-    letter-spacing: -.04em;
-  }
-
-  .about-card > p {
+  .welcome-copy p {
     margin: 0;
     color: var(--muted);
-    font-size: 12px;
+    font-size: 13px;
     line-height: 2;
   }
 
-  .about-divider {
-    height: 1px;
-    margin: 23px 0 17px;
-    background: var(--line);
-  }
-
-  .about-detail {
-    display: flex;
-    justify-content: space-between;
-    gap: 12px;
-    margin-top: 12px;
-    font-size: 11px;
-  }
-
-  .about-detail span {
-    color: #718198;
-  }
-
-  .about-detail strong {
-    color: #d8e4f5;
-    font-weight: 600;
-  }
-
-  .recent-section {
-    padding-top: 34px;
+  .content-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 285px;
+    gap: 35px;
+    align-items: start;
+    padding-top: 35px;
   }
 
   .section-heading {
     display: flex;
     justify-content: space-between;
     align-items: end;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
   }
 
   .section-heading h2 {
     margin: 7px 0 0;
-    font-size: 25px;
-    letter-spacing: -.055em;
+    font-size: 23px;
+    letter-spacing: -.05em;
   }
 
-  .view-all {
+  .more-link {
     color: #a9caff;
     font-size: 11px;
     font-weight: 700;
@@ -237,32 +200,31 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
     border-top: 1px solid var(--line);
   }
 
-  .post-item {
+  .post-card {
     display: grid;
-    grid-template-columns: 150px minmax(0, 1fr) 20px;
-    align-items: center;
-    gap: 22px;
-    padding: 19px 8px;
+    grid-template-columns: 165px minmax(0, 1fr);
+    gap: 19px;
+    padding: 18px 5px;
     border-bottom: 1px solid var(--line);
     transition: background .2s;
   }
 
-  .post-item:hover {
+  .post-card:hover {
     background: rgba(255,255,255,.025);
   }
 
   .post-thumbnail {
     display: grid;
     place-items: center;
-    width: 150px;
-    height: 95px;
+    width: 165px;
+    height: 110px;
     overflow: hidden;
     border-radius: 9px;
     background: #172740;
     color: #8db9ff;
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: .16em;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: .15em;
   }
 
   .post-thumbnail img {
@@ -271,48 +233,58 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
     object-fit: cover;
   }
 
+  .post-info {
+    min-width: 0;
+  }
+
   .post-meta {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 9px;
     color: #8fa0b7;
     font-size: 10px;
-    font-weight: 600;
   }
 
-  .meta-divider {
-    width: 3px;
-    height: 3px;
-    border-radius: 50%;
-    background: var(--accent);
+  .category-label {
+    padding: 3px 8px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    color: #a9caff;
   }
 
   .post-info h3 {
-    margin: 9px 0 5px;
-    font-size: 17px;
-    line-height: 1.5;
+    margin: 9px 0 7px;
+    font-size: 16px;
+    line-height: 1.55;
     letter-spacing: -.035em;
   }
 
   .post-info p {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
     margin: 0;
     color: var(--muted);
     font-size: 11px;
     line-height: 1.8;
   }
 
-  .post-arrow {
-    color: var(--accent);
-    font-size: 17px;
+  .read-more {
+    display: inline-block;
+    margin-top: 9px;
+    color: #a9caff;
+    font-size: 10px;
+    font-weight: 700;
   }
 
-  .bottom-link {
-    padding-top: 25px;
+  .all-posts {
+    padding: 24px 0;
     text-align: center;
   }
 
-  .bottom-link a {
+  .all-posts a {
     display: inline-block;
     padding: 11px 25px;
     border: 1px solid var(--line);
@@ -320,72 +292,177 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
     color: #c5dcff;
     font-size: 11px;
     font-weight: 700;
-    transition: .2s;
   }
 
-  .bottom-link a:hover {
-    border-color: var(--accent);
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .widget {
+    padding: 20px;
+    border: 1px solid var(--line);
+    border-radius: 11px;
+    background: rgba(17,28,46,.58);
+  }
+
+  .widget-title {
+    margin: 0 0 16px;
+    padding-bottom: 11px;
+    border-bottom: 1px solid var(--line);
+    font-size: 14px;
+    letter-spacing: -.025em;
+  }
+
+  .profile-logo {
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: -.09em;
+  }
+
+  .profile-logo span {
+    color: var(--accent);
+  }
+
+  .profile-widget > p {
+    margin: 9px 0 17px;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.9;
+  }
+
+  .profile-info {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+    font-size: 10px;
+  }
+
+  .profile-info span {
+    color: #718198;
+  }
+
+  .profile-info strong {
+    font-weight: 600;
+  }
+
+  .category-list,
+  .recent-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .category-list li,
+  .recent-list li {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .category-list li:last-child,
+  .recent-list li:last-child {
+    border-bottom: 0;
+  }
+
+  .category-list a {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    color: var(--muted);
+    font-size: 11px;
+  }
+
+  .category-list a:hover,
+  .recent-list a:hover span {
+    color: var(--accent);
+  }
+
+  .recent-list a {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 11px 0;
+    font-size: 11px;
+    line-height: 1.6;
+  }
+
+  .recent-list time {
+    color: #718198;
+    font-size: 9px;
+  }
+
+  .widget-note {
+    color: var(--muted);
+    font-size: 11px;
   }
 
   .empty-state {
-    padding: 45px 20px;
+    padding: 40px 20px;
     border: 1px dashed var(--line);
-    border-radius: 14px;
+    border-radius: 12px;
     text-align: center;
     color: var(--muted);
   }
 
   .empty-state h3 {
     color: var(--text);
-    font-size: 16px;
+    font-size: 15px;
   }
 
   .empty-state p {
-    font-size: 12px;
+    font-size: 11px;
   }
 
-  @media (max-width: 760px) {
-    .welcome {
+  @media (max-width: 780px) {
+    .content-layout {
       grid-template-columns: 1fr;
-      gap: 35px;
-      padding: 65px 0 55px;
+      gap: 25px;
     }
 
-    .about-card {
-      max-width: none;
+    .sidebar {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .profile-widget {
+      grid-column: 1 / -1;
     }
   }
 
   @media (max-width: 520px) {
-    h1 {
-      font-size: 42px;
+    .welcome {
+      padding-top: 35px;
     }
 
-    .post-item {
+    .post-card {
       grid-template-columns: 105px minmax(0, 1fr);
-      gap: 13px;
-      padding: 15px 3px;
+      gap: 12px;
+      padding: 14px 2px;
     }
 
     .post-thumbnail {
       width: 105px;
-      height: 82px;
+      height: 85px;
     }
 
     .post-info h3 {
-      font-size: 14px;
+      margin: 7px 0;
+      font-size: 13px;
     }
 
-    .post-info p {
+    .post-info p,
+    .read-more {
       display: none;
     }
 
-    .post-arrow {
-      display: none;
+    .post-meta {
+      gap: 6px;
+      font-size: 9px;
     }
 
-    .section-heading h2 {
-      font-size: 22px;
+    .sidebar {
+      display: flex;
     }
   }
 </style>
