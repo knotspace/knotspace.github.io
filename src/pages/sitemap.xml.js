@@ -1,7 +1,8 @@
 import { getCollection } from 'astro:content';
 
 export async function GET({ site }) {
-  const posts = await getCollection('blog');
+  const now = new Date();
+  const posts = (await getCollection('blog')).filter(post => !post.data.publishAt || post.data.publishAt <= now);
   const staticPaths = ['', 'blog/', 'about/'];
   const urls = [
     ...staticPaths.map((path) => ({ loc: new URL(path, site).href })),
