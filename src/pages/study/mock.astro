@@ -43,14 +43,22 @@ const years = [
 </main>
 <script type="application/json" id="exam-data">{JSON.stringify(years)}</script>
 <script>
-import * as pdfjsLib from 'pdfjs-dist';
 const years=JSON.parse(document.getElementById('exam-data').textContent);
-pdfjsLib.GlobalWorkerOptions.workerSrc = new URL('pdfjs-dist/build/pdf.worker.min.mjs', import.meta.url).href;
+let pdfjsPromise;
+async function getPdfjs(){
+  if(!pdfjsPromise){
+    pdfjsPromise=import('pdfjs-dist').then((lib)=>{
+      lib.GlobalWorkerOptions.workerSrc = new URL('pdfjs-dist/build/pdf.worker.min.mjs', import.meta.url).href;
+      return lib;
+    });
+  }
+  return pdfjsPromise;
+}
 const $=id=>document.getElementById(id);let chosen=[],remaining=0,interval=null,paused=false,currentYear=null;
 function fmt(n){const h=Math.floor(n/3600),m=Math.floor(n%3600/60),s=n%60;return [h,m,s].map(v=>String(v).padStart(2,'0')).join(':')}
 function drawClock(){ $('clock').textContent=remaining===null?'∞':fmt(remaining);}
 function stopTimer(){if(interval){clearInterval(interval);interval=null;}}
-async function renderPdf(container,src,title){container.replaceChildren();const status=document.createElement('p');status.className='pdf-status';status.textContent='PDFを読み込んでいます…';container.append(status);const fallback=document.createElement('a');fallback.className='pdf-fallback';fallback.href=src;fallback.target='_blank';fallback.rel='noopener noreferrer';fallback.textContent='公式PDFを別タブで開く ↗';try{let pdf;const candidates=[src,'https://corsproxy.io/?url='+encodeURIComponent(src),'https://api.allorigins.win/raw?url='+encodeURIComponent(src)];let lastError;for(const candidate of candidates){try{pdf=await pdfjsLib.getDocument({url:candidate,withCredentials:false}).promise;break;}catch(error){lastError=error;}}if(!pdf)throw lastError||new Error('PDFを取得できません');status.textContent=title+' · '+pdf.numPages+'ページ';for(let pageNo=1;pageNo<=pdf.numPages;pageNo++){const page=await pdf.getPage(pageNo);const viewport=page.getViewport({scale:1.35});const canvas=document.createElement('canvas');canvas.className='pdf-page';const context=canvas.getContext('2d');canvas.width=viewport.width;canvas.height=viewport.height;canvas.setAttribute('aria-label',title+' '+pageNo+'ページ');container.append(canvas);await page.render({canvasContext:context,viewport}).promise;} }catch(error){status.textContent='このPDFはブラウザ内で読み込めませんでした。公式PDFを開いてください。';container.append(fallback);console.warn('PDF.js load failed:',src,error);}}
+async function renderPdf(container,src,title){container.replaceChildren();const status=document.createElement('p');status.className='pdf-status';status.textContent='PDFを読み込んでいます…';container.append(status);const fallback=document.createElement('a');fallback.className='pdf-fallback';fallback.href=src;fallback.target='_blank';fallback.rel='noopener noreferrer';fallback.textContent='公式PDFを別タブで開く ↗';try{const pdfjsLib=await getPdfjs();let pdf;const candidates=[src,'https://corsproxy.io/?url='+encodeURIComponent(src),'https://api.allorigins.win/raw?url='+encodeURIComponent(src)];let lastError;for(const candidate of candidates){try{pdf=await pdfjsLib.getDocument({url:candidate,withCredentials:false}).promise;break;}catch(error){lastError=error;}}if(!pdf)throw lastError||new Error('PDFを取得できません');status.textContent=title+' · '+pdf.numPages+'ページ';for(let pageNo=1;pageNo<=pdf.numPages;pageNo++){const page=await pdf.getPage(pageNo);const viewport=page.getViewport({scale:1.35});const canvas=document.createElement('canvas');canvas.className='pdf-page';const context=canvas.getContext('2d');canvas.width=viewport.width;canvas.height=viewport.height;canvas.setAttribute('aria-label',title+' '+pageNo+'ページ');container.append(canvas);await page.render({canvasContext:context,viewport}).promise;} }catch(error){status.textContent='このPDFはブラウザ内で読み込めませんでした。公式PDFを開いてください。';container.append(fallback);console.warn('PDF.js load failed:',src,error);}}
 function finish(){stopTimer();$('answers').hidden=false;$('answer-links').replaceChildren();chosen.forEach(s=>{const card=document.createElement('article');card.className='answer-paper';const h=document.createElement('h3');h.textContent=s.name+' 解答・正解';card.append(h);renderPdf(card,s.answer,s.name+' 解答');$('answer-links').append(card);});$('finish').disabled=true;$('pause').disabled=true;}
 $('begin').addEventListener('click',()=>{
 currentYear=years.find(y=>y.year===$('year').value);const subject=$('subject').value;
