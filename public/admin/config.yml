@@ -1,9 +1,14 @@
 ﻿# KNOT CMS — Decap CMS
-# Decap Turbo の Site ID を設定済み。
+# 日本語UI・WordPress風の管理画面設定
 backend:
   name: turbo-github
   turbo_site_id: c0c81edd-df75-489a-a3c5-bc97d37c40e0
   branch: main
+
+locale: ja
+logo:
+  src: /favicon.svg
+  show_in_header: true
 
 site_url: https://knotspace.github.io
 display_url: https://knotspace.github.io
