@@ -251,3 +251,133 @@ html, body, #nc-root, #nc-root [role="main"] {
 }
 #knot-ai-link:hover { border-color: var(--knot-admin-blue); color: var(--knot-admin-blue-dark); }
 @media (max-width: 600px) { #knot-ai-link { left: 12px; bottom: 12px; min-height: 40px; } }
+
+
+/* KNOT Admin calm theme v2 — consistent, low-glare surfaces across Decap CMS. */
+:root {
+  color-scheme: light;
+  --knot-admin-bg: #edf0f1;
+  --knot-admin-surface: #f7f8f7;
+  --knot-admin-surface-raised: #fbfbfa;
+  --knot-admin-text: #354149;
+  --knot-admin-muted: #69767c;
+  --knot-admin-border: #d3dadd;
+  --knot-admin-blue: #668ba4;
+  --knot-admin-blue-dark: #4f7188;
+  --knot-admin-nav: #e3e8e9;
+  --knot-admin-shadow: 0 1px 4px rgb(35 48 55 / 5%);
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --knot-admin-bg: #252c30;
+  --knot-admin-surface: #30393e;
+  --knot-admin-surface-raised: #354046;
+  --knot-admin-text: #dce2e3;
+  --knot-admin-muted: #aeb9bc;
+  --knot-admin-border: #4a565b;
+  --knot-admin-blue: #91adbd;
+  --knot-admin-blue-dark: #b0c5cf;
+  --knot-admin-nav: #2b3439;
+  --knot-admin-shadow: 0 1px 5px rgb(0 0 0 / 14%);
+}
+
+/* Keep the page itself and Decap's main app on the same gentle palette. */
+html, body, #nc-root, #nc-root > div,
+#nc-root [role="main"], #nc-root main,
+#nc-root [class*="App"], #nc-root [class*="app"],
+#nc-root [class*="Page"], #nc-root [class*="page"] {
+  background-color: var(--knot-admin-bg) !important;
+  color: var(--knot-admin-text) !important;
+}
+
+/* Decap's header, collection sidebar, editor panes, cards and dialogs. */
+#nc-root header, #nc-root [role="banner"],
+#nc-root [role="navigation"], #nc-root nav, #nc-root aside,
+#nc-root [class*="Sidebar"], #nc-root [class*="sidebar"],
+#nc-root [class*="Header"], #nc-root [class*="header"] {
+  background-color: var(--knot-admin-nav) !important;
+  color: var(--knot-admin-text) !important;
+  border-color: var(--knot-admin-border) !important;
+}
+#nc-root [role="dialog"], #nc-root [role="menu"],
+#nc-root [role="listbox"], #nc-root [class*="Pane"],
+#nc-root [class*="pane"], #nc-root [class*="Card"],
+#nc-root [class*="card"], #nc-root [class*="Modal"],
+#nc-root [class*="modal"], #nc-root [class*="Widget"],
+#nc-root [class*="widget"], #nc-root [class*="Editor"],
+#nc-root [class*="editor"], #nc-root [class*="Control"],
+#nc-root [class*="control"] {
+  background-color: var(--knot-admin-surface) !important;
+  color: var(--knot-admin-text) !important;
+  border-color: var(--knot-admin-border) !important;
+  box-shadow: none !important;
+}
+
+/* Inputs and rich-text editor controls. */
+#nc-root input, #nc-root textarea, #nc-root select,
+#nc-root [role="textbox"], #nc-root [contenteditable="true"],
+#nc-root iframe {
+  background-color: var(--knot-admin-surface-raised) !important;
+  color: var(--knot-admin-text) !important;
+  border-color: var(--knot-admin-border) !important;
+  caret-color: var(--knot-admin-text);
+  box-shadow: none !important;
+}
+#nc-root input::placeholder, #nc-root textarea::placeholder {
+  color: var(--knot-admin-muted) !important;
+  opacity: 1;
+}
+#nc-root label, #nc-root [class*="label"], #nc-root [class*="Label"],
+#nc-root p, #nc-root h1, #nc-root h2, #nc-root h3,
+#nc-root span, #nc-root small {
+  color: inherit;
+}
+
+/* Buttons and links: muted blue, no bright flashes or bouncing. */
+#nc-root button {
+  background-color: var(--knot-admin-surface-raised) !important;
+  color: var(--knot-admin-text) !important;
+  border: 1px solid var(--knot-admin-border) !important;
+  box-shadow: none !important;
+  transition: none !important;
+}
+#nc-root button:hover {
+  background-color: var(--knot-admin-nav) !important;
+  color: var(--knot-admin-blue-dark) !important;
+  border-color: var(--knot-admin-blue) !important;
+}
+#nc-root a { color: var(--knot-admin-blue-dark); }
+#nc-root a:hover { color: var(--knot-admin-text); }
+#nc-root [aria-current="page"], #nc-root [aria-selected="true"] {
+  background-color: var(--knot-admin-nav) !important;
+  color: var(--knot-admin-text) !important;
+}
+#nc-root * { scrollbar-color: var(--knot-admin-border) transparent; }
+#nc-root *:focus-visible, #knot-theme-toggle:focus-visible {
+  outline: 2px solid var(--knot-admin-blue) !important;
+  outline-offset: 2px;
+  box-shadow: none !important;
+}
+
+/* The two floating admin shortcuts follow the same restrained palette. */
+#knot-theme-toggle, #knot-ai-link {
+  background: var(--knot-admin-surface) !important;
+  color: var(--knot-admin-text) !important;
+  border-color: var(--knot-admin-border) !important;
+  box-shadow: var(--knot-admin-shadow) !important;
+  transition: none !important;
+}
+#knot-theme-toggle:hover, #knot-ai-link:hover {
+  background: var(--knot-admin-nav) !important;
+  color: var(--knot-admin-text) !important;
+  transform: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
