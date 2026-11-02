@@ -23,8 +23,25 @@ const supabaseKey = 'sb_publishable_-yhc0QqTEEZTBWi9jTcFRA_-AVi-iP6';
     let session;
     let currentId = null;
     const getSession = () => { try { return JSON.parse(localStorage.getItem('knot-auth') || 'null'); } catch { return null; } };
+    async function refreshSession() {
+      if (!session?.refresh_token) throw new Error('ログイン期限が切れました。再ログインしてください。');
+      if (session.expires_at && session.expires_at > Date.now() + 60000) return;
+      const response = await fetch(supabaseUrl + '/auth/v1/token?grant_type=refresh_token', {
+        method: 'POST',
+        headers: { apikey: supabaseKey, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ refresh_token: session.refresh_token })
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || !data.access_token || !data.refresh_token) {
+        localStorage.removeItem('knot-auth');
+        throw new Error('ログイン期限が切れました。再ログインしてください。');
+      }
+      session = { access_token: data.access_token, refresh_token: data.refresh_token, expires_at: Date.now() + (data.expires_in || 3600) * 1000, user: data.user || session.user };
+      localStorage.setItem('knot-auth', JSON.stringify(session));
+    }
     const headers = () => ({ apikey: supabaseKey, Authorization: 'Bearer ' + session.access_token, 'Content-Type': 'application/json' });
     async function request(path, options = {}) {
+      await refreshSession();
       const res = await fetch(supabaseUrl + path, { ...options, headers: { ...headers(), ...(options.headers || {}) } });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data.message || data.msg || data.error || '通信に失敗しました。');
