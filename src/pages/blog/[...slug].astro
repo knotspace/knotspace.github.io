@@ -46,7 +46,7 @@ const recommendations = relatedPosts.length ? relatedPosts : allPosts.slice(0, 3
 >
   <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
   <article class="post" data-post-slug={post.slug}>
-    <div class="article-tools"><span>この記事を読む</span><button id="bookmark-button" type="button" aria-pressed="false">☆ あとで読む</button></div>
+    <div class="article-tools"><span>この記事を読む</span><div class="tool-actions"><button id="share-button" type="button">↗ リンクをコピー</button><button id="bookmark-button" type="button" aria-pressed="false">☆ あとで読む</button></div></div>
     <a class="back-link" href={`${BASE}blog/`}>
       ← 記事一覧に戻る
     </a>
@@ -100,6 +100,12 @@ const recommendations = relatedPosts.length ? relatedPosts : allPosts.slice(0, 3
       <Content />
     </div>
 
+    <div class="article-reaction">
+      <p>この記事がよかったら、リアクションしてね。</p>
+      <button id="like-button" type="button" aria-pressed="false">♡ <span id="like-label">いいね</span></button>
+      <small>※リアクションはこのブラウザ内に保存されます。</small>
+    </div>
+
     <div class="post-end">
       <span class="end-mark">✳</span>
       <p>最後まで読んでくれてありがとう。</p>
@@ -145,10 +151,34 @@ const recommendations = relatedPosts.length ? relatedPosts : allPosts.slice(0, 3
 (() => {
   const progress = document.getElementById('reading-progress');
   const button = document.getElementById('bookmark-button');
+  const shareButton = document.getElementById('share-button');
+  const likeButton = document.getElementById('like-button');
   const article = document.querySelector('[data-post-slug]');
   if (progress) {
     const update = () => { const max = document.documentElement.scrollHeight - window.innerHeight; progress.style.width = `${max > 0 ? Math.min(100, window.scrollY / max * 100) : 0}%`; };
     window.addEventListener('scroll', update, { passive: true }); window.addEventListener('resize', update); update();
+  }
+  if (shareButton) {
+    shareButton.addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(location.href); shareButton.textContent = '✓ コピーしました'; setTimeout(() => { shareButton.textContent = '↗ リンクをコピー'; }, 1800); }
+      catch { shareButton.textContent = 'コピーできませんでした'; }
+    });
+  }
+  if (likeButton && article) {
+    const key = `knot-liked:${article.dataset.postSlug}`;
+    const label = document.getElementById('like-label');
+    const paintLike = () => {
+      const liked = localStorage.getItem(key) === '1';
+      likeButton.setAttribute('aria-pressed', String(liked));
+      likeButton.classList.toggle('liked', liked);
+      if (label) label.textContent = liked ? 'ありがとう！' : 'いいね';
+      likeButton.firstChild.textContent = liked ? '♥ ' : '♡ ';
+    };
+    paintLike();
+    likeButton.addEventListener('click', () => {
+      localStorage.setItem(key, localStorage.getItem(key) === '1' ? '0' : '1');
+      paintLike();
+    });
   }
   if (button && article) {
     const key = 'knot-bookmarks'; const slug = article.dataset.postSlug;
@@ -162,7 +192,12 @@ const recommendations = relatedPosts.length ? relatedPosts : allPosts.slice(0, 3
 <style>
   .reading-progress{position:fixed;z-index:1000;top:0;left:0;width:0;height:3px;background:var(--accent);transition:width .08s linear}
   .article-tools{display:flex;justify-content:space-between;align-items:center;margin:0 0 20px;color:var(--muted);font-size:11px}
-  .article-tools button{border:1px solid var(--line);border-radius:999px;padding:8px 13px;background:var(--surface);color:var(--text);font-size:11px;font-weight:700;cursor:pointer}
+  .tool-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.article-tools button{border:1px solid var(--line);border-radius:999px;padding:8px 13px;background:var(--surface);color:var(--text);font-size:11px;font-weight:700;cursor:pointer}
+  .article-reaction{display:flex;flex-direction:column;align-items:center;gap:9px;margin:38px 0 12px;padding:24px 16px;border:1px solid var(--line);border-radius:16px;background:var(--surface)}
+  .article-reaction p{margin:0;color:var(--muted);font-size:12px}
+  .article-reaction button{border:1px solid var(--line);background:var(--bg);color:var(--text);border-radius:999px;padding:10px 22px;font-size:13px;font-weight:800;cursor:pointer}
+  .article-reaction button.liked{color:#e66b8a;border-color:#e66b8a}
+  .article-reaction small{color:var(--muted);font-size:10px}
   .related{margin-top:55px;padding-top:32px;border-top:1px solid var(--line)}.related h2{margin:8px 0 18px;color:var(--text);font-size:23px}.related-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.related-list a{display:flex;flex-direction:column;gap:9px;padding:18px;border:1px solid var(--line);border-radius:13px;background:var(--surface)}.related-list span,.related-list small{color:var(--muted);font-size:10px}.related-list strong{color:var(--text);font-size:13px;line-height:1.7}.related-list small{margin-top:auto;color:var(--accent)}
   .post {
     max-width: 760px;
@@ -470,7 +505,12 @@ const recommendations = relatedPosts.length ? relatedPosts : allPosts.slice(0, 3
   @media (max-width: 600px) {
     .reading-progress{position:fixed;z-index:1000;top:0;left:0;width:0;height:3px;background:var(--accent);transition:width .08s linear}
   .article-tools{display:flex;justify-content:space-between;align-items:center;margin:0 0 20px;color:var(--muted);font-size:11px}
-  .article-tools button{border:1px solid var(--line);border-radius:999px;padding:8px 13px;background:var(--surface);color:var(--text);font-size:11px;font-weight:700;cursor:pointer}
+  .tool-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.article-tools button{border:1px solid var(--line);border-radius:999px;padding:8px 13px;background:var(--surface);color:var(--text);font-size:11px;font-weight:700;cursor:pointer}
+  .article-reaction{display:flex;flex-direction:column;align-items:center;gap:9px;margin:38px 0 12px;padding:24px 16px;border:1px solid var(--line);border-radius:16px;background:var(--surface)}
+  .article-reaction p{margin:0;color:var(--muted);font-size:12px}
+  .article-reaction button{border:1px solid var(--line);background:var(--bg);color:var(--text);border-radius:999px;padding:10px 22px;font-size:13px;font-weight:800;cursor:pointer}
+  .article-reaction button.liked{color:#e66b8a;border-color:#e66b8a}
+  .article-reaction small{color:var(--muted);font-size:10px}
   .related{margin-top:55px;padding-top:32px;border-top:1px solid var(--line)}.related h2{margin:8px 0 18px;color:var(--text);font-size:23px}.related-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.related-list a{display:flex;flex-direction:column;gap:9px;padding:18px;border:1px solid var(--line);border-radius:13px;background:var(--surface)}.related-list span,.related-list small{color:var(--muted);font-size:10px}.related-list strong{color:var(--text);font-size:13px;line-height:1.7}.related-list small{margin-top:auto;color:var(--accent)}
   .post {
       padding-top: 30px;
