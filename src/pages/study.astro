@@ -1,25 +1,35 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import bank from '../data/study-questions.json';
-const science = bank.filter(q => q.subject === 'science').length;
-const social = bank.filter(q => q.subject === 'social').length;
-const topics = [...new Set(bank.map(q => q.topic))].length;
-const BASE = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+import foundation from '../data/study-foundation.json';
+const science = foundation.filter(q => q.subject === 'science').length;
+const social = foundation.filter(q => q.subject === 'social').length;
 ---
-<Layout title="Study｜KNOT" description="理科・社会の問題を解いて、苦手を少しずつ減らす学習スペース。">
+<Layout title="Study｜KNOT" description="教科書の基礎を網羅し、学びを積み上げるKNOTの学習スペース。">
 <main class="study-home">
-  <div class="intro"><p class="eyebrow">KNOTの学習スペース</p><h1>毎日少しずつ、<br><span>できる</span>を増やそう。</h1><p class="lead">理科と社会の問題演習。分野や難易度を選んで、自分のペースで取り組めます。</p></div>
-  <section class="summary"><div><strong>{bank.length.toLocaleString('ja-JP')}</strong><span>収録問題</span></div><div><strong>{science}</strong><span>理科</span></div><div><strong>{social}</strong><span>社会</span></div><div><strong>{topics}</strong><span>分野</span></div></section>
-  <div class="heading"><h2>どの教科を勉強する？</h2><p>教科を選んで演習を始めよう。</p></div>
-  <section class="subjects">
-    <a class="subject science" href={`${BASE}study/solve/?subject=science`}><span class="symbol">理</span><div><small>SCIENCE</small><h3>理科</h3><p>物理・化学・生物・地学を学ぶ</p><b>{science} 問収録 <span>→</span></b></div></a>
-    <a class="subject social" href={`${BASE}study/solve/?subject=social`}><span class="symbol">社</span><div><small>SOCIAL STUDIES</small><h3>社会</h3><p>地理・歴史・公民を学ぶ</p><b>{social} 問収録 <span>→</span></b></div></a>
+  <header class="intro">
+    <p class="eyebrow">KNOT / LEARNING SPACE</p>
+    <h1>理科と社会、<span>ここで練習</span>しよう。</h1>
+    <p>理科と社会の大事なところを、ここで一緒に確認しよう。</p>
+    <div class="stats"><div><b>{foundation.length}</b><small>基礎問題</small></div><div><b>{science}</b><small>理科</small></div><div><b>{social}</b><small>社会</small></div><div><b>7</b><small>分野</small></div></div>
+  </header>
+
+  <section class="section">
+    <div class="section-title"><div><p class="eyebrow">01 / FOUNDATION</p><h2>基礎網羅問題</h2><p>教科書に出てくる大事な語句や基本を、分野ごとにチェック。</p></div><span class="status active">公開中</span></div>
+    <a class="main-card" href="foundation/"><span class="card-icon">基</span><div><small>FOUNDATION PRACTICE</small><h3>まずは基本から確認しよう。</h3><p>理科4分野・社会3分野を収録。間違えた問題はあとから復習できるよ。</p><b>学習を始める <span>→</span></b></div></a>
   </section>
-  <section class="how"><h2>使い方</h2><ol><li><b>1</b><span><strong>教科・分野を選ぶ</strong><small>苦手な単元だけに絞ることもできます。</small></span></li><li><b>2</b><span><strong>問題を解く</strong><small>選択肢を選ぶと、その場で正誤と解説が表示されます。</small></span></li><li><b>3</b><span><strong>結果を確認する</strong><small>間違えた問題は記録して、あとから解き直せます。</small></span></li></ol></section>
-  <p class="back"><a href={BASE}>← KNOTトップへ戻る</a></p>
+
+  <section class="section">
+    <div class="section-title"><div><p class="eyebrow">02 / KO SEN EXAM</p><h2>高専入試特化</h2><p>高専入試向けの問題は、ただいま準備中。</p></div><span class="status soon">COMING SOON</span></div>
+    <div class="soon-card"><span class="card-icon">専</span><div><small>EXAM PREPARATION</small><h3>高専入試の対策問題を準備中！</h3><p>公開までもう少し待ってね。今は基礎網羅問題に取り組もう。</p><span class="soon-label">COMING SOON</span></div></div>
+  </section>
+
+  <section class="quote-banner">
+    <div><p class="eyebrow">WORDS TO KEEP</p><h2>偉人の名言集</h2><p>勉強を頑張るときに読みたい、偉人たちの言葉。</p></div>
+    <a href="quotes/">名言を読む <span>↗</span></a>
+  </section>
+  <p class="back"><a href="../">← KNOTトップへ戻る</a></p>
 </main>
 <style>
-.study-home{max-width:900px;margin:0 auto;padding:38px 0 30px}.intro{padding:22px 0 38px}.eyebrow{font-size:13px;font-weight:800;color:var(--accent);margin:0 0 18px}.intro h1{font-size:clamp(34px,6vw,58px);font-weight:900;letter-spacing:-.055em;line-height:1.35;margin:0}.intro h1 span{color:var(--accent)}.lead{font-size:14px;line-height:2;color:var(--muted);margin:16px 0 0}.summary{display:grid;grid-template-columns:repeat(4,1fr);background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}.summary div{padding:17px 20px;border-right:1px solid var(--line);display:grid;gap:4px}.summary div:last-child{border:0}.summary strong{font-size:25px;font-weight:900}.summary span{font-size:11px;color:var(--muted)}.heading{margin:48px 0 16px}.heading h2,.how h2{font-size:22px;font-weight:850;margin:0}.heading p{font-size:12px;color:var(--muted);margin:7px 0}.subjects{display:grid;grid-template-columns:1fr 1fr;gap:16px}.subject{display:flex;align-items:flex-start;gap:18px;padding:25px;border:1px solid var(--line);border-radius:15px;background:var(--surface);transition:border-color .15s,transform .15s}.subject:hover{border-color:var(--accent);transform:translateY(-2px)}.symbol{display:grid;place-items:center;width:54px;height:54px;border-radius:13px;background:var(--surface-soft);font-size:25px;font-weight:900;color:var(--accent);flex:none}.subject small{font-size:10px;color:var(--muted);font-weight:800;letter-spacing:.08em}.subject h3{font-size:27px;margin:4px 0;font-weight:900}.subject p{font-size:12px;color:var(--muted);margin:0 0 17px}.subject b{font-size:12px}.subject b span{color:var(--accent);margin-left:8px}.how{margin-top:45px;padding:25px;border:1px solid var(--line);border-radius:14px}.how ol{padding:0;margin:20px 0 0;list-style:none;display:grid;gap:17px}.how li{display:flex;align-items:center;gap:14px}.how li>b{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--surface-soft);color:var(--accent)}.how li span{display:grid;gap:3px}.how li strong{font-size:13px}.how li small{font-size:11px;color:var(--muted)}.back{margin-top:30px;font-size:12px;color:var(--muted)}.back a:hover{color:var(--accent)}
-@media(max-width:650px){.study-home{padding:25px 0}.summary div{padding:13px 10px}.summary strong{font-size:20px}.subjects{grid-template-columns:1fr}.subject{padding:20px}.how{padding:20px}.intro{padding-top:12px}}
+.study-home{max-width:900px;margin:0 auto;padding:40px 0 35px}.intro{padding:10px 0 35px}.eyebrow{font:10px ui-monospace,monospace;letter-spacing:.14em;color:var(--accent);font-weight:800;margin:0 0 12px}.intro h1{font-size:clamp(34px,6vw,54px);font-weight:900;letter-spacing:-.065em;margin:0}.intro h1 span{color:var(--accent)}.intro>p:not(.eyebrow){font-size:13px;color:var(--muted);line-height:1.8}.stats{display:grid;grid-template-columns:repeat(4,1fr);margin-top:25px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface)}.stats div{padding:13px 17px;border-right:1px solid var(--line);display:grid;gap:3px}.stats div:last-child{border:0}.stats b{font-size:23px}.stats small{font-size:10px;color:var(--muted)}.section{margin-top:34px}.section-title{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:13px}.section-title .eyebrow{margin:0 0 5px}.section-title h2{font-size:21px;margin:0}.section-title p:last-child{font-size:11px;color:var(--muted);margin:5px 0 0}.status{font-size:9px;font-weight:800;letter-spacing:.08em;padding:7px 9px;border-radius:5px;white-space:nowrap}.active{color:#25895e;background:color-mix(in srgb,#25895e 12%,var(--surface))}.soon{color:var(--muted);border:1px solid var(--line)}.main-card,.soon-card{display:flex;align-items:flex-start;gap:18px;padding:23px;border:1px solid var(--line);border-radius:13px;background:var(--surface)}.main-card{transition:border-color .15s,transform .15s}.main-card:hover{border-color:var(--accent);transform:translateY(-2px)}.card-icon{display:grid;place-items:center;flex:none;width:48px;height:48px;border-radius:11px;background:var(--surface-soft);color:var(--accent);font-size:21px;font-weight:900}.main-card small,.soon-card small{font:9px ui-monospace,monospace;color:var(--muted);letter-spacing:.1em}.main-card h3,.soon-card h3{font-size:20px;margin:6px 0}.main-card p,.soon-card p{font-size:12px;line-height:1.8;color:var(--muted);margin:0 0 13px}.main-card b{font-size:11px}.main-card b span,.quote-banner a span{color:var(--accent);margin-left:10px}.soon-card{background:var(--surface-soft);opacity:.85}.soon-label{display:inline-block;font:9px ui-monospace,monospace;letter-spacing:.1em;color:var(--muted);border:1px solid var(--line);padding:6px 8px;border-radius:4px}.quote-banner{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:42px;padding:22px 24px;border:1px solid var(--line);border-radius:13px;background:var(--surface)}.quote-banner .eyebrow{margin:0}.quote-banner h2{font-size:18px;margin:5px 0}.quote-banner p:last-child{font-size:11px;color:var(--muted);margin:0}.quote-banner>a{font-size:11px;font-weight:750;white-space:nowrap}.back{margin-top:30px;font-size:11px;color:var(--muted)}@media(max-width:620px){.study-home{padding:25px 0}.stats div{padding:11px 8px}.stats b{font-size:19px}.section-title h2{font-size:18px}.main-card,.soon-card{padding:17px;gap:12px}.card-icon{width:40px;height:40px}.quote-banner{padding:18px;align-items:flex-start;flex-direction:column}}
 </style>
 </Layout>
