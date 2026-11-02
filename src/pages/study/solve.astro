@@ -1,126 +1,40 @@
 ---
----
-<!doctype html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101827"><link rel="manifest" href="/study/manifest.webmanifest"><title>演習｜KNOT Study</title><style>
-:root{color-scheme:dark;font-family:system-ui,sans-serif;background:#0b1220;color:#edf3fb}*{box-sizing:border-box}body{margin:0}.wrap{width:min(780px,92vw);margin:auto;padding:22px 0 60px}.top,.row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}a{color:#9fc2ff;text-decoration:none}.ai-actions{margin-top:14px}.ai-actions a{font-size:13px;border:1px solid #40516b;border-radius:10px;padding:9px 12px}.settings{display:flex;justify-content:flex-end;margin-top:10px}.settings button{background:#26364c;color:#fff;border:1px solid #40516b;font-size:12px}.tag,.small{font-size:12px;color:#9db2ce}.tag{letter-spacing:.12em}h1{font-size:30px;margin:28px 0 6px}.muted{color:#aab8cc;line-height:1.7}.panel{margin-top:22px;padding:22px;border:1px solid #30415a;border-radius:17px;background:#141f30}label{display:block;color:#bdcbe0;font-size:13px;margin:12px 0 6px}select,button{font:inherit;border-radius:10px;padding:11px 13px}select{width:100%;background:#0c1727;color:#fff;border:1px solid #40516b}button{border:0;background:#78aaff;color:#081323;font-weight:800;cursor:pointer}
-#answers.answers{
-  display:grid !important;
-  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
-  gap:14px !important;
-  width:100% !important;
-  margin-top:22px !important;
-}
-#answers .answer{
-  width:100% !important;
-  min-width:0 !important;
-  min-height:118px !important;
-  aspect-ratio:auto !important;
-  padding:18px 16px !important;
-  display:flex !important;
-  flex-direction:row !important;
-  align-items:center !important;
-  justify-content:flex-start !important;
-  gap:14px !important;
-  border:2px solid #405675 !important;
-  border-radius:18px !important;
-  background:#1b2a40 !important;
-  color:#edf3fb !important;
-  text-align:left !important;
-  font-size:16px !important;
-  font-weight:600 !important;
-  line-height:1.6 !important;
-  white-space:normal !important;
-  overflow-wrap:anywhere !important;
-  cursor:pointer !important;
-  transition:background .15s,border-color .15s,transform .15s !important;
-}
-#answers .answer:hover{
-  background:#263d59 !important;
-  border-color:#82b4ff !important;
-  transform:translateY(-2px) !important;
-}
-#answers .answer .choice-num{
-  flex:0 0 36px !important;
-  width:36px !important;
-  height:36px !important;
-  display:grid !important;
-  place-items:center !important;
-  border-radius:11px !important;
-  background:#304866 !important;
-  color:#c8ddff !important;
-  font-size:15px !important;
-  font-weight:850 !important;
-}
-#answers .answer .choice-text{flex:1 1 auto !important;min-width:0 !important}
-#answers .answer.selected{
-  background:#244c78 !important;
-  border:2px solid #8dbdff !important;
-  box-shadow:0 0 0 2px rgba(141,189,255,.18) !important;
-  color:#fff !important;
-}
-#answers .answer.selected .choice-num{
-  background:#9ac5ff !important;
-  color:#081323 !important;
-}
-@media(max-width:520px){
-  #answers.answers{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:9px !important}
-  #answers .answer{min-height:108px !important;padding:12px 10px !important;gap:8px !important;font-size:13px !important;border-radius:14px !important}
-  #answers .answer .choice-num{flex-basis:27px !important;width:27px !important;height:27px !important;font-size:12px !important;border-radius:8px !important}
-}
-.flashcard{margin-top:20px;padding:28px 20px;border:2px solid #f28b36;border-radius:22px;background:linear-gradient(145deg,#fff8ef,#fff);color:#202536;text-align:center;min-height:240px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:24px}.flashcard[hidden]{display:none}.flash-label{font-size:11px;letter-spacing:.18em;color:#c8792d;font-weight:850}.flashcard #flash-content{font-size:clamp(20px,4vw,28px);font-weight:800;line-height:1.7}.flashcard button{background:#f28b36;color:#fff}.result{padding:14px;border-radius:12px;background:#0c1727;margin-top:18px;line-height:1.8}
-</style><script>if("serviceWorker" in navigator){navigator.serviceWorker.register("/study/sw.js",{scope:"/study/"}).catch(console.error)}</script></head><body><main class="wrap"><div class="top"><a href="/study/">← KNOT STUDY</a><span class="tag">INDEPENDENT PRACTICE SCREEN</span></div><div class="settings"><button id="theme-toggle" type="button">☀ / ☾ テーマ切替</button></div><h1 id="title">演習を準備中</h1><p class="muted">解答を選択して答え合わせ。模試モードでは最後にまとめて採点する。</p><section class="panel"><div class="row"><span class="tag" id="mode-label">PRACTICE</span><span class="small" id="progress">—</span><span class="small" id="timer" hidden>残り 00:00</span></div><label for="subject">教科</label><select id="subject"><option value="science">理科</option><option value="social">社会</option></select><label for="card-style">問題カード</label><select id="card-style"><option value="choice">4択カード</option><option value="flash">単語帳カード（答えをめくる）</option></select><label for="mode">学習モード</label><select id="mode"><option value="five">5分モード</option><option value="random">ランダム20問</option><option value="weak">弱点判定</option><option value="topic">分野別</option><option value="mock">模試モード</option></select><label for="topic-filter">分野（分野別モード用）</label><select id="topic-filter"><option value="all">すべての分野</option><option value="物理">物理</option><option value="化学">化学</option><option value="生物">生物</option><option value="地学">地学</option><option value="地理">地理</option><option value="歴史">歴史</option><option value="公民">公民</option></select><label for="level">難易度</label><select id="level"><option value="basic">基礎レベル</option><option value="standard" selected>入試標準レベル</option><option value="advanced">入試応用レベル</option></select><div class="row" style="margin-top:18px"><button id="start">学習を開始</button></div></section><section class="panel" id="quiz" hidden><div class="row"><span class="tag" id="topic"></span><span class="small" id="number"></span></div><h2 id="question"></h2><div class="answers" id="answers"></div><div id="flashcard" class="flashcard" hidden><div class="flash-label">QUESTION CARD</div><div id="flash-content"></div><button id="flip-card" type="button">答えを見る</button></div><div id="feedback" class="result" hidden></div><div class="row ai-actions"><a id="ask-chatgpt" target="_blank" rel="noopener">ChatGPTに質問 ↗</a><a id="ask-gemini" target="_blank" rel="noopener">Geminiに質問 ↗</a></div><div class="row" style="margin-top:18px"><button id="check">答え合わせ</button><button id="next" hidden>次の問題 →</button></div></section><p class="small" id="record"></p></main>
-<script type="module">
 import bank from '../../data/study-questions.json';
-const p=new URLSearchParams(location.search),$=s=>document.querySelector(s),subject=$('#subject'),level=$('#level');if(p.get('subject'))subject.value=p.get('subject');
-
-
-let list=[],idx=0,selected=-1,score=0,answers=[],isMock=false,timerId=null,secondsLeft=0;
-const root=document.documentElement;function applyTheme(t){root.dataset.theme=t;document.body.style.background=t==='light'?'#f6f7fb':'#0b1220';document.body.style.color=t==='light'?'#172033':'#edf3fb';localStorage.setItem('knot-study-theme',t)}applyTheme(localStorage.getItem('knot-study-theme')||'dark');$('#theme-toggle').onclick=()=>applyTheme(root.dataset.theme==='dark'?'light':'dark');
-const praiseGood=['正解！いい感じ！','その調子！理解できてるね！','ナイス！着実に力がついてる！','いいね！この調子でいこう！'];
-const praiseBad=['惜しい！解説を読んで次に活かそう！','大丈夫、間違いは伸びるチャンス！','ここで覚えれば次は解ける！'];
-const praiseFinish=['最後までやり切ったね！','お疲れさま！一歩前進！','今日の努力はちゃんと積み上がってる！'];
-function getRecord(){try{return JSON.parse(localStorage.getItem('knot-study-record')||'{"answered":0,"correct":0,"wrong":[],"seen":[]}')}catch{return {answered:0,correct:0,wrong:[],seen:[]}}}
-function saveRecord(){localStorage.setItem('knot-study-record',JSON.stringify(getRecord()))}
-function pick(arr){return arr[Math.floor(Math.random()*arr.length)]}
-function updateRecord(q,choice){let r=getRecord();r.seen=Array.isArray(r.seen)?r.seen:[];if(!r.seen.includes(q.id))r.seen.push(q.id);r.answered++;if(choice===q.c){r.correct++;r.wrong=r.wrong.filter(x=>x!==q.id)}else if(!r.wrong.includes(q.id))r.wrong.push(q.id);localStorage.setItem('knot-study-record',JSON.stringify(r))}
-function begin(){
- const sub=subject.value,lv=level.value,mode=$('#mode').value,topic=$('#topic-filter').value;
- isMock=mode==='mock';let pool=bank.filter(x=>x.subject===sub);
- if(mode==='weak'){const r=getRecord();pool=pool.filter(x=>r.wrong.includes(x.id));}
- else if(mode==='topic'&&topic!=='all')pool=pool.filter(x=>x.topic.includes(topic));
- else if(mode!=='mock'&&mode!=='random')pool=pool.filter(x=>x.level===lv);
- if(mode==='random'||mode==='five')pool=pool.filter(x=>x.level===lv);
- if(!pool.length){alert(mode==='weak'?'この教科に記録された苦手問題はまだないよ。まずは通常演習に挑戦しよう！':'この条件の問題はまだ収録されていないよ。難易度や分野を変えてみてね。');return}
- list=[...pool].sort(()=>Math.random()-.5);
- if(mode==='random')list=list.slice(0,20);
- if(mode==='five')list=list.slice(0,Math.min(5,list.length));
- if(mode==='weak'||mode==='topic')list=list.slice(0,20);
- if(isMock)list=list.slice(0,20);
- idx=0;score=0;answers=Array(list.length).fill(null);
- $('#quiz').hidden=false;$('#mode-label').textContent=isMock?'MOCK EXAM':mode.toUpperCase();
- $('#title').textContent=isMock?'模試モード':mode==='weak'?'弱点判定':mode==='topic'?'分野別演習':'ランダム20問';
- $('#timer').hidden=!(isMock||mode==='five');
- if(timerId)clearInterval(timerId);
- if(isMock||mode==='five'){secondsLeft=mode==='five'?300:Math.max(60,list.length*90);updateTimer();timerId=setInterval(()=>{secondsLeft--;updateTimer();if(secondsLeft<=0){if(isMock)submitMock(true);else{clearInterval(timerId);timerId=null;$('#quiz').innerHTML='<h2>5分終了！</h2><p class="muted">短い時間でも取り組めたね。お疲れさま！</p><p><a href="/study/">Studyトップへ戻る</a></p>'}}},1000)}
- render();
-}
-function updateTimer(){let m=Math.floor(secondsLeft/60),s=secondsLeft%60;$('#timer').textContent='残り '+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')}
-function render(){
- let q=list[idx];selected=answers[idx];$('#topic').textContent=q.topic;$('#number').textContent=(idx+1)+' / '+list.length;
- $('#progress').textContent=isMock?'解答済み '+answers.filter(x=>x!==null).length+' / '+list.length:'進捗 '+(idx+1)+' / '+list.length;
- $('#question').textContent=q.q;$('#answers').innerHTML='';const flash=$('#card-style').value==='flash';$('#answers').hidden=flash;$('#flashcard').hidden=!flash;$('#flip-card').hidden=false;$('#flash-content').textContent=q.q;$('#flip-card').textContent='答えを見る';const prompt='次の中学生向け問題を、考え方を順番に説明して教えてください。\n問題：'+q.q+'\n選択肢：'+q.a.map((x,i)=>String.fromCharCode(65+i)+'. '+x).join(' / ')+'\n正解：'+q.a[q.c]+'\n解説：'+q.e;$('#ask-chatgpt').href='https://chatgpt.com/?q='+encodeURIComponent(prompt);$('#ask-gemini').href='https://gemini.google.com/app?prompt='+encodeURIComponent(prompt);
- if(!flash)q.a.forEach((a,i)=>{let b=document.createElement('button');b.className='answer'+(selected===i?' selected':'');let n=document.createElement('span');n.className='choice-num';n.textContent=String.fromCharCode(65+i);let t=document.createElement('span');t.className='choice-text';t.textContent=a;b.append(n,t);b.onclick=()=>{selected=i;answers[idx]=i;document.querySelectorAll('.answer').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');if(isMock)$('#progress').textContent='解答済み '+answers.filter(x=>x!==null).length+' / '+list.length};$('#answers').append(b)});
- $('#feedback').hidden=true;$('#check').hidden=isMock||flash;$('#flip-card').onclick=()=>{if($('#flip-card').textContent==='答えを見る'){const q=list[idx];$('#flash-content').textContent='正解：'+q.a[q.c]+'\n\n'+q.e;$('#flip-card').textContent='理解した・次へ';}else{$('#check').click();}};$('#next').hidden=true;
- if(isMock){$('#check').hidden=true;$('#next').hidden=false;$('#next').textContent=idx===list.length-1?'解答一覧・提出へ':'次の問題 →'}
- else {$('#next').hidden=true;$('#check').hidden=false}
-}
-function submitMock(auto=false){
- if(timerId){clearInterval(timerId);timerId=null}
- list.forEach((q,i)=>{let choice=answers[i];if(choice!==null){if(choice===q.c)score++;updateRecord(q,choice)}});
- $('#quiz').innerHTML='<div class="row"><span class="tag">MOCK EXAM RESULT</span><span class="small">模試モード</span></div><h2>模試終了！</h2><p class="muted">'+pick(praiseFinish)+'</p><h1>'+score+' / '+list.length+' 点</h1><p class="muted">正答率 '+Math.round(score/list.length*100)+'％'+(auto?'・時間切れで自動提出':'')+'</p><div class="result" id="mock-review"></div><p><a href="/study/">Studyトップへ戻る</a></p>';
- let box=$('#mock-review');list.forEach((q,i)=>{let ok=answers[i]===q.c;let d=document.createElement('p');d.textContent=(i+1)+'. '+(answers[i]===null?'未回答':ok?'正解':'不正解')+'｜正解：'+q.a[q.c]+'｜'+q.e;box.append(d)});
-}
-$('#start').onclick=begin;
-$('#check').onclick=()=>{if($('#card-style').value==='flash'){let q=list[idx];updateRecord(q,q.c);score++;$('#feedback').hidden=false;$('#feedback').textContent='学習記録に追加したよ。 '+q.e;$('#check').hidden=true;$('#next').hidden=false;$('#next').textContent=idx===list.length-1?'結果を見る':'次のカード →';return}if(selected<0){alert('選択肢を選んでね');return}let q=list[idx],ok=selected===q.c;updateRecord(q,selected);$('#feedback').hidden=false;$('#feedback').textContent=(ok?pick(praiseGood):pick(praiseBad))+' '+(ok?'':'正解：'+q.a[q.c]+'。')+'解説：'+q.e;$('#check').hidden=true;$('#next').hidden=false;$('#next').textContent=idx===list.length-1?'結果を見る':'次の問題 →';if(ok)score++};
-$('#next').onclick=()=>{if(isMock){if(idx<list.length-1){idx++;render()}else{if(confirm('模試を提出して採点する？'))submitMock(false)}return}if($('#feedback').hidden){if(selected===-1){alert('選択肢を選んでね');return}$('#check').click();return}idx++;if(idx>=list.length){$('#quiz').innerHTML='<h2>演習終了！</h2><p>'+pick(praiseFinish)+'</p><p>今回の正解：'+score+' / '+list.length+'問</p><a href="/study/">Studyトップへ戻る</a>';return}render()};
-$('#record').textContent='学習記録とテーマ設定はこの端末に保存されるよ。5分モードは5分で自動終了するよ。';
+const BASE = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const scienceCount = bank.filter((q) => q.subject === 'science').length;
+const socialCount = bank.filter((q) => q.subject === 'social').length;
+---
+<!doctype html>
+<html lang="ja" data-theme="dark">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#101827" /><title>演習｜KNOT Study</title>
+<style>
+:root{font-family:Inter,"Noto Sans JP",system-ui,sans-serif;color-scheme:dark;--bg:#0b1220;--panel:#121d2d;--panel2:#18263a;--text:#edf3fb;--muted:#9aabc2;--line:#2a3a50;--accent:#91b8ff;--good:#52c995;--bad:#ff8585}
+:root[data-theme="light"]{color-scheme:light;--bg:#f4f6fa;--panel:#fff;--panel2:#edf2fa;--text:#172235;--muted:#64748b;--line:#dce3ed;--accent:#315fc2;--good:#16865a;--bad:#c43e4d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);transition:background .2s,color .2s}button,select{font:inherit}.wrap{width:min(850px,92vw);margin:auto;padding:24px 0 70px}.top,.row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.brand{font-size:13px;font-weight:850;letter-spacing:.13em}.brand span{color:var(--accent)}a{color:var(--accent);text-decoration:none}.theme{border:1px solid var(--line);border-radius:999px;background:var(--panel);color:var(--text);padding:9px 13px;cursor:pointer;font-size:12px}.tag,.small{font-size:12px;color:var(--muted)}.tag{letter-spacing:.14em;font-weight:750}.intro{padding:34px 0 22px}.intro h1{font-size:clamp(30px,6vw,46px);letter-spacing:-.06em;margin:12px 0 8px}.intro p{color:var(--muted);line-height:1.8;margin:0}.counts{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.counts span,.chip{border:1px solid var(--line);border-radius:999px;padding:6px 10px;font-size:11px;color:var(--muted)}.panel{margin-top:17px;padding:21px;border:1px solid var(--line);border-radius:17px;background:var(--panel)}.panel h2{font-size:16px;margin:0 0 15px}.subjects{display:grid;grid-template-columns:1fr 1fr;gap:10px}.subject{border:1px solid var(--line);border-radius:12px;background:var(--panel2);color:var(--text);padding:16px;text-align:left;cursor:pointer}.subject.active{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}.subject b{display:block;font-size:16px}.subject small{display:block;color:var(--muted);margin-top:5px}.fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.field label{display:block;color:var(--muted);font-size:12px;margin-bottom:7px}.field select{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:9px;color:var(--text);padding:11px}.primary,.secondary{border:1px solid transparent;border-radius:10px;padding:12px 16px;font-weight:800;cursor:pointer}.primary{background:var(--accent);color:#101827}.secondary{background:var(--panel2);border-color:var(--line);color:var(--text)}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.stat{padding:12px;background:var(--panel2);border-radius:10px}.stat small{display:block;color:var(--muted);font-size:11px}.stat strong{font-size:21px}.quiz[hidden],[hidden]{display:none!important}.quiz-head{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}.question{font-size:19px;line-height:1.85;margin:23px 0}.answers{display:grid;grid-template-columns:1fr 1fr;gap:10px}.answer{display:flex;align-items:center;gap:12px;min-height:68px;text-align:left;padding:14px;border:1px solid var(--line);border-radius:11px;background:var(--panel2);color:var(--text);cursor:pointer}.answer:disabled{cursor:default;opacity:1}.answer .letter{display:grid;place-items:center;flex:0 0 28px;height:28px;border-radius:8px;background:var(--bg);font-weight:800;color:var(--muted)}.answer.correct{border-color:var(--good);background:color-mix(in srgb,var(--good) 12%,var(--panel))}.answer.incorrect{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--panel))}.feedback{margin-top:17px;padding:15px;border-radius:11px;background:var(--panel2);line-height:1.85;white-space:pre-wrap}.quiz-actions{display:flex;justify-content:space-between;gap:10px;margin-top:20px}.progress{height:5px;background:var(--line);border-radius:9px;overflow:hidden;margin-top:15px}.progress span{display:block;height:100%;width:0;background:var(--accent)}.footer{text-align:center;color:var(--muted);font-size:11px;margin-top:35px}
+@media(max-width:600px){.fields{grid-template-columns:1fr 1fr}.fields .field:last-child{grid-column:1/-1}.answers{grid-template-columns:1fr}.panel{padding:16px}.question{font-size:17px}.wrap{padding-top:17px}}
+</style></head><body><div class="wrap">
+<header class="top"><a class="brand" href={BASE}>KNOT <span>/ STUDY</span></a><div class="row"><a href={`${BASE}study/`}>← Studyトップ</a><button class="theme" id="theme" type="button">☀ ライトモード</button></div></header>
+<section class="intro"><span class="tag">FOCUS / PRACTICE / GROW</span><h1>演習ルーム<span style="color:var(--accent)">.</span></h1><p>自分のペースで、1問ずつ。理科・社会の知識を確かな力に。</p><div class="counts"><span>理科 {scienceCount}問</span><span>社会 {socialCount}問</span><span>合計 {bank.length}問</span></div></section>
+<section class="panel"><h2>01　教科を選ぶ</h2><div class="subjects"><button class="subject active" data-subject="science"><b>🔬 理科</b><small>{scienceCount}問 / 物理・化学・生物・地学</small></button><button class="subject" data-subject="social"><b>🌏 社会</b><small>{socialCount}問 / 地理・歴史・公民</small></button></div></section>
+<section class="panel"><h2>02　学習方法を設定</h2><div class="fields"><div class="field"><label for="level">難易度</label><select id="level"><option value="all">すべて</option><option value="basic">基礎</option><option value="standard">標準</option><option value="advanced">発展</option></select></div><div class="field"><label for="topic">分野</label><select id="topic"><option value="all">すべての分野</option></select></div><div class="field"><label for="mode">出題数</label><select id="mode"><option value="10">10問</option><option value="20" selected>20問</option><option value="all">全問</option><option value="wrong">苦手問題のみ</option></select></div></div><div class="actions"><button class="primary" id="start">演習を開始 →</button><button class="secondary" id="clear">学習記録をリセット</button></div><div class="stats"><div class="stat"><small>解答数</small><strong id="answered">0</strong></div><div class="stat"><small>正解数</small><strong id="correct">0</strong></div><div class="stat"><small>苦手問題</small><strong id="wrong">0</strong></div></div></section>
+<section class="panel quiz" id="quiz" hidden><div class="quiz-head"><span class="chip" id="meta">理科</span><span class="small" id="counter">1 / 20</span></div><div class="progress"><span id="bar"></span></div><p class="question" id="question"></p><div class="answers" id="answers"></div><div class="feedback" id="feedback" hidden></div><div class="quiz-actions"><button class="secondary" id="quit">終了</button><button class="primary" id="next" disabled>次の問題 →</button></div></section>
+<footer class="footer">KNOT Study · 学習記録はこの端末に保存されます</footer></div>
+<script>
+import bank from '../../data/study-questions.json';
+const $=id=>document.getElementById(id),root=document.documentElement,THEME_KEY='knot-study-solve-theme-v1',RECORD_KEY='knot-study-solve-record-v1';
+let subject='science',list=[],index=0,done=false,record={answered:0,correct:0,wrong:[]};
+try{record={...record,...JSON.parse(localStorage.getItem(RECORD_KEY)||'{}')};}catch{}
+const setTheme=t=>{root.dataset.theme=t;localStorage.setItem(THEME_KEY,t);$('theme').textContent=t==='dark'?'☀ ライトモード':'☾ ダークモード';};
+let savedTheme='dark';try{savedTheme=localStorage.getItem(THEME_KEY)||'dark';}catch{}setTheme(savedTheme);
+$('theme').onclick=()=>setTheme(root.dataset.theme==='dark'?'light':'dark');
+function save(){localStorage.setItem(RECORD_KEY,JSON.stringify(record));}
+function stats(){$('answered').textContent=record.answered;$('correct').textContent=record.correct;$('wrong').textContent=record.wrong.length;}
+function topics(){const s=$('topic'),old=s.value;s.replaceChildren(new Option('すべての分野','all'));[...new Set(bank.filter(q=>q.subject===subject).map(q=>q.topic))].sort().forEach(t=>s.add(new Option(t,t)));if([...s.options].some(o=>o.value===old))s.value=old;}
+document.querySelectorAll('[data-subject]').forEach(b=>b.onclick=()=>{subject=b.dataset.subject;document.querySelectorAll('[data-subject]').forEach(x=>x.classList.toggle('active',x===b));topics();});
+function begin(){let pool=bank.filter(q=>q.subject===subject&&($('level').value==='all'||q.level===$('level').value)&&($('topic').value==='all'||q.topic===$('topic').value));if($('mode').value==='wrong')pool=pool.filter(q=>record.wrong.includes(q.id));if(!pool.length){alert('この条件に合う問題がないよ。難易度や分野を変えてみてね。');return;}pool.sort(()=>Math.random()-.5);if($('mode').value!=='all'&&$('mode').value!=='wrong')pool=pool.slice(0,Number($('mode').value));list=pool;index=0;$('quiz').hidden=false;$('quiz').scrollIntoView({behavior:'smooth',block:'start'});render();}
+function render(){done=false;const q=list[index];$('meta').textContent=(subject==='science'?'理科':'社会')+' ・ '+q.topic+' ・ '+q.level;$('counter').textContent=(index+1)+' / '+list.length;$('bar').style.width=(index/list.length*100)+'%';$('question').textContent=q.q;$('feedback').hidden=true;$('next').disabled=true;$('next').textContent=index===list.length-1?'演習を終了':'次の問題 →';const area=$('answers');area.replaceChildren();q.a.forEach((a,i)=>{const b=document.createElement('button');b.className='answer';const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+i);const label=document.createElement('span');label.textContent=a;b.append(letter,label);b.onclick=()=>choose(i);area.append(b);});}
+function choose(n){if(done)return;done=true;const q=list[index],ok=n===q.c;record.answered++;if(ok){record.correct++;record.wrong=record.wrong.filter(id=>id!==q.id);}else if(!record.wrong.includes(q.id))record.wrong.push(q.id);save();stats();[...$('answers').children].forEach((b,i)=>{b.disabled=true;if(i===q.c)b.classList.add('correct');if(i===n&&!ok)b.classList.add('incorrect');});$('feedback').hidden=false;$('feedback').textContent=(ok?'正解！':'不正解。正解は「'+q.a[q.c]+'」。')+'\\n\\n'+q.e;$('next').disabled=false;$('bar').style.width=((index+1)/list.length*100)+'%';}
+$('start').onclick=begin;$('quit').onclick=()=>{$('quiz').hidden=true;};$('next').onclick=()=>{if(index<list.length-1){index++;render();}else{$('quiz').hidden=true;alert('演習終了！お疲れさま！');}};$('clear').onclick=()=>{if(confirm('この演習画面の学習記録を削除する？')){record={answered:0,correct:0,wrong:[]};save();stats();}};topics();stats();
 </script></body></html>
