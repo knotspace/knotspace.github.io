@@ -17,6 +17,7 @@ jobs:
   patrol:
     name: Check public site availability and security headers
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - name: Inspect live site
         id: check
