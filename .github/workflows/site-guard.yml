@@ -1,0 +1,74 @@
+name: KNOT Site Guard
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: knot-site-guard
+  cancel-in-progress: true
+
+jobs:
+  patrol:
+    name: Check public site availability and security headers
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inspect live site
+        id: check
+        shell: bash
+        run: |
+          set -uo pipefail
+          URL="https://knotspace.github.io/"
+          CODE="$(curl --silent --show-error --location --max-time 30 --output /tmp/knot-home.html --dump-header /tmp/knot-headers.txt --write-out '%{http_code}' "$URL" || true)"
+          echo "http_status=$CODE"
+          if [[ "$CODE" != "200" ]]; then
+            echo "failed=true" >> "$GITHUB_OUTPUT"
+            echo "reason=Homepage returned HTTP ${CODE:-no response}" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          for HEADER in x-content-type-options referrer-policy strict-transport-security; do
+            if ! grep -qi "^$HEADER:" /tmp/knot-headers.txt; then
+              echo "MISSING_SECURITY_HEADER=$HEADER"
+            else
+              echo "PRESENT_SECURITY_HEADER=$HEADER"
+            fi
+          done
+          if ! grep -qi '<html' /tmp/knot-home.html; then
+            echo "failed=true" >> "$GITHUB_OUTPUT"
+            echo "reason=HTTP 200 response did not contain an HTML document" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "failed=false" >> "$GITHUB_OUTPUT"
+      - name: Open or update incident issue
+        if: steps.check.outputs.failed == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = '[Site Guard] KNOT public site check failed';
+            const reason = process.env.REASON || 'The public site health check failed.';
+            const { owner, repo } = context.repo;
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner, repo, state: 'open', per_page: 100
+            });
+            const existing = issues.find(issue => issue.title === title);
+            const body = [
+              'KNOT Site Guard detected a problem with the public homepage.',
+              '',
+              '**Details:** ' + reason,
+              '',
+              'Workflow run: ' + context.serverUrl + '/' + owner + '/' + repo + '/actions/runs/' + context.runId,
+              '',
+              'This automated check monitors availability and basic response integrity. It does not inspect visitor traffic or block attacks.'
+            ].join('\n');
+            if (existing) {
+              await github.rest.issues.createComment({ owner, repo, issue_number: existing.number, body });
+            } else {
+              await github.rest.issues.create({ owner, repo, title, body, labels: ['security'] });
+            }
+        env:
+          REASON: ${{ steps.check.outputs.reason }}
