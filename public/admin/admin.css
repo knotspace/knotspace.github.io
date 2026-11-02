@@ -79,14 +79,9 @@ html, body {
    Offset sticky/fixed app headers so Save/Publish controls remain clickable. */
 #nc-root header,
 #nc-root [role="banner"] {
-  scroll-margin-top: var(--knot-admin-bar-height);
-}
-
-#nc-root header[style*="position: sticky"],
-#nc-root header[style*="position: fixed"],
-#nc-root [role="banner"][style*="position: sticky"],
-#nc-root [role="banner"][style*="position: fixed"] {
+  /* top is harmless on static headers and offsets sticky/fixed headers. */
   top: var(--knot-admin-bar-height) !important;
+  scroll-margin-top: var(--knot-admin-bar-height);
 }
 
 #nc-root nav,
