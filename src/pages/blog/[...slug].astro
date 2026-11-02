@@ -154,16 +154,31 @@ const recommendations = relatedPosts.length ? relatedPosts : allPosts.slice(0, 3
   const shareButton = document.getElementById('share-button');
   const likeButton = document.getElementById('like-button');
   const article = document.querySelector('[data-post-slug]');
+
   if (progress) {
-    const update = () => { const max = document.documentElement.scrollHeight - window.innerHeight; progress.style.width = `${max > 0 ? Math.min(100, window.scrollY / max * 100) : 0}%`; };
-    window.addEventListener('scroll', update, { passive: true }); window.addEventListener('resize', update); update();
+    const update = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.width = `${max > 0 ? Math.min(100, window.scrollY / max * 100) : 0}%`;
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
   }
+
   if (shareButton) {
     shareButton.addEventListener('click', async () => {
-      try { await navigator.clipboard.writeText(location.href); shareButton.textContent = '✓ コピーしました'; setTimeout(() => { shareButton.textContent = '↗ リンクをコピー'; }, 1800); }
-      catch { shareButton.textContent = 'コピーできませんでした'; }
+      try {
+        await navigator.clipboard.writeText(location.href);
+        shareButton.textContent = '✓ コピーしました';
+        setTimeout(() => {
+          shareButton.textContent = '↗ リンクをコピー';
+        }, 1800);
+      } catch {
+        shareButton.textContent = 'コピーできませんでした';
+      }
     });
   }
+
   if (likeButton && article) {
     const SUPABASE_URL = 'https://rtzorqaigpeechqywjie.supabase.co';
     const SUPABASE_KEY = 'sb_publishable_-yhc0QqTEEZTBWi9jTcFRA_-AVi-iP6';
@@ -219,6 +234,7 @@ const recommendations = relatedPosts.length ? relatedPosts : allPosts.slice(0, 3
       const viewedKey = `knot-viewed:${slug}:${new Date().toISOString().slice(0, 10)}`;
       if (sessionStorage.getItem(viewedKey)) return;
       sessionStorage.setItem(viewedKey, '1');
+
       try {
         const response = await fetch(`${SUPABASE_URL}/rest/v1/rpc/increment_article_view`, {
           method: 'POST',
@@ -227,6 +243,7 @@ const recommendations = relatedPosts.length ? relatedPosts : allPosts.slice(0, 3
         });
         if (!response.ok) throw new Error('view count failed');
       } catch {}
+
       await loadStats();
     };
 
@@ -237,30 +254,62 @@ const recommendations = relatedPosts.length ? relatedPosts : allPosts.slice(0, 3
     likeButton.addEventListener('click', async () => {
       if (localStorage.getItem(likedKey) === '1') return;
       likeButton.disabled = true;
+
       try {
         const response = await fetch(`${SUPABASE_URL}/rest/v1/rpc/like_article`, {
           method: 'POST',
           headers,
           body: JSON.stringify({
             article_slug: slug,
-            visitor_id: getVisitorId(),
+            p_visitor_id: getVisitorId(),
           }),
         });
-        if (!response.ok) throw new Error('like request failed');
+
+        if (!response.ok) {
+          const errorDetails = await response.text();
+          throw new Error(errorDetails);
+        }
+
         localStorage.setItem(likedKey, '1');
         paintLike();
         await loadStats();
-      } catch {
+      } catch (error) {
+        console.error('Like request failed:', error);
         likeButton.disabled = false;
         if (label) label.textContent = '通信エラー・再試行';
       }
     });
   }
+
   if (button && article) {
-    const key = 'knot-bookmarks'; const slug = article.dataset.postSlug;
-    const read = () => { try { return JSON.parse(localStorage.getItem(key) || '[]'); } catch { return []; } };
-    const paint = () => { const saved = read().includes(slug); button.textContent = saved ? '★ 保存済み' : '☆ あとで読む'; button.setAttribute('aria-pressed', String(saved)); };
-    paint(); button.addEventListener('click', () => { const items = read(); const next = items.includes(slug) ? items.filter(x => x !== slug) : [...items, slug]; localStorage.setItem(key, JSON.stringify(next)); paint(); });
+    const key = 'knot-bookmarks';
+    const slug = article.dataset.postSlug;
+
+    const read = () => {
+      try {
+        return JSON.parse(localStorage.getItem(key) || '[]');
+      } catch {
+        return [];
+      }
+    };
+
+    const paint = () => {
+      const saved = read().includes(slug);
+      button.textContent = saved ? '★ 保存済み' : '☆ あとで読む';
+      button.setAttribute('aria-pressed', String(saved));
+    };
+
+    paint();
+
+    button.addEventListener('click', () => {
+      const items = read();
+      const next = items.includes(slug)
+        ? items.filter(x => x !== slug)
+        : [...items, slug];
+
+      localStorage.setItem(key, JSON.stringify(next));
+      paint();
+    });
   }
 })();
 </script>
@@ -341,7 +390,6 @@ const recommendations = relatedPosts.length ? relatedPosts : allPosts.slice(0, 3
     object-fit: cover;
   }
 
-  /* 目次 */
   .toc {
     margin: 32px 0 42px;
     padding: 23px 26px;
@@ -414,7 +462,6 @@ const recommendations = relatedPosts.length ? relatedPosts : allPosts.slice(0, 3
     font-size: 11px;
   }
 
-  /* 記事本文 */
   .article-content {
     color: var(--text);
     font-size: 15px;
@@ -511,7 +558,6 @@ const recommendations = relatedPosts.length ? relatedPosts : allPosts.slice(0, 3
     border-top: 1px solid var(--line);
   }
 
-  /* 記事の最後 */
   .post-end {
     margin-top: 65px;
     padding: 28px;
@@ -540,7 +586,6 @@ const recommendations = relatedPosts.length ? relatedPosts : allPosts.slice(0, 3
     font-weight: 700;
   }
 
-  /* コメント欄 */
   .comments {
     margin-top: 65px;
     padding-top: 35px;
@@ -580,15 +625,15 @@ const recommendations = relatedPosts.length ? relatedPosts : allPosts.slice(0, 3
 
   @media (max-width: 600px) {
     .reading-progress{position:fixed;z-index:1000;top:0;left:0;width:0;height:3px;background:var(--accent);transition:width .08s linear}
-  .article-tools{display:flex;justify-content:space-between;align-items:center;margin:0 0 20px;color:var(--muted);font-size:11px}
-  .tool-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.article-tools button{border:1px solid var(--line);border-radius:999px;padding:8px 13px;background:var(--surface);color:var(--text);font-size:11px;font-weight:700;cursor:pointer}
-  .article-reaction{display:flex;flex-direction:column;align-items:center;gap:9px;margin:38px 0 12px;padding:24px 16px;border:1px solid var(--line);border-radius:16px;background:var(--surface)}
-  .article-reaction p{margin:0;color:var(--muted);font-size:12px}
-  .article-reaction button{border:1px solid var(--line);background:var(--bg);color:var(--text);border-radius:999px;padding:10px 22px;font-size:13px;font-weight:800;cursor:pointer}
-  .article-reaction button.liked{color:#e66b8a;border-color:#e66b8a}
-  .article-reaction small{color:var(--muted);font-size:10px}
-  .related{margin-top:55px;padding-top:32px;border-top:1px solid var(--line)}.related h2{margin:8px 0 18px;color:var(--text);font-size:23px}.related-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.related-list a{display:flex;flex-direction:column;gap:9px;padding:18px;border:1px solid var(--line);border-radius:13px;background:var(--surface)}.related-list span,.related-list small{color:var(--muted);font-size:10px}.related-list strong{color:var(--text);font-size:13px;line-height:1.7}.related-list small{margin-top:auto;color:var(--accent)}
-  .post {
+    .article-tools{display:flex;justify-content:space-between;align-items:center;margin:0 0 20px;color:var(--muted);font-size:11px}
+    .tool-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.article-tools button{border:1px solid var(--line);border-radius:999px;padding:8px 13px;background:var(--surface);color:var(--text);font-size:11px;font-weight:700;cursor:pointer}
+    .article-reaction{display:flex;flex-direction:column;align-items:center;gap:9px;margin:38px 0 12px;padding:24px 16px;border:1px solid var(--line);border-radius:16px;background:var(--surface)}
+    .article-reaction p{margin:0;color:var(--muted);font-size:12px}
+    .article-reaction button{border:1px solid var(--line);background:var(--bg);color:var(--text);border-radius:999px;padding:10px 22px;font-size:13px;font-weight:800;cursor:pointer}
+    .article-reaction button.liked{color:#e66b8a;border-color:#e66b8a}
+    .article-reaction small{color:var(--muted);font-size:10px}
+    .related{margin-top:55px;padding-top:32px;border-top:1px solid var(--line)}.related h2{margin:8px 0 18px;color:var(--text);font-size:23px}.related-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.related-list a{display:flex;flex-direction:column;gap:9px;padding:18px;border:1px solid var(--line);border-radius:13px;background:var(--surface)}.related-list span,.related-list small{color:var(--muted);font-size:10px}.related-list strong{color:var(--text);font-size:13px;line-height:1.7}.related-list small{margin-top:auto;color:var(--accent)}
+    .post {
       padding-top: 30px;
     }
 
