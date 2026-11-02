@@ -3,7 +3,7 @@
 # 発行された Site ID を turbo_site_id に設定する。
 backend:
   name: turbo-github
-  turbo_site_id: SETUP_REQUIRED
+  turbo_site_id: c0c81edd-df75-489a-a3c5-bc97d37c40e0
   branch: main
 
 site_url: https://knotspace.github.io

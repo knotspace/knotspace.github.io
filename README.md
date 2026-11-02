@@ -70,6 +70,11 @@ npm run preview
 
 ## 📰 Update history
 
+### 2026-11-02 — Decap Turbo接続設定
+- Decap TurboのSite IDを管理画面設定に反映
+- GitHubリポジトリ・mainブランチ・管理画面URLの接続設定を確認
+
+
 ### 2026-11-02 — KNOTサイト再構築
 
 - トップページをBlog／Studyのポータルとして再設計
