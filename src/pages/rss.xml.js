@@ -1,6 +1,7 @@
 import { getCollection } from 'astro:content';
 export async function GET(context) {
-  const posts = (await getCollection('blog')).sort((a,b)=>b.data.pubDate.valueOf()-a.data.pubDate.valueOf());
+  const now = new Date();
+  const posts = (await getCollection('blog')).filter(post => !post.data.publishAt || post.data.publishAt <= now).sort((a,b)=>b.data.pubDate.valueOf()-a.data.pubDate.valueOf());
   const site = context.site ?? new URL('https://knotspace.github.io');
   const esc = (s='') => String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&apos;');
   const items = posts.map(post => `<item><title>${esc(post.data.title)}</title><link>${new URL(`blog/${post.slug}/`,site)}</link><guid>${new URL(`blog/${post.slug}/`,site)}</guid><description>${esc(post.data.description)}</description><pubDate>${post.data.pubDate.toUTCString()}</pubDate></item>`).join('');
