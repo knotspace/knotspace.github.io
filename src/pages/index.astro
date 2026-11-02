@@ -9,7 +9,6 @@ const posts = (await getCollection('blog')).sort(
 
 const [featured] = posts;
 
-// GitHub PagesのベースURL
 const BASE = import.meta.env.BASE_URL.endsWith('/')
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
@@ -21,27 +20,33 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
 });
 ---
 
-<Layout title="たかブロ | 好きなことを、好きなように。" description="日々の発見や好きなことを発信する、たかブロ。">
-
+<Layout
+  title="KNOT | 日々の記録"
+  description="中学3年生の日々感じたことを書いていく、備忘録的なブログです。"
+>
   <section class="hero">
     <div class="hero-copy">
-      <span class="eyebrow"><span class="eyebrow-dot"></span> PERSONAL BLOG / SINCE 2026</span>
-      <h1>好きなことを、<br /><span>好きなように。</span></h1>
-      <p>日々の出来事、気になったこと、好きなもの。<br class="desktop-break" />自分のペースで、いろいろ書いていくブログです。</p>
-      <a class="hero-link" href="#articles">記事を読む <span aria-hidden="true">↓</span></a>
+      <span class="eyebrow">PERSONAL JOURNAL / SINCE 2026</span>
+
+      <h1>日々のことを、<br /><span>少しずつ。</span></h1>
+
+      <p>
+        中学3年生の日々感じたことを書いていく、<br class="desktop-break" />
+        備忘録的なブログです。
+      </p>
+
+      <a class="hero-link" href="#articles">
+        記事を読む <span aria-hidden="true">↓</span>
+      </a>
     </div>
 
     <div class="hero-art" aria-hidden="true">
-      <div class="art-orbit orbit-one"></div>
-      <div class="art-orbit orbit-two"></div>
-      <div class="art-card">
-        <span class="art-label">TAKA'S NOTE</span>
-        <strong>THINK.<br />WRITE.<br /><em>SHARE.</em></strong>
-        <span class="art-line"></span>
-        <span class="art-caption">A little corner of the internet.</span>
+      <div class="logo-mark">
+        <span class="logo-name">KNOT</span>
+        <span class="logo-caption">A PERSONAL JOURNAL</span>
+        <span class="logo-line"></span>
+        <span class="logo-description">THOUGHTS & RECORDS</span>
       </div>
-      <span class="art-spark spark-one">✳</span>
-      <span class="art-spark spark-two">✦</span>
     </div>
   </section>
 
@@ -61,15 +66,18 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
             <img src={featured.data.heroImage} alt="" loading="eager" />
           </div>
         ) : (
-          <div class="featured-image image-placeholder"><span>TAKA BLOG</span></div>
+          <div class="featured-image image-placeholder"><span>KNOT</span></div>
         )}
 
         <div class="featured-content">
           <div class="post-meta">
-            <time datetime={featured.data.pubDate.toISOString()}>{dateFormat(featured.data.pubDate)}</time>
+            <time datetime={featured.data.pubDate.toISOString()}>
+              {dateFormat(featured.data.pubDate)}
+            </time>
             <span class="meta-divider"></span>
             <span>{featured.data.category}</span>
           </div>
+
           <h3>{featured.data.title}</h3>
           <p>{featured.data.description}</p>
           <span class="read-more">記事を読む <span aria-hidden="true">↗</span></span>
@@ -105,15 +113,18 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
             {post.data.heroImage ? (
               <img class="card-image" src={post.data.heroImage} alt="" loading="lazy" />
             ) : (
-              <div class="card-image image-placeholder"><span>TAKA BLOG</span></div>
+              <div class="card-image image-placeholder"><span>KNOT</span></div>
             )}
 
             <div class="card-body">
               <div class="post-meta">
-                <time datetime={post.data.pubDate.toISOString()}>{dateFormat(post.data.pubDate)}</time>
+                <time datetime={post.data.pubDate.toISOString()}>
+                  {dateFormat(post.data.pubDate)}
+                </time>
                 <span class="meta-divider"></span>
                 <span>{post.data.category}</span>
               </div>
+
               <h3>{post.data.title}</h3>
               <p>{post.data.description}</p>
             </div>
@@ -125,74 +136,346 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
 </Layout>
 
 <style>
-  .hero { min-height:470px; display:grid; grid-template-columns:1.1fr .9fr; align-items:center; gap:35px; padding:70px 0 76px; }
-  .eyebrow,.section-kicker { color:var(--accent); font-size:10px; font-weight:800; letter-spacing:.17em; }
-  .eyebrow { display:inline-flex; align-items:center; gap:9px; }
-  .eyebrow-dot { width:7px; height:7px; border-radius:50%; background:var(--accent); box-shadow:0 0 12px var(--accent); }
-  h1 { margin:22px 0 17px; font-size:clamp(38px,5.5vw,62px); line-height:1.22; letter-spacing:-.075em; font-weight:900; }
-  h1 span { color:#8db9ff; }
-  .hero-copy > p { color:var(--muted); font-size:14px; line-height:2.1; }
-  .hero-link { display:inline-flex; gap:20px; align-items:center; margin-top:20px; padding:12px 18px; border:1px solid rgba(141,185,255,.38); border-radius:999px; color:#c5dcff; font-size:12px; font-weight:700; transition:.2s; }
-  .hero-link:hover { background:rgba(114,167,255,.12); transform:translateY(-2px); }
-  .hero-art { min-height:320px; position:relative; display:grid; place-items:center; }
-  .art-card { position:relative; z-index:1; width:min(280px,85%); padding:27px 29px; border:1px solid rgba(171,199,239,.25); border-radius:19px; background:linear-gradient(145deg,rgba(35,55,84,.94),rgba(15,26,43,.96)); box-shadow:0 30px 80px rgba(0,0,0,.35); transform:rotate(5deg); }
-  .art-label,.art-caption { color:#9fb3cf; font-size:8px; letter-spacing:.16em; }
-  .art-card strong { display:block; margin:27px 0 22px; font-size:37px; line-height:1.05; letter-spacing:-.06em; }
-  .art-card em { color:#8db9ff; font-style:normal; }
-  .art-line { display:block; width:38px; height:3px; border-radius:3px; background:var(--accent); margin-bottom:15px; }
-  .art-orbit { position:absolute; border:1px solid rgba(114,167,255,.18); border-radius:50%; }
-  .orbit-one { width:310px; height:310px; }
-  .orbit-two { width:390px; height:220px; transform:rotate(-35deg); }
-  .art-spark { position:absolute; color:#8db9ff; }
-  .spark-one { top:35px; right:18%; font-size:27px; }
-  .spark-two { bottom:38px; left:15%; font-size:20px; }
-  .featured-section,.articles-section { padding-top:28px; }
-  .section-heading { display:flex; justify-content:space-between; align-items:end; margin-bottom:22px; }
-  .section-heading h2 { margin:7px 0 0; font-size:25px; letter-spacing:-.06em; }
-  .section-count { color:#718198; font-size:9px; font-weight:700; letter-spacing:.13em; }
-  .featured-card { display:grid; grid-template-columns:1.05fr .95fr; min-height:260px; overflow:hidden; border:1px solid var(--line); border-radius:20px; background:rgba(17,28,46,.72); transition:border-color .2s,transform .2s; }
-  .featured-card:hover,.article-card:hover { border-color:rgba(114,167,255,.55); transform:translateY(-3px); }
-  .featured-image { min-height:260px; overflow:hidden; background:#172740; }
-  .featured-image img { width:100%; height:100%; min-height:260px; object-fit:cover; transition:transform .5s; }
-  .featured-card:hover .featured-image img { transform:scale(1.04); }
-  .featured-content { align-self:center; padding:30px 34px; }
-  .post-meta { display:flex; align-items:center; gap:10px; color:#8fa0b7; font-size:10px; font-weight:600; }
-  .meta-divider { width:3px; height:3px; border-radius:50%; background:var(--accent); }
-  .featured-content h3 { margin:18px 0 10px; font-size:25px; line-height:1.45; letter-spacing:-.05em; }
-  .featured-content p,.card-body p { margin:0; color:var(--muted); font-size:12px; line-height:1.9; }
-  .read-more { display:inline-flex; gap:14px; margin-top:23px; color:#a9caff; font-size:11px; font-weight:700; }
-  .articles-section { padding-top:78px; }
-  .article-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
-  .article-card { overflow:hidden; border:1px solid var(--line); border-radius:17px; background:rgba(17,28,46,.65); transition:border-color .2s,transform .2s; }
-  .card-topline { display:flex; justify-content:space-between; padding:15px 17px 10px; color:#72839b; font-size:10px; }
-  .card-number { font-weight:800; letter-spacing:.12em; }
-  .card-arrow { color:var(--accent); font-size:15px; }
-  .card-image { display:block; width:calc(100% - 34px); height:150px; margin:0 17px; border-radius:10px; object-fit:cover; }
-  .card-body { padding:17px 19px 22px; }
-  .card-body h3 { margin:11px 0 7px; font-size:17px; line-height:1.5; letter-spacing:-.04em; }
-  .image-placeholder { display:grid; place-items:center; background:linear-gradient(135deg,#1b3150,#111c2e); color:#8db9ff; font-size:12px; font-weight:900; letter-spacing:.2em; }
-  .empty-state { padding:48px 20px; border:1px dashed var(--line); border-radius:18px; text-align:center; color:var(--muted); }
-  .empty-state > span { color:var(--accent); font-size:25px; }
-  .empty-state h3 { color:var(--text); font-size:16px; }
-  .empty-state p,.single-note { font-size:12px; color:var(--muted); }
-
-  @media (max-width:700px) {
-    .hero { grid-template-columns:1fr; padding:58px 0 50px; gap:10px; }
-    .hero-art { min-height:270px; }
-    .art-card { width:245px; }
-    .orbit-one { width:270px; height:270px; }
-    .featured-card { grid-template-columns:1fr; }
-    .featured-image,.featured-image img { min-height:190px; height:190px; }
-    .featured-content { padding:24px; }
-    .featured-content h3 { font-size:21px; }
-    .articles-section { padding-top:60px; }
+  .hero {
+    min-height: 430px;
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    align-items: center;
+    gap: 35px;
+    padding: 70px 0 76px;
   }
 
-  @media (max-width:480px) {
-    .article-grid { grid-template-columns:1fr; }
-    h1 { font-size:42px; }
-    .section-heading h2 { font-size:22px; }
-    .section-count { font-size:8px; }
+  .eyebrow, .section-kicker {
+    color: var(--accent);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .17em;
+  }
+
+  h1 {
+    margin: 22px 0 17px;
+    font-size: clamp(38px, 5.5vw, 62px);
+    line-height: 1.22;
+    letter-spacing: -.075em;
+    font-weight: 900;
+  }
+
+  h1 span {
+    color: #8db9ff;
+  }
+
+  .hero-copy > p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 2.1;
+  }
+
+  .hero-link {
+    display: inline-flex;
+    gap: 20px;
+    align-items: center;
+    margin-top: 20px;
+    padding: 12px 18px;
+    border: 1px solid rgba(141,185,255,.38);
+    border-radius: 999px;
+    color: #c5dcff;
+    font-size: 12px;
+    font-weight: 700;
+    transition: .2s;
+  }
+
+  .hero-link:hover {
+    background: rgba(114,167,255,.12);
+    transform: translateY(-2px);
+  }
+
+  .hero-art {
+    min-height: 280px;
+    display: grid;
+    place-items: center;
+  }
+
+  .logo-mark {
+    width: min(330px, 90%);
+    padding: 45px 35px;
+    border-left: 1px solid rgba(141,185,255,.35);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .logo-name {
+    font-size: clamp(65px, 9vw, 105px);
+    font-weight: 900;
+    letter-spacing: -.09em;
+    line-height: 1;
+    color: var(--text);
+  }
+
+  .logo-caption {
+    margin-top: 13px;
+    color: #8db9ff;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .22em;
+  }
+
+  .logo-line {
+    width: 35px;
+    height: 2px;
+    margin: 25px 0 13px;
+    background: var(--accent);
+  }
+
+  .logo-description {
+    color: #718198;
+    font-size: 9px;
+    letter-spacing: .18em;
+  }
+
+  .featured-section, .articles-section {
+    padding-top: 28px;
+  }
+
+  .section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-bottom: 22px;
+  }
+
+  .section-heading h2 {
+    margin: 7px 0 0;
+    font-size: 25px;
+    letter-spacing: -.06em;
+  }
+
+  .section-count {
+    color: #718198;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .13em;
+  }
+
+  .featured-card {
+    display: grid;
+    grid-template-columns: 1.05fr .95fr;
+    min-height: 260px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background: rgba(17,28,46,.72);
+    transition: border-color .2s, transform .2s;
+  }
+
+  .featured-card:hover, .article-card:hover {
+    border-color: rgba(114,167,255,.55);
+    transform: translateY(-3px);
+  }
+
+  .featured-image {
+    min-height: 260px;
+    overflow: hidden;
+    background: #172740;
+  }
+
+  .featured-image img {
+    width: 100%;
+    height: 100%;
+    min-height: 260px;
+    object-fit: cover;
+    transition: transform .5s;
+  }
+
+  .featured-card:hover .featured-image img {
+    transform: scale(1.04);
+  }
+
+  .featured-content {
+    align-self: center;
+    padding: 30px 34px;
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #8fa0b7;
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  .meta-divider {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .featured-content h3 {
+    margin: 18px 0 10px;
+    font-size: 25px;
+    line-height: 1.45;
+    letter-spacing: -.05em;
+  }
+
+  .featured-content p, .card-body p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.9;
+  }
+
+  .read-more {
+    display: inline-flex;
+    gap: 14px;
+    margin-top: 23px;
+    color: #a9caff;
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  .articles-section {
+    padding-top: 78px;
+  }
+
+  .article-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  .article-card {
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 17px;
+    background: rgba(17,28,46,.65);
+    transition: border-color .2s, transform .2s;
+  }
+
+  .card-topline {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 17px 10px;
+    color: #72839b;
+    font-size: 10px;
+  }
+
+  .card-number {
+    font-weight: 800;
+    letter-spacing: .12em;
+  }
+
+  .card-arrow {
+    color: var(--accent);
+    font-size: 15px;
+  }
+
+  .card-image {
+    display: block;
+    width: calc(100% - 34px);
+    height: 150px;
+    margin: 0 17px;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+
+  .card-body {
+    padding: 17px 19px 22px;
+  }
+
+  .card-body h3 {
+    margin: 11px 0 7px;
+    font-size: 17px;
+    line-height: 1.5;
+    letter-spacing: -.04em;
+  }
+
+  .image-placeholder {
+    display: grid;
+    place-items: center;
+    background: #172740;
+    color: #8db9ff;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: .2em;
+  }
+
+  .empty-state {
+    padding: 48px 20px;
+    border: 1px dashed var(--line);
+    border-radius: 18px;
+    text-align: center;
+    color: var(--muted);
+  }
+
+  .empty-state > span {
+    color: var(--accent);
+    font-size: 25px;
+  }
+
+  .empty-state h3 {
+    color: var(--text);
+    font-size: 16px;
+  }
+
+  .empty-state p {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  @media (max-width: 700px) {
+    .hero {
+      grid-template-columns: 1fr;
+      padding: 58px 0 50px;
+      gap: 10px;
+    }
+
+    .hero-art {
+      min-height: 210px;
+    }
+
+    .logo-mark {
+      padding: 30px;
+    }
+
+    .featured-card {
+      grid-template-columns: 1fr;
+    }
+
+    .featured-image, .featured-image img {
+      min-height: 190px;
+      height: 190px;
+    }
+
+    .featured-content {
+      padding: 24px;
+    }
+
+    .featured-content h3 {
+      font-size: 21px;
+    }
+
+    .articles-section {
+      padding-top: 60px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .article-grid {
+      grid-template-columns: 1fr;
+    }
+
+    h1 {
+      font-size: 42px;
+    }
+
+    .section-heading h2 {
+      font-size: 22px;
+    }
+
+    .section-count {
+      font-size: 8px;
+    }
   }
 </style>
-
