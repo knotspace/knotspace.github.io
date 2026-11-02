@@ -25,9 +25,16 @@ const socialCount = bank.filter((q) => q.subject === 'social').length;
 import bank from '../../data/study-questions.json';
 const $=id=>document.getElementById(id),root=document.documentElement,THEME_KEY='knot-theme',RECORD_KEY='knot-study-solve-record-v1';
 let subject=new URLSearchParams(location.search).get('subject')==='social'?'social':'science',list=[],index=0,done=false,record={answered:0,correct:0,wrong:[]};
-try{record={...record,...JSON.parse(localStorage.getItem(RECORD_KEY)||'{}')};}catch{}
+try {
+  const stored = JSON.parse(localStorage.getItem(RECORD_KEY) || 'null');
+  if (stored && typeof stored === 'object' && !Array.isArray(stored)) {
+    record.answered = Number.isFinite(stored.answered) ? Math.max(0, stored.answered) : 0;
+    record.correct = Number.isFinite(stored.correct) ? Math.max(0, stored.correct) : 0;
+    record.wrong = Array.isArray(stored.wrong) ? stored.wrong.filter(id => typeof id === 'string') : [];
+  }
+} catch { record = { answered: 0, correct: 0, wrong: [] }; }
 const setTheme=t=>{root.dataset.theme=t;try{localStorage.setItem(THEME_KEY,t);}catch{}$('theme').textContent=t==='dark'?'☀ ライトモード':'☾ ダークモード';};
-let savedTheme='dark';try{savedTheme=localStorage.getItem(THEME_KEY)||'dark';}catch{}setTheme(savedTheme);
+let savedTheme='dark';try{savedTheme=localStorage.getItem(THEME_KEY)||'dark';}catch{}setTheme(savedTheme==='light'?'light':'dark');
 $('theme').onclick=()=>setTheme(root.dataset.theme==='dark'?'light':'dark');
 function save(){try{localStorage.setItem(RECORD_KEY,JSON.stringify(record));}catch{}}
 function stats(){$('answered').textContent=record.answered;$('correct').textContent=record.correct;$('wrong').textContent=record.wrong.length;}
