@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "astro": "^7.4.5",
-    "decap-cms": "3.17.0"
+    "decap-cms": "3.17.0",
+    "pdfjs-dist": "4.10.38"
   }
 }
