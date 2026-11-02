@@ -159,7 +159,7 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
   }
 
   .welcome h1 span {
-    color: #8db9ff;
+    color: var(--accent);
   }
 
   .welcome-copy p {
@@ -186,12 +186,13 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
 
   .section-heading h2 {
     margin: 7px 0 0;
+    color: var(--text);
     font-size: 23px;
     letter-spacing: -.05em;
   }
 
   .more-link {
-    color: #a9caff;
+    color: var(--accent);
     font-size: 11px;
     font-weight: 700;
   }
@@ -210,7 +211,7 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
   }
 
   .post-card:hover {
-    background: rgba(255,255,255,.025);
+    background: var(--surface-soft);
   }
 
   .post-thumbnail {
@@ -220,8 +221,8 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
     height: 110px;
     overflow: hidden;
     border-radius: 9px;
-    background: #172740;
-    color: #8db9ff;
+    background: var(--code-bg);
+    color: var(--accent);
     font-size: 12px;
     font-weight: 900;
     letter-spacing: .15em;
@@ -242,7 +243,7 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
     align-items: center;
     flex-wrap: wrap;
     gap: 9px;
-    color: #8fa0b7;
+    color: var(--muted);
     font-size: 10px;
   }
 
@@ -250,11 +251,12 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
     padding: 3px 8px;
     border: 1px solid var(--line);
     border-radius: 4px;
-    color: #a9caff;
+    color: var(--accent);
   }
 
   .post-info h3 {
     margin: 9px 0 7px;
+    color: var(--text);
     font-size: 16px;
     line-height: 1.55;
     letter-spacing: -.035em;
@@ -274,7 +276,7 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
   .read-more {
     display: inline-block;
     margin-top: 9px;
-    color: #a9caff;
+    color: var(--accent);
     font-size: 10px;
     font-weight: 700;
   }
@@ -289,9 +291,16 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
     padding: 11px 25px;
     border: 1px solid var(--line);
     border-radius: 999px;
-    color: #c5dcff;
+    background: var(--surface);
+    color: var(--text);
     font-size: 11px;
     font-weight: 700;
+    transition: border-color .2s, background .2s;
+  }
+
+  .all-posts a:hover {
+    border-color: var(--accent);
+    background: var(--code-bg);
   }
 
   .sidebar {
@@ -304,18 +313,22 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
     padding: 20px;
     border: 1px solid var(--line);
     border-radius: 11px;
-    background: rgba(17,28,46,.58);
+    background: var(--surface);
+    color: var(--text);
+    transition: background .25s, border-color .25s;
   }
 
   .widget-title {
     margin: 0 0 16px;
     padding-bottom: 11px;
     border-bottom: 1px solid var(--line);
+    color: var(--text);
     font-size: 14px;
     letter-spacing: -.025em;
   }
 
   .profile-logo {
+    color: var(--text);
     font-size: 28px;
     font-weight: 900;
     letter-spacing: -.09em;
@@ -337,11 +350,12 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
     justify-content: space-between;
     padding-top: 12px;
     border-top: 1px solid var(--line);
+    color: var(--text);
     font-size: 10px;
   }
 
   .profile-info span {
-    color: #718198;
+    color: var(--muted);
   }
 
   .profile-info strong {
@@ -371,6 +385,7 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
     padding: 10px 0;
     color: var(--muted);
     font-size: 11px;
+    transition: color .2s;
   }
 
   .category-list a:hover,
@@ -383,12 +398,13 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
     flex-direction: column;
     gap: 5px;
     padding: 11px 0;
+    color: var(--text);
     font-size: 11px;
     line-height: 1.6;
   }
 
   .recent-list time {
-    color: #718198;
+    color: var(--muted);
     font-size: 9px;
   }
 
@@ -401,6 +417,7 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
     padding: 40px 20px;
     border: 1px dashed var(--line);
     border-radius: 12px;
+    background: var(--surface);
     text-align: center;
     color: var(--muted);
   }
