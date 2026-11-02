@@ -1,14 +1,72 @@
 ---
 ---
 <!doctype html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101827"><link rel="manifest" href="/study/manifest.webmanifest"><title>演習｜KNOT Study</title><style>
-:root{color-scheme:dark;font-family:system-ui,sans-serif;background:#0b1220;color:#edf3fb}*{box-sizing:border-box}body{margin:0}.wrap{width:min(780px,92vw);margin:auto;padding:22px 0 60px}.top,.row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}a{color:#9fc2ff;text-decoration:none}.tag,.small{font-size:12px;color:#9db2ce}.tag{letter-spacing:.12em}h1{font-size:30px;margin:28px 0 6px}.muted{color:#aab8cc;line-height:1.7}.panel{margin-top:22px;padding:22px;border:1px solid #30415a;border-radius:17px;background:#141f30}label{display:block;color:#bdcbe0;font-size:13px;margin:12px 0 6px}select,button{font:inherit;border-radius:10px;padding:11px 13px}select{width:100%;background:#0c1727;color:#fff;border:1px solid #40516b}button{border:0;background:#78aaff;color:#081323;font-weight:800;cursor:pointer}.answers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin-top:22px}
-.answer{min-height:112px;aspect-ratio:1.65/1;padding:16px 14px;background:linear-gradient(145deg,#1c2b40,#172438);color:#edf3fb;text-align:center;border:1px solid #405675;border-radius:17px;display:flex;align-items:center;justify-content:center;gap:11px;font-size:15px;line-height:1.55;white-space:normal;transition:transform .15s,border-color .15s,background .15s}
-.answer:hover{transform:translateY(-2px);border-color:#82b4ff;background:linear-gradient(145deg,#263b56,#1d3048)}
-.answer .choice-num{flex:0 0 29px;width:29px;height:29px;border-radius:10px;display:grid;place-items:center;background:#304866;color:#bcd6ff;font-size:13px;font-weight:800}
-.answer .choice-text{min-width:0}
-.answer.selected{outline:2px solid #82b4ff;border-color:#82b4ff;background:linear-gradient(145deg,#294b70,#203b5b)}
-.answer.selected .choice-num{background:#82b4ff;color:#081323}
-@media(max-width:480px){.answers{gap:9px}.answer{min-height:100px;padding:12px 9px;gap:7px;font-size:13px;border-radius:15px}.answer .choice-num{flex-basis:25px;width:25px;height:25px;border-radius:8px}}.result{padding:14px;border-radius:12px;background:#0c1727;margin-top:18px;line-height:1.8}
+:root{color-scheme:dark;font-family:system-ui,sans-serif;background:#0b1220;color:#edf3fb}*{box-sizing:border-box}body{margin:0}.wrap{width:min(780px,92vw);margin:auto;padding:22px 0 60px}.top,.row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}a{color:#9fc2ff;text-decoration:none}.tag,.small{font-size:12px;color:#9db2ce}.tag{letter-spacing:.12em}h1{font-size:30px;margin:28px 0 6px}.muted{color:#aab8cc;line-height:1.7}.panel{margin-top:22px;padding:22px;border:1px solid #30415a;border-radius:17px;background:#141f30}label{display:block;color:#bdcbe0;font-size:13px;margin:12px 0 6px}select,button{font:inherit;border-radius:10px;padding:11px 13px}select{width:100%;background:#0c1727;color:#fff;border:1px solid #40516b}button{border:0;background:#78aaff;color:#081323;font-weight:800;cursor:pointer}
+#answers.answers{
+  display:grid !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:14px !important;
+  width:100% !important;
+  margin-top:22px !important;
+}
+#answers .answer{
+  width:100% !important;
+  min-width:0 !important;
+  min-height:118px !important;
+  aspect-ratio:auto !important;
+  padding:18px 16px !important;
+  display:flex !important;
+  flex-direction:row !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  gap:14px !important;
+  border:2px solid #405675 !important;
+  border-radius:18px !important;
+  background:#1b2a40 !important;
+  color:#edf3fb !important;
+  text-align:left !important;
+  font-size:16px !important;
+  font-weight:600 !important;
+  line-height:1.6 !important;
+  white-space:normal !important;
+  overflow-wrap:anywhere !important;
+  cursor:pointer !important;
+  transition:background .15s,border-color .15s,transform .15s !important;
+}
+#answers .answer:hover{
+  background:#263d59 !important;
+  border-color:#82b4ff !important;
+  transform:translateY(-2px) !important;
+}
+#answers .answer .choice-num{
+  flex:0 0 36px !important;
+  width:36px !important;
+  height:36px !important;
+  display:grid !important;
+  place-items:center !important;
+  border-radius:11px !important;
+  background:#304866 !important;
+  color:#c8ddff !important;
+  font-size:15px !important;
+  font-weight:850 !important;
+}
+#answers .answer .choice-text{flex:1 1 auto !important;min-width:0 !important}
+#answers .answer.selected{
+  background:#244c78 !important;
+  border:2px solid #8dbdff !important;
+  box-shadow:0 0 0 2px rgba(141,189,255,.18) !important;
+  color:#fff !important;
+}
+#answers .answer.selected .choice-num{
+  background:#9ac5ff !important;
+  color:#081323 !important;
+}
+@media(max-width:520px){
+  #answers.answers{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:9px !important}
+  #answers .answer{min-height:108px !important;padding:12px 10px !important;gap:8px !important;font-size:13px !important;border-radius:14px !important}
+  #answers .answer .choice-num{flex-basis:27px !important;width:27px !important;height:27px !important;font-size:12px !important;border-radius:8px !important}
+}
+.result{padding:14px;border-radius:12px;background:#0c1727;margin-top:18px;line-height:1.8}
 </style><script>if("serviceWorker" in navigator){navigator.serviceWorker.register("/study/sw.js",{scope:"/study/"}).catch(console.error)}</script></head><body><main class="wrap"><div class="top"><a href="/study/">← KNOT STUDY</a><span class="tag">INDEPENDENT PRACTICE SCREEN</span></div><h1 id="title">演習を準備中</h1><p class="muted">解答を選択して答え合わせ。模試モードでは最後にまとめて採点する。</p><section class="panel"><div class="row"><span class="tag" id="mode-label">PRACTICE</span><span class="small" id="progress">—</span><span class="small" id="timer" hidden>残り 00:00</span></div><label for="subject">教科</label><select id="subject"><option value="science">理科</option><option value="social">社会</option></select><label for="mode">学習モード</label><select id="mode"><option value="random">ランダム20問</option><option value="weak">弱点判定</option><option value="topic">分野別</option><option value="mock">模試モード</option></select><label for="topic-filter">分野（分野別モード用）</label><select id="topic-filter"><option value="all">すべての分野</option><option value="物理">物理</option><option value="化学">化学</option><option value="生物">生物</option><option value="地学">地学</option><option value="地理">地理</option><option value="歴史">歴史</option><option value="公民">公民</option></select><label for="level">難易度</label><select id="level"><option value="basic">基礎レベル</option><option value="standard" selected>入試標準レベル</option><option value="advanced">入試応用レベル</option></select><div class="row" style="margin-top:18px"><button id="start">学習を開始</button></div></section><section class="panel" id="quiz" hidden><div class="row"><span class="tag" id="topic"></span><span class="small" id="number"></span></div><h2 id="question"></h2><div class="answers" id="answers"></div><div id="feedback" class="result" hidden></div><div class="row" style="margin-top:18px"><button id="check">答え合わせ</button><button id="next" hidden>次の問題 →</button></div></section><p class="small" id="record"></p></main>
 <script type="module">
 import bank from '../../data/study-questions.json';
