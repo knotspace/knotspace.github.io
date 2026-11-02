@@ -14718,5 +14718,77 @@
     "c": 2,
     "e": "内閣は行政権を担い、法律や予算に基づいて国の行政を行う。",
     "link": "/study/summary/civics/"
+  },
+  {
+    "id": "visual-sci-001",
+    "subject": "science",
+    "level": "standard",
+    "topic": "物理・運動",
+    "q": "表は台車の移動時間と距離を示している。台車の平均の速さとして正しいものを選びなさい。",
+    "a": [
+      "1m/s",
+      "2m/s",
+      "4m/s",
+      "6m/s"
+    ],
+    "c": 1,
+    "e": "6秒間で12m進んでいるので、平均の速さは12÷6＝2m/s。各区間でも2秒ごとに4m進み、速さは一定である。",
+    "link": "/study/summary/physics/",
+    "figure": "/study-data/motion-distance-table.svg",
+    "figureAlt": "台車の時間と移動距離の表"
+  },
+  {
+    "id": "visual-sci-002",
+    "subject": "science",
+    "level": "standard",
+    "topic": "物理・電流",
+    "q": "図の並列回路で、電流計を回路全体に流れる電流を測るように接続する位置として適切なのはどこか。",
+    "a": [
+      "分岐する前の導線に直列につなぐ",
+      "電源の両端に並列につなぐ",
+      "抵抗の両端に並列につなぐ",
+      "回路から外してつなぐ"
+    ],
+    "c": 0,
+    "e": "電流計は測りたい部分に直列につなぐ。回路全体の電流を測るには、枝分かれする前の導線に直列につなぐ。",
+    "link": "/study/summary/physics/",
+    "figure": "/study-data/circuit-series-parallel.svg",
+    "figureAlt": "直列回路と並列回路の模式図"
+  },
+  {
+    "id": "visual-sci-003",
+    "subject": "science",
+    "level": "standard",
+    "topic": "化学・中和",
+    "q": "表の結果から、塩酸20mLを中性にするために必要な水酸化ナトリウム水溶液の体積を読み取りなさい。",
+    "a": [
+      "0mL",
+      "5mL",
+      "10mL",
+      "15mL"
+    ],
+    "c": 2,
+    "e": "加えた体積が10mLのときに液性が中性になっている。表の値をそのまま読み取る。",
+    "link": "/study/summary/chemistry/",
+    "figure": "/study-data/neutralization-table.svg",
+    "figureAlt": "水酸化ナトリウム水溶液の添加量と液性の表"
+  },
+  {
+    "id": "visual-soc-001",
+    "subject": "social",
+    "level": "standard",
+    "topic": "地理・気候",
+    "q": "月別降水量のグラフから読み取れる特徴として最も適切なものはどれか。",
+    "a": [
+      "冬に降水量が最も多い",
+      "夏に降水量が多く、冬に少ない",
+      "毎月の降水量が等しい",
+      "降水量から月平均気温も直接わかる"
+    ],
+    "c": 1,
+    "e": "棒の高さを比べると6〜8月ごろに多く、11〜12月ごろに少ない。降水量のグラフだけでは気温はわからない。",
+    "link": "/study/summary/geography/",
+    "figure": "/study-data/climate-rainfall.svg",
+    "figureAlt": "月別降水量の模式グラフ"
   }
 ]
