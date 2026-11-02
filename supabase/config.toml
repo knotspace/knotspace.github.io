@@ -1,0 +1,4 @@
+project_id = "rtzorqaigpeechqywjie"
+
+[functions.invite-writer]
+verify_jwt = true
