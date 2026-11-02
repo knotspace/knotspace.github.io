@@ -8,15 +8,15 @@ const structuredData = {
   applicationCategory: 'EducationalApplication',
   operatingSystem: 'Any',
   inLanguage: 'ja-JP',
-  description: '中学1年から3年までの5教科を学べる無料の学習ツール。',
+  description: '中学理科・社会を学べる無料の学習ツール。',
   url: 'https://knotspace.github.io/study/',
   isAccessibleForFree: true,
 };
 ---
 
 <Layout
-  title="KNOT Study｜中学生のための5教科学習ツール"
-  description="中学1〜3年の5教科を学べる無料の学習ツール。理科・社会は単元別の豊富な問題と詳しい解説を収録。"
+  title="KNOT Study｜理科・社会の学習アプリ"
+  description="中学理科・社会の問題演習と詳しい解説で、入試に向けた学習をサポート。"
   structuredData={structuredData}
 >
   <main class="study-app"><link rel="manifest" href="/study/manifest.webmanifest"><meta name="theme-color" content="#101827">
@@ -24,7 +24,7 @@ const structuredData = {
       <div class="eyebrow">KNOT / LEARNING TOOL</div>
       <h1>Study<span>.</span></h1><p><a href="/study/solve/" style="display:inline-block;margin-top:12px;padding:11px 16px;border-radius:10px;background:var(--text);color:var(--bg);text-decoration:none;font-weight:750">理科・社会の演習を始める →</a></p>
       <p>知識をつなげて、考えて解ける力を身につける。</p>
-      <div class="study-meta"><span>中学1〜3年</span><span>5教科</span><span>理科・社会を大幅強化</span><span>記録はこの端末に保存</span></div>
+      <div class="study-meta"><span>中学1〜3年</span><span>理科・社会の2教科</span><span>入試対策</span><span>記録はこの端末に保存</span></div>
     </header>
 
     <section class="study-dashboard" aria-label="学習記録">
@@ -34,14 +34,19 @@ const structuredData = {
       <div><span class="dash-label">苦手問題</span><strong id="wrong-count">0</strong></div>
     </section>
 
+    <section class="progress-panel" aria-label="教科別の進捗">
+      <div class="section-top"><div><div class="eyebrow">YOUR PROGRESS</div><h2>教科別の進捗</h2></div><span class="quiet">解いた問題の割合</span></div>
+      <div class="progress-rings">
+        <div class="ring-card"><div class="progress-ring" id="science-ring" style="--progress:0deg"><span id="science-percent">0%</span></div><b>理科</b><small id="science-count">0 / 460問</small></div>
+        <div class="ring-card"><div class="progress-ring" id="social-ring" style="--progress:0deg"><span id="social-percent">0%</span></div><b>社会</b><small id="social-count">0 / 460問</small></div>
+      </div>
+    </section>
+
     <section class="study-panel" aria-labelledby="subject-title">
       <div class="section-top"><div><div class="eyebrow">01 / SELECT</div><h2 id="subject-title">教科を選ぶ</h2></div><span class="quiet">好きなところから始めよう</span></div>
       <div class="subject-grid" id="subject-grid">
-        <button class="subject active" data-subject="数学"><span>∑</span><b>数学</b><small>計算・関数・図形</small></button>
-        <button class="subject" data-subject="英語"><span>ABC</span><b>英語</b><small>文法・語彙</small></button>
-        <button class="subject" data-subject="国語"><span>文</span><b>国語</b><small>文法・漢字・古文</small></button>
-        <button class="subject" data-subject="理科"><span>⚗</span><b>理科</b><small>物理・化学・生物・地学</small></button>
-        <button class="subject" data-subject="社会"><span>地</span><b>社会</b><small>地理・歴史・公民</small></button>
+        <button class="subject active" data-subject="理科"><span>⚗️</span><b>理科</b><small>物理・化学・生物・地学</small></button>
+        <button class="subject" data-subject="社会"><span>🌏</span><b>社会</b><small>地理・歴史・公民</small></button>
       </div>
       <div class="filters">
         <label>学年<select id="grade"><option value="all">全学年</option><option value="1">中1</option><option value="2">中2</option><option value="3">中3</option></select></label>
@@ -63,7 +68,7 @@ const structuredData = {
 
     <section class="study-panel wrong-panel">
       <div class="section-top"><div><div class="eyebrow">02 / REVIEW</div><h2>苦手問題</h2></div><span class="quiet">間違えた問題を自動保存</span></div>
-      <p class="review-copy">解答すると、この端末に学習記録が保存されるよ。理科・社会を含め、間違えた問題を教科横断でまとめて復習できる。</p>
+      <p class="review-copy">解答すると、この端末に学習記録が保存されるよ。理科・社会の苦手問題をまとめて復習できる。</p>
       <button class="outline" id="review-btn" type="button">苦手問題を復習する <span id="review-total">0問</span></button>
       <button class="reset-link" id="reset-btn" type="button">学習記録をリセット</button>
     </section>
@@ -74,9 +79,9 @@ const structuredData = {
     .study-app{max-width:900px;margin:0 auto;padding:46px 22px 76px;color:var(--text)}
     .study-heading{padding:10px 0 28px}.eyebrow{font-size:.69rem;letter-spacing:.16em;color:var(--muted);font-weight:750}.study-heading h1{font-size:clamp(2.5rem,7vw,4.2rem);letter-spacing:-.07em;line-height:1;margin:13px 0}.study-heading h1 span{color:var(--accent,#6b9cff)}.study-heading p{color:var(--muted);margin:0}.study-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.study-meta span,.question-tags span{font-size:.72rem;border:1px solid var(--border);border-radius:30px;padding:5px 10px;color:var(--muted)}
     .study-dashboard{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin:10px 0 26px}.study-dashboard>div{background:var(--surface, var(--card));padding:15px 17px;display:flex;flex-direction:column;gap:5px}.dash-label{font-size:.72rem;color:var(--muted)}.study-dashboard strong{font-size:1.5rem;font-variant-numeric:tabular-nums}
-    .study-panel{border:1px solid var(--border);border-radius:16px;padding:23px;margin:18px 0;background:var(--surface,transparent)}.section-top,.quiz-top{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:20px}.section-top h2,.quiz-top h2{font-size:1.22rem;margin:5px 0 0;letter-spacing:-.03em}.quiet{font-size:.76rem;color:var(--muted)}.subject-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px}.subject{background:transparent;color:var(--text);border:1px solid var(--border);border-radius:12px;padding:13px 8px;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:5px;min-width:0;transition:border-color .15s,background .15s}.subject>span{font-size:1.35rem;font-weight:800;height:27px}.subject b{font-size:.9rem}.subject small{font-size:.68rem;color:var(--muted);line-height:1.4}.subject.active{border-color:var(--accent,#6b9cff);background:color-mix(in srgb,var(--accent,#6b9cff) 9%,transparent)}
+    .study-panel{border:1px solid var(--border);border-radius:16px;padding:23px;margin:18px 0;background:var(--surface,transparent)}.section-top,.quiz-top{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:20px}.section-top h2,.quiz-top h2{font-size:1.22rem;margin:5px 0 0;letter-spacing:-.03em}.quiet{font-size:.76rem;color:var(--muted)}.subject-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.subject{min-height:112px;background:transparent;color:var(--text);border:1px solid var(--border);border-radius:12px;padding:13px 8px;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:5px;min-width:0;transition:border-color .15s,background .15s}.subject>span{font-size:1.7rem;font-weight:800;height:27px}.subject b{font-size:.9rem}.subject small{font-size:.68rem;color:var(--muted);line-height:1.4}.subject.active{border-color:var(--accent,#6b9cff);background:color-mix(in srgb,var(--accent,#6b9cff) 9%,transparent)}
     .filters{display:flex;align-items:end;gap:12px;margin-top:20px;flex-wrap:wrap}.filters label{display:flex;flex-direction:column;gap:6px;font-size:.72rem;color:var(--muted);flex:1;min-width:125px}.filters select{background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:9px;padding:10px;font:inherit}.primary,.outline{border:0;border-radius:9px;padding:11px 16px;font-weight:750;cursor:pointer;background:var(--text);color:var(--bg)}.primary:disabled{opacity:.4;cursor:not-allowed}.primary span{margin-left:10px}.outline{background:transparent;color:var(--text);border:1px solid var(--border)}.quiz-panel[hidden]{display:none}.counter{font-size:.78rem;color:var(--muted);font-variant-numeric:tabular-nums}.question-card{border:1px solid var(--border);border-radius:13px;padding:20px}.question-tags{display:flex;gap:7px}.question-text{font-size:1.12rem;line-height:1.85;font-weight:650;white-space:pre-wrap;margin:18px 0}.answer-list{display:grid;gap:9px}.answer-option{padding:12px 14px;text-align:left;border:1px solid var(--border);border-radius:9px;background:transparent;color:var(--text);font:inherit;cursor:pointer}.answer-option:hover:not(:disabled){border-color:var(--accent,#6b9cff)}.answer-option.correct{border-color:#299b68;background:rgba(41,155,104,.1)}.answer-option.incorrect{border-color:#d65c5c;background:rgba(214,92,92,.1)}.explanation{margin-top:15px;padding:13px 15px;border-radius:10px;background:var(--bg);font-size:.88rem;line-height:1.8}.quiz-actions{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-top:18px}.text-button,.reset-link{border:0;background:none;color:var(--muted);cursor:pointer;font:inherit;font-size:.8rem;padding:8px 0}.review-copy{font-size:.86rem;color:var(--muted);line-height:1.8}.outline span{margin-left:12px;color:var(--muted);font-size:.78rem}.reset-link{display:block;margin-top:10px;font-size:.72rem}.study-footer{text-align:center;color:var(--muted);font-size:.75rem;padding:25px}.study-footer span{padding:0 6px}
-    @media(max-width:650px){.study-app{padding:30px 15px 55px}.study-panel{padding:17px}.subject-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.study-dashboard>div{padding:12px 10px}.study-dashboard strong{font-size:1.25rem}.dash-label{font-size:.65rem}.quiet{display:none}.filters{gap:9px}.filters label{min-width:calc(50% - 8px)}.filters .primary{width:100%}.question-card{padding:15px}.question-text{font-size:1rem}}
+    .progress-panel{border:1px solid var(--border);border-radius:16px;padding:22px;margin:18px 0;background:var(--surface,transparent)}.progress-rings{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.ring-card{display:flex;flex-direction:column;align-items:center;gap:7px;padding:18px 10px;border:1px solid var(--border);border-radius:14px;background:var(--surface,var(--card))}.ring-card b{font-size:.95rem}.ring-card small{font-size:.75rem;color:var(--muted)}.progress-ring{--progress:0deg;width:112px;height:112px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--accent,#f28b36) var(--progress),var(--border) 0);position:relative}.progress-ring:before{content:"";position:absolute;inset:9px;border-radius:50%;background:var(--bg)}.progress-ring span{position:relative;font-size:1.25rem;font-weight:850;font-variant-numeric:tabular-nums}.subject.active{border-color:#f28b36;background:color-mix(in srgb,#f28b36 10%,transparent);box-shadow:0 4px 16px rgba(242,139,54,.10)}@media(max-width:650px){.study-app{padding:30px 15px 55px}.study-panel{padding:17px}.subject-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.study-dashboard>div{padding:12px 10px}.study-dashboard strong{font-size:1.25rem}.dash-label{font-size:.65rem}.quiet{display:none}.filters{gap:9px}.filters label{min-width:calc(50% - 8px)}.filters .primary{width:100%}.question-card{padding:15px}.question-text{font-size:1rem}}
 
     /* Dedicated full-screen solving view */
     #quiz-panel:not([hidden]){position:fixed;inset:0;z-index:9999;overflow-y:auto;margin:0;border:0;border-radius:0;padding:clamp(20px,5vh,56px) 20px 40px;background:var(--bg);box-shadow:none;overscroll-behavior:contain}
@@ -287,7 +292,7 @@ const structuredData = {
       function readCookie(){try{const row=document.cookie.split('; ').find(x=>x.startsWith(COOKIE+'='));if(!row)return empty();const v=JSON.parse(decodeURIComponent(row.split('=').slice(1).join('=')));return {answered:Number(v.answered)||0,correct:Number(v.correct)||0,wrong:Array.isArray(v.wrong)?v.wrong.filter(x=>bank.some(q=>q.id===x)).slice(0,30):[]};}catch{return empty();}}
       let stats=readCookie(), selected='理科', list=[], index=0, answered=false;
       function save(){const data=encodeURIComponent(JSON.stringify(stats));document.cookie=`${COOKIE}=${data}; Max-Age=31536000; Path=/; SameSite=Lax`+(location.protocol==='https:'?'; Secure':'');}
-      function renderStats(){$('total-answered').textContent=stats.answered;$('total-correct').textContent=stats.correct;$('accuracy').textContent=stats.answered?Math.round(stats.correct/stats.answered*100)+'%':'—';$('wrong-count').textContent=stats.wrong.length;$('review-total').textContent=stats.wrong.length+'問';}
+      function renderStats(){try{const r=JSON.parse(localStorage.getItem('knot-study-record')||'{"answered":0,"correct":0,"wrong":[],"seen":[]}');const seen=Array.isArray(r.seen)?r.seen:[];for(const [key,prefix] of [['science','sci-'],['social','soc-']]){const n=seen.filter(id=>String(id).startsWith(prefix)).length;const pct=Math.round(n/460*100);$(key+'-percent').textContent=pct+'%';$(key+'-count').textContent=n+' / 460問';$(key+'-ring').style.setProperty('--progress',(pct*3.6)+'deg');}}catch{}$('total-answered').textContent=stats.answered;$('total-correct').textContent=stats.correct;$('accuracy').textContent=stats.answered?Math.round(stats.correct/stats.answered*100)+'%':'—';$('wrong-count').textContent=stats.wrong.length;$('review-total').textContent=stats.wrong.length+'問';}
       subjects.forEach(btn=>btn.addEventListener('click',()=>{selected=btn.dataset.subject;subjects.forEach(x=>x.classList.toggle('active',x===btn));$('quiz-panel').hidden=true;}));
       function begin(wrongOnly=false){const grade=$('grade').value;list=bank.filter(q=>(wrongOnly?stats.wrong.includes(q.id):q.s===selected)&&(grade==='all'||String(q.g)===grade));if(!list.length){alert(wrongOnly?'この条件の苦手問題はまだないよ。':'この条件に合う問題はまだないよ。');return;}list=[...list].sort(()=>Math.random()-.5);index=0;$('quiz-panel').hidden=false;$('quiz-panel').scrollIntoView({behavior:'smooth',block:'start'});showQuestion();}
       function showQuestion(){answered=false;const q=list[index];$('quiz-subtitle').textContent=q.s.toUpperCase();$('quiz-title').textContent=q.s+'の問題';$('question-counter').textContent=(index+1)+' / '+list.length;$('question-grade').textContent='中'+q.g;$('question-topic').textContent=q.t;$('question-text').textContent=q.q;$('explanation').hidden=true;$('next-btn').disabled=true;$('next-btn').textContent=index===list.length-1?'学習を終了':'次の問題 →';const area=$('answer-list');area.replaceChildren();q.a.forEach((answer,i)=>{const b=document.createElement('button');b.type='button';b.className='answer-option';b.textContent=(i+1)+'. '+answer;b.addEventListener('click',()=>choose(i));area.append(b);});}
