@@ -17,7 +17,7 @@ interface Props {
 }
 
 const { post } = Astro.props as Props;
-const { Content } = await post.render();
+const { Content, headings } = await post.render();
 
 const BASE = import.meta.env.BASE_URL.endsWith('/')
   ? import.meta.env.BASE_URL
@@ -28,6 +28,13 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
   month: 'long',
   day: 'numeric'
 });
+
+// H2・H3だけを目次に表示
+const toc = headings.filter((heading) =>
+  heading.depth === 2 || heading.depth === 3
+);
+
+const date = dateFormat(post.data.pubDate);
 ---
 
 <Layout
@@ -43,7 +50,7 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
     <header class="post-header">
       <div class="post-meta">
         <time datetime={post.data.pubDate.toISOString()}>
-          {dateFormat(post.data.pubDate)}
+          {date}
         </time>
 
         <span class="meta-divider"></span>
@@ -63,6 +70,26 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
 
     {post.data.heroImage && (
       <img class="hero-image" src={post.data.heroImage} alt="" />
+    )}
+
+    {toc.length > 0 && (
+      <nav class="toc" aria-label="目次">
+        <div class="toc-heading">
+          <span class="toc-icon">☷</span>
+          <span>目次</span>
+          <span class="toc-count">{toc.length}項目</span>
+        </div>
+
+        <ol>
+          {toc.map((heading) => (
+            <li class:list={[`toc-level-${heading.depth}`]}>
+              <a href={`#${heading.slug}`}>
+                {heading.text}
+              </a>
+            </li>
+          ))}
+        </ol>
+      </nav>
     )}
 
     <div class="article-content">
@@ -146,6 +173,79 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
     object-fit: cover;
   }
 
+  /* 目次 */
+  .toc {
+    margin: 32px 0 42px;
+    padding: 23px 26px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: rgba(17, 28, 46, .65);
+  }
+
+  .toc-heading {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line);
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 800;
+  }
+
+  .toc-icon {
+    color: var(--accent);
+    font-size: 18px;
+  }
+
+  .toc-count {
+    margin-left: auto;
+    color: #8192aa;
+    font-size: 10px;
+    font-weight: 500;
+  }
+
+  .toc ol {
+    margin: 13px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .toc li {
+    margin: 0;
+    padding: 0;
+  }
+
+  .toc li a {
+    display: block;
+    padding: 7px 0;
+    color: #aebdd0;
+    font-size: 12px;
+    line-height: 1.7;
+    text-decoration: none;
+    transition: color .2s, transform .2s;
+  }
+
+  .toc li a::before {
+    content: "›";
+    margin-right: 9px;
+    color: var(--accent);
+  }
+
+  .toc li a:hover {
+    color: #fff;
+    transform: translateX(3px);
+  }
+
+  .toc .toc-level-3 {
+    padding-left: 19px;
+  }
+
+  .toc .toc-level-3 a {
+    color: #8192aa;
+    font-size: 11px;
+  }
+
   .article-content {
     color: #c4cedc;
     font-size: 15px;
@@ -154,6 +254,7 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
   }
 
   .article-content :global(h2) {
+    scroll-margin-top: 24px;
     margin: 2.2em 0 .8em;
     padding-left: 15px;
     border-left: 3px solid var(--accent);
@@ -164,6 +265,7 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
   }
 
   .article-content :global(h3) {
+    scroll-margin-top: 24px;
     margin: 2em 0 .65em;
     color: var(--text);
     font-size: 18px;
@@ -270,6 +372,11 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
 
     .hero-image {
       margin: 22px 0 28px;
+    }
+
+    .toc {
+      padding: 19px;
+      margin: 25px 0 34px;
     }
   }
 </style>
