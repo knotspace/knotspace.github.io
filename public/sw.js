@@ -43,9 +43,12 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     fetch(event.request).then((response) => {
       const cacheControl = response.headers.get('Cache-Control') || '';
+      const contentType = response.headers.get('Content-Type') || '';
+      const cacheableType = /^(text\/html|text\/css|application\/javascript|text\/javascript|image\/svg\+xml)\b/i.test(contentType);
       const canCache =
         response.ok &&
         response.type === 'basic' &&
+        cacheableType &&
         !/\b(private|no-store)\b/i.test(cacheControl);
 
       if (!canCache) return response;
@@ -55,7 +58,14 @@ self.addEventListener('fetch', (event) => {
         .then((cache) => cache.put(event.request, copy))
         .catch(() => {})
         .then(() => response);
-    }).catch(() => caches.match(event.request).then((cached) => cached || caches.match('/')))
+    }).catch(async () => {
+      const cached = await caches.match(event.request);
+      if (cached) return cached;
+      if (event.request.mode === 'navigate') {
+        return (await caches.match('/')) || Response.error();
+      }
+      return Response.error();
+    })
   );
 });
 
