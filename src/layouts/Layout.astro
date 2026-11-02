@@ -8,7 +8,7 @@ interface Props {
 
 const {
   title,
-  description = '中学3年生の日々感じたことを書いていく、備忘録的なブログです。',
+  description = 'Web制作や日々の興味、ランニングなどを記録する個人ブログ。',
   image,
 } = Astro.props;
 
@@ -25,6 +25,8 @@ const BASE = import.meta.env.BASE_URL;
     <meta name="theme-color" content="#0b1220" />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
+
+    <link rel="alternate" type="application/rss+xml" title="KNOT RSS" href={`${BASE}rss.xml`} />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href={`${BASE}favicon.svg?v=4`} />
@@ -64,7 +66,8 @@ const BASE = import.meta.env.BASE_URL;
 
         <nav aria-label="メインナビゲーション">
           <a href={BASE}>ホーム</a>
-          <a href={`${BASE}articles/`}>記事一覧</a>
+          <a href={`${BASE}blog/`}>記事一覧</a>
+          <a href={`${BASE}about/`}>プロフィール</a>
 
           <button
             class="theme-toggle"
@@ -97,7 +100,7 @@ const BASE = import.meta.env.BASE_URL;
         <a class="footer-brand" href={BASE}>
           KNOT<span class="brand-dot">.</span>
         </a>
-        <p>中学3年生の日々感じたことを書いていく、備忘録的なブログです。</p>
+        <p>Web制作や日々の興味を記録する個人ブログ。</p>
         <span>© {new Date().getFullYear()} KNOT. Built with Astro.</span>
       </footer>
     </div>
