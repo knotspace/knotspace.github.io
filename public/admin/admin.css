@@ -2,6 +2,7 @@
 :root {
   color-scheme: light;
   --knot-admin-bar: #1d2327;
+  --knot-admin-bar-height: 36px;
   --knot-admin-blue: #2271b1;
   --knot-admin-blue-dark: #135e96;
   --knot-admin-bg: #f0f0f1;
@@ -25,7 +26,7 @@ html, body {
   position: fixed;
   z-index: 10000;
   inset: 0 0 auto;
-  height: 36px;
+  height: var(--knot-admin-bar-height);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -45,9 +46,19 @@ html, body {
 #knot-admin-bar a:hover { color: #72aee6; }
 
 .knot-admin-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
   font-size: 15px;
   font-weight: 800;
   letter-spacing: .08em;
+}
+
+.knot-admin-brand img {
+  display: block;
+  width: 21px;
+  height: 21px;
+  border-radius: 5px;
 }
 
 .knot-admin-divider { color: #8c8f94; }
@@ -61,7 +72,21 @@ html, body {
 
 #nc-root {
   min-height: 100vh;
-  padding-top: 36px;
+  padding-top: var(--knot-admin-bar-height);
+}
+
+/* Decap's editor action header was sitting underneath the custom KNOT bar.
+   Offset sticky/fixed app headers so Save/Publish controls remain clickable. */
+#nc-root header,
+#nc-root [role="banner"] {
+  scroll-margin-top: var(--knot-admin-bar-height);
+}
+
+#nc-root header[style*="position: sticky"],
+#nc-root header[style*="position: fixed"],
+#nc-root [role="banner"][style*="position: sticky"],
+#nc-root [role="banner"][style*="position: fixed"] {
+  top: var(--knot-admin-bar-height) !important;
 }
 
 #nc-root nav,
@@ -126,40 +151,28 @@ html, body {
 #cms-loading p { margin: 0 0 8px; color: var(--knot-admin-muted); font-size: 13px; }
 #cms-loading a { color: var(--knot-admin-blue); text-decoration: none; }
 
-@media (max-width: 600px) {
-  #knot-admin-bar { padding: 0 10px; }
-  #nc-root { padding-top: 36px; }
-}
-
 /* WordPress-like admin workspace */
-.knot-admin-brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-}
-.knot-admin-brand img {
-  display: block;
-  width: 21px;
-  height: 21px;
-  border-radius: 5px;
-}
 #nc-root [role="navigation"],
 #nc-root aside {
   background: #1d2327;
   color: #f0f0f1;
 }
+
 #nc-root [role="navigation"] a,
 #nc-root aside a {
   color: #f0f0f1;
 }
+
 #nc-root [role="navigation"] a:hover,
 #nc-root aside a:hover {
   background: #2c3338;
   color: #72aee6;
 }
+
 #nc-root [role="main"] {
   background: var(--knot-admin-bg);
 }
+
 #nc-root button {
   min-height: 32px;
   padding: 6px 12px;
@@ -169,15 +182,18 @@ html, body {
   font-size: 13px;
   font-weight: 500;
 }
+
 #nc-root button:hover {
   border-color: var(--knot-admin-blue);
   color: var(--knot-admin-blue-dark);
 }
+
 #nc-root button:focus-visible,
 #nc-root a:focus-visible {
   outline: 2px solid var(--knot-admin-blue);
   outline-offset: 2px;
 }
+
 #nc-root input,
 #nc-root textarea,
 #nc-root select {
@@ -187,10 +203,12 @@ html, body {
   color: var(--knot-admin-text);
   font-size: 13px;
 }
+
 #nc-root textarea { line-height: 1.65; }
 #nc-root img { max-width: 100%; }
+
 @media (max-width: 600px) {
+  :root { --knot-admin-bar-height: 40px; }
+  #knot-admin-bar { padding: 0 10px; }
   #cms-loading { margin-top: 12vh; padding: 26px 18px; }
-  #knot-admin-bar { height: 40px; }
-  #nc-root { padding-top: 40px; }
 }
