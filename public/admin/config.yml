@@ -63,10 +63,20 @@ collections:
         required: false
       - label: カテゴリー
         name: category
-        widget: string
-        default: BLOG
+        widget: select
+        options:
+          - お知らせ
+          - 英検・勉強法
+          - 本・読書
+          - 高校受験
+          - 勉強法
+          - ガジェット
+          - アプリ・ソフト
+          - 日記
+          - その他
+        default: その他
         required: true
-        hint: "例：BLOG / STUDY / REVIEW など。既存記事と表記をそろえよう。"
+        hint: "一覧から選ぶだけ。カテゴリーを統一して記事を整理しやすくするよ。"
       - label: タグ
         name: tags
         widget: list
