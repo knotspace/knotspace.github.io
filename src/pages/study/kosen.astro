@@ -15,7 +15,7 @@ const topics = [...new Set(questions.map(q => q.topic))];
   <section class="source-note"><div><strong>問題の方針</strong><p>高専の学力検査で問われる、複数の情報を組み合わせる力・統計や地図を読み取る力を意識したオリジナル問題。過去問の文章や選択肢をそのまま転載せず、出題テーマを参考に作成している。</p><a href="https://www.kosen-k.go.jp/wp/wp-content/uploads/2026/02/02_2026_syakai_mondai2.pdf" target="_blank" rel="noopener noreferrer">令和8年度 高専入試・社会の問題冊子（公式PDF） ↗</a>
   <p class="data-sources"><strong>資料データの出典</strong><br><a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener noreferrer">国土地理院・地理院タイル（地形図・土地条件図） ↗</a><br><a href="https://www.data.jma.go.jp/risk/obsdl/" target="_blank" rel="noopener noreferrer">気象庁・過去の気象データ（CSVダウンロード） ↗</a></p>
   <small class="figure-credit">図版：KNOTオリジナル模式図。実際の地形図・観測値ではなく、地形や自然現象の読み取り練習用に作成。</small></div></section>
-  <section class="workspace">
+  <section class="workspace" id="workspace">
     <div class="toolbar"><div><p class="eyebrow">QUESTION SET</p><h2>演習を始める</h2></div><div class="filters"><label>分野<select id="topic"><option value="all">すべて</option>{topics.map(t=><option value={t}>{t}</option>)}</select></label><label>問題数<select id="amount"><option value="5">5問</option><option value="10" selected>10問</option><option value="all">全問</option></select></label></div></div>
     <div class="history"><span>累計 <b id="total">0</b> 問</span><span>正解 <b id="correct">0</b> 問</span><span>正答率 <b id="rate">—</b></span></div>
     <button class="start" id="start">演習を開始する <span>→</span></button>
