@@ -4,7 +4,8 @@ import { type CollectionEntry, getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
+  const now = new Date();
+  const posts = (await getCollection('blog')).filter((post) => !post.data.publishAt || post.data.publishAt <= now);
 
   return posts.map((post) => ({
     params: { slug: post.slug },
@@ -34,7 +35,7 @@ const toc = headings.filter((heading) =>
 );
 
 const date = dateFormat(post.data.pubDate);
-const allPosts = (await getCollection('blog')).filter((item) => item.slug !== post.slug);
+const allPosts = (await getCollection('blog')).filter((item) => item.slug !== post.slug && (!item.data.publishAt || item.data.publishAt <= new Date()));
 const relatedPosts = allPosts.filter((item) => item.data.category === post.data.category).slice(0, 3);
 const recommendations = relatedPosts.length ? relatedPosts : allPosts.slice(0, 3);
 const articleUrl = new URL(`/blog/${post.slug}/`, Astro.site ?? Astro.url).href;
