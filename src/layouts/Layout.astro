@@ -12,9 +12,10 @@ const {
   image,
 } = Astro.props;
 
+const BASE = import.meta.env.BASE_URL;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 const pageImage = image ? new URL(image, Astro.url).href : undefined;
-const BASE = import.meta.env.BASE_URL;
+const faviconURL = `${BASE}favicon.svg?v=3`;
 ---
 
 <!doctype html>
@@ -26,7 +27,8 @@ const BASE = import.meta.env.BASE_URL;
     <meta name="description" content={description} />
 
     <link rel="canonical" href={canonicalURL} />
-    <link rel="icon" type="image/svg+xml" href={`${BASE}favicon.svg`} />
+    <link rel="icon" type="image/svg+xml" href={faviconURL} />
+    <link rel="shortcut icon" type="image/svg+xml" href={faviconURL} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -54,7 +56,7 @@ const BASE = import.meta.env.BASE_URL;
 
         <nav aria-label="メインナビゲーション">
           <a href={BASE}>ホーム</a>
-          <a href={`${BASE}#articles`}>記事一覧</a>
+          <a href={`${BASE}blog/`}>記事一覧</a>
         </nav>
       </header>
 
@@ -63,15 +65,23 @@ const BASE = import.meta.env.BASE_URL;
       </main>
 
       <footer class="site-footer">
-        <div class="footer-top">
+        <div class="footer-main">
           <a class="footer-brand" href={BASE}>
             KNOT<span class="brand-dot">.</span>
           </a>
-          <p>日々の記録を、少しずつ。</p>
+          <p>日々のことを、少しずつ。</p>
         </div>
 
         <div class="footer-bottom">
-          <span>© {new Date().getFullYear()} <a class="copyright-link" href="https://github.com/knotspace/knotspace.github.io" target="_blank" rel="noreferrer">KNOT.</a></span>
+          <span>
+            © {new Date().getFullYear()}
+            <a
+              class="copyright-link"
+              href="https://github.com/knotspace/knotspace.github.io"
+              target="_blank"
+              rel="noreferrer"
+            >KNOT.</a>
+          </span>
           <span>Built with Astro.</span>
         </div>
       </footer>
@@ -84,7 +94,8 @@ const BASE = import.meta.env.BASE_URL;
     color-scheme: dark;
     --bg: #0b1220;
     --surface: #111c2e;
-    --line: rgba(148, 163, 184, .14);
+    --surface-light: #152238;
+    --line: rgba(148, 163, 184, .16);
     --text: #f4f7fb;
     --muted: #9aa9bd;
     --accent: #82b2ff;
@@ -114,7 +125,7 @@ const BASE = import.meta.env.BASE_URL;
   }
 
   .site-shell {
-    width: min(100% - 48px, 1000px);
+    width: min(100% - 48px, 1120px);
     margin: 0 auto;
   }
 
@@ -129,7 +140,7 @@ const BASE = import.meta.env.BASE_URL;
   .brand {
     display: inline-flex;
     align-items: center;
-    font-size: 24px;
+    font-size: 25px;
     font-weight: 900;
     letter-spacing: -.09em;
     transition: opacity .2s ease;
@@ -156,7 +167,8 @@ const BASE = import.meta.env.BASE_URL;
     transition: color .2s ease;
   }
 
-  nav a:hover {
+  nav a:hover,
+  nav a[aria-current="page"] {
     color: var(--text);
   }
 
@@ -165,30 +177,29 @@ const BASE = import.meta.env.BASE_URL;
   }
 
   .site-footer {
-    margin-top: 100px;
-    padding: 30px 0 25px;
+    margin-top: 90px;
+    padding: 28px 0 24px;
     border-top: 1px solid var(--line);
   }
 
-  .footer-top {
+  .footer-main {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 15px;
-    margin-bottom: 30px;
+    gap: 16px;
+    margin-bottom: 28px;
   }
 
   .footer-brand {
-    color: var(--text);
-    font-size: 18px;
+    font-size: 19px;
     font-weight: 900;
     letter-spacing: -.08em;
   }
 
-  .footer-top p {
+  .footer-main p {
     margin: 0;
     color: var(--muted);
-    font-size: 11px;
+    font-size: 12px;
   }
 
   .footer-bottom {
@@ -209,7 +220,7 @@ const BASE = import.meta.env.BASE_URL;
 
   @media (max-width: 620px) {
     .site-shell {
-      width: min(100% - 32px, 1000px);
+      width: min(100% - 32px, 1120px);
     }
 
     .site-header {
@@ -217,12 +228,12 @@ const BASE = import.meta.env.BASE_URL;
     }
 
     nav {
-      gap: 18px;
+      gap: 19px;
       font-size: 12px;
     }
 
     .site-footer {
-      margin-top: 70px;
+      margin-top: 65px;
     }
   }
 </style>
