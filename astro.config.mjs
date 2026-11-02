@@ -2,5 +2,5 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://shiratakihot.github.io',
+  site: 'https://knotspace.github.io',
 });
