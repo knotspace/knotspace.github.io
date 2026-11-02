@@ -103,6 +103,34 @@ const date = dateFormat(post.data.pubDate);
         <span aria-hidden="true">→</span>
       </a>
     </div>
+
+    <!-- コメント欄 -->
+    <section class="comments" aria-label="コメント">
+      <div class="comments-heading">
+        <span class="comments-label">DISCUSSION</span>
+        <h2>コメント</h2>
+        <p>この記事について、気軽にコメントしてね。</p>
+      </div>
+
+      <div class="giscus-container">
+        <script
+          src="https://giscus.app/client.js"
+          data-repo="knotspace/knotspace.github.io"
+          data-repo-id="R_kgDOVfFtzQ"
+          data-category="General"
+          data-category-id="DIC_kwDOVfFtzc4DKNL2"
+          data-mapping="pathname"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="bottom"
+          data-theme="preferred_color_scheme"
+          data-lang="ja"
+          crossorigin="anonymous"
+          async
+        ></script>
+      </div>
+    </section>
   </article>
 </Layout>
 
@@ -372,6 +400,44 @@ const date = dateFormat(post.data.pubDate);
     font-weight: 700;
   }
 
+  /* コメント欄 */
+  .comments {
+    margin-top: 65px;
+    padding-top: 35px;
+    border-top: 1px solid var(--line);
+  }
+
+  .comments-heading {
+    margin-bottom: 25px;
+  }
+
+  .comments-label {
+    color: var(--accent);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .16em;
+  }
+
+  .comments-heading h2 {
+    margin: 8px 0;
+    color: var(--text);
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: -.05em;
+  }
+
+  .comments-heading p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.8;
+  }
+
+  .giscus-container {
+    min-height: 150px;
+    width: 100%;
+  }
+
   @media (max-width: 600px) {
     .post {
       padding-top: 30px;
@@ -392,6 +458,11 @@ const date = dateFormat(post.data.pubDate);
     .toc {
       padding: 19px;
       margin: 25px 0 34px;
+    }
+
+    .comments {
+      margin-top: 50px;
+      padding-top: 28px;
     }
   }
 </style>
