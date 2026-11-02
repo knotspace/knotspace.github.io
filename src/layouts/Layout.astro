@@ -45,7 +45,9 @@ const BASE = import.meta.env.BASE_URL;
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
     {pageImage && <meta property="og:image" content={pageImage} />}
-　　<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <link rel="icon" type="image/svg+xml" href={`${BASE}favicon.svg`} />
+
     <title>{title}</title>
   </head>
 
@@ -106,11 +108,14 @@ const BASE = import.meta.env.BASE_URL;
 
         const updateIcon = () => {
           const isDark = root.dataset.theme !== 'light';
+
           icon.textContent = isDark ? '☀' : '☾';
+
           button.setAttribute(
             'aria-label',
             isDark ? 'ライトモードに切り替える' : 'ダークモードに切り替える'
           );
+
           document.querySelector('meta[name="theme-color"]')
             ?.setAttribute('content', isDark ? '#0b1220' : '#f7f8fa');
         };
@@ -119,6 +124,7 @@ const BASE = import.meta.env.BASE_URL;
 
         button.addEventListener('click', () => {
           const nextTheme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+
           root.dataset.theme = nextTheme;
 
           try {
@@ -133,6 +139,8 @@ const BASE = import.meta.env.BASE_URL;
 </html>
 
 <style is:global>
+  /* ===== DARK MODE ===== */
+
   :root {
     color-scheme: dark;
     --bg: #0b1220;
@@ -146,15 +154,17 @@ const BASE = import.meta.env.BASE_URL;
     --code-bg: #142137;
   }
 
+  /* ===== LIGHT MODE ===== */
+
   html[data-theme="light"] {
     color-scheme: light;
-    --bg: #f7f8fa;
+    --bg: #f5f6f8;
     --surface: #ffffff;
-    --surface-soft: rgba(255, 255, 255, .8);
-    --line: rgba(30, 41, 59, .13);
-    --text: #202b3b;
-    --muted: #69778a;
-    --accent: #3978c9;
+    --surface-soft: #ffffff;
+    --line: #e2e6ed;
+    --text: #172033;
+    --muted: #596579;
+    --accent: #3478f6;
     --article-text: #465366;
     --code-bg: #edf2f8;
   }
@@ -175,7 +185,7 @@ const BASE = import.meta.env.BASE_URL;
     color: var(--text);
     font-family: "DM Sans", "Noto Sans JP", sans-serif;
     -webkit-font-smoothing: antialiased;
-    transition: background-color .25s ease, color .25s ease;
+    transition: background .25s ease, color .25s ease;
   }
 
   a {
@@ -288,6 +298,44 @@ const BASE = import.meta.env.BASE_URL;
 
   .site-footer p {
     margin: 0;
+  }
+
+  /* ===== LIGHT MODE COMMON FIX ===== */
+
+  html[data-theme="light"] body {
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  html[data-theme="light"] .site-shell {
+    color: var(--text);
+  }
+
+  html[data-theme="light"] .site-header,
+  html[data-theme="light"] .site-footer {
+    border-color: var(--line);
+  }
+
+  html[data-theme="light"] .site-footer {
+    color: var(--muted);
+  }
+
+  html[data-theme="light"] .footer-brand {
+    color: var(--text);
+  }
+
+  html[data-theme="light"] .theme-toggle {
+    background: #ffffff;
+    color: #172033;
+    border-color: #e2e6ed;
+  }
+
+  html[data-theme="light"] nav {
+    color: var(--muted);
+  }
+
+  html[data-theme="light"] nav a:hover {
+    color: var(--text);
   }
 
   @media (max-width: 620px) {
