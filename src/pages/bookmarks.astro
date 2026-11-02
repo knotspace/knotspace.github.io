@@ -5,7 +5,7 @@ const posts = await getCollection('blog');
 const bookmarkData = posts.map((post) => ({ slug: post.slug, title: post.data.title, description: post.data.description, category: post.data.category }));
 const BASE = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
-<Layout title="あとで読む | KNOT" description="保存した記事を一覧で確認できます。">
+<Layout title="あとで読む | KNOT" description="保存した記事を一覧で確認できます。" noindex>
   <main class="saved-page">
     <a class="back" href={`${BASE}blog/`}>← 記事一覧に戻る</a>
     <span class="eyebrow">YOUR READING LIST</span><h1>あとで読む</h1>

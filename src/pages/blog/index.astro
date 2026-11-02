@@ -22,7 +22,7 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
 
 <Layout
   title="記事一覧 | KNOT"
-  description="KNOTで公開している記事の一覧です。"
+  description="KNOTの記事一覧。Web制作、PC・フリーソフト、Androidアプリ、本・読書、英検や高校受験などの記事を掲載しています。"
 >
   <section class="archive-header">
     <span class="eyebrow">THE JOURNAL</span>
@@ -71,7 +71,7 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
           >
             <div class="post-thumbnail">
               {post.data.heroImage ? (
-                <img src={post.data.heroImage} alt="" loading="lazy" />
+                <img src={post.data.heroImage} alt={post.data.title} loading="lazy" decoding="async" />
               ) : (
                 <span>{String(index + 1).padStart(2, '0')}</span>
               )}
