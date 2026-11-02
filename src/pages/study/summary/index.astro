@@ -1,0 +1,10 @@
+---
+import Layout from '../../layouts/Layout.astro';
+const fields=[["physics","物理","力・運動・電流・エネルギー"],["chemistry","化学","物質・化学変化・イオン"],["biology","生物","植物・人体・遺伝・生態系"],["earth","地学","天気・地震・火山・天体"],["geography","地理","世界・日本の地形、気候、産業、統計"],["history","歴史","古代から現代までの政治・社会・文化"],["civics","公民","憲法・政治・経済・国際社会"]];
+---
+<Layout studyMode title="理社の要点まとめ｜KNOT Study" description="中学理科・社会の7分野を単元別に整理した入試頻出要点まとめ。">
+<main class="summary-index"><a class="back" href="/study/">← Studyに戻る</a><header><p class="eyebrow">KNOT STUDY / KNOWLEDGE BASE</p><h1>要点まとめ</h1><p>理科・社会の7分野を、それぞれ独立したページで整理。単元ごとの頻出用語、重要事項、公式、資料の読み方を確認しよう。</p></header><div class="field-grid">{fields.map((f,i)=><a class="field" href={`/study/summary/${f[0]}/`}><span>0{i+1}</span><div><h2>{f[1]}</h2><p>{f[2]}</p><b>要点を確認する →</b></div></a>)}</div><p class="note">※入試頻出事項を中心にした学習用まとめ。統計・制度の最新情報は公的資料も確認しよう。</p></main>
+<style>
+.summary-index{max-width:900px;margin:0 auto;padding:30px 0 60px}.back{font-size:12px;color:var(--accent)}header{padding:35px 0 25px}.eyebrow{font:10px ui-monospace,monospace;letter-spacing:.14em;color:var(--accent);font-weight:800}h1{font-size:clamp(34px,6vw,50px);letter-spacing:-.06em;margin:10px 0}.summary-index header>p:last-child{font-size:13px;line-height:1.9;color:var(--muted);max-width:650px}.field-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.field{display:flex;gap:15px;padding:20px;border:1px solid var(--line);border-radius:13px;background:var(--surface);transition:.15s}.field:hover{border-color:var(--accent);transform:translateY(-2px)}.field>span{font:12px ui-monospace,monospace;color:var(--accent)}.field h2{font-size:20px;margin:0 0 5px}.field p{font-size:11px;line-height:1.7;color:var(--muted);margin:0 0 12px}.field b{font-size:11px;color:var(--accent)}.note{font-size:10px;color:var(--muted);margin-top:20px}@media(max-width:620px){.summary-index{padding:20px 0 42px}.field-grid{grid-template-columns:1fr}}
+</style>
+</Layout>
