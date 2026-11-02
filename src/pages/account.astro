@@ -15,6 +15,15 @@ const supabaseKey = 'sb_publishable_-yhc0QqTEEZTBWi9jTcFRA_-AVi-iP6';
         <button type="button" class="tab active" id="login-tab">ログイン</button>
         <button type="button" class="tab" id="signup-tab">新規登録</button>
       </div>
+      <aside class="security-notice" id="security-notice" hidden>
+        <strong>🔒 登録前に確認してください</strong>
+        <ul>
+          <li>パスワードは他のサービスと使い回さず、KNOT専用のものを設定してください。</li>
+          <li>表示名に本名・住所・電話番号・学校名など、個人を特定できる情報を含めないでください。</li>
+          <li>プロフィールや投稿にも、個人を特定できる情報を掲載しないようご注意ください。</li>
+        </ul>
+        <p>KNOTでは情報を安全に管理できるよう努めていますが、インターネット上の情報漏えいリスクを完全になくすことはできません。ご自身でも安全対策にご協力ください。</p>
+      </aside>
       <form id="account-form">
         <label>メールアドレス<input id="email" type="email" autocomplete="email" required placeholder="you@example.com" /></label>
         <label>パスワード<input id="password" type="password" minlength="8" autocomplete="current-password" required placeholder="8文字以上" /></label>
@@ -65,6 +74,7 @@ const supabaseKey = 'sb_publishable_-yhc0QqTEEZTBWi9jTcFRA_-AVi-iP6';
       $('form-title').textContent = mode === 'login' ? 'KNOTにログイン' : 'アカウントを作成';
       $('form-intro').textContent = mode === 'login' ? '登録したメールアドレスとパスワードでログイン。' : 'メールアドレスとパスワードを登録して、KNOTをもっと便利に。';
       $('submit').textContent = mode === 'login' ? 'ログイン' : '新規登録';
+      $('security-notice').hidden = mode !== 'signup';
       $('password').autocomplete = mode === 'login' ? 'current-password' : 'new-password';
       $('message').textContent = '';
     };
@@ -110,5 +120,5 @@ const supabaseKey = 'sb_publishable_-yhc0QqTEEZTBWi9jTcFRA_-AVi-iP6';
   </script>
 </Layout>
 <style>
-.account-page{max-width:520px;margin:0 auto;padding:46px 0 75px}.back{display:inline-block;color:var(--muted);font-size:12px;margin-bottom:25px}.account-card{padding:30px;border:1px solid var(--line);border-radius:18px;background:var(--surface)}.eyebrow{color:var(--accent);font-size:10px;font-weight:800;letter-spacing:.16em}.account-card h1{margin:10px 0;color:var(--text);font-size:30px;letter-spacing:-.05em}.intro,.privacy{color:var(--muted);font-size:12px;line-height:1.9}.tabs{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:25px 0 20px;padding:4px;border-radius:11px;background:var(--bg)}.tab{padding:10px;border:0;border-radius:8px;background:transparent;color:var(--muted);font-size:12px;font-weight:700;cursor:pointer}.tab.active{background:var(--surface);color:var(--text);box-shadow:0 1px 5px #0002}form{display:grid;gap:15px}label{display:grid;gap:7px;color:var(--text);font-size:12px;font-weight:700}input{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--text);font:inherit;font-size:13px}input:focus{outline:2px solid var(--accent);outline-offset:1px}.submit{margin-top:5px;padding:13px;border:0;border-radius:10px;background:var(--accent);color:#fff;font-size:13px;font-weight:800;cursor:pointer}.submit:disabled{opacity:.55;cursor:wait}.message{min-height:22px;color:var(--accent);font-size:12px;line-height:1.8}.privacy{padding-top:15px;border-top:1px solid var(--line);font-size:10px}@media(max-width:600px){.account-page{padding:32px 0 60px}.account-card{padding:22px}}
+.account-page{max-width:520px;margin:0 auto;padding:46px 0 75px}.back{display:inline-block;color:var(--muted);font-size:12px;margin-bottom:25px}.account-card{padding:30px;border:1px solid var(--line);border-radius:18px;background:var(--surface)}.eyebrow{color:var(--accent);font-size:10px;font-weight:800;letter-spacing:.16em}.account-card h1{margin:10px 0;color:var(--text);font-size:30px;letter-spacing:-.05em}.intro,.privacy{color:var(--muted);font-size:12px;line-height:1.9}.tabs{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:25px 0 20px;padding:4px;border-radius:11px;background:var(--bg)}.tab{padding:10px;border:0;border-radius:8px;background:transparent;color:var(--muted);font-size:12px;font-weight:700;cursor:pointer}.tab.active{background:var(--surface);color:var(--text);box-shadow:0 1px 5px #0002}form{display:grid;gap:15px}label{display:grid;gap:7px;color:var(--text);font-size:12px;font-weight:700}input{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--text);font:inherit;font-size:13px}input:focus{outline:2px solid var(--accent);outline-offset:1px}.submit{margin-top:5px;padding:13px;border:0;border-radius:10px;background:var(--accent);color:#fff;font-size:13px;font-weight:800;cursor:pointer}.submit:disabled{opacity:.55;cursor:wait}.message{min-height:22px;color:var(--accent);font-size:12px;line-height:1.8}.privacy{padding-top:15px;border-top:1px solid var(--line);font-size:10px}.security-notice{margin:18px 0;padding:15px;border:1px solid #d6a84b66;border-radius:12px;background:color-mix(in srgb,#d6a84b 9%,var(--surface));color:var(--text);font-size:11px;line-height:1.85}.security-notice strong{font-size:12px}.security-notice ul{margin:9px 0;padding-left:19px}.security-notice li+li{margin-top:5px}.security-notice p{margin:9px 0 0;color:var(--muted);font-size:10px}@media(max-width:600px){.account-page{padding:32px 0 60px}.account-card{padding:22px}}
 </style>
