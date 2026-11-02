@@ -381,3 +381,59 @@ html, body, #nc-root, #nc-root > div,
     transition-duration: 0.01ms !important;
   }
 }
+
+
+/* KNOT fixed calm palette — no light/dark switching or high-contrast cards. */
+:root, :root[data-theme="dark"] {
+  color-scheme: light !important;
+  --knot-admin-bg: #edf0f1 !important;
+  --knot-admin-surface: #f5f6f5 !important;
+  --knot-admin-surface-raised: #f8f9f8 !important;
+  --knot-admin-text: #3f4b50 !important;
+  --knot-admin-muted: #737f84 !important;
+  --knot-admin-border: #d5dcde !important;
+  --knot-admin-blue: #718c9b !important;
+  --knot-admin-blue-dark: #526d7b !important;
+  --knot-admin-nav: #e5eaeb !important;
+  --knot-admin-shadow: none !important;
+}
+html, body, #nc-root, #nc-root [role="main"] {
+  background: #edf0f1 !important;
+  color: #3f4b50 !important;
+}
+#nc-root header, #nc-root [role="banner"], #nc-root nav,
+#nc-root aside, #nc-root [role="navigation"] {
+  background: #e5eaeb !important;
+  color: #3f4b50 !important;
+  border-color: #d5dcde !important;
+}
+#nc-root a, #nc-root [role="main"] a {
+  color: #526d7b !important;
+}
+#nc-root [role="main"] a:hover {
+  color: #3f4b50 !important;
+  background-color: #e7ecec !important;
+}
+#nc-root [role="main"] [role="listitem"],
+#nc-root [role="main"] [class*="ListCard"],
+#nc-root [role="main"] [class*="EntryCard"],
+#nc-root [role="main"] [class*="collection-card"],
+#nc-root [role="main"] [class*="CollectionCard"] {
+  background: #f5f6f5 !important;
+  color: #3f4b50 !important;
+  border: 1px solid #d5dcde !important;
+  box-shadow: none !important;
+}
+#nc-root button, #nc-root input, #nc-root textarea, #nc-root select,
+#nc-root [role="textbox"], #nc-root [contenteditable="true"] {
+  background: #f8f9f8 !important;
+  color: #3f4b50 !important;
+  border-color: #d5dcde !important;
+  box-shadow: none !important;
+}
+#nc-root button:hover {
+  background: #e5eaeb !important;
+  color: #3f4b50 !important;
+  border-color: #c7d1d5 !important;
+}
+#nc-root * { transition: none !important; animation: none !important; }
