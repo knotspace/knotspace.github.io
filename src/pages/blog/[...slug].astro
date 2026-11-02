@@ -34,6 +34,9 @@ const toc = headings.filter((heading) =>
 );
 
 const date = dateFormat(post.data.pubDate);
+const allPosts = (await getCollection('blog')).filter((item) => item.slug !== post.slug);
+const relatedPosts = allPosts.filter((item) => item.data.category === post.data.category).slice(0, 3);
+const recommendations = relatedPosts.length ? relatedPosts : allPosts.slice(0, 3);
 ---
 
 <Layout
@@ -41,7 +44,9 @@ const date = dateFormat(post.data.pubDate);
   description={post.data.description}
   image={post.data.heroImage}
 >
-  <article class="post">
+  <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
+  <article class="post" data-post-slug={post.slug}>
+    <div class="article-tools"><span>この記事を読む</span><button id="bookmark-button" type="button" aria-pressed="false">☆ あとで読む</button></div>
     <a class="back-link" href={`${BASE}blog/`}>
       ← 記事一覧に戻る
     </a>
@@ -104,6 +109,8 @@ const date = dateFormat(post.data.pubDate);
       </a>
     </div>
 
+    {recommendations.length > 0 && <section class="related"><span class="comments-label">KEEP READING</span><h2>関連記事</h2><div class="related-list">{recommendations.map((item) => <a href={`${BASE}blog/${item.slug}/`}><span>{item.data.category}</span><strong>{item.data.title}</strong><small>記事を読む →</small></a>)}</div></section>}
+
     <!-- コメント欄 -->
     <section class="comments" aria-label="コメント">
       <div class="comments-heading">
@@ -113,7 +120,7 @@ const date = dateFormat(post.data.pubDate);
       </div>
 
       <div class="giscus-container">
-        <script
+        <script is:inline
           src="https://giscus.app/client.js"
           data-repo="knotspace/knotspace.github.io"
           data-repo-id="R_kgDOVfFtzQ"
@@ -134,7 +141,29 @@ const date = dateFormat(post.data.pubDate);
   </article>
 </Layout>
 
+<script is:inline>
+(() => {
+  const progress = document.getElementById('reading-progress');
+  const button = document.getElementById('bookmark-button');
+  const article = document.querySelector('[data-post-slug]');
+  if (progress) {
+    const update = () => { const max = document.documentElement.scrollHeight - window.innerHeight; progress.style.width = `${max > 0 ? Math.min(100, window.scrollY / max * 100) : 0}%`; };
+    window.addEventListener('scroll', update, { passive: true }); window.addEventListener('resize', update); update();
+  }
+  if (button && article) {
+    const key = 'knot-bookmarks'; const slug = article.dataset.postSlug;
+    const read = () => { try { return JSON.parse(localStorage.getItem(key) || '[]'); } catch { return []; } };
+    const paint = () => { const saved = read().includes(slug); button.textContent = saved ? '★ 保存済み' : '☆ あとで読む'; button.setAttribute('aria-pressed', String(saved)); };
+    paint(); button.addEventListener('click', () => { const items = read(); const next = items.includes(slug) ? items.filter(x => x !== slug) : [...items, slug]; localStorage.setItem(key, JSON.stringify(next)); paint(); });
+  }
+})();
+</script>
+
 <style>
+  .reading-progress{position:fixed;z-index:1000;top:0;left:0;width:0;height:3px;background:var(--accent);transition:width .08s linear}
+  .article-tools{display:flex;justify-content:space-between;align-items:center;margin:0 0 20px;color:var(--muted);font-size:11px}
+  .article-tools button{border:1px solid var(--line);border-radius:999px;padding:8px 13px;background:var(--surface);color:var(--text);font-size:11px;font-weight:700;cursor:pointer}
+  .related{margin-top:55px;padding-top:32px;border-top:1px solid var(--line)}.related h2{margin:8px 0 18px;color:var(--text);font-size:23px}.related-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.related-list a{display:flex;flex-direction:column;gap:9px;padding:18px;border:1px solid var(--line);border-radius:13px;background:var(--surface)}.related-list span,.related-list small{color:var(--muted);font-size:10px}.related-list strong{color:var(--text);font-size:13px;line-height:1.7}.related-list small{margin-top:auto;color:var(--accent)}
   .post {
     max-width: 760px;
     margin: 0 auto;
@@ -439,7 +468,11 @@ const date = dateFormat(post.data.pubDate);
   }
 
   @media (max-width: 600px) {
-    .post {
+    .reading-progress{position:fixed;z-index:1000;top:0;left:0;width:0;height:3px;background:var(--accent);transition:width .08s linear}
+  .article-tools{display:flex;justify-content:space-between;align-items:center;margin:0 0 20px;color:var(--muted);font-size:11px}
+  .article-tools button{border:1px solid var(--line);border-radius:999px;padding:8px 13px;background:var(--surface);color:var(--text);font-size:11px;font-weight:700;cursor:pointer}
+  .related{margin-top:55px;padding-top:32px;border-top:1px solid var(--line)}.related h2{margin:8px 0 18px;color:var(--text);font-size:23px}.related-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.related-list a{display:flex;flex-direction:column;gap:9px;padding:18px;border:1px solid var(--line);border-radius:13px;background:var(--surface)}.related-list span,.related-list small{color:var(--muted);font-size:10px}.related-list strong{color:var(--text);font-size:13px;line-height:1.7}.related-list small{margin-top:auto;color:var(--accent)}
+  .post {
       padding-top: 30px;
     }
 
@@ -460,6 +493,7 @@ const date = dateFormat(post.data.pubDate);
       margin: 25px 0 34px;
     }
 
+    .related-list{grid-template-columns:1fr}
     .comments {
       margin-top: 50px;
       padding-top: 28px;

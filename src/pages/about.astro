@@ -1,0 +1,31 @@
+---
+import Layout from '../layouts/Layout.astro';
+const BASE = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+---
+<Layout title="プロフィール | KNOT" description="KNOTの運営者プロフィール。Web制作やプログラミング、ランニングについて。">
+  <main class="about-page">
+    <a class="back-link" href={BASE}>← ホームに戻る</a>
+    <header class="intro">
+      <span class="eyebrow">ABOUT KNOT</span>
+      <div class="logo">KNOT<span>.</span></div>
+      <h1>こんにちは。<br />KNOTを運営しています。</h1>
+      <p class="lead">好きなことを、好きなペースで記録する個人ブログです。</p>
+    </header>
+    <section class="about-card">
+      <span class="eyebrow">MY STORY</span>
+      <h2>Web制作との再会</h2>
+      <p>小学生の頃、HTMLやCSSに触れたことをきっかけに、プログラミングに興味を持ちました。</p>
+      <p>しばらく離れていましたが、最近またWeb制作を始めたところ、すっかり夢中に。GitHubを活用しながら、静的サイトをベースにJavaScriptなどで機能を加えた、動きのあるWebサイトづくりに挑戦しています。</p>
+      <p>このKNOTでは、日々興味を持ったことや、実際に使ってよかったもの、趣味について発信しています。</p>
+    </section>
+    <section class="details">
+      <div><span>LOCATION</span><strong>Japan 🇯🇵</strong></div>
+      <div><span>INTERESTS</span><strong>Web Development / Running</strong></div>
+      <div><span>TECH</span><strong>HTML / CSS / JavaScript / Astro</strong></div>
+    </section>
+    <a class="back-blog" href={`${BASE}blog/`}>記事を読んでみる →</a>
+  </main>
+</Layout>
+<style>
+.about-page{max-width:760px;margin:0 auto;padding:54px 0 90px}.back-link{color:var(--muted);font-size:12px;font-weight:700}.intro{padding:55px 0 42px;border-bottom:1px solid var(--line)}.eyebrow{color:var(--accent);font-size:10px;font-weight:800;letter-spacing:.18em}.logo{margin:20px 0 16px;font-size:42px;font-weight:900;letter-spacing:-.09em}.logo span{color:var(--accent)}h1{margin:0;color:var(--text);font-size:clamp(30px,5vw,46px);line-height:1.45;letter-spacing:-.06em}.lead{color:var(--muted);font-size:14px;line-height:1.9}.about-card{margin-top:35px;padding:30px;border:1px solid var(--line);border-radius:18px;background:var(--surface)}h2{margin:10px 0 20px;color:var(--text);font-size:23px}.about-card p{color:var(--article-text);font-size:14px;line-height:2.2}.details{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0}.details div{padding:20px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}.details div:last-child{grid-column:1/-1}.details span{display:block;margin-bottom:9px;color:var(--muted);font-size:10px;font-weight:800;letter-spacing:.14em}.details strong{color:var(--text);font-size:13px}.back-blog{display:inline-block;margin-top:20px;color:var(--accent);font-size:13px;font-weight:800}@media(max-width:600px){.about-page{padding:35px 0 65px}.about-card{padding:22px}.details{grid-template-columns:1fr}.details div:last-child{grid-column:auto}}
+</style>
