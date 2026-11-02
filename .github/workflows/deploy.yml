@@ -1,13 +1,14 @@
-
 name: Deploy to GitHub Pages
 
 on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    - cron: "*/15 * * * *"
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -16,12 +17,58 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      due: ${{ steps.schedule.outputs.due }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Release scheduled articles
+        id: schedule
+        if: github.event_name == 'schedule'
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import path from 'node:path';
+          const dir = 'src/content/blog';
+          const now = Date.now();
+          let released = 0;
+          for (const name of fs.readdirSync(dir).filter((n) => n.endsWith('.md'))) {
+            const file = path.join(dir, name);
+            const source = fs.readFileSync(file, 'utf8');
+            const match = source.match(/^publishAt:\s*["']?([^\r\n"']+)/m);
+            if (!match) continue;
+            const timestamp = Date.parse(match[1].trim());
+            if (!Number.isFinite(timestamp) || timestamp > now) continue;
+            const next = source.replace(/^publishAt:.*(?:\r?\n)?/m, '');
+            fs.writeFileSync(file, next);
+            released++;
+          }
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `due=${released > 0}\n`);
+          if (released > 0) {
+            console.log(`Released ${released} scheduled article(s).`);
+            const { execFileSync } = await import('node:child_process');
+            execFileSync('git', ['config', 'user.name', 'github-actions[bot]']);
+            execFileSync('git', ['config', 'user.email', '41898282+github-actions[bot]@users.noreply.github.com']);
+            execFileSync('git', ['add', 'src/content/blog']);
+            execFileSync('git', ['commit', '-m', 'Publish scheduled articles']);
+            execFileSync('git', ['push']);
+          } else {
+            console.log('No articles are due for publication.');
+          }
+          NODE
+
   build:
+    needs: prepare
+    if: github.event_name != 'schedule' || needs.prepare.outputs.due == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
-
       - name: Build and upload Astro site
         uses: withastro/action@v6
         with:
