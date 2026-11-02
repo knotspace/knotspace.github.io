@@ -1,0 +1,36 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="KNOT Focus Timer｜集中タイマー" description="KNOTの単体ポモドーロタイマー。勉強にも作業にも使える集中タイマー。">
+<main class="standalone">
+  <nav><a href="./study/">← KNOT Study</a><span>KNOT / FOCUS</span></nav>
+  <section class="panel">
+    <p class="eyebrow">FOCUS SESSION</p><h1>Focus Timer</h1><p class="sub">勉強にも、作業にも。ここだけで使える集中タイマー。</p>
+    <div class="presets"><button data-min="25" class="selected">25分</button><button data-min="50">50分</button><button data-min="5">5分休憩</button><button data-min="15">15分休憩</button></div>
+    <label class="custom">カスタム（分）<input id="custom" type="number" min="1" max="180" value="25"><button id="apply">設定</button></label>
+    <div class="dial"><svg viewBox="0 0 240 240"><circle cx="120" cy="120" r="105" class="track"/><circle cx="120" cy="120" r="105" class="progress" id="progress"/></svg><div><strong id="time">25:00</strong><small id="label">FOCUS</small></div></div>
+    <div class="actions"><button id="start" class="main">スタート</button><button id="reset">リセット</button><button id="skip">終了</button></div>
+    <p id="status" role="status">時間を選んでスタート。</p>
+    <label class="sound"><input id="sound" type="checkbox" checked> 終了音を鳴らす</label>
+  </section>
+  <footer>Timer works independently · <a href="./study/tools/">学習ツール・記録はこちら</a></footer>
+</main>
+<script>
+const $=id=>document.getElementById(id);let total=1500,left=1500,endAt=0,run=false,handle=null,ctx=null;
+const ring=$('progress'),circ=2*Math.PI*105;ring.style.strokeDasharray=circ;ring.style.strokeDashoffset=0;
+function paint(){ $('time').textContent=String(Math.floor(left/60)).padStart(2,'0')+':'+String(left%60).padStart(2,'0');ring.style.strokeDashoffset=circ*(1-left/total);$('start').textContent=run?'一時停止':'スタート';}
+function stop(){run=false;clearInterval(handle);handle=null;paint();}
+function choose(min,label){stop();total=left=min*60;$('label').textContent=label||'FOCUS';$('status').textContent=min+'分に設定しました。';document.querySelectorAll('[data-min]').forEach(b=>b.classList.toggle('selected',Number(b.dataset.min)===min));paint();}
+function beep(){if(!$('sound').checked)return;try{ctx=ctx||new(window.AudioContext||window.webkitAudioContext)();[660,880,1100].forEach((hz,i)=>{const o=ctx.createOscillator(),g=ctx.createGain();o.frequency.value=hz;g.gain.value=.12;o.connect(g);g.connect(ctx.destination);o.start(ctx.currentTime+i*.18);o.stop(ctx.currentTime+i*.18+.13);});}catch{}}
+function tick(){left=Math.max(0,Math.ceil((endAt-Date.now())/1000));paint();if(left===0){stop();$('status').textContent='時間終了！おつかれさま。';beep();if('Notification'in window&&Notification.permission==='granted')new Notification('KNOT Focus',{body:'タイマーが終了しました。'});}}
+document.querySelectorAll('[data-min]').forEach(b=>b.addEventListener('click',()=>choose(Number(b.dataset.min),b.dataset.min==='5'||b.dataset.min==='15'?'BREAK':'FOCUS')));
+$('apply').addEventListener('click',()=>{const n=Number($('custom').value);if(!Number.isInteger(n)||n<1||n>180){$('status').textContent='1〜180分で設定してください。';return;}choose(n,'CUSTOM');});
+$('start').addEventListener('click',()=>{if(run){stop();$('status').textContent='一時停止中';return;}if(left===0)left=total;run=true;endAt=Date.now()+left*1000;handle=setInterval(tick,200);$('status').textContent='集中中…';paint();if('Notification'in window&&Notification.permission==='default')Notification.requestPermission().catch(()=>{});});
+$('reset').addEventListener('click',()=>{stop();left=total;$('status').textContent='リセットしました。';paint();});
+$('skip').addEventListener('click',()=>{stop();left=0;$('status').textContent='タイマーを終了しました。';paint();});
+paint();
+</script>
+<style>
+.standalone{max-width:650px;margin:0 auto;padding:25px 0 50px;min-height:80vh;display:flex;flex-direction:column}.standalone nav{display:flex;justify-content:space-between;font-size:11px;color:var(--muted)}.standalone nav a,.standalone footer a{color:var(--accent)}.panel{margin:auto 0;padding:30px 20px;text-align:center;border:1px solid var(--line);border-radius:20px;background:var(--surface)}.eyebrow{font:10px ui-monospace,monospace;letter-spacing:.16em;color:var(--accent);font-weight:800}.panel h1{font-size:36px;letter-spacing:-.06em;margin:8px 0}.sub{font-size:12px;color:var(--muted)}.presets{display:flex;justify-content:center;gap:7px;flex-wrap:wrap;margin:22px 0}.presets button,.actions button,.custom button{padding:10px 14px;border:1px solid var(--line);border-radius:9px;background:transparent;color:var(--text);cursor:pointer;font-size:11px}.presets .selected,.actions .main,.custom button{background:var(--accent);border-color:var(--accent);color:white}.custom{display:flex;justify-content:center;align-items:center;gap:8px;font-size:11px;color:var(--muted)}.custom input{width:65px;padding:8px;border:1px solid var(--line);border-radius:7px;background:var(--bg);color:var(--text)}.dial{position:relative;width:min(270px,75vw);aspect-ratio:1;margin:15px auto}.dial svg{width:100%;height:100%;transform:rotate(-90deg)}.dial circle{fill:none;stroke-width:7}.track{stroke:var(--line)}.progress{stroke:var(--accent);stroke-linecap:round;transition:stroke-dashoffset .2s}.dial>div{position:absolute;inset:0;display:grid;align-content:center;justify-items:center;gap:5px}.dial strong{font-size:48px;font-variant-numeric:tabular-nums;letter-spacing:-.06em}.dial small{font:10px ui-monospace,monospace;letter-spacing:.15em;color:var(--muted)}.actions{display:flex;justify-content:center;gap:9px}.actions button{min-width:90px}.panel #status{min-height:20px;font-size:11px;color:var(--muted);margin:17px 0}.sound{font-size:11px;color:var(--muted)}.standalone footer{text-align:center;margin-top:25px;font-size:11px;color:var(--muted)}@media(max-width:600px){.standalone{padding:20px 0}.panel{padding:25px 12px}.panel h1{font-size:30px}.dial strong{font-size:42px}}
+</style>
+</Layout>
