@@ -11,7 +11,7 @@ const social = bank.filter(q => q.subject === 'social').length;
     <p class="eyebrow">KNOT STUDY / FOUNDATION</p>
     <h1>基礎網羅問題</h1>
     <p>教科書の重要語句と基本事項を、一つずつ確実に身につけよう。</p>
-    <div class="counts"><span><b>56</b> 問収録</span><span><b>{science}</b> 理科</span><span><b>{social}</b> 社会</span><span><b>7</b> 分野</span></div>
+    <div class="counts"><span><b>{bank.length}</b> 問収録</span><span><b>{science}</b> 理科</span><span><b>{social}</b> 社会</span><span><b>7</b> 分野</span></div>
   </header>
   <section class="panel" id="settings">
     <div class="section-head"><div><p class="eyebrow">START LEARNING</p><h2>学習内容を選ぶ</h2></div><span class="tag">基礎編 第1弾</span></div>
@@ -36,7 +36,7 @@ const social = bank.filter(q => q.subject === 'social').length;
     <div class="quiz-actions"><button class="secondary" id="backSettings">条件を変える</button><button class="primary" id="retry">もう一度解く</button></div>
   </section>
   <section class="coverage"><p class="eyebrow">LEARNING MAP</p><h2>収録分野</h2>
-    <div class="topic-grid"><div><span>理科</span><b>物理</b><small>8問</small></div><div><span>理科</span><b>化学</b><small>8問</small></div><div><span>理科</span><b>生物</b><small>8問</small></div><div><span>理科</span><b>地学</b><small>8問</small></div><div><span>社会</span><b>地理</b><small>8問</small></div><div><span>社会</span><b>歴史</b><small>8問</small></div><div><span>社会</span><b>公民</b><small>8問</small></div></div>
+    <div class="topic-grid"><div><span>理科</span><b>物理</b><small>15問</small></div><div><span>理科</span><b>化学</b><small>15問</small></div><div><span>理科</span><b>生物</b><small>15問</small></div><div><span>理科</span><b>地学</b><small>15問</small></div><div><span>社会</span><b>地理</b><small>15問</small></div><div><span>社会</span><b>歴史</b><small>15問</small></div><div><span>社会</span><b>公民</b><small>15問</small></div></div>
   </section>
 </main>
 <script>
