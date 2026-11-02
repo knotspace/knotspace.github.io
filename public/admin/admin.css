@@ -1,8 +1,6 @@
-/* KNOT Admin — WordPress-inspired, lightweight admin skin */
+/* KNOT Admin — light styling without overlays on the Decap CMS interface */
 :root {
   color-scheme: light;
-  --knot-admin-bar: #1d2327;
-  --knot-admin-bar-height: 36px;
   --knot-admin-blue: #2271b1;
   --knot-admin-blue-dark: #135e96;
   --knot-admin-bg: #f0f0f1;
@@ -22,66 +20,10 @@ html, body {
   text-rendering: optimizeLegibility;
 }
 
-#knot-admin-bar {
-  position: fixed;
-  z-index: 10000;
-  inset: 0 0 auto;
-  height: var(--knot-admin-bar-height);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 0 16px;
-  background: var(--knot-admin-bar);
-  color: #f0f0f1;
-  font-size: 12px;
-  line-height: 1;
-  box-shadow: 0 1px 3px rgb(0 0 0 / 18%);
-}
-
-#knot-admin-bar a {
-  color: #f0f0f1;
-  text-decoration: none;
-}
-
-#knot-admin-bar a:hover { color: #72aee6; }
-
-.knot-admin-brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 15px;
-  font-weight: 800;
-  letter-spacing: .08em;
-}
-
-.knot-admin-brand img {
-  display: block;
-  width: 21px;
-  height: 21px;
-  border-radius: 5px;
-}
-
-.knot-admin-divider { color: #8c8f94; }
-
-.knot-admin-view-site {
-  margin-left: auto;
-  padding: 7px 10px;
-  border: 1px solid #50575e;
-  border-radius: 3px;
-}
-
+/* No fixed KNOT toolbar and no top padding: Decap owns the full viewport. */
 #nc-root {
   min-height: 100vh;
-  padding-top: var(--knot-admin-bar-height);
-}
-
-/* Decap's editor action header was sitting underneath the custom KNOT bar.
-   Offset sticky/fixed app headers so Save/Publish controls remain clickable. */
-#nc-root header,
-#nc-root [role="banner"] {
-  /* top is harmless on static headers and offsets sticky/fixed headers. */
-  top: var(--knot-admin-bar-height) !important;
-  scroll-margin-top: var(--knot-admin-bar-height);
+  padding-top: 0;
 }
 
 #nc-root nav,
@@ -118,35 +60,6 @@ html, body {
   box-shadow: 0 0 0 1px var(--knot-admin-blue);
 }
 
-#cms-loading {
-  width: min(420px, calc(100% - 32px));
-  margin: 15vh auto 0;
-  padding: 32px 24px;
-  border: 1px solid #dcdcde;
-  border-radius: 6px;
-  background: #fff;
-  text-align: center;
-  box-shadow: 0 1px 2px rgb(0 0 0 / 4%);
-}
-
-.knot-loading-mark {
-  display: grid;
-  width: 42px;
-  height: 42px;
-  margin: 0 auto 12px;
-  place-items: center;
-  border-radius: 10px;
-  background: #1d2327;
-  color: #fff;
-  font-size: 24px;
-  font-weight: 800;
-}
-
-#cms-loading h1 { margin: 0 0 8px; font-size: 21px; }
-#cms-loading p { margin: 0 0 8px; color: var(--knot-admin-muted); font-size: 13px; }
-#cms-loading a { color: var(--knot-admin-blue); text-decoration: none; }
-
-/* WordPress-like admin workspace */
 #nc-root [role="navigation"],
 #nc-root aside {
   background: #1d2327;
@@ -201,9 +114,3 @@ html, body {
 
 #nc-root textarea { line-height: 1.65; }
 #nc-root img { max-width: 100%; }
-
-@media (max-width: 600px) {
-  :root { --knot-admin-bar-height: 40px; }
-  #knot-admin-bar { padding: 0 10px; }
-  #cms-loading { margin-top: 12vh; padding: 26px 18px; }
-}
