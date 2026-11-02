@@ -46,7 +46,7 @@ self.addEventListener('fetch', (event) => {
       const canCache =
         response.ok &&
         response.type === 'basic' &&
-        !/\\b(private|no-store)\\b/i.test(cacheControl);
+        !/\b(private|no-store)\b/i.test(cacheControl);
 
       if (!canCache) return response;
 
