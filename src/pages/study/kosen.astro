@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import questions from '../../data/kosen-questions.json';
 const topics = [...new Set(questions.map(q => q.topic))];
 ---
-<Layout title="高専入試対策｜KNOT Study" description="高専入試を意識した思考力・資料読解型のオリジナル演習問題。">
+<Layout studyMode title="高専入試対策｜KNOT Study" description="高専入試を意識した思考力・資料読解型のオリジナル演習問題。">
 <main class="kosen-page">
   <a class="back" href="../">← Studyに戻る</a>
   <header class="hero">
