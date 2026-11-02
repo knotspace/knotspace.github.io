@@ -6,7 +6,7 @@ const social = bank.filter(q => q.subject === 'social').length;
 ---
 <Layout title="基礎網羅問題｜KNOT Study" description="中学理科・社会の重要語句と基本事項を分野別に確認する基礎学習。">
 <main class="foundation">
-  <a class="back" href="../">← Studyトップへ</a>
+  <div class="top-links"><a class="back" href="../why/">勉強する意味を読む ↗</a><a class="back" href="../kosen/">高専入試対策 ↗</a><a class="back" href="../mock/">過去問模試 ↗</a></div>
   <header class="hero">
     <p class="eyebrow">KNOT STUDY / FOUNDATION</p>
     <h1>基礎網羅問題</h1>
@@ -107,7 +107,7 @@ html[data-theme="light"]{--quiz-answer-bg:#e8efff;--quiz-answer-border:#a9c0ed;-
 .answer.incorrect,.answer.incorrect:disabled{background-color:#ffe1e3!important;border:2px solid #d94c59!important;color:#842b35!important}
 .explanation{margin-top:17px;padding:15px;border-radius:9px;background:var(--surface-soft);line-height:1.8}.explanation p{font-size:12px;color:var(--muted);margin:6px 0 0}.quiz-actions{margin-top:20px}.score strong{font-size:48px}.score span{font-size:13px;color:var(--muted)}.result{text-align:center}.coverage{margin-top:42px}.coverage .eyebrow{margin-bottom:8px}.topic-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.topic-grid div{display:grid;gap:5px;padding:13px;border:1px solid var(--line);border-radius:9px;background:var(--surface)}.topic-grid span,.topic-grid small{font-size:10px;color:var(--muted)}.topic-grid b{font-size:13px}.quiz[hidden],.result[hidden]{display:none!important}
 @media(max-width:620px){.foundation{padding:22px 0 40px}.panel{padding:17px}.filters{grid-template-columns:1fr}.answers{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(2,minmax(82px,auto));gap:9px}.answer{min-height:82px;padding:11px 10px;gap:8px;font-size:12px;border-radius:13px}.letter{width:24px;height:24px}.topic-grid{grid-template-columns:repeat(2,1fr)}.hero{padding:30px 0 20px}}
-</style>
+.top-links{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px}.top-links .back{font-size:11px}</style>
 <style is:global>
 :root{--quiz-answer-bg:#26364f;--quiz-answer-border:#526b91;--quiz-answer-ink:#f4f7ff;--quiz-answer-chip:#405779}
 html[data-theme="light"]{--quiz-answer-bg:#e8efff;--quiz-answer-border:#a9c0ed;--quiz-answer-ink:#243b61;--quiz-answer-chip:#d1e0ff}
