@@ -1,0 +1,62 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import bank from '../../data/study-foundation.json';
+const science = bank.filter(q => q.subject === 'science').length;
+const social = bank.filter(q => q.subject === 'social').length;
+---
+<Layout title="基礎網羅問題｜KNOT Study" description="中学理科・社会の重要語句と基本事項を分野別に確認する基礎学習。">
+<main class="foundation">
+  <a class="back" href="../">← Studyトップへ</a>
+  <header class="hero">
+    <p class="eyebrow">KNOT STUDY / FOUNDATION</p>
+    <h1>基礎網羅問題</h1>
+    <p>理科と社会の大事な語句・基本知識を、分野ごとに確認しよう。</p>
+    <div class="counts"><span><b>{bank.length}</b> 問収録</span><span><b>{science}</b> 理科</span><span><b>{social}</b> 社会</span><span><b>7</b> 分野</span></div>
+  </header>
+  <section class="panel" id="settings">
+    <div class="section-head"><div><p class="eyebrow">START LEARNING</p><h2>学習内容を選ぶ</h2></div><span class="tag">基礎編 第1弾</span></div>
+    <div class="filters">
+      <label>教科<select id="subject"><option value="all">理科・社会</option><option value="science">理科</option><option value="social">社会</option></select></label>
+      <label>分野<select id="topic"><option value="all">すべての分野</option></select></label>
+      <label>問題数<select id="amount"><option value="10">10問</option><option value="20">20問</option><option value="all">全問</option><option value="wrong">苦手だけ</option></select></label>
+    </div>
+    <div class="record"><div><small>解答数</small><strong id="total">0</strong></div><div><small>正解数</small><strong id="correctTotal">0</strong></div><div><small>苦手な語句</small><strong id="weakTotal">0</strong></div></div>
+    <button class="primary" id="start">学習を始める <span>→</span></button>
+    <p class="note">間違えた問題は「苦手だけ」からもう一度解けるよ。問題はこれからも追加していくね。</p>
+  </section>
+  <section class="panel quiz" id="quiz" hidden>
+    <div class="quiz-meta"><span id="meta"></span><b id="progressText"></b></div><div class="progress"><i id="progress"></i></div>
+    <p class="term-label">この説明にあてはまる語句は？</p><h2 id="prompt"></h2>
+    <div class="answers" id="answers"></div><div class="explanation" id="explanation" hidden aria-live="polite"></div>
+    <div class="quiz-actions"><button class="secondary" id="quit">中断する</button><button class="primary" id="next" disabled>次の問題</button></div>
+  </section>
+  <section class="panel result" id="result" hidden>
+    <p class="eyebrow">SESSION COMPLETE</p><h2>おつかれさま！</h2>
+    <p class="score"><strong id="score">0</strong><span> / <span id="max">0</span> 問正解</span></p><p id="resultMessage"></p>
+    <div class="quiz-actions"><button class="secondary" id="backSettings">条件を変える</button><button class="primary" id="retry">もう一度解く</button></div>
+  </section>
+  <section class="coverage"><p class="eyebrow">LEARNING MAP</p><h2>収録分野</h2>
+    <div class="topic-grid"><div><span>理科</span><b>物理</b><small>{bank.filter(q => q.topic === '物理').length}問</small></div><div><span>理科</span><b>化学</b><small>{bank.filter(q => q.topic === '化学').length}問</small></div><div><span>理科</span><b>生物</b><small>{bank.filter(q => q.topic === '生物').length}問</small></div><div><span>理科</span><b>地学</b><small>{bank.filter(q => q.topic === '地学').length}問</small></div><div><span>社会</span><b>地理</b><small>{bank.filter(q => q.topic === '地理').length}問</small></div><div><span>社会</span><b>歴史</b><small>{bank.filter(q => q.topic === '歴史').length}問</small></div><div><span>社会</span><b>公民</b><small>{bank.filter(q => q.topic === '公民').length}問</small></div></div>
+  </section>
+</main>
+<script>
+import bank from '../../data/study-foundation.json';
+const $ = id => document.getElementById(id);
+const KEY = 'knot-foundation-v1';
+let record = { answered: 0, correct: 0, wrong: [] }, questions = [], index = 0, score = 0, selected = false, lastConfig = null;
+try { const saved = JSON.parse(localStorage.getItem(KEY) || 'null'); if (saved && typeof saved === 'object') { record.answered = Number.isFinite(saved.answered) ? saved.answered : 0; record.correct = Number.isFinite(saved.correct) ? saved.correct : 0; record.wrong = Array.isArray(saved.wrong) ? saved.wrong.filter(x => typeof x === 'string') : []; } } catch {}
+function save() { try { localStorage.setItem(KEY, JSON.stringify(record)); } catch {} }
+function updateRecord() { $('total').textContent = record.answered; $('correctTotal').textContent = record.correct; $('weakTotal').textContent = record.wrong.length; }
+function fillTopics() { const subject = $('subject').value, select = $('topic'), previous = select.value; select.replaceChildren(new Option('すべての分野', 'all')); [...new Set(bank.filter(q => subject === 'all' || q.subject === subject).map(q => q.topic))].forEach(topic => select.add(new Option(topic, topic))); if ([...select.options].some(option => option.value === previous)) select.value = previous; }
+$('subject').addEventListener('change', fillTopics); fillTopics(); updateRecord();
+function start() { lastConfig = { subject: $('subject').value, topic: $('topic').value, amount: $('amount').value }; let pool = bank.filter(q => (lastConfig.subject === 'all' || q.subject === lastConfig.subject) && (lastConfig.topic === 'all' || q.topic === lastConfig.topic)); if (lastConfig.amount === 'wrong') pool = pool.filter(q => record.wrong.includes(q.id)); if (!pool.length) { alert('この条件の問題はまだありません。別の分野を選んでね。'); return; } pool = [...pool].sort(() => Math.random() - .5); if (lastConfig.amount !== 'all' && lastConfig.amount !== 'wrong') pool = pool.slice(0, Number(lastConfig.amount)); questions = pool; index = 0; score = 0; $('settings').hidden = true; $('result').hidden = true; $('quiz').hidden = false; render(); }
+function render() { selected = false; const q = questions[index]; $('meta').textContent = (q.subject === 'science' ? '理科' : '社会') + ' / ' + q.topic + ' / ' + q.term; $('progressText').textContent = (index + 1) + ' / ' + questions.length; $('progress').style.width = (index / questions.length * 100) + '%'; $('prompt').textContent = q.prompt; $('answers').replaceChildren(); $('explanation').hidden = true; $('next').disabled = true; $('next').textContent = index === questions.length - 1 ? '結果を見る' : '次の問題'; q.options.forEach((option, i) => { const button = document.createElement('button'); button.type = 'button'; button.className = 'answer'; const letter = document.createElement('span'); letter.className = 'letter'; letter.textContent = ['A','B','C','D'][i]; const label = document.createElement('span'); label.textContent = option; button.append(letter, label); button.addEventListener('click', () => choose(i)); $('answers').append(button); }); }
+function choose(choice) { if (selected) return; selected = true; const q = questions[index], isCorrect = choice === q.correct; if (isCorrect) { score++; record.correct++; record.wrong = record.wrong.filter(id => id !== q.id); } else if (!record.wrong.includes(q.id)) record.wrong.push(q.id); record.answered++; save(); updateRecord(); [...$('answers').children].forEach((button, i) => { button.disabled = true; if (i === q.correct) button.classList.add('correct'); else if (i === choice) button.classList.add('incorrect'); }); const box = $('explanation'); box.replaceChildren(); box.hidden = false; const title = document.createElement('strong'); title.textContent = isCorrect ? '正解！ ' + q.term : '不正解 — 正解は「' + q.term + '」'; const body = document.createElement('p'); body.textContent = q.explanation; box.append(title, body); $('next').disabled = false; }
+function finish() { $('quiz').hidden = true; $('result').hidden = false; $('score').textContent = score; $('max').textContent = questions.length; $('resultMessage').textContent = score === questions.length ? '全問正解！この調子で次の分野も進めよう。' : '間違えた語句は「苦手だけ」から復習できるよ。'; }
+$('start').addEventListener('click', start); $('next').addEventListener('click', () => { if (!selected) return; if (index === questions.length - 1) finish(); else { index++; render(); } }); $('quit').addEventListener('click', () => { $('quiz').hidden = true; $('settings').hidden = false; }); $('backSettings').addEventListener('click', () => { $('result').hidden = true; $('settings').hidden = false; }); $('retry').addEventListener('click', () => { $('result').hidden = true; $('settings').hidden = false; if (lastConfig) { $('subject').value = lastConfig.subject; fillTopics(); $('topic').value = lastConfig.topic; $('amount').value = lastConfig.amount; } start(); });
+</script>
+<style>
+.foundation{max-width:880px;margin:0 auto;padding:28px 0 55px}.back{font-size:12px;color:var(--muted)}.hero{padding:42px 0 30px}.eyebrow{font:10px ui-monospace,monospace;letter-spacing:.14em;color:var(--accent);font-weight:800}.hero h1{font-size:clamp(32px,6vw,48px);letter-spacing:-.06em;margin:12px 0}.hero>p:not(.eyebrow){color:var(--muted);font-size:13px;line-height:1.9}.counts{display:flex;gap:9px;flex-wrap:wrap;margin-top:20px}.counts span,.tag{font-size:11px;padding:8px 11px;border:1px solid var(--line);border-radius:8px;color:var(--muted)}.counts b{color:var(--text)}.panel{background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:24px;margin-top:16px}.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.section-head h2,.coverage h2{font-size:19px;margin:5px 0 20px}.section-head .eyebrow{margin:0}.filters{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.filters label{display:grid;gap:7px;font-size:11px;color:var(--muted)}.filters select{width:100%;padding:11px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--text);font:inherit}.record{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:20px 0}.record div{background:var(--surface-soft);border-radius:9px;padding:12px}.record small{display:block;font-size:10px;color:var(--muted)}.record strong{font-size:23px}.primary,.secondary{border:0;border-radius:8px;padding:12px 17px;font:700 12px system-ui;cursor:pointer}.primary{background:var(--accent);color:white}.primary span{margin-left:15px}.secondary{background:var(--surface-soft);border:1px solid var(--line);color:var(--text)}.note{font-size:10px;line-height:1.8;color:var(--muted);margin:13px 0 0}.quiz-meta,.quiz-actions{display:flex;align-items:center;justify-content:space-between;gap:12px}.quiz-meta{font-size:11px;color:var(--muted)}.progress{height:6px;border-radius:8px;background:var(--line);overflow:hidden;margin:14px 0 28px}.progress i{display:block;height:100%;width:0;background:var(--accent);transition:width .2s}.term-label{font-size:11px;color:var(--muted)}.quiz h2{font-size:clamp(18px,3vw,23px);line-height:1.8;margin:8px 0 22px}.answers{display:grid;grid-template-columns:1fr 1fr;gap:10px}.answer{display:flex;align-items:center;gap:11px;text-align:left;min-height:58px;padding:12px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--text);font:inherit;font-size:13px;cursor:pointer}.answer:disabled{cursor:default}.letter{display:grid;place-items:center;flex:none;width:26px;height:26px;border-radius:7px;background:var(--surface-soft);font-size:11px;font-weight:800}.answer.correct{border-color:#28a36a;background:color-mix(in srgb,#28a36a 12%,var(--surface))}.answer.incorrect{border-color:#d94c59;background:color-mix(in srgb,#d94c59 10%,var(--surface))}.explanation{margin-top:17px;padding:15px;border-radius:9px;background:var(--surface-soft);line-height:1.8}.explanation p{font-size:12px;color:var(--muted);margin:6px 0 0}.quiz-actions{margin-top:20px}.score strong{font-size:48px}.score span{font-size:13px;color:var(--muted)}.result{text-align:center}.coverage{margin-top:42px}.coverage .eyebrow{margin-bottom:8px}.topic-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.topic-grid div{display:grid;gap:5px;padding:13px;border:1px solid var(--line);border-radius:9px;background:var(--surface)}.topic-grid span,.topic-grid small{font-size:10px;color:var(--muted)}.topic-grid b{font-size:13px}.quiz[hidden],.result[hidden]{display:none!important}
+@media(max-width:620px){.foundation{padding:22px 0 40px}.panel{padding:17px}.filters{grid-template-columns:1fr}.answers{grid-template-columns:1fr}.topic-grid{grid-template-columns:repeat(2,1fr)}.hero{padding:30px 0 20px}}
+</style>
+</Layout>
