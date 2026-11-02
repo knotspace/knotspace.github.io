@@ -1,4 +1,4 @@
-﻿# KNOT CMS — Decap CMS
+# KNOT CMS — Decap CMS
 # 日本語UI・WordPress風の管理画面設定
 backend:
   name: turbo-github
@@ -7,7 +7,7 @@ backend:
 
 locale: ja
 logo:
-  src: /favicon.svg
+  src: /admin/knot-logo.svg
   show_in_header: true
 
 site_url: https://knotspace.github.io
@@ -63,6 +63,11 @@ collections:
         widget: string
         default: BLOG
         required: true
+      - label: タグ
+        name: tags
+        widget: list
+        required: false
+        default: []
       - label: アイキャッチ画像
         name: heroImage
         widget: image
