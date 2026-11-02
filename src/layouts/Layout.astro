@@ -12,29 +12,32 @@ const {
   image,
 } = Astro.props;
 
-const BASE = import.meta.env.BASE_URL;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 const pageImage = image ? new URL(image, Astro.url).href : undefined;
-const faviconURL = `${BASE}favicon.svg?v=4`;
+const BASE = import.meta.env.BASE_URL;
 ---
 
 <!doctype html>
-<html lang="ja">
+<html lang="ja" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0b1220" />
     <meta name="description" content={description} />
-
     <link rel="canonical" href={canonicalURL} />
-    <link rel="icon" type="image/svg+xml" href={faviconURL} />
+
+    <script is:inline>
+      try {
+        const savedTheme = localStorage.getItem('knot-theme');
+        if (savedTheme === 'light' || savedTheme === 'dark') {
+          document.documentElement.dataset.theme = savedTheme;
+        }
+      } catch {}
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;600;700;800;900&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="KNOT" />
@@ -55,7 +58,28 @@ const faviconURL = `${BASE}favicon.svg?v=4`;
 
         <nav aria-label="メインナビゲーション">
           <a href={BASE}>ホーム</a>
-          <a href={`${BASE}blog/`}>記事一覧</a>
+          <a href={`${BASE}articles/`}>記事一覧</a>
+
+          <button
+            class="theme-toggle"
+            id="theme-toggle"
+            type="button"
+            aria-label="テーマを切り替える"
+            title="テーマを切り替える"
+          >
+            <span id="theme-icon">☀</span>
+          </button>
+
+          <a
+            class="github-link"
+            href="https://github.com/knotspace/knotspace.github.io"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="GitHub"
+            title="GitHub"
+          >
+            ↗
+          </a>
         </nav>
       </header>
 
@@ -64,27 +88,47 @@ const faviconURL = `${BASE}favicon.svg?v=4`;
       </main>
 
       <footer class="site-footer">
-        <div class="footer-main">
-          <a class="footer-brand" href={BASE}>
-            KNOT<span class="brand-dot">.</span>
-          </a>
-          <p>日々のことを、少しずつ。</p>
-        </div>
-
-        <div class="footer-bottom">
-          <span>
-            © {new Date().getFullYear()}
-            <a
-              class="copyright-link"
-              href="https://github.com/knotspace/knotspace.github.io"
-              target="_blank"
-              rel="noreferrer"
-            >KNOT.</a>
-          </span>
-          <span>Built with Astro.</span>
-        </div>
+        <a class="footer-brand" href={BASE}>
+          KNOT<span class="brand-dot">.</span>
+        </a>
+        <p>中学3年生の日々感じたことを書いていく、備忘録的なブログです。</p>
+        <span>© {new Date().getFullYear()} KNOT. Built with Astro.</span>
       </footer>
     </div>
+
+    <script is:inline>
+      (() => {
+        const button = document.getElementById('theme-toggle');
+        const icon = document.getElementById('theme-icon');
+        const root = document.documentElement;
+
+        if (!button || !icon) return;
+
+        const updateIcon = () => {
+          const isDark = root.dataset.theme !== 'light';
+          icon.textContent = isDark ? '☀' : '☾';
+          button.setAttribute(
+            'aria-label',
+            isDark ? 'ライトモードに切り替える' : 'ダークモードに切り替える'
+          );
+          document.querySelector('meta[name="theme-color"]')
+            ?.setAttribute('content', isDark ? '#0b1220' : '#f7f8fa');
+        };
+
+        updateIcon();
+
+        button.addEventListener('click', () => {
+          const nextTheme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+          root.dataset.theme = nextTheme;
+
+          try {
+            localStorage.setItem('knot-theme', nextTheme);
+          } catch {}
+
+          updateIcon();
+        });
+      })();
+    </script>
   </body>
 </html>
 
@@ -93,10 +137,26 @@ const faviconURL = `${BASE}favicon.svg?v=4`;
     color-scheme: dark;
     --bg: #0b1220;
     --surface: #111c2e;
-    --line: rgba(148, 163, 184, .16);
+    --surface-soft: rgba(17, 28, 46, .6);
+    --line: rgba(148, 163, 184, .14);
     --text: #f4f7fb;
     --muted: #9aa9bd;
     --accent: #82b2ff;
+    --article-text: #c4cedc;
+    --code-bg: #142137;
+  }
+
+  html[data-theme="light"] {
+    color-scheme: light;
+    --bg: #f7f8fa;
+    --surface: #ffffff;
+    --surface-soft: rgba(255, 255, 255, .8);
+    --line: rgba(30, 41, 59, .13);
+    --text: #202b3b;
+    --muted: #69778a;
+    --accent: #3978c9;
+    --article-text: #465366;
+    --code-bg: #edf2f8;
   }
 
   * {
@@ -110,11 +170,12 @@ const faviconURL = `${BASE}favicon.svg?v=4`;
   body {
     margin: 0;
     background:
-      radial-gradient(ellipse at 50% -18%, rgba(61,112,190,.08), transparent 42rem),
+      radial-gradient(ellipse at 50% -18%, rgba(61,112,190,.12), transparent 42rem),
       var(--bg);
     color: var(--text);
     font-family: "DM Sans", "Noto Sans JP", sans-serif;
     -webkit-font-smoothing: antialiased;
+    transition: background-color .25s ease, color .25s ease;
   }
 
   a {
@@ -122,26 +183,30 @@ const faviconURL = `${BASE}favicon.svg?v=4`;
     text-decoration: none;
   }
 
+  button {
+    font: inherit;
+  }
+
   .site-shell {
-    width: min(100% - 48px, 1100px);
+    width: min(100% - 48px, 1080px);
     margin: 0 auto;
   }
 
   .site-header {
-    min-height: 76px;
+    min-height: 88px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid var(--line);
+    border-bottom: none;
   }
 
   .brand {
     display: inline-flex;
     align-items: center;
-    font-size: 26px;
+    font-size: 25px;
     font-weight: 900;
     letter-spacing: -.09em;
-    transition: opacity .2s;
+    transition: opacity .2s ease;
   }
 
   .brand:hover {
@@ -155,14 +220,47 @@ const faviconURL = `${BASE}favicon.svg?v=4`;
   nav {
     display: flex;
     align-items: center;
-    gap: 28px;
+    gap: 25px;
     color: var(--muted);
     font-size: 13px;
-    font-weight: 700;
+    font-weight: 600;
+  }
+
+  nav a {
+    transition: color .2s ease;
   }
 
   nav a:hover {
     color: var(--text);
+  }
+
+  .theme-toggle {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: var(--surface);
+    color: var(--text);
+    font-size: 17px;
+    cursor: pointer;
+    transition: transform .2s, background .2s;
+  }
+
+  .theme-toggle:hover {
+    transform: rotate(15deg);
+    background: var(--code-bg);
+  }
+
+  .github-link {
+    color: var(--muted);
+    font-size: 13px;
+    opacity: .55;
+  }
+
+  .github-link:hover {
+    opacity: 1;
   }
 
   main {
@@ -170,61 +268,51 @@ const faviconURL = `${BASE}favicon.svg?v=4`;
   }
 
   .site-footer {
-    margin-top: 80px;
-    padding: 28px 0 24px;
+    margin-top: 100px;
+    padding: 27px 0 34px;
     border-top: 1px solid var(--line);
-  }
-
-  .footer-main {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 25px;
-  }
-
-  .footer-brand {
-    font-size: 19px;
-    font-weight: 900;
-    letter-spacing: -.08em;
-  }
-
-  .footer-main p {
-    margin: 0;
+    gap: 18px;
     color: var(--muted);
     font-size: 11px;
   }
 
-  .footer-bottom {
-    display: flex;
-    justify-content: space-between;
-    color: #718198;
-    font-size: 10px;
+  .footer-brand {
+    color: var(--text);
+    font-size: 17px;
+    font-weight: 900;
+    letter-spacing: -.08em;
   }
 
-  .copyright-link {
-    color: inherit;
-  }
-
-  .copyright-link:hover {
-    color: var(--accent);
+  .site-footer p {
+    margin: 0;
   }
 
   @media (max-width: 620px) {
     .site-shell {
-      width: min(100% - 32px, 1100px);
+      width: min(100% - 32px, 1080px);
     }
 
     .site-header {
-      min-height: 68px;
+      min-height: 72px;
     }
 
     nav {
-      gap: 18px;
+      gap: 15px;
       font-size: 12px;
     }
 
+    .github-link {
+      display: none;
+    }
+
     .site-footer {
-      margin-top: 60px;
+      margin-top: 70px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
     }
   }
 </style>
