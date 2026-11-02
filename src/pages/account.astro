@@ -3,6 +3,8 @@ import Layout from '../layouts/Layout.astro';
 const BASE = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 const supabaseUrl = 'https://rtzorqaigpeechqywjie.supabase.co';
 const supabaseKey = 'sb_publishable_-yhc0QqTEEZTBWi9jTcFRA_-AVi-iP6';
+// Cloudflare Turnstile の Sitekey を設定。Secret key はここに絶対に書かない。
+const turnstileSiteKey = 'REPLACE_WITH_CLOUDFLARE_TURNSTILE_SITEKEY';
 ---
 <Layout title="アカウント | KNOT" description="KNOTのアカウントにログイン、または新規登録。" noindex>
   <main class="account-page">
@@ -25,6 +27,10 @@ const supabaseKey = 'sb_publishable_-yhc0QqTEEZTBWi9jTcFRA_-AVi-iP6';
         <p>KNOTでは情報を安全に管理できるよう努めていますが、インターネット上の情報漏えいリスクを完全になくすことはできません。ご自身でも安全対策にご協力ください。</p>
       </aside>
       <form id="account-form">
+        <div id="turnstile-container" class="turnstile-wrap" hidden>
+          <div id="turnstile-widget"></div>
+          <p class="captcha-help">不正な自動操作を防ぐための確認です。</p>
+        </div>
         <label>メールアドレス<input id="email" type="email" autocomplete="email" required placeholder="you@example.com" /></label>
         <label>パスワード<input id="password" type="password" minlength="8" autocomplete="current-password" required placeholder="8文字以上" /></label>
         <button class="submit" id="submit" type="submit">ログイン</button>
@@ -33,9 +39,34 @@ const supabaseKey = 'sb_publishable_-yhc0QqTEEZTBWi9jTcFRA_-AVi-iP6';
       <p class="privacy">メールアドレスはログインに使用します。公開プロフィールやランキングは作成しません。</p>
     </section>
   </main>
-  <script define:vars={{ supabaseUrl, supabaseKey, base: BASE }}>
+  <script define:vars={{ supabaseUrl, supabaseKey, base: BASE, turnstileSiteKey }}>
     const $ = (id) => document.getElementById(id);
     const form = $('account-form');
+    let captchaToken = '';
+    let turnstileWidgetId = null;
+    const turnstileConfigured = turnstileSiteKey && !turnstileSiteKey.startsWith('REPLACE_');
+    if (turnstileConfigured) {
+      $('turnstile-container').hidden = false;
+      const turnstileScript = document.createElement('script');
+      turnstileScript.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      turnstileScript.async = true;
+      turnstileScript.defer = true;
+      turnstileScript.onload = () => {
+        if (!window.turnstile) {
+          $('message').textContent = '本人確認を読み込めませんでした。ページを再読み込みしてください。';
+          return;
+        }
+        turnstileWidgetId = window.turnstile.render('#turnstile-widget', {
+          sitekey: turnstileSiteKey,
+          theme: 'auto',
+          callback: (token) => { captchaToken = token; },
+          'expired-callback': () => { captchaToken = ''; },
+          'error-callback': () => { captchaToken = ''; $('message').textContent = '本人確認に失敗しました。もう一度お試しください。'; }
+        });
+      };
+      turnstileScript.onerror = () => { $('message').textContent = '本人確認を読み込めませんでした。広告ブロッカー等を確認してください。'; };
+      document.head.appendChild(turnstileScript);
+    }
     // Supabaseの確認メールから戻ったとき、URLフラグメントの認証情報を保存する
     const callbackParams = new URLSearchParams(location.hash.replace(/^#/, ''));
     const callbackError = callbackParams.get('error_description') || callbackParams.get('error');
@@ -77,6 +108,8 @@ const supabaseKey = 'sb_publishable_-yhc0QqTEEZTBWi9jTcFRA_-AVi-iP6';
       $('security-notice').hidden = mode !== 'signup';
       $('password').autocomplete = mode === 'login' ? 'current-password' : 'new-password';
       $('message').textContent = '';
+      captchaToken = '';
+      if (turnstileConfigured && window.turnstile && turnstileWidgetId !== null) window.turnstile.reset(turnstileWidgetId);
     };
     $('login-tab').addEventListener('click', () => setMode('login'));
     $('signup-tab').addEventListener('click', () => setMode('signup'));
@@ -92,24 +125,27 @@ const supabaseKey = 'sb_publishable_-yhc0QqTEEZTBWi9jTcFRA_-AVi-iP6';
       submit.disabled = true;
       $('message').textContent = '処理中...';
       try {
+        if (turnstileConfigured && !captchaToken) throw new Error('先に本人確認を完了してください。');
         const email = $('email').value.trim();
         const password = $('password').value;
         let data;
         if (mode === 'signup') {
           const redirectTo = 'https://knotspace.github.io/account/';
-          data = await api('/auth/v1/signup?redirect_to=' + encodeURIComponent(redirectTo), { email, password, data: {} });
+          data = await api('/auth/v1/signup?redirect_to=' + encodeURIComponent(redirectTo), { email, password, data: {}, gotrue_meta_security: { captcha_token: captchaToken || undefined } });
           if (!data.access_token) {
             $('message').textContent = '確認メールを送信しました。メール内のリンクから登録を完了してね。';
             return;
           }
         } else {
-          data = await api('/auth/v1/token?grant_type=password', { email, password });
+          data = await api('/auth/v1/token?grant_type=password', { email, password, gotrue_meta_security: { captcha_token: captchaToken || undefined } });
         }
         localStorage.setItem('knot-auth', JSON.stringify({ access_token: data.access_token, refresh_token: data.refresh_token, expires_at: Date.now() + (data.expires_in || 3600) * 1000, user: data.user }));
         location.href = base + 'mypage/';
       } catch (error) {
         $('message').textContent = error.message;
       } finally {
+        captchaToken = '';
+        if (turnstileConfigured && window.turnstile && turnstileWidgetId !== null) window.turnstile.reset(turnstileWidgetId);
         submit.disabled = false;
       }
     });
@@ -120,5 +156,5 @@ const supabaseKey = 'sb_publishable_-yhc0QqTEEZTBWi9jTcFRA_-AVi-iP6';
   </script>
 </Layout>
 <style>
-.account-page{max-width:520px;margin:0 auto;padding:46px 0 75px}.back{display:inline-block;color:var(--muted);font-size:12px;margin-bottom:25px}.account-card{padding:30px;border:1px solid var(--line);border-radius:18px;background:var(--surface)}.eyebrow{color:var(--accent);font-size:10px;font-weight:800;letter-spacing:.16em}.account-card h1{margin:10px 0;color:var(--text);font-size:30px;letter-spacing:-.05em}.intro,.privacy{color:var(--muted);font-size:12px;line-height:1.9}.tabs{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:25px 0 20px;padding:4px;border-radius:11px;background:var(--bg)}.tab{padding:10px;border:0;border-radius:8px;background:transparent;color:var(--muted);font-size:12px;font-weight:700;cursor:pointer}.tab.active{background:var(--surface);color:var(--text);box-shadow:0 1px 5px #0002}form{display:grid;gap:15px}label{display:grid;gap:7px;color:var(--text);font-size:12px;font-weight:700}input{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--text);font:inherit;font-size:13px}input:focus{outline:2px solid var(--accent);outline-offset:1px}.submit{margin-top:5px;padding:13px;border:0;border-radius:10px;background:var(--accent);color:#fff;font-size:13px;font-weight:800;cursor:pointer}.submit:disabled{opacity:.55;cursor:wait}.message{min-height:22px;color:var(--accent);font-size:12px;line-height:1.8}.privacy{padding-top:15px;border-top:1px solid var(--line);font-size:10px}.security-notice{margin:18px 0;padding:15px;border:1px solid #d6a84b66;border-radius:12px;background:color-mix(in srgb,#d6a84b 9%,var(--surface));color:var(--text);font-size:11px;line-height:1.85}.security-notice strong{font-size:12px}.security-notice ul{margin:9px 0;padding-left:19px}.security-notice li+li{margin-top:5px}.security-notice p{margin:9px 0 0;color:var(--muted);font-size:10px}@media(max-width:600px){.account-page{padding:32px 0 60px}.account-card{padding:22px}}
+.account-page{max-width:520px;margin:0 auto;padding:46px 0 75px}.back{display:inline-block;color:var(--muted);font-size:12px;margin-bottom:25px}.account-card{padding:30px;border:1px solid var(--line);border-radius:18px;background:var(--surface)}.eyebrow{color:var(--accent);font-size:10px;font-weight:800;letter-spacing:.16em}.account-card h1{margin:10px 0;color:var(--text);font-size:30px;letter-spacing:-.05em}.intro,.privacy{color:var(--muted);font-size:12px;line-height:1.9}.tabs{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:25px 0 20px;padding:4px;border-radius:11px;background:var(--bg)}.tab{padding:10px;border:0;border-radius:8px;background:transparent;color:var(--muted);font-size:12px;font-weight:700;cursor:pointer}.tab.active{background:var(--surface);color:var(--text);box-shadow:0 1px 5px #0002}form{display:grid;gap:15px}label{display:grid;gap:7px;color:var(--text);font-size:12px;font-weight:700}input{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--text);font:inherit;font-size:13px}input:focus{outline:2px solid var(--accent);outline-offset:1px}.submit{margin-top:5px;padding:13px;border:0;border-radius:10px;background:var(--accent);color:#fff;font-size:13px;font-weight:800;cursor:pointer}.submit:disabled{opacity:.55;cursor:wait}.message{min-height:22px;color:var(--accent);font-size:12px;line-height:1.8}.privacy{padding-top:15px;border-top:1px solid var(--line);font-size:10px}.turnstile-wrap{display:grid;justify-items:start;gap:5px}.captcha-help{margin:0;color:var(--muted);font-size:10px}.security-notice{margin:18px 0;padding:15px;border:1px solid #d6a84b66;border-radius:12px;background:color-mix(in srgb,#d6a84b 9%,var(--surface));color:var(--text);font-size:11px;line-height:1.85}.security-notice strong{font-size:12px}.security-notice ul{margin:9px 0;padding-left:19px}.security-notice li+li{margin-top:5px}.security-notice p{margin:9px 0 0;color:var(--muted);font-size:10px}@media(max-width:600px){.account-page{padding:32px 0 60px}.account-card{padding:22px}}
 </style>
