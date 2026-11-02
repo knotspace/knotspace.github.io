@@ -9,7 +9,7 @@ const supabaseKey = 'sb_publishable_-yhc0QqTEEZTBWi9jTcFRA_-AVi-iP6';
     <header class="welcome"><span class="eyebrow">YOUR SPACE</span><h1>マイページ</h1><p id="user-email">ログイン情報を確認しています...</p></header>
     <section id="admin-panel" class="panel" hidden><span class="eyebrow">KNOT ADMIN</span><h2>管理人アカウント</h2><p>管理人権限が有効です。このアカウントはKNOTの管理者として登録されています。</p></section>
     <section id="writer-link" class="panel" hidden><span class="eyebrow">KNOT WRITER</span><h2>投稿者ワークスペース</h2><p>記事の下書きを作成・編集できます。公開操作はできません。</p><a href={BASE + 'writer/'}>記事を書く →</a></section>
-    <section id="invite-panel" class="panel" hidden><span class="eyebrow">WRITER MANAGEMENT</span><h2>投稿者を招待</h2><p>招待した相手は記事の下書き作成・編集だけができます。公開・削除・管理設定はできません。</p><form id="invite-form"><label>メールアドレス<input id="invite-email" type="email" required placeholder="writer@example.com" /></label><button type="submit">招待メールを送る</button></form><p id="invite-message" role="status"></p><h3>投稿者から届いた記事</h3><div id="admin-submissions">読み込み中...</div></section>
+    <section id="invite-panel" class="panel" hidden><span class="eyebrow">WRITER MANAGEMENT</span><h2>投稿者を招待</h2><p>先に相手に通常のKNOTアカウントを作成してもらい、その登録メールアドレスに投稿者権限を付与します。ここで作るSQLをSupabaseのSQL Editorで実行してください。</p><form id="invite-form"><label>登録済みメールアドレス<input id="invite-email" type="email" required placeholder="writer@example.com" /></label><button type="submit">権限付与SQLを作成</button></form><textarea id="writer-sql" rows="4" readonly placeholder="ここにSQLが表示されます"></textarea><button id="copy-writer-sql" type="button">SQLをコピー</button><p id="invite-message" role="status"></p><h3>投稿者から届いた記事</h3><div id="admin-submissions">読み込み中...</div></section>
     <section class="profile panel">
       <div><span class="eyebrow">PROFILE</span><h2>プロフィール</h2></div>
       <label>表示名<input id="display-name" maxlength="30" placeholder="表示名" /></label>
@@ -70,15 +70,17 @@ const supabaseKey = 'sb_publishable_-yhc0QqTEEZTBWi9jTcFRA_-AVi-iP6';
         });
       } catch(error) { $('admin-submissions').textContent = error.message; }
     }
-    $('invite-form').addEventListener('submit', async event => {
+    $('invite-form').addEventListener('submit', event => {
       event.preventDefault();
-      const button = $('invite-form').querySelector('button'); button.disabled=true; $('invite-message').textContent='招待中...';
-      try {
-        const response = await fetch(supabaseUrl + '/functions/v1/invite-writer', {method:'POST',headers:{apikey:supabaseKey,Authorization:'Bearer '+session.access_token,'Content-Type':'application/json'},body:JSON.stringify({email:$('invite-email').value.trim()})});
-        const data=await response.json(); if(!response.ok) throw new Error(data.error || '招待に失敗しました。');
-        $('invite-message').textContent=data.message; $('invite-email').value='';
-      } catch(error) { $('invite-message').textContent=error.message; }
-      finally { button.disabled=false; }
+      const email = $('invite-email').value.trim().replace(/'/g, "''");
+      if (!email) return;
+      $('writer-sql').value = "insert into public.knot_writer_roles (user_id) select id from auth.users where lower(email) = lower('" + email + "') on conflict (user_id) do nothing;";
+      $('invite-message').textContent = "SQLを作成したよ。SupabaseのSQL Editorで実行してね。";
+    });
+    $('copy-writer-sql').addEventListener('click', async () => {
+      if (!$('writer-sql').value) { $('invite-message').textContent = "先にメールアドレスを入力してSQLを作成してね。"; return; }
+      try { await navigator.clipboard.writeText($('writer-sql').value); $('invite-message').textContent = "SQLをコピーしました。"; }
+      catch { $('invite-message').textContent = "SQL欄を選択して手動でコピーしてね。"; }
     });
     load();
     $('save-profile').addEventListener('click', async () => {
