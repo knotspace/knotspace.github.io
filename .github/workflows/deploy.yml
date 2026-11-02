@@ -19,6 +19,7 @@ jobs:
     permissions:
       contents: write
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     outputs:
       due: ${{ steps.schedule.outputs.due }}
     steps:
@@ -70,9 +71,8 @@ jobs:
     needs: prepare
     if: github.event_name != 'schedule' || needs.prepare.outputs.due == 'true'
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
       - name: Build and upload Astro site
         uses: withastro/action@a8b97df764791eb61fbf3338ef713b0e61ae05c5
         with:
@@ -85,6 +85,7 @@ jobs:
       id-token: write
     needs: build
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
