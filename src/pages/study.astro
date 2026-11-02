@@ -1,0 +1,134 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'KNOT Study',
+  applicationCategory: 'EducationalApplication',
+  operatingSystem: 'Any',
+  inLanguage: 'ja-JP',
+  description: '中学1年から3年までの5教科を学べる無料の学習ツール。',
+  url: 'https://knotspace.github.io/study/',
+  isAccessibleForFree: true,
+};
+---
+
+<Layout
+  title="KNOT Study｜中学生のための5教科学習ツール"
+  description="中学1〜3年の数学・英語・国語・理科・社会を一問一答で学習。苦手問題や学習記録はCookieに保存できます。"
+  structuredData={structuredData}
+>
+  <main class="study-app">
+    <header class="study-heading">
+      <div class="eyebrow">KNOT / LEARNING TOOL</div>
+      <h1>Study<span>.</span></h1>
+      <p>中学範囲を、必要なときに必要な分だけ。</p>
+      <div class="study-meta"><span>中学1〜3年</span><span>5教科</span><span>無料</span><span>記録はこの端末に保存</span></div>
+    </header>
+
+    <section class="study-dashboard" aria-label="学習記録">
+      <div><span class="dash-label">解答数</span><strong id="total-answered">0</strong></div>
+      <div><span class="dash-label">正解数</span><strong id="total-correct">0</strong></div>
+      <div><span class="dash-label">正答率</span><strong id="accuracy">—</strong></div>
+      <div><span class="dash-label">苦手問題</span><strong id="wrong-count">0</strong></div>
+    </section>
+
+    <section class="study-panel" aria-labelledby="subject-title">
+      <div class="section-top"><div><div class="eyebrow">01 / SELECT</div><h2 id="subject-title">教科を選ぶ</h2></div><span class="quiet">好きなところから始めよう</span></div>
+      <div class="subject-grid" id="subject-grid">
+        <button class="subject active" data-subject="数学"><span>∑</span><b>数学</b><small>計算・関数・図形</small></button>
+        <button class="subject" data-subject="英語"><span>ABC</span><b>英語</b><small>文法・語彙</small></button>
+        <button class="subject" data-subject="国語"><span>文</span><b>国語</b><small>文法・漢字・古文</small></button>
+        <button class="subject" data-subject="理科"><span>⚗</span><b>理科</b><small>物理・化学・生物・地学</small></button>
+        <button class="subject" data-subject="社会"><span>地</span><b>社会</b><small>地理・歴史・公民</small></button>
+      </div>
+      <div class="filters">
+        <label>学年<select id="grade"><option value="all">全学年</option><option value="1">中1</option><option value="2">中2</option><option value="3">中3</option></select></label>
+        <label>出題範囲<select id="mode"><option value="all">すべて</option><option value="wrong">間違えた問題</option></select></label>
+        <button class="primary" id="start-btn" type="button">学習を始める <span>→</span></button>
+      </div>
+    </section>
+
+    <section class="study-panel quiz-panel" id="quiz-panel" hidden aria-live="polite">
+      <div class="quiz-top"><div><div class="eyebrow" id="quiz-subtitle">MATHEMATICS</div><h2 id="quiz-title">問題</h2></div><span class="counter" id="question-counter">1 / 1</span></div>
+      <div class="question-card">
+        <div class="question-tags"><span id="question-grade">中3</span><span id="question-topic">二次方程式</span></div>
+        <p class="question-text" id="question-text"></p>
+        <div class="answer-list" id="answer-list"></div>
+        <div class="explanation" id="explanation" hidden></div>
+        <div class="quiz-actions"><button class="text-button" id="quit-btn" type="button">教科選択に戻る</button><button class="primary" id="next-btn" type="button" disabled>次の問題 →</button></div>
+      </div>
+    </section>
+
+    <section class="study-panel wrong-panel">
+      <div class="section-top"><div><div class="eyebrow">02 / REVIEW</div><h2>苦手問題</h2></div><span class="quiet">間違えた問題を自動保存</span></div>
+      <p class="review-copy">解答すると、この端末のCookieに学習記録が保存されるよ。苦手問題だけを選んで解き直すこともできる。</p>
+      <button class="outline" id="review-btn" type="button">苦手問題を復習する <span id="review-total">0問</span></button>
+      <button class="reset-link" id="reset-btn" type="button">学習記録をリセット</button>
+    </section>
+    <footer class="study-footer">KNOT Study <span>・</span> 学習内容は今後も追加予定</footer>
+  </main>
+
+  <style>
+    .study-app{max-width:900px;margin:0 auto;padding:46px 22px 76px;color:var(--text)}
+    .study-heading{padding:10px 0 28px}.eyebrow{font-size:.69rem;letter-spacing:.16em;color:var(--muted);font-weight:750}.study-heading h1{font-size:clamp(2.5rem,7vw,4.2rem);letter-spacing:-.07em;line-height:1;margin:13px 0}.study-heading h1 span{color:var(--accent,#6b9cff)}.study-heading p{color:var(--muted);margin:0}.study-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.study-meta span,.question-tags span{font-size:.72rem;border:1px solid var(--border);border-radius:30px;padding:5px 10px;color:var(--muted)}
+    .study-dashboard{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin:10px 0 26px}.study-dashboard>div{background:var(--surface, var(--card));padding:15px 17px;display:flex;flex-direction:column;gap:5px}.dash-label{font-size:.72rem;color:var(--muted)}.study-dashboard strong{font-size:1.5rem;font-variant-numeric:tabular-nums}
+    .study-panel{border:1px solid var(--border);border-radius:16px;padding:23px;margin:18px 0;background:var(--surface,transparent)}.section-top,.quiz-top{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:20px}.section-top h2,.quiz-top h2{font-size:1.22rem;margin:5px 0 0;letter-spacing:-.03em}.quiet{font-size:.76rem;color:var(--muted)}.subject-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px}.subject{background:transparent;color:var(--text);border:1px solid var(--border);border-radius:12px;padding:13px 8px;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:5px;min-width:0;transition:border-color .15s,background .15s}.subject>span{font-size:1.35rem;font-weight:800;height:27px}.subject b{font-size:.9rem}.subject small{font-size:.68rem;color:var(--muted);line-height:1.4}.subject.active{border-color:var(--accent,#6b9cff);background:color-mix(in srgb,var(--accent,#6b9cff) 9%,transparent)}
+    .filters{display:flex;align-items:end;gap:12px;margin-top:20px;flex-wrap:wrap}.filters label{display:flex;flex-direction:column;gap:6px;font-size:.72rem;color:var(--muted);flex:1;min-width:125px}.filters select{background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:9px;padding:10px;font:inherit}.primary,.outline{border:0;border-radius:9px;padding:11px 16px;font-weight:750;cursor:pointer;background:var(--text);color:var(--bg)}.primary:disabled{opacity:.4;cursor:not-allowed}.primary span{margin-left:10px}.outline{background:transparent;color:var(--text);border:1px solid var(--border)}.quiz-panel[hidden]{display:none}.counter{font-size:.78rem;color:var(--muted);font-variant-numeric:tabular-nums}.question-card{border:1px solid var(--border);border-radius:13px;padding:20px}.question-tags{display:flex;gap:7px}.question-text{font-size:1.12rem;line-height:1.85;font-weight:650;white-space:pre-wrap;margin:18px 0}.answer-list{display:grid;gap:9px}.answer-option{padding:12px 14px;text-align:left;border:1px solid var(--border);border-radius:9px;background:transparent;color:var(--text);font:inherit;cursor:pointer}.answer-option:hover:not(:disabled){border-color:var(--accent,#6b9cff)}.answer-option.correct{border-color:#299b68;background:rgba(41,155,104,.1)}.answer-option.incorrect{border-color:#d65c5c;background:rgba(214,92,92,.1)}.explanation{margin-top:15px;padding:13px 15px;border-radius:10px;background:var(--bg);font-size:.88rem;line-height:1.8}.quiz-actions{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-top:18px}.text-button,.reset-link{border:0;background:none;color:var(--muted);cursor:pointer;font:inherit;font-size:.8rem;padding:8px 0}.review-copy{font-size:.86rem;color:var(--muted);line-height:1.8}.outline span{margin-left:12px;color:var(--muted);font-size:.78rem}.reset-link{display:block;margin-top:10px;font-size:.72rem}.study-footer{text-align:center;color:var(--muted);font-size:.75rem;padding:25px}.study-footer span{padding:0 6px}
+    @media(max-width:650px){.study-app{padding:30px 15px 55px}.study-panel{padding:17px}.subject-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.study-dashboard>div{padding:12px 10px}.study-dashboard strong{font-size:1.25rem}.dash-label{font-size:.65rem}.quiet{display:none}.filters{gap:9px}.filters label{min-width:calc(50% - 8px)}.filters .primary{width:100%}.question-card{padding:15px}.question-text{font-size:1rem}}
+    @media(prefers-reduced-motion:reduce){.subject{transition:none}}
+  </style>
+
+  <script is:inline>
+    (() => {
+      const bank = [
+        {id:'m1',s:'数学',g:1,t:'正負の数',q:'−3 + 8 の答えは？',a:['−11','−5','5','11'],c:2,e:'正負の数の加法。異符号なので絶対値の差 8−3=5 を計算し、絶対値が大きい正の符号をつける。'},
+        {id:'m2',s:'数学',g:1,t:'文字式',q:'x=3 のとき、2x²−5x の値は？',a:['−3','3','−9','9'],c:0,e:'2×3²−5×3=18−15=3。正解は「3」。'},
+        {id:'m3',s:'数学',g:2,t:'連立方程式',q:'x+y=7、x−y=1 のとき、x の値は？',a:['2','3','4','6'],c:2,e:'2つの式を足すと 2x=8。したがって x=4。'},
+        {id:'m4',s:'数学',g:2,t:'一次関数',q:'y=−3x+2 の傾きは？',a:['−3','−2','2','3'],c:0,e:'一次関数 y=ax+b の傾きは x の係数 a。よって −3。'},
+        {id:'m5',s:'数学',g:3,t:'平方根',q:'√50 を簡単にすると？',a:['2√5','5√2','10√5','25√2'],c:1,e:'√50=√(25×2)=5√2。'},
+        {id:'m6',s:'数学',g:3,t:'二次方程式',q:'x²−5x+6=0 の解は？',a:['1, 6','−2, −3','2, 3','−2, 3'],c:2,e:'(x−2)(x−3)=0 より x=2,3。'},
+        {id:'m7',s:'数学',g:3,t:'相似',q:'相似比が 2:3 の2つの図形。面積比は？',a:['2:3','4:9','8:27','1:3'],c:1,e:'面積比は相似比の2乗。2²:3²=4:9。'},
+        {id:'e1',s:'英語',g:1,t:'be動詞',q:'「彼は学生です。」を英語にすると？',a:['He am a student.','He is a student.','He are a student.','He be a student.'],c:1,e:'主語が三人称単数の He なので be動詞は is。'},
+        {id:'e2',s:'英語',g:1,t:'一般動詞',q:'She (　) tennis every day. に入る語は？',a:['play','plays','playing','played'],c:1,e:'現在形で主語が三人称単数のとき、一般動詞に s をつける。'},
+        {id:'e3',s:'英語',g:2,t:'不定詞',q:'「私は本を読むために図書館へ行った。」の「読むために」は？',a:['read','to read','reading','reads'],c:1,e:'目的を表す「〜するために」は to + 動詞の原形。'},
+        {id:'e4',s:'英語',g:2,t:'比較',q:'「富士山は日本で最も高い山です。」に合う表現は？',a:['high','higher','the highest','highest than'],c:2,e:'最上級は the + 形容詞est。'},
+        {id:'e5',s:'英語',g:3,t:'現在完了',q:'I have lived here (　) 2020. に入る語は？',a:['for','since','during','from'],c:1,e:'since は過去のある時点、for は期間を表す。2020という時点なので since。'},
+        {id:'e6',s:'英語',g:3,t:'受動態',q:'This book (　) by many people. に入る語は？',a:['read','reads','is read','is reading'],c:2,e:'受動態は be動詞 + 過去分詞。主語が単数なので is read。'},
+        {id:'k1',s:'国語',g:1,t:'文法',q:'「美しい」の品詞は？',a:['名詞','動詞','形容詞','形容動詞'],c:2,e:'「美しい」は言い切りが「い」で終わり、活用する形容詞。'},
+        {id:'k2',s:'国語',g:2,t:'文法',q:'「静かな町」の「静かな」の品詞は？',a:['形容詞','形容動詞','副詞','連体詞'],c:1,e:'「静かだ」と言い切ることができる形容動詞。'},
+        {id:'k3',s:'国語',g:3,t:'文法',q:'「走っている」の「て」は何の助詞？',a:['格助詞','接続助詞','副助詞','終助詞'],c:1,e:'「走って」と後ろの「いる」をつなぐ接続助詞。'},
+        {id:'k4',s:'国語',g:2,t:'敬語',q:'「先生がおっしゃる」は何語？',a:['尊敬語','謙譲語','丁寧語','美化語'],c:0,e:'相手や話題の人物の動作を高める尊敬語。'},
+        {id:'k5',s:'国語',g:3,t:'古文',q:'古文の「いと」の意味は？',a:['少し','とても','すぐに','決して'],c:1,e:'「いと」は「とても」「たいそう」という意味。'},
+        {id:'s1',s:'理科',g:1,t:'生物',q:'植物が光を受けてデンプンなどをつくるはたらきは？',a:['呼吸','蒸散','光合成','消化'],c:2,e:'光エネルギーを使い、二酸化炭素と水から養分をつくる光合成。'},
+        {id:'s2',s:'理科',g:2,t:'化学',q:'水の化学式は？',a:['CO₂','O₂','H₂O','NaCl'],c:2,e:'水は水素原子2個と酸素原子1個からなる H₂O。'},
+        {id:'s3',s:'理科',g:2,t:'物理',q:'電圧6V、抵抗3Ωのとき、電流は？',a:['0.5A','2A','3A','18A'],c:1,e:'オームの法則 I=V/R。6÷3=2A。'},
+        {id:'s4',s:'理科',g:3,t:'化学',q:'酸とアルカリが互いの性質を打ち消し合う反応は？',a:['酸化','還元','中和','分解'],c:2,e:'酸の水素イオンとアルカリの水酸化物イオンが反応する中和。'},
+        {id:'s5',s:'理科',g:3,t:'地学',q:'地震が発生した地下の場所を何という？',a:['震央','震源','震度','断層'],c:1,e:'地震が最初に発生した地下の場所が震源。その真上の地表が震央。'},
+        {id:'s6',s:'理科',g:1,t:'地学',q:'マグマが冷えて固まってできた岩石は？',a:['堆積岩','変成岩','火成岩','石灰岩'],c:2,e:'マグマが冷え固まってできる岩石を火成岩という。'},
+        {id:'h1',s:'社会',g:1,t:'地理',q:'赤道の緯度は？',a:['北緯90度','北緯0度','南緯23.4度','南緯90度'],c:1,e:'赤道は緯度0度。'},
+        {id:'h2',s:'社会',g:2,t:'歴史',q:'鎌倉幕府を開いた人物は？',a:['藤原道長','源頼朝','足利尊氏','徳川家康'],c:1,e:'源頼朝は1192年（現在は1185年説も重視）に鎌倉幕府を開いた。'},
+        {id:'h3',s:'社会',g:2,t:'歴史',q:'大化の改新が始まった年は？',a:['538年','645年','710年','794年'],c:1,e:'645年、中大兄皇子や中臣鎌足らが蘇我氏を倒し改革を始めた。'},
+        {id:'h4',s:'社会',g:3,t:'公民',q:'日本国憲法の三大原則に含まれないものは？',a:['国民主権','基本的人権の尊重','平和主義','議院内閣制'],c:3,e:'三大原則は国民主権・基本的人権の尊重・平和主義。'},
+        {id:'h5',s:'社会',g:3,t:'公民',q:'法律を制定する国の機関は？',a:['内閣','裁判所','国会','地方議会'],c:2,e:'国会は国権の最高機関であり、唯一の立法機関。'},
+        {id:'h6',s:'社会',g:1,t:'地理',q:'日本で最も面積が大きい都道府県は？',a:['岩手県','長野県','北海道','新潟県'],c:2,e:'北海道が日本で最も面積の大きい都道府県。'}
+      ];
+      const $ = (id) => document.getElementById(id);
+      const subjects = [...document.querySelectorAll('.subject')];
+      const COOKIE = 'knot_study_v1';
+      const empty = () => ({answered:0,correct:0,wrong:[]});
+      function readCookie(){try{const row=document.cookie.split('; ').find(x=>x.startsWith(COOKIE+'='));if(!row)return empty();const v=JSON.parse(decodeURIComponent(row.split('=').slice(1).join('=')));return {answered:Number(v.answered)||0,correct:Number(v.correct)||0,wrong:Array.isArray(v.wrong)?v.wrong.filter(x=>bank.some(q=>q.id===x)).slice(0,30):[]};}catch{return empty();}}
+      let stats=readCookie(), selected='数学', list=[], index=0, answered=false;
+      function save(){const data=encodeURIComponent(JSON.stringify(stats));document.cookie=`${COOKIE}=${data}; Max-Age=31536000; Path=/; SameSite=Lax`+(location.protocol==='https:'?'; Secure':'');}
+      function renderStats(){$('total-answered').textContent=stats.answered;$('total-correct').textContent=stats.correct;$('accuracy').textContent=stats.answered?Math.round(stats.correct/stats.answered*100)+'%':'—';$('wrong-count').textContent=stats.wrong.length;$('review-total').textContent=stats.wrong.length+'問';}
+      subjects.forEach(btn=>btn.addEventListener('click',()=>{selected=btn.dataset.subject;subjects.forEach(x=>x.classList.toggle('active',x===btn));$('quiz-panel').hidden=true;}));
+      function begin(wrongOnly=false){const grade=$('grade').value;list=bank.filter(q=>q.s===selected&&(grade==='all'||String(q.g)===grade)&&(!wrongOnly||stats.wrong.includes(q.id)));if(!list.length){alert(wrongOnly?'この条件の苦手問題はまだないよ。':'この学年の問題は準備中だよ。');return;}list=[...list].sort(()=>Math.random()-.5);index=0;$('quiz-panel').hidden=false;$('quiz-panel').scrollIntoView({behavior:'smooth',block:'start'});showQuestion();}
+      function showQuestion(){answered=false;const q=list[index];$('quiz-subtitle').textContent=q.s.toUpperCase();$('quiz-title').textContent=q.s+'の問題';$('question-counter').textContent=(index+1)+' / '+list.length;$('question-grade').textContent='中'+q.g;$('question-topic').textContent=q.t;$('question-text').textContent=q.q;$('explanation').hidden=true;$('next-btn').disabled=true;$('next-btn').textContent=index===list.length-1?'学習を終了':'次の問題 →';const area=$('answer-list');area.replaceChildren();q.a.forEach((answer,i)=>{const b=document.createElement('button');b.type='button';b.className='answer-option';b.textContent=(i+1)+'. '+answer;b.addEventListener('click',()=>choose(i));area.append(b);});}
+      function choose(choice){if(answered)return;answered=true;const q=list[index], correct=choice===q.c;stats.answered++;if(correct){stats.correct++;stats.wrong=stats.wrong.filter(x=>x!==q.id);}else if(!stats.wrong.includes(q.id))stats.wrong.push(q.id);save();renderStats();[...$('answer-list').children].forEach((b,i)=>{b.disabled=true;if(i===q.c)b.classList.add('correct');else if(i===choice)b.classList.add('incorrect');});$('explanation').hidden=false;$('explanation').textContent=(correct?'正解！ ':'不正解。正解は「'+q.a[q.c]+'」。 ')+q.e;$('next-btn').disabled=false;}
+      $('start-btn').addEventListener('click',()=>begin($('mode').value==='wrong'));$('review-btn').addEventListener('click',()=>{selected='数学';subjects.forEach(x=>x.classList.toggle('active',x.dataset.subject===selected));$('grade').value='all';$('mode').value='wrong';begin(true);});$('next-btn').addEventListener('click',()=>{if(index<list.length-1){index++;showQuestion();}else{$('quiz-panel').hidden=true;alert('おつかれさま！学習記録を保存したよ。');}});$('quit-btn').addEventListener('click',()=>$('quiz-panel').hidden=true);
+      $('reset-btn').addEventListener('click',()=>{if(confirm('この端末に保存した学習記録を削除する？')){stats=empty();save();renderStats();}});
+      renderStats();
+    })();
+  </script>
+</Layout>
