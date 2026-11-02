@@ -32,4 +32,9 @@ create trigger on_auth_user_created_knot
   after insert on auth.users
   for each row execute procedure public.handle_new_knot_user();
 
+-- Explicitly remove any default/public grants, then grant only the required access.
+revoke all on public.knot_profiles from anon, authenticated;
 grant select, insert, update on public.knot_profiles to authenticated;
+
+-- The trigger is the only intended caller of this function.
+revoke all on function public.handle_new_knot_user() from public, anon, authenticated;
