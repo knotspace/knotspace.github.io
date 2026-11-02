@@ -1,40 +1,8 @@
-# ブログ
+# KNOT Study 920問データ版
+- 理科460問、社会460問の計920問を収録。
+- 科目別の基礎・標準・応用レベルを設定。
+- データは `src/data/study-questions.json`。
+- `src/pages/study/solve.astro` はJSONを読み込む構成。
+- このZIPはStudy関連ファイルのみ。ブログ記事や共通レイアウトは含まない。
 
-Astro 4 と GitHub Pages で運用する個人ブログです。
-
-## ローカルで起動
-
-```bash
-npm install
-npm run dev
-```
-
-## GitHub Pages
-
-この設定はリポジトリ `Shiratakihot/Astro` 用です。
-公開URLは `https://shiratakihot.github.io/Astro/` を想定しています。
-
-1. GitHub リポジトリの Settings → Pages を開く
-2. Build and deployment の Source を **GitHub Actions** にする
-3. `main` ブランチへ push すると `.github/workflows/deploy.yml` がビルド・公開します
-4. リポジトリの Actions タブで Deploy Astro site to Pages が成功したことを確認します
-
-## 記事を追加する
-
-`src/content/blog/` に Markdown ファイル（`.md`）を追加します。
-
-```md
----
-title: "記事タイトル"
-description: "記事の説明文"
-pubDate: "2026-11-02"
-category: "日常"
-heroImage: "https://example.com/image.jpg"
----
-
-## 見出し
-
-ここに本文を書きます。
-```
-
-`category` と `heroImage` は省略できます。画像を使う場合は HTTPS の公開URLを指定してください。
+注意：問題データは中学範囲の知識確認用に作成した初期データです。応用レベルを含め、実際の入試問題のような資料読解・複合計算・記述力を十分に代替するものではありません。公開前に教科書・学習指導要領・高専/高校入試の出題範囲との照合と、全問の校閲を行ってください。
