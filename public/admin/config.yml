@@ -40,13 +40,16 @@ collections:
         name: title
         widget: string
         required: true
+        hint: "検索結果や記事一覧に表示されるタイトル。内容がひと目で伝わる長さがおすすめ。"
       - label: 記事の説明
         name: description
         widget: text
         required: true
+        hint: "検索結果に表示される紹介文。記事の要点を2〜3文でまとめよう。"
       - label: 公開日
         name: pubDate
         widget: datetime
+        hint: "記事を公開する日付。"
         format: "YYYY-MM-DD"
         date_format: "YYYY-MM-DD"
         time_format: false
@@ -63,16 +66,50 @@ collections:
         widget: string
         default: BLOG
         required: true
+        hint: "例：BLOG / STUDY / REVIEW など。既存記事と表記をそろえよう。"
       - label: タグ
         name: tags
         widget: list
         required: false
         default: []
+        hint: "記事の内容を表すキーワード。1記事あたり2〜5個が目安。"
       - label: アイキャッチ画像
         name: heroImage
         widget: image
         required: false
+        hint: "記事一覧や記事上部に表示する画像。なくても公開できるよ。"
       - label: 本文
         name: body
         widget: markdown
         required: true
+        hint: "見出し・太字・リンク・箇条書き・引用・コードをツールバーから挿入できるよ。新規記事には下書きテンプレートが入る。"
+        buttons:
+          - bold
+          - italic
+          - strikethrough
+          - code
+          - link
+          - heading-one
+          - heading-two
+          - heading-three
+          - quote
+          - bulleted-list
+          - numbered-list
+        default: |
+          ## はじめに
+
+          この記事で紹介する内容を簡単にまとめます。
+
+          ## 本題
+
+          ### ポイント1
+
+          ここに内容を書きます。
+
+          ### ポイント2
+
+          ここに内容を書きます。
+
+          ## まとめ
+
+          重要なポイントを振り返ります。
