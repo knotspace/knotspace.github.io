@@ -1,0 +1,69 @@
+# KNOT CMS — Decap CMS
+# 初回のみ Decap Turbo に GitHub リポジトリを接続し、
+# 発行された Site ID を turbo_site_id に設定する。
+backend:
+  name: turbo-github
+  turbo_site_id: SETUP_REQUIRED
+  branch: main
+
+site_url: https://knotspace.github.io
+display_url: https://knotspace.github.io
+publish_mode: editorial_workflow
+
+media_folder: public/uploads
+public_folder: /uploads
+
+slug:
+  encoding: unicode
+  clean_accents: true
+  sanitize_replacement: "-"
+
+collections:
+  - name: blog
+    label: ブログ記事
+    label_singular: 記事
+    folder: src/content/blog
+    create: true
+    delete: true
+    extension: md
+    format: frontmatter
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    preview_path: blog/{{slug}}/
+    summary: "{{title}} — {{pubDate}}"
+    sortable_fields: [pubDate, title]
+    fields:
+      - label: タイトル
+        name: title
+        widget: string
+        required: true
+      - label: 記事の説明
+        name: description
+        widget: text
+        required: true
+      - label: 公開日
+        name: pubDate
+        widget: datetime
+        format: "YYYY-MM-DD"
+        date_format: "YYYY-MM-DD"
+        time_format: false
+        required: true
+      - label: 更新日
+        name: updatedDate
+        widget: datetime
+        format: "YYYY-MM-DD"
+        date_format: "YYYY-MM-DD"
+        time_format: false
+        required: false
+      - label: カテゴリー
+        name: category
+        widget: string
+        default: BLOG
+        required: true
+      - label: アイキャッチ画像
+        name: heroImage
+        widget: image
+        required: false
+      - label: 本文
+        name: body
+        widget: markdown
+        required: true
