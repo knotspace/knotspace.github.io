@@ -1,0 +1,19 @@
+KNOT SEO / Performance update
+
+Included:
+- Per-page meta description, canonical URL, Open Graph and X(Twitter) card metadata
+- Default social sharing image: public/og-default.svg
+- WebSite JSON-LD on every page
+- BlogPosting + BreadcrumbList JSON-LD on each article
+- sitemap.xml generated from Astro content collection
+- robots.txt with sitemap location and bookmarks disallowed
+- noindex on bookmarks and 404 pages
+- More descriptive image alt text on article thumbnails and hero images
+
+After deployment:
+1. Open https://knotspace.github.io/sitemap.xml and confirm it lists the home, blog, about and article URLs.
+2. Open https://knotspace.github.io/robots.txt and confirm the sitemap line.
+3. Add https://knotspace.github.io/ to Google Search Console, verify ownership, then submit sitemap.xml.
+4. Use URL Inspection for important pages and request indexing if appropriate.
+
+SEO cannot guarantee rankings or indexing. Search engines decide when and how pages appear.

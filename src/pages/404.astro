@@ -5,7 +5,7 @@ const posts = await getCollection('blog');
 const randomPost = posts.length ? posts[Math.floor(Math.random()*posts.length)] : null;
 const BASE = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
-<Layout title="ページが見つかりません | KNOT" description="お探しのページは見つかりませんでした。">
+<Layout title="ページが見つかりません | KNOT" description="お探しのページは見つかりませんでした。" noindex>
   <main class="not-found"><span class="eyebrow">ERROR 404</span><h1>ページが<br /><span>見つかりません。</span></h1><p>URLが変更されたか、ページが削除された可能性があります。</p><div class="actions"><a href={BASE}>ホームに戻る</a>{randomPost && <a class="secondary" href={`${BASE}blog/${randomPost.slug}/`}>ランダム記事を読む ↗</a>}</div></main>
 </Layout>
 <style>.not-found{max-width:760px;min-height:55vh;margin:auto;padding:100px 0}.eyebrow{color:var(--accent);font-size:11px;font-weight:800;letter-spacing:.18em}.not-found h1{margin:20px 0;font-size:clamp(42px,8vw,72px);line-height:1.25;letter-spacing:-.07em}.not-found h1 span{color:var(--accent)}.not-found p{color:var(--muted);font-size:14px}.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}.actions a{padding:13px 18px;border-radius:10px;background:var(--accent);color:#081326;font-size:12px;font-weight:800}.actions .secondary{border:1px solid var(--line);background:var(--surface);color:var(--text)}</style>

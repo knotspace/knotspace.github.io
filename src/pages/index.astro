@@ -24,7 +24,7 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
 
 <Layout
   title="KNOT | 日々の記録"
-  description="Web制作や日々の興味を記録する個人ブログです。"
+  description="Web制作・プログラミング、PCやAndroidアプリ、本・読書、勉強やランニングなど、日々気になったことを発信する個人ブログ KNOT。"
 >
   <section class="welcome">
     <div class="welcome-copy">
@@ -58,7 +58,7 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
             <a class="post-card" href={`${BASE}blog/${post.slug}/`}>
               <div class="post-thumbnail">
                 {post.data.heroImage ? (
-                  <img src={post.data.heroImage} alt="" loading="lazy" />
+                  <img src={post.data.heroImage} alt={post.data.title} loading="lazy" decoding="async" />
                 ) : (
                   <span>KNOT</span>
                 )}
