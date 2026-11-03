@@ -165,7 +165,7 @@ function buildStages(){
   ], 'VOCATIONAL');
   add('専門学校2年','GRADUATION','学んだ技術を仕事へ','卒業が近づき、身につけた技術を活かす場所を探す。','就職して経験を積むか、自分のサービスを始めるか。',[
    ['学んだ分野に就職する',{experience:8},'学んだ技術を活かせる仕事に進んだ。',{afterStudy:'work'}],
-   ['独立・起業に挑戦する',{experience:10,health:-3},'自分の技術で仕事をつくる道を選んだ。',{afterStudy:'startup'})
+   ['独立・起業に挑戦する',{experience:10,health:-3},'自分の技術で仕事をつくる道を選んだ。',{afterStudy:'startup'}]
   ], 'VOCATIONAL');
  }
  if(state.decisions.career==='work'||state.decisions.afterStudy==='work'){
