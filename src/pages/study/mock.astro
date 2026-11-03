@@ -1,70 +1,64 @@
 ---
 import StudyLayout from '../../layouts/StudyLayout.astro';
-const exam = {
-  year: '令和8年度',
-  subject: '社会',
-  minutes: 50,
-  problem: 'https://www.kosen-k.go.jp/wp/wp-content/uploads/2026/02/02_2026_syakai_mondai2.pdf',
-  answer: 'https://www.kosen-k.go.jp/wp/wp-content/uploads/2026/02/02_2026_syakai_seikai.pdf'
-};
+import answerKey from '../../data/study/mock-2026-social.json';
+const exam = answerKey;
 ---
-<StudyLayout title="高専過去問｜社会・令和8年度｜KNOT Study" description="令和8年度の国立高専入試・社会の公式過去問を、50分の模試形式で解く。">
+<StudyLayout title="高専過去問｜社会・令和8年度｜KNOT Study" description="令和8年度の国立高専入試・社会を50分で解き、保存済みの公式解答データで自動採点できる過去問モード。">
 <main class="mock-page">
   <a class="back" href="../">← Studyに戻る</a>
   <header class="hero">
     <p class="eyebrow">KNOT STUDY / OFFICIAL PAST PAPER</p>
     <h1>高専過去問に挑戦</h1>
-    <p>まずは令和8年度の社会1教科から。本番を意識して、50分で解いてみよう。</p>
-    <div class="exam-tags"><span>令和8年度</span><span>社会</span><span>制限時間 50分</span><span>公式問題</span></div>
+    <p>令和8年度・社会。問題冊子を見ながらKNOT Study上で選択肢を選び、50分終了後に自動採点しよう。</p>
+    <div class="exam-tags"><span>令和8年度</span><span>社会</span><span>制限時間 50分</span><span>全25問・100点</span><span>自動採点</span></div>
   </header>
 
   <section class="setup panel" id="setup">
     <p class="eyebrow">BEFORE THE EXAM</p>
     <h2>試験の準備</h2>
     <div class="instruction-grid">
-      <div><b>01</b><strong>筆記用具を準備</strong><p>紙とペンを用意して、途中の考え方や計算も残そう。</p></div>
-      <div><b>02</b><strong>50分で解く</strong><p>タイマーは一時停止・再開ができます。時間切れになると自動で終了します。</p></div>
-      <div><b>03</b><strong>公式解答で採点</strong><p>終了後に正解PDFを開き、自分で採点して点数を記録できます。</p></div>
+      <div><b>01</b><strong>問題冊子を開く</strong><p>公式問題PDFを見ながら、KNOT Studyの解答欄で選択肢を選ぼう。</p></div>
+      <div><b>02</b><strong>50分で解く</strong><p>選んだ答えは自動保存。一時停止・再開にも対応。残り時間が0になると自動終了。</p></div>
+      <div><b>03</b><strong>自動採点</strong><p>公式解答をあらかじめKNOT内に保存。終了した瞬間に25問・100点満点で採点する。</p></div>
     </div>
     <div class="official-links">
-      <a href={exam.problem} target="_blank" rel="noopener noreferrer">問題PDFを先に確認 ↗</a>
-      <a href={exam.answer} target="_blank" rel="noopener noreferrer">公式解答PDF ↗</a>
+      <a href={exam.source.problem} target="_blank" rel="noopener noreferrer">公式問題PDFを開く ↗</a>
     </div>
     <button type="button" class="primary start-button" id="begin">社会の模試を開始する <span>→</span></button>
-    <p class="hint">問題・正解は国立高等専門学校機構の公式公開資料です。KNOTはPDFを転載せず、公式サイトの資料を表示しています。</p>
+    <p class="hint">問題冊子は国立高等専門学校機構の公式公開資料を表示します。正解データは公式解答PDFに基づきKNOT内に保存しています。正解は試験終了まで表示されません。</p>
   </section>
 
   <section class="exam panel" id="exam" hidden>
     <div class="exam-bar">
-      <div><p class="eyebrow">EXAM IN PROGRESS</p><h2>令和8年度 / 社会</h2></div>
+      <div><p class="eyebrow">EXAM IN PROGRESS</p><h2>令和8年度 / 社会</h2><p class="answered-count" id="answered-count">解答済み 0 / 25問</p></div>
       <div class="clock-wrap"><span>残り時間</span><strong id="clock">50:00</strong></div>
     </div>
     <div class="timer-actions">
       <button type="button" class="secondary" id="pause">一時停止</button>
       <button type="button" class="danger" id="finish">試験を終了する</button>
     </div>
-    <div class="paper-heading"><h3>問題冊子</h3><a href={exam.problem} target="_blank" rel="noopener noreferrer">別タブで開く ↗</a></div>
+    <div class="paper-heading"><h3>問題冊子（公式PDF）</h3><a href={exam.source.problem} target="_blank" rel="noopener noreferrer">別タブで開く ↗</a></div>
     <iframe id="problem-pdf" title="令和8年度 高専入試 社会 問題PDF" loading="lazy"></iframe>
-    <p class="pdf-fallback">PDFが表示されない場合は<a href={exam.problem} target="_blank" rel="noopener noreferrer">公式PDFを別タブで開いてください ↗</a></p>
-    <p class="hint">画面を閉じたり再読み込みしたりすると、タイマーはリセットされます。途中で休憩するときは一時停止を使ってください。</p>
+    <p class="pdf-fallback">PDFが表示されない場合は<a href={exam.source.problem} target="_blank" rel="noopener noreferrer">公式PDFを別タブで開いてください ↗</a></p>
+    <div class="answer-sheet">
+      <div class="answer-sheet-head"><div><p class="eyebrow">KNOT ANSWER SHEET</p><h3>解答用紙</h3></div><span>各問4点</span></div>
+      <p class="answer-instruction">問題冊子の「大問・問」に対応する選択肢をタップ。選び直しもできるよ。回答は自動で保存される。</p>
+      <div class="question-grid" id="question-grid"></div>
+      <div class="answer-progress"><div class="progress-track"><span id="progress-fill"></span></div><span id="progress-label">0 / 25問 解答済み</span></div>
+    </div>
+    <p class="hint">画面を再読み込みしても、解答と残り時間を復元します。試験を終えると自動採点され、正解は変更できません。</p>
   </section>
 
   <section class="result panel" id="result" hidden>
-    <p class="eyebrow">EXAM FINISHED</p>
-    <h2 id="result-title">試験終了！</h2>
-    <p class="result-summary" id="result-summary"></p>
-    <button type="button" class="secondary retake-button" id="retake">もう一度受ける</button>
-    <div class="answer-area">
-      <div class="paper-heading"><h3>公式解答・正解</h3><a href={exam.answer} target="_blank" rel="noopener noreferrer">別タブで開く ↗</a></div>
-      <iframe id="answer-pdf" title="令和8年度 高専入試 社会 公式解答PDF" loading="lazy"></iframe>
-      <p class="pdf-fallback"><a href={exam.answer} target="_blank" rel="noopener noreferrer">公式解答PDFを別タブで開く ↗</a></p>
-    </div>
-    <div class="score-entry">
-      <h3>採点結果を記録</h3>
-      <p>公式解答で採点して、得点を入力しよう。100点満点で記録します。</p>
-      <label for="score">得点（100点満点）</label>
-      <div class="score-row"><input id="score" type="number" min="0" max="100" step="1" inputmode="numeric" placeholder="例：72"><span>点 / 100点</span><button type="button" id="save-score">結果を保存</button></div>
-      <p class="save-status" id="save-status" aria-live="polite"></p>
+    <p class="eyebrow">AUTO-GRADED RESULT</p>
+    <h2 id="result-title">自動採点結果</h2>
+    <div class="score-hero"><strong id="final-score">--</strong><span>/ 100点</span><p id="result-summary"></p></div>
+    <div class="result-stats" id="result-stats"></div>
+    <div class="result-actions"><button type="button" class="secondary" id="retake">もう一度受ける</button><a href={exam.source.answer} target="_blank" rel="noopener noreferrer">公式解答PDFを確認 ↗</a></div>
+    <div class="answer-review">
+      <h3>問題ごとの採点</h3>
+      <p>正解・不正解と、選んだ答えを確認しよう。公式の解答記号と照合して採点しています。</p>
+      <div class="review-grid" id="review-grid"></div>
     </div>
   </section>
 
@@ -76,8 +70,8 @@ const exam = {
   </section>
 
   <section class="source panel">
-    <strong>出典・利用について</strong>
-    <p>問題冊子・正解は、独立行政法人 国立高等専門学校機構が公開している令和8年度入試過去問です。KNOTは問題・解答PDFを転載せず、公式資料を埋め込んで表示しています。</p>
+    <strong>出典・採点について</strong>
+    <p>問題冊子・正解は、独立行政法人 国立高等専門学校機構が公開している令和8年度入試の本試験問題・正解です。公式解答の配点に基づき、全25問を各4点・100点満点で自動採点します。KNOTは問題PDFを転載せず、公式資料を表示します。</p>
     <a href="https://www.kosen-k.go.jp/kosen_navi" target="_blank" rel="noopener noreferrer">国立高専機構・入試過去問（公式） ↗</a>
   </section>
   <a class="back-bottom" href="../">Studyトップに戻る ↑</a>
@@ -86,66 +80,126 @@ const exam = {
 <script>
 const config=JSON.parse(document.getElementById('exam-config').textContent);
 const $=id=>document.getElementById(id);
-const KEY='knot-kosen-mock-social-v1';
-let remaining=config.minutes*60,paused=false,timer=null,finished=false;
-function formatTime(value){const minutes=Math.floor(value/60),seconds=value%60;return String(minutes).padStart(2,'0')+':'+String(seconds).padStart(2,'0');}
-function drawClock(){$('clock').textContent=formatTime(remaining);$('clock').classList.toggle('urgent',remaining<=300);}
+const KEY='knot-kosen-mock-social-v2';
+const DRAFT=KEY+'-draft';
+const total=config.questions.length;
+let remaining=config.minutes*60,deadline=0,paused=false,timer=null,finished=false,answers={};
+function formatTime(value){const n=Math.max(0,Math.ceil(value));return String(Math.floor(n/60)).padStart(2,'0')+':'+String(n%60).padStart(2,'0');}
+function readDraft(){try{const d=JSON.parse(localStorage.getItem(DRAFT)||'null');return d&&typeof d==='object'?d:null;}catch{return null;}}
+function saveDraft(){try{localStorage.setItem(DRAFT,JSON.stringify({answers,remaining,deadline,paused,finished}));}catch{}}
+function drawClock(){ $('clock').textContent=formatTime(paused?remaining:(deadline?Math.max(0,(deadline-Date.now())/1000):remaining)); $('clock').classList.toggle('urgent',!paused&&remaining<=300);$('clock').classList.toggle('paused',paused); }
 function stopTimer(){if(timer){clearInterval(timer);timer=null;}}
-function startTimer(){stopTimer();timer=setInterval(()=>{if(paused||finished)return;if(remaining>0){remaining--;drawClock();}if(remaining<=0)finishExam('time');},1000);}
-function finishExam(reason){
- if(finished)return;
- finished=true;paused=false;stopTimer();
- $('exam').hidden=true;$('result').hidden=false;
- $('result-title').textContent=reason==='time'?'時間切れ！':'試験終了！';
- const used=config.minutes*60-remaining;
- $('result-summary').textContent='解答時間：'+formatTime(used)+' / '+config.minutes+'分'+(reason==='time'?'（制限時間終了）':'（手動終了）');
- $('answer-pdf').src=config.answer+'#view=FitH';
- $('score').value='';$('save-status').textContent='';
- $('result').scrollIntoView({behavior:'smooth',block:'start'});
+function showExam(){
+ $('setup').hidden=true;$('result').hidden=true;$('exam').hidden=false;
+ $('problem-pdf').src=config.source.problem+'#view=FitH';
+ renderAnswerSheet();drawClock();$('exam').scrollIntoView({behavior:'smooth',block:'start'});
 }
-function readHistory(){try{const data=JSON.parse(localStorage.getItem(KEY)||'[]');return Array.isArray(data)?data.filter(x=>x&&Number.isFinite(x.score)&&Number.isFinite(x.used)):[];}catch{return[];}}
+function renderAnswerSheet(){
+ const grid=$('question-grid');grid.replaceChildren();
+ config.questions.forEach((q,index)=>{
+  const card=document.createElement('section');card.className='question-card';card.dataset.id=q.id;
+  const head=document.createElement('div');head.className='question-card-head';
+  const title=document.createElement('strong');title.textContent=q.label;
+  const points=document.createElement('small');points.textContent=q.points+'点';
+  head.append(title,points);
+  const options=document.createElement('div');options.className='choice-list';options.setAttribute('role','group');options.setAttribute('aria-label',q.label+'の選択肢');
+  q.choices.forEach(choice=>{
+   const btn=document.createElement('button');btn.type='button';btn.className='choice-button';btn.textContent=choice;btn.setAttribute('aria-pressed',String(answers[q.id]===choice));
+   if(answers[q.id]===choice)btn.classList.add('selected');
+   btn.addEventListener('click',()=>selectAnswer(q,choice,card,options));options.append(btn);
+  });
+  card.append(head,options);grid.append(card);
+ });
+ updateProgress();
+}
+function selectAnswer(q,choice,card,options){
+ if(finished||paused)return;
+ answers[q.id]=choice;
+ options.querySelectorAll('button').forEach(btn=>{const selected=btn.textContent===choice;btn.classList.toggle('selected',selected);btn.setAttribute('aria-pressed',String(selected));});
+ card.classList.add('has-answer');saveDraft();updateProgress();
+}
+function updateProgress(){
+ const count=Object.keys(answers).filter(id=>config.questions.some(q=>q.id===id)).length;
+ $('answered-count').textContent='解答済み '+count+' / '+total+'問';
+ $('progress-label').textContent=count+' / '+total+'問 解答済み';
+ $('progress-fill').style.width=(count/total*100)+'%';
+}
+function startTimer(){
+ stopTimer();deadline=Date.now()+remaining*1000;paused=false;saveDraft();
+ timer=setInterval(()=>{
+  remaining=Math.max(0,Math.ceil((deadline-Date.now())/1000));drawClock();
+  if(remaining<=0)finishExam('time');
+ },250);
+}
+function pauseTimer(){
+ if(finished)return;
+ if(!paused){remaining=Math.max(0,Math.ceil((deadline-Date.now())/1000));paused=true;stopTimer();}
+ else{startTimer();}
+ $('pause').textContent=paused?'再開する':'一時停止';saveDraft();drawClock();
+}
+function readHistory(){try{const data=JSON.parse(localStorage.getItem(KEY)||'[]');return Array.isArray(data)?data.filter(x=>x&&Number.isFinite(x.score)):[];}catch{return[];}}
 function renderHistory(){
- const history=readHistory(),list=$('history-list');list.replaceChildren();
- $('history-empty').hidden=history.length>0;
+ const history=readHistory(),list=$('history-list');list.replaceChildren();$('history-empty').hidden=history.length>0;
  history.slice(0,8).forEach(item=>{
   const row=document.createElement('div');row.className='history-row';
   const date=document.createElement('span');date.textContent=item.date;
   const score=document.createElement('strong');score.textContent=item.score+'点';
-  const time=document.createElement('small');time.textContent='解答 '+formatTime(item.used);
-  row.append(date,score,time);list.append(row);
+  const detail=document.createElement('small');detail.textContent=item.correct+'/'+total+'問正解・'+formatTime(item.used);
+  row.append(date,score,detail);list.append(row);
  });
 }
+function finishExam(reason){
+ if(finished)return;
+ finished=true;paused=false;stopTimer();
+ remaining=Math.max(0,Math.ceil((deadline-Date.now())/1000));
+ const used=config.minutes*60-remaining;
+ let score=0,correct=0,unanswered=0;
+ const review=$('review-grid');review.replaceChildren();
+ config.questions.forEach(q=>{
+  const selected=answers[q.id]||'未回答',ok=selected===q.correct;
+  if(ok){score+=q.points;correct++;}if(selected==='未回答')unanswered++;
+  const item=document.createElement('div');item.className='review-item '+(ok?'is-correct':selected==='未回答'?'is-empty':'is-wrong');
+  const title=document.createElement('strong');title.textContent=q.label;
+  const status=document.createElement('span');status.textContent=ok?'正解':selected==='未回答'?'未回答':'不正解';
+  const answer=document.createElement('small');answer.textContent='あなた：'+selected+' ／ 正解：'+q.correct;
+  const points=document.createElement('b');points.textContent=(ok?q.points:0)+' / '+q.points+'点';
+  item.append(title,status,answer,points);review.append(item);
+ });
+ $('exam').hidden=true;$('result').hidden=false;$('result-title').textContent=reason==='time'?'50分終了！自動採点完了':'試験終了！自動採点完了';
+ $('final-score').textContent=String(score);$('result-summary').textContent='解答時間 '+formatTime(used)+' ／ '+config.minutes+'分';
+ const stats=$('result-stats');stats.replaceChildren();
+ [[correct+' / '+total+'問','正解'],[total-correct-unanswered+'問','不正解'],[unanswered+'問','未回答']].forEach(([value,label])=>{
+  const box=document.createElement('div');const v=document.createElement('strong');v.textContent=value;const l=document.createElement('span');l.textContent=label;box.append(v,l);stats.append(box);
+ });
+ const history=readHistory();history.unshift({date:new Intl.DateTimeFormat('ja-JP',{year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date()),score,correct,used});
+ try{localStorage.setItem(KEY,JSON.stringify(history.slice(0,20)));localStorage.removeItem(DRAFT);}catch{}
+ renderHistory();$('result').scrollIntoView({behavior:'smooth',block:'start'});
+}
 $('retake').addEventListener('click',()=>{
- $('result').hidden=true;$('setup').hidden=false;$('problem-pdf').removeAttribute('src');$('answer-pdf').removeAttribute('src');
+ stopTimer();finished=false;answers={};remaining=config.minutes*60;deadline=0;paused=false;localStorage.removeItem(DRAFT);
+ $('result').hidden=true;$('exam').hidden=true;$('setup').hidden=false;$('problem-pdf').removeAttribute('src');
  $('setup').scrollIntoView({behavior:'smooth',block:'start'});
 });
 $('begin').addEventListener('click',()=>{
- remaining=config.minutes*60;paused=false;finished=false;drawClock();
- $('setup').hidden=true;$('result').hidden=true;$('exam').hidden=false;
- $('problem-pdf').src=config.problem+'#view=FitH';
- $('pause').textContent='一時停止';$('pause').disabled=false;$('finish').disabled=false;
- startTimer();$('exam').scrollIntoView({behavior:'smooth',block:'start'});
+ answers={};remaining=config.minutes*60;deadline=0;paused=false;finished=false;saveDraft();showExam();$('pause').textContent='一時停止';startTimer();
 });
-$('pause').addEventListener('click',()=>{
- if(finished)return;
- paused=!paused;$('pause').textContent=paused?'再開する':'一時停止';
- $('clock').classList.toggle('paused',paused);
-});
+$('pause').addEventListener('click',pauseTimer);
 $('finish').addEventListener('click',()=>{
- if(confirm('試験を終了して、解答・正解を表示する？'))finishExam('manual');
-});
-$('save-score').addEventListener('click',()=>{
- const score=Number($('score').value);
- if($('score').value.trim()===''||!Number.isInteger(score)||score<0||score>100){$('save-status').textContent='0〜100の整数で得点を入力してね。';return;}
- const used=config.minutes*60-remaining;
- const history=readHistory();
- history.unshift({date:new Intl.DateTimeFormat('ja-JP',{year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date()),score,used});
- try{localStorage.setItem(KEY,JSON.stringify(history.slice(0,20)));$('save-status').textContent='結果を保存したよ！';renderHistory();}catch{$('save-status').textContent='保存できませんでした。ブラウザの保存設定を確認してね。';}
+ if(confirm('試験を終了して、自動採点する？ 未回答の問題は0点になるよ。'))finishExam('manual');
 });
 renderHistory();
+const saved=readDraft();
+if(saved&&!saved.finished&&saved.answers&&typeof saved.answers==='object'){
+ answers=saved.answers;paused=Boolean(saved.paused);remaining=Number.isFinite(saved.remaining)?saved.remaining:config.minutes*60;deadline=Number.isFinite(saved.deadline)?saved.deadline:0;
+ if(!paused&&deadline){remaining=Math.max(0,Math.ceil((deadline-Date.now())/1000));}
+ showExam();
+ if(remaining<=0&&!paused)finishExam('time');
+ else if(!paused)startTimer();
+ else $('pause').textContent='再開する';
+}
 </script>
 <style>
-.mock-page{max-width:900px;margin:0 auto;padding:28px 0 55px}.back,.back-bottom{font-size:12px;color:var(--accent)}.hero{padding:30px 0 25px;border-bottom:1px solid var(--line)}.eyebrow{font:10px ui-monospace,monospace;letter-spacing:.14em;color:var(--accent);font-weight:850;margin:0 0 9px}.hero h1{font-size:clamp(32px,6vw,48px);letter-spacing:-.06em;margin:0}.hero>p:not(.eyebrow){font-size:13px;line-height:1.8;color:var(--muted)}.exam-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:17px}.exam-tags span{padding:7px 10px;border:1px solid var(--line);border-radius:7px;font-size:10px;color:var(--muted)}.panel{margin-top:18px;padding:22px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}.panel h2{font-size:20px;margin:0 0 16px}.instruction-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.instruction-grid>div{padding:14px;border:1px solid var(--line);border-radius:10px;background:var(--surface-soft)}.instruction-grid b{display:block;font:11px ui-monospace,monospace;color:var(--accent);margin-bottom:8px}.instruction-grid strong{font-size:12px}.instruction-grid p,.score-entry>p{font-size:11px;line-height:1.8;color:var(--muted);margin:6px 0 0}.official-links{display:flex;gap:16px;flex-wrap:wrap;margin:17px 0}.official-links a,.paper-heading a,.source a,.pdf-fallback a{font-size:11px;color:var(--accent);font-weight:800}.primary,.secondary,.danger{border:0;border-radius:9px;padding:12px 16px;font-size:12px;font-weight:800;cursor:pointer}.primary{background:var(--accent);color:#fff}.start-button{margin-top:4px}.start-button span{margin-left:15px}.secondary{background:var(--surface-soft);border:1px solid var(--line);color:var(--text)}.danger{background:#b84c58;color:white}.hint{font-size:10px;line-height:1.8;color:var(--muted);margin:13px 0 0}.exam[hidden],.result[hidden]{display:none}.exam-bar{display:flex;justify-content:space-between;align-items:center;gap:15px}.exam-bar h2{margin:0}.clock-wrap{display:grid;gap:3px;text-align:right}.clock-wrap span{font-size:10px;color:var(--muted)}.clock{font:800 30px ui-monospace,monospace;font-variant-numeric:tabular-nums}.clock.urgent{color:#d94c59}.clock.paused{opacity:.55}.timer-actions{display:flex;gap:8px;margin:16px 0 22px}.paper-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:18px 0 10px}.paper-heading h3{font-size:14px;margin:0}.exam iframe,.answer-area iframe{display:block;width:100%;height:78vh;min-height:560px;border:1px solid var(--line);border-radius:9px;background:#fff}.pdf-fallback{font-size:10px;color:var(--muted);margin:8px 0}.result-summary{font-size:12px;color:var(--muted);margin:-6px 0 16px}.retake-button{margin:0 0 4px}.score-entry{margin-top:22px;padding:18px;border:1px solid var(--line);border-radius:11px;background:var(--surface-soft)}.score-entry h3{font-size:15px;margin:0}.score-entry label{display:block;font-size:11px;margin:15px 0 6px}.score-row{display:flex;align-items:center;gap:9px;flex-wrap:wrap}.score-row input{width:130px;padding:11px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--text);font:inherit}.score-row span{font-size:11px;color:var(--muted)}.save-status{font-size:11px;color:var(--accent);margin:10px 0 0}.history h2{margin-bottom:12px}.history-empty{font-size:11px;color:var(--muted)}.history-list{display:grid;gap:7px}.history-row{display:grid;grid-template-columns:1fr auto auto;gap:14px;align-items:center;padding:11px 13px;border:1px solid var(--line);border-radius:8px;background:var(--surface-soft)}.history-row span,.history-row small{font-size:10px;color:var(--muted)}.history-row strong{font-size:15px}.source strong{font-size:12px}.source p{font-size:11px;line-height:1.8;color:var(--muted)}.back-bottom{display:inline-block;margin-top:20px}
-@media(max-width:650px){.mock-page{padding:20px 0 40px}.panel{padding:16px}.instruction-grid{grid-template-columns:1fr}.exam-bar{align-items:flex-start}.clock{font-size:25px}.exam iframe,.answer-area iframe{height:68vh;min-height:430px}.score-row input{width:100px}.history-row{gap:8px}}
+.mock-page{max-width:940px;margin:0 auto;padding:28px 0 55px}.back,.back-bottom{font-size:12px;color:var(--accent)}.hero{padding:30px 0 25px;border-bottom:1px solid var(--line)}.eyebrow{font:10px ui-monospace,monospace;letter-spacing:.14em;color:var(--accent);font-weight:850;margin:0 0 9px}.hero h1{font-size:clamp(32px,6vw,48px);letter-spacing:-.06em;margin:0}.hero>p:not(.eyebrow){font-size:13px;line-height:1.8;color:var(--muted)}.exam-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:17px}.exam-tags span{padding:7px 10px;border:1px solid var(--line);border-radius:7px;font-size:10px;color:var(--muted)}.panel{margin-top:18px;padding:22px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}.panel h2{font-size:20px;margin:0 0 16px}.instruction-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.instruction-grid>div{padding:14px;border:1px solid var(--line);border-radius:10px;background:var(--surface-soft)}.instruction-grid b{display:block;font:11px ui-monospace,monospace;color:var(--accent);margin-bottom:8px}.instruction-grid strong{font-size:12px}.instruction-grid p{font-size:11px;line-height:1.8;color:var(--muted);margin:6px 0 0}.official-links{display:flex;gap:16px;flex-wrap:wrap;margin:17px 0}.official-links a,.paper-heading a,.source a,.pdf-fallback a,.result-actions a{font-size:11px;color:var(--accent);font-weight:800}.primary,.secondary,.danger{border:0;border-radius:9px;padding:12px 16px;font-size:12px;font-weight:800;cursor:pointer}.primary{background:var(--accent);color:#fff}.start-button{margin-top:4px}.start-button span{margin-left:15px}.secondary{background:var(--surface-soft);border:1px solid var(--line);color:var(--text)}.danger{background:#b84c58;color:white}.hint{font-size:10px;line-height:1.8;color:var(--muted);margin:13px 0 0}.exam[hidden],.result[hidden]{display:none}.exam-bar{display:flex;justify-content:space-between;align-items:center;gap:15px}.exam-bar h2{margin:0}.answered-count{font-size:11px;color:var(--muted);margin:6px 0 0}.clock-wrap{display:grid;gap:3px;text-align:right}.clock-wrap span{font-size:10px;color:var(--muted)}.clock-wrap strong{font:800 30px ui-monospace,monospace;font-variant-numeric:tabular-nums}.clock-wrap strong.urgent{color:#d94c59}.clock-wrap strong.paused{opacity:.55}.timer-actions{display:flex;gap:8px;margin:16px 0 22px}.paper-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:18px 0 10px}.paper-heading h3{font-size:14px;margin:0}.exam iframe{display:block;width:100%;height:72vh;min-height:500px;border:1px solid var(--line);border-radius:9px;background:#fff}.pdf-fallback{font-size:10px;color:var(--muted);margin:8px 0}.answer-sheet{margin-top:24px;padding-top:20px;border-top:1px solid var(--line)}.answer-sheet-head{display:flex;justify-content:space-between;align-items:end}.answer-sheet-head h3{font-size:20px;margin:0}.answer-sheet-head>span{font-size:10px;color:var(--muted)}.answer-instruction,.answer-review>p{font-size:11px;line-height:1.8;color:var(--muted)}.question-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.question-card{padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--surface-soft)}.question-card.has-answer{border-color:var(--accent)}.question-card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.question-card-head strong{font-size:12px}.question-card-head small{font-size:10px;color:var(--muted)}.choice-list{display:flex;gap:7px;flex-wrap:wrap}.choice-button{min-width:40px;min-height:38px;padding:7px 11px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--text);font-size:13px;font-weight:800;cursor:pointer}.choice-button.selected{background:var(--accent);border-color:var(--accent);color:#fff}.choice-button:focus-visible,.primary:focus-visible,.secondary:focus-visible,.danger:focus-visible{outline:3px solid var(--accent);outline-offset:2px}.answer-progress{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:16px;font-size:10px;color:var(--muted)}.progress-track{height:7px;flex:1;border-radius:10px;background:var(--surface-soft);overflow:hidden}.progress-track span{display:block;height:100%;width:0;background:var(--accent);transition:width .15s}.score-hero{padding:20px;border-radius:12px;background:var(--surface-soft);text-align:center}.score-hero>strong{font-size:54px;letter-spacing:-.06em;font-variant-numeric:tabular-nums}.score-hero>span{font-size:13px;color:var(--muted)}.score-hero p{font-size:11px;color:var(--muted);margin:5px 0 0}.result-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.result-stats>div{display:grid;gap:3px;text-align:center;padding:13px;border:1px solid var(--line);border-radius:9px}.result-stats strong{font-size:18px}.result-stats span{font-size:10px;color:var(--muted)}.result-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin:15px 0 25px}.answer-review h3{font-size:16px;margin:0}.review-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.review-item{display:grid;grid-template-columns:1fr auto;gap:4px 8px;padding:10px;border:1px solid var(--line);border-radius:8px;font-size:11px}.review-item strong{font-size:11px}.review-item>span{font-size:10px;font-weight:800}.review-item small{font-size:10px;color:var(--muted)}.review-item>b{font-size:10px;text-align:right}.review-item.is-correct{border-color:#398b63;background:color-mix(in srgb,#398b63 8%,var(--surface))}.review-item.is-correct>span{color:#398b63}.review-item.is-wrong{border-color:#c65b61;background:color-mix(in srgb,#c65b61 7%,var(--surface))}.review-item.is-wrong>span{color:#c65b61}.review-item.is-empty{opacity:.7}.history h2{margin-bottom:12px}.history-empty{font-size:11px;color:var(--muted)}.history-list{display:grid;gap:7px}.history-row{display:grid;grid-template-columns:1fr auto auto;gap:14px;align-items:center;padding:11px 13px;border:1px solid var(--line);border-radius:8px;background:var(--surface-soft)}.history-row span,.history-row small{font-size:10px;color:var(--muted)}.history-row strong{font-size:15px}.source strong{font-size:12px}.source p{font-size:11px;line-height:1.8;color:var(--muted)}.back-bottom{display:inline-block;margin-top:20px}
+@media(max-width:650px){.mock-page{padding:20px 0 40px}.panel{padding:16px}.instruction-grid{grid-template-columns:1fr}.exam-bar{align-items:flex-start}.clock-wrap strong{font-size:25px}.exam iframe{height:65vh;min-height:400px}.question-grid,.review-grid{grid-template-columns:1fr}.result-stats{gap:5px}.history-row{gap:8px}}
 </style>
 </StudyLayout>
