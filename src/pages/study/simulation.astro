@@ -1,4 +1,14 @@
 ---
-const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
-return Astro.redirect(`${base}game/life/`, 301);
 ---
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="description" content="人生シミュレーターはGAMEへ移動しました。"/>
+<link rel="canonical" href="https://knotspace.github.io/game/life/"/>
+<meta http-equiv="refresh" content="0;url=/game/life/"/>
+<title>人生シミュレーター｜GAMEへ移動</title>
+</head>
+<body><p><a href="/game/life/">人生シミュレーターはこちら</a></p></body>
+</html>
