@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const banks = [
+  { name: '総合問題演習', file: 'src/data/study/study-questions.json', question: 'q', choices: 'a', answer: 'c', explanation: 'e' },
   { name: '基礎網羅', file: 'src/data/study/study-foundation.json', question: 'prompt', choices: 'options', answer: 'correct' },
   { name: '高専対策', file: 'src/data/study/kosen-questions.json', question: 'q', choices: 'choices', answer: 'answer' }
 ];
@@ -59,7 +60,8 @@ for (const bank of banks) {
     if (!Number.isInteger(item[bank.answer]) || item[bank.answer] < 0 || item[bank.answer] > 3) {
       errors.push(`${label} 正解番号が0〜3の範囲外です。`);
     }
-    if (typeof item.explanation !== 'string' || item.explanation.trim().length < 12) {
+    const explanation = item[bank.explanation || 'explanation'];
+    if (typeof explanation !== 'string' || explanation.trim().length < 12) {
       errors.push(`${label} 解説がないか、短すぎます。`);
     }
     const slug = summaryFor(item.topic);
@@ -68,8 +70,8 @@ for (const bank of banks) {
     }
     const normalized = String(item[bank.question] || '').replace(/[\\s　]/g, '');
     if (normalized) questionTexts.set(normalized, (questionTexts.get(normalized) || 0) + 1);
-    const explanation = String(item.explanation || '').trim();
-    if (explanation) explanationTexts.set(explanation, (explanationTexts.get(explanation) || 0) + 1);
+    const explanationText = String(explanation || '').trim();
+    if (explanationText) explanationTexts.set(explanationText, (explanationTexts.get(explanationText) || 0) + 1);
   }
 }
 
