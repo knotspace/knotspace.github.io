@@ -164,7 +164,21 @@ async function saveNow(){
   }catch(e){setStatus("保存エラー: "+e.message,true);}
   finally{saving=false;}
 }
-async function publishNow(){\n  if(!current){setStatus("記事を選択してください",true);return;}\n  if(!confirm("この記事をKNOTのブログに公開しますか？"))return;\n  await saveNow();\n  if(!current||!current.document_id||dirty||!current.title){setStatus("先に記事を保存してください",true);return;}\n  setStatus("GitHubへ公開中...");\n  try{\n    const result=await api("/api/publish-document",{method:"POST",body:JSON.stringify({document_id:current.document_id})});\n    current=result.document||current;\n    setStatus("公開しました · "+(result.path||"GitHub"));\n    await loadList();\n    if(result.url)window.open(result.url,"_blank","noopener");\n  }catch(e){setStatus("公開エラー: "+e.message,true);}\n}\nasync function openDoc(id){
+async function publishNow(){
+  if(!current){setStatus("記事を選択してください",true);return;}
+  if(!confirm("この記事をKNOTのブログに公開しますか？"))return;
+  await saveNow();
+  if(!current||!current.document_id||dirty||!current.title){setStatus("先に記事を保存してください",true);return;}
+  setStatus("GitHubへ公開中...");
+  try{
+    const result=await api("/api/publish-document",{method:"POST",body:JSON.stringify({document_id:current.document_id})});
+    current=result.document||current;
+    setStatus("公開しました · "+(result.path||"GitHub"));
+    await loadList();
+    if(result.url)window.open(result.url,"_blank","noopener");
+  }catch(e){setStatus("公開エラー: "+e.message,true);}
+}
+async function openDoc(id){
   if(dirty)await saveNow();
   try{
     const data=await api("/api/documents/"+id);current=data.document;
@@ -565,7 +579,7 @@ export default {
           "blocks: " + JSON.stringify(blocks),
           "---",
           ""
-        ].join("\\n");
+        ].join("\n");
         const tokenRow = await env.DB.prepare("SELECT encrypted_token FROM cms_github_tokens WHERE user_login = ?").bind(auth.session.login).first();
         if (!tokenRow?.encrypted_token) return json({ error: "GitHub公開権限がありません。いったんログアウトしてGitHubで再ログインしてください。" }, 401, origin);
         const githubToken = await decryptSecret(tokenRow.encrypted_token, env.SESSION_SECRET);
