@@ -2,10 +2,13 @@
 title: "英検準2級に合格する勉強法"
 description: "中学生が英検準2級に合格するための勉強法を紹介します。"
 pubDate: "2026-11-01T00:00:00.000Z"
+heroImage: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1400&auto=format&fit=crop"
 category: "英検・勉強法"
 ---
 
 # 【中学生向け】英検準2級に合格する勉強法！実際に合格した経験から徹底解説
+
+![英語の参考書とノートで勉強する様子](https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1200&auto=format&fit=crop)
 
 「英検準2級って中学生でも合格できるの？」
 
@@ -153,6 +156,8 @@ category: "英検・勉強法"
 大切なのは、ただ音声を流すだけで終わらせないことです。
 
 聞き取れなかった原因を確認し、少しずつ改善していきましょう。
+
+![ノートに英文を書いて練習する様子](https://images.unsplash.com/photo-1455390582262-044c7382a6b8?w=1000&auto=format&fit=crop)
 
 ## 6. ライティング対策｜型を覚えると書きやすい！
 
