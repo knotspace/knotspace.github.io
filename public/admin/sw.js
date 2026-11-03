@@ -17,6 +17,7 @@ const STATIC_ASSETS = new Set([
   '/admin/index.html',
   '/admin/admin.css',
   '/admin/editor-tools.js',
+  '/admin/block-editor.js',
   '/admin/richtext-components.js',
   '/admin/decap-cms.js',
   '/admin/admin-app-icon.svg',
