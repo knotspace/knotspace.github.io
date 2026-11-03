@@ -15,9 +15,20 @@ category: "本・読書"
 
 ※作品ごとの読書状況や感想は、実際に読んだ範囲で更新していきます。内容の核心に触れるネタバレは避けています！
 
-<figure class="book-cover-figure"><img src="https://covers.openlibrary.org/b/isbn/9784167911300-L.jpg" alt="『コンビニ人間』の書影" loading="lazy" decoding="async" width="300" height="450" /><figcaption>書影出典：<a href="https://openlibrary.org/isbn/9784167911300" target="_blank" rel="noopener noreferrer">Open Library（ISBN 9784167911300）</a></figcaption></figure>
+<div class="knot-box knot-box-summary">
+  <p class="knot-box-title">この記事の要点</p>
+  <ul>
+    <li>紹介した5作品は、ミステリー・青春小説・不思議な世界観などジャンルがさまざま。</li>
+    <li>『コンビニ人間』は「普通」について考えさせられる作品。</li>
+    <li>『海辺のカフカ』は現実と幻想が交差する長編小説。</li>
+    <li>ランキングは好みによるものなので、気になった作品から手に取ってみよう。</li>
+  </ul>
+  <p class="knot-box-credit">要点まとめ：KNOT制作</p>
+</div>
 
 ## 第5位『コンビニ人間』／村田沙耶香
+
+<figure class="book-cover-figure"><img src="https://b-bunshun.ismcdn.jp/mwimgs/2/4/350/img_24979314337abb47d25b13279eb6f10e1831696.jpg" alt="『コンビニ人間』の書影" loading="lazy" decoding="async" width="180" height="270" /><figcaption>書影出典：<a href="https://books.bunshun.jp/ud/book/num/9784167911300" target="_blank" rel="noopener noreferrer">文藝春秋公式『コンビニ人間』</a>（ISBN 9784167911300）</figcaption></figure>
 
 『コンビニ人間』は、コンビニで働く古倉恵子を中心に、「普通」ってなんなの？と考えさせられる作品です！
 
@@ -25,9 +36,9 @@ category: "本・読書"
 
 文章は比較的読み進めやすいのに、読み終わったあとに考えることがずっと残るタイプの小説です。短めの作品から読書を始めたい人も、ぜひ候補に入れてみてください！
 
-<figure class="book-cover-figure"><img src="https://covers.openlibrary.org/b/isbn/9784062639248-L.jpg" alt="『すべてがFになる』の書影" loading="lazy" decoding="async" width="300" height="450" /><figcaption>書影出典：<a href="https://openlibrary.org/isbn/9784062639248" target="_blank" rel="noopener noreferrer">Open Library（ISBN 9784062639248）</a></figcaption></figure>
-
 ## 第4位『すべてがFになる』／森博嗣
+
+<figure class="book-cover-figure"><img src="https://covers.openlibrary.org/b/isbn/9784062639248-M.jpg" alt="『すべてがFになる』の書影" loading="lazy" decoding="async" width="180" height="270" /><figcaption>書影出典：<a href="https://openlibrary.org/isbn/9784062639248" target="_blank" rel="noopener noreferrer">Open Library（ISBN 9784062639248）</a></figcaption></figure>
 
 本格ミステリーに挑戦してみたいなら、『すべてがFになる』も気になる作品です！
 
@@ -35,9 +46,9 @@ category: "本・読書"
 
 専門的な話や難しい言葉も出てくるので、気軽にサクッと読める本とはちょっと違うかも。でも、その分、内容を理解しながらじっくり読み進めたい人には、きっと面白いと思います！
 
-<figure class="book-cover-figure"><img src="https://covers.openlibrary.org/b/isbn/9784575525054-L.jpg" alt="『君の膵臓をたべたい』の書影" loading="lazy" decoding="async" width="300" height="450" /><figcaption>書影出典：<a href="https://openlibrary.org/isbn/9784575525054" target="_blank" rel="noopener noreferrer">Open Library（ISBN 9784575525054）</a></figcaption></figure>
-
 ## 第3位『君の膵臓をたべたい』／住野よる
+
+<figure class="book-cover-figure"><img src="https://covers.openlibrary.org/b/isbn/9784575525054-M.jpg" alt="『君の膵臓をたべたい』の書影" loading="lazy" decoding="async" width="180" height="270" /><figcaption>書影出典：<a href="https://openlibrary.org/isbn/9784575525054" target="_blank" rel="noopener noreferrer">Open Library（ISBN 9784575525054）</a></figcaption></figure>
 
 このタイトル、インパクトすごくないですか！？『君の膵臓をたべたい』。最初に見たとき、「どんな話なの！？」って気になった人も多いはず！
 
@@ -45,9 +56,9 @@ category: "本・読書"
 
 青春小説を読んでみたい人や、読み終わったあとに少し考えさせられる作品を探している人におすすめしたいです。
 
-<figure class="book-cover-figure"><img src="https://covers.openlibrary.org/b/isbn/9784101001548-L.jpg" alt="『海辺のカフカ』の書影" loading="lazy" decoding="async" width="300" height="450" /><figcaption>書影出典：<a href="https://openlibrary.org/isbn/9784101001548" target="_blank" rel="noopener noreferrer">Open Library（ISBN 9784101001548）</a></figcaption></figure>
-
 ## 第2位『海辺のカフカ』／村上春樹
+
+<figure class="book-cover-figure"><img src="https://www.shinchosha.co.jp/images_v2/book/cover/100154/100154_m.jpg" alt="新潮文庫『海辺のカフカ〔上〕』の表紙。村上春樹著" loading="lazy" decoding="async" width="207" height="300" /><figcaption>書影出典：<a href="https://www.shinchosha.co.jp/book/100154/" target="_blank" rel="noopener noreferrer">新潮社公式『海辺のカフカ〔上〕』</a>（ISBN 9784101001548）</figcaption></figure>
 
 『海辺のカフカ』は、15歳の少年・田村カフカの物語などが交互に描かれる、独特な雰囲気の小説です！
 
@@ -55,9 +66,9 @@ category: "本・読書"
 
 でも、全部が説明されるわけじゃないからこそ、自分なりに考えながら読む楽しさがありそう！長めの作品に挑戦したい人にも向いていると思います。
 
-<figure class="book-cover-figure"><img src="https://covers.openlibrary.org/b/isbn/9784167110121-L.jpg" alt="『容疑者Xの献身』の書影" loading="lazy" decoding="async" width="300" height="450" /><figcaption>書影出典：<a href="https://openlibrary.org/isbn/9784167110121" target="_blank" rel="noopener noreferrer">Open Library（ISBN 9784167110121）</a></figcaption></figure>
-
 ## 第1位『容疑者Xの献身』／東野圭吾
+
+<figure class="book-cover-figure"><img src="https://b-bunshun.ismcdn.jp/mwimgs/7/5/350/img_758daba297b46fa7c4ac3d01a38c8b0e569925.jpg" alt="『容疑者Xの献身』の書影" loading="lazy" decoding="async" width="180" height="270" /><figcaption>書影出典：<a href="https://books.bunshun.jp/ud/book/num/9784167110123" target="_blank" rel="noopener noreferrer">文藝春秋公式『容疑者Xの献身』</a>（ISBN 9784167110123）</figcaption></figure>
 
 お待たせしました！今回の1位は、東野圭吾さんの『容疑者Xの献身』です！
 

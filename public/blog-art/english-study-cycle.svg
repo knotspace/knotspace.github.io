@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f7f9ff"/><stop offset="1" stop-color="#eef6f4"/></linearGradient><filter id="s" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#26334d" flood-opacity=".09"/></filter></defs>
+<rect width="1000" height="560" rx="34" fill="url(#bg)"/>
+<text x="64" y="78" font-family="sans-serif" font-size="30" font-weight="700" fill="#17243b">英語力を伸ばす 5つのステップ</text>
+<text x="64" y="116" font-family="sans-serif" font-size="17" fill="#5d6b80">「解いて終わり」にしない。復習までを1セットにする。</text>
+<g filter="url(#s)">
+<rect x="55" y="190" width="160" height="190" rx="22" fill="#fff"/>
+<rect x="245" y="190" width="160" height="190" rx="22" fill="#fff"/>
+<rect x="435" y="190" width="160" height="190" rx="22" fill="#fff"/>
+<rect x="625" y="190" width="160" height="190" rx="22" fill="#fff"/>
+<rect x="815" y="190" width="130" height="190" rx="22" fill="#fff"/>
+</g>
+<g font-family="sans-serif" text-anchor="middle">
+<g fill="#4b70c9"><circle cx="135" cy="245" r="28"/><text x="135" y="254" font-size="24" font-weight="700" fill="#fff">1</text></g>
+<text x="135" y="306" font-size="21" font-weight="700" fill="#17243b">基礎確認</text><text x="135" y="340" font-size="15" fill="#66748a">文法・語順</text>
+<g fill="#2d9b87"><circle cx="325" cy="245" r="28"/><text x="325" y="254" font-size="24" font-weight="700" fill="#fff">2</text></g>
+<text x="325" y="306" font-size="21" font-weight="700" fill="#17243b">単語・熟語</text><text x="325" y="340" font-size="15" fill="#66748a">毎日少しずつ</text>
+<g fill="#d58a43"><circle cx="515" cy="245" r="28"/><text x="515" y="254" font-size="24" font-weight="700" fill="#fff">3</text></g>
+<text x="515" y="306" font-size="21" font-weight="700" fill="#17243b">問題演習</text><text x="515" y="340" font-size="15" fill="#66748a">過去問・長文</text>
+<g fill="#8a6bc1"><circle cx="705" cy="245" r="28"/><text x="705" y="254" font-size="24" font-weight="700" fill="#fff">4</text></g>
+<text x="705" y="306" font-size="21" font-weight="700" fill="#17243b">原因分析</text><text x="705" y="340" font-size="15" fill="#66748a">なぜ間違えた？</text>
+<g fill="#d16b78"><circle cx="880" cy="245" r="28"/><text x="880" y="254" font-size="24" font-weight="700" fill="#fff">5</text></g>
+<text x="880" y="306" font-size="19" font-weight="700" fill="#17243b">解き直し</text><text x="880" y="340" font-size="14" fill="#66748a">できるまで</text>
+</g>
+<g fill="none" stroke="#9aa8bb" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M220 285h16m-7-8 8 8-8 8"/><path d="M410 285h16m-7-8 8 8-8 8"/><path d="M600 285h16m-7-8 8 8-8 8"/><path d="M790 285h16m-7-8 8 8-8 8"/></g>
+<rect x="55" y="430" width="890" height="70" rx="18" fill="#17243b"/>
+<text x="500" y="473" text-anchor="middle" font-family="sans-serif" font-size="22" font-weight="700" fill="#fff">間違えた問題こそ、次の得点につながる！</text>
+</svg>

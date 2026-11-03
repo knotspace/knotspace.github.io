@@ -8,6 +8,9 @@ category: "英検・勉強法"
 
 ## 英検準2級に合格するまでに意識したこと
 
+<figure class="knot-infographic"><img src="/blog-art/eiken-pre2-roadmap.svg" alt="英検準2級の学習を単語、読解、リスニング、ライティング、直前確認の順に整理した学習ロードマップ" width="1000" height="560" loading="lazy" decoding="async" /><figcaption>英検準2級の学習ポイント：KNOT制作</figcaption></figure>
+
+
 「準2級って高校中級程度って書いてあるけど、そんなに早く挑戦できるの？」って思ったこと、ない？
 
 自分も準2級に挑戦する前は、単語の難しさと長文の量がめっちゃ気になってたんだよね！　実際、3級までと比べると知らない単語が増えるし、最初からスラスラ解けるわけじゃないんだ。

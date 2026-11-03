@@ -9,6 +9,9 @@ tags: ["高校受験", "下野模試", "模試", "偏差値"]
 
 ## 下野模試とは？結果の見方と受験勉強への生かし方
 
+<figure class="knot-infographic"><img src="/blog-art/mock-exam-review.svg" alt="模試の結果を点数、間違いの原因、復習、次の目標に分けて振り返る流れ" width="1000" height="560" loading="lazy" decoding="async" /><figcaption>模試の振り返り方：KNOT制作</figcaption></figure>
+
+
 高校受験が近づくと、模試を受ける機会が一気に増えてきますよね！
 
 その中でも、高校受験を考えている人なら一度は耳にするのが「下野模試」です。

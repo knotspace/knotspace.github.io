@@ -12,6 +12,8 @@ category: "英語・勉強法"
 
 先に言っておくね。英検3級に合格したからって、公立入試で必ず70点取れるわけじゃないんだ。でも、**英検3級の問題を余裕で解けるくらいの英語力**があれば、入試でもかなり強い土台になると思う！
 
+<figure class="knot-infographic"><img src="/blog-art/english-study-cycle.svg" alt="英語学習を基礎確認、単語・熟語、問題演習、間違いの原因分析、解き直しの5段階で進める学習サイクル" width="1000" height="560" loading="lazy" decoding="async" /><figcaption>英語学習の5ステップ：KNOT制作</figcaption></figure>
+
 ## まずは英検3級を余裕で解けるようにする
 
 英検3級は中学卒業程度が目安なんだよ。だから、中学校で習う英語をしっかり身につける目標としてちょうどいいんだよね！
