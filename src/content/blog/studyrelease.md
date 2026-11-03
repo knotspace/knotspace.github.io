@@ -6,7 +6,7 @@ heroImage: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1400&
 category: "KNOT開発記録"
 ---
 
-# KNOT Studyを公開しました！
+## KNOT Studyを公開しました！
 
 KNOTに新しい学習コンテンツ「KNOT Study」を追加しました！
 
