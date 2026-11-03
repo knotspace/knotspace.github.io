@@ -1,4 +1,4 @@
-import { readFile, writeFile } from 'node:fs/promises';
+import { mkdir, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
@@ -89,23 +89,40 @@ const schools = [...records.values()].sort((a,b) =>
   a.schoolType.localeCompare(b.schoolType, 'ja') ||
   a.name.localeCompare(b.name, 'ja')
 );
+const schoolTypes = ['小学校','中学校','義務教育学校','中等教育学校','高等学校','特別支援学校','大学','短期大学','高等専門学校','専修学校','各種学校'];
+const ownershipTypes = ['国立','公立','私立'];
+const fields = ['schoolCode','name','schoolType','ownership','prefecture','city','address','postalCode','establishedBy','department','integratedSchool','officialUrl','sourceYear','source'];
+const publicDir = path.join(ROOT, 'public/data/game/schools');
+await mkdir(publicDir, { recursive: true });
+const byPrefecture = new Map(PREFECTURES.map(pref => [pref, []]));
+for (const school of schools) {
+  if (byPrefecture.has(school.prefecture)) byPrefecture.get(school.prefecture).push(school);
+}
+const prefectureFiles = {};
+for (let i = 0; i < PREFECTURES.length; i++) {
+  const pref = PREFECTURES[i];
+  const file = String(i + 1).padStart(2, '0') + '.json';
+  const list = byPrefecture.get(pref) || [];
+  await writeFile(path.join(publicDir, file), JSON.stringify({ prefecture: pref, count: list.length, schools: list }) + '\\n', 'utf8');
+  prefectureFiles[pref] = { file, count: list.length };
+}
 const output = {
   meta: {
     name: 'KNOT National School Database',
-    schemaVersion: 1,
+    schemaVersion: 2,
     source: '文部科学省 学校コード一覧',
     sourceUrl: 'https://www.mext.go.jp/b_menu/toukei/mext_01087.html',
     referenceDate: '2026-05-01',
     importedAt: new Date().toISOString(),
     status: 'imported',
     count: schools.length,
-    note: '学校コードで重複排除。偏差値・入試倍率・学科詳細は別途、年度と出典を付けて管理する。'
+    note: '全国データは都道府県別JSONに分割。偏差値・入試倍率は別データで年度と出典を保持。'
   },
   prefectures: PREFECTURES,
-  schoolTypes: ['小学校','中学校','義務教育学校','中等教育学校','高等学校','特別支援学校','大学','短期大学','高等専門学校','専修学校','各種学校'],
-  ownershipTypes: ['国立','公立','私立'],
-  fields: ['schoolCode','name','schoolType','ownership','prefecture','city','address','postalCode','establishedBy','department','integratedSchool','officialUrl','sourceYear','source'],
-  schools
+  prefectureFiles,
+  schoolTypes,
+  ownershipTypes,
+  fields
 };
-await writeFile(OUTPUT, JSON.stringify(output) + '\n', 'utf8');
-console.log(`Imported ${schools.length} schools into ${OUTPUT}`);
+await writeFile(OUTPUT, JSON.stringify(output) + '\\n', 'utf8');
+console.log(`Imported ${schools.length} schools into ${PREFECTURES.length} prefecture files.`);
