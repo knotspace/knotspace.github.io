@@ -115,11 +115,7 @@ const isStudyActive = (path: string) => currentPath === path || (currentPath.sta
           <a href={`${BASE}blog/`}>記事一覧</a>
           <a href={`${BASE}study/`}>Study</a>
           <a href={`${BASE}bookmarks/`}>あとで読む</a>
-          <a href={`${BASE}about/`}>プロフィール</a>
-
-          <a class="account-link" id="account-link" href={`${BASE}account/`} aria-label="ログイン / マイページ" title="ログイン / マイページ">♙</a>
-
-          <button
+          <a href={`${BASE}about/`}>プロフィール</a><button
             class="theme-toggle"
             id="theme-toggle"
             type="button"
@@ -246,35 +242,7 @@ const isStudyActive = (path: string) => currentPath === path || (currentPath.sta
           sessionStorage.setItem(dismissKey, '1');
         });
       })();
-    </script>
-    <script is:inline id="knot-account-shortcut">
-      (() => {
-        const link = document.getElementById('account-link');
-        if (!link) return;
-        const base = document.querySelector('meta[name="site-base"]')?.content || '/';
-        const update = () => {
-          let loggedIn = false;
-          try {
-            const session = JSON.parse(localStorage.getItem('knot-auth') || 'null');
-            loggedIn = Boolean(session?.access_token);
-          } catch {}
-          link.href = base + (loggedIn ? 'mypage/' : 'account/');
-          link.title = loggedIn ? 'マイページ' : 'ログイン / アカウント';
-          link.setAttribute('aria-label', link.title);
-          link.textContent = loggedIn ? '♙' : '♙';
-        };
-        update();
-        window.addEventListener('storage', update);
-        link.addEventListener('click', (event) => {
-          update();
-          if (link.href.endsWith('/mypage/')) {
-            event.preventDefault();
-            window.location.href = link.href;
-          }
-        });
-      })();
-    </script>
-    <script is:inline id="knot-search-shortcut">
+    </script><script is:inline id="knot-search-shortcut">
       document.addEventListener('keydown', (event) => {
         if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
           event.preventDefault();
