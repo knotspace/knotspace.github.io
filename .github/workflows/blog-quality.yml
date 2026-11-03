@@ -66,6 +66,17 @@ jobs:
               workflow_id: 'deploy.yml',
               ref: 'main'
             });
+      - name: Close resolved quality incident
+        if: success() && github.event_name != 'pull_request'
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b
+        with:
+          script: |
+            const title = '[Blog Quality] 自動検査で問題を検出';
+            const { owner, repo } = context.repo;
+            const { data: issues } = await github.rest.issues.listForRepo({ owner, repo, state: 'open', per_page: 100 });
+            for (const issue of issues.filter(item => item.title === title)) {
+              await github.rest.issues.update({ owner, repo, issue_number: issue.number, state: 'closed', state_reason: 'completed' });
+            }
       - name: Report detected issue
         if: failure() && github.event_name != 'pull_request'
         uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b
