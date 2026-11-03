@@ -183,6 +183,10 @@ const breadcrumbJsonLd = {
     </section>
   </article>
   <aside class="article-sidebar" aria-label="記事ナビゲーション">
+    {toc.length > 0 && <nav class="article-side-widget side-toc" aria-label="サイドバーの目次">
+      <h2>この記事の目次</h2>
+      <ol>{toc.map((heading) => <li class:list={[`toc-level-${heading.depth}`]}><a href={`#${heading.slug}`} data-toc-link={heading.slug}>{heading.text}</a></li>)}</ol>
+    </nav>}
     <section class="article-side-widget"><h2>お知らせ</h2><p>KNOTの記事を読んでくれてありがとう！新しい記事も随時更新中。</p><a href={`${BASE}blog/`}>記事一覧を見る »</a></section>
 
   </aside>
@@ -802,13 +806,13 @@ const breadcrumbJsonLd = {
   .article-toc summary::after{content:"＋";color:var(--accent);font-size:16px}
   .article-toc details[open] summary::after{content:"−"}
   .article-toc-count{margin-left:auto;color:var(--muted);font-size:10px;font-weight:600}
-  .article-toc ol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3px 14px;margin:0;padding:4px 18px 17px;list-style:none}
+  .article-toc ol{display:flex;flex-direction:column;gap:2px;margin:0;padding:4px 18px 17px;list-style:none}
   .article-toc li{min-width:0;margin:0;padding:0}
   .article-toc li.toc-level-3{padding-left:13px}
   .article-toc a{display:block;padding:7px 10px;border-radius:9px;color:var(--article-text);font-size:11px;line-height:1.6;text-decoration:none;overflow-wrap:anywhere}
   .article-toc a:hover,.article-toc a.is-current{background:var(--surface-soft);color:var(--accent)}
   .article-content :global(h2),.article-content :global(h3){scroll-margin-top:88px}
-  @media(max-width:560px){.article-toc ol{grid-template-columns:1fr}.article-toc{margin:20px 0 28px}}
+  @media(max-width:760px){.article-sidebar .side-toc{display:none}}@media(max-width:560px){.article-toc{margin:20px 0 28px}}
   .article-content :global(h2){border-left:4px solid var(--accent);padding:5px 0 5px 13px;margin:2em 0 .8em;font-size:22px}
   .article-content :global(h3){font-size:18px;margin:1.7em 0 .6em}
   .article-content :global(img){display:block;max-width:100%;height:auto;border-radius:14px;box-shadow:0 8px 26px rgba(0,0,0,.10)}
