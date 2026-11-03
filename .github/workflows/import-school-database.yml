@@ -30,9 +30,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          mkdir -p public/data/game
-          cp src/data/game/schools.json public/data/game/schools.json
-          git add src/data/game/schools.json public/data/game/schools.json
+          rm -f public/data/game/schools.json
+          git add -A src/data/game/schools.json public/data/game
           if git diff --cached --quiet; then
             echo "School database is already up to date."
           else
