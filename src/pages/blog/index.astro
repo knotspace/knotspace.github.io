@@ -74,7 +74,7 @@ const timeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTim
           >
             <div class="post-thumbnail">
               {post.data.heroImage ? (
-                <img src={post.data.heroImage} alt={post.data.title} loading="lazy" decoding="async" />
+                <img src={post.data.heroImage} alt={post.data.title} loading="lazy" decoding="async" width="380" height="254" />
               ) : (
                 <span>{String(index + 1).padStart(2, '0')}</span>
               )}
@@ -224,8 +224,8 @@ const timeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTim
 
 <style>
   .archive-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px}
-  .random-button{border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:999px;padding:9px 14px;font-size:11px;font-weight:700;cursor:pointer;transition:border-color .2s,transform .2s}
-  .random-button:hover{border-color:var(--accent);transform:translateY(-1px)}
+  .random-button{border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:999px;padding:9px 14px;font-size:11px;font-weight:700;cursor:pointer}
+  .random-button:hover{border-color:var(--accent)}
   .archive-header {
     padding: 44px 0 25px;
     border-bottom: 1px solid var(--line);
@@ -549,7 +549,7 @@ const timeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTim
   .widget-title{font-size:15px;border-bottom:1px solid var(--line)}
   .profile-logo{font-size:30px}
   .total-count{font-weight:700}
-  @media(max-width:520px){.post-card{grid-template-columns:112px minmax(0,1fr);gap:12px}.post-thumbnail{width:112px;height:88px}.post-info h2{font-size:13px}.post-info p{display:block;font-size:10px;line-height:1.6}.read-more{display:inline-block;font-size:10px}.archive-header{padding-top:28px}}
+  @media(max-width:520px){.post-card{grid-template-columns:112px minmax(0,1fr);gap:12px;min-height:124px}.post-thumbnail{width:112px;height:88px;aspect-ratio:7/5}.post-info h2{font-size:13px}.post-info p{display:block;font-size:10px;line-height:1.6}.read-more{display:inline-block;font-size:10px}.archive-header{padding-top:28px}}
 
   /* WordPress-style archive refinements */
   .archive-header{padding:25px 0 18px;border-bottom:2px solid var(--line)}
@@ -561,8 +561,8 @@ const timeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTim
   #article-search{border-radius:3px}
   .category-filters{gap:0;margin-top:10px;border:1px solid var(--line);width:max-content;max-width:100%}
   .filter-button{border:0;border-right:1px solid var(--line);border-radius:0;padding:8px 12px}
-  .post-card{grid-template-columns:180px minmax(0,1fr);gap:18px;padding:19px 0}
-  .post-thumbnail{width:180px;height:120px;border-radius:2px}
+  .post-card{grid-template-columns:180px minmax(0,1fr);gap:18px;padding:19px 0;min-height:158px}
+  .post-thumbnail{width:180px;height:120px;aspect-ratio:3/2;border-radius:2px}
   .post-info h2{font-size:16px;letter-spacing:0;margin:7px 0}
   .post-info p{font-size:11px;line-height:1.8}
   .widget{border:1px solid var(--line);border-radius:0;background:var(--surface);padding:0}
