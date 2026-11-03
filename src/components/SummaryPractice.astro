@@ -1,0 +1,165 @@
+---
+import bank from '../data/study/study-questions.json';
+const { slug, title } = Astro.props;
+const questions = bank.filter((item) => item.link === `/study/summary/${slug}/`);
+---
+<section class="summary-practice" data-summary-practice data-questions={JSON.stringify(questions)} data-title={title}>
+  <div class="practice-intro">
+    <p class="eyebrow">CHECK YOUR UNDERSTANDING</p>
+    <h2>理解度チェック</h2>
+    <p>この分野の問題からランダムに10問出題します。解答後は正解と解説を確認できます。</p>
+    <div class="practice-start-row">
+      <span>{questions.length.toLocaleString('ja-JP')}問から出題</span>
+      <button type="button" data-start>10問チェックを始める →</button>
+    </div>
+  </div>
+  <div class="practice-session" data-session hidden>
+    <div class="practice-progress"><span data-progress>1 / 10</span><div><i data-bar></i></div></div>
+    <h3 data-question></h3>
+    <figure data-figure hidden><img data-image alt=""><figcaption data-caption></figcaption></figure>
+    <div class="practice-choices" data-choices></div>
+    <div class="practice-explanation" data-explanation hidden aria-live="polite"></div>
+    <div class="practice-next-row"><button type="button" data-next disabled>次の問題 →</button></div>
+  </div>
+  <div class="practice-result" data-result hidden>
+    <p class="eyebrow">CHECK COMPLETE</p>
+    <h3>チェック完了！</h3>
+    <strong data-score>0 / 10</strong>
+    <p data-message></p>
+    <div class="practice-result-actions">
+      <button type="button" data-retry>もう一度挑戦する</button>
+      <a href="/study/solve/">この分野以外の問題も解く →</a>
+    </div>
+  </div>
+</section>
+<script>
+document.querySelectorAll('[data-summary-practice]').forEach((root) => {
+  if (root.dataset.initialized) return;
+  root.dataset.initialized = 'true';
+  const all = JSON.parse(root.dataset.questions || '[]');
+  const $ = (name) => root.querySelector('[data-' + name + ']');
+  let session = [], position = 0, score = 0, locked = false;
+  const sessionBox = $('session');
+  const resultBox = $('result');
+  function begin() {
+    session = [...all].sort(() => Math.random() - 0.5).slice(0, Math.min(10, all.length));
+    if (!session.length) return;
+    position = 0;
+    score = 0;
+    $('start').hidden = true;
+    sessionBox.hidden = false;
+    resultBox.hidden = true;
+    render();
+  }
+  function render() {
+    locked = false;
+    const q = session[position];
+    $('progress').textContent = (position + 1) + ' / ' + session.length;
+    $('bar').style.width = (position / session.length * 100) + '%';
+    $('question').textContent = q.q;
+    $('choices').replaceChildren();
+    $('explanation').hidden = true;
+    $('next').disabled = true;
+    $('next').textContent = position === session.length - 1 ? '結果を見る →' : '次の問題 →';
+    const figure = $('figure');
+    if (q.figure) {
+      $('image').src = q.figure;
+      $('image').alt = q.figureAlt || '問題資料';
+      $('caption').textContent = q.figureAlt || '問題資料';
+      figure.hidden = false;
+    } else {
+      figure.hidden = true;
+      $('image').removeAttribute('src');
+    }
+    q.a.forEach((choice, index) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'practice-choice';
+      const letter = document.createElement('b');
+      letter.textContent = ['A', 'B', 'C', 'D'][index];
+      const label = document.createElement('span');
+      label.textContent = choice;
+      button.append(letter, label);
+      button.addEventListener('click', () => answer(index));
+      $('choices').append(button);
+    });
+  }
+  function answer(selected) {
+    if (locked) return;
+    locked = true;
+    const q = session[position];
+    const correct = selected === q.c;
+    if (correct) score++;
+    [...$('choices').children].forEach((button, index) => {
+      button.disabled = true;
+      if (index === q.c) button.classList.add('is-correct');
+      else if (index === selected) button.classList.add('is-wrong');
+    });
+    const explanation = $('explanation');
+    explanation.replaceChildren();
+    const heading = document.createElement('strong');
+    heading.textContent = correct ? '正解！' : '不正解';
+    const detail = document.createElement('p');
+    detail.textContent = q.e || '解説は準備中です。';
+    explanation.append(heading, detail);
+    if (q.link) {
+      const link = document.createElement('a');
+      link.href = q.link;
+      link.textContent = 'この分野の要点に戻る ↑';
+      explanation.append(link);
+    }
+    explanation.hidden = false;
+    $('next').disabled = false;
+  }
+  function finish() {
+    sessionBox.hidden = true;
+    resultBox.hidden = false;
+    $('score').textContent = score + ' / ' + session.length;
+    const rate = score / session.length;
+    $('message').textContent = rate === 1 ? '全問正解！この分野はかなり身についています。' : rate >= 0.7 ? 'いい調子！間違えた問題の解説を見直そう。' : '要点をもう一度確認して、少し時間をおいて再挑戦しよう。';
+  }
+  $('start').addEventListener('click', begin);
+  $('retry').addEventListener('click', begin);
+  $('next').addEventListener('click', () => {
+    if (!locked) return;
+    if (position === session.length - 1) finish();
+    else { position++; render(); }
+  });
+});
+</script>
+<style>
+.summary-practice{margin:36px 0;padding:22px;border:1px solid var(--line);border-radius:15px;background:var(--surface)}
+.practice-intro .eyebrow,.practice-result .eyebrow{font:10px ui-monospace,monospace;letter-spacing:.14em;color:var(--accent);font-weight:850;margin:0 0 8px}
+.practice-intro h2,.practice-result h3{font-size:23px;letter-spacing:-.04em;margin:0 0 8px}
+.practice-intro>p:not(.eyebrow),.practice-result>p:not(.eyebrow){font-size:12px;line-height:1.8;color:var(--muted);margin:0}
+.practice-start-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px}
+.practice-start-row>span{font-size:10px;color:var(--muted)}
+.practice-start-row button,.practice-next-row button,.practice-result-actions button{border:0;border-radius:9px;padding:12px 16px;background:var(--accent);color:#fff;font-size:12px;font-weight:800;cursor:pointer}
+.practice-session{margin-top:18px;padding-top:18px;border-top:1px solid var(--line)}
+.practice-session[hidden],.practice-result[hidden]{display:none}
+.practice-progress{display:flex;align-items:center;gap:12px;margin-bottom:18px;font-size:11px;color:var(--muted)}
+.practice-progress>span{white-space:nowrap}
+.practice-progress>div{height:6px;flex:1;border-radius:10px;background:var(--line);overflow:hidden}
+.practice-progress i{display:block;height:100%;width:0;background:var(--accent);transition:width .2s}
+.practice-session h3{font-size:18px;line-height:1.8;margin:0 0 16px}
+.practice-session figure{margin:12px 0;padding:12px;border:1px solid var(--line);border-radius:10px}
+.practice-session figure[hidden]{display:none}
+.practice-session figure img{display:block;width:100%;max-height:300px;object-fit:contain}
+.practice-session figcaption{font-size:10px;color:var(--muted);text-align:center;margin-top:6px}
+.practice-choices{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.practice-choice{display:flex;align-items:center;gap:10px;min-height:58px;padding:12px;text-align:left;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--text);font:inherit;line-height:1.65;cursor:pointer}
+.practice-choice b{display:grid;place-items:center;width:26px;height:26px;flex:none;border-radius:7px;background:var(--surface-soft);font-size:10px}
+.practice-choice:disabled{cursor:default}
+.practice-choice.is-correct{border-color:#259b68;background:color-mix(in srgb,#259b68 12%,var(--surface))}
+.practice-choice.is-wrong{border-color:#d94c59;background:color-mix(in srgb,#d94c59 12%,var(--surface))}
+.practice-explanation{margin-top:14px;padding:14px;border-radius:9px;background:var(--surface-soft);font-size:12px;line-height:1.8}
+.practice-explanation p{margin:6px 0 0;white-space:pre-line}
+.practice-explanation a{display:inline-block;margin-top:8px;color:var(--accent);font-size:11px;font-weight:800}
+.practice-next-row{display:flex;justify-content:flex-end;margin-top:14px}
+.practice-next-row button:disabled{opacity:.45;cursor:not-allowed}
+.practice-result{margin-top:18px;padding-top:18px;border-top:1px solid var(--line)}
+.practice-result>strong{display:block;font-size:42px;letter-spacing:-.05em;margin:12px 0}
+.practice-result-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:16px}
+.practice-result-actions a{font-size:11px;color:var(--accent);font-weight:800}
+@media(max-width:620px){.summary-practice{padding:16px}.practice-choices{grid-template-columns:1fr}.practice-start-row{align-items:flex-start;flex-direction:column}.practice-session h3{font-size:16px}}
+</style>
