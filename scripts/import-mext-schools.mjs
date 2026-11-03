@@ -13,6 +13,9 @@ const SOURCES = [
 const PREFECTURES = ['北海道','青森県','岩手県','宮城県','秋田県','山形県','福島県','茨城県','栃木県','群馬県','埼玉県','千葉県','東京都','神奈川県','新潟県','富山県','石川県','福井県','山梨県','長野県','岐阜県','静岡県','愛知県','三重県','滋賀県','京都府','大阪府','兵庫県','奈良県','和歌山県','鳥取県','島根県','岡山県','広島県','山口県','徳島県','香川県','愛媛県','高知県','福岡県','佐賀県','長崎県','熊本県','大分県','宮崎県','鹿児島県','沖縄県'];
 
 function parseCsv(text) {
+  const firstLine = text.split(/\r?\n/, 1)[0] || '';
+  const delimiters = [',', '\\t', ';'];
+  const delimiter = delimiters.sort((a,b) => firstLine.split(b).length - firstLine.split(a).length)[0];
   const rows = []; let row = []; let field = ''; let quoted = false;
   for (let i = 0; i < text.length; i++) {
     const c = text[i], next = text[i + 1];
@@ -21,7 +24,7 @@ function parseCsv(text) {
       else if (c === '"') quoted = false;
       else field += c;
     } else if (c === '"') quoted = true;
-    else if (c === ',') { row.push(field); field = ''; }
+    else if (c === delimiter) { row.push(field); field = ''; }
     else if (c === '\n') { row.push(field.replace(/\r$/, '')); if (row.some(v => v.trim())) rows.push(row); row = []; field = ''; }
     else field += c;
   }
@@ -63,7 +66,7 @@ for (const url of SOURCES) {
     });
   }
 }
-if (records.size === 0) throw new Error('No schools imported. Check MEXT CSV headers and encoding.');
+if (records.size === 0) throw new Error('No schools imported. Check the CSV header diagnostics above.');
 const schools = [...records.values()].sort((a,b) =>
   PREFECTURES.indexOf(a.prefecture) - PREFECTURES.indexOf(b.prefecture) ||
   a.schoolType.localeCompare(b.schoolType, 'ja') ||
