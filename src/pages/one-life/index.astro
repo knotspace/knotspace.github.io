@@ -21,7 +21,7 @@
 <label><input type="radio" name="talent" value="balanced" checked/><span><b>バランス型</b><small>学力・体力・人間関係を平均的に伸ばす</small></span></label>
 <label><input type="radio" name="talent" value="curious"/><span><b>探究型</b><small>知りたいことを深く掘り下げる</small></span></label>
 <label><input type="radio" name="talent" value="social"/><span><b>社交型</b><small>人との出会いや経験から成長する</small></span></label>
-</div><div class="start-note">1年ごとに時間が流れ、節目では進学・受験・仕事などの決断が訪れる。途中で一時停止や倍速にも切り替えられる。</div><button id="start-game" class="primary-button">この人生を始める →</button><p class="fine-print">架空の人生シミュレーションです。実際の合否・収入・将来を予測するものではありません。</p><section id="past-life-archive" class="past-life-archive"><h3>これまでに歩んだ人生</h3><p>この端末に保存された人生の記録がここに残ります。</p><div id="past-life-list"></div></section>
+</div><div class="start-note">1年ごとに時間が流れ、節目では進学・受験・仕事などの決断が訪れる。途中で一時停止や倍速にも切り替えられる。</div><button id="start-game" class="primary-button">この人生を始める →</button><button id="continue-game" class="secondary-button" hidden>前回の続きから再開 →</button><p class="fine-print">架空の人生シミュレーションです。実際の合否・収入・将来を予測するものではありません。</p><section id="past-life-archive" class="past-life-archive"><h3>これまでに歩んだ人生</h3><p>この端末に保存された人生の記録がここに残ります。</p><div id="past-life-list"></div></section>
 </section>
 <section id="game-screen" hidden>
 <div class="game-top"><div><p class="eyebrow">YOUR LIFE JOURNEY</p><h2 id="year-label">小学1年生</h2><p id="term-label">春</p></div><div class="progress-wrap"><span id="progress-label">1 / 1</span><div class="progress-track"><i id="progress-bar"></i></div></div></div>
@@ -270,7 +270,7 @@ function updateClockUI(){
  const total=clockYearLength();state.yearRemaining=state.yearRemaining??total;
  $('year-time-label').textContent=Math.ceil(state.yearRemaining/1000)+'秒';
  $('year-time-bar').style.width=Math.max(0,Math.min(100,(1-state.yearRemaining/total)*100))+'%';
- $('pause-game').textContent=state.paused?'再開':'一時停止';
+ $('pause-game').textContent=state.waitingChoice?'決断待ち':state.paused?'再開':'一時停止';$('pause-game').disabled=!!state.waitingChoice;
  $('auto-choice').checked=!!state.auto;
  document.querySelectorAll('[data-speed]').forEach(b=>b.classList.toggle('active',Number(b.dataset.speed)===(state.speed||1)));
 }
@@ -481,7 +481,8 @@ $('pause-game').addEventListener('click',()=>{if(!state)return;state.paused=!sta
 document.querySelectorAll('[data-speed]').forEach(b=>b.addEventListener('click',()=>{if(!state)return;state.speed=Number(b.dataset.speed);updateClockUI();}));
 $('auto-choice').addEventListener('change',e=>{if(state){state.auto=e.target.checked;if(state.auto)$('clock-message').textContent='おまかせ進行が有効。時間切れで選択肢を自動選択します。';else $('clock-message').textContent='決断は自分で選択します。';if(state.waitingChoice&&state.auto){state.waitingChoice=false;const current=stages[state.step];if(current?.opts?.length)chooseAutomatically();}}});
 
-$('save-exit').addEventListener('click',()=>{stopClock();try{localStorage.setItem('knot-life-sim-v2',JSON.stringify(state));}catch{}$('game-screen').hidden=true;$('start-screen').hidden=false;});
+$('save-exit').addEventListener('click',()=>{stopClock();try{localStorage.setItem('knot-life-sim-v2',JSON.stringify(state));}catch{}$('game-screen').hidden=true;$('start-screen').hidden=false;$('continue-game').hidden=false;});
+$('continue-game').addEventListener('click',()=>{if(!state)return;$('start-screen').hidden=true;$('game-screen').hidden=false;render();startClock();});
 renderArchive();
 try{const saved=JSON.parse(localStorage.getItem('knot-life-sim-v2')||'null');if(saved&&saved.stats&&saved.decisions&&saved.diary&&Number.isInteger(saved.step)){state=saved;state.durationMinutes=state.durationMinutes||30;state.stats.happiness=state.stats.happiness??50;state.examPrefecture=state.examPrefecture||state.prefecture;state.estimatedYears=state.estimatedYears||20;state.speed=state.speed||1;state.yearRemaining=state.yearRemaining??clockYearLength();$('duration').value=String(state.durationMinutes);$('player-name').value=state.name||'';$('home-prefecture').value=state.prefecture||'栃木県';loadSchools(state.examPrefecture||$('home-prefecture').value);$('start-screen').hidden=true;$('game-screen').hidden=false;render();startClock();}}catch{}
 </script>
