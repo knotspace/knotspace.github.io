@@ -575,4 +575,8 @@ const isStudyActive = (path: string) => currentPath === path || (currentPath.sta
  .site-footer{align-items:flex-start;flex-direction:column;gap:8px;margin-top:52px}
 }
 
+
+  /* Study uses a full-width app frame; keep the site-wide width rule off it. */
+  .site-shell.study-shell{width:100%;max-width:none;margin:0;padding:0}
+  .study-app-main{min-width:0}
 </style>
