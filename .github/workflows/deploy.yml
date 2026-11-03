@@ -6,6 +6,7 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "*/15 * * * *"
+    - cron: "0 15 31 3 *"
 
 permissions:
   contents: read
@@ -27,6 +28,9 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Trigger annual profile refresh
+        if: github.event.schedule == '0 15 31 3 *'
+        run: echo "due=true" >> "$GITHUB_OUTPUT"
       - name: Release scheduled articles
         id: schedule
         if: github.event_name == 'schedule'
