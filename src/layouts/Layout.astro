@@ -35,7 +35,7 @@ const articleStructuredData = structuredItems.find((item) =>
 );
 const isArticlePage = Boolean(articleStructuredData);
 const BASE = import.meta.env.BASE_URL;
-const navHref = (path: string) => /^https?:\\/\\//i.test(path) ? path : `${BASE}${path.replace(/^\\/+/, '')}`;
+const navHref = (path: string) => /^https?:\/\//i.test(path) ? path : BASE + path.replace(/^\/+/, '');
 ---
 
 <!doctype html>
