@@ -135,6 +135,7 @@ function legacyToBlocks(value) {
     if (type === 'callout') return createBlock('knot/callout', { title: item.title || 'ポイント', text: item.text || '', style: item.style || 'note' });
     if (type === 'button') return createBlock('knot/button', { label: item.label || '詳しく見る', url: item.url || '' });
     if (type === 'code') return createBlock('knot/code', { code: item.code || item.text || '', language: item.language || 'text' });
+    if (type === 'table') return createBlock('core/table', { head: item.head || [], body: item.rows || [] });
     if (type === 'accordion') return createBlock('knot/accordion', { title: item.title || '詳しく見る', text: item.text || '' });
     if (type === 'notice') return createBlock('knot/notice', { title: item.title || 'お知らせ', text: item.text || '', tone: item.tone || 'info' });
     return createBlock('core/paragraph', { content: item.text || '' });
@@ -145,6 +146,8 @@ function blocksToLegacy(blocks) {
   return blocks.map(block => {
     const a = block.attributes || {};
     if (block.name === 'core/paragraph') return { type: 'paragraph', text: a.content || '' };
+    if (block.name === 'core/code') return { type: 'code', code: a.content || '', language: 'text' };
+    if (block.name === 'core/table') return { type: 'table', head: a.head || [], rows: a.body || [] };
     if (block.name === 'core/heading') return { type: 'heading', level: a.level || 2, text: a.content || '' };
     if (block.name === 'core/image') return { type: 'image', src: a.url || '', alt: a.alt || '', caption: a.caption || '' };
     if (block.name === 'core/quote') return { type: 'quote', text: a.value || '', attribution: a.citation || '' };
@@ -162,6 +165,8 @@ function blocksToLegacy(blocks) {
     return { type: 'paragraph', text: a.content || '' };
   });
 }
+
+const previewText = value => String(value || '').replace(/<[^>]*>/g, '');
 
 function Editor({ value, onChange }) {
   const [blocks, setBlocks] = useState(() => legacyToBlocks(value));
@@ -192,7 +197,7 @@ function Editor({ value, onChange }) {
       value: blocks,
       onInput: update,
       onChange: update,
-      settings: { allowedBlockTypes: ['core/paragraph', 'core/heading', 'core/image', 'core/quote', 'core/list', 'core/separator', 'core/code', 'core/table', 'core/embed', 'knot/callout', 'knot/button', 'knot/code', 'knot/accordion', 'knot/notice'] }
+      settings: { allowedBlockTypes: ['core/paragraph', 'core/heading', 'core/image', 'core/quote', 'core/list', 'core/separator', 'core/code', 'core/table', 'knot/callout', 'knot/button', 'knot/code', 'knot/accordion', 'knot/notice'] }
     },
       el('div', { className: 'knot-gutenberg-editor' },
         el('div', { className: 'knot-gutenberg-topbar' },
@@ -221,17 +226,18 @@ function Editor({ value, onChange }) {
                   el('div', { className: 'knot-preview-frame knot-preview-'+previewWidth },
                     ...blocks.map((block,index) => {
                       const a=block.attributes||{};
-                      if(block.name==='core/paragraph') return el('p',{key:index,dangerouslySetInnerHTML:{__html:a.content||''}});
-                      if(block.name==='core/heading') return el(a.level===3?'h3':'h2',{key:index,dangerouslySetInnerHTML:{__html:a.content||''}});
+                      if(block.name==='core/paragraph') return el('p',{key:index,children:previewText(a.content)});
+                      if(block.name==='core/heading') return el(a.level===3?'h3':'h2',{key:index,children:previewText(a.content)});
                       if(block.name==='core/image') return el('figure',{key:index},a.url?el('img',{src:a.url,alt:a.alt||''}):el('p',null,'画像URLを設定してください'),a.caption?el('figcaption',null,a.caption):null);
                       if(block.name==='core/quote') return el('blockquote',{key:index},el('p',null,a.value||''),a.citation?el('cite',null,a.citation):null);
                       if(block.name==='core/list') return el(a.ordered?'ol':'ul',{key:index},...(block.innerBlocks||[]).map((child,i)=>el('li',{key:i},child.attributes?.content||'')));
                       if(block.name==='core/separator') return el('hr',{key:index});
+                      if(block.name==='core/table') return el('table',{key:index},a.head?.length?el('thead',null,el('tr',null,...a.head.map((cell,i)=>el('th',{key:i},cell.content||'')))):null,el('tbody',null,...(a.body||[]).map((row,i)=>el('tr',{key:i},...(row.cells||[]).map((cell,j)=>el('td',{key:j},cell.content||''))))));
                       if(block.name==='knot/callout'||block.name==='knot/notice') return el('aside',{key:index,className:'knot-preview-callout'},el('strong',null,a.title||'ポイント'),el('p',null,a.text||''));
                       if(block.name==='knot/button') return el('p',{key:index},el('a',{className:'knot-preview-button',href:a.url||'#'},a.label||'詳しく見る'));
                       if(block.name==='knot/code'||block.name==='core/code') return el('pre',{key:index},el('code',null,a.code||a.content||''));
                       if(block.name==='knot/accordion') return el('details',{key:index},el('summary',null,a.title||'詳しく見る'),el('p',null,a.text||''));
-                      if(block.name==='core/embed') return el('p',{key:index},a.url||'埋め込みURL');
+                      
                       return el('p',{key:index},'');
                     })
                   )
