@@ -1,8 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import aboutSettings from '../data/about-settings.json';
-import { getAcademicGrade } from '../utils/academic-grade';
-const academicGrade = getAcademicGrade(new Date());
+import { getAge } from '../utils/profile-age';
+const age = getAge(new Date());
 const BASE = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
 <Layout title="プロフィール | KNOT" description={aboutSettings.lead}>
@@ -21,7 +21,7 @@ const BASE = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     </section>
     <section class="details">
       
-      <div><span>CURRENT GRADE</span><strong>{academicGrade.label}</strong></div>
+      <div><span>AGE</span><strong>{age}歳</strong></div>
       <div><span>INTERESTS</span><strong>{aboutSettings.interests}</strong></div>
       <div><span>TECH</span><strong>{aboutSettings.tech}</strong></div>
     </section>
