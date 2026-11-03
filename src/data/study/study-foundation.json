@@ -1,0 +1,6850 @@
+[
+  {
+    "id": "fb-001",
+    "subject": "science",
+    "topic": "物理",
+    "term": "力",
+    "prompt": "物体の形や運動の状態を変化させるはたらきは何か。",
+    "options": [
+      "力",
+      "圧力",
+      "仕事",
+      "エネルギー"
+    ],
+    "correct": 0,
+    "explanation": "力は物体の運動の状態や形を変えるはたらき。単位はN（ニュートン）。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-002",
+    "subject": "science",
+    "topic": "物理",
+    "term": "圧力",
+    "prompt": "面を垂直に押す力を、力を受ける面積で割った量は何か。",
+    "options": [
+      "密度",
+      "圧力",
+      "浮力",
+      "仕事率"
+    ],
+    "correct": 1,
+    "explanation": "圧力＝面を垂直に押す力÷力を受ける面積。単位はPa。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-003",
+    "subject": "science",
+    "topic": "物理",
+    "term": "浮力",
+    "prompt": "水中の物体が、重力と反対向きに水から受ける力は何か。",
+    "options": [
+      "摩擦力",
+      "弾性力",
+      "浮力",
+      "磁力"
+    ],
+    "correct": 2,
+    "explanation": "浮力は液体や気体の中の物体にはたらく、上向きの力。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-004",
+    "subject": "science",
+    "topic": "物理",
+    "term": "仕事",
+    "prompt": "物体に力を加え、その力の向きに動かしたときの量は何か。",
+    "options": [
+      "仕事",
+      "仕事率",
+      "運動量",
+      "熱量"
+    ],
+    "correct": 0,
+    "explanation": "仕事〔J〕＝力〔N〕×力の向きに動いた距離〔m〕。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-005",
+    "subject": "science",
+    "topic": "物理",
+    "term": "仕事率",
+    "prompt": "一定時間あたりにする仕事の大きさを何というか。",
+    "options": [
+      "効率",
+      "仕事率",
+      "圧力",
+      "電力量"
+    ],
+    "correct": 1,
+    "explanation": "仕事率は仕事をする速さ。仕事率〔W〕＝仕事〔J〕÷時間〔s〕。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-006",
+    "subject": "science",
+    "topic": "物理",
+    "term": "オームの法則",
+    "prompt": "電圧・電流・抵抗の関係を表す法則は何か。",
+    "options": [
+      "フレミングの法則",
+      "反射の法則",
+      "オームの法則",
+      "質量保存の法則"
+    ],
+    "correct": 2,
+    "explanation": "オームの法則は V＝RI。電圧V、電流I、抵抗Rの関係を表す。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-007",
+    "subject": "science",
+    "topic": "物理",
+    "term": "屈折",
+    "prompt": "光が異なる物質の境界で進む向きを変える現象は何か。",
+    "options": [
+      "反射",
+      "屈折",
+      "分散",
+      "回折"
+    ],
+    "correct": 1,
+    "explanation": "光が空気と水など異なる物質の境界を通るとき、進む向きが変わる現象。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-008",
+    "subject": "science",
+    "topic": "物理",
+    "term": "直列回路",
+    "prompt": "電流の流れる道筋が1本だけの回路を何というか。",
+    "options": [
+      "並列回路",
+      "直列回路",
+      "分岐回路",
+      "短絡回路"
+    ],
+    "correct": 1,
+    "explanation": "直列回路では電流の通り道が1本で、回路のどこでも電流は等しい。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-009",
+    "subject": "science",
+    "topic": "化学",
+    "term": "原子",
+    "prompt": "物質をつくる基本的な粒子で、元素の性質を示す最小の粒子は何か。",
+    "options": [
+      "分子",
+      "原子",
+      "イオン",
+      "電子殻"
+    ],
+    "correct": 1,
+    "explanation": "原子は物質を構成する基本粒子。原子核と電子からできている。",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-010",
+    "subject": "science",
+    "topic": "化学",
+    "term": "分子",
+    "prompt": "いくつかの原子が結びついてできた粒子は何か。",
+    "options": [
+      "分子",
+      "元素",
+      "原子核",
+      "陽イオン"
+    ],
+    "correct": 0,
+    "explanation": "水分子H₂Oのように、複数の原子が結びついた粒子を分子という。",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-011",
+    "subject": "science",
+    "topic": "化学",
+    "term": "化合物",
+    "prompt": "2種類以上の元素が化学的に結びついてできた純物質は何か。",
+    "options": [
+      "単体",
+      "混合物",
+      "化合物",
+      "元素"
+    ],
+    "correct": 2,
+    "explanation": "水や二酸化炭素のように、複数の元素からできた純物質を化合物という。",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-012",
+    "subject": "science",
+    "topic": "化学",
+    "term": "化学変化",
+    "prompt": "別の物質に変わり、もとの物質とは性質が異なる物質ができる変化は何か。",
+    "options": [
+      "状態変化",
+      "化学変化",
+      "溶解",
+      "蒸留"
+    ],
+    "correct": 1,
+    "explanation": "化学変化では原子の組み合わせが変わり、新しい物質ができる。",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-013",
+    "subject": "science",
+    "topic": "化学",
+    "term": "質量保存の法則",
+    "prompt": "化学変化の前後で、反応に関係する物質全体の質量が変わらない法則は何か。",
+    "options": [
+      "定比例の法則",
+      "質量保存の法則",
+      "慣性の法則",
+      "電磁誘導の法則"
+    ],
+    "correct": 1,
+    "explanation": "化学変化の前後で原子の種類と数は変わらないため、全体の質量は保存される。",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-014",
+    "subject": "science",
+    "topic": "化学",
+    "term": "酸化",
+    "prompt": "物質が酸素と化合する反応を何というか。",
+    "options": [
+      "還元",
+      "中和",
+      "酸化",
+      "電離"
+    ],
+    "correct": 2,
+    "explanation": "中学理科では、物質が酸素と結びつく反応を酸化という。",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-015",
+    "subject": "science",
+    "topic": "化学",
+    "term": "イオン",
+    "prompt": "原子や原子団が電子を失ったり受け取ったりして電気を帯びた粒子は何か。",
+    "options": [
+      "分子",
+      "イオン",
+      "同位体",
+      "中性子"
+    ],
+    "correct": 1,
+    "explanation": "電子を失うと陽イオン、電子を受け取ると陰イオンになる。",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-016",
+    "subject": "science",
+    "topic": "化学",
+    "term": "中和",
+    "prompt": "酸の性質とアルカリの性質が互いに打ち消し合う反応は何か。",
+    "options": [
+      "電気分解",
+      "中和",
+      "酸化",
+      "蒸発"
+    ],
+    "correct": 1,
+    "explanation": "中和では酸とアルカリが反応し、塩と水ができる。",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-017",
+    "subject": "science",
+    "topic": "生物",
+    "term": "細胞",
+    "prompt": "生物の体をつくる基本単位は何か。",
+    "options": [
+      "組織",
+      "器官",
+      "細胞",
+      "個体"
+    ],
+    "correct": 2,
+    "explanation": "細胞は生物の体をつくる基本単位。植物細胞には細胞壁や葉緑体などがある。",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-018",
+    "subject": "science",
+    "topic": "生物",
+    "term": "光合成",
+    "prompt": "植物が光エネルギーを使い、二酸化炭素と水から養分をつくるはたらきは何か。",
+    "options": [
+      "呼吸",
+      "蒸散",
+      "光合成",
+      "消化"
+    ],
+    "correct": 2,
+    "explanation": "光合成では光エネルギーを利用してデンプンなどの養分をつくり、酸素を放出する。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-019",
+    "subject": "science",
+    "topic": "生物",
+    "term": "蒸散",
+    "prompt": "植物の体内の水が水蒸気となって主に気孔から出ていく現象は何か。",
+    "options": [
+      "蒸散",
+      "吸収",
+      "呼吸",
+      "受粉"
+    ],
+    "correct": 0,
+    "explanation": "蒸散は主に葉の気孔から水蒸気が出ていく現象。",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-020",
+    "subject": "science",
+    "topic": "生物",
+    "term": "消化",
+    "prompt": "食物を吸収されやすい小さな物質に分解するはたらきは何か。",
+    "options": [
+      "循環",
+      "消化",
+      "排出",
+      "同化"
+    ],
+    "correct": 1,
+    "explanation": "消化酵素などのはたらきで、栄養分を吸収できる形に分解する。",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-021",
+    "subject": "science",
+    "topic": "生物",
+    "term": "肺胞",
+    "prompt": "肺で酸素と二酸化炭素の交換が行われる小さな袋状のつくりは何か。",
+    "options": [
+      "気管支",
+      "肺胞",
+      "横隔膜",
+      "心房"
+    ],
+    "correct": 1,
+    "explanation": "肺胞の壁は薄く、周囲を毛細血管が取り囲み、気体交換が行われる。",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-022",
+    "subject": "science",
+    "topic": "生物",
+    "term": "反射",
+    "prompt": "刺激に対して、意識とは関係なく起こるすばやい反応は何か。",
+    "options": [
+      "反射",
+      "学習",
+      "感覚",
+      "随意運動"
+    ],
+    "correct": 0,
+    "explanation": "反射は脳で意識して判断する前に起こる、すばやい反応。",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-023",
+    "subject": "science",
+    "topic": "生物",
+    "term": "遺伝子",
+    "prompt": "親から子へ受け継がれ、形質を決める情報を担うものは何か。",
+    "options": [
+      "酵素",
+      "遺伝子",
+      "ホルモン",
+      "抗体"
+    ],
+    "correct": 1,
+    "explanation": "遺伝子はDNAの一部で、親から子へ受け継がれる形質の情報を担う。",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-024",
+    "subject": "science",
+    "topic": "生物",
+    "term": "食物連鎖",
+    "prompt": "生物どうしが食べる・食べられる関係でつながることを何というか。",
+    "options": [
+      "食物連鎖",
+      "遷移",
+      "共生",
+      "分解"
+    ],
+    "correct": 0,
+    "explanation": "食物連鎖では、生物を通じて物質やエネルギーが移動する。",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-025",
+    "subject": "science",
+    "topic": "地学",
+    "term": "震源",
+    "prompt": "地下で地震が発生した場所を何というか。",
+    "options": [
+      "震央",
+      "震源",
+      "断層",
+      "火口"
+    ],
+    "correct": 1,
+    "explanation": "震源は地下で地震が発生した場所。震源の真上の地表の点が震央。",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-026",
+    "subject": "science",
+    "topic": "地学",
+    "term": "震央",
+    "prompt": "震源の真上にあたる地表の地点を何というか。",
+    "options": [
+      "震央",
+      "震源",
+      "震度",
+      "マグニチュード"
+    ],
+    "correct": 0,
+    "explanation": "震央は震源の真上にあたる地表の地点。",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-027",
+    "subject": "science",
+    "topic": "地学",
+    "term": "初期微動",
+    "prompt": "P波によって起こる、地震の最初の小さな揺れは何か。",
+    "options": [
+      "主要動",
+      "初期微動",
+      "余震",
+      "液状化"
+    ],
+    "correct": 1,
+    "explanation": "P波は速く伝わり、先に到着して初期微動を起こす。",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-028",
+    "subject": "science",
+    "topic": "地学",
+    "term": "前線",
+    "prompt": "性質の異なる気団どうしが接する境界面が地表と交わる線は何か。",
+    "options": [
+      "等圧線",
+      "前線",
+      "等温線",
+      "断層"
+    ],
+    "correct": 1,
+    "explanation": "前線付近では雲や雨が発生しやすく、温帯低気圧の発達にも関係する。",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-029",
+    "subject": "science",
+    "topic": "地学",
+    "term": "湿度",
+    "prompt": "空気中に含まれる水蒸気量が、その気温での飽和水蒸気量に対して何％かを表す量は何か。",
+    "options": [
+      "気圧",
+      "湿度",
+      "風力",
+      "降水量"
+    ],
+    "correct": 1,
+    "explanation": "湿度〔％〕＝空気中の水蒸気量÷飽和水蒸気量×100。",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-030",
+    "subject": "science",
+    "topic": "地学",
+    "term": "公転",
+    "prompt": "地球が太陽の周りを回る運動は何か。",
+    "options": [
+      "自転",
+      "公転",
+      "日周運動",
+      "年周運動"
+    ],
+    "correct": 1,
+    "explanation": "地球の公転周期は約1年。季節の変化に関係する。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-031",
+    "subject": "science",
+    "topic": "地学",
+    "term": "自転",
+    "prompt": "地球が地軸を中心に回転する運動は何か。",
+    "options": [
+      "公転",
+      "自転",
+      "年周運動",
+      "南中"
+    ],
+    "correct": 1,
+    "explanation": "地球は約24時間で1回自転し、昼と夜の変化に関係する。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-032",
+    "subject": "science",
+    "topic": "地学",
+    "term": "日食",
+    "prompt": "月が太陽と地球の間に入り、太陽の一部または全部が隠される現象は何か。",
+    "options": [
+      "月食",
+      "日食",
+      "満月",
+      "金環運動"
+    ],
+    "correct": 1,
+    "explanation": "日食は太陽—月—地球の順にほぼ一直線に並んだときに起こる。",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-033",
+    "subject": "social",
+    "topic": "地理",
+    "term": "緯度",
+    "prompt": "赤道を0度として、南北の位置を表す角度は何か。",
+    "options": [
+      "経度",
+      "緯度",
+      "標高",
+      "縮尺"
+    ],
+    "correct": 1,
+    "explanation": "緯度は赤道を基準に南北の位置を表し、北緯・南緯で示す。",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-034",
+    "subject": "social",
+    "topic": "地理",
+    "term": "経度",
+    "prompt": "本初子午線を0度として、東西の位置を表す角度は何か。",
+    "options": [
+      "緯度",
+      "経度",
+      "標高",
+      "方位"
+    ],
+    "correct": 1,
+    "explanation": "経度は本初子午線を基準に東西の位置を表し、東経・西経で示す。",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-035",
+    "subject": "social",
+    "topic": "地理",
+    "term": "時差",
+    "prompt": "経度の違いによって生じる、地点間の時刻の差を何というか。",
+    "options": [
+      "季節差",
+      "時差",
+      "気温差",
+      "標高差"
+    ],
+    "correct": 1,
+    "explanation": "地球は24時間で360度自転するため、経度15度でおよそ1時間の時差が生じる。",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-036",
+    "subject": "social",
+    "topic": "地理",
+    "term": "モンスーン",
+    "prompt": "季節によって風向きが変わる、アジアなどで見られる季節風を何というか。",
+    "options": [
+      "偏西風",
+      "貿易風",
+      "モンスーン",
+      "極風"
+    ],
+    "correct": 2,
+    "explanation": "モンスーンは季節によって風向きが変わり、アジアの降水や農業に大きく関係する。",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-037",
+    "subject": "social",
+    "topic": "地理",
+    "term": "促成栽培",
+    "prompt": "温室などを利用して作物の出荷時期を早める栽培方法は何か。",
+    "options": [
+      "抑制栽培",
+      "促成栽培",
+      "輪作",
+      "混作"
+    ],
+    "correct": 1,
+    "explanation": "促成栽培は温室などで生育を早め、通常より早く出荷する方法。",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-038",
+    "subject": "social",
+    "topic": "地理",
+    "term": "工業地域",
+    "prompt": "工場が集中し、工業生産が盛んな地域を何というか。",
+    "options": [
+      "工業地域",
+      "商業圏",
+      "農業地域",
+      "過疎地域"
+    ],
+    "correct": 0,
+    "explanation": "工業地域には工場や関連産業が集まり、交通・港湾などと結びつく。",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-039",
+    "subject": "social",
+    "topic": "地理",
+    "term": "人口密度",
+    "prompt": "一定面積あたりに住む人口を何というか。",
+    "options": [
+      "人口増加率",
+      "人口密度",
+      "人口ピラミッド",
+      "昼夜間人口"
+    ],
+    "correct": 1,
+    "explanation": "人口密度＝人口÷面積。一般に1平方キロメートルあたりの人口で表す。",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-040",
+    "subject": "social",
+    "topic": "地理",
+    "term": "縮尺",
+    "prompt": "地図上の距離と実際の距離の比を何というか。",
+    "options": [
+      "方位",
+      "縮尺",
+      "等高線",
+      "経度"
+    ],
+    "correct": 1,
+    "explanation": "縮尺を使うと、地図上の長さから実際の距離を求められる。",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-041",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "縄文時代",
+    "prompt": "打製石器や土器を使い、狩りや採集を中心とした生活が営まれた時代は何か。",
+    "options": [
+      "弥生時代",
+      "縄文時代",
+      "古墳時代",
+      "奈良時代"
+    ],
+    "correct": 1,
+    "explanation": "縄文時代は土器や弓矢などを使い、狩り・採集・漁労を中心に生活した。",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-042",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "弥生時代",
+    "prompt": "水田稲作が広まり、金属器も使われるようになった時代は何か。",
+    "options": [
+      "縄文時代",
+      "弥生時代",
+      "平安時代",
+      "鎌倉時代"
+    ],
+    "correct": 1,
+    "explanation": "弥生時代には大陸から稲作や金属器が伝わり、むらやくにが発達した。",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-043",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "大化の改新",
+    "prompt": "645年に始まった、中大兄皇子らによる政治改革を何というか。",
+    "options": [
+      "建武の新政",
+      "大化の改新",
+      "明治維新",
+      "享保の改革"
+    ],
+    "correct": 1,
+    "explanation": "大化の改新は645年に始まり、豪族中心の政治から天皇中心の国家づくりを目指した。",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-044",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "平安京",
+    "prompt": "794年に桓武天皇が都を移した場所はどこか。",
+    "options": [
+      "平城京",
+      "平安京",
+      "藤原京",
+      "長岡京"
+    ],
+    "correct": 1,
+    "explanation": "794年、桓武天皇は都を平安京に移した。",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-045",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "鎌倉幕府",
+    "prompt": "源頼朝が武士による政権を開いた場所はどこか。",
+    "options": [
+      "京都",
+      "鎌倉",
+      "江戸",
+      "奈良"
+    ],
+    "correct": 1,
+    "explanation": "源頼朝は鎌倉を本拠地として武士の政権を築いた。",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-046",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "室町幕府",
+    "prompt": "足利尊氏が開いた幕府は何か。",
+    "options": [
+      "鎌倉幕府",
+      "室町幕府",
+      "江戸幕府",
+      "平氏政権"
+    ],
+    "correct": 1,
+    "explanation": "足利尊氏が京都に開いた武家政権が室町幕府。",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-047",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "江戸幕府",
+    "prompt": "1603年に征夷大将軍となり、江戸幕府を開いた人物は誰か。",
+    "options": [
+      "豊臣秀吉",
+      "徳川家康",
+      "織田信長",
+      "徳川吉宗"
+    ],
+    "correct": 1,
+    "explanation": "徳川家康は1603年に征夷大将軍となり、江戸幕府を開いた。",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-048",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "明治維新",
+    "prompt": "明治政府が進めた、近代国家をつくるための一連の改革を何というか。",
+    "options": [
+      "享保の改革",
+      "明治維新",
+      "大化の改新",
+      "文明開化"
+    ],
+    "correct": 1,
+    "explanation": "明治維新では廃藩置県、徴兵令、地租改正など近代国家づくりの改革が進められた。",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-049",
+    "subject": "social",
+    "topic": "公民",
+    "term": "日本国憲法",
+    "prompt": "日本の国の基本的なしくみや国民の権利・義務を定めた最高法規は何か。",
+    "options": [
+      "民法",
+      "日本国憲法",
+      "刑法",
+      "条例"
+    ],
+    "correct": 1,
+    "explanation": "日本国憲法は国の基本原則や統治のしくみ、国民の権利・義務を定める最高法規。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-050",
+    "subject": "social",
+    "topic": "公民",
+    "term": "国民主権",
+    "prompt": "国の政治のあり方を最終的に決める権限が国民にあるという原理は何か。",
+    "options": [
+      "基本的人権の尊重",
+      "国民主権",
+      "平和主義",
+      "三権分立"
+    ],
+    "correct": 1,
+    "explanation": "国民主権は日本国憲法の三つの基本原則の一つ。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-051",
+    "subject": "social",
+    "topic": "公民",
+    "term": "基本的人権",
+    "prompt": "人が生まれながらに持つ、人間らしく生きるための権利を何というか。",
+    "options": [
+      "社会権",
+      "基本的人権",
+      "参政権",
+      "請求権"
+    ],
+    "correct": 1,
+    "explanation": "基本的人権は侵すことのできない永久の権利として憲法で保障される。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-052",
+    "subject": "social",
+    "topic": "公民",
+    "term": "三権分立",
+    "prompt": "立法・行政・司法の権力を別々の機関に分け、権力の集中を防ぐしくみは何か。",
+    "options": [
+      "議院内閣制",
+      "三権分立",
+      "直接民主制",
+      "地方自治"
+    ],
+    "correct": 1,
+    "explanation": "国会・内閣・裁判所が権力を分担し、互いに抑制と均衡を保つ。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-053",
+    "subject": "social",
+    "topic": "公民",
+    "term": "国会",
+    "prompt": "日本国憲法で国権の最高機関、かつ唯一の立法機関とされる機関は何か。",
+    "options": [
+      "内閣",
+      "裁判所",
+      "国会",
+      "地方議会"
+    ],
+    "correct": 2,
+    "explanation": "国会は国権の最高機関であり、国の唯一の立法機関と定められている。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-054",
+    "subject": "social",
+    "topic": "公民",
+    "term": "内閣",
+    "prompt": "行政権を担当し、法律や予算に基づいて国の行政を行う機関は何か。",
+    "options": [
+      "国会",
+      "内閣",
+      "最高裁判所",
+      "会計検査院"
+    ],
+    "correct": 1,
+    "explanation": "内閣は行政権を担い、内閣総理大臣と国務大臣で構成される。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-055",
+    "subject": "social",
+    "topic": "公民",
+    "term": "裁判員制度",
+    "prompt": "重大な刑事裁判で、国民が裁判官とともに審理や判決に参加する制度は何か。",
+    "options": [
+      "陪審制度",
+      "裁判員制度",
+      "国民審査",
+      "住民投票"
+    ],
+    "correct": 1,
+    "explanation": "裁判員制度では、選ばれた国民が裁判官と一緒に有罪・無罪や刑の内容を判断する。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-056",
+    "subject": "social",
+    "topic": "公民",
+    "term": "需要と供給",
+    "prompt": "市場で、商品を買いたい量と売りたい量の関係を表す基本的な考え方は何か。",
+    "options": [
+      "需要と供給",
+      "税と社会保障",
+      "輸出と輸入",
+      "生産と分配"
+    ],
+    "correct": 0,
+    "explanation": "一般に需要が供給を上回ると価格は上がり、供給が需要を上回ると価格は下がる方向に働く。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-057",
+    "subject": "science",
+    "topic": "物理",
+    "term": "エネルギー保存の法則",
+    "prompt": "エネルギーは形を変えても、その総量は変わらないという法則は何か。",
+    "options": [
+      "質量保存の法則",
+      "エネルギー保存の法則",
+      "慣性の法則",
+      "作用・反作用の法則"
+    ],
+    "correct": 1,
+    "explanation": "エネルギーは移り変わったり形を変えたりするが、全体の量は保存される。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-058",
+    "subject": "science",
+    "topic": "物理",
+    "term": "熱量",
+    "prompt": "物体が受け取ったり失ったりした熱の量を何というか。",
+    "options": [
+      "電力量",
+      "熱量",
+      "仕事率",
+      "圧力"
+    ],
+    "correct": 1,
+    "explanation": "熱量の単位はJ（ジュール）。水の温度変化などから求められる。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-059",
+    "subject": "science",
+    "topic": "物理",
+    "term": "並列回路",
+    "prompt": "電流の流れる道筋が枝分かれしている回路を何というか。",
+    "options": [
+      "直列回路",
+      "並列回路",
+      "短絡回路",
+      "開回路"
+    ],
+    "correct": 1,
+    "explanation": "並列回路では各枝にかかる電圧が等しく、全体の電流は枝の電流の和になる。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-060",
+    "subject": "science",
+    "topic": "物理",
+    "term": "磁界",
+    "prompt": "磁石の力がはたらく空間を何というか。",
+    "options": [
+      "電界",
+      "磁界",
+      "音場",
+      "重力場"
+    ],
+    "correct": 1,
+    "explanation": "磁界の向きは方位磁針のN極が指す向きで表す。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-061",
+    "subject": "science",
+    "topic": "物理",
+    "term": "電磁誘導",
+    "prompt": "コイル内の磁界を変化させると電圧が生じる現象は何か。",
+    "options": [
+      "静電気",
+      "電磁誘導",
+      "放電",
+      "電気分解"
+    ],
+    "correct": 1,
+    "explanation": "磁石を動かすなどしてコイルを貫く磁界を変化させると誘導電流が流れる。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-062",
+    "subject": "science",
+    "topic": "物理",
+    "term": "共鳴",
+    "prompt": "物体に固有振動数と同じ振動を加えたとき、振幅が大きくなる現象は何か。",
+    "options": [
+      "反射",
+      "共鳴",
+      "屈折",
+      "干渉"
+    ],
+    "correct": 1,
+    "explanation": "共鳴では外から加える振動数が固有振動数と一致し、振幅が大きくなる。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-063",
+    "subject": "science",
+    "topic": "物理",
+    "term": "力のつり合い",
+    "prompt": "一つの物体にはたらく複数の力が打ち消し合い、物体の運動状態が変わらない状態を何というか。",
+    "options": [
+      "力のつり合い",
+      "慣性",
+      "作用・反作用",
+      "仕事"
+    ],
+    "correct": 0,
+    "explanation": "力がつり合う条件は、二力なら大きさが等しく、同一直線上で向きが反対であること。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-064",
+    "subject": "science",
+    "topic": "化学",
+    "term": "蒸留",
+    "prompt": "液体を加熱して気体にし、それを冷やして再び液体にすることで分ける方法は何か。",
+    "options": [
+      "ろ過",
+      "蒸留",
+      "再結晶",
+      "抽出"
+    ],
+    "correct": 1,
+    "explanation": "蒸留は沸点の違いなどを利用して液体を分離する方法。",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-065",
+    "subject": "science",
+    "topic": "化学",
+    "term": "飽和水溶液",
+    "prompt": "ある温度で、それ以上溶質を溶かすことができない水溶液は何か。",
+    "options": [
+      "希薄溶液",
+      "飽和水溶液",
+      "濃厚溶液",
+      "コロイド"
+    ],
+    "correct": 1,
+    "explanation": "飽和水溶液には、その温度で溶ける限度まで溶質が溶けている。",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-066",
+    "subject": "science",
+    "topic": "化学",
+    "term": "溶解度",
+    "prompt": "一定量の水に溶ける物質の限度量を何というか。",
+    "options": [
+      "濃度",
+      "溶解度",
+      "質量",
+      "密度"
+    ],
+    "correct": 1,
+    "explanation": "溶解度は通常、一定温度で水100gに溶ける溶質の質量で表す。",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-067",
+    "subject": "science",
+    "topic": "化学",
+    "term": "質量パーセント濃度",
+    "prompt": "溶液全体の質量に対する溶質の質量の割合を百分率で表したものは何か。",
+    "options": [
+      "体積パーセント",
+      "質量パーセント濃度",
+      "密度",
+      "溶解度"
+    ],
+    "correct": 1,
+    "explanation": "質量パーセント濃度＝溶質の質量÷溶液の質量×100。",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-068",
+    "subject": "science",
+    "topic": "化学",
+    "term": "電気分解",
+    "prompt": "電解質の水溶液などに電流を流して、物質を分解する化学変化は何か。",
+    "options": [
+      "中和",
+      "電気分解",
+      "蒸留",
+      "還元"
+    ],
+    "correct": 1,
+    "explanation": "電気エネルギーによって化合物を分解する反応。水の電気分解では水素と酸素が発生する。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-069",
+    "subject": "science",
+    "topic": "化学",
+    "term": "発熱反応",
+    "prompt": "化学変化にともなって周囲に熱を放出する反応は何か。",
+    "options": [
+      "吸熱反応",
+      "発熱反応",
+      "中和反応",
+      "置換反応"
+    ],
+    "correct": 1,
+    "explanation": "発熱反応では反応の前後で周囲の温度が上がる。",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-070",
+    "subject": "science",
+    "topic": "化学",
+    "term": "化学反応式",
+    "prompt": "化学変化を化学式と矢印を使って表した式は何か。",
+    "options": [
+      "イオン式",
+      "化学反応式",
+      "分子模型",
+      "元素記号"
+    ],
+    "correct": 1,
+    "explanation": "化学反応式では、反応の前後で原子の種類と数が等しくなるように係数をつける。",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-071",
+    "subject": "science",
+    "topic": "生物",
+    "term": "葉緑体",
+    "prompt": "植物細胞にあり、光合成が行われる緑色の小器官は何か。",
+    "options": [
+      "ミトコンドリア",
+      "葉緑体",
+      "核",
+      "液胞"
+    ],
+    "correct": 1,
+    "explanation": "葉緑体には緑色の色素クロロフィルが含まれ、光合成の場となる。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-072",
+    "subject": "science",
+    "topic": "生物",
+    "term": "気孔",
+    "prompt": "植物の葉にあり、気体の出入りや蒸散に関係する小さな穴は何か。",
+    "options": [
+      "維管束",
+      "気孔",
+      "根毛",
+      "子房"
+    ],
+    "correct": 1,
+    "explanation": "気孔は主に葉の表皮にあり、二酸化炭素や酸素、水蒸気の出入りに関係する。",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-073",
+    "subject": "science",
+    "topic": "生物",
+    "term": "道管",
+    "prompt": "根から吸収した水や無機養分を運ぶ管は何か。",
+    "options": [
+      "師管",
+      "道管",
+      "気孔",
+      "維管束鞘"
+    ],
+    "correct": 1,
+    "explanation": "道管は水や無機養分を根から茎・葉へ運ぶ。",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-074",
+    "subject": "science",
+    "topic": "生物",
+    "term": "師管",
+    "prompt": "葉でつくられた養分を植物の体全体へ運ぶ管は何か。",
+    "options": [
+      "道管",
+      "師管",
+      "気孔",
+      "根毛"
+    ],
+    "correct": 1,
+    "explanation": "師管は光合成でつくられた養分などを運ぶ。",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-075",
+    "subject": "science",
+    "topic": "生物",
+    "term": "腎臓",
+    "prompt": "血液中の不要物をこし取り、尿をつくる器官は何か。",
+    "options": [
+      "肝臓",
+      "腎臓",
+      "肺",
+      "すい臓"
+    ],
+    "correct": 1,
+    "explanation": "腎臓は血液から不要物や余分な水分などを取り除き、尿をつくる。",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-076",
+    "subject": "science",
+    "topic": "生物",
+    "term": "心臓",
+    "prompt": "血液を全身に送り出すポンプの役割をする器官は何か。",
+    "options": [
+      "肺",
+      "心臓",
+      "胃",
+      "腎臓"
+    ],
+    "correct": 1,
+    "explanation": "心臓は収縮と拡張を繰り返し、血液を循環させる。",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-077",
+    "subject": "science",
+    "topic": "生物",
+    "term": "分解者",
+    "prompt": "生物の遺骸や排出物を分解し、無機物に戻す生物を何というか。",
+    "options": [
+      "生産者",
+      "消費者",
+      "分解者",
+      "捕食者"
+    ],
+    "correct": 2,
+    "explanation": "菌類や細菌類などの分解者は、有機物を分解して物質を自然界に戻す。",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-078",
+    "subject": "science",
+    "topic": "地学",
+    "term": "地層",
+    "prompt": "れき・砂・泥などが積み重なってできた層を何というか。",
+    "options": [
+      "断層",
+      "地層",
+      "火成岩",
+      "プレート"
+    ],
+    "correct": 1,
+    "explanation": "地層は堆積物が積み重なってできる。一般に下の層ほど古い。",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-079",
+    "subject": "science",
+    "topic": "地学",
+    "term": "化石",
+    "prompt": "地層に残された、過去の生物の体や生活の跡を何というか。",
+    "options": [
+      "鉱物",
+      "化石",
+      "火山灰",
+      "岩脈"
+    ],
+    "correct": 1,
+    "explanation": "化石は地層ができた時代や環境を推定する手がかりになる。",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-080",
+    "subject": "science",
+    "topic": "地学",
+    "term": "火成岩",
+    "prompt": "マグマが冷え固まってできた岩石を何というか。",
+    "options": [
+      "堆積岩",
+      "変成岩",
+      "火成岩",
+      "石灰岩"
+    ],
+    "correct": 2,
+    "explanation": "火成岩には、地下深くでゆっくり冷えた深成岩と、地表付近で急に冷えた火山岩がある。",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-081",
+    "subject": "science",
+    "topic": "地学",
+    "term": "震度",
+    "prompt": "ある地点での地震の揺れの強さを表す尺度は何か。",
+    "options": [
+      "マグニチュード",
+      "震度",
+      "震源",
+      "震央距離"
+    ],
+    "correct": 1,
+    "explanation": "震度は地点ごとの揺れの強さを表す。地震そのものの規模を表すマグニチュードとは異なる。",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-082",
+    "subject": "science",
+    "topic": "地学",
+    "term": "マグニチュード",
+    "prompt": "地震そのものの規模や放出されたエネルギーの大きさを表す値は何か。",
+    "options": [
+      "震度",
+      "マグニチュード",
+      "初期微動",
+      "震央"
+    ],
+    "correct": 1,
+    "explanation": "マグニチュードは地震の規模を表し、震度は各地点での揺れの強さを表す。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-083",
+    "subject": "science",
+    "topic": "地学",
+    "term": "積乱雲",
+    "prompt": "強い上昇気流によって発達し、雷や激しい雨をもたらす雲は何か。",
+    "options": [
+      "巻雲",
+      "層雲",
+      "積乱雲",
+      "高積雲"
+    ],
+    "correct": 2,
+    "explanation": "積乱雲は縦に大きく発達し、雷雨や突風、ひょうなどをもたらすことがある。",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-084",
+    "subject": "science",
+    "topic": "地学",
+    "term": "季節",
+    "prompt": "地球の公転と地軸の傾きによって生じる、春夏秋冬の変化を何というか。",
+    "options": [
+      "潮汐",
+      "季節",
+      "日周運動",
+      "月の満ち欠け"
+    ],
+    "correct": 1,
+    "explanation": "地軸が傾いたまま地球が公転するため、季節によって太陽の高さや昼の長さが変わる。",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-085",
+    "subject": "social",
+    "topic": "地理",
+    "term": "等高線",
+    "prompt": "地図上で標高が等しい地点を結んだ線は何か。",
+    "options": [
+      "等温線",
+      "等高線",
+      "等圧線",
+      "経線"
+    ],
+    "correct": 1,
+    "explanation": "等高線の間隔が狭い場所ほど、一般に傾斜が急である。",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-086",
+    "subject": "social",
+    "topic": "地理",
+    "term": "扇状地",
+    "prompt": "山地から平地に出た川が土砂を堆積させてつくる、扇形の地形は何か。",
+    "options": [
+      "三角州",
+      "扇状地",
+      "リアス海岸",
+      "カルデラ"
+    ],
+    "correct": 1,
+    "explanation": "扇状地は水はけがよく、果樹園などに利用されることが多い。",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-087",
+    "subject": "social",
+    "topic": "地理",
+    "term": "三角州",
+    "prompt": "川が河口付近で土砂を堆積させてつくる地形は何か。",
+    "options": [
+      "扇状地",
+      "三角州",
+      "台地",
+      "盆地"
+    ],
+    "correct": 1,
+    "explanation": "三角州は河口付近にできる低く平らな地形で、水田などに利用される。",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-088",
+    "subject": "social",
+    "topic": "地理",
+    "term": "稲作",
+    "prompt": "水田で米を栽培する農業を何というか。",
+    "options": [
+      "畑作",
+      "稲作",
+      "酪農",
+      "園芸農業"
+    ],
+    "correct": 1,
+    "explanation": "稲作は水田で稲を育てる農業で、アジアの季節風地域などで盛ん。",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-089",
+    "subject": "social",
+    "topic": "地理",
+    "term": "酪農",
+    "prompt": "牛や羊などを飼育し、牛乳や乳製品を生産する農業は何か。",
+    "options": [
+      "酪農",
+      "近郊農業",
+      "焼畑農業",
+      "混合農業"
+    ],
+    "correct": 0,
+    "explanation": "酪農は乳牛などを飼育し、生乳や乳製品を生産する農業。",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-090",
+    "subject": "social",
+    "topic": "地理",
+    "term": "貿易",
+    "prompt": "国と国との間で商品やサービスを売買することを何というか。",
+    "options": [
+      "流通",
+      "貿易",
+      "金融",
+      "観光"
+    ],
+    "correct": 1,
+    "explanation": "輸出は外国へ売ること、輸入は外国から買うこと。",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-091",
+    "subject": "social",
+    "topic": "地理",
+    "term": "人口ピラミッド",
+    "prompt": "年齢別・男女別の人口構成を表したグラフは何か。",
+    "options": [
+      "人口密度図",
+      "人口ピラミッド",
+      "雨温図",
+      "階級区分図"
+    ],
+    "correct": 1,
+    "explanation": "人口ピラミッドの形から、年齢構成や少子高齢化の進み方などを読み取れる。",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-092",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "飛鳥時代",
+    "prompt": "聖徳太子や大化の改新などに代表される時代は何か。",
+    "options": [
+      "飛鳥時代",
+      "奈良時代",
+      "平安時代",
+      "鎌倉時代"
+    ],
+    "correct": 0,
+    "explanation": "飛鳥時代には仏教が広まり、中央集権国家への改革が進められた。",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-093",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "奈良時代",
+    "prompt": "710年に平城京に都が置かれて始まった時代は何か。",
+    "options": [
+      "平安時代",
+      "奈良時代",
+      "飛鳥時代",
+      "室町時代"
+    ],
+    "correct": 1,
+    "explanation": "710年に平城京へ遷都し、奈良時代が始まった。",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-094",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "摂関政治",
+    "prompt": "藤原氏が天皇の外戚となり、摂政や関白として行った政治は何か。",
+    "options": [
+      "院政",
+      "摂関政治",
+      "執権政治",
+      "武家政治"
+    ],
+    "correct": 1,
+    "explanation": "藤原氏は摂政・関白の地位を利用して、平安時代に政治の実権を握った。",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-095",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "応仁の乱",
+    "prompt": "1467年に始まり、戦国時代のきっかけとなった争乱は何か。",
+    "options": [
+      "承久の乱",
+      "応仁の乱",
+      "壬申の乱",
+      "島原の乱"
+    ],
+    "correct": 1,
+    "explanation": "応仁の乱で京都が荒廃し、各地の守護大名らが争う戦国時代へ向かった。",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-096",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "楽市・楽座",
+    "prompt": "織田信長が商工業を活発にするため、市場の特権などを廃止した政策は何か。",
+    "options": [
+      "刀狩",
+      "楽市・楽座",
+      "参勤交代",
+      "地租改正"
+    ],
+    "correct": 1,
+    "explanation": "楽市・楽座は商売の自由を広げ、城下町や商工業の発展を促した。",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-097",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "参勤交代",
+    "prompt": "江戸幕府が大名に江戸と領地を往復させた制度は何か。",
+    "options": [
+      "鎖国",
+      "参勤交代",
+      "廃藩置県",
+      "五人組"
+    ],
+    "correct": 1,
+    "explanation": "参勤交代は大名の経済力を弱め、幕府への服従を示させる目的もあった。",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-098",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "日清戦争",
+    "prompt": "1894年に日本と清との間で起こった戦争は何か。",
+    "options": [
+      "日露戦争",
+      "日清戦争",
+      "第一次世界大戦",
+      "太平洋戦争"
+    ],
+    "correct": 1,
+    "explanation": "日清戦争は1894年に始まり、下関条約が結ばれた。",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-099",
+    "subject": "social",
+    "topic": "公民",
+    "term": "平和主義",
+    "prompt": "戦争を放棄し、戦力を持たないことなどを定めた憲法の原則は何か。",
+    "options": [
+      "国民主権",
+      "平和主義",
+      "基本的人権の尊重",
+      "法の支配"
+    ],
+    "correct": 1,
+    "explanation": "平和主義は日本国憲法の三つの基本原則の一つで、第9条に関係する。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-100",
+    "subject": "social",
+    "topic": "公民",
+    "term": "法の下の平等",
+    "prompt": "すべての人が法の下で平等に扱われるという権利は何か。",
+    "options": [
+      "自由権",
+      "平等権",
+      "社会権",
+      "参政権"
+    ],
+    "correct": 1,
+    "explanation": "平等権は、性別や身分などによって不合理な差別を受けない権利。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-101",
+    "subject": "social",
+    "topic": "公民",
+    "term": "生存権",
+    "prompt": "健康で文化的な最低限度の生活を営む権利は何か。",
+    "options": [
+      "教育を受ける権利",
+      "生存権",
+      "参政権",
+      "請求権"
+    ],
+    "correct": 1,
+    "explanation": "生存権は社会権の一つで、日本国憲法第25条に定められている。",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-102",
+    "subject": "social",
+    "topic": "公民",
+    "term": "衆議院",
+    "prompt": "国会を構成する二つの議院のうち、任期が4年で解散がある議院はどれか。",
+    "options": [
+      "参議院",
+      "衆議院",
+      "最高裁判所",
+      "内閣"
+    ],
+    "correct": 1,
+    "explanation": "衆議院の任期は4年だが、解散がある。参議院の任期は6年で解散はない。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-103",
+    "subject": "social",
+    "topic": "公民",
+    "term": "違憲審査制",
+    "prompt": "法律や命令などが憲法に違反していないか、裁判所が判断する制度は何か。",
+    "options": [
+      "国民審査",
+      "違憲審査制",
+      "直接請求",
+      "弾劾裁判"
+    ],
+    "correct": 1,
+    "explanation": "裁判所は具体的な裁判で、法律などが憲法に違反するかを判断できる。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-104",
+    "subject": "social",
+    "topic": "公民",
+    "term": "地方自治",
+    "prompt": "地域の住民が地域の政治を自主的に行うしくみは何か。",
+    "options": [
+      "中央集権",
+      "地方自治",
+      "議院内閣制",
+      "三権分立"
+    ],
+    "correct": 1,
+    "explanation": "地方自治は住民に身近な行政を、地方公共団体と住民が担うしくみ。",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-105",
+    "subject": "social",
+    "topic": "公民",
+    "term": "累進課税",
+    "prompt": "所得などが多くなるほど、より高い税率を適用する課税方法は何か。",
+    "options": [
+      "間接税",
+      "累進課税",
+      "定額税",
+      "関税"
+    ],
+    "correct": 1,
+    "explanation": "累進課税は所得が高いほど税率が高くなるしくみで、所得税などに採用されている。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-108",
+    "subject": "science",
+    "topic": "物理",
+    "term": "電力",
+    "prompt": "電流がする仕事の割合を表し、電圧×電流で求められる量は何か。",
+    "options": [
+      "電力",
+      "電力量",
+      "抵抗",
+      "電流"
+    ],
+    "correct": 0,
+    "explanation": "電力の単位はワット（W）。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-109",
+    "subject": "science",
+    "topic": "物理",
+    "term": "電力量",
+    "prompt": "電力と時間の積で表される、電気器具が使った電気エネルギーは何か。",
+    "options": [
+      "電圧",
+      "電力",
+      "抵抗",
+      "電力量"
+    ],
+    "correct": 3,
+    "explanation": "電力量は電力×時間で求め、単位にはWhやJを使う。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-114",
+    "subject": "science",
+    "topic": "物理",
+    "term": "慣性",
+    "prompt": "物体が運動の状態を保とうとする性質は何か。",
+    "options": [
+      "反作用",
+      "浮力",
+      "慣性",
+      "作用"
+    ],
+    "correct": 2,
+    "explanation": "外から力を受けない、または力がつり合うと運動の状態は変わらない。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-115",
+    "subject": "science",
+    "topic": "物理",
+    "term": "反射",
+    "prompt": "光が鏡などの面に当たってはね返る現象は何か。",
+    "options": [
+      "吸収",
+      "反射",
+      "屈折",
+      "分散"
+    ],
+    "correct": 1,
+    "explanation": "反射では入射角と反射角が等しい。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-118",
+    "subject": "science",
+    "topic": "化学",
+    "term": "還元",
+    "prompt": "酸化物から酸素が取り除かれる化学変化は何か。",
+    "options": [
+      "燃焼",
+      "電離",
+      "還元",
+      "酸化"
+    ],
+    "correct": 2,
+    "explanation": "還元は酸化と反対向きの変化として説明できる。",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-120",
+    "subject": "science",
+    "topic": "化学",
+    "term": "塩",
+    "prompt": "酸の陰イオンとアルカリの陽イオンなどからできる、中和で生じる物質は何か。",
+    "options": [
+      "塩",
+      "酸",
+      "アルカリ",
+      "単体"
+    ],
+    "correct": 0,
+    "explanation": "塩（えん）は食塩だけでなく、さまざまな化合物を含む。",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-121",
+    "subject": "science",
+    "topic": "化学",
+    "term": "電離",
+    "prompt": "物質が水に溶けて陽イオンと陰イオンに分かれることは何か。",
+    "options": [
+      "融解",
+      "蒸発",
+      "凝固",
+      "電離"
+    ],
+    "correct": 3,
+    "explanation": "塩化ナトリウムなどの電解質は水溶液中で電離する。",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-122",
+    "subject": "science",
+    "topic": "化学",
+    "term": "電解質",
+    "prompt": "水に溶けると電流を流す水溶液になる物質は何か。",
+    "options": [
+      "金属",
+      "有機物",
+      "電解質",
+      "非電解質"
+    ],
+    "correct": 2,
+    "explanation": "塩化ナトリウムや塩酸などは電解質。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-126",
+    "subject": "science",
+    "topic": "生物",
+    "term": "消化酵素",
+    "prompt": "食物を吸収しやすい小さな物質に分解するはたらきをもつ物質は何か。",
+    "options": [
+      "抗体",
+      "色素",
+      "消化酵素",
+      "ホルモン"
+    ],
+    "correct": 2,
+    "explanation": "アミラーゼやペプシンなどが消化酵素にあたる。",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-127",
+    "subject": "science",
+    "topic": "生物",
+    "term": "柔毛",
+    "prompt": "小腸の内側に多数あり、養分を吸収する表面積を大きくする突起は何か。",
+    "options": [
+      "根毛",
+      "柔毛",
+      "肺胞",
+      "気孔"
+    ],
+    "correct": 1,
+    "explanation": "柔毛があることで小腸の表面積が大きくなる。",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-129",
+    "subject": "science",
+    "topic": "生物",
+    "term": "動脈",
+    "prompt": "心臓から送り出された血液が流れる血管は何か。",
+    "options": [
+      "静脈",
+      "毛細血管",
+      "リンパ管",
+      "動脈"
+    ],
+    "correct": 3,
+    "explanation": "動脈は心臓から出る血液が流れる血管。",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-130",
+    "subject": "science",
+    "topic": "生物",
+    "term": "静脈",
+    "prompt": "全身から心臓へ戻る血液が流れる血管は何か。",
+    "options": [
+      "毛細血管",
+      "気管",
+      "静脈",
+      "動脈"
+    ],
+    "correct": 2,
+    "explanation": "静脈には血液の逆流を防ぐ弁があるものが多い。",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-133",
+    "subject": "science",
+    "topic": "生物",
+    "term": "受粉",
+    "prompt": "花粉がめしべの柱頭につくことは何か。",
+    "options": [
+      "受精",
+      "発芽",
+      "結実",
+      "受粉"
+    ],
+    "correct": 3,
+    "explanation": "受粉の後、花粉管が伸びて受精につながる。",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-135",
+    "subject": "science",
+    "topic": "生物",
+    "term": "生態系",
+    "prompt": "生物と、それを取り巻く光・水・空気などの環境をひとまとまりにしたものは何か。",
+    "options": [
+      "器官",
+      "生態系",
+      "個体群",
+      "細胞"
+    ],
+    "correct": 1,
+    "explanation": "生態系では生物どうしや環境との間に関係がある。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-138",
+    "subject": "science",
+    "topic": "地学",
+    "term": "初期微動継続時間",
+    "prompt": "P波が到着してからS波が到着するまでの時間は何か。",
+    "options": [
+      "震源距離",
+      "周期",
+      "初期微動継続時間",
+      "主要動"
+    ],
+    "correct": 2,
+    "explanation": "初期微動継続時間は震源から遠いほど長くなる。",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-141",
+    "subject": "science",
+    "topic": "地学",
+    "term": "寒冷前線",
+    "prompt": "寒気が暖気の下にもぐりこみ、暖気を急に押し上げる前線は何か。",
+    "options": [
+      "温暖前線",
+      "停滞前線",
+      "閉塞前線",
+      "寒冷前線"
+    ],
+    "correct": 3,
+    "explanation": "寒冷前線付近では短時間に強い雨が降ることがある。",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-142",
+    "subject": "science",
+    "topic": "地学",
+    "term": "温暖前線",
+    "prompt": "暖気が寒気の上にはい上がるように進む前線は何か。",
+    "options": [
+      "停滞前線",
+      "閉塞前線",
+      "温暖前線",
+      "寒冷前線"
+    ],
+    "correct": 2,
+    "explanation": "温暖前線では広い範囲で比較的長く雨が降ることがある。",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-143",
+    "subject": "science",
+    "topic": "地学",
+    "term": "日周運動",
+    "prompt": "地球の自転によって、天体が1日に1回東から西へ動いて見える見かけの動きは何か。",
+    "options": [
+      "自転",
+      "日周運動",
+      "年周運動",
+      "公転"
+    ],
+    "correct": 1,
+    "explanation": "日周運動は地球の自転によって起こる。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-144",
+    "subject": "science",
+    "topic": "地学",
+    "term": "年周運動",
+    "prompt": "地球の公転によって、星座が季節ごとに変わって見える見かけの動きは何か。",
+    "options": [
+      "年周運動",
+      "日周運動",
+      "自転",
+      "月の満ち欠け"
+    ],
+    "correct": 0,
+    "explanation": "年周運動は地球の公転によって起こる。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-148",
+    "subject": "social",
+    "topic": "地理",
+    "term": "季節風",
+    "prompt": "季節によって風向きが変わる風は何か。",
+    "options": [
+      "季節風",
+      "偏西風",
+      "貿易風",
+      "海陸風"
+    ],
+    "correct": 0,
+    "explanation": "日本では冬に北西、夏に南東寄りの季節風が吹く。",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-149",
+    "subject": "social",
+    "topic": "地理",
+    "term": "偏西風",
+    "prompt": "中緯度地域の上空で、西から東へ吹く卓越風は何か。",
+    "options": [
+      "貿易風",
+      "季節風",
+      "極東風",
+      "偏西風"
+    ],
+    "correct": 3,
+    "explanation": "偏西風は日本付近の天気の変化にも関係する。",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-151",
+    "subject": "social",
+    "topic": "地理",
+    "term": "抑制栽培",
+    "prompt": "涼しい高冷地などで、出荷時期を遅らせる栽培方法は何か。",
+    "options": [
+      "焼畑農業",
+      "抑制栽培",
+      "促成栽培",
+      "二毛作"
+    ],
+    "correct": 1,
+    "explanation": "高冷地の気候を利用して、夏に高原野菜などを出荷する。",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-152",
+    "subject": "social",
+    "topic": "地理",
+    "term": "排他的経済水域",
+    "prompt": "沿岸国が水産資源や海底資源を管理できる、沿岸から原則200海里までの水域は何か。",
+    "options": [
+      "排他的経済水域",
+      "領海",
+      "公海",
+      "接続水域"
+    ],
+    "correct": 0,
+    "explanation": "排他的経済水域では資源の探査・利用などの権利が認められる。",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-155",
+    "subject": "social",
+    "topic": "地理",
+    "term": "地形図",
+    "prompt": "土地の高低や土地利用、道路などを縮尺に応じて表した地図は何か。",
+    "options": [
+      "世界地図",
+      "地形図",
+      "主題図",
+      "統計地図"
+    ],
+    "correct": 1,
+    "explanation": "地形図では等高線や地図記号を使って地表の様子を表す。",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-157",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "墾田永年私財法",
+    "prompt": "743年、新しく開墾した土地の永久私有を認めた法令は何か。",
+    "options": [
+      "班田収授法",
+      "御成敗式目",
+      "公地公民",
+      "墾田永年私財法"
+    ],
+    "correct": 3,
+    "explanation": "墾田永年私財法により荘園が広がるきっかけとなった。",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-159",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "承久の乱",
+    "prompt": "1221年、後鳥羽上皇が鎌倉幕府を倒そうとして起こした戦いは何か。",
+    "options": [
+      "保元の乱",
+      "承久の乱",
+      "応仁の乱",
+      "壬申の乱"
+    ],
+    "correct": 1,
+    "explanation": "幕府側が勝利し、朝廷を監視するため六波羅探題が置かれた。",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-160",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "御成敗式目",
+    "prompt": "1232年、北条泰時が定めた武士のための法律は何か。",
+    "options": [
+      "御成敗式目",
+      "武家諸法度",
+      "大宝律令",
+      "公事方御定書"
+    ],
+    "correct": 0,
+    "explanation": "御成敗式目は武士社会の慣習や道理をもとに定められた。",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-163",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "大政奉還",
+    "prompt": "1867年、徳川慶喜が政権を朝廷に返したことは何か。",
+    "options": [
+      "版籍奉還",
+      "大政奉還",
+      "王政復古",
+      "廃藩置県"
+    ],
+    "correct": 1,
+    "explanation": "大政奉還によって江戸幕府の政治は終わりに向かった。",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-164",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "日米修好通商条約",
+    "prompt": "1858年に結ばれ、日本に領事裁判権を認め、関税自主権がなかった条約は何か。",
+    "options": [
+      "日米修好通商条約",
+      "日米和親条約",
+      "下関条約",
+      "ポーツマス条約"
+    ],
+    "correct": 0,
+    "explanation": "不平等条約の一つで、関税自主権の回復などが課題となった。",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-165",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "サンフランシスコ平和条約",
+    "prompt": "1951年に調印され、日本が主権を回復することになった条約は何か。",
+    "options": [
+      "日米安全保障条約",
+      "ポーツマス条約",
+      "ベルサイユ条約",
+      "サンフランシスコ平和条約"
+    ],
+    "correct": 3,
+    "explanation": "1952年に発効し、日本は独立を回復した。",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-168",
+    "subject": "social",
+    "topic": "公民",
+    "term": "内閣不信任決議",
+    "prompt": "衆議院が内閣を信任できないと意思表示する決議は何か。",
+    "options": [
+      "内閣不信任決議",
+      "弾劾裁判",
+      "国民審査",
+      "問責決議"
+    ],
+    "correct": 0,
+    "explanation": "可決された場合、内閣は10日以内に衆議院を解散しない限り総辞職する。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-169",
+    "subject": "social",
+    "topic": "公民",
+    "term": "小選挙区制",
+    "prompt": "一つの選挙区から原則として一人を選ぶ選挙制度は何か。",
+    "options": [
+      "比例代表制",
+      "大選挙区制",
+      "間接選挙",
+      "小選挙区制"
+    ],
+    "correct": 3,
+    "explanation": "小選挙区制では各選挙区で最も得票数の多い候補者が当選する。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-170",
+    "subject": "social",
+    "topic": "公民",
+    "term": "比例代表制",
+    "prompt": "政党の得票数に応じて議席を配分する選挙制度は何か。",
+    "options": [
+      "直接請求制",
+      "制限選挙",
+      "比例代表制",
+      "小選挙区制"
+    ],
+    "correct": 2,
+    "explanation": "比例代表制は得票数を議席に反映させる制度。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-171",
+    "subject": "social",
+    "topic": "公民",
+    "term": "需要",
+    "prompt": "水分子 H₂O をつくる原子の種類と数の組み合わせとして正しいものはどれか。",
+    "options": [
+      "水素原子2個と酸素原子1個",
+      "水素原子1個と酸素原子2個",
+      "水素原子2個だけ",
+      "酸素原子2個だけ"
+    ],
+    "correct": 0,
+    "explanation": "化学式 H₂O の下付きの数字は、その元素の原子の数を表す。Hには数字がないので1個、Oには2が付いていないため1個。したがって水素原子2個と酸素原子1個からできている。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-172",
+    "subject": "social",
+    "topic": "公民",
+    "term": "供給",
+    "prompt": "生産者や企業が商品やサービスを売ろうとする量は何か。",
+    "options": [
+      "供給",
+      "需要",
+      "消費",
+      "税収"
+    ],
+    "correct": 0,
+    "explanation": "供給量は価格や生産条件などの影響を受ける。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-173",
+    "subject": "social",
+    "topic": "公民",
+    "term": "直接税",
+    "prompt": "税を納める人と、実際に税を負担する人が同じ税は何か。",
+    "options": [
+      "間接税",
+      "関税",
+      "消費税",
+      "直接税"
+    ],
+    "correct": 3,
+    "explanation": "所得税や法人税は直接税に分類される。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-174",
+    "subject": "social",
+    "topic": "公民",
+    "term": "間接税",
+    "prompt": "税を納める人と、実際に税を負担する人が異なる税は何か。",
+    "options": [
+      "所得税",
+      "住民税",
+      "間接税",
+      "直接税"
+    ],
+    "correct": 2,
+    "explanation": "消費税は事業者が納めるが、負担するのは消費者である。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-175",
+    "subject": "social",
+    "topic": "公民",
+    "term": "国際連合",
+    "prompt": "第二次世界大戦後、国際平和と安全の維持などを目的に設立された組織は何か。",
+    "options": [
+      "NATO",
+      "国際連合",
+      "国際連盟",
+      "EU"
+    ],
+    "correct": 1,
+    "explanation": "国際連合は1945年に発足した。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-144",
+    "subject": "science",
+    "topic": "化学",
+    "term": "化学変化",
+    "prompt": "化学変化について正しい説明を選べ。別の物質に変わり、もとの物質とは性質が異なる物質ができる変化は何か。",
+    "options": [
+      "状態変化",
+      "化学変化",
+      "溶解",
+      "蒸留"
+    ],
+    "correct": 1,
+    "explanation": "化学変化では原子の組み合わせが変わり、新しい物質ができる。（確認ポイント：化学変化）",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-145",
+    "subject": "social",
+    "topic": "公民",
+    "term": "日本国憲法",
+    "prompt": "確認問題：日本の国の基本的なしくみや国民の権利・義務を定めた最高法規は何か。",
+    "options": [
+      "民法",
+      "日本国憲法",
+      "刑法",
+      "条例"
+    ],
+    "correct": 1,
+    "explanation": "日本国憲法は国の基本原則や統治のしくみ、国民の権利・義務を定める最高法規。（確認ポイント：日本国憲法）",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-146",
+    "subject": "social",
+    "topic": "地理",
+    "term": "扇状地",
+    "prompt": "扇状地について正しい説明を選べ。山地から平地に出た川が土砂を堆積させてつくる、扇形の地形は何か。",
+    "options": [
+      "三角州",
+      "扇状地",
+      "リアス海岸",
+      "カルデラ"
+    ],
+    "correct": 1,
+    "explanation": "扇状地は水はけがよく、果樹園などに利用されることが多い。（確認ポイント：扇状地）",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-147",
+    "subject": "science",
+    "topic": "地学",
+    "term": "日周運動",
+    "prompt": "確認問題：地球の自転によって、天体が1日に1回東から西へ動いて見える見かけの動きは何か。",
+    "options": [
+      "自転",
+      "日周運動",
+      "年周運動",
+      "公転"
+    ],
+    "correct": 1,
+    "explanation": "日周運動は地球の自転によって起こる。（確認ポイント：日周運動）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-148",
+    "subject": "science",
+    "topic": "生物",
+    "term": "細胞",
+    "prompt": "細胞について正しい説明を選べ。生物の体をつくる基本単位は何か。",
+    "options": [
+      "組織",
+      "器官",
+      "細胞",
+      "個体"
+    ],
+    "correct": 2,
+    "explanation": "細胞は生物の体をつくる基本単位。植物細胞には細胞壁や葉緑体などがある。（確認ポイント：細胞）",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-149",
+    "subject": "social",
+    "topic": "公民",
+    "term": "内閣",
+    "prompt": "確認問題：行政権を担当し、法律や予算に基づいて国の行政を行う機関は何か。",
+    "options": [
+      "国会",
+      "内閣",
+      "最高裁判所",
+      "会計検査院"
+    ],
+    "correct": 1,
+    "explanation": "内閣は行政権を担い、内閣総理大臣と国務大臣で構成される。（確認ポイント：内閣）",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-150",
+    "subject": "social",
+    "topic": "地理",
+    "term": "人口ピラミッド",
+    "prompt": "人口ピラミッドについて正しい説明を選べ。年齢別・男女別の人口構成を表したグラフは何か。",
+    "options": [
+      "人口密度図",
+      "人口ピラミッド",
+      "雨温図",
+      "階級区分図"
+    ],
+    "correct": 1,
+    "explanation": "人口ピラミッドの形から、年齢構成や少子高齢化の進み方などを読み取れる。（確認ポイント：人口ピラミッド）",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-151",
+    "subject": "social",
+    "topic": "地理",
+    "term": "排他的経済水域",
+    "prompt": "確認問題：沿岸国が水産資源や海底資源を管理できる、沿岸から原則200海里までの水域は何か。",
+    "options": [
+      "排他的経済水域",
+      "領海",
+      "公海",
+      "接続水域"
+    ],
+    "correct": 0,
+    "explanation": "排他的経済水域では資源の探査・利用などの権利が認められる。（確認ポイント：排他的経済水域）",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-152",
+    "subject": "science",
+    "topic": "生物",
+    "term": "反射",
+    "prompt": "反射について正しい説明を選べ。刺激に対して、意識とは関係なく起こるすばやい反応は何か。",
+    "options": [
+      "反射",
+      "学習",
+      "感覚",
+      "随意運動"
+    ],
+    "correct": 0,
+    "explanation": "反射は脳で意識して判断する前に起こる、すばやい反応。（確認ポイント：反射）",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-153",
+    "subject": "science",
+    "topic": "物理",
+    "term": "並列回路",
+    "prompt": "確認問題：電流の流れる道筋が枝分かれしている回路を何というか。",
+    "options": [
+      "直列回路",
+      "並列回路",
+      "短絡回路",
+      "開回路"
+    ],
+    "correct": 1,
+    "explanation": "並列回路では各枝にかかる電圧が等しく、全体の電流は枝の電流の和になる。（確認ポイント：並列回路）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-154",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "楽市・楽座",
+    "prompt": "楽市・楽座について正しい説明を選べ。織田信長が商工業を活発にするため、市場の特権などを廃止した政策は何か。",
+    "options": [
+      "刀狩",
+      "楽市・楽座",
+      "参勤交代",
+      "地租改正"
+    ],
+    "correct": 1,
+    "explanation": "楽市・楽座は商売の自由を広げ、城下町や商工業の発展を促した。（確認ポイント：楽市・楽座）",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-155",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "大政奉還",
+    "prompt": "確認問題：1867年、徳川慶喜が政権を朝廷に返したことは何か。",
+    "options": [
+      "版籍奉還",
+      "大政奉還",
+      "王政復古",
+      "廃藩置県"
+    ],
+    "correct": 1,
+    "explanation": "大政奉還によって江戸幕府の政治は終わりに向かった。（確認ポイント：大政奉還）",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-156",
+    "subject": "science",
+    "topic": "地学",
+    "term": "初期微動",
+    "prompt": "初期微動について正しい説明を選べ。P波によって起こる、地震の最初の小さな揺れは何か。",
+    "options": [
+      "主要動",
+      "初期微動",
+      "余震",
+      "液状化"
+    ],
+    "correct": 1,
+    "explanation": "P波は速く伝わり、先に到着して初期微動を起こす。（確認ポイント：初期微動）",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-157",
+    "subject": "science",
+    "topic": "化学",
+    "term": "蒸留",
+    "prompt": "確認問題：液体を加熱して気体にし、それを冷やして再び液体にすることで分ける方法は何か。",
+    "options": [
+      "ろ過",
+      "蒸留",
+      "再結晶",
+      "抽出"
+    ],
+    "correct": 1,
+    "explanation": "蒸留は沸点の違いなどを利用して液体を分離する方法。（確認ポイント：蒸留）",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-158",
+    "subject": "social",
+    "topic": "公民",
+    "term": "生存権",
+    "prompt": "生存権について正しい説明を選べ。健康で文化的な最低限度の生活を営む権利は何か。",
+    "options": [
+      "教育を受ける権利",
+      "生存権",
+      "参政権",
+      "請求権"
+    ],
+    "correct": 1,
+    "explanation": "生存権は社会権の一つで、日本国憲法第25条に定められている。（確認ポイント：生存権）",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-159",
+    "subject": "social",
+    "topic": "公民",
+    "term": "比例代表制",
+    "prompt": "確認問題：政党の得票数に応じて議席を配分する選挙制度は何か。",
+    "options": [
+      "直接請求制",
+      "制限選挙",
+      "比例代表制",
+      "小選挙区制"
+    ],
+    "correct": 2,
+    "explanation": "比例代表制は得票数を議席に反映させる制度。（確認ポイント：比例代表制）",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-160",
+    "subject": "science",
+    "topic": "地学",
+    "term": "日食",
+    "prompt": "日食について正しい説明を選べ。月が太陽と地球の間に入り、太陽の一部または全部が隠される現象は何か。",
+    "options": [
+      "月食",
+      "日食",
+      "満月",
+      "金環運動"
+    ],
+    "correct": 1,
+    "explanation": "日食は太陽—月—地球の順にほぼ一直線に並んだときに起こる。（確認ポイント：日食）",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-161",
+    "subject": "science",
+    "topic": "化学",
+    "term": "発熱反応",
+    "prompt": "確認問題：化学変化にともなって周囲に熱を放出する反応は何か。",
+    "options": [
+      "吸熱反応",
+      "発熱反応",
+      "中和反応",
+      "置換反応"
+    ],
+    "correct": 1,
+    "explanation": "発熱反応では反応の前後で周囲の温度が上がる。（確認ポイント：発熱反応）",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-162",
+    "subject": "science",
+    "topic": "物理",
+    "term": "電力",
+    "prompt": "電力について正しい説明を選べ。電流がする仕事の割合を表し、電圧×電流で求められる量は何か。",
+    "options": [
+      "電力",
+      "電力量",
+      "抵抗",
+      "電流"
+    ],
+    "correct": 0,
+    "explanation": "電力の単位はワット（W）。（確認ポイント：電力）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-163",
+    "subject": "social",
+    "topic": "公民",
+    "term": "国際連合",
+    "prompt": "確認問題：第二次世界大戦後、国際平和と安全の維持などを目的に設立された組織は何か。",
+    "options": [
+      "NATO",
+      "国際連合",
+      "国際連盟",
+      "EU"
+    ],
+    "correct": 1,
+    "explanation": "国際連合は1945年に発足した。（確認ポイント：国際連合）",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-164",
+    "subject": "social",
+    "topic": "地理",
+    "term": "促成栽培",
+    "prompt": "促成栽培について正しい説明を選べ。温室などを利用して作物の出荷時期を早める栽培方法は何か。",
+    "options": [
+      "抑制栽培",
+      "促成栽培",
+      "輪作",
+      "混作"
+    ],
+    "correct": 1,
+    "explanation": "促成栽培は温室などで生育を早め、通常より早く出荷する方法。（確認ポイント：促成栽培）",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-165",
+    "subject": "science",
+    "topic": "生物",
+    "term": "師管",
+    "prompt": "確認問題：葉でつくられた養分を植物の体全体へ運ぶ管は何か。",
+    "options": [
+      "道管",
+      "師管",
+      "気孔",
+      "根毛"
+    ],
+    "correct": 1,
+    "explanation": "師管は光合成でつくられた養分などを運ぶ。（確認ポイント：師管）",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-166",
+    "subject": "science",
+    "topic": "化学",
+    "term": "塩",
+    "prompt": "塩について正しい説明を選べ。酸の陰イオンとアルカリの陽イオンなどからできる、中和で生じる物質は何か。",
+    "options": [
+      "塩",
+      "酸",
+      "アルカリ",
+      "単体"
+    ],
+    "correct": 0,
+    "explanation": "塩（えん）は食塩だけでなく、さまざまな化合物を含む。（確認ポイント：塩）",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-167",
+    "subject": "science",
+    "topic": "物理",
+    "term": "仕事率",
+    "prompt": "確認問題：一定時間あたりにする仕事の大きさを何というか。",
+    "options": [
+      "効率",
+      "仕事率",
+      "圧力",
+      "電力量"
+    ],
+    "correct": 1,
+    "explanation": "仕事率は仕事をする速さ。仕事率〔W〕＝仕事〔J〕÷時間〔s〕。（確認ポイント：仕事率）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-168",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "弥生時代",
+    "prompt": "弥生時代について正しい説明を選べ。水田稲作が広まり、金属器も使われるようになった時代は何か。",
+    "options": [
+      "縄文時代",
+      "弥生時代",
+      "平安時代",
+      "鎌倉時代"
+    ],
+    "correct": 1,
+    "explanation": "弥生時代には大陸から稲作や金属器が伝わり、むらやくにが発達した。（確認ポイント：弥生時代）",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-169",
+    "subject": "science",
+    "topic": "地学",
+    "term": "化石",
+    "prompt": "確認問題：地層に残された、過去の生物の体や生活の跡を何というか。",
+    "options": [
+      "鉱物",
+      "化石",
+      "火山灰",
+      "岩脈"
+    ],
+    "correct": 1,
+    "explanation": "化石は地層ができた時代や環境を推定する手がかりになる。（確認ポイント：化石）",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-170",
+    "subject": "science",
+    "topic": "生物",
+    "term": "動脈",
+    "prompt": "動脈について正しい説明を選べ。心臓から送り出された血液が流れる血管は何か。",
+    "options": [
+      "静脈",
+      "毛細血管",
+      "リンパ管",
+      "動脈"
+    ],
+    "correct": 3,
+    "explanation": "動脈は心臓から出る血液が流れる血管。（確認ポイント：動脈）",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-171",
+    "subject": "science",
+    "topic": "化学",
+    "term": "分子",
+    "prompt": "水分子 H₂O をつくる原子の種類と数の組み合わせとして正しいものはどれか。",
+    "options": [
+      "水素原子2個と酸素原子1個",
+      "水素原子1個と酸素原子2個",
+      "水素原子2個だけ",
+      "酸素原子2個だけ"
+    ],
+    "correct": 0,
+    "explanation": "化学式 H₂O の下付きの数字は、その元素の原子の数を表す。Hには数字がないので1個、Oには2が付いていないため1個。したがって水素原子2個と酸素原子1個からできている。",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-172",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "江戸幕府",
+    "prompt": "江戸幕府について正しい説明を選べ。1603年に征夷大将軍となり、江戸幕府を開いた人物は誰か。",
+    "options": [
+      "豊臣秀吉",
+      "徳川家康",
+      "織田信長",
+      "徳川吉宗"
+    ],
+    "correct": 1,
+    "explanation": "徳川家康は1603年に征夷大将軍となり、江戸幕府を開いた。（確認ポイント：江戸幕府）",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-173",
+    "subject": "science",
+    "topic": "地学",
+    "term": "季節",
+    "prompt": "確認問題：地球の公転と地軸の傾きによって生じる、春夏秋冬の変化を何というか。",
+    "options": [
+      "潮汐",
+      "季節",
+      "日周運動",
+      "月の満ち欠け"
+    ],
+    "correct": 1,
+    "explanation": "地軸が傾いたまま地球が公転するため、季節によって太陽の高さや昼の長さが変わる。（確認ポイント：季節）",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-174",
+    "subject": "science",
+    "topic": "地学",
+    "term": "寒冷前線",
+    "prompt": "寒冷前線について正しい説明を選べ。寒気が暖気の下にもぐりこみ、暖気を急に押し上げる前線は何か。",
+    "options": [
+      "温暖前線",
+      "停滞前線",
+      "閉塞前線",
+      "寒冷前線"
+    ],
+    "correct": 3,
+    "explanation": "寒冷前線付近では短時間に強い雨が降ることがある。（確認ポイント：寒冷前線）",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-175",
+    "subject": "science",
+    "topic": "化学",
+    "term": "イオン",
+    "prompt": "確認問題：原子や原子団が電子を失ったり受け取ったりして電気を帯びた粒子は何か。",
+    "options": [
+      "分子",
+      "イオン",
+      "同位体",
+      "中性子"
+    ],
+    "correct": 1,
+    "explanation": "電子を失うと陽イオン、電子を受け取ると陰イオンになる。（確認ポイント：イオン）",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-176",
+    "subject": "social",
+    "topic": "公民",
+    "term": "三権分立",
+    "prompt": "三権分立について正しい説明を選べ。立法・行政・司法の権力を別々の機関に分け、権力の集中を防ぐしくみは何か。",
+    "options": [
+      "議院内閣制",
+      "三権分立",
+      "直接民主制",
+      "地方自治"
+    ],
+    "correct": 1,
+    "explanation": "国会・内閣・裁判所が権力を分担し、互いに抑制と均衡を保つ。（確認ポイント：三権分立）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-177",
+    "subject": "social",
+    "topic": "地理",
+    "term": "酪農",
+    "prompt": "確認問題：牛や羊などを飼育し、牛乳や乳製品を生産する農業は何か。",
+    "options": [
+      "酪農",
+      "近郊農業",
+      "焼畑農業",
+      "混合農業"
+    ],
+    "correct": 0,
+    "explanation": "酪農は乳牛などを飼育し、生乳や乳製品を生産する農業。（確認ポイント：酪農）",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-178",
+    "subject": "social",
+    "topic": "地理",
+    "term": "偏西風",
+    "prompt": "偏西風について正しい説明を選べ。中緯度地域の上空で、西から東へ吹く卓越風は何か。",
+    "options": [
+      "貿易風",
+      "季節風",
+      "極東風",
+      "偏西風"
+    ],
+    "correct": 3,
+    "explanation": "偏西風は日本付近の天気の変化にも関係する。（確認ポイント：偏西風）",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-179",
+    "subject": "science",
+    "topic": "生物",
+    "term": "消化",
+    "prompt": "確認問題：食物を吸収されやすい小さな物質に分解するはたらきは何か。",
+    "options": [
+      "循環",
+      "消化",
+      "排出",
+      "同化"
+    ],
+    "correct": 1,
+    "explanation": "消化酵素などのはたらきで、栄養分を吸収できる形に分解する。（確認ポイント：消化）",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-180",
+    "subject": "science",
+    "topic": "物理",
+    "term": "エネルギー保存の法則",
+    "prompt": "エネルギー保存の法則について正しい説明を選べ。エネルギーは形を変えても、その総量は変わらないという法則は何か。",
+    "options": [
+      "質量保存の法則",
+      "エネルギー保存の法則",
+      "慣性の法則",
+      "作用・反作用の法則"
+    ],
+    "correct": 1,
+    "explanation": "エネルギーは移り変わったり形を変えたりするが、全体の量は保存される。（確認ポイント：エネルギー保存の法則）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-181",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "摂関政治",
+    "prompt": "確認問題：藤原氏が天皇の外戚となり、摂政や関白として行った政治は何か。",
+    "options": [
+      "院政",
+      "摂関政治",
+      "執権政治",
+      "武家政治"
+    ],
+    "correct": 1,
+    "explanation": "藤原氏は摂政・関白の地位を利用して、平安時代に政治の実権を握った。（確認ポイント：摂関政治）",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-182",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "承久の乱",
+    "prompt": "承久の乱について正しい説明を選べ。1221年、後鳥羽上皇が鎌倉幕府を倒そうとして起こした戦いは何か。",
+    "options": [
+      "保元の乱",
+      "承久の乱",
+      "応仁の乱",
+      "壬申の乱"
+    ],
+    "correct": 1,
+    "explanation": "幕府側が勝利し、朝廷を監視するため六波羅探題が置かれた。（確認ポイント：承久の乱）",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-183",
+    "subject": "science",
+    "topic": "地学",
+    "term": "震源",
+    "prompt": "確認問題：地下で地震が発生した場所を何というか。",
+    "options": [
+      "震央",
+      "震源",
+      "断層",
+      "火口"
+    ],
+    "correct": 1,
+    "explanation": "震源は地下で地震が発生した場所。震源の真上の地表の点が震央。（確認ポイント：震源）",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-184",
+    "subject": "science",
+    "topic": "物理",
+    "term": "共鳴",
+    "prompt": "共鳴について正しい説明を選べ。物体に固有振動数と同じ振動を加えたとき、振幅が大きくなる現象は何か。",
+    "options": [
+      "反射",
+      "共鳴",
+      "屈折",
+      "干渉"
+    ],
+    "correct": 1,
+    "explanation": "共鳴では外から加える振動数が固有振動数と一致し、振幅が大きくなる。（確認ポイント：共鳴）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-185",
+    "subject": "social",
+    "topic": "公民",
+    "term": "平和主義",
+    "prompt": "確認問題：戦争を放棄し、戦力を持たないことなどを定めた憲法の原則は何か。",
+    "options": [
+      "国民主権",
+      "平和主義",
+      "基本的人権の尊重",
+      "法の支配"
+    ],
+    "correct": 1,
+    "explanation": "平和主義は日本国憲法の三つの基本原則の一つで、第9条に関係する。（確認ポイント：平和主義）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-186",
+    "subject": "social",
+    "topic": "公民",
+    "term": "内閣不信任決議",
+    "prompt": "内閣不信任決議について正しい説明を選べ。衆議院が内閣を信任できないと意思表示する決議は何か。",
+    "options": [
+      "内閣不信任決議",
+      "弾劾裁判",
+      "国民審査",
+      "問責決議"
+    ],
+    "correct": 0,
+    "explanation": "可決された場合、内閣は10日以内に衆議院を解散しない限り総辞職する。（確認ポイント：内閣不信任決議）",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-187",
+    "subject": "science",
+    "topic": "地学",
+    "term": "公転",
+    "prompt": "確認問題：地球が太陽の周りを回る運動は何か。",
+    "options": [
+      "自転",
+      "公転",
+      "日周運動",
+      "年周運動"
+    ],
+    "correct": 1,
+    "explanation": "地球の公転周期は約1年。季節の変化に関係する。（確認ポイント：公転）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-188",
+    "subject": "science",
+    "topic": "化学",
+    "term": "質量パーセント濃度",
+    "prompt": "質量パーセント濃度について正しい説明を選べ。溶液全体の質量に対する溶質の質量の割合を百分率で表したものは何か。",
+    "options": [
+      "体積パーセント",
+      "質量パーセント濃度",
+      "密度",
+      "溶解度"
+    ],
+    "correct": 1,
+    "explanation": "質量パーセント濃度＝溶質の質量÷溶液の質量×100。（確認ポイント：質量パーセント濃度）",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-189",
+    "subject": "social",
+    "topic": "公民",
+    "term": "地方自治",
+    "prompt": "確認問題：地域の住民が地域の政治を自主的に行うしくみは何か。",
+    "options": [
+      "中央集権",
+      "地方自治",
+      "議院内閣制",
+      "三権分立"
+    ],
+    "correct": 1,
+    "explanation": "地方自治は住民に身近な行政を、地方公共団体と住民が担うしくみ。（確認ポイント：地方自治）",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-190",
+    "subject": "social",
+    "topic": "公民",
+    "term": "直接税",
+    "prompt": "直接税について正しい説明を選べ。税を納める人と、実際に税を負担する人が同じ税は何か。",
+    "options": [
+      "間接税",
+      "関税",
+      "消費税",
+      "直接税"
+    ],
+    "correct": 3,
+    "explanation": "所得税や法人税は直接税に分類される。（確認ポイント：直接税）",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-191",
+    "subject": "social",
+    "topic": "地理",
+    "term": "時差",
+    "prompt": "確認問題：経度の違いによって生じる、地点間の時刻の差を何というか。",
+    "options": [
+      "季節差",
+      "時差",
+      "気温差",
+      "標高差"
+    ],
+    "correct": 1,
+    "explanation": "地球は24時間で360度自転するため、経度15度でおよそ1時間の時差が生じる。（確認ポイント：時差）",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-192",
+    "subject": "science",
+    "topic": "生物",
+    "term": "気孔",
+    "prompt": "気孔について正しい説明を選べ。植物の葉にあり、気体の出入りや蒸散に関係する小さな穴は何か。",
+    "options": [
+      "維管束",
+      "気孔",
+      "根毛",
+      "子房"
+    ],
+    "correct": 1,
+    "explanation": "気孔は主に葉の表皮にあり、二酸化炭素や酸素、水蒸気の出入りに関係する。（確認ポイント：気孔）",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-193",
+    "subject": "science",
+    "topic": "物理",
+    "term": "反射",
+    "prompt": "確認問題：光が鏡などの面に当たってはね返る現象は何か。",
+    "options": [
+      "吸収",
+      "反射",
+      "屈折",
+      "分散"
+    ],
+    "correct": 1,
+    "explanation": "反射では入射角と反射角が等しい。（確認ポイント：反射）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-194",
+    "subject": "science",
+    "topic": "物理",
+    "term": "浮力",
+    "prompt": "浮力について正しい説明を選べ。水中の物体が、重力と反対向きに水から受ける力は何か。",
+    "options": [
+      "摩擦力",
+      "弾性力",
+      "浮力",
+      "磁力"
+    ],
+    "correct": 2,
+    "explanation": "浮力は液体や気体の中の物体にはたらく、上向きの力。（確認ポイント：浮力）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-195",
+    "subject": "social",
+    "topic": "地理",
+    "term": "縮尺",
+    "prompt": "確認問題：地図上の距離と実際の距離の比を何というか。",
+    "options": [
+      "方位",
+      "縮尺",
+      "等高線",
+      "経度"
+    ],
+    "correct": 1,
+    "explanation": "縮尺を使うと、地図上の長さから実際の距離を求められる。（確認ポイント：縮尺）",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-196",
+    "subject": "science",
+    "topic": "生物",
+    "term": "分解者",
+    "prompt": "分解者について正しい説明を選べ。生物の遺骸や排出物を分解し、無機物に戻す生物を何というか。",
+    "options": [
+      "生産者",
+      "消費者",
+      "分解者",
+      "捕食者"
+    ],
+    "correct": 2,
+    "explanation": "菌類や細菌類などの分解者は、有機物を分解して物質を自然界に戻す。（確認ポイント：分解者）",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-197",
+    "subject": "science",
+    "topic": "生物",
+    "term": "消化酵素",
+    "prompt": "確認問題：食物を吸収しやすい小さな物質に分解するはたらきをもつ物質は何か。",
+    "options": [
+      "抗体",
+      "色素",
+      "消化酵素",
+      "ホルモン"
+    ],
+    "correct": 2,
+    "explanation": "アミラーゼやペプシンなどが消化酵素にあたる。（確認ポイント：消化酵素）",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-198",
+    "subject": "science",
+    "topic": "物理",
+    "term": "直列回路",
+    "prompt": "直列回路について正しい説明を選べ。電流の流れる道筋が1本だけの回路を何というか。",
+    "options": [
+      "並列回路",
+      "直列回路",
+      "分岐回路",
+      "短絡回路"
+    ],
+    "correct": 1,
+    "explanation": "直列回路では電流の通り道が1本で、回路のどこでも電流は等しい。（確認ポイント：直列回路）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-199",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "鎌倉幕府",
+    "prompt": "確認問題：源頼朝が武士による政権を開いた場所はどこか。",
+    "options": [
+      "京都",
+      "鎌倉",
+      "江戸",
+      "奈良"
+    ],
+    "correct": 1,
+    "explanation": "源頼朝は鎌倉を本拠地として武士の政権を築いた。（確認ポイント：鎌倉幕府）",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-200",
+    "subject": "science",
+    "topic": "地学",
+    "term": "マグニチュード",
+    "prompt": "マグニチュードについて正しい説明を選べ。地震そのものの規模や放出されたエネルギーの大きさを表す値は何か。",
+    "options": [
+      "震度",
+      "マグニチュード",
+      "初期微動",
+      "震央"
+    ],
+    "correct": 1,
+    "explanation": "マグニチュードは地震の規模を表し、震度は各地点での揺れの強さを表す。（確認ポイント：マグニチュード）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-201",
+    "subject": "science",
+    "topic": "生物",
+    "term": "生態系",
+    "prompt": "確認問題：生物と、それを取り巻く光・水・空気などの環境をひとまとまりにしたものは何か。",
+    "options": [
+      "器官",
+      "生態系",
+      "個体群",
+      "細胞"
+    ],
+    "correct": 1,
+    "explanation": "生態系では生物どうしや環境との間に関係がある。（確認ポイント：生態系）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-202",
+    "subject": "science",
+    "topic": "化学",
+    "term": "質量保存の法則",
+    "prompt": "質量保存の法則について正しい説明を選べ。化学変化の前後で、反応に関係する物質全体の質量が変わらない法則は何か。",
+    "options": [
+      "定比例の法則",
+      "質量保存の法則",
+      "慣性の法則",
+      "電磁誘導の法則"
+    ],
+    "correct": 1,
+    "explanation": "化学変化の前後で原子の種類と数は変わらないため、全体の質量は保存される。（確認ポイント：質量保存の法則）",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-203",
+    "subject": "social",
+    "topic": "公民",
+    "term": "国民主権",
+    "prompt": "確認問題：国の政治のあり方を最終的に決める権限が国民にあるという原理は何か。",
+    "options": [
+      "基本的人権の尊重",
+      "国民主権",
+      "平和主義",
+      "三権分立"
+    ],
+    "correct": 1,
+    "explanation": "国民主権は日本国憲法の三つの基本原則の一つ。（確認ポイント：国民主権）",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-204",
+    "subject": "social",
+    "topic": "地理",
+    "term": "三角州",
+    "prompt": "三角州について正しい説明を選べ。川が河口付近で土砂を堆積させてつくる地形は何か。",
+    "options": [
+      "扇状地",
+      "三角州",
+      "台地",
+      "盆地"
+    ],
+    "correct": 1,
+    "explanation": "三角州は河口付近にできる低く平らな地形で、水田などに利用される。（確認ポイント：三角州）",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-205",
+    "subject": "science",
+    "topic": "地学",
+    "term": "年周運動",
+    "prompt": "確認問題：地球の公転によって、星座が季節ごとに変わって見える見かけの動きは何か。",
+    "options": [
+      "年周運動",
+      "日周運動",
+      "自転",
+      "月の満ち欠け"
+    ],
+    "correct": 0,
+    "explanation": "年周運動は地球の公転によって起こる。（確認ポイント：年周運動）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-206",
+    "subject": "science",
+    "topic": "生物",
+    "term": "光合成",
+    "prompt": "光合成について正しい説明を選べ。植物が光エネルギーを使い、二酸化炭素と水から養分をつくるはたらきは何か。",
+    "options": [
+      "呼吸",
+      "蒸散",
+      "光合成",
+      "消化"
+    ],
+    "correct": 2,
+    "explanation": "光合成では光エネルギーを利用してデンプンなどの養分をつくり、酸素を放出する。（確認ポイント：光合成）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-207",
+    "subject": "social",
+    "topic": "公民",
+    "term": "裁判員制度",
+    "prompt": "確認問題：重大な刑事裁判で、国民が裁判官とともに審理や判決に参加する制度は何か。",
+    "options": [
+      "陪審制度",
+      "裁判員制度",
+      "国民審査",
+      "住民投票"
+    ],
+    "correct": 1,
+    "explanation": "裁判員制度では、選ばれた国民が裁判官と一緒に有罪・無罪や刑の内容を判断する。（確認ポイント：裁判員制度）",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-208",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "飛鳥時代",
+    "prompt": "飛鳥時代について正しい説明を選べ。聖徳太子や大化の改新などに代表される時代は何か。",
+    "options": [
+      "飛鳥時代",
+      "奈良時代",
+      "平安時代",
+      "鎌倉時代"
+    ],
+    "correct": 0,
+    "explanation": "飛鳥時代には仏教が広まり、中央集権国家への改革が進められた。（確認ポイント：飛鳥時代）",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-209",
+    "subject": "social",
+    "topic": "地理",
+    "term": "地形図",
+    "prompt": "確認問題：土地の高低や土地利用、道路などを縮尺に応じて表した地図は何か。",
+    "options": [
+      "世界地図",
+      "地形図",
+      "主題図",
+      "統計地図"
+    ],
+    "correct": 1,
+    "explanation": "地形図では等高線や地図記号を使って地表の様子を表す。（確認ポイント：地形図）",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-210",
+    "subject": "science",
+    "topic": "生物",
+    "term": "遺伝子",
+    "prompt": "遺伝子について正しい説明を選べ。親から子へ受け継がれ、形質を決める情報を担うものは何か。",
+    "options": [
+      "酵素",
+      "遺伝子",
+      "ホルモン",
+      "抗体"
+    ],
+    "correct": 1,
+    "explanation": "遺伝子はDNAの一部で、親から子へ受け継がれる形質の情報を担う。（確認ポイント：遺伝子）",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-211",
+    "subject": "science",
+    "topic": "物理",
+    "term": "磁界",
+    "prompt": "確認問題：磁石の力がはたらく空間を何というか。",
+    "options": [
+      "電界",
+      "磁界",
+      "音場",
+      "重力場"
+    ],
+    "correct": 1,
+    "explanation": "磁界の向きは方位磁針のN極が指す向きで表す。（確認ポイント：磁界）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-212",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "参勤交代",
+    "prompt": "参勤交代について正しい説明を選べ。江戸幕府が大名に江戸と領地を往復させた制度は何か。",
+    "options": [
+      "鎖国",
+      "参勤交代",
+      "廃藩置県",
+      "五人組"
+    ],
+    "correct": 1,
+    "explanation": "参勤交代は大名の経済力を弱め、幕府への服従を示させる目的もあった。（確認ポイント：参勤交代）",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-213",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "日米修好通商条約",
+    "prompt": "確認問題：1858年に結ばれ、日本に領事裁判権を認め、関税自主権がなかった条約は何か。",
+    "options": [
+      "日米修好通商条約",
+      "日米和親条約",
+      "下関条約",
+      "ポーツマス条約"
+    ],
+    "correct": 0,
+    "explanation": "不平等条約の一つで、関税自主権の回復などが課題となった。（確認ポイント：日米修好通商条約）",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-214",
+    "subject": "science",
+    "topic": "地学",
+    "term": "前線",
+    "prompt": "前線について正しい説明を選べ。性質の異なる気団どうしが接する境界面が地表と交わる線は何か。",
+    "options": [
+      "等圧線",
+      "前線",
+      "等温線",
+      "断層"
+    ],
+    "correct": 1,
+    "explanation": "前線付近では雲や雨が発生しやすく、温帯低気圧の発達にも関係する。（確認ポイント：前線）",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-215",
+    "subject": "science",
+    "topic": "化学",
+    "term": "飽和水溶液",
+    "prompt": "確認問題：ある温度で、それ以上溶質を溶かすことができない水溶液は何か。",
+    "options": [
+      "希薄溶液",
+      "飽和水溶液",
+      "濃厚溶液",
+      "コロイド"
+    ],
+    "correct": 1,
+    "explanation": "飽和水溶液には、その温度で溶ける限度まで溶質が溶けている。（確認ポイント：飽和水溶液）",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-216",
+    "subject": "social",
+    "topic": "公民",
+    "term": "衆議院",
+    "prompt": "衆議院について正しい説明を選べ。国会を構成する二つの議院のうち、任期が4年で解散がある議院はどれか。",
+    "options": [
+      "参議院",
+      "衆議院",
+      "最高裁判所",
+      "内閣"
+    ],
+    "correct": 1,
+    "explanation": "衆議院の任期は4年だが、解散がある。参議院の任期は6年で解散はない。（確認ポイント：衆議院）",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-217",
+    "subject": "social",
+    "topic": "公民",
+    "term": "需要",
+    "prompt": "確認問題：消費者が商品やサービスを買おうとする量は何か。",
+    "options": [
+      "利益",
+      "需要",
+      "供給",
+      "価格"
+    ],
+    "correct": 1,
+    "explanation": "需要と供給の関係によって市場価格が変化する。（確認ポイント：需要）",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-218",
+    "subject": "social",
+    "topic": "地理",
+    "term": "緯度",
+    "prompt": "緯度について正しい説明を選べ。赤道を0度として、南北の位置を表す角度は何か。",
+    "options": [
+      "経度",
+      "緯度",
+      "標高",
+      "縮尺"
+    ],
+    "correct": 1,
+    "explanation": "緯度は赤道を基準に南北の位置を表し、北緯・南緯で示す。（確認ポイント：緯度）",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-219",
+    "subject": "science",
+    "topic": "化学",
+    "term": "化学反応式",
+    "prompt": "確認問題：化学変化を化学式と矢印を使って表した式は何か。",
+    "options": [
+      "イオン式",
+      "化学反応式",
+      "分子模型",
+      "元素記号"
+    ],
+    "correct": 1,
+    "explanation": "化学反応式では、反応の前後で原子の種類と数が等しくなるように係数をつける。（確認ポイント：化学反応式）",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-220",
+    "subject": "science",
+    "topic": "物理",
+    "term": "電力量",
+    "prompt": "電力量について正しい説明を選べ。電力と時間の積で表される、電気器具が使った電気エネルギーは何か。",
+    "options": [
+      "電圧",
+      "電力",
+      "抵抗",
+      "電力量"
+    ],
+    "correct": 3,
+    "explanation": "電力量は電力×時間で求め、単位にはWhやJを使う。（確認ポイント：電力量）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-221",
+    "subject": "science",
+    "topic": "物理",
+    "term": "力",
+    "prompt": "確認問題：物体の形や運動の状態を変化させるはたらきは何か。",
+    "options": [
+      "力",
+      "圧力",
+      "仕事",
+      "エネルギー"
+    ],
+    "correct": 0,
+    "explanation": "力は物体の運動の状態や形を変えるはたらき。単位はN（ニュートン）。（確認ポイント：力）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-222",
+    "subject": "social",
+    "topic": "地理",
+    "term": "工業地域",
+    "prompt": "工業地域について正しい説明を選べ。工場が集中し、工業生産が盛んな地域を何というか。",
+    "options": [
+      "工業地域",
+      "商業圏",
+      "農業地域",
+      "過疎地域"
+    ],
+    "correct": 0,
+    "explanation": "工業地域には工場や関連産業が集まり、交通・港湾などと結びつく。（確認ポイント：工業地域）",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-223",
+    "subject": "science",
+    "topic": "生物",
+    "term": "腎臓",
+    "prompt": "確認問題：血液中の不要物をこし取り、尿をつくる器官は何か。",
+    "options": [
+      "肝臓",
+      "腎臓",
+      "肺",
+      "すい臓"
+    ],
+    "correct": 1,
+    "explanation": "腎臓は血液から不要物や余分な水分などを取り除き、尿をつくる。（確認ポイント：腎臓）",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-224",
+    "subject": "science",
+    "topic": "化学",
+    "term": "電離",
+    "prompt": "電離について正しい説明を選べ。物質が水に溶けて陽イオンと陰イオンに分かれることは何か。",
+    "options": [
+      "融解",
+      "蒸発",
+      "凝固",
+      "電離"
+    ],
+    "correct": 3,
+    "explanation": "塩化ナトリウムなどの電解質は水溶液中で電離する。（確認ポイント：電離）",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-225",
+    "subject": "science",
+    "topic": "物理",
+    "term": "オームの法則",
+    "prompt": "確認問題：電圧・電流・抵抗の関係を表す法則は何か。",
+    "options": [
+      "フレミングの法則",
+      "反射の法則",
+      "オームの法則",
+      "質量保存の法則"
+    ],
+    "correct": 2,
+    "explanation": "オームの法則は V＝RI。電圧V、電流I、抵抗Rの関係を表す。（確認ポイント：オームの法則）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-226",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "大化の改新",
+    "prompt": "大化の改新について正しい説明を選べ。645年に始まった、中大兄皇子らによる政治改革を何というか。",
+    "options": [
+      "建武の新政",
+      "大化の改新",
+      "明治維新",
+      "享保の改革"
+    ],
+    "correct": 1,
+    "explanation": "大化の改新は645年に始まり、豪族中心の政治から天皇中心の国家づくりを目指した。（確認ポイント：大化の改新）",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-227",
+    "subject": "science",
+    "topic": "地学",
+    "term": "火成岩",
+    "prompt": "確認問題：マグマが冷え固まってできた岩石を何というか。",
+    "options": [
+      "堆積岩",
+      "変成岩",
+      "火成岩",
+      "石灰岩"
+    ],
+    "correct": 2,
+    "explanation": "火成岩には、地下深くでゆっくり冷えた深成岩と、地表付近で急に冷えた火山岩がある。（確認ポイント：火成岩）",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-228",
+    "subject": "science",
+    "topic": "生物",
+    "term": "静脈",
+    "prompt": "静脈について正しい説明を選べ。全身から心臓へ戻る血液が流れる血管は何か。",
+    "options": [
+      "毛細血管",
+      "気管",
+      "静脈",
+      "動脈"
+    ],
+    "correct": 2,
+    "explanation": "静脈には血液の逆流を防ぐ弁があるものが多い。（確認ポイント：静脈）",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-229",
+    "subject": "science",
+    "topic": "化学",
+    "term": "化合物",
+    "prompt": "確認問題：2種類以上の元素が化学的に結びついてできた純物質は何か。",
+    "options": [
+      "単体",
+      "混合物",
+      "化合物",
+      "元素"
+    ],
+    "correct": 2,
+    "explanation": "水や二酸化炭素のように、複数の元素からできた純物質を化合物という。（確認ポイント：化合物）",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-230",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "明治維新",
+    "prompt": "明治維新について正しい説明を選べ。明治政府が進めた、近代国家をつくるための一連の改革を何というか。",
+    "options": [
+      "享保の改革",
+      "明治維新",
+      "大化の改新",
+      "文明開化"
+    ],
+    "correct": 1,
+    "explanation": "明治維新では廃藩置県、徴兵令、地租改正など近代国家づくりの改革が進められた。（確認ポイント：明治維新）",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-231",
+    "subject": "social",
+    "topic": "地理",
+    "term": "等高線",
+    "prompt": "確認問題：地図上で標高が等しい地点を結んだ線は何か。",
+    "options": [
+      "等温線",
+      "等高線",
+      "等圧線",
+      "経線"
+    ],
+    "correct": 1,
+    "explanation": "等高線の間隔が狭い場所ほど、一般に傾斜が急である。（確認ポイント：等高線）",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-232",
+    "subject": "science",
+    "topic": "地学",
+    "term": "温暖前線",
+    "prompt": "温暖前線について正しい説明を選べ。暖気が寒気の上にはい上がるように進む前線は何か。",
+    "options": [
+      "停滞前線",
+      "閉塞前線",
+      "温暖前線",
+      "寒冷前線"
+    ],
+    "correct": 2,
+    "explanation": "温暖前線では広い範囲で比較的長く雨が降ることがある。（確認ポイント：温暖前線）",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-233",
+    "subject": "science",
+    "topic": "化学",
+    "term": "中和",
+    "prompt": "確認問題：酸の性質とアルカリの性質が互いに打ち消し合う反応は何か。",
+    "options": [
+      "電気分解",
+      "中和",
+      "酸化",
+      "蒸発"
+    ],
+    "correct": 1,
+    "explanation": "中和では酸とアルカリが反応し、塩と水ができる。（確認ポイント：中和）",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-234",
+    "subject": "social",
+    "topic": "公民",
+    "term": "国会",
+    "prompt": "国会について正しい説明を選べ。日本国憲法で国権の最高機関、かつ唯一の立法機関とされる機関は何か。",
+    "options": [
+      "内閣",
+      "裁判所",
+      "国会",
+      "地方議会"
+    ],
+    "correct": 2,
+    "explanation": "国会は国権の最高機関であり、国の唯一の立法機関と定められている。（確認ポイント：国会）",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-235",
+    "subject": "social",
+    "topic": "地理",
+    "term": "貿易",
+    "prompt": "確認問題：国と国との間で商品やサービスを売買することを何というか。",
+    "options": [
+      "流通",
+      "貿易",
+      "金融",
+      "観光"
+    ],
+    "correct": 1,
+    "explanation": "輸出は外国へ売ること、輸入は外国から買うこと。（確認ポイント：貿易）",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-236",
+    "subject": "social",
+    "topic": "地理",
+    "term": "抑制栽培",
+    "prompt": "抑制栽培について正しい説明を選べ。涼しい高冷地などで、出荷時期を遅らせる栽培方法は何か。",
+    "options": [
+      "焼畑農業",
+      "抑制栽培",
+      "促成栽培",
+      "二毛作"
+    ],
+    "correct": 1,
+    "explanation": "高冷地の気候を利用して、夏に高原野菜などを出荷する。（確認ポイント：抑制栽培）",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-237",
+    "subject": "science",
+    "topic": "生物",
+    "term": "肺胞",
+    "prompt": "確認問題：肺で酸素と二酸化炭素の交換が行われる小さな袋状のつくりは何か。",
+    "options": [
+      "気管支",
+      "肺胞",
+      "横隔膜",
+      "心房"
+    ],
+    "correct": 1,
+    "explanation": "肺胞の壁は薄く、周囲を毛細血管が取り囲み、気体交換が行われる。（確認ポイント：肺胞）",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-238",
+    "subject": "science",
+    "topic": "物理",
+    "term": "熱量",
+    "prompt": "熱量について正しい説明を選べ。物体が受け取ったり失ったりした熱の量を何というか。",
+    "options": [
+      "電力量",
+      "熱量",
+      "仕事率",
+      "圧力"
+    ],
+    "correct": 1,
+    "explanation": "熱量の単位はJ（ジュール）。水の温度変化などから求められる。（確認ポイント：熱量）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-239",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "応仁の乱",
+    "prompt": "確認問題：1467年に始まり、戦国時代のきっかけとなった争乱は何か。",
+    "options": [
+      "承久の乱",
+      "応仁の乱",
+      "壬申の乱",
+      "島原の乱"
+    ],
+    "correct": 1,
+    "explanation": "応仁の乱で京都が荒廃し、各地の守護大名らが争う戦国時代へ向かった。（確認ポイント：応仁の乱）",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-240",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "御成敗式目",
+    "prompt": "御成敗式目について正しい説明を選べ。1232年、北条泰時が定めた武士のための法律は何か。",
+    "options": [
+      "御成敗式目",
+      "武家諸法度",
+      "大宝律令",
+      "公事方御定書"
+    ],
+    "correct": 0,
+    "explanation": "御成敗式目は武士社会の慣習や道理をもとに定められた。（確認ポイント：御成敗式目）",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-241",
+    "subject": "science",
+    "topic": "地学",
+    "term": "震央",
+    "prompt": "確認問題：震源の真上にあたる地表の地点を何というか。",
+    "options": [
+      "震央",
+      "震源",
+      "震度",
+      "マグニチュード"
+    ],
+    "correct": 0,
+    "explanation": "震央は震源の真上にあたる地表の地点。（確認ポイント：震央）",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-242",
+    "subject": "science",
+    "topic": "物理",
+    "term": "力のつり合い",
+    "prompt": "力のつり合いについて正しい説明を選べ。一つの物体にはたらく複数の力が打ち消し合い、物体の運動状態が変わらない状態を何というか。",
+    "options": [
+      "力のつり合い",
+      "慣性",
+      "作用・反作用",
+      "仕事"
+    ],
+    "correct": 0,
+    "explanation": "力がつり合う条件は、二力なら大きさが等しく、同一直線上で向きが反対であること。（確認ポイント：力のつり合い）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-243",
+    "subject": "social",
+    "topic": "公民",
+    "term": "法の下の平等",
+    "prompt": "確認問題：すべての人が法の下で平等に扱われるという権利は何か。",
+    "options": [
+      "自由権",
+      "平等権",
+      "社会権",
+      "参政権"
+    ],
+    "correct": 1,
+    "explanation": "平等権は、性別や身分などによって不合理な差別を受けない権利。（確認ポイント：法の下の平等）",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-244",
+    "subject": "social",
+    "topic": "公民",
+    "term": "小選挙区制",
+    "prompt": "小選挙区制について正しい説明を選べ。一つの選挙区から原則として一人を選ぶ選挙制度は何か。",
+    "options": [
+      "比例代表制",
+      "大選挙区制",
+      "間接選挙",
+      "小選挙区制"
+    ],
+    "correct": 3,
+    "explanation": "小選挙区制では各選挙区で最も得票数の多い候補者が当選する。（確認ポイント：小選挙区制）",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-245",
+    "subject": "science",
+    "topic": "地学",
+    "term": "自転",
+    "prompt": "確認問題：地球が地軸を中心に回転する運動は何か。",
+    "options": [
+      "公転",
+      "自転",
+      "年周運動",
+      "南中"
+    ],
+    "correct": 1,
+    "explanation": "地球は約24時間で1回自転し、昼と夜の変化に関係する。（確認ポイント：自転）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-246",
+    "subject": "science",
+    "topic": "化学",
+    "term": "電気分解",
+    "prompt": "電気分解について正しい説明を選べ。電解質の水溶液などに電流を流して、物質を分解する化学変化は何か。",
+    "options": [
+      "中和",
+      "電気分解",
+      "蒸留",
+      "還元"
+    ],
+    "correct": 1,
+    "explanation": "電気エネルギーによって化合物を分解する反応。水の電気分解では水素と酸素が発生する。（確認ポイント：電気分解）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-247",
+    "subject": "social",
+    "topic": "公民",
+    "term": "累進課税",
+    "prompt": "確認問題：所得などが多くなるほど、より高い税率を適用する課税方法は何か。",
+    "options": [
+      "間接税",
+      "累進課税",
+      "定額税",
+      "関税"
+    ],
+    "correct": 1,
+    "explanation": "累進課税は所得が高いほど税率が高くなるしくみで、所得税などに採用されている。（確認ポイント：累進課税）",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-248",
+    "subject": "social",
+    "topic": "公民",
+    "term": "間接税",
+    "prompt": "間接税について正しい説明を選べ。税を納める人と、実際に税を負担する人が異なる税は何か。",
+    "options": [
+      "所得税",
+      "住民税",
+      "間接税",
+      "直接税"
+    ],
+    "correct": 2,
+    "explanation": "消費税は事業者が納めるが、負担するのは消費者である。（確認ポイント：間接税）",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-249",
+    "subject": "social",
+    "topic": "地理",
+    "term": "モンスーン",
+    "prompt": "確認問題：季節によって風向きが変わる、アジアなどで見られる季節風を何というか。",
+    "options": [
+      "偏西風",
+      "貿易風",
+      "モンスーン",
+      "極風"
+    ],
+    "correct": 2,
+    "explanation": "モンスーンは季節によって風向きが変わり、アジアの降水や農業に大きく関係する。（確認ポイント：モンスーン）",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-250",
+    "subject": "science",
+    "topic": "生物",
+    "term": "道管",
+    "prompt": "道管について正しい説明を選べ。根から吸収した水や無機養分を運ぶ管は何か。",
+    "options": [
+      "師管",
+      "道管",
+      "気孔",
+      "維管束鞘"
+    ],
+    "correct": 1,
+    "explanation": "道管は水や無機養分を根から茎・葉へ運ぶ。（確認ポイント：道管）",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-251",
+    "subject": "science",
+    "topic": "化学",
+    "term": "還元",
+    "prompt": "確認問題：酸化物から酸素が取り除かれる化学変化は何か。",
+    "options": [
+      "燃焼",
+      "電離",
+      "還元",
+      "酸化"
+    ],
+    "correct": 2,
+    "explanation": "還元は酸化と反対向きの変化として説明できる。（確認ポイント：還元）",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-252",
+    "subject": "science",
+    "topic": "物理",
+    "term": "仕事",
+    "prompt": "仕事について正しい説明を選べ。物体に力を加え、その力の向きに動かしたときの量は何か。",
+    "options": [
+      "仕事",
+      "仕事率",
+      "運動量",
+      "熱量"
+    ],
+    "correct": 0,
+    "explanation": "仕事〔J〕＝力〔N〕×力の向きに動いた距離〔m〕。（確認ポイント：仕事）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-253",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "縄文時代",
+    "prompt": "確認問題：打製石器や土器を使い、狩りや採集を中心とした生活が営まれた時代は何か。",
+    "options": [
+      "弥生時代",
+      "縄文時代",
+      "古墳時代",
+      "奈良時代"
+    ],
+    "correct": 1,
+    "explanation": "縄文時代は土器や弓矢などを使い、狩り・採集・漁労を中心に生活した。（確認ポイント：縄文時代）",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-254",
+    "subject": "science",
+    "topic": "地学",
+    "term": "地層",
+    "prompt": "地層について正しい説明を選べ。れき・砂・泥などが積み重なってできた層を何というか。",
+    "options": [
+      "断層",
+      "地層",
+      "火成岩",
+      "プレート"
+    ],
+    "correct": 1,
+    "explanation": "地層は堆積物が積み重なってできる。一般に下の層ほど古い。（確認ポイント：地層）",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-255",
+    "subject": "science",
+    "topic": "生物",
+    "term": "柔毛",
+    "prompt": "確認問題：小腸の内側に多数あり、養分を吸収する表面積を大きくする突起は何か。",
+    "options": [
+      "根毛",
+      "柔毛",
+      "肺胞",
+      "気孔"
+    ],
+    "correct": 1,
+    "explanation": "柔毛があることで小腸の表面積が大きくなる。（確認ポイント：柔毛）",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-256",
+    "subject": "science",
+    "topic": "化学",
+    "term": "原子",
+    "prompt": "原子について正しい説明を選べ。物質をつくる基本的な粒子で、元素の性質を示す最小の粒子は何か。",
+    "options": [
+      "分子",
+      "原子",
+      "イオン",
+      "電子殻"
+    ],
+    "correct": 1,
+    "explanation": "原子は物質を構成する基本粒子。原子核と電子からできている。（確認ポイント：原子）",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-257",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "室町幕府",
+    "prompt": "確認問題：足利尊氏が開いた幕府は何か。",
+    "options": [
+      "鎌倉幕府",
+      "室町幕府",
+      "江戸幕府",
+      "平氏政権"
+    ],
+    "correct": 1,
+    "explanation": "足利尊氏が京都に開いた武家政権が室町幕府。（確認ポイント：室町幕府）",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-258",
+    "subject": "science",
+    "topic": "地学",
+    "term": "積乱雲",
+    "prompt": "積乱雲について正しい説明を選べ。強い上昇気流によって発達し、雷や激しい雨をもたらす雲は何か。",
+    "options": [
+      "巻雲",
+      "層雲",
+      "積乱雲",
+      "高積雲"
+    ],
+    "correct": 2,
+    "explanation": "積乱雲は縦に大きく発達し、雷雨や突風、ひょうなどをもたらすことがある。（確認ポイント：積乱雲）",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-259",
+    "subject": "science",
+    "topic": "地学",
+    "term": "初期微動継続時間",
+    "prompt": "確認問題：P波が到着してからS波が到着するまでの時間は何か。",
+    "options": [
+      "震源距離",
+      "周期",
+      "初期微動継続時間",
+      "主要動"
+    ],
+    "correct": 2,
+    "explanation": "初期微動継続時間は震源から遠いほど長くなる。（確認ポイント：初期微動継続時間）",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-260",
+    "subject": "science",
+    "topic": "化学",
+    "term": "酸化",
+    "prompt": "酸化について正しい説明を選べ。物質が酸素と化合する反応を何というか。",
+    "options": [
+      "還元",
+      "中和",
+      "酸化",
+      "電離"
+    ],
+    "correct": 2,
+    "explanation": "中学理科では、物質が酸素と結びつく反応を酸化という。（確認ポイント：酸化）",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-261",
+    "subject": "social",
+    "topic": "公民",
+    "term": "基本的人権",
+    "prompt": "確認問題：人が生まれながらに持つ、人間らしく生きるための権利を何というか。",
+    "options": [
+      "社会権",
+      "基本的人権",
+      "参政権",
+      "請求権"
+    ],
+    "correct": 1,
+    "explanation": "基本的人権は侵すことのできない永久の権利として憲法で保障される。（確認ポイント：基本的人権）",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-262",
+    "subject": "social",
+    "topic": "地理",
+    "term": "稲作",
+    "prompt": "稲作について正しい説明を選べ。水田で米を栽培する農業を何というか。",
+    "options": [
+      "畑作",
+      "稲作",
+      "酪農",
+      "園芸農業"
+    ],
+    "correct": 1,
+    "explanation": "稲作は水田で稲を育てる農業で、アジアの季節風地域などで盛ん。（確認ポイント：稲作）",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-263",
+    "subject": "social",
+    "topic": "地理",
+    "term": "季節風",
+    "prompt": "確認問題：季節によって風向きが変わる風は何か。",
+    "options": [
+      "季節風",
+      "偏西風",
+      "貿易風",
+      "海陸風"
+    ],
+    "correct": 0,
+    "explanation": "日本では冬に北西、夏に南東寄りの季節風が吹く。（確認ポイント：季節風）",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-264",
+    "subject": "science",
+    "topic": "生物",
+    "term": "蒸散",
+    "prompt": "蒸散について正しい説明を選べ。植物の体内の水が水蒸気となって主に気孔から出ていく現象は何か。",
+    "options": [
+      "蒸散",
+      "吸収",
+      "呼吸",
+      "受粉"
+    ],
+    "correct": 0,
+    "explanation": "蒸散は主に葉の気孔から水蒸気が出ていく現象。（確認ポイント：蒸散）",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-265",
+    "subject": "social",
+    "topic": "公民",
+    "term": "需要と供給",
+    "prompt": "確認問題：市場で、商品を買いたい量と売りたい量の関係を表す基本的な考え方は何か。",
+    "options": [
+      "需要と供給",
+      "税と社会保障",
+      "輸出と輸入",
+      "生産と分配"
+    ],
+    "correct": 0,
+    "explanation": "一般に需要が供給を上回ると価格は上がり、供給が需要を上回ると価格は下がる方向に働く。（確認ポイント：需要と供給）",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-266",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "奈良時代",
+    "prompt": "奈良時代について正しい説明を選べ。710年に平城京に都が置かれて始まった時代は何か。",
+    "options": [
+      "平安時代",
+      "奈良時代",
+      "飛鳥時代",
+      "室町時代"
+    ],
+    "correct": 1,
+    "explanation": "710年に平城京へ遷都し、奈良時代が始まった。（確認ポイント：奈良時代）",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-267",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "墾田永年私財法",
+    "prompt": "確認問題：743年、新しく開墾した土地の永久私有を認めた法令は何か。",
+    "options": [
+      "班田収授法",
+      "御成敗式目",
+      "公地公民",
+      "墾田永年私財法"
+    ],
+    "correct": 3,
+    "explanation": "墾田永年私財法により荘園が広がるきっかけとなった。（確認ポイント：墾田永年私財法）",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-268",
+    "subject": "science",
+    "topic": "生物",
+    "term": "食物連鎖",
+    "prompt": "食物連鎖について正しい説明を選べ。生物どうしが食べる・食べられる関係でつながることを何というか。",
+    "options": [
+      "食物連鎖",
+      "遷移",
+      "共生",
+      "分解"
+    ],
+    "correct": 0,
+    "explanation": "食物連鎖では、生物を通じて物質やエネルギーが移動する。（確認ポイント：食物連鎖）",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-269",
+    "subject": "science",
+    "topic": "物理",
+    "term": "電磁誘導",
+    "prompt": "確認問題：コイル内の磁界を変化させると電圧が生じる現象は何か。",
+    "options": [
+      "静電気",
+      "電磁誘導",
+      "放電",
+      "電気分解"
+    ],
+    "correct": 1,
+    "explanation": "磁石を動かすなどしてコイルを貫く磁界を変化させると誘導電流が流れる。（確認ポイント：電磁誘導）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-270",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "日清戦争",
+    "prompt": "日清戦争について正しい説明を選べ。1894年に日本と清との間で起こった戦争は何か。",
+    "options": [
+      "日露戦争",
+      "日清戦争",
+      "第一次世界大戦",
+      "太平洋戦争"
+    ],
+    "correct": 1,
+    "explanation": "日清戦争は1894年に始まり、下関条約が結ばれた。（確認ポイント：日清戦争）",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-271",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "サンフランシスコ平和条約",
+    "prompt": "確認問題：1951年に調印され、日本が主権を回復することになった条約は何か。",
+    "options": [
+      "日米安全保障条約",
+      "ポーツマス条約",
+      "ベルサイユ条約",
+      "サンフランシスコ平和条約"
+    ],
+    "correct": 3,
+    "explanation": "1952年に発効し、日本は独立を回復した。（確認ポイント：サンフランシスコ平和条約）",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-272",
+    "subject": "science",
+    "topic": "地学",
+    "term": "湿度",
+    "prompt": "湿度について正しい説明を選べ。空気中に含まれる水蒸気量が、その気温での飽和水蒸気量に対して何％かを表す量は何か。",
+    "options": [
+      "気圧",
+      "湿度",
+      "風力",
+      "降水量"
+    ],
+    "correct": 1,
+    "explanation": "湿度〔％〕＝空気中の水蒸気量÷飽和水蒸気量×100。（確認ポイント：湿度）",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-273",
+    "subject": "science",
+    "topic": "化学",
+    "term": "溶解度",
+    "prompt": "確認問題：一定量の水に溶ける物質の限度量を何というか。",
+    "options": [
+      "濃度",
+      "溶解度",
+      "質量",
+      "密度"
+    ],
+    "correct": 1,
+    "explanation": "溶解度は通常、一定温度で水100gに溶ける溶質の質量で表す。（確認ポイント：溶解度）",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-274",
+    "subject": "social",
+    "topic": "公民",
+    "term": "違憲審査制",
+    "prompt": "違憲審査制について正しい説明を選べ。法律や命令などが憲法に違反していないか、裁判所が判断する制度は何か。",
+    "options": [
+      "国民審査",
+      "違憲審査制",
+      "直接請求",
+      "弾劾裁判"
+    ],
+    "correct": 1,
+    "explanation": "裁判所は具体的な裁判で、法律などが憲法に違反するかを判断できる。（確認ポイント：違憲審査制）",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-275",
+    "subject": "social",
+    "topic": "公民",
+    "term": "供給",
+    "prompt": "確認問題：生産者や企業が商品やサービスを売ろうとする量は何か。",
+    "options": [
+      "供給",
+      "需要",
+      "消費",
+      "税収"
+    ],
+    "correct": 0,
+    "explanation": "供給量は価格や生産条件などの影響を受ける。（確認ポイント：供給）",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-276",
+    "subject": "social",
+    "topic": "地理",
+    "term": "経度",
+    "prompt": "経度について正しい説明を選べ。本初子午線を0度として、東西の位置を表す角度は何か。",
+    "options": [
+      "緯度",
+      "経度",
+      "標高",
+      "方位"
+    ],
+    "correct": 1,
+    "explanation": "経度は本初子午線を基準に東西の位置を表し、東経・西経で示す。（確認ポイント：経度）",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-277",
+    "subject": "science",
+    "topic": "生物",
+    "term": "葉緑体",
+    "prompt": "確認問題：植物細胞にあり、光合成が行われる緑色の小器官は何か。",
+    "options": [
+      "ミトコンドリア",
+      "葉緑体",
+      "核",
+      "液胞"
+    ],
+    "correct": 1,
+    "explanation": "葉緑体には緑色の色素クロロフィルが含まれ、光合成の場となる。（確認ポイント：葉緑体）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-278",
+    "subject": "science",
+    "topic": "物理",
+    "term": "慣性",
+    "prompt": "慣性について正しい説明を選べ。物体が運動の状態を保とうとする性質は何か。",
+    "options": [
+      "反作用",
+      "浮力",
+      "慣性",
+      "作用"
+    ],
+    "correct": 2,
+    "explanation": "外から力を受けない、または力がつり合うと運動の状態は変わらない。（確認ポイント：慣性）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-279",
+    "subject": "science",
+    "topic": "物理",
+    "term": "圧力",
+    "prompt": "確認問題：面を垂直に押す力を、力を受ける面積で割った量は何か。",
+    "options": [
+      "密度",
+      "圧力",
+      "浮力",
+      "仕事率"
+    ],
+    "correct": 1,
+    "explanation": "圧力＝面を垂直に押す力÷力を受ける面積。単位はPa。（確認ポイント：圧力）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-280",
+    "subject": "social",
+    "topic": "地理",
+    "term": "人口密度",
+    "prompt": "人口密度について正しい説明を選べ。一定面積あたりに住む人口を何というか。",
+    "options": [
+      "人口増加率",
+      "人口密度",
+      "人口ピラミッド",
+      "昼夜間人口"
+    ],
+    "correct": 1,
+    "explanation": "人口密度＝人口÷面積。一般に1平方キロメートルあたりの人口で表す。（確認ポイント：人口密度）",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-281",
+    "subject": "science",
+    "topic": "生物",
+    "term": "心臓",
+    "prompt": "確認問題：血液を全身に送り出すポンプの役割をする器官は何か。",
+    "options": [
+      "肺",
+      "心臓",
+      "胃",
+      "腎臓"
+    ],
+    "correct": 1,
+    "explanation": "心臓は収縮と拡張を繰り返し、血液を循環させる。（確認ポイント：心臓）",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-282",
+    "subject": "science",
+    "topic": "化学",
+    "term": "電解質",
+    "prompt": "電解質について正しい説明を選べ。水に溶けると電流を流す水溶液になる物質は何か。",
+    "options": [
+      "金属",
+      "有機物",
+      "電解質",
+      "非電解質"
+    ],
+    "correct": 2,
+    "explanation": "塩化ナトリウムや塩酸などは電解質。（確認ポイント：電解質）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-283",
+    "subject": "science",
+    "topic": "物理",
+    "term": "屈折",
+    "prompt": "確認問題：光が異なる物質の境界で進む向きを変える現象は何か。",
+    "options": [
+      "反射",
+      "屈折",
+      "分散",
+      "回折"
+    ],
+    "correct": 1,
+    "explanation": "光が空気と水など異なる物質の境界を通るとき、進む向きが変わる現象。（確認ポイント：屈折）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-284",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "平安京",
+    "prompt": "平安京について正しい説明を選べ。794年に桓武天皇が都を移した場所はどこか。",
+    "options": [
+      "平城京",
+      "平安京",
+      "藤原京",
+      "長岡京"
+    ],
+    "correct": 1,
+    "explanation": "794年、桓武天皇は都を平安京に移した。（確認ポイント：平安京）",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-285",
+    "subject": "science",
+    "topic": "地学",
+    "term": "震度",
+    "prompt": "確認問題：ある地点での地震の揺れの強さを表す尺度は何か。",
+    "options": [
+      "マグニチュード",
+      "震度",
+      "震源",
+      "震央距離"
+    ],
+    "correct": 1,
+    "explanation": "震度は地点ごとの揺れの強さを表す。地震そのものの規模を表すマグニチュードとは異なる。（確認ポイント：震度）",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-286",
+    "subject": "science",
+    "topic": "生物",
+    "term": "受粉",
+    "prompt": "受粉について正しい説明を選べ。花粉がめしべの柱頭につくことは何か。",
+    "options": [
+      "受精",
+      "発芽",
+      "結実",
+      "受粉"
+    ],
+    "correct": 3,
+    "explanation": "受粉の後、花粉管が伸びて受精につながる。（確認ポイント：受粉）",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-287",
+    "subject": "science",
+    "topic": "化学",
+    "term": "化学変化",
+    "prompt": "確認問題：別の物質に変わり、もとの物質とは性質が異なる物質ができる変化は何か。",
+    "options": [
+      "状態変化",
+      "化学変化",
+      "溶解",
+      "蒸留"
+    ],
+    "correct": 1,
+    "explanation": "化学変化では原子の組み合わせが変わり、新しい物質ができる。（確認ポイント：化学変化）",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-288",
+    "subject": "social",
+    "topic": "公民",
+    "term": "日本国憲法",
+    "prompt": "日本国憲法について正しい説明を選べ。日本の国の基本的なしくみや国民の権利・義務を定めた最高法規は何か。",
+    "options": [
+      "民法",
+      "日本国憲法",
+      "刑法",
+      "条例"
+    ],
+    "correct": 1,
+    "explanation": "日本国憲法は国の基本原則や統治のしくみ、国民の権利・義務を定める最高法規。（確認ポイント：日本国憲法）",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-289",
+    "subject": "social",
+    "topic": "地理",
+    "term": "扇状地",
+    "prompt": "確認問題：山地から平地に出た川が土砂を堆積させてつくる、扇形の地形は何か。",
+    "options": [
+      "三角州",
+      "扇状地",
+      "リアス海岸",
+      "カルデラ"
+    ],
+    "correct": 1,
+    "explanation": "扇状地は水はけがよく、果樹園などに利用されることが多い。（確認ポイント：扇状地）",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-290",
+    "subject": "science",
+    "topic": "地学",
+    "term": "日周運動",
+    "prompt": "日周運動について正しい説明を選べ。地球の自転によって、天体が1日に1回東から西へ動いて見える見かけの動きは何か。",
+    "options": [
+      "自転",
+      "日周運動",
+      "年周運動",
+      "公転"
+    ],
+    "correct": 1,
+    "explanation": "日周運動は地球の自転によって起こる。（確認ポイント：日周運動）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-291",
+    "subject": "science",
+    "topic": "生物",
+    "term": "細胞",
+    "prompt": "確認問題：生物の体をつくる基本単位は何か。",
+    "options": [
+      "組織",
+      "器官",
+      "細胞",
+      "個体"
+    ],
+    "correct": 2,
+    "explanation": "細胞は生物の体をつくる基本単位。植物細胞には細胞壁や葉緑体などがある。（確認ポイント：細胞）",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-292",
+    "subject": "social",
+    "topic": "公民",
+    "term": "内閣",
+    "prompt": "内閣について正しい説明を選べ。行政権を担当し、法律や予算に基づいて国の行政を行う機関は何か。",
+    "options": [
+      "国会",
+      "内閣",
+      "最高裁判所",
+      "会計検査院"
+    ],
+    "correct": 1,
+    "explanation": "内閣は行政権を担い、内閣総理大臣と国務大臣で構成される。（確認ポイント：内閣）",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-293",
+    "subject": "social",
+    "topic": "地理",
+    "term": "人口ピラミッド",
+    "prompt": "確認問題：年齢別・男女別の人口構成を表したグラフは何か。",
+    "options": [
+      "人口密度図",
+      "人口ピラミッド",
+      "雨温図",
+      "階級区分図"
+    ],
+    "correct": 1,
+    "explanation": "人口ピラミッドの形から、年齢構成や少子高齢化の進み方などを読み取れる。（確認ポイント：人口ピラミッド）",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-294",
+    "subject": "social",
+    "topic": "地理",
+    "term": "排他的経済水域",
+    "prompt": "排他的経済水域について正しい説明を選べ。沿岸国が水産資源や海底資源を管理できる、沿岸から原則200海里までの水域は何か。",
+    "options": [
+      "排他的経済水域",
+      "領海",
+      "公海",
+      "接続水域"
+    ],
+    "correct": 0,
+    "explanation": "排他的経済水域では資源の探査・利用などの権利が認められる。（確認ポイント：排他的経済水域）",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-295",
+    "subject": "science",
+    "topic": "生物",
+    "term": "反射",
+    "prompt": "確認問題：刺激に対して、意識とは関係なく起こるすばやい反応は何か。",
+    "options": [
+      "反射",
+      "学習",
+      "感覚",
+      "随意運動"
+    ],
+    "correct": 0,
+    "explanation": "反射は脳で意識して判断する前に起こる、すばやい反応。（確認ポイント：反射）",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-296",
+    "subject": "science",
+    "topic": "物理",
+    "term": "並列回路",
+    "prompt": "並列回路について正しい説明を選べ。電流の流れる道筋が枝分かれしている回路を何というか。",
+    "options": [
+      "直列回路",
+      "並列回路",
+      "短絡回路",
+      "開回路"
+    ],
+    "correct": 1,
+    "explanation": "並列回路では各枝にかかる電圧が等しく、全体の電流は枝の電流の和になる。（確認ポイント：並列回路）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-297",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "楽市・楽座",
+    "prompt": "確認問題：織田信長が商工業を活発にするため、市場の特権などを廃止した政策は何か。",
+    "options": [
+      "刀狩",
+      "楽市・楽座",
+      "参勤交代",
+      "地租改正"
+    ],
+    "correct": 1,
+    "explanation": "楽市・楽座は商売の自由を広げ、城下町や商工業の発展を促した。（確認ポイント：楽市・楽座）",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-298",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "大政奉還",
+    "prompt": "大政奉還について正しい説明を選べ。1867年、徳川慶喜が政権を朝廷に返したことは何か。",
+    "options": [
+      "版籍奉還",
+      "大政奉還",
+      "王政復古",
+      "廃藩置県"
+    ],
+    "correct": 1,
+    "explanation": "大政奉還によって江戸幕府の政治は終わりに向かった。（確認ポイント：大政奉還）",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-299",
+    "subject": "science",
+    "topic": "地学",
+    "term": "初期微動",
+    "prompt": "確認問題：P波によって起こる、地震の最初の小さな揺れは何か。",
+    "options": [
+      "主要動",
+      "初期微動",
+      "余震",
+      "液状化"
+    ],
+    "correct": 1,
+    "explanation": "P波は速く伝わり、先に到着して初期微動を起こす。（確認ポイント：初期微動）",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-300",
+    "subject": "science",
+    "topic": "化学",
+    "term": "蒸留",
+    "prompt": "蒸留について正しい説明を選べ。液体を加熱して気体にし、それを冷やして再び液体にすることで分ける方法は何か。",
+    "options": [
+      "ろ過",
+      "蒸留",
+      "再結晶",
+      "抽出"
+    ],
+    "correct": 1,
+    "explanation": "蒸留は沸点の違いなどを利用して液体を分離する方法。（確認ポイント：蒸留）",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-301",
+    "subject": "social",
+    "topic": "公民",
+    "term": "生存権",
+    "prompt": "確認問題：健康で文化的な最低限度の生活を営む権利は何か。",
+    "options": [
+      "教育を受ける権利",
+      "生存権",
+      "参政権",
+      "請求権"
+    ],
+    "correct": 1,
+    "explanation": "生存権は社会権の一つで、日本国憲法第25条に定められている。（確認ポイント：生存権）",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-302",
+    "subject": "social",
+    "topic": "公民",
+    "term": "比例代表制",
+    "prompt": "比例代表制について正しい説明を選べ。政党の得票数に応じて議席を配分する選挙制度は何か。",
+    "options": [
+      "直接請求制",
+      "制限選挙",
+      "比例代表制",
+      "小選挙区制"
+    ],
+    "correct": 2,
+    "explanation": "比例代表制は得票数を議席に反映させる制度。（確認ポイント：比例代表制）",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-303",
+    "subject": "science",
+    "topic": "地学",
+    "term": "日食",
+    "prompt": "確認問題：月が太陽と地球の間に入り、太陽の一部または全部が隠される現象は何か。",
+    "options": [
+      "月食",
+      "日食",
+      "満月",
+      "金環運動"
+    ],
+    "correct": 1,
+    "explanation": "日食は太陽—月—地球の順にほぼ一直線に並んだときに起こる。（確認ポイント：日食）",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-304",
+    "subject": "science",
+    "topic": "化学",
+    "term": "発熱反応",
+    "prompt": "発熱反応について正しい説明を選べ。化学変化にともなって周囲に熱を放出する反応は何か。",
+    "options": [
+      "吸熱反応",
+      "発熱反応",
+      "中和反応",
+      "置換反応"
+    ],
+    "correct": 1,
+    "explanation": "発熱反応では反応の前後で周囲の温度が上がる。（確認ポイント：発熱反応）",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-305",
+    "subject": "science",
+    "topic": "物理",
+    "term": "電力",
+    "prompt": "確認問題：電流がする仕事の割合を表し、電圧×電流で求められる量は何か。",
+    "options": [
+      "電力",
+      "電力量",
+      "抵抗",
+      "電流"
+    ],
+    "correct": 0,
+    "explanation": "電力の単位はワット（W）。（確認ポイント：電力）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-306",
+    "subject": "social",
+    "topic": "公民",
+    "term": "国際連合",
+    "prompt": "国際連合について正しい説明を選べ。第二次世界大戦後、国際平和と安全の維持などを目的に設立された組織は何か。",
+    "options": [
+      "NATO",
+      "国際連合",
+      "国際連盟",
+      "EU"
+    ],
+    "correct": 1,
+    "explanation": "国際連合は1945年に発足した。（確認ポイント：国際連合）",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-307",
+    "subject": "social",
+    "topic": "地理",
+    "term": "促成栽培",
+    "prompt": "確認問題：温室などを利用して作物の出荷時期を早める栽培方法は何か。",
+    "options": [
+      "抑制栽培",
+      "促成栽培",
+      "輪作",
+      "混作"
+    ],
+    "correct": 1,
+    "explanation": "促成栽培は温室などで生育を早め、通常より早く出荷する方法。（確認ポイント：促成栽培）",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-308",
+    "subject": "science",
+    "topic": "生物",
+    "term": "師管",
+    "prompt": "師管について正しい説明を選べ。葉でつくられた養分を植物の体全体へ運ぶ管は何か。",
+    "options": [
+      "道管",
+      "師管",
+      "気孔",
+      "根毛"
+    ],
+    "correct": 1,
+    "explanation": "師管は光合成でつくられた養分などを運ぶ。（確認ポイント：師管）",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-309",
+    "subject": "science",
+    "topic": "化学",
+    "term": "塩",
+    "prompt": "確認問題：酸の陰イオンとアルカリの陽イオンなどからできる、中和で生じる物質は何か。",
+    "options": [
+      "塩",
+      "酸",
+      "アルカリ",
+      "単体"
+    ],
+    "correct": 0,
+    "explanation": "塩（えん）は食塩だけでなく、さまざまな化合物を含む。（確認ポイント：塩）",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-310",
+    "subject": "science",
+    "topic": "物理",
+    "term": "仕事率",
+    "prompt": "仕事率について正しい説明を選べ。一定時間あたりにする仕事の大きさを何というか。",
+    "options": [
+      "効率",
+      "仕事率",
+      "圧力",
+      "電力量"
+    ],
+    "correct": 1,
+    "explanation": "仕事率は仕事をする速さ。仕事率〔W〕＝仕事〔J〕÷時間〔s〕。（確認ポイント：仕事率）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-311",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "弥生時代",
+    "prompt": "確認問題：水田稲作が広まり、金属器も使われるようになった時代は何か。",
+    "options": [
+      "縄文時代",
+      "弥生時代",
+      "平安時代",
+      "鎌倉時代"
+    ],
+    "correct": 1,
+    "explanation": "弥生時代には大陸から稲作や金属器が伝わり、むらやくにが発達した。（確認ポイント：弥生時代）",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-312",
+    "subject": "science",
+    "topic": "地学",
+    "term": "化石",
+    "prompt": "化石について正しい説明を選べ。地層に残された、過去の生物の体や生活の跡を何というか。",
+    "options": [
+      "鉱物",
+      "化石",
+      "火山灰",
+      "岩脈"
+    ],
+    "correct": 1,
+    "explanation": "化石は地層ができた時代や環境を推定する手がかりになる。（確認ポイント：化石）",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-313",
+    "subject": "science",
+    "topic": "生物",
+    "term": "動脈",
+    "prompt": "確認問題：心臓から送り出された血液が流れる血管は何か。",
+    "options": [
+      "静脈",
+      "毛細血管",
+      "リンパ管",
+      "動脈"
+    ],
+    "correct": 3,
+    "explanation": "動脈は心臓から出る血液が流れる血管。（確認ポイント：動脈）",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-314",
+    "subject": "science",
+    "topic": "化学",
+    "term": "分子",
+    "prompt": "酸素分子 O₂ と水分子 H₂O に共通する特徴はどれか。",
+    "options": [
+      "複数の原子が化学的に結びついている",
+      "必ず同じ種類の原子だけでできている",
+      "原子核を持たない",
+      "どちらも1個の原子だけでできている"
+    ],
+    "correct": 0,
+    "explanation": "分子は、複数の原子が化学的に結びついてできた粒子。O₂は酸素原子2個、H₂Oは水素原子2個と酸素原子1個からできている。異なる種類の原子が結びついた分子もある。",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-315",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "江戸幕府",
+    "prompt": "確認問題：1603年に征夷大将軍となり、江戸幕府を開いた人物は誰か。",
+    "options": [
+      "豊臣秀吉",
+      "徳川家康",
+      "織田信長",
+      "徳川吉宗"
+    ],
+    "correct": 1,
+    "explanation": "徳川家康は1603年に征夷大将軍となり、江戸幕府を開いた。（確認ポイント：江戸幕府）",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-316",
+    "subject": "science",
+    "topic": "地学",
+    "term": "季節",
+    "prompt": "季節について正しい説明を選べ。地球の公転と地軸の傾きによって生じる、春夏秋冬の変化を何というか。",
+    "options": [
+      "潮汐",
+      "季節",
+      "日周運動",
+      "月の満ち欠け"
+    ],
+    "correct": 1,
+    "explanation": "地軸が傾いたまま地球が公転するため、季節によって太陽の高さや昼の長さが変わる。（確認ポイント：季節）",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-317",
+    "subject": "science",
+    "topic": "地学",
+    "term": "寒冷前線",
+    "prompt": "確認問題：寒気が暖気の下にもぐりこみ、暖気を急に押し上げる前線は何か。",
+    "options": [
+      "温暖前線",
+      "停滞前線",
+      "閉塞前線",
+      "寒冷前線"
+    ],
+    "correct": 3,
+    "explanation": "寒冷前線付近では短時間に強い雨が降ることがある。（確認ポイント：寒冷前線）",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-318",
+    "subject": "science",
+    "topic": "化学",
+    "term": "イオン",
+    "prompt": "イオンについて正しい説明を選べ。原子や原子団が電子を失ったり受け取ったりして電気を帯びた粒子は何か。",
+    "options": [
+      "分子",
+      "イオン",
+      "同位体",
+      "中性子"
+    ],
+    "correct": 1,
+    "explanation": "電子を失うと陽イオン、電子を受け取ると陰イオンになる。（確認ポイント：イオン）",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-319",
+    "subject": "social",
+    "topic": "公民",
+    "term": "三権分立",
+    "prompt": "確認問題：立法・行政・司法の権力を別々の機関に分け、権力の集中を防ぐしくみは何か。",
+    "options": [
+      "議院内閣制",
+      "三権分立",
+      "直接民主制",
+      "地方自治"
+    ],
+    "correct": 1,
+    "explanation": "国会・内閣・裁判所が権力を分担し、互いに抑制と均衡を保つ。（確認ポイント：三権分立）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-320",
+    "subject": "social",
+    "topic": "地理",
+    "term": "酪農",
+    "prompt": "酪農について正しい説明を選べ。牛や羊などを飼育し、牛乳や乳製品を生産する農業は何か。",
+    "options": [
+      "酪農",
+      "近郊農業",
+      "焼畑農業",
+      "混合農業"
+    ],
+    "correct": 0,
+    "explanation": "酪農は乳牛などを飼育し、生乳や乳製品を生産する農業。（確認ポイント：酪農）",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-321",
+    "subject": "social",
+    "topic": "地理",
+    "term": "偏西風",
+    "prompt": "確認問題：中緯度地域の上空で、西から東へ吹く卓越風は何か。",
+    "options": [
+      "貿易風",
+      "季節風",
+      "極東風",
+      "偏西風"
+    ],
+    "correct": 3,
+    "explanation": "偏西風は日本付近の天気の変化にも関係する。（確認ポイント：偏西風）",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-322",
+    "subject": "science",
+    "topic": "生物",
+    "term": "消化",
+    "prompt": "消化について正しい説明を選べ。食物を吸収されやすい小さな物質に分解するはたらきは何か。",
+    "options": [
+      "循環",
+      "消化",
+      "排出",
+      "同化"
+    ],
+    "correct": 1,
+    "explanation": "消化酵素などのはたらきで、栄養分を吸収できる形に分解する。（確認ポイント：消化）",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-323",
+    "subject": "science",
+    "topic": "物理",
+    "term": "エネルギー保存の法則",
+    "prompt": "確認問題：エネルギーは形を変えても、その総量は変わらないという法則は何か。",
+    "options": [
+      "質量保存の法則",
+      "エネルギー保存の法則",
+      "慣性の法則",
+      "作用・反作用の法則"
+    ],
+    "correct": 1,
+    "explanation": "エネルギーは移り変わったり形を変えたりするが、全体の量は保存される。（確認ポイント：エネルギー保存の法則）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-324",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "摂関政治",
+    "prompt": "摂関政治について正しい説明を選べ。藤原氏が天皇の外戚となり、摂政や関白として行った政治は何か。",
+    "options": [
+      "院政",
+      "摂関政治",
+      "執権政治",
+      "武家政治"
+    ],
+    "correct": 1,
+    "explanation": "藤原氏は摂政・関白の地位を利用して、平安時代に政治の実権を握った。（確認ポイント：摂関政治）",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-325",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "承久の乱",
+    "prompt": "確認問題：1221年、後鳥羽上皇が鎌倉幕府を倒そうとして起こした戦いは何か。",
+    "options": [
+      "保元の乱",
+      "承久の乱",
+      "応仁の乱",
+      "壬申の乱"
+    ],
+    "correct": 1,
+    "explanation": "幕府側が勝利し、朝廷を監視するため六波羅探題が置かれた。（確認ポイント：承久の乱）",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-326",
+    "subject": "science",
+    "topic": "地学",
+    "term": "震源",
+    "prompt": "震源について正しい説明を選べ。地下で地震が発生した場所を何というか。",
+    "options": [
+      "震央",
+      "震源",
+      "断層",
+      "火口"
+    ],
+    "correct": 1,
+    "explanation": "震源は地下で地震が発生した場所。震源の真上の地表の点が震央。（確認ポイント：震源）",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-327",
+    "subject": "science",
+    "topic": "物理",
+    "term": "共鳴",
+    "prompt": "確認問題：物体に固有振動数と同じ振動を加えたとき、振幅が大きくなる現象は何か。",
+    "options": [
+      "反射",
+      "共鳴",
+      "屈折",
+      "干渉"
+    ],
+    "correct": 1,
+    "explanation": "共鳴では外から加える振動数が固有振動数と一致し、振幅が大きくなる。（確認ポイント：共鳴）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-328",
+    "subject": "social",
+    "topic": "公民",
+    "term": "平和主義",
+    "prompt": "平和主義について正しい説明を選べ。戦争を放棄し、戦力を持たないことなどを定めた憲法の原則は何か。",
+    "options": [
+      "国民主権",
+      "平和主義",
+      "基本的人権の尊重",
+      "法の支配"
+    ],
+    "correct": 1,
+    "explanation": "平和主義は日本国憲法の三つの基本原則の一つで、第9条に関係する。（確認ポイント：平和主義）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-329",
+    "subject": "social",
+    "topic": "公民",
+    "term": "内閣不信任決議",
+    "prompt": "確認問題：衆議院が内閣を信任できないと意思表示する決議は何か。",
+    "options": [
+      "内閣不信任決議",
+      "弾劾裁判",
+      "国民審査",
+      "問責決議"
+    ],
+    "correct": 0,
+    "explanation": "可決された場合、内閣は10日以内に衆議院を解散しない限り総辞職する。（確認ポイント：内閣不信任決議）",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-330",
+    "subject": "science",
+    "topic": "地学",
+    "term": "公転",
+    "prompt": "公転について正しい説明を選べ。地球が太陽の周りを回る運動は何か。",
+    "options": [
+      "自転",
+      "公転",
+      "日周運動",
+      "年周運動"
+    ],
+    "correct": 1,
+    "explanation": "地球の公転周期は約1年。季節の変化に関係する。（確認ポイント：公転）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-331",
+    "subject": "science",
+    "topic": "化学",
+    "term": "質量パーセント濃度",
+    "prompt": "確認問題：溶液全体の質量に対する溶質の質量の割合を百分率で表したものは何か。",
+    "options": [
+      "体積パーセント",
+      "質量パーセント濃度",
+      "密度",
+      "溶解度"
+    ],
+    "correct": 1,
+    "explanation": "質量パーセント濃度＝溶質の質量÷溶液の質量×100。（確認ポイント：質量パーセント濃度）",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-332",
+    "subject": "social",
+    "topic": "公民",
+    "term": "地方自治",
+    "prompt": "地方自治について正しい説明を選べ。地域の住民が地域の政治を自主的に行うしくみは何か。",
+    "options": [
+      "中央集権",
+      "地方自治",
+      "議院内閣制",
+      "三権分立"
+    ],
+    "correct": 1,
+    "explanation": "地方自治は住民に身近な行政を、地方公共団体と住民が担うしくみ。（確認ポイント：地方自治）",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-333",
+    "subject": "social",
+    "topic": "公民",
+    "term": "直接税",
+    "prompt": "確認問題：税を納める人と、実際に税を負担する人が同じ税は何か。",
+    "options": [
+      "間接税",
+      "関税",
+      "消費税",
+      "直接税"
+    ],
+    "correct": 3,
+    "explanation": "所得税や法人税は直接税に分類される。（確認ポイント：直接税）",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-334",
+    "subject": "social",
+    "topic": "地理",
+    "term": "時差",
+    "prompt": "時差について正しい説明を選べ。経度の違いによって生じる、地点間の時刻の差を何というか。",
+    "options": [
+      "季節差",
+      "時差",
+      "気温差",
+      "標高差"
+    ],
+    "correct": 1,
+    "explanation": "地球は24時間で360度自転するため、経度15度でおよそ1時間の時差が生じる。（確認ポイント：時差）",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-335",
+    "subject": "science",
+    "topic": "生物",
+    "term": "気孔",
+    "prompt": "確認問題：植物の葉にあり、気体の出入りや蒸散に関係する小さな穴は何か。",
+    "options": [
+      "維管束",
+      "気孔",
+      "根毛",
+      "子房"
+    ],
+    "correct": 1,
+    "explanation": "気孔は主に葉の表皮にあり、二酸化炭素や酸素、水蒸気の出入りに関係する。（確認ポイント：気孔）",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-336",
+    "subject": "science",
+    "topic": "物理",
+    "term": "反射",
+    "prompt": "反射について正しい説明を選べ。光が鏡などの面に当たってはね返る現象は何か。",
+    "options": [
+      "吸収",
+      "反射",
+      "屈折",
+      "分散"
+    ],
+    "correct": 1,
+    "explanation": "反射では入射角と反射角が等しい。（確認ポイント：反射）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-337",
+    "subject": "science",
+    "topic": "物理",
+    "term": "浮力",
+    "prompt": "確認問題：水中の物体が、重力と反対向きに水から受ける力は何か。",
+    "options": [
+      "摩擦力",
+      "弾性力",
+      "浮力",
+      "磁力"
+    ],
+    "correct": 2,
+    "explanation": "浮力は液体や気体の中の物体にはたらく、上向きの力。（確認ポイント：浮力）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-338",
+    "subject": "social",
+    "topic": "地理",
+    "term": "縮尺",
+    "prompt": "縮尺について正しい説明を選べ。地図上の距離と実際の距離の比を何というか。",
+    "options": [
+      "方位",
+      "縮尺",
+      "等高線",
+      "経度"
+    ],
+    "correct": 1,
+    "explanation": "縮尺を使うと、地図上の長さから実際の距離を求められる。（確認ポイント：縮尺）",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-339",
+    "subject": "science",
+    "topic": "生物",
+    "term": "分解者",
+    "prompt": "確認問題：生物の遺骸や排出物を分解し、無機物に戻す生物を何というか。",
+    "options": [
+      "生産者",
+      "消費者",
+      "分解者",
+      "捕食者"
+    ],
+    "correct": 2,
+    "explanation": "菌類や細菌類などの分解者は、有機物を分解して物質を自然界に戻す。（確認ポイント：分解者）",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-340",
+    "subject": "science",
+    "topic": "生物",
+    "term": "消化酵素",
+    "prompt": "消化酵素について正しい説明を選べ。食物を吸収しやすい小さな物質に分解するはたらきをもつ物質は何か。",
+    "options": [
+      "抗体",
+      "色素",
+      "消化酵素",
+      "ホルモン"
+    ],
+    "correct": 2,
+    "explanation": "アミラーゼやペプシンなどが消化酵素にあたる。（確認ポイント：消化酵素）",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-341",
+    "subject": "science",
+    "topic": "物理",
+    "term": "直列回路",
+    "prompt": "確認問題：電流の流れる道筋が1本だけの回路を何というか。",
+    "options": [
+      "並列回路",
+      "直列回路",
+      "分岐回路",
+      "短絡回路"
+    ],
+    "correct": 1,
+    "explanation": "直列回路では電流の通り道が1本で、回路のどこでも電流は等しい。（確認ポイント：直列回路）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-342",
+    "subject": "social",
+    "topic": "歴史",
+    "term": "鎌倉幕府",
+    "prompt": "鎌倉幕府について正しい説明を選べ。源頼朝が武士による政権を開いた場所はどこか。",
+    "options": [
+      "京都",
+      "鎌倉",
+      "江戸",
+      "奈良"
+    ],
+    "correct": 1,
+    "explanation": "源頼朝は鎌倉を本拠地として武士の政権を築いた。（確認ポイント：鎌倉幕府）",
+    "link": "/study/summary/history/"
+  },
+  {
+    "id": "fb-343",
+    "subject": "science",
+    "topic": "地学",
+    "term": "マグニチュード",
+    "prompt": "確認問題：地震そのものの規模や放出されたエネルギーの大きさを表す値は何か。",
+    "options": [
+      "震度",
+      "マグニチュード",
+      "初期微動",
+      "震央"
+    ],
+    "correct": 1,
+    "explanation": "マグニチュードは地震の規模を表し、震度は各地点での揺れの強さを表す。（確認ポイント：マグニチュード）",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-add-001",
+    "subject": "science",
+    "topic": "物理",
+    "term": "作用・反作用",
+    "prompt": "物体Aが物体Bを押すと、BもAを反対向きに同じ大きさで押す。この法則は何か。",
+    "options": [
+      "フックの法則",
+      "質量保存の法則",
+      "作用・反作用の法則",
+      "慣性の法則"
+    ],
+    "correct": 2,
+    "explanation": "作用・反作用：物体Aが物体Bを押すと、BもAを反対向きに同じ大きさで押す。この法則は何か。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-add-002",
+    "subject": "science",
+    "topic": "物理",
+    "term": "合力",
+    "prompt": "複数の力を合わせて、同じはたらきをする1つの力にしたものは何か。",
+    "options": [
+      "浮力",
+      "分力",
+      "摩擦力",
+      "合力"
+    ],
+    "correct": 3,
+    "explanation": "合力：複数の力を合わせて、同じはたらきをする1つの力にしたものは何か。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-add-003",
+    "subject": "science",
+    "topic": "物理",
+    "term": "摩擦力",
+    "prompt": "接触している面に沿って、物体の運動を妨げる向きにはたらく力は何か。",
+    "options": [
+      "重力",
+      "摩擦力",
+      "磁力",
+      "弾性力"
+    ],
+    "correct": 1,
+    "explanation": "摩擦力：接触している面に沿って、物体の運動を妨げる向きにはたらく力は何か。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-add-004",
+    "subject": "science",
+    "topic": "物理",
+    "term": "圧力の単位",
+    "prompt": "圧力を表すSI単位は何か。",
+    "options": [
+      "J",
+      "W",
+      "Pa",
+      "N"
+    ],
+    "correct": 2,
+    "explanation": "圧力の単位：圧力を表すSI単位は何か。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-add-005",
+    "subject": "science",
+    "topic": "物理",
+    "term": "電気量",
+    "prompt": "電流と時間の積で表される電気の量は何か。",
+    "options": [
+      "電力量",
+      "電力",
+      "電圧",
+      "電気量"
+    ],
+    "correct": 3,
+    "explanation": "電気量：電流と時間の積で表される電気の量は何か。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-add-006",
+    "subject": "science",
+    "topic": "物理",
+    "term": "直列回路の電流",
+    "prompt": "直列回路の各部分を流れる電流の大きさはどうなるか。",
+    "options": [
+      "抵抗が大きいほど大きい",
+      "どこでも等しい",
+      "電源から遠いほど小さい",
+      "必ず0になる"
+    ],
+    "correct": 1,
+    "explanation": "直列回路の電流：直列回路の各部分を流れる電流の大きさはどうなるか。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-add-007",
+    "subject": "science",
+    "topic": "物理",
+    "term": "並列回路の電圧",
+    "prompt": "並列回路で各枝分かれした部分にかかる電圧はどうなるか。",
+    "options": [
+      "電流と同じ値になる",
+      "必ず半分になる",
+      "どの枝でも等しい",
+      "枝の長さに比例する"
+    ],
+    "correct": 2,
+    "explanation": "並列回路の電圧：並列回路で各枝分かれした部分にかかる電圧はどうなるか。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-add-008",
+    "subject": "science",
+    "topic": "物理",
+    "term": "運動エネルギー",
+    "prompt": "運動している物体がもつエネルギーは何か。",
+    "options": [
+      "電気エネルギー",
+      "位置エネルギー",
+      "化学エネルギー",
+      "運動エネルギー"
+    ],
+    "correct": 3,
+    "explanation": "運動エネルギー：運動している物体がもつエネルギーは何か。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-add-009",
+    "subject": "science",
+    "topic": "物理",
+    "term": "位置エネルギー",
+    "prompt": "高い位置にある物体が位置によってもつエネルギーは何か。",
+    "options": [
+      "運動エネルギー",
+      "位置エネルギー",
+      "光エネルギー",
+      "音エネルギー"
+    ],
+    "correct": 1,
+    "explanation": "位置エネルギー：高い位置にある物体が位置によってもつエネルギーは何か。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-add-010",
+    "subject": "science",
+    "topic": "物理",
+    "term": "音の振幅",
+    "prompt": "音の波形の振れ幅が大きいほど、音はどう聞こえるか。",
+    "options": [
+      "低く聞こえる",
+      "速く伝わる",
+      "大きく聞こえる",
+      "高く聞こえる"
+    ],
+    "correct": 2,
+    "explanation": "音の振幅：音の波形の振れ幅が大きいほど、音はどう聞こえるか。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-add-011",
+    "subject": "science",
+    "topic": "物理",
+    "term": "音の振動数",
+    "prompt": "音の振動数が大きいほど、音の高さはどうなるか。",
+    "options": [
+      "変わらない",
+      "低くなる",
+      "必ず小さくなる",
+      "高くなる"
+    ],
+    "correct": 3,
+    "explanation": "音の振動数：音の振動数が大きいほど、音の高さはどうなるか。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-add-012",
+    "subject": "science",
+    "topic": "物理",
+    "term": "光の反射",
+    "prompt": "光が物体の表面ではね返る現象は何か。",
+    "options": [
+      "屈折",
+      "反射",
+      "分散",
+      "回折"
+    ],
+    "correct": 1,
+    "explanation": "光の反射：光が物体の表面ではね返る現象は何か。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-add-013",
+    "subject": "science",
+    "topic": "物理",
+    "term": "光の屈折",
+    "prompt": "光が異なる物質の境界で進む向きを変える現象は何か。",
+    "options": [
+      "干渉",
+      "分解",
+      "屈折",
+      "反射"
+    ],
+    "correct": 2,
+    "explanation": "光の屈折：光が異なる物質の境界で進む向きを変える現象は何か。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-add-014",
+    "subject": "science",
+    "topic": "化学",
+    "term": "溶質",
+    "prompt": "水溶液の中で、溶媒に溶けている物質は何か。",
+    "options": [
+      "触媒",
+      "溶媒",
+      "沈殿",
+      "溶質"
+    ],
+    "correct": 3,
+    "explanation": "溶質：水溶液の中で、溶媒に溶けている物質は何か。",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-add-015",
+    "subject": "science",
+    "topic": "化学",
+    "term": "溶媒",
+    "prompt": "水溶液で、溶質を溶かしている液体は何か。",
+    "options": [
+      "溶質",
+      "溶媒",
+      "結晶",
+      "気体"
+    ],
+    "correct": 1,
+    "explanation": "溶媒：水溶液で、溶質を溶かしている液体は何か。",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-add-016",
+    "subject": "science",
+    "topic": "化学",
+    "term": "再結晶",
+    "prompt": "温度による溶解度の差を利用して、溶質を結晶として取り出す方法は何か。",
+    "options": [
+      "ろ過",
+      "分解",
+      "再結晶",
+      "蒸留"
+    ],
+    "correct": 2,
+    "explanation": "再結晶：温度による溶解度の差を利用して、溶質を結晶として取り出す方法は何か。",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-add-017",
+    "subject": "science",
+    "topic": "化学",
+    "term": "触媒",
+    "prompt": "化学反応を速めるが、反応の前後でそれ自体は変化しない物質は何か。",
+    "options": [
+      "指示薬",
+      "溶媒",
+      "沈殿",
+      "触媒"
+    ],
+    "correct": 3,
+    "explanation": "触媒：化学反応を速めるが、反応の前後でそれ自体は変化しない物質は何か。",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-add-018",
+    "subject": "science",
+    "topic": "化学",
+    "term": "陽イオン",
+    "prompt": "原子が電子を失うなどして、正の電荷をもつようになった粒子は何か。",
+    "options": [
+      "陰イオン",
+      "陽イオン",
+      "中性子",
+      "分子"
+    ],
+    "correct": 1,
+    "explanation": "陽イオン：原子が電子を失うなどして、正の電荷をもつようになった粒子は何か。",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-add-019",
+    "subject": "science",
+    "topic": "化学",
+    "term": "陰イオン",
+    "prompt": "原子や原子団が電子を受け取り、負の電荷をもつ粒子は何か。",
+    "options": [
+      "陽子",
+      "原子核",
+      "陰イオン",
+      "陽イオン"
+    ],
+    "correct": 2,
+    "explanation": "陰イオン：原子や原子団が電子を受け取り、負の電荷をもつ粒子は何か。",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-add-020",
+    "subject": "science",
+    "topic": "化学",
+    "term": "中和でできる水",
+    "prompt": "水素イオンと水酸化物イオンが結びつくと何ができるか。",
+    "options": [
+      "塩素",
+      "酸素",
+      "水素",
+      "水"
+    ],
+    "correct": 3,
+    "explanation": "中和でできる水：水素イオンと水酸化物イオンが結びつくと何ができるか。",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-add-021",
+    "subject": "science",
+    "topic": "化学",
+    "term": "吸熱反応",
+    "prompt": "化学変化の際に周囲から熱を吸収する反応は何か。",
+    "options": [
+      "発熱反応",
+      "吸熱反応",
+      "燃焼",
+      "酸化"
+    ],
+    "correct": 1,
+    "explanation": "吸熱反応：化学変化の際に周囲から熱を吸収する反応は何か。",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-add-022",
+    "subject": "science",
+    "topic": "生物",
+    "term": "タンパク質",
+    "prompt": "アミノ酸が多数つながってできている栄養素は何か。",
+    "options": [
+      "デンプン",
+      "ビタミン",
+      "タンパク質",
+      "脂肪"
+    ],
+    "correct": 2,
+    "explanation": "タンパク質：アミノ酸が多数つながってできている栄養素は何か。",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-add-023",
+    "subject": "science",
+    "topic": "生物",
+    "term": "脂肪の消化",
+    "prompt": "脂肪を分解する消化酵素は何か。",
+    "options": [
+      "マルターゼ",
+      "アミラーゼ",
+      "ペプシン",
+      "リパーゼ"
+    ],
+    "correct": 3,
+    "explanation": "脂肪の消化：脂肪を分解する消化酵素は何か。",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-add-024",
+    "subject": "science",
+    "topic": "生物",
+    "term": "小腸の柔毛",
+    "prompt": "小腸の内壁に多数あり、養分を吸収する表面積を大きくする突起は何か。",
+    "options": [
+      "肺胞",
+      "柔毛",
+      "気孔",
+      "根毛"
+    ],
+    "correct": 1,
+    "explanation": "小腸の柔毛：小腸の内壁に多数あり、養分を吸収する表面積を大きくする突起は何か。",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-add-025",
+    "subject": "science",
+    "topic": "生物",
+    "term": "肝臓",
+    "prompt": "胆汁をつくり、養分の貯蔵や有害物質の分解にも関わる器官は何か。",
+    "options": [
+      "すい臓",
+      "腎臓",
+      "肝臓",
+      "胃"
+    ],
+    "correct": 2,
+    "explanation": "肝臓：胆汁をつくり、養分の貯蔵や有害物質の分解にも関わる器官は何か。",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-add-026",
+    "subject": "science",
+    "topic": "生物",
+    "term": "すい臓",
+    "prompt": "消化液を分泌し、血糖量を調節するホルモンも分泌する器官は何か。",
+    "options": [
+      "心臓",
+      "肝臓",
+      "肺",
+      "すい臓"
+    ],
+    "correct": 3,
+    "explanation": "すい臓：消化液を分泌し、血糖量を調節するホルモンも分泌する器官は何か。",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-add-027",
+    "subject": "science",
+    "topic": "生物",
+    "term": "毛細血管",
+    "prompt": "血液と組織の間で物質交換が行われる、非常に細い血管は何か。",
+    "options": [
+      "大動脈",
+      "毛細血管",
+      "大静脈",
+      "リンパ管"
+    ],
+    "correct": 1,
+    "explanation": "毛細血管：血液と組織の間で物質交換が行われる、非常に細い血管は何か。",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-add-028",
+    "subject": "science",
+    "topic": "生物",
+    "term": "白血球",
+    "prompt": "体内に侵入した細菌などを取り込んで体を守る血球は何か。",
+    "options": [
+      "血小板",
+      "血しょう",
+      "白血球",
+      "赤血球"
+    ],
+    "correct": 2,
+    "explanation": "白血球：体内に侵入した細菌などを取り込んで体を守る血球は何か。",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-add-029",
+    "subject": "science",
+    "topic": "生物",
+    "term": "血小板",
+    "prompt": "出血したとき血液を固めるはたらきに関わる成分は何か。",
+    "options": [
+      "リンパ球だけ",
+      "赤血球",
+      "白血球",
+      "血小板"
+    ],
+    "correct": 3,
+    "explanation": "血小板：出血したとき血液を固めるはたらきに関わる成分は何か。",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-add-030",
+    "subject": "science",
+    "topic": "生物",
+    "term": "神経細胞",
+    "prompt": "刺激や命令を電気信号として伝える細胞は何か。",
+    "options": [
+      "赤血球",
+      "神経細胞",
+      "筋細胞だけ",
+      "表皮細胞"
+    ],
+    "correct": 1,
+    "explanation": "神経細胞：刺激や命令を電気信号として伝える細胞は何か。",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-add-031",
+    "subject": "science",
+    "topic": "生物",
+    "term": "自律神経",
+    "prompt": "心拍や消化など、意思とは無関係な体のはたらきを調節する神経は何か。",
+    "options": [
+      "感覚神経だけ",
+      "視神経",
+      "自律神経",
+      "運動神経だけ"
+    ],
+    "correct": 2,
+    "explanation": "自律神経：心拍や消化など、意思とは無関係な体のはたらきを調節する神経は何か。",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-add-032",
+    "subject": "science",
+    "topic": "生物",
+    "term": "個体群",
+    "prompt": "同じ地域に生息する、同じ種類の生物の集まりは何か。",
+    "options": [
+      "群集",
+      "生態系",
+      "食物網",
+      "個体群"
+    ],
+    "correct": 3,
+    "explanation": "個体群：同じ地域に生息する、同じ種類の生物の集まりは何か。",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-add-033",
+    "subject": "science",
+    "topic": "生物",
+    "term": "食物網",
+    "prompt": "複数の食物連鎖が複雑につながった関係は何か。",
+    "options": [
+      "単独の食物連鎖",
+      "食物網",
+      "個体群",
+      "遷移"
+    ],
+    "correct": 1,
+    "explanation": "食物網：複数の食物連鎖が複雑につながった関係は何か。",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-add-034",
+    "subject": "science",
+    "topic": "生物",
+    "term": "遷移",
+    "prompt": "ある場所の植生が時間とともに移り変わる現象は何か。",
+    "options": [
+      "受粉",
+      "発芽",
+      "遷移",
+      "蒸散"
+    ],
+    "correct": 2,
+    "explanation": "遷移：ある場所の植生が時間とともに移り変わる現象は何か。",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-add-035",
+    "subject": "science",
+    "topic": "生物",
+    "term": "裸子植物",
+    "prompt": "胚珠が子房に包まれず、むき出しになっている植物のグループは何か。",
+    "options": [
+      "コケ植物",
+      "被子植物",
+      "シダ植物",
+      "裸子植物"
+    ],
+    "correct": 3,
+    "explanation": "裸子植物：胚珠が子房に包まれず、むき出しになっている植物のグループは何か。",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-add-036",
+    "subject": "science",
+    "topic": "生物",
+    "term": "被子植物",
+    "prompt": "胚珠が子房に包まれている植物のグループは何か。",
+    "options": [
+      "裸子植物",
+      "被子植物",
+      "シダ植物",
+      "菌類"
+    ],
+    "correct": 1,
+    "explanation": "被子植物：胚珠が子房に包まれている植物のグループは何か。",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-add-037",
+    "subject": "science",
+    "topic": "生物",
+    "term": "減数分裂",
+    "prompt": "生殖細胞がつくられるとき、染色体数が半分になる細胞分裂は何か。",
+    "options": [
+      "出芽",
+      "受精",
+      "減数分裂",
+      "体細胞分裂"
+    ],
+    "correct": 2,
+    "explanation": "減数分裂：生殖細胞がつくられるとき、染色体数が半分になる細胞分裂は何か。",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-add-038",
+    "subject": "science",
+    "topic": "生物",
+    "term": "受精",
+    "prompt": "精子と卵が合体して新しい個体のもとになる細胞をつくることは何か。",
+    "options": [
+      "蒸散",
+      "発芽",
+      "分裂",
+      "受精"
+    ],
+    "correct": 3,
+    "explanation": "受精：精子と卵が合体して新しい個体のもとになる細胞をつくることは何か。",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-add-039",
+    "subject": "science",
+    "topic": "生物",
+    "term": "染色体",
+    "prompt": "細胞の核内にあり、遺伝情報を担うDNAなどからできている構造は何か。",
+    "options": [
+      "葉緑体",
+      "染色体",
+      "液胞",
+      "細胞壁"
+    ],
+    "correct": 1,
+    "explanation": "染色体：細胞の核内にあり、遺伝情報を担うDNAなどからできている構造は何か。",
+    "link": "/study/summary/biology/"
+  },
+  {
+    "id": "fb-add-040",
+    "subject": "science",
+    "topic": "生物",
+    "term": "DNA",
+    "prompt": "遺伝情報を記録している物質は何か。",
+    "options": [
+      "脂肪酸",
+      "セルロース",
+      "DNA",
+      "デンプン"
+    ],
+    "correct": 2,
+    "explanation": "DNA：遺伝情報を記録している物質は何か。",
+    "link": "/study/summary/chemistry/"
+  },
+  {
+    "id": "fb-add-041",
+    "subject": "science",
+    "topic": "地学",
+    "term": "プレート",
+    "prompt": "地球表面をおおう、十数枚ほどに分かれた硬い岩盤は何か。",
+    "options": [
+      "地層",
+      "雲",
+      "気団",
+      "プレート"
+    ],
+    "correct": 3,
+    "explanation": "プレート：地球表面をおおう、十数枚ほどに分かれた硬い岩盤は何か。",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-add-042",
+    "subject": "science",
+    "topic": "地学",
+    "term": "海溝",
+    "prompt": "海洋プレートが別のプレートの下へ沈み込む場所にできる深い溝は何か。",
+    "options": [
+      "海嶺",
+      "海溝",
+      "扇状地",
+      "三角州"
+    ],
+    "correct": 1,
+    "explanation": "海溝：海洋プレートが別のプレートの下へ沈み込む場所にできる深い溝は何か。",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-add-043",
+    "subject": "science",
+    "topic": "地学",
+    "term": "海嶺",
+    "prompt": "海底でプレートが互いに離れ、新しい海洋地殻がつくられる場所は何か。",
+    "options": [
+      "断層",
+      "カルデラ",
+      "海嶺",
+      "海溝"
+    ],
+    "correct": 2,
+    "explanation": "海嶺：海底でプレートが互いに離れ、新しい海洋地殻がつくられる場所は何か。",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-add-044",
+    "subject": "science",
+    "topic": "地学",
+    "term": "深成岩",
+    "prompt": "マグマが地下深くでゆっくり冷え固まってできた岩石は何か。",
+    "options": [
+      "変成岩",
+      "火山岩",
+      "堆積岩",
+      "深成岩"
+    ],
+    "correct": 3,
+    "explanation": "深成岩：マグマが地下深くでゆっくり冷え固まってできた岩石は何か。",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-add-045",
+    "subject": "science",
+    "topic": "地学",
+    "term": "火山岩",
+    "prompt": "マグマが地表や地表近くで急に冷え固まってできた岩石は何か。",
+    "options": [
+      "深成岩",
+      "火山岩",
+      "堆積岩",
+      "変成岩"
+    ],
+    "correct": 1,
+    "explanation": "火山岩：マグマが地表や地表近くで急に冷え固まってできた岩石は何か。",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-add-046",
+    "subject": "science",
+    "topic": "地学",
+    "term": "示準化石",
+    "prompt": "地層ができた地質時代を知る手がかりとなる化石は何か。",
+    "options": [
+      "鉱物",
+      "火山灰",
+      "示準化石",
+      "示相化石"
+    ],
+    "correct": 2,
+    "explanation": "示準化石：地層ができた地質時代を知る手がかりとなる化石は何か。",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-add-047",
+    "subject": "science",
+    "topic": "地学",
+    "term": "示相化石",
+    "prompt": "地層が堆積した当時の環境を知る手がかりとなる化石は何か。",
+    "options": [
+      "示圧化石",
+      "示準化石",
+      "示温化石",
+      "示相化石"
+    ],
+    "correct": 3,
+    "explanation": "示相化石：地層が堆積した当時の環境を知る手がかりとなる化石は何か。",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-add-048",
+    "subject": "science",
+    "topic": "地学",
+    "term": "露点",
+    "prompt": "空気を冷やしたとき、水蒸気が水滴になり始める温度は何か。",
+    "options": [
+      "沸点",
+      "露点",
+      "融点",
+      "気温差"
+    ],
+    "correct": 1,
+    "explanation": "露点：空気を冷やしたとき、水蒸気が水滴になり始める温度は何か。",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-add-049",
+    "subject": "science",
+    "topic": "地学",
+    "term": "高気圧",
+    "prompt": "周囲より気圧が高く、中心付近で下降気流が生じやすい領域は何か。",
+    "options": [
+      "前線",
+      "台風の目だけ",
+      "高気圧",
+      "低気圧"
+    ],
+    "correct": 2,
+    "explanation": "高気圧：周囲より気圧が高く、中心付近で下降気流が生じやすい領域は何か。",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-add-050",
+    "subject": "science",
+    "topic": "地学",
+    "term": "低気圧",
+    "prompt": "周囲より気圧が低く、中心付近で上昇気流が生じやすい領域は何か。",
+    "options": [
+      "気団",
+      "高気圧",
+      "海嶺",
+      "低気圧"
+    ],
+    "correct": 3,
+    "explanation": "低気圧：周囲より気圧が低く、中心付近で上昇気流が生じやすい領域は何か。",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-add-051",
+    "subject": "science",
+    "topic": "地学",
+    "term": "春分",
+    "prompt": "太陽がほぼ真東から昇り真西に沈み、昼夜の長さがほぼ等しくなる春の日は何か。",
+    "options": [
+      "夏至",
+      "春分",
+      "冬至",
+      "大暑"
+    ],
+    "correct": 1,
+    "explanation": "春分：太陽がほぼ真東から昇り真西に沈み、昼夜の長さがほぼ等しくなる春の日は何か。",
+    "link": "/study/summary/earth/"
+  },
+  {
+    "id": "fb-add-052",
+    "subject": "social",
+    "topic": "地理",
+    "term": "季節風気候",
+    "prompt": "夏と冬で風向きが変わり、降水量にも季節差が生じやすい気候の特徴に関係する風は何か。",
+    "options": [
+      "貿易風のみ",
+      "極東風",
+      "季節風",
+      "偏西風のみ"
+    ],
+    "correct": 2,
+    "explanation": "季節風気候：夏と冬で風向きが変わり、降水量にも季節差が生じやすい気候の特徴に関係する風は何か。",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-add-053",
+    "subject": "social",
+    "topic": "地理",
+    "term": "プランテーション",
+    "prompt": "熱帯・亜熱帯地域で、輸出向け作物を大規模に栽培する農園は何か。",
+    "options": [
+      "焼畑農業",
+      "近郊農業",
+      "混合農業",
+      "プランテーション"
+    ],
+    "correct": 3,
+    "explanation": "プランテーション：熱帯・亜熱帯地域で、輸出向け作物を大規模に栽培する農園は何か。",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-add-054",
+    "subject": "social",
+    "topic": "地理",
+    "term": "企業的農業",
+    "prompt": "大規模な土地と機械を利用し、市場向けに効率よく生産する農業は何か。",
+    "options": [
+      "自給的農業",
+      "企業的農業",
+      "焼畑農業",
+      "遊牧"
+    ],
+    "correct": 1,
+    "explanation": "企業的農業：大規模な土地と機械を利用し、市場向けに効率よく生産する農業は何か。",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-add-055",
+    "subject": "social",
+    "topic": "地理",
+    "term": "過疎",
+    "prompt": "人口が減少し、地域社会の維持が難しくなる状態は何か。",
+    "options": [
+      "都市化",
+      "ドーナツ化",
+      "過疎",
+      "過密"
+    ],
+    "correct": 2,
+    "explanation": "過疎：人口が減少し、地域社会の維持が難しくなる状態は何か。",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-add-056",
+    "subject": "social",
+    "topic": "地理",
+    "term": "過密",
+    "prompt": "人口や都市機能が狭い地域に集中しすぎた状態は何か。",
+    "options": [
+      "人口転換",
+      "過疎",
+      "限界集落",
+      "過密"
+    ],
+    "correct": 3,
+    "explanation": "過密：人口や都市機能が狭い地域に集中しすぎた状態は何か。",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-add-057",
+    "subject": "social",
+    "topic": "地理",
+    "term": "少子高齢化",
+    "prompt": "出生率の低下と高齢者の割合の上昇が同時に進む現象は何か。",
+    "options": [
+      "人口爆発",
+      "少子高齢化",
+      "都市化",
+      "人口移動"
+    ],
+    "correct": 1,
+    "explanation": "少子高齢化：出生率の低下と高齢者の割合の上昇が同時に進む現象は何か。",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-add-058",
+    "subject": "social",
+    "topic": "公民",
+    "term": "立法",
+    "prompt": "国会が法律を制定するはたらきを何というか。",
+    "options": [
+      "司法",
+      "監査",
+      "立法",
+      "行政"
+    ],
+    "correct": 2,
+    "explanation": "立法：国会が法律を制定するはたらきを何というか。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-add-059",
+    "subject": "social",
+    "topic": "公民",
+    "term": "行政",
+    "prompt": "法律や予算に基づいて国の政治を実際に行うはたらきは何か。",
+    "options": [
+      "立憲",
+      "立法",
+      "司法",
+      "行政"
+    ],
+    "correct": 3,
+    "explanation": "行政：法律や予算に基づいて国の政治を実際に行うはたらきは何か。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-add-060",
+    "subject": "social",
+    "topic": "公民",
+    "term": "司法",
+    "prompt": "法律に基づいて争いを解決し、法を適用するはたらきは何か。",
+    "options": [
+      "行政",
+      "司法",
+      "立法",
+      "財政"
+    ],
+    "correct": 1,
+    "explanation": "司法：法律に基づいて争いを解決し、法を適用するはたらきは何か。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-add-061",
+    "subject": "social",
+    "topic": "公民",
+    "term": "国政調査権",
+    "prompt": "国会が国の政治全般について調査する権限は何か。",
+    "options": [
+      "拒否権",
+      "請願権",
+      "国政調査権",
+      "違憲審査権"
+    ],
+    "correct": 2,
+    "explanation": "国政調査権：国会が国の政治全般について調査する権限は何か。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-add-062",
+    "subject": "social",
+    "topic": "公民",
+    "term": "条例",
+    "prompt": "地方公共団体が、その地域の事務について制定する決まりは何か。",
+    "options": [
+      "条約",
+      "法律",
+      "政令",
+      "条例"
+    ],
+    "correct": 3,
+    "explanation": "条例：地方公共団体が、その地域の事務について制定する決まりは何か。",
+    "link": "/study/summary/geography/"
+  },
+  {
+    "id": "fb-add-063",
+    "subject": "social",
+    "topic": "公民",
+    "term": "直接請求",
+    "prompt": "住民が一定数の署名を集め、条例制定・改廃などを求める制度は何か。",
+    "options": [
+      "国民審査",
+      "直接請求",
+      "弾劾裁判",
+      "国政調査"
+    ],
+    "correct": 1,
+    "explanation": "直接請求：住民が一定数の署名を集め、条例制定・改廃などを求める制度は何か。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-add-064",
+    "subject": "social",
+    "topic": "公民",
+    "term": "請願権",
+    "prompt": "国や地方公共団体に意見や希望を述べ、対応を求める権利は何か。",
+    "options": [
+      "団結権",
+      "生存権",
+      "請願権",
+      "参政権だけ"
+    ],
+    "correct": 2,
+    "explanation": "請願権：国や地方公共団体に意見や希望を述べ、対応を求める権利は何か。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-add-065",
+    "subject": "social",
+    "topic": "公民",
+    "term": "表現の自由",
+    "prompt": "意見や考えを発表し、伝えることを保障する自由は何か。",
+    "options": [
+      "生存権",
+      "居住移転の自由",
+      "財産権",
+      "表現の自由"
+    ],
+    "correct": 3,
+    "explanation": "表現の自由：意見や考えを発表し、伝えることを保障する自由は何か。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-add-066",
+    "subject": "social",
+    "topic": "公民",
+    "term": "信教の自由",
+    "prompt": "宗教を信じるかどうか、どの宗教を信じるかを自分で決める自由は何か。",
+    "options": [
+      "職業選択の自由",
+      "信教の自由",
+      "学問の自由",
+      "請願権"
+    ],
+    "correct": 1,
+    "explanation": "信教の自由：宗教を信じるかどうか、どの宗教を信じるかを自分で決める自由は何か。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-add-067",
+    "subject": "social",
+    "topic": "公民",
+    "term": "職業選択の自由",
+    "prompt": "どのような職業に就くかを自分で決める自由は何か。",
+    "options": [
+      "生存権",
+      "参政権",
+      "職業選択の自由",
+      "信教の自由"
+    ],
+    "correct": 2,
+    "explanation": "職業選択の自由：どのような職業に就くかを自分で決める自由は何か。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-add-068",
+    "subject": "social",
+    "topic": "公民",
+    "term": "団結権",
+    "prompt": "労働者が労働組合をつくり、加入する権利は何か。",
+    "options": [
+      "請願権",
+      "団体交渉権",
+      "団体行動権",
+      "団結権"
+    ],
+    "correct": 3,
+    "explanation": "団結権：労働者が労働組合をつくり、加入する権利は何か。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-add-069",
+    "subject": "social",
+    "topic": "公民",
+    "term": "団体交渉権",
+    "prompt": "労働者が使用者と労働条件について交渉する権利は何か。",
+    "options": [
+      "団結権",
+      "団体交渉権",
+      "団体行動権",
+      "選挙権"
+    ],
+    "correct": 1,
+    "explanation": "団体交渉権：労働者が使用者と労働条件について交渉する権利は何か。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-add-070",
+    "subject": "social",
+    "topic": "公民",
+    "term": "団体行動権",
+    "prompt": "労働者が要求実現のためにストライキなどを行う権利は何か。",
+    "options": [
+      "請願権",
+      "生存権",
+      "団体行動権",
+      "団結権"
+    ],
+    "correct": 2,
+    "explanation": "団体行動権：労働者が要求実現のためにストライキなどを行う権利は何か。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-add-071",
+    "subject": "social",
+    "topic": "公民",
+    "term": "市場",
+    "prompt": "売り手と買い手が商品やサービスを取引する場や仕組みは何か。",
+    "options": [
+      "行政機関",
+      "国会",
+      "裁判所",
+      "市場"
+    ],
+    "correct": 3,
+    "explanation": "市場：売り手と買い手が商品やサービスを取引する場や仕組みは何か。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-add-072",
+    "subject": "social",
+    "topic": "公民",
+    "term": "独占禁止法",
+    "prompt": "企業の不公正な競争や市場の独占を防ぐための法律は何か。",
+    "options": [
+      "労働基準法",
+      "独占禁止法",
+      "民法",
+      "教育基本法"
+    ],
+    "correct": 1,
+    "explanation": "独占禁止法：企業の不公正な競争や市場の独占を防ぐための法律は何か。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-add-073",
+    "subject": "social",
+    "topic": "公民",
+    "term": "消費者契約法",
+    "prompt": "不当な勧誘などによる消費者契約の取消しを認める場合がある法律は何か。",
+    "options": [
+      "会社法",
+      "刑法",
+      "消費者契約法",
+      "独占禁止法"
+    ],
+    "correct": 2,
+    "explanation": "消費者契約法：不当な勧誘などによる消費者契約の取消しを認める場合がある法律は何か。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-add-074",
+    "subject": "social",
+    "topic": "公民",
+    "term": "社会保障",
+    "prompt": "病気・失業・老後などの生活上のリスクを社会全体で支える制度は何か。",
+    "options": [
+      "自由貿易",
+      "市場経済",
+      "累進課税",
+      "社会保障"
+    ],
+    "correct": 3,
+    "explanation": "社会保障：病気・失業・老後などの生活上のリスクを社会全体で支える制度は何か。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-add-075",
+    "subject": "social",
+    "topic": "公民",
+    "term": "地方交付税",
+    "prompt": "地方公共団体間の財政力の差を調整するため、国から配分される財源は何か。",
+    "options": [
+      "関税",
+      "地方交付税",
+      "所得税",
+      "国債"
+    ],
+    "correct": 1,
+    "explanation": "地方交付税：地方公共団体間の財政力の差を調整するため、国から配分される財源は何か。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-add-076",
+    "subject": "social",
+    "topic": "公民",
+    "term": "国債",
+    "prompt": "国が資金を調達するために発行する債券は何か。",
+    "options": [
+      "社債だけ",
+      "紙幣",
+      "国債",
+      "株式"
+    ],
+    "correct": 2,
+    "explanation": "国債：国が資金を調達するために発行する債券は何か。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-add-077",
+    "subject": "social",
+    "topic": "公民",
+    "term": "為替相場",
+    "prompt": "異なる通貨を交換するときの比率や価格は何か。",
+    "options": [
+      "金利",
+      "物価指数",
+      "株価",
+      "為替相場"
+    ],
+    "correct": 3,
+    "explanation": "為替相場：異なる通貨を交換するときの比率や価格は何か。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-add-078",
+    "subject": "social",
+    "topic": "公民",
+    "term": "円高",
+    "prompt": "外国通貨に対して円の価値が上がることは何か。",
+    "options": [
+      "円安",
+      "円高",
+      "インフレ",
+      "デフレ"
+    ],
+    "correct": 1,
+    "explanation": "円高：外国通貨に対して円の価値が上がることは何か。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-add-079",
+    "subject": "social",
+    "topic": "公民",
+    "term": "円安",
+    "prompt": "外国通貨に対して円の価値が下がることは何か。",
+    "options": [
+      "増税",
+      "金融緩和",
+      "円安",
+      "円高"
+    ],
+    "correct": 2,
+    "explanation": "円安：外国通貨に対して円の価値が下がることは何か。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-add-080",
+    "subject": "social",
+    "topic": "公民",
+    "term": "国際連合総会",
+    "prompt": "原則としてすべての加盟国が参加し、各国が1票をもつ国連の機関は何か。",
+    "options": [
+      "事務局",
+      "安全保障理事会",
+      "国際司法裁判所",
+      "国連総会"
+    ],
+    "correct": 3,
+    "explanation": "国際連合総会：原則としてすべての加盟国が参加し、各国が1票をもつ国連の機関は何か。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-add-081",
+    "subject": "social",
+    "topic": "公民",
+    "term": "安全保障理事会",
+    "prompt": "国際平和と安全の維持について主要な責任を負う国連の機関は何か。",
+    "options": [
+      "国連総会",
+      "安全保障理事会",
+      "UNESCO",
+      "WHO"
+    ],
+    "correct": 1,
+    "explanation": "安全保障理事会：国際平和と安全の維持について主要な責任を負う国連の機関は何か。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-add-082",
+    "subject": "social",
+    "topic": "公民",
+    "term": "UNESCO",
+    "prompt": "教育・科学・文化を通じて国際協力を進める国連の専門機関は何か。",
+    "options": [
+      "ILO",
+      "WTO",
+      "UNESCO",
+      "WHO"
+    ],
+    "correct": 2,
+    "explanation": "UNESCO：教育・科学・文化を通じて国際協力を進める国連の専門機関は何か。",
+    "link": "/study/summary/physics/"
+  },
+  {
+    "id": "fb-add-083",
+    "subject": "social",
+    "topic": "公民",
+    "term": "UNICEF",
+    "prompt": "子どもの権利や健康、教育などを支援する国連機関は何か。",
+    "options": [
+      "IMF",
+      "UNESCO",
+      "WHO",
+      "UNICEF"
+    ],
+    "correct": 3,
+    "explanation": "UNICEF：子どもの権利や健康、教育などを支援する国連機関は何か。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-add-084",
+    "subject": "social",
+    "topic": "公民",
+    "term": "持続可能な開発目標",
+    "prompt": "2030年までの達成を目指し、貧困や環境などの課題に取り組む国際目標は何か。",
+    "options": [
+      "GDP",
+      "SDGs",
+      "ODA",
+      "FTA"
+    ],
+    "correct": 1,
+    "explanation": "持続可能な開発目標：2030年までの達成を目指し、貧困や環境などの課題に取り組む国際目標は何か。",
+    "link": "/study/summary/civics/"
+  },
+  {
+    "id": "fb-add-085",
+    "subject": "social",
+    "topic": "公民",
+    "term": "ODA",
+    "prompt": "政府または政府機関が開発途上国の経済・社会発展のために行う援助は何か。",
+    "options": [
+      "輸入関税",
+      "国際裁判",
+      "政府開発援助",
+      "民間投資"
+    ],
+    "correct": 2,
+    "explanation": "ODA：政府または政府機関が開発途上国の経済・社会発展のために行う援助は何か。",
+    "link": "/study/summary/civics/"
+  }
+]
