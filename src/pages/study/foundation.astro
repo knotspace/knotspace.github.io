@@ -1,6 +1,6 @@
 ---
 import StudyLayout from '../../layouts/StudyLayout.astro';
-import bank from '../../data/study-foundation.json';
+import bank from '../../data/study/study-foundation.json';
 const science = bank.filter(q => q.subject === 'science').length;
 const social = bank.filter(q => q.subject === 'social').length;
 ---
@@ -40,7 +40,7 @@ const social = bank.filter(q => q.subject === 'social').length;
   </section>
 </main>
 <script>
-import bank from '../../data/study-foundation.json';
+import bank from '../../data/study/study-foundation.json';
 const $ = id => document.getElementById(id);
 const KEY = 'knot-foundation-v1';
 let record = { answered: 0, correct: 0, wrong: [] }, questions = [], index = 0, score = 0, selected = false, lastConfig = null;
