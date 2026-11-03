@@ -49,9 +49,8 @@ function save() { try { localStorage.setItem(KEY, JSON.stringify(record)); } cat
 function updateRecord() { $('total').textContent = record.answered; $('correctTotal').textContent = record.correct; $('weakTotal').textContent = record.wrong.length; }
 function fillTopics() { const subject = $('subject').value, select = $('topic'), previous = select.value; select.replaceChildren(new Option('すべての分野', 'all')); [...new Set(bank.filter(q => subject === 'all' || q.subject === subject).map(q => q.topic))].forEach(topic => select.add(new Option(topic, topic))); if ([...select.options].some(option => option.value === previous)) select.value = previous; }
 $('subject').addEventListener('change', fillTopics); fillTopics(); updateRecord();
-function enterQuizMode() { document.documentElement.classList.add('quiz-active'); if (!document.fullscreenElement && document.documentElement.requestFullscreen) { document.documentElement.requestFullscreen().catch(() => {}); } }
-function leaveQuizMode() { document.documentElement.classList.remove('quiz-active'); if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(() => {}); }
-document.addEventListener('fullscreenchange', () => { if (!document.fullscreenElement) document.documentElement.classList.remove('quiz-active'); });
+function enterQuizMode() { document.documentElement.classList.add('quiz-active'); }
+function leaveQuizMode() { document.documentElement.classList.remove('quiz-active'); }
 function start() { lastConfig = { subject: $('subject').value, topic: $('topic').value, amount: $('amount').value }; let pool = bank.filter(q => (lastConfig.subject === 'all' || q.subject === lastConfig.subject) && (lastConfig.topic === 'all' || q.topic === lastConfig.topic)); if (lastConfig.amount === 'wrong') pool = pool.filter(q => record.wrong.includes(q.id)); if (!pool.length) { alert('この条件の問題はまだありません。別の分野を選んでね。'); return; } pool = [...pool].sort(() => Math.random() - .5); if (lastConfig.amount !== 'all' && lastConfig.amount !== 'wrong') pool = pool.slice(0, Number(lastConfig.amount)); enterQuizMode(); questions = pool; index = 0; score = 0; $('settings').hidden = true; $('result').hidden = true; $('quiz').hidden = false; render(); }
 function render() { selected = false; const q = questions[index]; $('prompt').textContent = q.prompt; $('answers').replaceChildren(); $('next').disabled = true; $('next').textContent = index === questions.length - 1 ? '結果を見る' : '次の問題'; q.options.forEach((option, i) => {
   const palette = {
@@ -136,3 +135,17 @@ html.quiz-active #next,html.quiz-active #quit{min-height:52px;padding:14px 24px;
 
 
 </StudyLayout>
+<style is="global">
+@media(max-width:620px){
+  html.quiz-active,html.quiz-active body{height:auto!important;min-height:100%!important;overflow-x:hidden!important;overflow-y:auto!important}
+  html.quiz-active body main{height:auto!important;min-height:100dvh!important}
+  html.quiz-active .foundation{height:auto!important;min-height:100dvh!important;display:block!important;padding:14px 12px calc(24px + env(safe-area-inset-bottom))!important}
+  html.quiz-active #quiz{width:100%;min-height:calc(100dvh - 28px);height:auto!important;max-height:none!important;overflow:visible!important;display:flex!important;justify-content:flex-start!important;gap:18px!important;padding:20px 15px!important;margin:0!important}
+  html.quiz-active #answers{display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:none!important;gap:11px!important}
+  html.quiz-active #answers>.answer{width:100%;min-height:76px!important;height:auto!important;padding:15px 14px!important;border-radius:18px!important;font-size:15px!important;line-height:1.55!important;gap:12px!important}
+  html.quiz-active #answers>.answer .letter{width:34px!important;height:34px!important;flex:0 0 34px!important;border-radius:11px!important;font-size:13px!important}
+  html.quiz-active #prompt{font-size:clamp(19px,5vw,23px)!important;line-height:1.65!important;overflow-wrap:anywhere}
+  html.quiz-active .quiz-actions{position:sticky;bottom:0;background:var(--surface);padding:10px 0 max(8px,env(safe-area-inset-bottom));z-index:5}
+  html.quiz-active #next,html.quiz-active #quit{min-height:48px!important}
+}
+</style>
