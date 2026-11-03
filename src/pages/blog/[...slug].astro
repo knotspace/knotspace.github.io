@@ -742,4 +742,21 @@ const breadcrumbJsonLd = {
   .article-content :global(.knot-figure figcaption){margin-top:8px;color:var(--muted);font-size:11px}
   @media(max-width:560px){.article-content :global(.knot-compare){grid-template-columns:1fr}.article-content :global(.knot-balloon){max-width:94%}}
 
+
+  /* Softer article imagery and rounded table of contents */
+  .hero-image,
+  .article-content img,
+  .article-content picture,
+  .article-content figure img,
+  .article-content video,
+  .article-content iframe{border-radius:18px;overflow:hidden}
+  .article-content img{display:block;max-width:100%;height:auto;margin:24px auto;}
+  .article-side-widget.side-toc{border-radius:16px;overflow:hidden;box-shadow:0 8px 28px rgba(0,0,0,.07)}
+  .side-toc h2{border-left:0;border-bottom:1px solid var(--line);padding:14px 16px;background:var(--surface-soft)}
+  .side-toc ol{padding:10px 12px 14px}
+  .side-toc li a{border:0;border-radius:9px;padding:9px 11px;transition:background .18s,color .18s}
+  .side-toc li a:hover{background:var(--surface-soft)}
+  .side-toc li a.is-current{border:0;border-radius:9px;background:color-mix(in srgb,var(--accent) 12%,var(--surface));}
+  .side-toc li.toc-level-3{padding-left:12px}
+
 </style>
