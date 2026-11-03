@@ -1,7 +1,8 @@
 ---
 import StudyLayout from '../../layouts/StudyLayout.astro';
 import '../../styles/study/quiz-ui.css';
-import questions from '../../data/study/kosen-questions.json';
+import questionsData from '../../data/study/kosen-questions.json';
+const questions = questionsData.questions;
 const topics = [...new Set(questions.map(q => q.topic))];
 ---
 <StudyLayout title="高専入試対策｜KNOT Study" description="高専入試を意識した思考力・資料読解型のオリジナル演習問題。">
