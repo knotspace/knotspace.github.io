@@ -128,12 +128,12 @@ const { categories = [], limit = 17 } = Astro.props;
       link.rel = 'noopener noreferrer';
 
       const img = document.createElement('img');
-      img.src = item.image;
       img.alt = item.title;
       img.loading = 'lazy';
       img.decoding = 'async';
       img.addEventListener('load', () => { loaded += 1; updateCount(); }, { once: true });
       img.addEventListener('error', () => { failed += 1; link.remove(); updateCount(); }, { once: true });
+      img.src = item.image;
 
       const caption = document.createElement('span');
       caption.className = 'commons-gallery-title';
