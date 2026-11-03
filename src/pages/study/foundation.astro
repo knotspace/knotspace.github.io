@@ -1,7 +1,8 @@
 ---
 import StudyLayout from '../../layouts/StudyLayout.astro';
 import '../../styles/study/quiz-ui.css';
-import bank from '../../data/study/study-foundation.json';
+import foundationData from '../../data/study/study-foundation.json';
+const bank = foundationData.questions;
 const science = bank.filter(q => q.subject === 'science').length;
 const social = bank.filter(q => q.subject === 'social').length;
 ---
