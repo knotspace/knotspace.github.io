@@ -1,6 +1,14 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import sanitizeHtml from 'sanitize-html';
+
+const safeInline = (value: unknown) => sanitizeHtml(String(value ?? ''), {
+  allowedTags: ['a', 'strong', 'b', 'em', 'i', 'u', 's', 'del', 'code', 'br', 'sub', 'sup', 'span'],
+  allowedAttributes: { a: ['href', 'title', 'target', 'rel'], span: ['class'] },
+  allowedSchemes: ['http', 'https', 'mailto'],
+  transformTags: { a: sanitizeHtml.simpleTransform('a', { rel: 'nofollow noopener noreferrer' }, true) },
+});
 
 export async function getStaticPaths() {
   const pages = await getCollection('pages');
@@ -47,16 +55,16 @@ const pageJsonLd = {
       {contentBlocks.length > 0 ? contentBlocks.map((block: any) => {
         const type = block.type || block.blockType || 'paragraph';
         if (type === 'heading') return Number(block.level) === 3 ? <h3>{block.text}</h3> : <h2>{block.text}</h2>;
-        if (type === 'image') return <figure><img src={block.src || block.image || ''} alt={block.alt || ''} loading="lazy" decoding="async" /><figcaption>{block.caption}</figcaption></figure>;
-        if (type === 'quote') return <blockquote><p>{block.text}</p>{block.attribution && <cite>{block.attribution}</cite>}</blockquote>;
-        if (type === 'callout') return <aside class:list={['knot-box', `knot-box-${block.style || 'note'}`]}><strong>{block.title || 'ポイント'}</strong><p>{block.text}</p></aside>;
+        if (type === 'image') return <figure><img src={block.src || block.image || ''} alt={block.alt || ''} loading="lazy" decoding="async" />{block.caption && <figcaption set:html={safeInline(block.caption)} />}</figure>;
+        if (type === 'quote') return <blockquote><p set:html={safeInline(block.text)} />{block.attribution && <cite>{block.attribution}</cite>}</blockquote>;
+        if (type === 'callout') return <aside class:list={['knot-box', `knot-box-${block.style || 'note'}`]}><strong set:html={safeInline(block.title || 'ポイント')} /><p set:html={safeInline(block.text)} /></aside>;
         if (type === 'list') {
           const items = String(block.items || '').split('\n').map((item: string) => item.trim()).filter(Boolean);
-          return block.ordered ? <ol>{items.map((item: string) => <li>{item}</li>)}</ol> : <ul>{items.map((item: string) => <li>{item}</li>)}</ul>;
+          return block.ordered ? <ol>{items.map((item: string) => <li set:html={safeInline(item)} />)}</ol> : <ul>{items.map((item: string) => <li set:html={safeInline(item)} />)}</ul>;
         }
         if (type === 'button') return <p><a class="knot-content-button" href={block.url || '#'}>{block.label || '詳しく見る'} ↗</a></p>;
         if (type === 'divider') return <hr />;
-        return <p>{block.text}</p>;
+        return <p set:html={safeInline(block.text)} />;
       }) : hasLegacyBody ? <Content /> : <p>本文を準備中です。</p>}
     </article>
     <footer class="page-footer"><a href="/">KNOT ホームへ戻る →</a></footer>
