@@ -93,7 +93,8 @@ function renderEditor(){
   $("status").addEventListener("change",queueSave);
   root.querySelectorAll("[data-add]").forEach(btn=>btn.addEventListener("click",()=>{blocks.push({type:btn.dataset.add,text:""});renderBlocks();queueSave();}));
   $("preview-toggle").addEventListener("click",togglePreview);
-  $("save").addEventListener("click",saveNow);\n  $("publish").addEventListener("click",publishNow);
+  $("save").addEventListener("click",saveNow);
+  $("publish").addEventListener("click",publishNow);
   renderBlocks();
 }
 function renderBlocks(){
