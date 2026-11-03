@@ -1,6 +1,19 @@
 {
   "releases": [
     {
+      "id": "ab54400",
+      "publishedAt": "2026-11-03T21:35:13+09:00",
+      "title": "Fix civics summary diagram map syntax",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "Study画面・機能"
+      ],
+      "files": [
+        "src/pages/study/summary/civics.astro"
+      ]
+    },
+    {
       "id": "cb5481b",
       "publishedAt": "2026-11-03T21:33:45+09:00",
       "title": "Add topic-specific explanations to all KNOT diagrams",
