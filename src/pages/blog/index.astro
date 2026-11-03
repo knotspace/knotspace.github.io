@@ -6,11 +6,9 @@ import Layout from '../../layouts/Layout.astro';
 const now = new Date();
 const posts = (await getCollection('blog'))
   .filter((post) => !post.data.publishAt || post.data.publishAt <= now)
-  .sort((a, b) => {
-    if (a.id === 'first-post') return -1;
-    if (b.id === 'first-post') return 1;
-    return a.data.pubDate.valueOf() - b.data.pubDate.valueOf() || a.id.localeCompare(b.id);
-  });
+  .sort((a, b) =>
+    b.data.pubDate.valueOf() - a.data.pubDate.valueOf() || b.id.localeCompare(a.id)
+  );
 
 const categories = [...new Set(posts.map((post) => post.data.category))];
 const readingTime = (body = '') => Math.max(1, Math.ceil(body.replace(/\s/g, '').length / 500));
