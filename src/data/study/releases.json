@@ -1,6 +1,19 @@
 {
   "releases": [
     {
+      "id": "0d150c9",
+      "publishedAt": "2026-11-03T20:38:11+09:00",
+      "title": "Add 200 original study motivation messages",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "学習コンテンツ・データ"
+      ],
+      "files": [
+        "src/data/study/motivation-200.json"
+      ]
+    },
+    {
       "id": "38123c2",
       "publishedAt": "2026-11-03T20:36:41+09:00",
       "title": "Sort subquestions in original order within each large question (#40)",
