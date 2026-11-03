@@ -18,7 +18,7 @@ const diagrams = bank.diagrams;
   <p id="empty" hidden>該当する図解が見つからないよ。別の言葉で検索してみてね。</p>
 </main>
 <script>
-const buttons=[...document.querySelectorAll('[data-subject]')],cards=[...document.querySelectorAll('.card')],search=document.getElementById('search'),count=document.getElementById('count'),empty=document.getElementById('empty');let subject='all';
+const buttons=[...document.querySelectorAll('.filters button[data-subject]')],cards=[...document.querySelectorAll('.card')],search=document.getElementById('search'),count=document.getElementById('count'),empty=document.getElementById('empty');let subject='all';
 function filter(){const q=search.value.trim().toLocaleLowerCase();let n=0;cards.forEach(card=>{const ok=(subject==='all'||card.dataset.subject===subject)&&(!q||card.dataset.search.toLocaleLowerCase().includes(q));card.hidden=!ok;if(ok)n++;});count.textContent=n+'個を表示';empty.hidden=n>0;}
 buttons.forEach(button=>button.addEventListener('click',()=>{subject=button.dataset.subject;buttons.forEach(b=>b.classList.toggle('active',b===button));filter();}));
 search.addEventListener('input',filter);
