@@ -1,6 +1,19 @@
 {
   "releases": [
     {
+      "id": "35bd450",
+      "publishedAt": "2026-11-03T21:00:37+09:00",
+      "title": "Keep SEO metadata on legacy simulator redirect",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "Study画面・機能"
+      ],
+      "files": [
+        "src/pages/study/simulation.astro"
+      ]
+    },
+    {
       "id": "e856f9f",
       "publishedAt": "2026-11-03T20:50:49+09:00",
       "title": "Redirect legacy Study simulator route to GAME",
