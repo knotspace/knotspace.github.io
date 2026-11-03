@@ -257,7 +257,12 @@ function startClock(){
    stopClock();state.waitingChoice=true;
    $('clock-message').textContent=state.auto?'おまかせで今年の選択を進めます。':'今年の時間が経過した。選択肢から次の道を決めよう。';
    if(state.auto)chooseAutomatically();
-   else {$('pause-game').textContent='再開';}
+   else {
+    $('pause-game').textContent='再開';
+    const canChoose=!getExamType(stages[state.step]?.tag)||!!state.pendingSchool;
+    document.querySelectorAll('.choice-button').forEach(button=>button.disabled=!canChoose);
+    try{localStorage.setItem('knot-life-sim-v2',JSON.stringify(state));}catch{}
+   }
   }
  },100);
 }
