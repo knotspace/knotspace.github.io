@@ -156,6 +156,22 @@ collections:
             name: siteDescription
             widget: text
             required: true
+          - label: ナビゲーションメニュー
+            name: navigation
+            widget: list
+            collapsed: true
+            summary: "{{fields.label}} → {{fields.url}}"
+            fields:
+              - { label: 表示名, name: label, widget: string }
+              - { label: リンク先URL, name: url, widget: string, hint: "例：/blog/ または https://example.com" }
+          - label: フッター説明文
+            name: footerText
+            widget: text
+            required: true
+          - label: フッター下部の短い表記
+            name: footerNote
+            widget: string
+            required: true
   - name: study_content
     label: KNOT Study管理
     files:
