@@ -12,7 +12,10 @@ const files = fs.readdirSync(blogDir).filter((name) => name.endsWith('.md')).sor
 function normalizeImage(value) {
   try {
     const url = new URL(value, 'https://knotspace.github.io/');
-    return url.origin + url.pathname;
+    // Query parameters can identify distinct icon assets served by one favicon endpoint.
+    const query = [...url.searchParams.entries()].sort(([a], [b]) => a.localeCompare(b));
+    const suffix = query.length ? '?' + new URLSearchParams(query).toString() : '';
+    return url.origin + url.pathname + suffix;
   } catch {
     return value;
   }
