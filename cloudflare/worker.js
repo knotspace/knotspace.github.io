@@ -602,7 +602,9 @@ export default {
         await env.DB.prepare("UPDATE cms_documents SET status = 'published', published_at = ?, updated_at = ? WHERE document_id = ?").bind(publishedAt, now, id).run();
         return json({ published: true, path, url: "https://knotspace.github.io/" + (row.collection === "pages" ? "" : "blog/") + row.slug + "/", document: { ...row, status: "published", published_at: publishedAt, updated_at: now } }, 200, origin);
       } catch (error) {
-        return json({ error: "公開に失敗しました。記事データまたはGitHub連携を確認してください。" }, 502, origin);
+        console.error("KNOT publish-document failed:", error);
+        const detail = error instanceof Error ? error.message : String(error);
+        return json({ error: "公開処理エラー: " + detail.slice(0, 240) }, 502, origin);
       }
     }
 
