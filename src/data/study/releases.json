@@ -1,6 +1,19 @@
 {
   "releases": [
     {
+      "id": "51363dd",
+      "publishedAt": "2026-11-03T20:19:47+09:00",
+      "title": "Restrict KOSEN regular practice to science and social studies (#36)",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "高専対策"
+      ],
+      "files": [
+        "src/pages/study/kosen.astro"
+      ]
+    },
+    {
       "id": "675093b",
       "publishedAt": "2026-11-03T20:16:44+09:00",
       "title": "Expand KNOT Study with five-subject KOSEN preparation (#35)",
