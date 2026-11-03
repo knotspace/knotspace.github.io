@@ -56,6 +56,13 @@ function walk(dir) {
     return extensions.has(path.extname(entry.name))?[full]:[];
   });
 }
+// The game intentionally displays official public crisis-support hotlines; these are not personal contact details.
+const publicHelplineFiles = new Set([
+  'public/青の分岐点/index.html',
+  'public/青の分岐点/i18n/en.json',
+  'public/青の分岐点/i18n/ko.json',
+  'public/青の分岐点/i18n/zh.json'
+]);
 // These files use grade labels as generic fictional simulation stages, not as personal profile data.
 const gradeLabelFiles = new Set(['src/pages/game/life.astro','src/pages/one-life/index.astro','src/utils/academic-grade.ts','src/utils/profile-age.ts']);
 for (const dir of dirs) for (const file of walk(path.join(root,dir))) {
@@ -63,6 +70,7 @@ for (const dir of dirs) for (const file of walk(path.join(root,dir))) {
   const content=fs.readFileSync(file,'utf8');
   for (const p of patterns) {
     if (p.label==='specific school grade' && gradeLabelFiles.has(relative)) continue;
+    if (p.label==='Japanese phone' && publicHelplineFiles.has(relative)) continue;
     if(p.regex.test(content)) failures.push(relative+':個人情報の可能性 ('+p.label+')');
   }
 }
