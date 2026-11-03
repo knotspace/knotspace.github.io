@@ -1,0 +1,186 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="人生シミュレーター｜KNOT GAME" description="小学校入学から進学、就職、起業、若年期の未来までを選択して進む人生シミュレーション。">
+<main class="sim-page">
+<a class="back-link" href="../">← GAMEに戻る</a>
+<header class="sim-hero"><p class="eyebrow">KNOT GAME / LIFE SIMULATION</p><h1>人生は、選択で<span>変わっていく。</span></h1><p>小学校入学から若年期の未来まで。受験するか、何を学ぶか、どんな仕事をするか。自分の選択で人生を進めよう。</p><div class="hero-tags"><span>CHILDHOOD</span><span>EDUCATION</span><span>CAREER</span><span>YOUR FUTURE</span></div></header>
+<section id="start-screen" class="panel start-panel">
+<p class="eyebrow">NEW LIFE</p><h2>新しい人生を始めよう。</h2>
+<label class="field-label" for="player-name">主人公の名前</label><input id="player-name" maxlength="12" placeholder="ニックネーム（任意）"/>
+<p class="field-label">生まれ持った個性を選ぼう</p><div class="path-options">
+<label><input type="radio" name="talent" value="balanced" checked/><span><b>バランス型</b><small>学力・体力・人間関係を平均的に伸ばす</small></span></label>
+<label><input type="radio" name="talent" value="curious"/><span><b>探究型</b><small>知りたいことを深く掘り下げる</small></span></label>
+<label><input type="radio" name="talent" value="social"/><span><b>社交型</b><small>人との出会いや経験から成長する</small></span></label>
+</div><button id="start-game" class="primary-button">人生を始める →</button><p class="fine-print">架空の人生シミュレーションです。実際の合否・収入・将来を予測するものではありません。</p>
+</section>
+<section id="game-screen" hidden>
+<div class="game-top"><div><p class="eyebrow">YOUR LIFE JOURNEY</p><h2 id="year-label">小学1年生</h2><p id="term-label">春</p></div><div class="progress-wrap"><span id="progress-label">1 / 1</span><div class="progress-track"><i id="progress-bar"></i></div></div></div>
+<div class="stats-panel">
+<div><span>学力</span><strong id="stat-study">40</strong><i><b id="bar-study"></b></i></div><div><span>経験</span><strong id="stat-experience">30</strong><i><b id="bar-experience"></b></i></div><div><span>健康</span><strong id="stat-health">75</strong><i><b id="bar-health"></b></i></div><div><span>人とのつながり</span><strong id="stat-friends">35</strong><i><b id="bar-friends"></b></i></div>
+</div>
+<article class="event-card"><div class="event-meta"><span id="event-season">LIFE STAGE</span><span id="event-number">EPISODE 01</span></div><p id="event-scene" class="event-scene"></p><h3 id="event-title"></h3><p id="event-description" class="event-description"></p><div id="choices" class="choices"></div></article>
+<div class="diary-log"><h3>人生の記録</h3><ol id="diary-list"></ol></div><button id="save-exit" class="quiet-button">ここまでの記録を保存して閉じる</button>
+</section>
+<section id="result-screen" class="panel result-panel" hidden>
+<p class="eyebrow">YOUR LIFE / YOUNG ADULTHOOD</p><h2 id="ending-title">あなたの人生の、その先へ。</h2><p id="ending-copy" class="ending-copy"></p><div id="result-stats" class="result-stats"></div>
+<div class="result-message"><strong>この人生で育てたもの</strong><p id="result-reflection"></p></div><h3 class="timeline-heading">歩んできた人生</h3><ol id="final-diary" class="final-diary"></ol>
+<div class="result-message future-box"><strong>この若年期から考えられる、その後の未来</strong><p id="future-copy"></p></div>
+<div class="result-actions"><button id="restart-game" class="primary-button">別の人生を歩む ↻</button><a href="../" class="secondary-button">GAME一覧へ戻る →</a></div><p class="fine-print">ゲーム内の選択と数値から作るフィクションの展望です。現実の人生はこの結果に固定されず、何度でも選び直せます。</p>
+</section>
+</main>
+<script>
+const $=id=>document.getElementById(id), clamp=n=>Math.max(0,Math.min(100,n));
+let state=null, stages=[];
+const choices=(items)=>items.map(([label,effect,log,decision])=>({label,effect,log,decision}));
+function stage(year,season,title,scene,desc,opts,tag){return {year,season,title,scene,desc,opts:choices(opts),tag};}
+function buildStages(){
+ const s=[];
+ const add=(...args)=>s.push(stage(...args));
+ const school=[['毎日少しずつ宿題と復習をする',{study:7},'机に向かう習慣が少しずつ身についた。'],['友達と遊びながらいろいろなことを経験する',{friends:7,experience:6},'友達との時間や遊びから多くを学んだ。'],['スポーツや習い事に打ち込む',{health:7,experience:6},'続けることの楽しさと難しさを知った。']];
+ for(let g=1;g<=6;g++) add('小学'+g+'年生','APRIL','小学校'+g+'年生の毎日',g===1?'ランドセルを背負って、初めての教室へ。':'少しずつできることが増え、学校にも慣れてきた。','授業、友達、休み時間。毎日の小さな経験が、これからの自分をつくっていく。',school,'ELEMENTARY');
+ add('小学6年生','WINTER','中学受験をする？','周りでは中学受験の話も聞こえてきた。受験する道も、地元の中学校へ進む道もある。','ここで選んだ進路によって、その後の受験ルートが変わる。',[
+ ['中学受験に挑戦する',{study:4,health:-3},'受験勉強を始めた。自分で決めた目標に挑戦する。',{middleExam:true}],
+ ['地元の中学校へ進む',{friends:3,health:3},'地元の中学校へ進むことにした。高校受験は中学生活の先に待っている。',{middleExam:false}]
+ ],'MIDDLE EXAM CHOICE');
+ if(state.decisions.middleExam) add('中学受験','FEBRUARY','中学受験本番','準備してきた日々を思い出しながら、試験会場へ向かう。','結果は努力だけで決まるものではない。最後まで落ち着いて取り組もう。',[
+ ['得意な問題から落ち着いて解く',{study:5,health:3},'最後まで自分の力を出し切った。',{examResult:'pass'}),
+ ['難しい問題にも粘り強く向き合う',{study:7,health:-4},'考え抜く経験を積んだ。',{examResult:'pass'})
+ ],'EXAM');
+ if(!state.decisions.middleExam||state.decisions.examResult!=='pass'){
+  for(let g=1;g<=3;g++) add('中学'+g+'年生','APRIL','中学校'+g+'年生',g===1?'新しい制服、新しい教室。中学校生活が始まる。':'勉強も部活も少しずつ本格的になってきた。','定期テスト、部活動、友達との時間。自分に合うペースを探そう。',[
+   ['授業と復習を大切にする',{study:8,health:-2},'基礎を積み重ね、学ぶ力が伸びた。'],
+   ['部活動や学校行事に力を入れる',{experience:8,friends:5,health:-2},'仲間と一緒に取り組む経験が増えた。'],
+   ['勉強と遊びのバランスを取る',{study:4,experience:4,friends:4,health:3},'無理をしすぎず、充実した毎日を送った。']
+  ],'MIDDLE'));
+  add('中学3年生','WINTER','高校受験に挑む','進路を決める時期。行きたい高校、学びたいこと、通学や校風。自分に合う場所を考える。','中学受験を選ばなかった人は、ここで高校受験に挑戦する。',[
+   ['目標校に向けて最後まで勉強する',{study:12,health:-5},'目標を決め、最後まで努力を続けた。',{highExam:true}],
+   ['自分に合う学校を調べて選ぶ',{study:5,experience:5},'偏差値だけでなく、学びや環境も考えて進路を選んだ。',{highExam:true}]
+  ],'HIGH EXAM');
+  add('高校受験','FEBRUARY','高校受験本番','積み重ねた時間を胸に、試験会場へ。','結果がどうであっても、ここまで努力した経験は残る。',[
+   ['落ち着いて解ける問題から進める',{study:5,health:3},'自分のペースで最後までやり切った。',{highResult:'pass'}],
+   ['最後の一秒まで考え抜く',{study:7,health:-3},'粘り強く問題と向き合った。',{highResult:'pass'}]
+  ],'EXAM');
+ } else {
+  add('中高一貫校','APRIL','中高一貫の新しい学び','中学受験を経て入った学校。高校受験がない分、学びや活動に時間を使える。','中学から高校へ、同じ環境で学びを深めていく。',[
+   ['先取り学習に挑戦する',{study:9,health:-2},'自分のペースで学びを進めた。'],
+   ['部活や行事にも積極的に参加する',{experience:8,friends:5},'学校生活の幅が広がった。']
+  ],'INTEGRATED'));
+ }
+ const highRoute=state.decisions.middleExam&&state.decisions.examResult==='pass'?'中高一貫校':'高校';
+ for(let g=1;g<=3;g++) add(highRoute+g+'年生','APRIL',highRoute+g+'年生、広がる世界',g===1?'新しい校舎、新しい仲間。ここからの3年間が始まる。':g===2?'学校生活に慣れ、自分の得意や興味が見えてきた。':'最後の学年。卒業後の進路を具体的に考える時期。','授業、部活、行事、探究。高校生活で何を大切にするかは自分次第。',[
+  ['学びを深め、資格や検定にも挑戦',{study:8,experience:3,health:-2},'知識と技術が少しずつ自分の力になった。'],
+  ['部活・行事・仲間との経験を大切にする',{experience:8,friends:7},'仲間と過ごした時間が大切な思い出になった。'],
+  ['興味のある分野を見つけて挑戦する',{study:5,experience:8},'自分が夢中になれる分野に出会った。']
+ ],'HIGH SCHOOL'));
+ add('高校卒業','MARCH','卒業後の進路を選ぶ','高校生活が終わる。ここから先は、大学だけが道ではない。学びたいことや目指す暮らしから進路を考えよう。','大学・専門学校・就職・起業。それぞれに違う経験と可能性がある。',[
+ ['大学へ進学する',{study:4,experience:2},'大学進学を目指すことにした。',{career:'university'}],
+ ['専門学校で専門技術を学ぶ',{experience:7},'学びたい技術を身につけるため、専門学校を選んだ。',{career:'vocational'}],
+ ['就職して社会に出る',{experience:8},'働きながら経験を積む道を選んだ。',{career:'work'}],
+ ['自分で事業を始める',{experience:10,health:-3},'自分のアイデアを形にする挑戦を始める。',{career:'startup'})
+ ],'CAREER');
+ if(state.decisions.career==='university'){
+  add('大学受験','JANUARY','大学受験に挑戦','大学で何を学ぶかを考え、受験本番を迎えた。','大学進学を選んだ人は全員ここで受験に挑む。結果はゲーム上の経験値で表現される。',[
+   ['基礎から積み上げた力を発揮する',{study:9,health:3},'準備してきたことを出し切った。',{uniResult:'pass'}],
+   ['難しい問題にも挑み続ける',{study:11,health:-4},'最後まで考え抜く姿勢を貫いた。',{uniResult:'pass'}]
+  ],'UNIVERSITY EXAM');
+  add('大学1〜2年','CAMPUS','大学での学びが始まる','授業やゼミ、サークル、アルバイト。高校までとは違う自由と責任がある。','自分で時間を管理し、学びたいテーマを見つけよう。',[
+   ['専門分野を深く学ぶ',{study:10,experience:4},'専門知識が積み重なった。'],
+   ['サークルや人との出会いを広げる',{friends:10,experience:8},'多様な人と出会い、視野が広がった。'],
+   ['インターンや実践活動に参加する',{experience:12,health:-2},'社会につながる経験を積んだ。']
+  ],'UNIVERSITY'));
+  add('大学3〜4年','CAREER','学びを次の一歩につなぐ','研究、制作、就職活動。大学で得たものをどう活かすか考える。','卒業後の道を選ぶ時期が来た。',[
+   ['企業に就職する',{experience:8},'学んだことを仕事につなげる道を選んだ。',{afterStudy:'work'}],
+   ['専門性をさらに磨く',{study:8,experience:5},'知識を深め、専門性を高めることにした。',{afterStudy:'work'}],
+   ['自分の事業を立ち上げる',{experience:10,health:-3},'学びとアイデアを事業にしてみる。',{afterStudy:'startup'})
+  ],'GRADUATION'));
+ }
+ if(state.decisions.career==='vocational'){
+  add('専門学校1年','SKILLS','専門技術を身につける','実習や課題を通して、目指す仕事に必要な技術を学ぶ。','手を動かし、失敗し、できることを増やしていこう。',[
+   ['実習と作品づくりに全力を注ぐ',{experience:11,study:5,health:-2},'技術と実践力が伸びた。'],
+   ['資格取得に向けて勉強する',{study:10,experience:3},'目標に向けて知識を整理した。'],
+   ['現場での実習や交流を大切にする',{friends:5,experience:9},'仕事の現場を知る機会になった。']
+  ],'VOCATIONAL'));
+  add('専門学校2年','GRADUATION','学んだ技術を仕事へ','卒業が近づき、身につけた技術を活かす場所を探す。','就職して経験を積むか、自分のサービスを始めるか。',[
+   ['学んだ分野に就職する',{experience:8},'学んだ技術を活かせる仕事に進んだ。',{afterStudy:'work'}],
+   ['独立・起業に挑戦する',{experience:10,health:-3},'自分の技術で仕事をつくる道を選んだ。',{afterStudy:'startup'})
+  ],'VOCATIONAL'));
+ }
+ if(state.decisions.career==='work'||state.decisions.afterStudy==='work'){
+  for(let y=1;y<=3;y++) add('社会人'+y+'年目','WORK','仕事'+y+'年目','仕事を通じて、責任やチームで働くことを学んでいく。','収入だけでなく、働き方、成長、生活とのバランスも考えよう。',[
+   ['目の前の仕事を丁寧に積み重ねる',{experience:7,health:2},'信頼と経験が少しずつ積み上がった。'],
+   ['新しいスキルや資格を学ぶ',{study:6,experience:6,health:-2},'仕事の幅を広げる力を身につけた。'],
+   ['人とのつながりやチームワークを大切にする',{friends:8,experience:4},'相談できる仲間や信頼関係ができた。']
+  ],'WORK'));
+ }
+ if(state.decisions.career==='startup'||state.decisions.afterStudy==='startup'){
+  for(let y=1;y<=3;y++) add('起業'+y+'年目','STARTUP','自分の事業、'+y+'年目','自分で始めた事業を続ける。顧客の声、資金、仲間、サービスの改善。毎年状況が変わる。','うまくいく保証はない。続ける・方向転換する・協力者を探す。判断の積み重ねが事業を形づくる。',[
+   ['顧客の声を聞いてサービスを改善',{experience:8,study:4},'使う人の声をもとに改善を重ねた。'],
+   ['仲間や協力者を探す',{friends:9,experience:5},'一緒に挑戦する人とのつながりができた。'],
+   ['支出を見直し、小さく堅実に続ける',{experience:5,health:5},'無理のない運営を意識した。']
+  ],'STARTUP'));
+ }
+ add('若年期','FUTURE','ここから先の人生','これまでの選択を振り返る。学び、出会い、失敗、挑戦。その全部が今の自分につながっている。','これからも仕事、学び直し、転職、独立、休息。人生には何度も選び直す機会がある。',[
+  ['新しいことを学び続ける',{study:5,experience:5},'これからも成長を続けると決めた。'],
+  ['大切な人や暮らしを守る',{friends:5,health:5},'自分にとって大切なものを見つめ直した。'],
+  ['もう一度、大きな挑戦をする',{experience:8,health:-2},'次の目標に向けて一歩を踏み出した。']
+ ],'FUTURE');
+ stages=s;
+}
+function updateStats(){
+ for(const k of ['study','experience','health','friends']){$('stat-'+k).textContent=state.stats[k];$('bar-'+k).style.width=state.stats[k]+'%';}
+ $('progress-label').textContent=(state.step+1)+' / '+stages.length;$('progress-bar').style.width=((state.step+1)/stages.length*100)+'%';
+ const e=stages[state.step];$('year-label').textContent=e.year;$('term-label').textContent=e.season;
+}
+function render(){
+ buildStages();
+ if(state.step>=stages.length){finish();return;}
+ const e=stages[state.step];updateStats();
+ $('event-season').textContent=e.tag+' / '+e.season;$('event-number').textContent='EPISODE '+String(state.step+1).padStart(2,'0');
+ $('event-scene').textContent=e.scene;$('event-title').textContent=e.title;$('event-description').textContent=e.desc;
+ const box=$('choices');box.replaceChildren();
+ e.opts.forEach((o,i)=>{const b=document.createElement('button');b.className='choice-button';const strong=document.createElement('strong');strong.textContent=String.fromCharCode(65+i)+'. '+o.label;const small=document.createElement('small');small.textContent='この道を選ぶ';b.append(strong,small);b.addEventListener('click',()=>choose(o));box.append(b);});
+ $('diary-list').replaceChildren();state.diary.slice(-5).forEach(x=>{const li=document.createElement('li');li.textContent=x.title+' — '+x.log;$('diary-list').append(li);});
+}
+function choose(o){
+ Object.entries(o.effect||{}).forEach(([k,v])=>state.stats[k]=clamp(state.stats[k]+v));
+ if(o.decision){const decision={...o.decision};if(decision.examResult==='pass'&&state.stats.study<50)decision.examResult='fail';if(decision.highResult==='pass'&&state.stats.study<42)decision.highResult='fail';Object.assign(state.decisions,decision);}
+ const e=stages[state.step];state.diary.push({title:e.title,log:o.log,choice:o.label});
+ state.step++;buildStages();
+ try{localStorage.setItem('knot-life-sim-v2',JSON.stringify(state));}catch{}
+ render();
+}
+function finish(){
+ $('game-screen').hidden=true;$('result-screen').hidden=false;
+ const d=state.decisions,s=state.stats;
+ let route=d.career==='university'?'大学進学':d.career==='vocational'?'専門学校':d.career==='work'?'就職':'起業';
+ if(d.afterStudy==='startup')route='学びを経て起業';if(d.afterStudy==='work')route='学びを経て就職';
+ let title=s.experience>75?'挑戦を重ね、自分の道を切り開いた。':s.study>75?'学びを力に変えた人生。':s.friends>75?'人とのつながりに恵まれた人生。':'自分の選択で歩んだ人生。';
+ $('ending-title').textContent=title;
+ $('ending-copy').textContent=(state.name?state.name+'さん':'あなた')+'は、小学校から若年期まで、さまざまな選択を重ねてきた。最終的には「'+route+'」の道へ。どの進路が上ということではない。自分で選び、経験し、次の一歩を決めたことに意味がある。';
+ $('result-stats').replaceChildren();[['学力',s.study],['経験',s.experience],['健康',s.health],['人とのつながり',s.friends]].forEach(([k,v])=>{const el=document.createElement('div'),b=document.createElement('b'),sp=document.createElement('span');b.textContent=v;sp.textContent=k;el.append(b,sp);$('result-stats').append(el);});
+ $('result-reflection').textContent='学力だけでも、収入だけでも、人生の価値は決まらない。あなたは学び、経験し、人と関わりながら、自分なりの土台をつくった。';
+ let future='これから先も、仕事で経験を積む、別の分野を学ぶ、転職する、独立する、暮らしを大切にするなど、多くの道がある。今の結果は未来の決定ではない。';
+ if(d.career==='startup'||d.afterStudy==='startup')future='事業を3年間続けた経験は、成功・失敗にかかわらず大きな財産になる。顧客を理解する力、資金を管理する力、仲間と進める力を活かして、事業を育てる・方向転換する・就職して経験を活かすなどの未来が考えられる。';
+ else if(d.career==='university')future='大学で得た知識や出会いを土台に、仕事で専門性を磨く道も、別の分野へ進む道もある。学び直しや転職も含め、選択肢はこれからも増やせる。';
+ else if(d.career==='vocational')future='専門学校で身につけた技術と現場経験を重ね、専門職として成長する道がある。経験を積んで独立したり、別の技術を学び直したりする未来も考えられる。';
+ $('future-copy').textContent=future;
+ $('final-diary').replaceChildren();state.diary.forEach((x,i)=>{const li=document.createElement('li'),b=document.createElement('b'),p=document.createElement('p');b.textContent=String(i+1).padStart(2,'0')+' / '+x.title;p.textContent=x.log;li.append(b,p);$('final-diary').append(li);});
+ try{localStorage.removeItem('knot-life-sim-v2');}catch{}
+}
+function start(){
+ const t=document.querySelector('input[name="talent"]:checked')?.value||'balanced';
+ const stats=t==='curious'?{study:48,experience:35,health:72,friends:32}:t==='social'?{study:35,experience:42,health:78,friends:48}:{study:40,experience:35,health:75,friends:38};
+ state={name:$('player-name').value.trim(),stats,decisions:{},step:0,diary:[]};
+ $('start-screen').hidden=true;$('result-screen').hidden=true;$('game-screen').hidden=false;render();
+ try{localStorage.setItem('knot-life-sim-v2',JSON.stringify(state));}catch{}
+}
+$('start-game').addEventListener('click',start);
+$('restart-game').addEventListener('click',()=>{$('result-screen').hidden=true;$('start-screen').hidden=false;});
+$('save-exit').addEventListener('click',()=>{try{localStorage.setItem('knot-life-sim-v2',JSON.stringify(state));}catch{}$('game-screen').hidden=true;$('start-screen').hidden=false;});
+try{const saved=JSON.parse(localStorage.getItem('knot-life-sim-v2')||'null');if(saved&&saved.stats&&saved.decisions&&saved.diary&&Number.isInteger(saved.step)){state=saved;$('player-name').value=state.name||'';$('start-screen').hidden=true;$('game-screen').hidden=false;render();}}catch{}
+</script>
+<style>
+.sim-page{width:min(100%,900px);margin:0 auto;padding:25px 0 55px;color:var(--text)}.back-link{font-size:12px;color:var(--accent)}.sim-hero{padding:38px 0 27px}.eyebrow{font:9px ui-monospace,monospace;letter-spacing:.16em;color:var(--accent);font-weight:850}.sim-hero h1{font-size:clamp(34px,6vw,58px);line-height:1.2;letter-spacing:-.065em;margin:12px 0}.sim-hero h1 span{color:var(--accent)}.sim-hero>p:not(.eyebrow){max-width:650px;color:var(--muted);font-size:13px;line-height:1.9}.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:17px}.hero-tags span{padding:6px 9px;border:1px solid var(--line);border-radius:6px;color:var(--muted);font:8px ui-monospace,monospace;letter-spacing:.1em}.panel{padding:24px;border:1px solid var(--line);border-radius:17px;background:var(--surface)}.panel h2{font-size:23px;margin:6px 0 20px}.field-label{display:block;font-size:11px;font-weight:800;margin:17px 0 8px}.start-panel>input{width:100%;max-width:340px;padding:12px 13px;border:1px solid var(--line);border-radius:9px;background:var(--surface-soft);color:var(--text);font:inherit}.path-options{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.path-options label{cursor:pointer}.path-options input{position:absolute;opacity:0}.path-options label span{display:grid;gap:7px;height:100%;padding:14px;border:1px solid var(--line);border-radius:11px;background:var(--surface-soft)}.path-options input:checked+span{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}.path-options b{font-size:12px}.path-options small{font-size:10px;line-height:1.6;color:var(--muted)}.primary-button,.secondary-button{display:inline-flex;justify-content:center;align-items:center;gap:12px;margin-top:20px;padding:13px 18px;border:0;border-radius:9px;background:var(--accent);color:#071426;font:inherit;font-size:12px;font-weight:900;cursor:pointer;text-decoration:none}.fine-print{font-size:10px;line-height:1.7;color:var(--muted);margin:14px 0 0}.game-top{display:flex;align-items:end;justify-content:space-between;gap:15px;padding:17px 0}.game-top h2{font-size:25px;margin:4px 0}.game-top p:not(.eyebrow){font-size:11px;color:var(--muted);margin:0}.progress-wrap{width:min(180px,35%);font:10px ui-monospace,monospace;color:var(--muted)}.progress-track{height:6px;margin-top:8px;border-radius:8px;background:var(--surface-soft);overflow:hidden}.progress-track i{display:block;height:100%;width:0;background:var(--accent);transition:width .25s}.stats-panel{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:14px;border:1px solid var(--line);border-radius:13px;background:var(--surface)}.stats-panel>div{display:grid;grid-template-columns:1fr auto;gap:5px;align-items:center}.stats-panel span{font-size:10px;color:var(--muted)}.stats-panel strong{font-size:17px;font-variant-numeric:tabular-nums}.stats-panel i{grid-column:1/-1;height:5px;border-radius:5px;background:var(--surface-soft);overflow:hidden}.stats-panel i b{display:block;height:100%;width:45%;background:var(--accent);border-radius:5px}.event-card{margin-top:13px;padding:23px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 7%,var(--surface)),var(--surface))}.event-meta{display:flex;justify-content:space-between;font:9px ui-monospace,monospace;letter-spacing:.12em;color:var(--accent)}.event-scene{font-size:12px;color:var(--muted);line-height:1.8;margin:25px 0 5px}.event-card h3{font-size:clamp(22px,4vw,29px);letter-spacing:-.04em;margin:7px 0}.event-description{font-size:13px;line-height:1.9;color:var(--muted);margin:8px 0 19px}.choices{display:grid;gap:9px}.choice-button{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--text);text-align:left;cursor:pointer;font:inherit}.choice-button:hover{border-color:var(--accent)}.choice-button strong{font-size:12px}.choice-button small{font-size:9px;color:var(--muted);white-space:nowrap}.diary-log{margin:17px 0;padding:16px;border:1px solid var(--line);border-radius:12px}.diary-log h3,.timeline-heading{font-size:13px;margin:0 0 9px}.diary-log ol{margin:0;padding-left:20px;color:var(--muted);font-size:10px;line-height:1.9}.quiet-button{border:0;background:transparent;color:var(--muted);font:inherit;font-size:10px;text-decoration:underline;cursor:pointer}.result-panel{margin-top:12px}.result-panel h2{font-size:clamp(25px,5vw,38px);letter-spacing:-.05em;margin:10px 0}.ending-copy{font-size:13px;line-height:2;color:var(--muted)}.result-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:20px 0}.result-stats div{display:grid;gap:4px;padding:13px;border-radius:10px;background:var(--surface-soft)}.result-stats b{font-size:25px}.result-stats span{font-size:10px;color:var(--muted)}.result-message{padding:17px;border-left:3px solid var(--accent);background:var(--surface-soft);margin-top:16px}.result-message strong{font-size:12px}.result-message p{font-size:12px;line-height:1.8;color:var(--muted);margin:7px 0 0}.timeline-heading{margin:24px 0 10px}.final-diary{list-style:none;padding:0;margin:0}.final-diary li{padding:11px 0;border-bottom:1px solid var(--line)}.final-diary b{font-size:11px}.final-diary p{font-size:11px;color:var(--muted);margin:5px 0 0}.result-actions{display:flex;gap:10px;flex-wrap:wrap}.secondary-button{background:var(--surface-soft);color:var(--text);border:1px solid var(--line)}[hidden]{display:none!important}@media(max-width:650px){.sim-page{padding:18px 0 40px}.sim-hero{padding:28px 0 20px}.panel{padding:18px}.path-options{grid-template-columns:1fr}.stats-panel{gap:8px;padding:11px}.stats-panel span{font-size:9px}.stats-panel strong{font-size:15px}.event-card{padding:17px}.choice-button{display:grid;gap:5px}.choice-button small{white-space:normal}.result-stats{grid-template-columns:repeat(2,1fr)}.game-top h2{font-size:21px}}
+</style>
+</Layout>
