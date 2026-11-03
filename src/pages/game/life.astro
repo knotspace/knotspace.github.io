@@ -3057,7 +3057,46 @@ function polStep(L){const F=L.flags,x=L.age,J=JOBS[L.job]||{};if(!L.alive||L.pri
     {t:"立候補する",s:`${L.job}を辞める`,w:1,f(){F.polPrev=L.job;log(L,`${L.job}を辞めて、立候補を決めた。`,"big");polElect(L,o,true)}},
     {t:"断る",s:"今の仕事を続ける",w:4,f(){log(L,"断った。選挙のポスターを見るたび、自分の顔を想像した。")}}]}}
   return null}
-function stepYearAll(L){jobTrack(L);let d=stepYearAll0(L);jobTrack(L);if(L.alive){const md=misc(L,!d);if(!d&&md)d=md}if(L.alive&&!d){const pd=polStep(L);if(pd)d=pd}if(L.alive){const gd=geiStep(L,!d);if(!d&&gd)d=gd}if(L.alive)teenLove(L);if(L.alive)engStep(L);if(L.alive){const sd=showStep(L,!d);if(!d&&sd)d=sd}if(L.alive){const nd=snStep(L,!d);if(!d&&nd)d=nd}if(L.alive){const kd=komuStep(L,!d);if(!d&&kd)d=kd}if(L.alive){const td=takaStep(L,true);if(td){if(!d)d=td;else if(d.opts){const nx=td;d.opts.forEach(o=>{const f0=o.f;o.f=function(){const r=f0.apply(this,arguments);return r||nx}})}}}if(L.flags.marsGo){L.where="火星";if(d&&/選挙|投票|争点/.test((d.title||"")+(d.text||"")))return null;if(d&&d.moral&&!/火星|基地|ドーム|地球|宇宙/.test((d.title||"")+(d.text||""))&&!/病|検査|入院|子ども|息子|娘|夫|妻|結婚|恋/.test(d.title||""))return null}prisonNote(L);if(!L.alive){if(!L.flags.post){L.flags.post=1;towerEstate(L);postDeath(L)}return null}return d}
+function schoolYouthDecision(L){
+  const x=L.age,F=L.flags;
+  if(!L.alive||L.prison)return null;
+  const once=key=>{if(F[key])return false;F[key]=1;return true};
+  if(x===12&&once("knotStudy12"))return{moral:1,force:1,title:"中学入学。これからの3年間をどう過ごす？",text:"勉強も部活も友だちとの時間も、全部は簡単に両立できない。最初の方針を決める。",opts:[
+    {t:"毎日コツコツ勉強する",s:"授業の復習を習慣にする",w:3,f(){add(L,"k",7);add(L,"j",-2);log(L,"中学では、毎日少しずつ勉強する習慣をつけた。最初は面倒だったが、テスト前に慌てなくなった。","big")}},
+    {t:"塾・通信教材を活用する",s:"費用はかかるが、学習環境を整える",w:2,f(){L.assets-=12;add(L,"k",9);log(L,"塾か通信教材を始めた。月謝や教材費は家計の負担になったが、勉強する時間が決まった。")}},
+    {t:"部活と友だちとの時間を大切にする",s:"青春を楽しみながら、必要な勉強は続ける",w:3,f(){add(L,"j",7);add(L,"r",5);add(L,"k",2);log(L,"部活や友だちとの時間を大切にした。放課後の何気ない会話が、あとから一番の思い出になった。","big")}}
+  ]};
+  if(x===14&&once("knotStudy14"))return{moral:1,force:1,title:"中2。成績と青春、どちらにも本気になりたい。",text:"定期テスト、模試、部活、友人関係。時間の使い方で差がつき始める。",opts:[
+    {t:"定期テストで上位を目指す",s:"苦手単元をつぶして内申も意識",w:3,f(){add(L,"k",8);log(L,"テスト前は計画表を作り、苦手な単元から取り組んだ。順位が上がり、少し自信がついた。","big")}},
+    {t:"模試を受けて実力を知る",s:"偏差値や志望校判定を見て作戦を立てる",w:2,f(){add(L,"k",6);if(R()<.45){add(L,"j",-2);log(L,"模試の結果は思ったより厳しかった。偏差値だけに振り回されず、間違えた問題を分析することにした。")}else{add(L,"j",3);log(L,"模試で手応えを感じた。志望校の判定も上がり、目標が少し具体的になった。","big")}}},
+    {t:"部活・友だち・行事を優先する",s:"今しかない中学生活を楽しむ",w:3,f(){add(L,"j",8);add(L,"r",4);log(L,"部活の仲間と過ごす時間を優先した。勉強時間は短くなったが、かけがえのない思い出が増えた。","big")}}
+  ]};
+  if(x===16&&once("knotYouth16"))return{moral:1,force:1,title:"高校生活。どんな3年間にする？",text:"入学した高校で、勉強・部活・行事・人間関係のバランスを決める。",opts:[
+    {t:"勉強中心。大学受験を見据える",s:"授業・定期テスト・模試を軸にする",w:3,f(){add(L,"k",9);add(L,"j",-2);log(L,"高校では勉強を軸にした。模試の判定や校内順位を見て、少しずつ志望校を絞った。","big")}},
+    {t:"部活に全力。最後までやり切る",s:"仲間と大会やコンクールを目指す",w:3,f(){add(L,"h",4);add(L,"j",7);add(L,"r",4);log(L,"部活に本気で打ち込んだ。練習はきつかったが、仲間と同じ目標を追いかけた時間は忘れられない。","big")}},
+    {t:"文化祭・体育祭・友人関係を楽しむ",s:"行事の企画やクラスの思い出を作る",w:3,f(){add(L,"j",8);add(L,"r",6);log(L,"文化祭や体育祭の準備に夢中になった。放課後の教室、帰り道、写真に残った笑顔。","big")}},
+    {t:"勉強も青春も、どちらも諦めない",s:"時間を決めて両立に挑戦する",w:4,f(){add(L,"k",5);add(L,"j",5);add(L,"r",3);log(L,"平日は勉強、休日は部活や友人との時間。完璧ではなかったが、自分なりのペースを作った。","big")}}
+  ]};
+  if(x===17&&once("knotExam17")&&L.hs&&!L.hs.voc){
+    const dev=devOf(L);
+    return{moral:1,force:1,title:"高2〜高3。受験のライバルが本気を出し始めた。",text:"模試の偏差値、判定、校内順位。数字は参考になるが、最後に伸びるかどうかはこれからの行動で変わる。",opts:[
+      {t:"志望校のレベルを上げて挑戦する",s:"今の実力より上を目指し、勉強量を増やす",w:2,f(){add(L,"k",10);add(L,"j",-3);L.flags.knotReach=1;log(L,`模試の結果を見て、志望校を一段上げた。周りからは無謀だと言われたが、${dev>=60?"得意科目を武器に":"基礎からやり直して"}挑戦することにした。`,"big")}},
+      {t:"得意科目を武器にして戦う",s:"苦手を放置せず、得点源を磨く",w:4,f(){add(L,"k",8);log(L,"模試の科目別成績を分析し、得意科目をさらに伸ばした。偏差値の数字だけでなく、答案の中身を見るようになった。","big")}},
+      {t:"大学名より、学びたい分野で選ぶ",s:"学部・カリキュラム・将来の仕事を調べる",w:3,f(){add(L,"k",6);add(L,"j",3);L.flags.knotFieldFirst=1;log(L,"大学の序列や偏差値の話題から少し距離を置き、学びたい分野や研究内容を調べて志望先を考えた。")}},
+      {t:"学校生活や部活も最後まで大切にする",s:"受験勉強一色にせず、今の仲間との時間も守る",w:3,f(){add(L,"j",6);add(L,"r",4);add(L,"k",3);log(L,"受験勉強を続けながら、最後の大会や行事にも参加した。卒業後に戻れない時間を大切にした。","big")}}
+    ]};
+  }
+  if(x===19&&L.univ&&once("knotCampus19")){
+    const rank=wakatte(L);
+    return{moral:1,title:"大学1年。学歴トークが始まった。",text:"大学群、偏差値、国公立か私立か。ネットでは序列の話題が尽きない。自分はどう向き合う？",opts:[
+      {t:"大学の外でも通用する力を磨く",s:"資格・研究・制作・インターンに挑戦",w:4,f(){add(L,"k",7);add(L,"j",3);log(L,"大学名の話より、何を学び何を作るかに時間を使った。研究室や課外活動で、自分の強みが少しずつ見えてきた。","big")}},
+      {t:"学歴トークの議論に参加してみる",s:"偏差値や大学群を比較し、議論を楽しむ",w:2,f(){add(L,"k",2);add(L,"r",-1);log(L,`サークルで大学群や偏差値の話になった。自分の大学の目安偏差値は${Math.round(rank)}。数字だけで人を判断しないようにしつつ、議論は楽しんだ。`)}},
+      {t:"学歴の話題から距離を置く",s:"友人や授業、自分の生活を大切にする",w:3,f(){add(L,"j",5);add(L,"r",3);log(L,"大学名で比べ合う会話からは距離を置いた。目の前の授業や友人との時間のほうが、自分には大切だった。")}}
+    ]};
+  }
+  return null;
+}
+function stepYearAll(L){jobTrack(L);let d=schoolYouthDecision(L)||stepYearAll0(L);jobTrack(L);if(L.alive){const md=misc(L,!d);if(!d&&md)d=md}if(L.alive&&!d){const pd=polStep(L);if(pd)d=pd}if(L.alive){const gd=geiStep(L,!d);if(!d&&gd)d=gd}if(L.alive)teenLove(L);if(L.alive)engStep(L);if(L.alive){const sd=showStep(L,!d);if(!d&&sd)d=sd}if(L.alive){const nd=snStep(L,!d);if(!d&&nd)d=nd}if(L.alive){const kd=komuStep(L,!d);if(!d&&kd)d=kd}if(L.alive){const td=takaStep(L,true);if(td){if(!d)d=td;else if(d.opts){const nx=td;d.opts.forEach(o=>{const f0=o.f;o.f=function(){const r=f0.apply(this,arguments);return r||nx}})}}}if(L.flags.marsGo){L.where="火星";if(d&&/選挙|投票|争点/.test((d.title||"")+(d.text||"")))return null;if(d&&d.moral&&!/火星|基地|ドーム|地球|宇宙/.test((d.title||"")+(d.text||""))&&!/病|検査|入院|子ども|息子|娘|夫|妻|結婚|恋/.test(d.title||""))return null}prisonNote(L);if(!L.alive){if(!L.flags.post){L.flags.post=1;towerEstate(L);postDeath(L)}return null}return d}
 function otoshidama(L){const x=L.age,F=L.flags;if(!L.alive||L.prison)return;const h=L.home5||3;const yen=v=>(Math.round(v*10)*1000).toLocaleString("ja-JP");
   if(x>=3&&x<=18){const base=(h>=5?10:h===4?5:h===3?3:h===2?1.5:.6)*(x<6?.4:x<12?1:1.6)*(.7+R()*.6);const v=Math.max(.1,Math.round(base*10)/10);
     if(F.seiho||(h===1&&R()<.4)){if(R()<.15)log(L,"お年玉は、どこからももらえなかった。");}
