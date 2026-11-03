@@ -14,7 +14,7 @@ const PREFECTURES = ['北海道','青森県','岩手県','宮城県','秋田県'
 
 function parseCsv(text) {
   const firstLine = text.split(/\r?\n/, 1)[0] || '';
-  const delimiters = [',', '\\t', ';'];
+  const delimiters = [',', '\t', ';'];
   const delimiter = delimiters.sort((a,b) => firstLine.split(b).length - firstLine.split(a).length)[0];
   const rows = []; let row = []; let field = ''; let quoted = false;
   for (let i = 0; i < text.length; i++) {
@@ -42,10 +42,22 @@ for (const url of SOURCES) {
   console.log('Fetching', url);
   const response = await fetch(url, { headers: { 'user-agent': 'KNOT-School-Database-Importer/1.0' } });
   if (!response.ok) throw new Error(`MEXT CSV fetch failed: ${response.status} ${url}`);
-  const rows = parseCsv(await response.text());
+  const bytes = new Uint8Array(await response.arrayBuffer());
+  let csvText = new TextDecoder('utf-8').decode(bytes);
+  if (!csvText.includes('学校コード') || !csvText.includes('学校名')) {
+    try { csvText = new TextDecoder('shift_jis').decode(bytes); } catch {}
+  }
+  if (bytes[0] === 0xff && bytes[1] === 0xfe) csvText = new TextDecoder('utf-16le').decode(bytes);
+  const rows = parseCsv(csvText);
   if (rows.length < 2) continue;
-  const headers = rows[0].map(v => v.replace(/^\uFEFF/, '').trim());
-  for (const row of rows.slice(1)) {
+  const headerIndex = rows.findIndex(r => r.some(v => /学校コード/.test(v)) && r.some(v => /学校名/.test(v)));
+  if (headerIndex < 0) {
+    console.log('Could not identify CSV header. First rows:', JSON.stringify(rows.slice(0, 3)));
+    continue;
+  }
+  const headers = rows[headerIndex].map(v => v.replace(/^\uFEFF/, '').trim());
+  console.log('Detected school CSV columns:', headers.slice(0, 20).join(' | '));
+  for (const row of rows.slice(headerIndex + 1)) {
     const code = pick(row, headers, [/^学校コード$/,/学校コード/]);
     const name = pick(row, headers, [/学校名/,/学校名称/]);
     if (!code || !name) continue;
