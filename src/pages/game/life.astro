@@ -90,15 +90,15 @@ function buildStages(){
  ['地元の中学校へ進む',{friends:3,health:3},'地元の中学校へ進むことにした。高校受験は中学生活の先に待っている。',{middleExam:false}]
  ],'MIDDLE EXAM CHOICE');
  if(state.decisions.middleExam) add('中学受験','FEBRUARY','中学受験本番','準備してきた日々を思い出しながら、試験会場へ向かう。','結果は努力だけで決まるものではない。最後まで落ち着いて取り組もう。',[
- ['得意な問題から落ち着いて解く',{study:5,health:3},'最後まで自分の力を出し切った。',{examResult:'pass'}),
- ['難しい問題にも粘り強く向き合う',{study:7,health:-4},'考え抜く経験を積んだ。',{examResult:'pass'})
+ ['得意な問題から落ち着いて解く',{study:5,health:3},'最後まで自分の力を出し切った。',{examResult:'pass'}],
+ ['難しい問題にも粘り強く向き合う',{study:7,health:-4},'考え抜く経験を積んだ。',{examResult:'pass'}]
  ],'EXAM');
  if(!state.decisions.middleExam||state.decisions.examResult!=='pass'){
   for(let g=1;g<=3;g++) add('中学'+g+'年生','APRIL','中学校'+g+'年生',g===1?'新しい制服、新しい教室。中学校生活が始まる。':'勉強も部活も少しずつ本格的になってきた。','定期テスト、部活動、友達との時間。自分に合うペースを探そう。',[
    ['授業と復習を大切にする',{study:8,health:-2},'基礎を積み重ね、学ぶ力が伸びた。'],
    ['部活動や学校行事に力を入れる',{experience:8,friends:5,health:-2},'仲間と一緒に取り組む経験が増えた。'],
    ['勉強と遊びのバランスを取る',{study:4,experience:4,friends:4,health:3},'無理をしすぎず、充実した毎日を送った。']
-  ],'MIDDLE'));
+  ], 'MIDDLE');
   add('中学3年生','WINTER','高校受験に挑む','進路を決める時期。行きたい高校、学びたいこと、通学や校風。自分に合う場所を考える。','中学受験を選ばなかった人は、ここで高校受験に挑戦する。',[
    ['目標校に向けて最後まで勉強する',{study:12,health:-5},'目標を決め、最後まで努力を続けた。',{highExam:true}],
    ['自分に合う学校を調べて選ぶ',{study:5,experience:5},'偏差値だけでなく、学びや環境も考えて進路を選んだ。',{highExam:true}]
@@ -111,7 +111,7 @@ function buildStages(){
   add('中高一貫校','APRIL','中高一貫の新しい学び','中学受験を経て入った学校。高校受験がない分、学びや活動に時間を使える。','中学から高校へ、同じ環境で学びを深めていく。',[
    ['先取り学習に挑戦する',{study:9,health:-2},'自分のペースで学びを進めた。'],
    ['部活や行事にも積極的に参加する',{experience:8,friends:5},'学校生活の幅が広がった。']
-  ],'INTEGRATED'));
+  ], 'INTEGRATED');
  }
  if(state.decisions.highResult==='fail'){
   add('中学卒業','MARCH','高校受験の結果、ここからの道を選ぶ','高校受験は不合格。悔しさはあるけれど、人生が終わるわけではない。中卒で働く道、専門技術を学ぶ道、もう一度挑戦する道もある。','高校卒業とは違うスタートになる。選んだ道で経験を積んでいこう。',[
@@ -125,12 +125,12 @@ function buildStages(){
    ['学びを深め、資格や検定にも挑戦',{study:8,experience:3,health:-2},'知識と技術が少しずつ自分の力になった。'],
    ['部活・行事・仲間との経験を大切にする',{experience:8,friends:7},'仲間と過ごした時間が大切な思い出になった。'],
    ['興味のある分野を見つけて挑戦する',{study:5,experience:8},'自分が夢中になれる分野に出会った。']
-  ],'HIGH SCHOOL'));
+  ], 'HIGH SCHOOL');
   add('高校卒業','MARCH','卒業後の進路を選ぶ','高校生活が終わる。ここから先は、大学だけが道ではない。学びたいことや目指す暮らしから進路を考えよう。','大学・専門学校・就職・起業。それぞれに違う経験と可能性がある。',[
   ['大学へ進学する',{study:4,experience:2},'大学進学を目指すことにした。',{career:'university'}],
   ['専門学校で専門技術を学ぶ',{experience:7},'学びたい技術を身につけるため、専門学校を選んだ。',{career:'vocational'}],
   ['就職して社会に出る',{experience:8},'働きながら経験を積む道を選んだ。',{career:'work'}],
-  ['自分で事業を始める',{experience:10,health:-3},'自分のアイデアを形にする挑戦を始める。',{career:'startup'})
+  ['自分で事業を始める',{experience:10,health:-3},'自分のアイデアを形にする挑戦を始める。',{career:'startup'}]
   ],'CAREER');
  }
  if(state.decisions.career==='university'){
@@ -153,8 +153,8 @@ function buildStages(){
    add('大学3〜4年','CAREER','学びを次の一歩につなぐ','研究、制作、就職活動。大学で得たものをどう活かすか考える。','卒業後の道を選ぶ時期が来た。',[
     ['企業に就職する',{experience:8},'学んだことを仕事につなげる道を選んだ。',{afterStudy:'work'}],
     ['専門性をさらに磨く',{study:8,experience:5},'知識を深め、専門性を高めることにした。',{afterStudy:'work'}],
-    ['自分の事業を立ち上げる',{experience:10,health:-3},'学びとアイデアを事業にしてみる。',{afterStudy:'startup'})
-   ],'GRADUATION'));
+    ['自分の事業を立ち上げる',{experience:10,health:-3},'学びとアイデアを事業にしてみる。',{afterStudy:'startup'}]
+   ], 'GRADUATION');
   }
  }
  if(state.decisions.career==='vocational'){
@@ -162,25 +162,25 @@ function buildStages(){
    ['実習と作品づくりに全力を注ぐ',{experience:11,study:5,health:-2},'技術と実践力が伸びた。'],
    ['資格取得に向けて勉強する',{study:10,experience:3},'目標に向けて知識を整理した。'],
    ['現場での実習や交流を大切にする',{friends:5,experience:9},'仕事の現場を知る機会になった。']
-  ],'VOCATIONAL'));
+  ], 'VOCATIONAL');
   add('専門学校2年','GRADUATION','学んだ技術を仕事へ','卒業が近づき、身につけた技術を活かす場所を探す。','就職して経験を積むか、自分のサービスを始めるか。',[
    ['学んだ分野に就職する',{experience:8},'学んだ技術を活かせる仕事に進んだ。',{afterStudy:'work'}],
    ['独立・起業に挑戦する',{experience:10,health:-3},'自分の技術で仕事をつくる道を選んだ。',{afterStudy:'startup'})
-  ],'VOCATIONAL'));
+  ], 'VOCATIONAL');
  }
  if(state.decisions.career==='work'||state.decisions.afterStudy==='work'){
   for(let y=1;y<=3;y++) add('社会人'+y+'年目','WORK','仕事'+y+'年目','仕事を通じて、責任やチームで働くことを学んでいく。','収入だけでなく、働き方、成長、生活とのバランスも考えよう。',[
    ['目の前の仕事を丁寧に積み重ねる',{experience:7,health:2},'信頼と経験が少しずつ積み上がった。'],
    ['新しいスキルや資格を学ぶ',{study:6,experience:6,health:-2},'仕事の幅を広げる力を身につけた。'],
    ['人とのつながりやチームワークを大切にする',{friends:8,experience:4},'相談できる仲間や信頼関係ができた。']
-  ],'WORK'));
+  ], 'WORK');
  }
  if(state.decisions.career==='startup'||state.decisions.afterStudy==='startup'){
   for(let y=1;y<=3;y++) add('起業'+y+'年目','STARTUP','自分の事業、'+y+'年目','自分で始めた事業を続ける。顧客の声、資金、仲間、サービスの改善。毎年状況が変わる。','うまくいく保証はない。続ける・方向転換する・協力者を探す。判断の積み重ねが事業を形づくる。',[
    ['顧客の声を聞いてサービスを改善',{experience:8,study:4},'使う人の声をもとに改善を重ねた。'],
    ['仲間や協力者を探す',{friends:9,experience:5},'一緒に挑戦する人とのつながりができた。'],
    ['支出を見直し、小さく堅実に続ける',{experience:5,health:5},'無理のない運営を意識した。']
-  ],'STARTUP'));
+  ], 'STARTUP');
  }
  add('若年期','FUTURE','ここから先の人生','これまでの選択を振り返る。学び、出会い、失敗、挑戦。その全部が今の自分につながっている。','これからも仕事、学び直し、転職、独立、休息。人生には何度も選び直す機会がある。',[
   ['新しいことを学び続ける',{study:5,experience:5},'これからも成長を続けると決めた。'],
