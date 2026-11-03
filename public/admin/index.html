@@ -5,8 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, nofollow" />
     <meta name="theme-color" content="#252c30" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="KNOT Admin" />
     <title>KNOT Admin</title>
+    <link rel="manifest" href="/admin/manifest.webmanifest" />
     <link rel="icon" href="/admin/knot-logo.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/admin/knot-logo.svg" />
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
     <link rel="stylesheet" href="/admin/admin.css" />
   </head>
@@ -34,8 +40,15 @@
         apply();
       })();
     </script>
-    <!-- Writing helpers are loaded before Decap so they can enhance the editor as it renders. -->
     <script defer src="/admin/editor-tools.js"></script>
     <script defer src="/admin/decap-cms.js"></script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("/admin/sw.js", { scope: "/admin/", updateViaCache: "none" })
+            .catch((error) => console.warn("KNOT Admin offline shell unavailable:", error));
+        });
+      }
+    </script>
   </body>
 </html>
