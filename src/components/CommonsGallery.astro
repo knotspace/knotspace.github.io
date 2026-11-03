@@ -113,9 +113,11 @@ const { categories = [], limit = 17 } = Astro.props;
     let loaded = 0;
     let failed = 0;
     const updateCount = () => {
-      const missing = Math.max(0, limit - loaded - failed);
-      count.textContent = loaded + '点表示 / ' + items.length + '点取得（目標' + limit + '点）' +
-        (missing ? '・あと' + missing + '点不足' : '');
+      const settled = loaded + failed;
+      const status = settled < items.length
+        ? '・画像確認中'
+        : loaded < limit ? '・あと' + (limit - loaded) + '点不足' : '・目標達成';
+      count.textContent = loaded + '点表示 / ' + items.length + '点取得（目標' + limit + '点）' + status;
     };
 
     for (const item of items) {
