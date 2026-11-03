@@ -36,8 +36,14 @@ const websiteJsonLd = { '@context': 'https://schema.org', '@type': 'WebSite', na
 <a class:list={["study-nav-item", { active: isActive(`${BASE}study/updates/`) }]} href={`${BASE}study/updates/`}><span>↻</span>更新情報・使い方</a>
 <div class="sidebar-spacer"></div><a class="study-back-site" href={BASE}><span>↗</span> KNOT本体へ戻る</a><div class="sidebar-foot">KNOT STUDY <span>·</span> LEARN EVERY DAY</div>
 </aside>
-<header class="study-appbar"><a class="study-mobile-brand" href={`${BASE}study/`}><span class="study-brand-mark">K</span><strong>KNOT<span>.</span> STUDY</strong></a><div class="study-appbar-right"><span class="study-appbar-caption">YOUR LEARNING SPACE</span><button class="theme-toggle study-theme-toggle" id="theme-toggle" type="button" aria-label="テーマを切り替える" title="テーマを切り替える"><span id="theme-icon">☀</span></button></div></header>
-<main class="study-app-main"><slot /></main>
+<header class="study-appbar"><a class="study-mobile-brand" href={`${BASE}study/`}><span class="study-brand-mark">K</span><strong>KNOT<span>.</span> STUDY</strong></a><div class="study-appbar-right"><a class="study-maker-shortcut" href={`${BASE}studio/`}>KNOT制作 ↗</a><span class="study-appbar-caption">YOUR LEARNING SPACE</span><button class="theme-toggle study-theme-toggle" id="theme-toggle" type="button" aria-label="テーマを切り替える" title="テーマを切り替える"><span id="theme-icon">☀</span></button></div></header>
+<main class="study-app-main"><slot />
+<section class="study-maker-banner" aria-label="KNOT制作・開発記録">
+  <div class="study-maker-icon">K.</div>
+  <div><span>BUILT BY KNOT</span><strong>Studyをつくっているのも、KNOT。</strong><p>問題・解説・機能を少しずつ追加しながら、自分たちで開発と改善を続けています。</p></div>
+  <a href={`${BASE}studio/`}>制作の裏側を見る ↗</a>
+</section>
+</main>
 <aside id="pwa-install-prompt" class="pwa-prompt" hidden aria-live="polite"><div><strong>KNOT Studyをアプリとして使う</strong><p id="pwa-install-description">ホーム画面に追加すると、Studyをすぐに開けるよ。</p></div><button id="pwa-install-button" type="button">インストール</button><button id="pwa-install-close" type="button" aria-label="閉じる">×</button></aside>
 <nav class="study-bottom-nav" aria-label="Study navigation">
 <a class:list={{ active: currentPath === `${BASE}study/` }} href={`${BASE}study/`}><span>⌂</span><small>ホーム</small></a><a class:list={{ active: isActive(`${BASE}study/foundation/`) || isActive(`${BASE}study/solve/`) }} href={`${BASE}study/foundation/`}><span>✎</span><small>演習</small></a><a class:list={{ active: isActive(`${BASE}study/summary/`) }} href={`${BASE}study/summary/`}><span>▦</span><small>要点</small></a><a class:list={{ active: isActive(`${BASE}study/mock/`) }} href={`${BASE}study/mock/`}><span>▤</span><small>模試</small></a>
@@ -89,6 +95,13 @@ const websiteJsonLd = { '@context': 'https://schema.org', '@type': 'WebSite', na
 })();
 </script>
 <style is="global">
+.study-maker-banner{display:flex;align-items:center;gap:14px;margin:26px 0 10px;padding:16px;border:1px solid var(--line);border-radius:15px;background:linear-gradient(110deg,color-mix(in srgb,var(--accent) 10%,var(--surface)),var(--surface))}
+.study-maker-icon{display:grid;place-items:center;flex:0 0 42px;width:42px;height:42px;border-radius:12px;background:var(--accent);color:#081323;font-size:19px;font-weight:950}
+.study-maker-banner>div:nth-child(2){flex:1;min-width:0}.study-maker-banner>div:nth-child(2)>span{display:block;color:var(--accent);font:9px ui-monospace,monospace;letter-spacing:.14em}.study-maker-banner strong{display:block;margin-top:4px;font-size:12px}.study-maker-banner p{margin:4px 0 0;color:var(--muted);font-size:10px;line-height:1.6}.study-maker-banner>a{white-space:nowrap;color:var(--accent);font-size:10px;font-weight:850}
+.study-maker-shortcut{color:var(--accent);font-size:10px;font-weight:800;padding:7px 10px;border:1px solid var(--line);border-radius:999px}
+.maker-nav{margin-top:5px;border-top:1px solid var(--line);padding-top:15px!important;color:var(--accent)!important}
+@media(max-width:760px){.study-maker-banner{align-items:flex-start;flex-wrap:wrap;gap:10px;margin-top:18px}.study-maker-banner>div:nth-child(2){width:calc(100% - 54px)}.study-maker-banner>a{margin-left:52px}.study-maker-shortcut{font-size:9px;padding:6px 8px}}
+html.quiz-active .study-maker-banner,html.kosen-quiz-active .study-maker-banner,html.solve-quiz-active .study-maker-banner{display:none!important}
 html.quiz-active .study-sidebar,html.quiz-active .study-appbar,html.quiz-active .study-bottom-nav,
 html.kosen-quiz-active .study-sidebar,html.kosen-quiz-active .study-appbar,html.kosen-quiz-active .study-bottom-nav,
 html.solve-quiz-active .study-sidebar,html.solve-quiz-active .study-appbar,html.solve-quiz-active .study-bottom-nav{display:none!important}
