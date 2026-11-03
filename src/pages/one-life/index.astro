@@ -83,7 +83,7 @@ prefectures.forEach(pref=>{const o=document.createElement('option');o.value=pref
 async function loadSchools(pref){
  const index=prefectures.indexOf(pref);
  if(index<0)return;
- loadedPrefecture=pref;schoolsLoaded=false;
+ loadedPrefecture=pref;schoolsLoaded=false;schoolRecords=[];
  const file=String(index+1).padStart(2,'0')+'.json';
  try{
   const response=await fetch('/data/game/schools/'+file);
