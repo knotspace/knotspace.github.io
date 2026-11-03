@@ -1,8 +1,11 @@
 ---
 import StudyLayout from '../layouts/StudyLayout.astro';
-import foundation from '../data/study/study-foundation.json';
-import kosen from '../data/study/kosen-questions.json';
-import quotes from '../data/study/study-quotes.json';
+import foundationData from '../data/study/study-foundation.json';
+import quotesData from '../data/study/study-quotes.json';
+import kosenData from '../data/study/kosen-questions.json';
+const foundation = foundationData.questions;
+const quotes = quotesData.quotes;
+const kosen = kosenData.questions;
 const science = foundation.filter(q => q.subject === 'science').length;
 const social = foundation.filter(q => q.subject === 'social').length;
 const fields = [
