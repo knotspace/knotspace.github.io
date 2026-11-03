@@ -16,7 +16,7 @@ function walk(directory) {
 
 function metaContent(html, key) {
   for (const tag of html.matchAll(/<meta\b[^>]*>/gi)) {
-    if (new RegExp('\\bname=["\\']' + key + '["\\']', 'i').test(tag[0])) {
+    if (tag[0].includes('name="' + key + '"') || tag[0].includes("name='" + key + "'")) {
       return tag[0].match(/\bcontent=["']([^"']*)["']/i)?.[1] ?? '';
     }
   }
