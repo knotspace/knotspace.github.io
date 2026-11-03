@@ -66,7 +66,7 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
         {posts.map((post, index) => (
           <a
             class="post-card"
-            href={`${BASE}blog/${post.slug}/`}
+            href={`${BASE}blog/${post.id}/`}
             data-category={post.data.category}
             data-title={post.data.title}
             data-description={post.data.description}
