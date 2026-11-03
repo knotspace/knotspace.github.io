@@ -31,6 +31,9 @@ if (!fs.existsSync(root)) {
 walk(root);
 const canonicalOwners = new Map();
 let indexableCount = 0;
+let homepageWebsiteSchemas = 0;
+let nonHomepageWebsiteSchemas = 0;
+let homepageWebsiteData = null;
 
 for (const file of htmlFiles) {
   const relative = path.relative(root, file).replaceAll(path.sep, '/');
@@ -58,9 +61,26 @@ for (const file of htmlFiles) {
   }
 
   for (const match of html.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)) {
-    try { JSON.parse(match[1]); }
-    catch { errors.push(relative + ': JSON-LDが正しいJSONではありません'); }
+    try {
+      const data = JSON.parse(match[1]);
+      if (data['@type'] === 'WebSite') {
+        if (relative === 'index.html') {
+          homepageWebsiteSchemas++;
+          homepageWebsiteData = data;
+        } else {
+          nonHomepageWebsiteSchemas++;
+        }
+      }
+    } catch { errors.push(relative + ': JSON-LDが正しいJSONではありません'); }
   }
+}
+
+if (homepageWebsiteSchemas !== 1) errors.push('トップページのWebSite構造化データは1つ必要です（現在: ' + homepageWebsiteSchemas + '）');
+if (nonHomepageWebsiteSchemas > 0) warnings.push('WebSite構造化データはトップページだけに配置することを推奨します');
+if (homepageWebsiteData) {
+  if (homepageWebsiteData.name !== 'KNOT') errors.push('WebSite構造化データのnameがKNOTではありません');
+  if (homepageWebsiteData.alternateName !== 'KNOT 個人ブログ') errors.push('WebSite構造化データのalternateNameが設定されていません');
+  if (homepageWebsiteData.url !== 'https://knotspace.github.io/') errors.push('WebSite構造化データのurlが正規トップページではありません');
 }
 
 const sitemapPath = path.join(root, 'sitemap.xml');
