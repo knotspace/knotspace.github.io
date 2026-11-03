@@ -1,9 +1,17 @@
 /**
  * 2026年11月時点で14歳・中学3年生。
  * 毎年12月1日（日本時間）に年齢と学年を1年進める。
+ * ビルド環境のタイムゾーンに左右されないよう、Asia/Tokyoで年月を取得する。
  */
 function getYearsSinceDecember2026(date = new Date()) {
-  return date.getFullYear() - 2026 + (date.getMonth() >= 11 ? 1 : 0);
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'Asia/Tokyo',
+    year: 'numeric',
+    month: 'numeric',
+  }).formatToParts(date);
+  const year = Number(parts.find((part) => part.type === 'year')?.value);
+  const month = Number(parts.find((part) => part.type === 'month')?.value);
+  return year - 2026 + (month === 12 ? 1 : 0);
 }
 
 export function getAge(date = new Date()) {
