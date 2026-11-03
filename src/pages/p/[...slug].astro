@@ -64,6 +64,9 @@ const pageJsonLd = {
         }
         if (type === 'button') return <p><a class="knot-content-button" href={block.url || '#'}>{block.label || '詳しく見る'} ↗</a></p>;
         if (type === 'divider') return <hr />;
+        if (type === 'code') return <pre class="knot-code"><code>{block.code || block.text || ''}</code></pre>;
+        if (type === 'accordion') return <details class="knot-accordion"><summary>{block.title || '詳しく見る'}</summary><p>{block.text || ''}</p></details>;
+        if (type === 'notice') return <aside class:list={['knot-box', `knot-box-${block.tone || 'note'}`]}><strong>{block.title || 'お知らせ'}</strong><p>{block.text || ''}</p></aside>;;
         return <p set:html={safeInline(block.text)} />;
       }) : hasLegacyBody ? <Content /> : <p>本文を準備中です。</p>}
     </article>
