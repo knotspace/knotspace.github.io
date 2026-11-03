@@ -26,7 +26,8 @@ const websiteJsonLd = { '@context': 'https://schema.org', '@type': 'WebSite', na
 <a class="study-brand" href={`${BASE}study/`}><span class="study-brand-mark">K</span><span><strong>KNOT<span>.</span></strong><small>STUDY</small></span></a>
 <div class="sidebar-label">LEARN</div>
 <a class:list={["study-nav-item", { active: currentPath === `${BASE}study/` }]} href={`${BASE}study/`}><span>⌂</span>ホーム</a>
-<a class:list={["study-nav-item", { active: isActive(`${BASE}study/foundation/`) || isActive(`${BASE}study/solve/`) }]} href={`${BASE}study/foundation/`}><span>✎</span>基礎演習</a>
+<a class:list={["study-nav-item", { active: isActive(`${BASE}study/solve/`) }]} href={`${BASE}study/solve/`}><span>▣</span>問題演習</a>
+<a class:list={["study-nav-item", { active: isActive(`${BASE}study/foundation/`) }]} href={`${BASE}study/foundation/`}><span>✎</span>基礎演習</a>
 <a class:list={["study-nav-item", { active: isActive(`${BASE}study/kosen/`) }]} href={`${BASE}study/kosen/`}><span>⌁</span>高専対策</a>
 <a class:list={["study-nav-item", { active: isActive(`${BASE}study/mock/`) }]} href={`${BASE}study/mock/`}><span>▤</span>模試に挑戦</a>
 <div class="sidebar-label second">KNOWLEDGE</div>
@@ -47,7 +48,7 @@ const websiteJsonLd = { '@context': 'https://schema.org', '@type': 'WebSite', na
 </main>
 <aside id="pwa-install-prompt" class="pwa-prompt" hidden aria-live="polite"><div><strong>KNOT Studyをアプリとして使う</strong><p id="pwa-install-description">ホーム画面に追加すると、Studyをすぐに開けるよ。</p></div><button id="pwa-install-button" type="button">インストール</button><button id="pwa-install-close" type="button" aria-label="閉じる">×</button></aside>
 <nav class="study-bottom-nav" aria-label="Study navigation">
-<a class:list={{ active: currentPath === `${BASE}study/` }} href={`${BASE}study/`}><span>⌂</span><small>ホーム</small></a><a class:list={{ active: isActive(`${BASE}study/foundation/`) || isActive(`${BASE}study/solve/`) }} href={`${BASE}study/foundation/`}><span>✎</span><small>演習</small></a><a class:list={{ active: isActive(`${BASE}study/summary/`) }} href={`${BASE}study/summary/`}><span>▦</span><small>要点</small></a><a class:list={{ active: isActive(`${BASE}study/mock/`) }} href={`${BASE}study/mock/`}><span>▤</span><small>模試</small></a>
+<a class:list={{ active: currentPath === `${BASE}study/` }} href={`${BASE}study/`}><span>⌂</span><small>ホーム</small></a><a class:list={{ active: isActive(`${BASE}study/solve/`) }} href={`${BASE}study/solve/`}><span>▣</span><small>問題演習</small></a><a class:list={{ active: isActive(`${BASE}study/summary/`) }} href={`${BASE}study/summary/`}><span>▦</span><small>要点</small></a><a class:list={{ active: isActive(`${BASE}study/mock/`) }} href={`${BASE}study/mock/`}><span>▤</span><small>模試</small></a>
 </nav>
 </div>
 <script is:inline>
