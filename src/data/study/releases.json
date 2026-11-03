@@ -1,6 +1,19 @@
 {
   "releases": [
     {
+      "id": "e9f65da",
+      "publishedAt": "2026-11-03T21:28:31+09:00",
+      "title": "Normalize KNOT diagram library to 200 per subject",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "学習コンテンツ・データ"
+      ],
+      "files": [
+        "src/data/study/knot-diagrams.json"
+      ]
+    },
+    {
       "id": "16f0ef6",
       "publishedAt": "2026-11-03T21:13:34+09:00",
       "title": "Redirect Study simulator entry to independent One Life experience",
