@@ -7,7 +7,7 @@
       "type": "STUDY UPDATE",
       "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
       "details": [
-        "高専対策"
+        "基礎網羅問題"
       ],
       "files": [
         "src/pages/study/kosen.astro"
@@ -59,7 +59,7 @@
       "type": "STUDY UPDATE",
       "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
       "details": [
-        "高専対策"
+        "基礎網羅問題"
       ],
       "files": [
         "src/pages/study/kosen.astro"
@@ -254,7 +254,7 @@
       "type": "STUDY UPDATE",
       "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
       "details": [
-        "高専対策"
+        "基礎網羅問題"
       ],
       "files": [
         "src/pages/study/kosen.astro"
@@ -268,7 +268,7 @@
       "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
       "details": [
         "学習コンテンツ・データ",
-        "高専対策"
+        "基礎網羅問題"
       ],
       "files": [
         "src/data/study/kosen-past-questions.json",
@@ -283,7 +283,7 @@
       "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
       "details": [
         "学習コンテンツ・データ",
-        "高専対策"
+        "基礎網羅問題"
       ],
       "files": [
         "src/data/study/kosen-past-questions.json",
@@ -298,7 +298,7 @@
       "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
       "details": [
         "学習コンテンツ・データ",
-        "高専対策"
+        "基礎網羅問題"
       ],
       "files": [
         "src/data/study/kosen-past-questions.json",
@@ -312,7 +312,7 @@
       "type": "STUDY UPDATE",
       "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
       "details": [
-        "高専対策"
+        "基礎網羅問題"
       ],
       "files": [
         "src/pages/study/kosen.astro"
@@ -325,8 +325,8 @@
       "type": "STUDY UPDATE",
       "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
       "details": [
-        "高専問題データ",
-        "高専対策"
+        "基礎問題データ",
+        "基礎網羅問題"
       ],
       "files": [
         "src/data/study/kosen-questions.json",
@@ -353,7 +353,7 @@
       "type": "STUDY UPDATE",
       "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
       "details": [
-        "高専対策"
+        "基礎網羅問題"
       ],
       "files": [
         "src/pages/study/kosen.astro"
@@ -393,7 +393,7 @@
       "summary": "Studyで現在使える機能と使い方をまとめたページを追加しました。今後はStudyの機能や問題データを更新するたびに、更新内容と更新日時が自動で記録されます。",
       "details": [
         "現在使える機能を一覧で確認できるようになりました。",
-        "基礎演習・高専対策・過去問模試・要点まとめ・学習ツールなどの使い方を掲載しました。",
+        "基礎演習・基礎網羅問題・過去問模試・要点まとめ・学習ツールなどの使い方を掲載しました。",
         "更新履歴には日本時間の更新日時と変更内容が表示されます。"
       ],
       "files": [
