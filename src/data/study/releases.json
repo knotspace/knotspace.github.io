@@ -1,6 +1,19 @@
 {
   "releases": [
     {
+      "id": "38123c2",
+      "publishedAt": "2026-11-03T20:36:41+09:00",
+      "title": "Sort subquestions in original order within each large question (#40)",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "高専対策"
+      ],
+      "files": [
+        "src/pages/study/kosen.astro"
+      ]
+    },
+    {
       "id": "a8aaae5",
       "publishedAt": "2026-11-03T20:35:48+09:00",
       "title": "Complete social past-paper large question one (#39)",
