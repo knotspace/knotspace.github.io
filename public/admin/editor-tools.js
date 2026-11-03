@@ -27,7 +27,15 @@
     ["番号リスト", "\n1. 1つ目\n2. 2つ目\n3. 3つ目\n", "1つ目"],
     ["引用", "\n> 引用文をここに入力\n\n", "引用文をここに入力"],
     ["画像", "\n![画像の説明](/uploads/image-name.jpg)\n", "画像の説明"],
-    ["区切り線", "\n---\n\n", ""]
+    ["吹き出し（左）", '\n<div class="knot-balloon knot-left">\\n  <div class="knot-balloon-name">名前</div>\\n  <div class="knot-balloon-text">ここにセリフを入力</div>\\n</div>\\n', "名前"],
+    ["吹き出し（右）", '\n<div class="knot-balloon knot-right">\\n  <div class="knot-balloon-name">名前</div>\\n  <div class="knot-balloon-text">ここにセリフを入力</div>\\n</div>\\n', "名前"],
+    ["ポイント枠", '\n<div class="knot-box knot-box-point">\\n  <div class="knot-box-title">POINT</div>\\n  ここに重要なポイントを書く\\n</div>\\n', "ここに重要なポイントを書く"],
+    ["補足枠", '\n<div class="knot-box knot-box-note">\\n  <div class="knot-box-title">補足</div>\\n  ここに補足説明を書く\\n</div>\\n', "ここに補足説明を書く"],
+    ["注意枠", '\n<div class="knot-box knot-box-warning">\\n  <div class="knot-box-title">注意</div>\\n  ここに注意事項を書く\\n</div>\\n', "ここに注意事項を書く"],
+    ["結論ボックス", '\n<div class="knot-box knot-box-summary">\\n  <div class="knot-box-title">この記事の結論</div>\\n  ここに結論を書く\\n</div>\\n', "ここに結論を書く"],
+    ["2列比較", '\n<div class="knot-compare">\\n  <div class="knot-compare-item"><strong>メリット</strong><p>内容を書く</p></div>\\n  <div class="knot-compare-item"><strong>デメリット</strong><p>内容を書く</p></div>\\n</div>\\n', "メリット"],
+    ["画像＋説明", '\n<figure class="knot-figure">\\n  <img src="/uploads/image-name.jpg" alt="画像の説明" />\\n  <figcaption>画像の説明を書く</figcaption>\\n</figure>\\n', "画像の説明"],
+    ["区切り線", "\\n---\\n\\n", ""]
   ];
 
   function insertAtCursor(el, text, selectText) {
@@ -47,7 +55,7 @@
     el.dataset.knotTools = "1";
     const panel = document.createElement("section");
     panel.className = "knot-editor-tools";
-    panel.innerHTML = '<div class="knot-tools-top"><span class="knot-tools-title">✍️ 記事編集アシスト</span><span class="knot-tools-stats" aria-live="polite"></span></div><div class="knot-tools-buttons"></div><div class="knot-tools-help">ボタンを押すとカーソル位置に挿入されるよ。文章を選択してから押すと、その部分を置き換えることもできるよ。</div>';
+    panel.innerHTML = '<div class="knot-tools-top"><span class="knot-tools-title">✍️ 記事編集アシスト</span><span class="knot-tools-stats" aria-live="polite"></span></div><div class="knot-tools-buttons"></div><div class="knot-tools-help">ボタンを押すとカーソル位置にパーツが入るよ。吹き出し・枠の中の文章や名前を書き換えて使ってね。HTMLタグは消さず、中の文章だけ編集してね。</div>';
     const buttons = panel.querySelector(".knot-tools-buttons");
     snippets.forEach(([label, value, selected]) => {
       const b = document.createElement("button");
