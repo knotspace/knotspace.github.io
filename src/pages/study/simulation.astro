@@ -43,7 +43,7 @@ function buildStages(){
  ['中学受験に挑戦する',{study:4,health:-3},'受験勉強を始めた。自分で決めた目標に挑戦する。',{middleExam:true}],
  ['地元の中学校へ進む',{friends:3,health:3},'地元の中学校へ進むことにした。高校受験は中学生活の先に待っている。',{middleExam:false}]
  ],'MIDDLE EXAM CHOICE');
- add('中学受験','FEBRUARY','中学受験本番','準備してきた日々を思い出しながら、試験会場へ向かう。','結果は努力だけで決まるものではない。最後まで落ち着いて取り組もう。',[
+ if(state.decisions.middleExam) add('中学受験','FEBRUARY','中学受験本番','準備してきた日々を思い出しながら、試験会場へ向かう。','結果は努力だけで決まるものではない。最後まで落ち着いて取り組もう。',[
  ['得意な問題から落ち着いて解く',{study:5,health:3},'最後まで自分の力を出し切った。',{examResult:'pass'}),
  ['難しい問題にも粘り強く向き合う',{study:7,health:-4},'考え抜く経験を積んだ。',{examResult:'pass'})
  ],'EXAM');
@@ -144,7 +144,7 @@ function render(){
 }
 function choose(o){
  Object.entries(o.effect||{}).forEach(([k,v])=>state.stats[k]=clamp(state.stats[k]+v));
- if(o.decision)Object.assign(state.decisions,o.decision);
+ if(o.decision){const decision={...o.decision};if(decision.examResult==='pass'&&state.stats.study<50)decision.examResult='fail';if(decision.highResult==='pass'&&state.stats.study<42)decision.highResult='fail';Object.assign(state.decisions,decision);}
  const e=stages[state.step];state.diary.push({title:e.title,log:o.log,choice:o.label});
  state.step++;buildStages();
  try{localStorage.setItem('knot-life-sim-v2',JSON.stringify(state));}catch{}
