@@ -2,10 +2,10 @@ import { createElement as el, createRoot, useEffect, useRef, useState } from '@w
 import { registerBlockType, getBlockType, createBlock } from '@wordpress/blocks';
 import { registerCoreBlocks } from '@wordpress/block-library';
 import {
-  BlockEditorProvider, BlockList, BlockTools, Inserter, WritingFlow, ObserveTyping, DropZoneProvider,
+  BlockEditorProvider, BlockList, BlockTools, Inserter, WritingFlow, ObserveTyping,
   BlockEditorKeyboardShortcuts, useBlockProps, RichText
 } from '@wordpress/block-editor';
-import { SlotFillProvider, Popover, SelectControl } from '@wordpress/components';
+import { SlotFillProvider, DropZoneProvider, Popover, SelectControl } from '@wordpress/components';
 
 import '@wordpress/components/build-style/style.css';
 import '@wordpress/block-editor/build-style/style.css';
@@ -144,6 +144,7 @@ function Editor({ value, onChange }) {
           el(Inserter, { position: 'bottom right' })
         ),
         el(BlockEditorKeyboardShortcuts, null),
+        el(Popover.Slot, { name: 'block-toolbar' }),
         el(BlockTools, null,
           el(WritingFlow, null,
             el(ObserveTyping, null,
@@ -151,10 +152,10 @@ function Editor({ value, onChange }) {
             )
           )
         ),
-        el('div', { className: 'knot-gutenberg-bottom-inserter' }, el(Inserter, { position: 'bottom right' })),
-        el(Popover.Slot, null)
+        el('div', { className: 'knot-gutenberg-bottom-inserter' }, el(Inserter, { position: 'bottom right' }))
       )
-    )
+    ),
+    el(Popover.Slot, null)
   ));
 }
 
