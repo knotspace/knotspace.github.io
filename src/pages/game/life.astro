@@ -335,13 +335,15 @@ function finish(){
  const d=state.decisions,s=state.stats;
  let route=d.career==='university'?'大学進学':d.career==='vocational'?'専門学校':d.career==='work'?'就職':'起業';
  if(d.afterStudy==='startup')route='学びを経て起業';if(d.afterStudy==='work')route='学びを経て就職';
+ if(d.education==='middle')route=(d.career==='work'?'中卒で就職':d.career==='vocational'?'中卒後に専門技術を学ぶ':'中卒後に起業');
  let title=s.experience>75?'挑戦を重ね、自分の道を切り開いた。':s.study>75?'学びを力に変えた人生。':s.friends>75?'人とのつながりに恵まれた人生。':'自分の選択で歩んだ人生。';
  $('ending-title').textContent=title;
  $('ending-copy').textContent=(state.name?state.name+'さん':'あなた')+'は、小学校から若年期まで、さまざまな選択を重ねてきた。最終的には「'+route+'」の道へ。どの進路が上ということではない。自分で選び、経験し、次の一歩を決めたことに意味がある。';
  $('result-stats').replaceChildren();[['学力',s.study],['経験',s.experience],['健康',s.health],['人とのつながり',s.friends]].forEach(([k,v])=>{const el=document.createElement('div'),b=document.createElement('b'),sp=document.createElement('span');b.textContent=v;sp.textContent=k;el.append(b,sp);$('result-stats').append(el);});
  $('result-reflection').textContent='学力だけでも、収入だけでも、人生の価値は決まらない。あなたは学び、経験し、人と関わりながら、自分なりの土台をつくった。';
  let future='これから先も、仕事で経験を積む、別の分野を学ぶ、転職する、独立する、暮らしを大切にするなど、多くの道がある。今の結果は未来の決定ではない。';
- if(d.career==='startup'||d.afterStudy==='startup')future='事業を3年間続けた経験は、成功・失敗にかかわらず大きな財産になる。顧客を理解する力、資金を管理する力、仲間と進める力を活かして、事業を育てる・方向転換する・就職して経験を活かすなどの未来が考えられる。';
+ if(d.education==='middle')future='中学校卒業後に選んだ道から、働きながら技術を身につける、定時制・通信制などで学び直す、資格を取る、転職するなどの選択肢が広がっていく。中卒であることだけで未来が決まるわけではない。';
+ else if(d.career==='startup'||d.afterStudy==='startup')future='事業を3年間続けた経験は、成功・失敗にかかわらず大きな財産になる。顧客を理解する力、資金を管理する力、仲間と進める力を活かして、事業を育てる・方向転換する・就職して経験を活かすなどの未来が考えられる。';
  else if(d.career==='university')future='大学で得た知識や出会いを土台に、仕事で専門性を磨く道も、別の分野へ進む道もある。学び直しや転職も含め、選択肢はこれからも増やせる。';
  else if(d.career==='vocational')future='専門学校で身につけた技術と現場経験を重ね、専門職として成長する道がある。経験を積んで独立したり、別の技術を学び直したりする未来も考えられる。';
  $('future-copy').textContent=future;
