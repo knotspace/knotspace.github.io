@@ -1,6 +1,19 @@
 {
   "releases": [
     {
+      "id": "81adea1",
+      "publishedAt": "2026-11-03T16:44:48+09:00",
+      "title": "feat(study): add motivation center",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "Study画面・機能"
+      ],
+      "files": [
+        "src/pages/study/motivation.astro"
+      ]
+    },
+    {
       "id": "0a9b342",
       "publishedAt": "2026-11-03T16:42:38+09:00",
       "title": "style(study): refresh future-life section heading",
