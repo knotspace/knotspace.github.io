@@ -8,7 +8,7 @@ export async function getStaticPaths() {
   const posts = (await getCollection('blog')).filter((post) => !post.data.publishAt || post.data.publishAt <= now);
 
   return posts.map((post) => ({
-    params: { slug: post.slug },
+    params: { slug: post.id },
     props: { post },
   }));
 }
@@ -37,10 +37,10 @@ const toc = headings.filter((heading) =>
 const date = dateFormat(post.data.pubDate);
 const articleText = (post.body ?? '').replace(/\!\[[^\]]*\]\([^)]*\)/g, ' ').replace(/<[^>]+>/g, ' ').replace(/[#>*_\x60~|\[\](){}]/g, ' ');
 const readingMinutes = Math.max(1, Math.ceil(articleText.replace(/\s/g, '').length / 500));
-const allPosts = (await getCollection('blog')).filter((item) => item.slug !== post.slug && (!item.data.publishAt || item.data.publishAt <= new Date()));
+const allPosts = (await getCollection('blog')).filter((item) => item.id !== post.id && (!item.data.publishAt || item.data.publishAt <= new Date()));
 const relatedPosts = allPosts.filter((item) => item.data.category === post.data.category).slice(0, 3);
 const recommendations = relatedPosts.length ? relatedPosts : allPosts.slice(0, 3);
-const articleUrl = new URL(`/blog/${post.slug}/`, Astro.site ?? Astro.url).href;
+const articleUrl = new URL(`/blog/${post.id}/`, Astro.site ?? Astro.url).href;
 const articleJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
@@ -74,7 +74,7 @@ const breadcrumbJsonLd = {
   structuredData={[articleJsonLd, breadcrumbJsonLd]}
 >
   <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
-  <article class="post" data-post-slug={post.slug}>
+  <article class="post" data-post-slug={post.id}>
     <div class="article-tools"><span>この記事を読む</span><div class="tool-actions"><button id="share-button" type="button">↗ リンクをコピー</button><button id="bookmark-button" type="button" aria-pressed="false">☆ あとで読む</button></div></div>
     <a class="back-link" href={`${BASE}blog/`}>
       ← 記事一覧に戻る
@@ -155,7 +155,7 @@ const breadcrumbJsonLd = {
       </a>
     </div>
 
-    {recommendations.length > 0 && <section class="related"><span class="comments-label">KEEP READING</span><h2>関連記事</h2><div class="related-list">{recommendations.map((item) => <a href={`${BASE}blog/${item.slug}/`}><span>{item.data.category}</span><strong>{item.data.title}</strong><small>記事を読む →</small></a>)}</div></section>}
+    {recommendations.length > 0 && <section class="related"><span class="comments-label">KEEP READING</span><h2>関連記事</h2><div class="related-list">{recommendations.map((item) => <a href={`${BASE}blog/${item.id}/`}><span>{item.data.category}</span><strong>{item.data.title}</strong><small>記事を読む →</small></a>)}</div></section>}
 
     <!-- コメント欄 -->
     <section class="comments" aria-label="コメント">
