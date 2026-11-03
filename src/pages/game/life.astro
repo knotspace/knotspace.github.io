@@ -5,32 +5,33 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta name="theme-color" content="#10151f"/>
+<meta name="theme-color" content="#f4f0e7"/>
 <meta name="description" content="小学校から若年期まで、自分の選択で人生を進める本格人生シミュレーション。"/><link rel="canonical" href="https://knotspace.github.io/game/life/"/>
-<title>人生シミュレーター｜KNOT GAME</title>
+<title>ひとりぶんの人生｜人生シミュレーション</title>
 </head>
 <body class="life-game-body">
 <main class="sim-page">
-<a class="back-link" href="../">← GAMEに戻る</a>
-<header class="sim-hero"><p class="eyebrow">KNOT GAME / LIFE SIMULATION</p><h1>人生は、選択で<span>変わっていく。</span></h1><p>小学校入学から若年期の未来まで。受験するか、何を学ぶか、どんな仕事をするか。自分の選択で人生を進めよう。</p><div class="hero-tags"><span>CHILDHOOD</span><span>EDUCATION</span><span>CAREER</span><span>YOUR FUTURE</span></div></header>
+<header class="sim-hero"><p class="eyebrow">ONE LIFE SIMULATION</p><h1>ひとりぶんの<span>人生。</span></h1><p>生まれ育つ場所、出会う人、学ぶこと、選ぶ進路。小学校から若年期まで、ひとつの人生を自分の手で歩いてみよう。</p><div class="hero-tags"><span>ONE LIFE</span><span>YOUR CHOICES</span><span>YOUR FUTURE</span></div></header>
 <section id="start-screen" class="panel start-panel">
-<p class="eyebrow">NEW LIFE</p><h2>新しい人生を始めよう。</h2>
+<p class="eyebrow">A NEW JOURNEY</p><h2>これからの人生を設定する。</h2>
 <label class="field-label" for="player-name">主人公の名前</label><input id="player-name" maxlength="12" placeholder="ニックネーム（任意）"/>
-<label class="field-label" for="home-prefecture">住んでいる都道府県</label><select id="home-prefecture" class="native-select"><option value="">都道府県を選択</option></select>
+<label class="field-label" for="home-prefecture">暮らし始める都道府県</label><select id="home-prefecture" class="native-select"><option value="">都道府県を選択</option></select>
+<label class="field-label" for="duration">人生を体験する時間</label><select id="duration" class="native-select"><option value="10">約10分（テンポよく体験）</option><option value="30" selected>約30分（じっくり体験）</option><option value="60">約60分（深く体験）</option></select>
 <p class="field-label">生まれ持った個性を選ぼう</p><div class="path-options">
 <label><input type="radio" name="talent" value="balanced" checked/><span><b>バランス型</b><small>学力・体力・人間関係を平均的に伸ばす</small></span></label>
 <label><input type="radio" name="talent" value="curious"/><span><b>探究型</b><small>知りたいことを深く掘り下げる</small></span></label>
 <label><input type="radio" name="talent" value="social"/><span><b>社交型</b><small>人との出会いや経験から成長する</small></span></label>
-</div><button id="start-game" class="primary-button">人生を始める →</button><p class="fine-print">架空の人生シミュレーションです。実際の合否・収入・将来を予測するものではありません。</p>
+</div><div class="start-note">1年ごとに時間が流れ、節目では進学・受験・仕事などの決断が訪れる。途中で一時停止や倍速にも切り替えられる。</div><button id="start-game" class="primary-button">この人生を始める →</button><p class="fine-print">架空の人生シミュレーションです。実際の合否・収入・将来を予測するものではありません。</p>
 </section>
 <section id="game-screen" hidden>
 <div class="game-top"><div><p class="eyebrow">YOUR LIFE JOURNEY</p><h2 id="year-label">小学1年生</h2><p id="term-label">春</p></div><div class="progress-wrap"><span id="progress-label">1 / 1</span><div class="progress-track"><i id="progress-bar"></i></div></div></div>
+<div class="life-controls"><div class="life-clock"><span>この1年の時間</span><strong id="year-time-label">--:--</strong><i class="clock-track"><b id="year-time-bar"></b></i></div><div class="clock-actions"><button id="pause-game" type="button">一時停止</button><button data-speed="1" class="speed-button active" type="button">1×</button><button data-speed="2" class="speed-button" type="button">2×</button><button data-speed="4" class="speed-button" type="button">4×</button><button data-speed="8" class="speed-button" type="button">8×</button><button data-speed="16" class="speed-button" type="button">16×</button></div><label class="auto-control"><input id="auto-choice" type="checkbox"/> 決断をおまかせ（時間切れで自動選択）</label><p id="clock-message">時間が進んでいます。選択すると次の年へ進みます。</p></div>
 <div class="stats-panel">
 <div><span>学力</span><strong id="stat-study">40</strong><i><b id="bar-study"></b></i></div><div><span>経験</span><strong id="stat-experience">30</strong><i><b id="bar-experience"></b></i></div><div><span>健康</span><strong id="stat-health">75</strong><i><b id="bar-health"></b></i></div><div><span>人とのつながり</span><strong id="stat-friends">35</strong><i><b id="bar-friends"></b></i></div>
 </div>
 <div id="exam-result-banner" class="exam-result-banner" hidden></div>
 <article class="event-card"><div class="event-meta"><span id="event-season">LIFE STAGE</span><span id="event-number">EPISODE 01</span></div><p id="event-scene" class="event-scene"></p><h3 id="event-title"></h3><p id="event-description" class="event-description"></p><div id="school-picker" class="school-picker" hidden></div><div id="choices" class="choices"></div></article>
-<div class="diary-log"><h3>人生の記録</h3><ol id="diary-list"></ol></div><button id="save-exit" class="quiet-button">ここまでの記録を保存して閉じる</button>
+<div class="life-map"><div class="life-map-head"><strong>人生の軌跡</strong><span id="life-age-label">START</span></div><div class="life-map-track"><i id="life-map-progress"></i></div></div><div class="diary-log"><h3>人生の記録</h3><ol id="diary-list"></ol></div><button id="save-exit" class="quiet-button">ここまでの記録を保存して閉じる</button>
 </section>
 <section id="result-screen" class="panel result-panel" hidden>
 <p class="eyebrow">YOUR LIFE / YOUNG ADULTHOOD</p><h2 id="ending-title">あなたの人生の、その先へ。</h2><p id="ending-copy" class="ending-copy"></p><div id="result-stats" class="result-stats"></div>
@@ -39,6 +40,7 @@
 <div class="result-actions"><button id="restart-game" class="primary-button">別の人生を歩む ↻</button><a href="../" class="secondary-button">GAME一覧へ戻る →</a></div><p class="fine-print">ゲーム内の選択と数値から作るフィクションの展望です。現実の人生はこの結果に固定されず、何度でも選び直せます。</p>
 </section>
 </main>
+<footer class="independent-footer"><p>ひとりぶんの人生 — 選ばなかった道にも、人生がある。</p><nav><a href="/">KNOT</a><a href="/study/">KNOT Study</a></nav><small>このゲームは独立した創作シミュレーションです。現実の人生や受験結果を予測するものではありません。</small></footer>
 <script>
 import deviationData from '../../data/game/deviation-scores.json';
 const $=id=>document.getElementById(id), clamp=n=>Math.max(0,Math.min(100,n));
@@ -100,7 +102,7 @@ async function loadSchools(pref){
 }
 prefectureSelect.addEventListener('change',()=>loadSchools(prefectureSelect.value));
 loadSchools(prefectureSelect.value);
-let state=null, stages=[];
+let state=null, stages=[],clockHandle=null,lastClockTick=0;
 const choices=(items)=>items.map(([label,effect,log,decision])=>({label,effect,log,decision}));
 function stage(year,season,title,scene,desc,opts,tag){return {year,season,title,scene,desc,opts:choices(opts),tag};}
 function buildStages(){
@@ -224,6 +226,34 @@ function buildStages(){
  ],'FUTURE');
  stages=s;
 }
+function stopClock(){if(clockHandle){clearInterval(clockHandle);clockHandle=null;}}
+function clockYearLength(){return (Number(state?.durationMinutes)||30)*60000/Math.max(1,state?.estimatedYears||20);}
+function startClock(){
+ stopClock();if(!state||$('game-screen').hidden||state.paused||state.waitingChoice)return;
+ lastClockTick=Date.now();
+ clockHandle=setInterval(()=>{
+  if(!state||state.paused||state.waitingChoice)return;
+  const now=Date.now(),delta=Math.min(1000,now-lastClockTick);lastClockTick=now;
+  state.yearRemaining=Math.max(0,(state.yearRemaining??clockYearLength())-delta*(state.speed||1));
+  const total=clockYearLength(),pct=Math.max(0,Math.min(100,(1-state.yearRemaining/total)*100));
+  $('year-time-label').textContent=state.yearRemaining>0?Math.ceil(state.yearRemaining/1000)+'秒':'決断の時間';
+  $('year-time-bar').style.width=pct+'%';
+  if(state.yearRemaining<=0){
+   stopClock();state.waitingChoice=true;
+   $('clock-message').textContent=state.auto?'おまかせで今年の選択を進めます。':'今年の時間が経過した。選択肢から次の道を決めよう。';
+   if(state.auto){const current=stages[state.step];if(current?.opts?.length)choose(current.opts[Math.floor(Math.random()*current.opts.length)]);}
+   else {$('pause-game').textContent='再開';}
+  }
+ },100);
+}
+function updateClockUI(){
+ const total=clockYearLength();state.yearRemaining=state.yearRemaining??total;
+ $('year-time-label').textContent=Math.ceil(state.yearRemaining/1000)+'秒';
+ $('year-time-bar').style.width=Math.max(0,Math.min(100,(1-state.yearRemaining/total)*100))+'%';
+ $('pause-game').textContent=state.paused?'再開':'一時停止';
+ $('auto-choice').checked=!!state.auto;
+ document.querySelectorAll('[data-speed]').forEach(b=>b.classList.toggle('active',Number(b.dataset.speed)===(state.speed||1)));
+}
 function updateStats(){
  for(const k of ['study','experience','health','friends']){$('stat-'+k).textContent=state.stats[k];$('bar-'+k).style.width=state.stats[k]+'%';}
  $('progress-label').textContent=(state.step+1)+' / '+stages.length;$('progress-bar').style.width=((state.step+1)/stages.length*100)+'%';
@@ -254,7 +284,7 @@ function schoolDeviation(s){
 function render(){
  buildStages();
  if(state.step>=stages.length){finish();return;}
- const e=stages[state.step];updateStats();
+ const e=stages[state.step];updateStats();updateClockUI();$('life-age-label').textContent=e.year;$('life-map-progress').style.width=((state.step+1)/stages.length*100)+'%';
  $('event-season').textContent=e.tag+' / '+e.season;$('event-number').textContent='EPISODE '+String(state.step+1).padStart(2,'0');
  $('event-scene').textContent=e.scene;$('event-title').textContent=e.title;$('event-description').textContent=e.desc;
  const banner=$('exam-result-banner');
@@ -313,7 +343,7 @@ function render(){
      }
    }
  }
- const canAnswer=!examType||!!state.pendingSchool;
+ const canAnswer=(!examType||!!state.pendingSchool)&&!state.waitingChoice||(!examType||!!state.pendingSchool);
  e.opts.forEach((o,i)=>{const b=document.createElement('button');b.className='choice-button';const strong=document.createElement('strong');strong.textContent=String.fromCharCode(65+i)+'. '+o.label;const small=document.createElement('small');small.textContent='この道を選ぶ';b.append(strong,small);b.disabled=!canAnswer;b.classList.toggle('is-disabled',!canAnswer);b.addEventListener('click',()=>choose(o));box.append(b);});
  $('diary-list').replaceChildren();state.diary.slice(-5).forEach(x=>{const li=document.createElement('li');li.textContent=x.title+' — '+x.log;$('diary-list').append(li);});
 }
@@ -343,11 +373,12 @@ function choose(o){
  const e=stages[state.step];state.diary.push({title:e.title,log:o.log,choice:o.label});
  if(state.lastExamResult)state.lastExamResult=null;
  state.step++;buildStages();
+ state.yearRemaining=clockYearLength();state.waitingChoice=false;state.paused=false;
  try{localStorage.setItem('knot-life-sim-v2',JSON.stringify(state));}catch{}
- render();
+ render();startClock();
 }
 function finish(){
- $('game-screen').hidden=true;$('result-screen').hidden=false;
+ stopClock();$('game-screen').hidden=true;$('result-screen').hidden=false;
  const d=state.decisions,s=state.stats;
  let route=d.career==='university'?'大学進学':d.career==='vocational'?'専門学校':d.career==='work'?'就職':'起業';
  if(d.afterStudy==='startup')route='学びを経て起業';if(d.afterStudy==='work')route='学びを経て就職';
@@ -364,19 +395,28 @@ function finish(){
  else if(d.career==='vocational')future='専門学校で身につけた技術と現場経験を重ね、専門職として成長する道がある。経験を積んで独立したり、別の技術を学び直したりする未来も考えられる。';
  $('future-copy').textContent=future;
  $('final-diary').replaceChildren();state.diary.forEach((x,i)=>{const li=document.createElement('li'),b=document.createElement('b'),p=document.createElement('p');b.textContent=String(i+1).padStart(2,'0')+' / '+x.title;p.textContent=x.log;li.append(b,p);$('final-diary').append(li);});
- try{localStorage.removeItem('knot-life-sim-v2');}catch{}
+ try{
+  const key='one-life-archive-v1',archive=JSON.parse(localStorage.getItem(key)||'[]');
+  if(!state.archived){archive.unshift({name:state.name||'名もない人生',route,completedAt:new Date().toISOString(),stats:{...s},years:state.diary.length});localStorage.setItem(key,JSON.stringify(archive.slice(0,10)));state.archived=true;}
+  localStorage.removeItem('knot-life-sim-v2');
+ }catch{}
 }
 function start(){
  const t=document.querySelector('input[name="talent"]:checked')?.value||'balanced';
  const stats=t==='curious'?{study:48,experience:35,health:72,friends:32}:t==='social'?{study:35,experience:42,health:78,friends:48}:{study:40,experience:35,health:75,friends:38};
- state={name:$('player-name').value.trim(),prefecture:$('home-prefecture').value,stats,decisions:{},pendingSchool:null,step:0,diary:[]};
- $('start-screen').hidden=true;$('result-screen').hidden=true;$('game-screen').hidden=false;render();
+ state={name:$('player-name').value.trim(),prefecture:$('home-prefecture').value,stats,decisions:{},pendingSchool:null,step:0,diary:[],durationMinutes:Number($('duration').value)||30,estimatedYears:20,yearRemaining:null,speed:1,paused:false,auto:false,waitingChoice:false,archived:false};
+ state.yearRemaining=clockYearLength();
+ $('start-screen').hidden=true;$('result-screen').hidden=true;$('game-screen').hidden=false;render();startClock();
  try{localStorage.setItem('knot-life-sim-v2',JSON.stringify(state));}catch{}
 }
 $('start-game').addEventListener('click',start);
 $('restart-game').addEventListener('click',()=>{$('result-screen').hidden=true;$('start-screen').hidden=false;});
-$('save-exit').addEventListener('click',()=>{try{localStorage.setItem('knot-life-sim-v2',JSON.stringify(state));}catch{}$('game-screen').hidden=true;$('start-screen').hidden=false;});
-try{const saved=JSON.parse(localStorage.getItem('knot-life-sim-v2')||'null');if(saved&&saved.stats&&saved.decisions&&saved.diary&&Number.isInteger(saved.step)){state=saved;$('player-name').value=state.name||'';$('home-prefecture').value=state.prefecture||'栃木県';loadSchools($('home-prefecture').value);$('start-screen').hidden=true;$('game-screen').hidden=false;render();}}catch{}
+$('pause-game').addEventListener('click',()=>{if(!state)return;state.paused=!state.paused;if(state.paused)stopClock();else startClock();updateClockUI();});
+document.querySelectorAll('[data-speed]').forEach(b=>b.addEventListener('click',()=>{if(!state)return;state.speed=Number(b.dataset.speed);updateClockUI();}));
+$('auto-choice').addEventListener('change',e=>{if(state){state.auto=e.target.checked;if(state.waitingChoice&&state.auto){state.waitingChoice=false;const current=stages[state.step];if(current?.opts?.length)choose(current.opts[Math.floor(Math.random()*current.opts.length)]);}}});
+
+$('save-exit').addEventListener('click',()=>{stopClock();try{localStorage.setItem('knot-life-sim-v2',JSON.stringify(state));}catch{}$('game-screen').hidden=true;$('start-screen').hidden=false;});
+try{const saved=JSON.parse(localStorage.getItem('knot-life-sim-v2')||'null');if(saved&&saved.stats&&saved.decisions&&saved.diary&&Number.isInteger(saved.step)){state=saved;state.durationMinutes=state.durationMinutes||30;state.estimatedYears=state.estimatedYears||20;state.speed=state.speed||1;state.yearRemaining=state.yearRemaining??clockYearLength();$('duration').value=String(state.durationMinutes);$('player-name').value=state.name||'';$('home-prefecture').value=state.prefecture||'栃木県';loadSchools($('home-prefecture').value);$('start-screen').hidden=true;$('game-screen').hidden=false;render();startClock();}}catch{}
 </script>
 <style>
 :root{color-scheme:dark;--bg:#0b1018;--panel:#151e2b;--panel2:#1b2737;--surface:#151e2b;--surface-soft:#1b2737;--line:#2d3b4f;--text:#edf3fb;--muted:#9eacc0;--accent:#9cf06b;font-family:Inter,"Noto Sans JP",system-ui,sans-serif}
@@ -393,6 +433,64 @@ try{const saved=JSON.parse(localStorage.getItem('knot-life-sim-v2')||'null');if(
 .selected-school span{font-size:10px;color:var(--muted)}.selected-school strong{font-size:12px}.selected-school b{margin-left:auto;padding:5px 8px;border-radius:5px;background:#293d50;color:#b9f99b;font-size:10px}
 .choice-button.is-disabled{opacity:.35;cursor:not-allowed}.choice-button:disabled{pointer-events:none}
 [hidden]{display:none!important}@media(max-width:650px){.sim-page{padding:18px 0 40px}.sim-hero{padding:28px 0 20px}.panel{padding:18px}.path-options{grid-template-columns:1fr}.stats-panel{gap:8px;padding:11px}.stats-panel span{font-size:9px}.stats-panel strong{font-size:15px}.event-card{padding:17px}.choice-button{display:grid;gap:5px}.choice-button small{white-space:normal}.result-stats{grid-template-columns:repeat(2,1fr)}.game-top h2{font-size:21px}}
+
+/* Independent visual identity: warm paper, editorial typography, no KNOT dashboard chrome */
+:root{color-scheme:light;--bg:#f4f0e7;--panel:#fffdf8;--panel2:#f1ece1;--surface:#fffdf8;--surface-soft:#f5f1e8;--line:#ded7c9;--text:#272820;--muted:#77776d;--accent:#c45a36;font-family:"Noto Sans JP",YuGothic,system-ui,sans-serif}
+body.life-game-body{background:#f4f0e7;color:var(--text)}
+.sim-page{max-width:860px;color:var(--text);padding-top:38px}
+.sim-hero{padding:35px 0 30px;border-bottom:1px solid var(--line);margin-bottom:26px}
+.eyebrow{color:var(--accent);letter-spacing:.18em}
+.sim-hero h1{font-family:"Noto Serif JP",serif;font-weight:800;font-size:clamp(38px,7vw,66px);letter-spacing:-.06em;color:var(--text)}
+.sim-hero h1 span{color:var(--accent)}
+.sim-hero>p:not(.eyebrow){color:var(--muted);font-size:14px}
+.hero-tags span{border-color:var(--line);color:var(--muted)}
+.panel,.stats-panel,.event-card,.diary-log{background:var(--panel);border-color:var(--line);box-shadow:0 5px 24px #4a39200a}
+.panel{border-radius:4px;padding:clamp(20px,4vw,38px)}
+.panel h2{font-family:"Noto Serif JP",serif}
+.start-panel>input,.native-select,.school-select,.school-search{background:#fff;color:var(--text);border-color:var(--line)}
+.path-options label span{background:#faf7f0;border-color:var(--line)}
+.path-options input:checked+span{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.primary-button{background:var(--accent);color:white;border-radius:4px}
+.game-top{border-bottom:1px solid var(--line)}
+.progress-track,.stats-panel i{background:#e9e3d7}
+.progress-track i,.stats-panel i b{background:var(--accent)}
+.stats-panel{border-radius:4px}
+.event-card{border-radius:4px;background:#fffdf8;padding:clamp(20px,4vw,34px)}
+.event-meta{color:var(--accent)}
+.event-scene,.event-description{color:var(--muted)}
+.choice-button{background:#faf7f0;border-color:var(--line);color:var(--text);border-radius:4px;padding:16px}
+.choice-button:hover{border-color:var(--accent);background:#fff5ed}
+.diary-log{border-radius:4px}
+.life-controls{margin:15px 0;padding:16px 18px;background:#eee8dc;border:1px solid var(--line);display:grid;gap:10px}
+.life-clock{display:grid;grid-template-columns:1fr auto;align-items:center;gap:5px}
+.life-clock span,.auto-control,#clock-message{font-size:11px;color:var(--muted)}
+.life-clock strong{font:700 15px ui-monospace,monospace}
+.clock-track{grid-column:1/-1;display:block;height:5px;background:#d8d0c2;border-radius:8px;overflow:hidden}
+.clock-track b{display:block;width:0;height:100%;background:var(--accent);transition:width .1s linear}
+.clock-actions{display:flex;gap:5px;flex-wrap:wrap}
+.clock-actions button{border:1px solid #d4cbbb;background:#fffdf8;color:var(--text);padding:7px 11px;font:inherit;font-size:10px;cursor:pointer}
+.clock-actions button.active{background:var(--text);border-color:var(--text);color:white}
+.auto-control{display:flex;align-items:center;gap:7px}
+#clock-message{margin:0}
+.life-map{margin:17px 0;padding:14px 16px;background:#eee8dc}
+.life-map-head{display:flex;justify-content:space-between;font-size:11px}
+.life-map-head span{color:var(--accent);font:10px ui-monospace,monospace}
+.life-map-track{height:7px;margin-top:10px;background:#d8d0c2}
+.life-map-track i{display:block;height:100%;width:0;background:var(--accent);transition:width .3s}
+.exam-result-banner{background:#fff5e9;border-color:#e4b28d;color:var(--text)}
+.exam-result-banner.passed{background:#edf4e8;border-color:#8cad7b}.exam-result-banner.failed{background:#fae9e6;border-color:#d98c7e}
+.school-picker{background:#f6f2e9;border-color:var(--line)}
+.selected-school{background:#eee8dc}
+.result-message{background:#f3eee4;border-color:var(--line)}
+.independent-footer{max-width:860px;margin:0 auto;padding:28px 22px 42px;border-top:1px solid var(--line);color:var(--muted);text-align:center}
+.independent-footer p{font-family:"Noto Serif JP",serif;color:var(--text);font-size:13px}
+.independent-footer nav{display:flex;justify-content:center;gap:18px;margin:13px}
+.independent-footer a{color:var(--accent);font-size:11px}
+.independent-footer small{font-size:9px;line-height:1.7}
+.start-note{margin:16px 0;padding:12px 14px;background:#f3eee4;color:var(--muted);font-size:11px;line-height:1.8}
+.quiet-button{background:transparent;color:var(--muted);border:1px solid var(--line);padding:10px 14px;border-radius:4px}
+@media(max-width:650px){.sim-page{padding:18px 15px 35px}.sim-hero{padding:28px 0 22px}.stats-panel{gap:8px}.life-controls{padding:13px}.clock-actions button{padding:8px 10px}}
+
 </style>
 </body>
 </html>
