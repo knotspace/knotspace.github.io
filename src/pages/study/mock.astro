@@ -151,7 +151,7 @@ function renderHistory(){
 function finishExam(reason){
  if(finished)return;
  finished=true;paused=false;stopTimer();
- remaining=Math.max(0,Math.ceil((deadline-Date.now())/1000));
+ remaining=paused?remaining:Math.max(0,Math.ceil((deadline-Date.now())/1000));
  const used=config.minutes*60-remaining;
  let score=0,correct=0,unanswered=0;
  const review=$('review-grid');review.replaceChildren();
