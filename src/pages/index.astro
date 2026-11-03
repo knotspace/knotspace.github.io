@@ -5,98 +5,79 @@ import Layout from '../layouts/Layout.astro';
 const now = new Date();
 const posts = (await getCollection('blog'))
   .filter((post) => !post.data.publishAt || post.data.publishAt <= now)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 5);
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const categories = [...new Set(posts.map((post) => post.data.category))];
 const BASE = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
-const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', { year: 'numeric', month: 'short', day: 'numeric' });
+const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
 const readingTime = (body = '') => Math.max(1, Math.ceil(body.replace(/\s/g, '').length / 500));
+const featured = posts[0];
+const recent = posts.slice(1, 9);
 ---
-<Layout title="KNOT | 好きと学びをつなぐ場所" description="中学生が運営する個人ブログ。読書、勉強、Web制作など日々の興味を記録しています。">
-  <main class="home">
-    <div class="topline"><span>KNOT BLOG</span><span>日々の記録と、ちょっとした発見。</span></div>
-    <section class="intro">
-      <div class="intro-main">
-        <p class="eyebrow">KNOTの個人ブログ</p>
-        <h1>気になったことを、<br>自分の言葉で。</h1>
-        <p class="summary">勉強や読書、Web制作、日々の小さな発見。<br>興味の向くままに書いています。</p>
-        <div class="quick-links"><a href={`${BASE}blog/`}>ブログを読む <span>→</span></a></div>
-      </div>
-      <aside class="operator">
-        <div class="operator-head"><span>OPERATOR / 001</span><span class="status"><i></i> ONLINE</span></div>
-        <div class="operator-name">運営者について<span>。</span></div>
-        <p>中学3年生。小学生の頃に触れたHTML/CSSをきっかけに、最近またWeb制作にハマっています。</p>
-        <dl><div><dt>INTEREST</dt><dd>Web / 読書 / 勉強</dd></div><div><dt>STACK</dt><dd>Astro · HTML · CSS · JS</dd></div></dl>
-        <a href={`${BASE}about/`}>プロフィールを読む <span>↗</span></a>
+<Layout title="KNOT | 個人ブログ" description="Web制作、PC・アプリ、本・読書、勉強や日々の興味を記録する個人ブログ。">
+  <div class="home-blog">
+    <div class="blog-masthead">
+      <a class="blog-title" href={BASE}>KNOT<span>.</span></a>
+      <p>Web・ガジェット・読書・勉強。気になったことを、自分の言葉で。</p>
+    </div>
+    <nav class="blog-category-nav" aria-label="カテゴリー">
+      <a href={`${BASE}blog/`}>トップ</a>
+      <a href={`${BASE}blog/`}>記事一覧</a>
+      {categories.map((category) => <a href={`${BASE}blog/?category=${encodeURIComponent(category)}`}>{category}</a>)}
+      <a href={`${BASE}about/`}>運営者について</a>
+    </nav>
+    <div class="home-columns">
+      <main class="home-main">
+        <div class="home-section-heading"><h1>新着記事</h1><span>NEW ARTICLES</span></div>
+        {featured && <a class="featured-article" href={`${BASE}blog/${featured.slug}/`}>
+          {featured.data.heroImage && <img src={featured.data.heroImage} alt={featured.data.title} />}
+          <div class="featured-copy"><div class="article-meta"><span>{featured.data.category}</span><time>{dateFormat(featured.data.pubDate)}</time></div><h2>{featured.data.title}</h2><p>{featured.data.description}</p><span class="continue-reading">続きを読む »</span></div>
+        </a>}
+        <div class="home-article-list">
+          {recent.map((post) => <article class="home-article-row">
+            <a class="row-thumb" href={`${BASE}blog/${post.slug}/`}>{post.data.heroImage ? <img src={post.data.heroImage} alt="" loading="lazy" /> : <span>KNOT</span>}</a>
+            <div class="row-copy"><div class="article-meta"><span>{post.data.category}</span><time>{dateFormat(post.data.pubDate)}</time><small>約{readingTime(post.body)}分</small></div><h2><a href={`${BASE}blog/${post.slug}/`}>{post.data.title}</a></h2><p>{post.data.description}</p><a class="continue-reading" href={`${BASE}blog/${post.slug}/`}>続きを読む »</a></div>
+          </article>)}
+        </div>
+        <a class="all-articles" href={`${BASE}blog/`}>記事一覧をもっと見る »</a>
+      </main>
+      <aside class="home-sidebar">
+        <section class="side-widget"><h2>このブログについて</h2><div class="side-profile"><strong>KNOT<span>.</span></strong><p>中学3年生が運営する個人ブログ。Web制作や読書、勉強など、興味のあることを記録しています。</p><a href={`${BASE}about/`}>プロフィール »</a></div></section>
+        <section class="side-widget"><h2>カテゴリー</h2><ul>{categories.map((category) => <li><a href={`${BASE}blog/?category=${encodeURIComponent(category)}`}>{category}<span>›</span></a></li>)}</ul></section>
+        <section class="side-widget"><h2>最近の記事</h2><ol>{posts.slice(0, 5).map((post) => <li><a href={`${BASE}blog/${post.slug}/`}>{post.data.title}</a></li>)}</ol></section>
+        <section class="side-widget"><h2>KNOT Study</h2><p>勉強に使える問題・まとめを公開中。</p><a href={`${BASE}study/`}>Studyを開く »</a></section>
       </aside>
-    </section>
-
-    <section class="directory">
-      <div class="section-label"><span>CONTENTS</span><small>WHAT'S HERE?</small></div>
-      <a class="directory-row" href={`${BASE}blog/`}><span class="number">01</span><div><h2>Blog</h2><p>読書、日常、勉強。考えたことを文章に残す。</p></div><span class="row-arrow">↗</span></a>
-      <a class="study-text-link" href={`${BASE}study/`}>Studyも使ってみる <span>↗</span></a>
-    </section>
-
-    <section class="latest">
-      <div class="section-label"><span>新着記事</span><a href={`${BASE}blog/`}>記事をもっと見る →</a></div>
-      {posts.length ? <div class="post-list">
-        {posts.map((post, i) => <a class="post" href={`${BASE}blog/${post.slug}/`}>
-          <span class="post-no">{String(i + 1).padStart(2, '0')}</span>
-          <span class="post-info"><small>{dateFormat(post.data.pubDate)}　/　{post.data.category}　/　約{readingTime(post.body)}分</small><strong>{post.data.title}</strong><em>{post.data.description}</em></span>
-          <span class="post-arrow">→</span>
-        </a>)}
-      </div> : <p class="empty">記事は準備中です。</p>}
-    </section>
-    <footer class="home-footer"><span>KNOT / BUILT WHILE LEARNING.</span><a href={`${BASE}about/`}>ABOUT THE OPERATOR ↗</a></footer>
-  </main>
+    </div>
+  </div>
 </Layout>
 <style>
-.home{max-width:900px;margin:0 auto;padding:25px 0 35px;color:var(--text)}
-/* A warmer, magazine-like personal blog front page */
-.home{max-width:1040px;padding-top:18px}
-.topline{letter-spacing:.03em;font-family:inherit;font-size:11px}
-.intro{grid-template-columns:minmax(0,1.35fr) minmax(250px,.65fr);gap:58px;padding:55px 0 58px}
-.eyebrow{font-family:inherit;font-size:12px;letter-spacing:.02em;font-weight:800}
-.intro h1{font-size:clamp(36px,5.5vw,58px);line-height:1.35;letter-spacing:-.06em}
-.summary{font-size:14px;line-height:2}
-.operator{padding:20px;border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:8px;background:var(--surface)}
-.operator-head{font-family:inherit;letter-spacing:0}
-.operator-name{margin:22px 0 10px}
-.directory{border:0;padding:18px 0 0}
-.section-label{font-family:inherit;letter-spacing:0;font-size:12px;font-weight:800}
-.directory-row{border-top:1px solid var(--line);padding:17px 8px}
-.directory-row h2{font-size:19px}
-.latest{margin-top:44px;padding:22px;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
-.latest .section-label{margin-bottom:15px}
-.post-list{border-top:1px solid var(--line)}
-.post{padding:18px 6px}
-.post-info small{font-size:10px}
-.post-info strong{font-size:14px}
-.post-info em{font-size:12px}
-.home-footer{font-family:inherit;letter-spacing:0}
-@media(max-width:680px){.intro{gap:25px;padding:35px 0}.operator{margin:0}.latest{padding:15px}.post-info em{display:block}.post{padding:15px 3px}}
-
-.topline,.section-label{display:flex;justify-content:space-between;align-items:center;gap:12px;color:var(--muted);font:10px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.12em}
-.topline{padding:0 0 13px;border-bottom:1px solid var(--line)}
-.intro{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(240px,.75fr);gap:48px;align-items:center;padding:62px 0 65px}
-.eyebrow{font:11px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.14em;color:var(--accent)}
-.intro h1{margin:17px 0 18px;font-size:clamp(33px,5vw,52px);line-height:1.45;letter-spacing:-.075em;font-weight:850}
-.summary{color:var(--muted);font-size:13px;line-height:2.1}
-.quick-links{display:flex;gap:23px;margin-top:27px;flex-wrap:wrap}.quick-links a{font-size:12px;font-weight:750;border-bottom:1px solid var(--line);padding-bottom:7px}.quick-links span{color:var(--accent);margin-left:12px}
-.operator{padding:18px 0 17px 22px;border-left:1px solid var(--line)}
-.operator-head{display:flex;justify-content:space-between;gap:8px;color:var(--muted);font:9px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.08em}
-.status{color:var(--accent)}.status i{display:inline-block;width:6px;height:6px;margin-right:5px;border-radius:50%;background:#62c58b}
-.operator-name{margin:30px 0 12px;font-size:20px;font-weight:800;letter-spacing:-.05em}.operator-name span{color:var(--accent)}
-.operator p{font-size:12px;line-height:2;color:var(--muted);margin:0}
-.operator dl{margin:19px 0;display:grid;gap:9px}.operator dl div{display:grid;grid-template-columns:80px 1fr;gap:10px;font-size:10px}.operator dt{font:9px ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--muted);letter-spacing:.08em}.operator dd{margin:0;color:var(--text)}
-.operator>a{font-size:11px;color:var(--accent);font-weight:750}.operator>a span{margin-left:7px}
-.directory{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:17px 0 5px}
-.section-label{margin-bottom:8px}.section-label a{color:var(--accent)}
-.directory-row{display:grid;grid-template-columns:55px 1fr 25px;gap:12px;align-items:center;padding:20px 4px;border-top:1px solid var(--line);transition:padding .18s,color .18s}
-.directory-row:hover{padding-left:11px;color:var(--accent)}
-.study-text-link{display:inline-flex;gap:12px;align-items:center;margin:12px 4px 17px 71px;color:var(--muted);font-size:11px;transition:color .2s}.study-text-link:hover{color:var(--accent)}.study-text-link span{color:var(--accent)}
-.number,.post-no{font:11px ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--muted)}
-.directory-row h2{margin:0;font-size:21px;letter-spacing:-.05em}.directory-row p{margin:4px 0 0;color:var(--muted);font-size:11px;line-height:1.7}.row-arrow{justify-self:end;color:var(--accent);font-size:18px}
-.latest{margin-top:52px}.post-list{border-top:1px solid var(--line)}.post{display:grid;grid-template-columns:40px 1fr 22px;gap:12px;align-items:center;padding:17px 4px;border-bottom:1px solid var(--line);transition:background .15s}.post:hover{background:var(--surface-soft)}.post-info{display:grid;gap:5px}.post-info small{font-size:10px;color:var(--muted)}.post-info strong{font-size:13px;line-height:1.6}.post-info em{font-size:11px;line-height:1.6;color:var(--muted);font-style:normal}.post-arrow{justify-self:end;color:var(--accent)}.empty{font-size:12px;color:var(--muted)}
-.home-footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:45px;padding-top:15px;border-top:1px solid var(--line);font:9px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.1em;color:var(--muted)}.home-footer a{color:var(--accent)}
-@media(max-width:680px){.home{padding-top:18px}.intro{grid-template-columns:1fr;gap:32px;padding:43px 0}.intro h1{font-size:clamp(32px,8vw,44px)}.operator{margin-left:4px;padding:16px 0 15px 17px}.directory-row{grid-template-columns:35px 1fr 20px}.post{grid-template-columns:25px 1fr 15px}.post-info em{display:none}}
+.home-blog{width:100%;max-width:1100px;margin:0 auto;padding:12px 0 35px}
+.blog-masthead{padding:27px 0 23px;border-bottom:1px solid var(--line)}
+.blog-title{font-size:34px;font-weight:900;letter-spacing:-.08em}.blog-title span,.side-profile strong span{color:var(--accent)}
+.blog-masthead p{margin:7px 0 0;color:var(--muted);font-size:12px}
+.blog-category-nav{display:flex;align-items:center;gap:0;flex-wrap:wrap;border-bottom:3px solid var(--accent);background:var(--surface)}
+.blog-category-nav a{display:block;padding:13px 17px;border-right:1px solid var(--line);font-size:12px;font-weight:700}
+.blog-category-nav a:hover{background:var(--surface-soft);color:var(--accent)}
+.home-columns{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:34px;align-items:start;padding-top:28px}
+.home-section-heading{display:flex;align-items:baseline;gap:12px;margin-bottom:17px;padding-bottom:10px;border-bottom:2px solid var(--line)}
+.home-section-heading h1{font-size:21px;margin:0}.home-section-heading span{font-size:9px;color:var(--muted);letter-spacing:.12em}
+.featured-article{display:grid;grid-template-columns: minmax(0,1.1fr) minmax(0,1fr);gap:20px;padding-bottom:22px;border-bottom:1px solid var(--line)}
+.featured-article>img{width:100%;height:220px;object-fit:cover}
+.featured-copy{align-self:center}.article-meta{display:flex;align-items:center;flex-wrap:wrap;gap:9px;color:var(--muted);font-size:10px}
+.article-meta>span{padding:3px 7px;background:var(--surface);border:1px solid var(--line);font-weight:700}
+.featured-copy h2{font-size:20px;line-height:1.55;margin:12px 0 8px}.featured-copy p,.row-copy p{color:var(--muted);font-size:12px;line-height:1.9;margin:0 0 10px}
+.continue-reading{color:var(--accent);font-size:11px;font-weight:700}
+.home-article-row{display:grid;grid-template-columns:155px minmax(0,1fr);gap:17px;padding:19px 0;border-bottom:1px solid var(--line)}
+.row-thumb{display:block;width:155px;height:105px;background:var(--surface);overflow:hidden}.row-thumb img{width:100%;height:100%;object-fit:cover}.row-thumb span{display:grid;place-items:center;height:100%;font-weight:900;color:var(--muted)}
+.row-copy h2{font-size:16px;line-height:1.55;margin:7px 0}.row-copy p{margin-bottom:7px}
+.all-articles{display:block;margin-top:22px;padding:13px;text-align:center;border:1px solid var(--line);font-size:12px;font-weight:700}
+.home-sidebar{display:grid;gap:22px}.side-widget{border:1px solid var(--line);background:var(--surface)}
+.side-widget>h2{font-size:14px;margin:0;padding:12px 14px;border-bottom:1px solid var(--line);border-left:4px solid var(--accent)}
+.side-profile{padding:15px}.side-profile strong{font-size:26px;letter-spacing:-.08em}.side-profile p,.side-widget>p{font-size:11px;line-height:1.9;color:var(--muted);margin:8px 0}
+.side-profile>a,.side-widget> a{font-size:11px;color:var(--accent);font-weight:700}
+.side-widget ul,.side-widget ol{margin:0;padding:7px 14px 10px;list-style:none}.side-widget li{border-bottom:1px dotted var(--line)}.side-widget li:last-child{border:0}
+.side-widget li a{display:flex;justify-content:space-between;gap:10px;padding:9px 0;font-size:11px;line-height:1.6}.side-widget li a:hover{color:var(--accent)}
+.side-widget ol{counter-reset:recent}.side-widget ol li{counter-increment:recent}.side-widget ol li a:before{content:counter(recent);color:var(--accent);font-weight:800;margin-right:8px}
+.side-widget>p{padding:0 14px}.side-widget> a{display:block;padding:0 14px 14px}
+@media(max-width:760px){.home-columns{grid-template-columns:1fr;gap:30px}.home-sidebar{grid-template-columns:repeat(2,minmax(0,1fr))}.featured-article{grid-template-columns:1fr}.featured-article>img{height:230px}}
+@media(max-width:520px){.home-blog{padding-top:0}.blog-masthead{padding:20px 0}.blog-title{font-size:29px}.blog-category-nav{overflow-x:auto;flex-wrap:nowrap}.blog-category-nav a{white-space:nowrap;padding:12px 13px;font-size:11px}.home-columns{padding-top:20px}.home-article-row{grid-template-columns:112px minmax(0,1fr);gap:12px}.row-thumb{width:112px;height:88px}.row-copy h2{font-size:13px}.row-copy p{font-size:10px;line-height:1.65}.home-sidebar{grid-template-columns:1fr}.featured-copy h2{font-size:18px}}
 </style>
