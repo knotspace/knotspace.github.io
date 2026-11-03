@@ -67,27 +67,24 @@ self.addEventListener('fetch', (event) => {
     !url.pathname.startsWith(SCOPE)
   ) return;
 
+  if (STATIC_ASSETS.has(url.pathname)) {
+    const cachePromise = caches.open(CACHE_NAME);
+    const updatePromise = cachePromise
+      .then((cache) => refreshStaticAsset(request, cache))
+      .catch(() => null);
+    // Register both lifetime promises synchronously during the fetch event.
+    event.waitUntil(updatePromise);
+    event.respondWith(
+      cachePromise
+        .then((cache) => cache.match(request))
+        .then((cached) => cached || updatePromise.then((response) => response || Response.error()))
+    );
+    return;
+  }
+
+  // Keep config and other non-shell resources network-first.
   event.respondWith((async () => {
     const cache = await caches.open(CACHE_NAME);
-
-    // Static CMS assets are served from cache immediately on repeat visits.
-    // A background refresh keeps the next launch current without delaying this one.
-    if (STATIC_ASSETS.has(url.pathname)) {
-      const cached = await cache.match(request);
-      if (cached) {
-        event.waitUntil(refreshStaticAsset(request, cache).catch(() => {}));
-        return cached;
-      }
-      try {
-        return await refreshStaticAsset(request, cache);
-      } catch {
-        const shell = await cache.match('/admin/') || await cache.match('/admin/index.html');
-        if (shell && request.mode === 'navigate') return shell;
-        return Response.error();
-      }
-    }
-
-    // Keep config and other non-shell resources network-first.
     try {
       const response = await fetch(request, { cache: 'no-cache' });
       const cacheControl = response.headers.get('Cache-Control') || '';
