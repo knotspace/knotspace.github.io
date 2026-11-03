@@ -82,33 +82,49 @@ function buildStages(){
    ['部活や行事にも積極的に参加する',{experience:8,friends:5},'学校生活の幅が広がった。']
   ],'INTEGRATED'));
  }
- const highRoute=state.decisions.middleExam&&state.decisions.examResult==='pass'?'中高一貫校':'高校';
- for(let g=1;g<=3;g++) add(highRoute+g+'年生','APRIL',highRoute+g+'年生、広がる世界',g===1?'新しい校舎、新しい仲間。ここからの3年間が始まる。':g===2?'学校生活に慣れ、自分の得意や興味が見えてきた。':'最後の学年。卒業後の進路を具体的に考える時期。','授業、部活、行事、探究。高校生活で何を大切にするかは自分次第。',[
-  ['学びを深め、資格や検定にも挑戦',{study:8,experience:3,health:-2},'知識と技術が少しずつ自分の力になった。'],
-  ['部活・行事・仲間との経験を大切にする',{experience:8,friends:7},'仲間と過ごした時間が大切な思い出になった。'],
-  ['興味のある分野を見つけて挑戦する',{study:5,experience:8},'自分が夢中になれる分野に出会った。']
- ],'HIGH SCHOOL'));
- add('高校卒業','MARCH','卒業後の進路を選ぶ','高校生活が終わる。ここから先は、大学だけが道ではない。学びたいことや目指す暮らしから進路を考えよう。','大学・専門学校・就職・起業。それぞれに違う経験と可能性がある。',[
- ['大学へ進学する',{study:4,experience:2},'大学進学を目指すことにした。',{career:'university'}],
- ['専門学校で専門技術を学ぶ',{experience:7},'学びたい技術を身につけるため、専門学校を選んだ。',{career:'vocational'}],
- ['就職して社会に出る',{experience:8},'働きながら経験を積む道を選んだ。',{career:'work'}],
- ['自分で事業を始める',{experience:10,health:-3},'自分のアイデアを形にする挑戦を始める。',{career:'startup'})
- ],'CAREER');
+ if(state.decisions.highResult==='fail'){
+  add('中学卒業','MARCH','高校受験の結果、ここからの道を選ぶ','高校受験は不合格。悔しさはあるけれど、人生が終わるわけではない。中卒で働く道、専門技術を学ぶ道、もう一度挑戦する道もある。','高校卒業とは違うスタートになる。選んだ道で経験を積んでいこう。',[
+   ['中卒で就職する',{experience:8},'中学校卒業後、社会に出て働き始めた。',{career:'work',education:'middle'}],
+   ['職業訓練や専門技術を学ぶ',{study:4,experience:7},'仕事に役立つ技術を身につける道を選んだ。',{career:'vocational',education:'middle'}],
+   ['小さく事業を始める',{experience:9,health:-3},'自分の力で仕事をつくる挑戦を始めた。',{career:'startup',education:'middle'}]
+  ],'MIDDLE SCHOOL GRADUATE');
+ } else {
+  const highRoute=state.decisions.middleExam&&state.decisions.examResult==='pass'?'中高一貫校':'高校';
+  for(let g=1;g<=3;g++) add(highRoute+g+'年生','APRIL',highRoute+g+'年生、広がる世界',g===1?'新しい校舎、新しい仲間。ここからの3年間が始まる。':g===2?'学校生活に慣れ、自分の得意や興味が見えてきた。':'最後の学年。卒業後の進路を具体的に考える時期。','授業、部活、行事、探究。高校生活で何を大切にするかは自分次第。',[
+   ['学びを深め、資格や検定にも挑戦',{study:8,experience:3,health:-2},'知識と技術が少しずつ自分の力になった。'],
+   ['部活・行事・仲間との経験を大切にする',{experience:8,friends:7},'仲間と過ごした時間が大切な思い出になった。'],
+   ['興味のある分野を見つけて挑戦する',{study:5,experience:8},'自分が夢中になれる分野に出会った。']
+  ],'HIGH SCHOOL'));
+  add('高校卒業','MARCH','卒業後の進路を選ぶ','高校生活が終わる。ここから先は、大学だけが道ではない。学びたいことや目指す暮らしから進路を考えよう。','大学・専門学校・就職・起業。それぞれに違う経験と可能性がある。',[
+  ['大学へ進学する',{study:4,experience:2},'大学進学を目指すことにした。',{career:'university'}],
+  ['専門学校で専門技術を学ぶ',{experience:7},'学びたい技術を身につけるため、専門学校を選んだ。',{career:'vocational'}],
+  ['就職して社会に出る',{experience:8},'働きながら経験を積む道を選んだ。',{career:'work'}],
+  ['自分で事業を始める',{experience:10,health:-3},'自分のアイデアを形にする挑戦を始める。',{career:'startup'})
+  ],'CAREER');
+ }
  if(state.decisions.career==='university'){
   add('大学受験','JANUARY','大学受験に挑戦','大学で何を学ぶかを考え、受験本番を迎えた。','大学進学を選んだ人は全員ここで受験に挑む。結果はゲーム上の経験値で表現される。',[
    ['基礎から積み上げた力を発揮する',{study:9,health:3},'準備してきたことを出し切った。',{uniResult:'pass'}],
    ['難しい問題にも挑み続ける',{study:11,health:-4},'最後まで考え抜く姿勢を貫いた。',{uniResult:'pass'}]
   ],'UNIVERSITY EXAM');
-  add('大学1〜2年','CAMPUS','大学での学びが始まる','授業やゼミ、サークル、アルバイト。高校までとは違う自由と責任がある。','自分で時間を管理し、学びたいテーマを見つけよう。',[
-   ['専門分野を深く学ぶ',{study:10,experience:4},'専門知識が積み重なった。'],
-   ['サークルや人との出会いを広げる',{friends:10,experience:8},'多様な人と出会い、視野が広がった。'],
-   ['インターンや実践活動に参加する',{experience:12,health:-2},'社会につながる経験を積んだ。']
-  ],'UNIVERSITY'));
-  add('大学3〜4年','CAREER','学びを次の一歩につなぐ','研究、制作、就職活動。大学で得たものをどう活かすか考える。','卒業後の道を選ぶ時期が来た。',[
-   ['企業に就職する',{experience:8},'学んだことを仕事につなげる道を選んだ。',{afterStudy:'work'}],
-   ['専門性をさらに磨く',{study:8,experience:5},'知識を深め、専門性を高めることにした。',{afterStudy:'work'}],
-   ['自分の事業を立ち上げる',{experience:10,health:-3},'学びとアイデアを事業にしてみる。',{afterStudy:'startup'})
-  ],'GRADUATION'));
+  if(state.decisions.uniResult==='fail'){
+   add('高校卒業','MARCH','大学受験の結果、次の道を選ぶ','大学受験は不合格。進学先を変える、専門学校へ進む、就職するなど、ここから選び直せる。','合否は人生の価値を決めない。次の一歩を決めよう。',[
+    ['専門学校へ進む',{experience:7},'専門分野を学ぶ道に切り替えた。',{career:'vocational'}],
+    ['高卒で就職する',{experience:8},'高校卒業後、社会に出て働く道を選んだ。',{career:'work'}],
+    ['起業に挑戦する',{experience:9,health:-3},'自分のアイデアを仕事にする挑戦を始めた。',{career:'startup'}]
+   ],'UNIVERSITY RESULT');
+  } else {
+   add('大学1〜2年','CAMPUS','大学での学びが始まる','授業やゼミ、サークル、アルバイト。高校までとは違う自由と責任がある。','自分で時間を管理し、学びたいテーマを見つけよう。',[
+    ['専門分野を深く学ぶ',{study:10,experience:4},'専門知識が積み重なった。'],
+    ['サークルや人との出会いを広げる',{friends:10,experience:8},'多様な人と出会い、視野が広がった。'],
+    ['インターンや実践活動に参加する',{experience:12,health:-2},'社会につながる経験を積んだ。']
+   ],'UNIVERSITY'));
+   add('大学3〜4年','CAREER','学びを次の一歩につなぐ','研究、制作、就職活動。大学で得たものをどう活かすか考える。','卒業後の道を選ぶ時期が来た。',[
+    ['企業に就職する',{experience:8},'学んだことを仕事につなげる道を選んだ。',{afterStudy:'work'}],
+    ['専門性をさらに磨く',{study:8,experience:5},'知識を深め、専門性を高めることにした。',{afterStudy:'work'}],
+    ['自分の事業を立ち上げる',{experience:10,health:-3},'学びとアイデアを事業にしてみる。',{afterStudy:'startup'})
+   ],'GRADUATION'));
+  }
  }
  if(state.decisions.career==='vocational'){
   add('専門学校1年','SKILLS','専門技術を身につける','実習や課題を通して、目指す仕事に必要な技術を学ぶ。','手を動かし、失敗し、できることを増やしていこう。',[
