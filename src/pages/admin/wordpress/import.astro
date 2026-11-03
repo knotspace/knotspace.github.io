@@ -6,7 +6,8 @@ import Layout from '../../../layouts/Layout.astro';
     <a class="back" href="/admin/wordpress/">← WordPress編集室へ戻る</a>
     <p class="eyebrow">KNOT PUBLISH BRIDGE</p>
     <h1>WordPressの記事をKNOTへ</h1>
-    <p class="lead">WordPressの標準エクスポート（XML）を読み込み、KNOTのブログ記事ファイル（Markdown）に変換します。</p>
+    <p class="lead">WordPressの標準エクスポート（XML）を読み込み、KNOTの記事ファイルに変換して、そのままGitHubへ公開できます。</p>
+    <div class="auth-row"><span>公開にはKNOT GitHub連携が必要です。</span><a href="https://knot-cms-api.edanohumio.workers.dev/auth/login" target="_blank" rel="noopener noreferrer">GitHub連携・ログイン ↗</a></div>
 
     <section class="steps">
       <h2>取り込み手順</h2>
@@ -14,7 +15,7 @@ import Layout from '../../../layouts/Layout.astro';
         <li>WordPressで「ツール → エクスポート」を開く</li>
         <li>「すべてのコンテンツ」を選んでエクスポートファイルを保存</li>
         <li>ここにXMLファイルを読み込む</li>
-        <li>変換されたMarkdownをダウンロードして、GitHubの <code>src/content/blog/</code> に追加する</li>
+        <li>変換結果を確認して「GitHubに公開」を押す（自動でサイト更新が始まります）</li>
       </ol>
     </section>
 
@@ -44,6 +45,13 @@ const filesEl = document.querySelector('#files');
 const summary = document.querySelector('#summary');
 const downloadAll = document.querySelector('#download-all');
 let converted = [];
+const API = 'https://knot-cms-api.edanohumio.workers.dev';
+let csrfToken = '';
+async function getCsrf() {
+  const response = await fetch(API + '/api/me', { credentials: 'include' });
+  if (!response.ok) throw new Error('先に「GitHub連携・ログイン」を行ってください。');
+  const data = await response.json(); csrfToken = data.csrfToken; return csrfToken;
+}
 
 input?.addEventListener('change', () => {
   convert.disabled = !input.files?.[0];
@@ -114,9 +122,22 @@ convert?.addEventListener('click', async () => {
     converted.forEach(file => {
       const row = document.createElement('div'); row.className = 'file-row';
       const label = document.createElement('span'); label.textContent = file.title + ' · ' + file.name;
-      const button = document.createElement('button'); button.type = 'button'; button.textContent = 'ダウンロード';
-      button.addEventListener('click', () => download(file));
-      row.append(label, button); filesEl.append(row);
+      const actions = document.createElement('div'); actions.className = 'file-actions';
+      const button = document.createElement('button'); button.type = 'button'; button.textContent = '保存';
+      button.className = 'secondary'; button.addEventListener('click', () => download(file));
+      const publish = document.createElement('button'); publish.type = 'button'; publish.textContent = 'GitHubに公開';
+      publish.addEventListener('click', async () => {
+        publish.disabled = true; publish.textContent = '公開中…';
+        try {
+          if (!csrfToken) await getCsrf();
+          const slug = file.name.replace(/\\.md$/, '');
+          const response = await fetch(API + '/api/publish-article', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json', 'X-KNOT-CSRF': csrfToken }, body: JSON.stringify({ slug, content: file.content }) });
+          const result = await response.json();
+          if (!response.ok) throw new Error(result.error || '公開に失敗しました。');
+          publish.textContent = '✓ 公開済み'; publish.disabled = true; label.textContent += ' · GitHubへ反映済み';
+        } catch (error) { publish.disabled = false; publish.textContent = '再試行'; alert(error.message || '公開に失敗しました。'); }
+      });
+      actions.append(button, publish); row.append(label, actions); filesEl.append(row);
     });
     summary.textContent = converted.length + '件の記事を変換しました。';
     results.hidden = false;
@@ -151,6 +172,6 @@ button:disabled{opacity:.4;cursor:not-allowed}
 #summary{font-size:13px;color:var(--muted)}
 .files{display:grid;gap:8px}
 .file-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px;border:1px solid var(--line);border-radius:9px;font-size:12px;min-width:0}
-.file-row span{overflow-wrap:anywhere}
-@media(max-width:600px){.import-shell{padding-top:24px}.steps,.upload,.results{padding:15px}.result-head{align-items:flex-start;flex-direction:column}.file-row{align-items:flex-start;flex-direction:column}}
+.file-row span{overflow-wrap:anywhere}.file-actions{display:flex;gap:7px;flex:none}.auth-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 16px;margin:0 0 16px;border:1px solid var(--line);border-radius:10px;background:var(--surface);font-size:12px;color:var(--muted)}.auth-row a{color:var(--accent);font-weight:800;text-decoration:none}
+@media(max-width:600px){.auth-row{align-items:flex-start;flex-direction:column}.file-actions{width:100%;flex-wrap:wrap}.import-shell{padding-top:24px}.steps,.upload,.results{padding:15px}.result-head{align-items:flex-start;flex-direction:column}.file-row{align-items:flex-start;flex-direction:column}}
 </style>
