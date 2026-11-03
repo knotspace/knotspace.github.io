@@ -112,7 +112,10 @@ const breadcrumbJsonLd = {
     </header>
 
     {post.data.heroImage && (
-      <img class="hero-image" src={post.data.heroImage} alt={post.data.title} loading="eager" fetchpriority="high" decoding="async" />
+      <>
+        <img class="hero-image" src={post.data.heroImage} alt={post.data.title} loading="eager" fetchpriority="high" decoding="async" width="1200" height="630" />
+        {post.data.heroImage.startsWith('/blog-art/') && <p class="hero-image-credit">図版：KNOT制作のオリジナルイラスト</p>}
+      </>
     )}
 
 
@@ -828,6 +831,7 @@ const breadcrumbJsonLd = {
   .article-content :global(td){color:var(--article-text)}
   .article-content :global(tr:nth-child(even) td){background:var(--surface-soft)}
   .hero-image{border-radius:16px}
+  .hero-image-credit{margin:-18px 0 26px;text-align:right;color:var(--muted);font-size:10px;line-height:1.6}
   .article-content :global(figure){margin:1.8em 0}
   .article-content :global(.book-cover-figure){width:min(100%,260px);margin:28px auto 34px;text-align:center}
   .article-content :global(.book-cover-figure img){display:block;width:auto;max-width:100%;max-height:390px;height:auto;object-fit:contain;margin:0 auto;border-radius:5px;box-shadow:0 8px 24px rgba(0,0,0,.13)}
