@@ -15,15 +15,49 @@ const BASE = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     <div id="saved-list" class="saved-list" aria-live="polite"></div>
   </main>
   <script define:vars={{ bookmarkData, base: BASE }}>
-    const root = document.querySelector('#saved-list'); const key = 'knot-bookmarks';
-    let saved = []; try { saved = JSON.parse(localStorage.getItem(key) || '[]'); } catch { saved = []; }
-    const escapeHtml = (v) => String(v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-    const render = () => {
-      const entries = bookmarkData.filter(p => saved.includes(p.slug));
-      if (!entries.length) { root.innerHTML = '<div class="empty"><strong>まだ保存した記事はありません。</strong><p>記事ページの「☆ あとで読む」から保存できます。</p><a href="'+base+'blog/">記事を探す →</a></div>'; return; }
-      root.innerHTML = entries.map(p => `<article class="saved-card"><div><span>${escapeHtml(p.category)}</span><h2><a href="${base}blog/${encodeURIComponent(p.slug)}/">${escapeHtml(p.title)}</a></h2><p>${escapeHtml(p.description)}</p></div><button type="button" data-remove="${escapeHtml(p.slug)}">保存解除</button></article>`).join('');
+    const root = document.querySelector('#saved-list');
+    const key = 'knot-bookmarks';
+    const readSaved = () => {
+      try {
+        const value = JSON.parse(localStorage.getItem(key) || '[]');
+        return Array.isArray(value) ? value.filter(item => typeof item === 'string') : [];
+      } catch {
+        return [];
+      }
     };
-    render(); root.addEventListener('click', e => { const b=e.target.closest('[data-remove]'); if(!b)return; saved=saved.filter(s=>s!==b.dataset.remove); localStorage.setItem(key,JSON.stringify(saved)); render(); });
+    const escapeHtml = (value) => String(value).replace(/[&<>"']/g, character => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[character]));
+    let saved = readSaved();
+
+    const render = () => {
+      if (!root) return;
+      const entries = bookmarkData.filter(post => saved.includes(post.slug));
+      if (!entries.length) {
+        root.innerHTML = '<div class="empty"><strong>まだ保存した記事はありません。</strong><p>記事ページの「☆ あとで読む」から保存できます。</p><a href="' + base + 'blog/">記事を探す →</a></div>';
+        return;
+      }
+      root.innerHTML = entries.map(post => (
+        '<article class="saved-card"><div><span>' + escapeHtml(post.category) +
+        '</span><h2><a href="' + base + 'blog/' + encodeURIComponent(post.slug) + '/">' +
+        escapeHtml(post.title) + '</a></h2><p>' + escapeHtml(post.description) +
+        '</p></div><button type="button" data-remove="' + escapeHtml(post.slug) +
+        '">保存解除</button></article>'
+      )).join('');
+    };
+
+    render();
+    if (root) root.addEventListener('click', event => {
+      const button = event.target.closest('[data-remove]');
+      if (!button) return;
+      saved = saved.filter(slug => slug !== button.dataset.remove);
+      try {
+        localStorage.setItem(key, JSON.stringify(saved));
+        render();
+      } catch {
+        button.textContent = '解除できません';
+      }
+    });
   </script>
 </Layout>
 <style>
