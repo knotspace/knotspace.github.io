@@ -1,6 +1,19 @@
 {
   "releases": [
     {
+      "id": "ba94795",
+      "publishedAt": "2026-11-03T20:39:01+09:00",
+      "title": "Fix motivation group data rendering",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "Study画面・機能"
+      ],
+      "files": [
+        "src/pages/study/why.astro"
+      ]
+    },
+    {
       "id": "0d150c9",
       "publishedAt": "2026-11-03T20:38:11+09:00",
       "title": "Add 200 original study motivation messages",
