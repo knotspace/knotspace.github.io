@@ -1,4 +1,5 @@
 ---
+heroImage: "/blog-art/english-study.svg"
 title: "英語の偏差値60超えは余裕!? 中学生の英語勉強法とおすすめ参考書"
 description: "英検3級の勉強や実際に使いやすい参考書をもとに、公立高校入試で高得点を目指す英語の勉強法を紹介します。"
 pubDate: "2026-11-03T00:00:00.000Z"
@@ -34,7 +35,7 @@ category: "英語・勉強法"
 
 ### 1. 中学英語をもう一度ひとつひとつわかりやすく。改訂版
 
-![中学英語をもう一度ひとつひとつわかりやすく。改訂版 表紙](https://hon.gakken.jp/img/books/352x452/1130548200.jpg)
+<figure class="book-cover-figure"><img src="https://hon.gakken.jp/img/books/352x452/1130548200.jpg" alt="中学英語をもう一度ひとつひとつわかりやすく。改訂版 表紙" loading="lazy" decoding="async" width="352" height="452" /><figcaption>書影・書籍情報：<a href="https://hon.gakken.jp/book/1130548200" target="_blank" rel="noopener noreferrer">学研公式書籍ページ</a></figcaption></figure>
 
 これは英文法が苦手な人や、基礎から復習したい人におすすめ！　中学3年間の文法をまとめて確認できて、説明もかなりわかりやすいんだ。
 
@@ -52,7 +53,7 @@ be動詞と一般動詞の違いとか、不定詞、比較、現在完了とか
 
 ### 2. 英検3級をひとつひとつわかりやすく。改訂版
 
-![英検3級をひとつひとつわかりやすく。改訂版 表紙](https://hon.gakken.jp/img/books/352x452/1130600000.jpg)
+<figure class="book-cover-figure"><img src="https://hon.gakken.jp/img/books/352x452/1130600000.jpg" alt="英検3級をひとつひとつわかりやすく。改訂版 表紙" loading="lazy" decoding="async" width="352" height="452" /><figcaption>書影・書籍情報：<a href="https://hon.gakken.jp/book/1130600000" target="_blank" rel="noopener noreferrer">学研公式書籍ページ</a></figcaption></figure>
 
 英検3級を受けるなら、ガチでおすすめの一冊！　単語や文法だけじゃなくて、読解・リスニング・英作文、面接対策まで勉強できるんだよ。
 
@@ -68,7 +69,7 @@ be動詞と一般動詞の違いとか、不定詞、比較、現在完了とか
 
 ### 3. きちんとこれだけ公立高校入試対策問題集 英語
 
-![きちんとこれだけ公立高校入試対策問題集 英語 三訂版 表紙](https://shop.r10s.jp/book/cabinet/2874/9784010222874_1_2.jpg)
+<figure class="book-cover-figure"><img src="https://shop.r10s.jp/book/cabinet/2874/9784010222874_1_2.jpg" alt="きちんとこれだけ公立高校入試対策問題集 英語 三訂版 表紙" loading="lazy" decoding="async" width="352" height="452" /><figcaption>書影・書籍情報：<a href="https://www.obunsha.co.jp/product/detail/022287" target="_blank" rel="noopener noreferrer">旺文社公式書籍ページ（書影掲載元：楽天ブックス）</a></figcaption></figure>
 
 英検3級レベルの勉強ができてきたら、次はいよいよ公立高校入試の問題に挑戦したいところ！
 
