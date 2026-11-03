@@ -1,6 +1,19 @@
 {
   "releases": [
     {
+      "id": "8a60a40",
+      "publishedAt": "2026-11-03T23:03:37+09:00",
+      "title": "Polish KOSEN filters and add keyboard answer shortcuts",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "高専対策"
+      ],
+      "files": [
+        "src/pages/study/kosen.astro"
+      ]
+    },
+    {
       "id": "0f412bb",
       "publishedAt": "2026-11-03T21:54:12+09:00",
       "title": "Add 200 KNOT-made summary learning resources",
