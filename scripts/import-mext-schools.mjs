@@ -10,6 +10,8 @@ const SOURCES = [
   'https://www.mext.go.jp/content/20260825-mxt_chousa01-000011635_4.csv',
   'https://www.mext.go.jp/content/20260825-mxt_chousa01-000011635_6.csv'
 ];
+const TYPE_MAP = {A1:'幼稚園',A2:'幼保連携型認定こども園',B1:'小学校',C1:'中学校',C2:'義務教育学校',D1:'高等学校',D2:'中等教育学校',E1:'特別支援学校',F1:'大学',F2:'短期大学',G1:'高等専門学校',H1:'専修学校',H2:'各種学校'};
+const OWNERSHIP_MAP = {'1':'国立','2':'公立','3':'私立'};
 const PREFECTURES = ['北海道','青森県','岩手県','宮城県','秋田県','山形県','福島県','茨城県','栃木県','群馬県','埼玉県','千葉県','東京都','神奈川県','新潟県','富山県','石川県','福井県','山梨県','長野県','岐阜県','静岡県','愛知県','三重県','滋賀県','京都府','大阪府','兵庫県','奈良県','和歌山県','鳥取県','島根県','岡山県','広島県','山口県','徳島県','香川県','愛媛県','高知県','福岡県','佐賀県','長崎県','熊本県','大分県','宮崎県','鹿児島県','沖縄県'];
 
 function parseCsv(text) {
@@ -61,9 +63,12 @@ for (const url of SOURCES) {
     const code = pick(row, headers, [/^学校コード$/,/学校コード/]);
     const name = pick(row, headers, [/学校名/,/学校名称/]);
     if (!code || !name) continue;
-    const schoolType = pick(row, headers, [/学校種/]) || pick(row, headers, [/校種/]);
-    const ownership = pick(row, headers, [/設置区分/,/設置者区分/,/国公私立/]);
-    const prefecture = pick(row, headers, [/都道府県/]);
+    const typeCode = pick(row, headers, [/学校種/]) || code.slice(0, 2);
+    const schoolType = TYPE_MAP[typeCode] || typeCode;
+    const ownershipCode = pick(row, headers, [/設置区分/,/設置者区分/,/国公私立/]) || code.slice(4, 5);
+    const ownership = OWNERSHIP_MAP[ownershipCode] || ownershipCode;
+    const prefectureCode = pick(row, headers, [/都道府県番号/]) || code.slice(2, 4);
+    const prefecture = PREFECTURES[Number(prefectureCode) - 1] || pick(row, headers, [/都道府県/]);
     const city = pick(row, headers, [/市区町村/]);
     const address = pick(row, headers, [/所在地/,/住所/]);
     const postalCode = pick(row, headers, [/郵便番号/]);
