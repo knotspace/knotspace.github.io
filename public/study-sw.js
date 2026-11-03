@@ -1,39 +1,40 @@
-const CACHE='knot-study-v2';
-const CORE=[
-  '/study/',
-  '/study/foundation/',
-  '/study/kosen/',
-  '/study/mock/',
-  '/study/summary/',
-  '/study/tools/',
-  '/study.webmanifest',
-  '/study-icon.svg'
-];
-self.addEventListener('install',event=>event.waitUntil(
-  caches.open(CACHE).then(cache=>cache.addAll(CORE)).then(()=>self.skipWaiting())
-));
-self.addEventListener('activate',event=>event.waitUntil(
-  caches.keys()
-    .then(keys=>Promise.all(keys.filter(key=>key.startsWith('knot-study-')&&key!==CACHE).map(key=>caches.delete(key))))
-    .then(()=>self.clients.claim())
-));
-self.addEventListener('fetch',event=>{
-  const request=event.request;
-  const url=new URL(request.url);
-  if(request.method!=='GET'||url.origin!==self.location.origin||!url.pathname.startsWith('/study/'))return;
-  event.respondWith(
-    caches.match(request).then(cached=>{
-      if(cached)return cached;
-      return fetch(request).then(response=>{
-        if(response.ok&&response.type==='basic'){
-          const copy=response.clone();
-          caches.open(CACHE).then(cache=>cache.put(request,copy)).catch(()=>{});
-        }
-        return response;
-      }).catch(async()=>{
-        if(request.mode==='navigate')return (await caches.match('/study/'))||Response.error();
-        return Response.error();
-      });
-    })
-  );
+const CACHE = 'knot-study-v3';
+const SCOPE = new URL('./study/', self.location.href).pathname;
+
+self.addEventListener('install', (event) => {
+  event.waitUntil(self.skipWaiting());
+});
+
+self.addEventListener('activate', (event) => {
+  event.waitUntil((async () => {
+    const keys = await caches.keys();
+    await Promise.all(keys.filter((key) => key.startsWith('knot-study-') && key !== CACHE).map((key) => caches.delete(key)));
+    await self.clients.claim();
+  })());
+});
+
+self.addEventListener('fetch', (event) => {
+  const request = event.request;
+  const url = new URL(request.url);
+  if (request.method !== 'GET' || url.origin !== self.location.origin || !url.pathname.startsWith(SCOPE)) return;
+
+  event.respondWith((async () => {
+    const cache = await caches.open(CACHE);
+    try {
+      const response = await fetch(request, { cache: 'no-cache' });
+      const cacheControl = response.headers.get('Cache-Control') || '';
+      if (response.ok && response.type === 'basic' && !/\b(private|no-store)\b/i.test(cacheControl)) {
+        await cache.put(request, response.clone()).catch(() => {});
+      }
+      return response;
+    } catch {
+      const cached = await cache.match(request);
+      if (cached) return cached;
+      if (request.mode === 'navigate') {
+        const home = await cache.match(new URL('./', self.location.href).pathname);
+        if (home) return home;
+      }
+      return Response.error();
+    }
+  })());
 });
