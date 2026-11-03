@@ -1,6 +1,19 @@
 {
   "releases": [
     {
+      "id": "cb5481b",
+      "publishedAt": "2026-11-03T21:33:45+09:00",
+      "title": "Add topic-specific explanations to all KNOT diagrams",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "学習コンテンツ・データ"
+      ],
+      "files": [
+        "src/data/study/knot-diagrams.json"
+      ]
+    },
+    {
       "id": "831f763",
       "publishedAt": "2026-11-03T21:33:03+09:00",
       "title": "Improve subject-specific diagram matching in practice",
