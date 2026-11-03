@@ -1,6 +1,19 @@
 {
   "releases": [
     {
+      "id": "727dc8b",
+      "publishedAt": "2026-11-03T21:29:24+09:00",
+      "title": "Add searchable 400-item KNOT diagram library",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "Study画面・機能"
+      ],
+      "files": [
+        "src/pages/study/diagrams.astro"
+      ]
+    },
+    {
       "id": "e9f65da",
       "publishedAt": "2026-11-03T21:28:31+09:00",
       "title": "Normalize KNOT diagram library to 200 per subject",
