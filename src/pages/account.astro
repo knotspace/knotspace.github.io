@@ -106,7 +106,7 @@ const turnstileSiteKey = '0x4AAAAAAFw3tWRvQprhMAu3';
         }));
         location.href = base + 'mypage/';
       } catch (error) {
-        $('message').textContent = error.message || '処理に失敗しました。';
+        $('message').textContent = error instanceof TypeError ? 'ユーザー名認証のサーバー設定がまだ完了していません。設定完了後に登録・ログインできるようになります。' : (error.message || '処理に失敗しました。');
       } finally {
         captchaToken = '';
         if (window.turnstile && turnstileWidgetId !== null) window.turnstile.reset(turnstileWidgetId);
