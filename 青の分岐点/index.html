@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="日本の人口1億2380万人のひとりとして、47都道府県のどこかに生まれ、実在の高校・大学・職業・年収の統計で一生を生きる人生シミュレーション。">
-<meta property="og:title" content="1億2380万分の1 ― 日本で生まれ、一度きりの人生を生きる">
+<meta name="description" content="青の分岐点。生まれる場所も時代も選べない。勉強、青春、進路、仕事、人との出会い。選択を重ねて一度きりの人生を歩くシミュレーション。">
+<meta property="og:title" content="青の分岐点｜一度きりの人生シミュレーション">
 <meta property="og:description" content="どこに、誰の子として生まれるかは選べません。実際の統計で決まる、日本版人生シミュレーション。">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://rs-developing26.github.io/1oku2380man/">
+<meta property="og:url" content="https://knotspace.github.io/青の分岐点/">
 <meta property="og:image" content="https://rs-developing26.github.io/1oku2380man/og.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://rs-developing26.github.io/1oku2380man/og.png">
@@ -22,7 +22,7 @@
 .decmini{display:none;width:100%;padding:10px 12px;border:1px solid var(--shu,#c8372d);background:var(--paper,#fff);color:var(--shu,#c8372d);border-radius:8px;font-weight:700;text-align:left;cursor:pointer}#dec.decmin .decmini{display:block}#dec.decmin .decision{display:none}.decclose{font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid var(--rule,#cfd6e0);background:transparent;color:var(--sub,#5b6577);cursor:pointer}
 </style>
 <script src="i18n/runtime.js"></script>
-<title>1億2380万分の1</title>
+<title>青の分岐点｜人生シミュレーション</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@500;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
@@ -3495,7 +3495,7 @@ function home(){
   ${(()=>{const r=loadResume();return r&&r.L&&r.L.alive?`<div class="sheet resume"><b>前回の人生が途中です</b><p class="muted" style="margin:4px 0 8px;font-size:13px">${esc(r.L.name||"")}・${r.L.age}歳（${esc(r.L.home||"")}生まれ）</p><button class="btn" id="resumeGo">続きから生きる</button> <button class="chip" id="resumeDrop">破棄する</button></div>`:""})()}
   <header class="hero">
     <span class="label">日本の人口 1億2,380万人（2024年10月）・去年の出生 ${TOTAL.toLocaleString()}人</span>
-    <h1>1億2380万分の1<small>の人生</small></h1>
+    <h1>青の分岐点<small>人生シミュレーション</small></h1>
     <p class="lead">去年、日本で生まれた68万6千人のひとりとして、一生を最後まで生きてみる。県も家も選べない。高校も大学も職業も年収も、実在の名前と統計で決まっていく。</p>
     <button class="btn big" id="go0">生まれる</button>
     <p class="credit muted" style="font-size:12px;margin:8px 0 0"><span>元ネタ：</span><a href="https://1in8b.life/" target="_blank" rel="noopener" onclick="try{track('origin','元ネタ')}catch(e){}">1 in 8 Billion</a> by <a href="https://x.com/jins__earth" target="_blank" rel="noopener">Jin (@jins__earth)</a><br><span>この日本版は、世界版のアイデアをお借りして作りました。本家もぜひ遊んでみてください。</span></p>
