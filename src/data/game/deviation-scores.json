@@ -10,7 +10,7 @@
       "https://www.minkou.jp/hischool/ranking/deviation/r%3D1/u%3D6/se%3D1/",
       "https://www.minkou.jp/hischool/ranking/deviation/c%3D3/"
     ],
-    "note": "同一学校内に複数コースがある場合はコース差を含む参考値。ゲーム内の合否判定用の目安であり、合格を保証しない。 全国の代表校も順次追加。偏差値は模試・コースで異なるため参考値として表示。"
+    "note": "同一学校内に複数コースがある場合はコース差を含む参考値。ゲーム内の合否判定用の目安であり、合格を保証しない。 全国の代表校も順次追加。偏差値は模試・コースで異なるため参考値として表示。 栃木県の高校は2026年度の公立・私立別一覧を参照し、学科・コースを明記。"
   },
   "scores": [
     {
@@ -197,6 +197,48 @@
       "name": "日比谷高等学校",
       "prefecture": "東京都",
       "deviation": 74,
+      "course": "普通科"
+    },
+    {
+      "name": "佐野高等学校",
+      "prefecture": "栃木県",
+      "deviation": 54,
+      "course": "普通科"
+    },
+    {
+      "name": "宇都宮北高等学校",
+      "prefecture": "栃木県",
+      "deviation": 58,
+      "course": "普通科"
+    },
+    {
+      "name": "矢板東高等学校",
+      "prefecture": "栃木県",
+      "deviation": 58,
+      "course": "普通科"
+    },
+    {
+      "name": "足利高等学校",
+      "prefecture": "栃木県",
+      "deviation": 57,
+      "course": "普通科"
+    },
+    {
+      "name": "真岡高等学校",
+      "prefecture": "栃木県",
+      "deviation": 57,
+      "course": "普通科"
+    },
+    {
+      "name": "佐野東高等学校",
+      "prefecture": "栃木県",
+      "deviation": 51,
+      "course": "普通科"
+    },
+    {
+      "name": "大田原女子高等学校",
+      "prefecture": "栃木県",
+      "deviation": 55,
       "course": "普通科"
     }
   ]
