@@ -6,18 +6,19 @@ const now = new Date();
 const posts = (await getCollection('blog'))
   .filter((post) => !post.data.publishAt || post.data.publishAt <= now)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 3);
+  .slice(0, 5);
 const BASE = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', { year: 'numeric', month: 'short', day: 'numeric' });
+const readingTime = (body = '') => Math.max(1, Math.ceil(body.replace(/\s/g, '').length / 500));
 ---
 <Layout title="KNOT | 好きと学びをつなぐ場所" description="中学生が運営する個人ブログ。読書、勉強、Web制作など日々の興味を記録しています。">
   <main class="home">
-    <div class="topline"><span>PERSONAL WEBSITE</span><span>EST. 2026　/　JAPAN</span></div>
+    <div class="topline"><span>KNOT BLOG</span><span>日々の記録と、ちょっとした発見。</span></div>
     <section class="intro">
       <div class="intro-main">
-        <p class="eyebrow">HELLO, I'M KNOT.</p>
-        <h1>好きなことや、<br>日々のことを。</h1>
-        <p class="summary">読んだ本や勉強のこと、Web制作のこと。<br>気になったことを、気ままに書いています。</p>
+        <p class="eyebrow">KNOTの個人ブログ</p>
+        <h1>気になったことを、<br>自分の言葉で。</h1>
+        <p class="summary">勉強や読書、Web制作、日々の小さな発見。<br>興味の向くままに書いています。</p>
         <div class="quick-links"><a href={`${BASE}blog/`}>ブログを読む <span>→</span></a></div>
       </div>
       <aside class="operator">
@@ -36,11 +37,11 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', { year: 'num
     </section>
 
     <section class="latest">
-      <div class="section-label"><span>RECENT POSTS</span><a href={`${BASE}blog/`}>ALL POSTS ↗</a></div>
+      <div class="section-label"><span>新着記事</span><a href={`${BASE}blog/`}>記事をもっと見る →</a></div>
       {posts.length ? <div class="post-list">
         {posts.map((post, i) => <a class="post" href={`${BASE}blog/${post.slug}/`}>
           <span class="post-no">{String(i + 1).padStart(2, '0')}</span>
-          <span class="post-info"><small>{dateFormat(post.data.pubDate)}　/　{post.data.category}</small><strong>{post.data.title}</strong><em>{post.data.description}</em></span>
+          <span class="post-info"><small>{dateFormat(post.data.pubDate)}　/　{post.data.category}　/　約{readingTime(post.body)}分</small><strong>{post.data.title}</strong><em>{post.data.description}</em></span>
           <span class="post-arrow">→</span>
         </a>)}
       </div> : <p class="empty">記事は準備中です。</p>}
@@ -50,6 +51,30 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', { year: 'num
 </Layout>
 <style>
 .home{max-width:900px;margin:0 auto;padding:25px 0 35px;color:var(--text)}
+/* A warmer, magazine-like personal blog front page */
+.home{max-width:1040px;padding-top:18px}
+.topline{letter-spacing:.03em;font-family:inherit;font-size:11px}
+.intro{grid-template-columns:minmax(0,1.35fr) minmax(250px,.65fr);gap:58px;padding:55px 0 58px}
+.eyebrow{font-family:inherit;font-size:12px;letter-spacing:.02em;font-weight:800}
+.intro h1{font-size:clamp(36px,5.5vw,58px);line-height:1.35;letter-spacing:-.06em}
+.summary{font-size:14px;line-height:2}
+.operator{padding:20px;border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:8px;background:var(--surface)}
+.operator-head{font-family:inherit;letter-spacing:0}
+.operator-name{margin:22px 0 10px}
+.directory{border:0;padding:18px 0 0}
+.section-label{font-family:inherit;letter-spacing:0;font-size:12px;font-weight:800}
+.directory-row{border-top:1px solid var(--line);padding:17px 8px}
+.directory-row h2{font-size:19px}
+.latest{margin-top:44px;padding:22px;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+.latest .section-label{margin-bottom:15px}
+.post-list{border-top:1px solid var(--line)}
+.post{padding:18px 6px}
+.post-info small{font-size:10px}
+.post-info strong{font-size:14px}
+.post-info em{font-size:12px}
+.home-footer{font-family:inherit;letter-spacing:0}
+@media(max-width:680px){.intro{gap:25px;padding:35px 0}.operator{margin:0}.latest{padding:15px}.post-info em{display:block}.post{padding:15px 3px}}
+
 .topline,.section-label{display:flex;justify-content:space-between;align-items:center;gap:12px;color:var(--muted);font:10px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.12em}
 .topline{padding:0 0 13px;border-bottom:1px solid var(--line)}
 .intro{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(240px,.75fr);gap:48px;align-items:center;padding:62px 0 65px}
