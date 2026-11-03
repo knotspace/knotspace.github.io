@@ -1,6 +1,15 @@
 ---
 import StudyLayout from '../../layouts/StudyLayout.astro';
-import bank from '../../data/study/study-questions.json';
+import questionBank from '../../data/study/study-questions.json';
+import foundationBank from '../../data/study/study-foundation.json';
+import kosenBank from '../../data/study/kosen-questions.json';
+const normalizeFoundation = (q) => ({ ...q, q: q.prompt, a: q.options, c: q.correct, e: q.explanation, level: 'basic' });
+const normalizeKosen = (q) => ({ ...q, subject: q.subject === '理科' ? 'science' : 'social', level: q.level === '発展' ? 'advanced' : 'standard', a: q.choices, c: q.answer, e: q.explanation });
+const bank = [
+  ...questionBank,
+  ...foundationBank.map(normalizeFoundation),
+  ...kosenBank.map(normalizeKosen)
+];
 const science = bank.filter(q => q.subject === 'science').length;
 const social = bank.filter(q => q.subject === 'social').length;
 ---
