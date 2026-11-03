@@ -44,7 +44,7 @@ for (const url of SOURCES) {
   const headers = rows[0].map(v => v.replace(/^\uFEFF/, '').trim());
   for (const row of rows.slice(1)) {
     const code = pick(row, headers, [/^学校コード$/,/学校コード/]);
-    const name = pick(row, headers, [/^学校名$/,/学校名称/]);
+    const name = pick(row, headers, [/学校名/,/学校名称/]);
     if (!code || !name) continue;
     const schoolType = pick(row, headers, [/学校種/]) || pick(row, headers, [/校種/]);
     const ownership = pick(row, headers, [/設置区分/,/設置者区分/,/国公私立/]);
@@ -63,6 +63,7 @@ for (const url of SOURCES) {
     });
   }
 }
+if (records.size === 0) throw new Error('No schools imported. Check MEXT CSV headers and encoding.');
 const schools = [...records.values()].sort((a,b) =>
   PREFECTURES.indexOf(a.prefecture) - PREFECTURES.indexOf(b.prefecture) ||
   a.schoolType.localeCompare(b.schoolType, 'ja') ||
