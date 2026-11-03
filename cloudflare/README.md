@@ -87,3 +87,14 @@ Only `draft` and `review` can be created or saved. Published/scheduled states ar
 ## Safety and next phase
 
 The current API stores drafts and revisions only. It does not publish to the production Astro site or modify Decap CMS. Before production use, implement the CMS UI on a same-origin host, test session and CSRF behavior in the target browser, and then add a reviewed GitHub publishing workflow.
+
+
+## Admin interface
+
+The experimental same-origin admin interface is served directly by the Worker:
+
+- `https://knot-cms-api.edanohumio.workers.dev/admin/`
+- GitHub OAuth callback returns to this Worker-hosted interface so the HttpOnly cookie is first-party for the CMS.
+- The first editor supports title, slug, draft/review status, paragraph/heading/quote/list text blocks, autosave, manual save, and revision metadata.
+- It is a first functional draft, not yet a Gutenberg-compatible editor. Image uploads, full visual preview, revision restore, and publishing are not implemented.
+- The editor stores structured JSON in D1. Existing Astro content and Decap CMS are not changed.
