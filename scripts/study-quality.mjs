@@ -68,7 +68,7 @@ for (const bank of banks) {
     if (slug && item.link !== `/study/summary/${slug}/`) {
       errors.push(`${label} 関連まとめリンクが分野と一致しません（期待: /study/summary/${slug}/）。`);
     }
-    const normalized = String(item[bank.question] || '').replace(/[\\s　]/g, '');
+    const normalized = String(item[bank.question] || '').replace(/[\s　]/g, '');
     if (normalized) questionTexts.set(normalized, (questionTexts.get(normalized) || 0) + 1);
     const explanationText = String(explanation || '').trim();
     if (explanationText) explanationTexts.set(explanationText, (explanationTexts.get(explanationText) || 0) + 1);
