@@ -58,7 +58,7 @@ function walk(dir) {
 }
 const gradeLabelFiles = new Set(['src/pages/game/life.astro','src/utils/academic-grade.ts','src/utils/profile-age.ts']);
 for (const dir of dirs) for (const file of walk(path.join(root,dir))) {
-  const relative = path.relative(root,file).replace(/\\\\/g,'/');
+  const relative = path.relative(root,file);
   const content=fs.readFileSync(file,'utf8');
   for (const p of patterns) {
     if (p.label==='specific school grade' && gradeLabelFiles.has(relative)) continue;
