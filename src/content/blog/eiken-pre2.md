@@ -2,7 +2,7 @@
 title: "英検準2級に合格する勉強法"
 description: "英検準2級に挑戦した経験をもとに、単語・読解・リスニング・英作文の勉強法をまとめました。"
 pubDate: "2026-11-01T00:00:00.000Z"
-heroImage: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1400&auto=format&fit=crop"
+heroImage: "/blog-art/english-study.svg"
 category: "英検・勉強法"
 ---
 
