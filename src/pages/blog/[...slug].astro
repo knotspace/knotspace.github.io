@@ -140,7 +140,7 @@ const breadcrumbJsonLd = {
         if (type === 'quote') return <blockquote><p>{block.text}</p>{block.attribution && <cite>{block.attribution}</cite>}</blockquote>;
         if (type === 'callout') return <aside class:list={['knot-box', `knot-box-${block.style || 'note'}`]}><strong>{block.title || 'ポイント'}</strong><p>{block.text}</p></aside>;
         if (type === 'list') {
-          const items = String(block.items || '').split('\\n').map((item: string) => item.trim()).filter(Boolean);
+          const items = String(block.items || '').split('\n').map((item: string) => item.trim()).filter(Boolean);
           return block.ordered ? <ol>{items.map((item: string) => <li>{item}</li>)}</ol> : <ul>{items.map((item: string) => <li>{item}</li>)}</ul>;
         }
         if (type === 'button') return <p><a class="knot-content-button" href={block.url || '#'}>{block.label || '詳しく見る'} ↗</a></p>;
