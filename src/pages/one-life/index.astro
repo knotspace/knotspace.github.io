@@ -236,7 +236,7 @@ function renderArchive(){
   const card=document.createElement('article');card.className='archive-card';
   const title=document.createElement('strong');title.textContent=(i+1)+'. '+item.name+' — '+item.route;
   const meta=document.createElement('small');meta.textContent=new Date(item.completedAt).toLocaleDateString('ja-JP')+' / '+item.years+'の記録';
-  const stats=document.createElement('p');stats.textContent='学力 '+item.stats.study+' · 経験 '+item.stats.experience+' · 健康 '+item.stats.health+' · 人間関係 '+item.stats.friends;
+  const stats=document.createElement('p');stats.textContent='学力 '+item.stats.study+' · 経験 '+item.stats.experience+' · 健康 '+item.stats.health+' · 幸福 '+(item.stats.happiness??50)+' · 人間関係 '+item.stats.friends;
   card.append(title,meta,stats);list.append(card);
  });
 }
