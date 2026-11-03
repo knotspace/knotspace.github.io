@@ -1,6 +1,19 @@
 {
   "releases": [
     {
+      "id": "5b0f44c",
+      "publishedAt": "2026-11-04T07:37:24+09:00",
+      "title": "Remove unused retired Study question bank",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "学習コンテンツ・データ"
+      ],
+      "files": [
+        "src/data/study/kosen-past-questions.json"
+      ]
+    },
+    {
       "id": "8a60a40",
       "publishedAt": "2026-11-03T23:03:37+09:00",
       "title": "Polish KOSEN filters and add keyboard answer shortcuts",
