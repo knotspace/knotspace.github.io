@@ -11,7 +11,8 @@ const BASE = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
 const readingTime = (body = '') => Math.max(1, Math.ceil(body.replace(/\s/g, '').length / 500));
 const featured = posts[0];
-const recent = posts.slice(1, 9);
+const popular = [...posts].sort((a, b) => (b.data.popularity ?? 0) - (a.data.popularity ?? 0) || b.data.pubDate.valueOf() - a.data.pubDate.valueOf()).slice(0, 8);
+const recent = posts.slice(0, 8);
 ---
 <Layout title="KNOT | 個人ブログ" description="Web制作、PC・アプリ、本・読書、勉強や日々の興味を記録する個人ブログ。">
   <div class="home-blog">
@@ -27,17 +28,35 @@ const recent = posts.slice(1, 9);
     </nav>
     <div class="home-columns">
       <main class="home-main">
-        <div class="home-section-heading"><h1>新着記事</h1><span>NEW ARTICLES</span></div>
+        <div class="home-section-heading"><h1>記事</h1><span>ARTICLES</span></div>
         {featured && <a class="featured-article" href={`${BASE}blog/${featured.slug}/`}>
           {featured.data.heroImage && <img src={featured.data.heroImage} alt={featured.data.title} />}
           <div class="featured-copy"><div class="article-meta"><span>{featured.data.category}</span><time>{dateFormat(featured.data.pubDate)}</time></div><h2>{featured.data.title}</h2><p>{featured.data.description}</p><span class="continue-reading">続きを読む »</span></div>
         </a>}
-        <div class="home-article-list">
-          {recent.map((post) => <article class="home-article-row">
-            <a class="row-thumb" href={`${BASE}blog/${post.slug}/`}>{post.data.heroImage ? <img src={post.data.heroImage} alt="" loading="lazy" /> : <span>KNOT</span>}</a>
-            <div class="row-copy"><div class="article-meta"><span>{post.data.category}</span><time>{dateFormat(post.data.pubDate)}</time><small>約{readingTime(post.body)}分</small></div><h2><a href={`${BASE}blog/${post.slug}/`}>{post.data.title}</a></h2><p>{post.data.description}</p><a class="continue-reading" href={`${BASE}blog/${post.slug}/`}>続きを読む »</a></div>
-          </article>)}
+        <div class="article-switcher" role="tablist" aria-label="記事の表示順">
+          <button type="button" class="article-tab is-active" id="tab-new" role="tab" aria-selected="true" aria-controls="panel-new">新着記事</button>
+          <button type="button" class="article-tab" id="tab-popular" role="tab" aria-selected="false" aria-controls="panel-popular">人気記事</button>
         </div>
+        <section class="home-card-grid is-visible" id="panel-new" role="tabpanel" aria-labelledby="tab-new">
+          {recent.map((post, index) => <a class="home-post-card" href={`${BASE}blog/${post.slug}/`}>
+            <div class="card-thumb">{post.data.heroImage ? <img src={post.data.heroImage} alt={post.data.title} loading="lazy" /> : <span>KNOT</span>}</div>
+            <div class="card-details"><div class="article-meta"><span>{post.data.category}</span><time>{dateFormat(post.data.pubDate)}</time></div><h2>{post.data.title}</h2><p>{post.data.description}</p><span class="card-read">続きを読む »</span></div>
+          </a>)}
+        </section>
+        <section class="home-card-grid" id="panel-popular" role="tabpanel" aria-labelledby="tab-popular" hidden>
+          {popular.map((post, index) => <a class="home-post-card" href={`${BASE}blog/${post.slug}/`}>
+            <div class="card-thumb">{post.data.heroImage ? <img src={post.data.heroImage} alt={post.data.title} loading="lazy" /> : <span>KNOT</span>}<b class="card-rank">{index + 1}</b></div>
+            <div class="card-details"><div class="article-meta"><span>{post.data.category}</span><time>{dateFormat(post.data.pubDate)}</time></div><h2>{post.data.title}</h2><p>{post.data.description}</p><span class="card-read">続きを読む »</span></div>
+          </a>)}
+        </section>
+        <script>
+          const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('.article-tab'));
+          const panels = [document.querySelector<HTMLElement>('#panel-new'), document.querySelector<HTMLElement>('#panel-popular')];
+          tabs.forEach((tab, index) => tab.addEventListener('click', () => {
+            tabs.forEach((item, i) => { item.classList.toggle('is-active', i === index); item.setAttribute('aria-selected', String(i === index)); });
+            panels.forEach((panel, i) => { if (panel) panel.hidden = i !== index; });
+          }));
+        </script>
         <a class="all-articles" href={`${BASE}blog/`}>記事一覧をもっと見る »</a>
       </main>
       <aside class="home-sidebar">
@@ -66,6 +85,23 @@ const recent = posts.slice(1, 9);
 .article-meta>span{padding:3px 7px;background:var(--surface);border:1px solid var(--line);font-weight:700}
 .featured-copy h2{font-size:20px;line-height:1.55;margin:12px 0 8px}.featured-copy p,.row-copy p{color:var(--muted);font-size:12px;line-height:1.9;margin:0 0 10px}
 .continue-reading{color:var(--accent);font-size:11px;font-weight:700}
+.article-switcher{display:flex;gap:0;margin:23px 0 0;border-bottom:2px solid var(--accent)}
+.article-tab{padding:12px 24px;border:1px solid var(--line);border-bottom:0;background:var(--surface);color:var(--muted);font:inherit;font-size:13px;font-weight:800;cursor:pointer}
+.article-tab+.article-tab{border-left:0}
+.article-tab.is-active{background:var(--accent);border-color:var(--accent);color:#fff}
+.home-card-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 18px;padding:20px 0}
+.home-card-grid[hidden]{display:none}
+.home-post-card{display:block;min-width:0;border:1px solid var(--line);background:var(--surface);transition:transform .18s,border-color .18s}
+.home-post-card:hover{transform:translateY(-3px);border-color:var(--accent)}
+.card-thumb{height:155px;position:relative;overflow:hidden;background:var(--surface-soft)}
+.card-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .25s}
+.home-post-card:hover .card-thumb img{transform:scale(1.035)}
+.card-thumb>span{height:100%;display:grid;place-items:center;color:var(--muted);font-weight:900;letter-spacing:.15em}
+.card-rank{position:absolute;left:9px;top:9px;display:grid;place-items:center;width:27px;height:27px;background:var(--accent);color:white;font-size:12px}
+.card-details{padding:13px 14px 15px}
+.card-details h2{font-size:15px;line-height:1.55;margin:9px 0 6px}
+.card-details p{font-size:11px;line-height:1.75;color:var(--muted);margin:0 0 10px}
+.card-read{font-size:10px;color:var(--accent);font-weight:800}
 .home-article-row{display:grid;grid-template-columns:155px minmax(0,1fr);gap:17px;padding:19px 0;border-bottom:1px solid var(--line)}
 .row-thumb{display:block;width:155px;height:105px;background:var(--surface);overflow:hidden}.row-thumb img{width:100%;height:100%;object-fit:cover}.row-thumb span{display:grid;place-items:center;height:100%;font-weight:900;color:var(--muted)}
 .row-copy h2{font-size:16px;line-height:1.55;margin:7px 0}.row-copy p{margin-bottom:7px}
@@ -78,6 +114,6 @@ const recent = posts.slice(1, 9);
 .side-widget li a{display:flex;justify-content:space-between;gap:10px;padding:9px 0;font-size:11px;line-height:1.6}.side-widget li a:hover{color:var(--accent)}
 .side-widget ol{counter-reset:recent}.side-widget ol li{counter-increment:recent}.side-widget ol li a:before{content:counter(recent);color:var(--accent);font-weight:800;margin-right:8px}
 .side-widget>p{padding:0 14px}.side-widget> a{display:block;padding:0 14px 14px}
-@media(max-width:760px){.home-columns{grid-template-columns:1fr;gap:30px}.home-sidebar{grid-template-columns:repeat(2,minmax(0,1fr))}.featured-article{grid-template-columns:1fr}.featured-article>img{height:230px}}
-@media(max-width:520px){.home-blog{padding-top:0}.blog-masthead{padding:20px 0}.blog-title{font-size:29px}.blog-category-nav{overflow-x:auto;flex-wrap:nowrap}.blog-category-nav a{white-space:nowrap;padding:12px 13px;font-size:11px}.home-columns{padding-top:20px}.home-article-row{grid-template-columns:112px minmax(0,1fr);gap:12px}.row-thumb{width:112px;height:88px}.row-copy h2{font-size:13px}.row-copy p{font-size:10px;line-height:1.65}.home-sidebar{grid-template-columns:1fr}.featured-copy h2{font-size:18px}}
+@media(max-width:760px){.card-thumb{height:135px}.home-columns{grid-template-columns:1fr;gap:30px}.home-sidebar{grid-template-columns:repeat(2,minmax(0,1fr))}.featured-article{grid-template-columns:1fr}.featured-article>img{height:230px}}
+@media(max-width:520px){.home-card-grid{grid-template-columns:1fr;gap:14px}.card-thumb{height:190px}.card-details h2{font-size:14px}.article-tab{flex:1;padding:11px 8px}.home-blog{padding-top:0}.blog-masthead{padding:20px 0}.blog-title{font-size:29px}.blog-category-nav{overflow-x:auto;flex-wrap:nowrap}.blog-category-nav a{white-space:nowrap;padding:12px 13px;font-size:11px}.home-columns{padding-top:20px}.home-article-row{grid-template-columns:112px minmax(0,1fr);gap:12px}.row-thumb{width:112px;height:88px}.row-copy h2{font-size:13px}.row-copy p{font-size:10px;line-height:1.65}.home-sidebar{grid-template-columns:1fr}.featured-copy h2{font-size:18px}}
 </style>
