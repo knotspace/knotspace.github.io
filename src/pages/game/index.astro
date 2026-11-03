@@ -1,7 +1,9 @@
 ---
-import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="GAME｜KNOT" description="KNOTのゲーム。人生シミュレーションや学びにつながるゲームを楽しもう。">
+<!doctype html>
+<html lang="ja">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="theme-color" content="#101713"/><title>GAME CENTER｜KNOT</title><meta name="description" content="KNOTの独立したゲームセンター。"/></head>
+<body class="game-center-body">
 <main class="game-home">
   <header class="game-hero">
     <p class="eyebrow">KNOT / GAME CENTER</p>
@@ -19,9 +21,10 @@ import Layout from '../../layouts/Layout.astro';
   </section>
   <footer class="game-foot"><span>KNOT GAME CENTER</span><span>MADE TO EXPLORE.</span></footer>
 </main>
-</Layout>
+</body>
+</html>
 <style>
-.game-home{--game-accent:#a6f36b;max-width:1080px;margin:0 auto;padding:42px 22px 30px;color:var(--text)}
+:root{color-scheme:dark;--text:#f2f6ee;--muted:#a3b09f;--line:#344238;--surface:#17231b;font-family:Inter,'Noto Sans JP',system-ui,sans-serif}*{box-sizing:border-box}body.game-center-body{margin:0;min-height:100vh;background:#0d130f;color:var(--text)}.game-home{--game-accent:#a6f36b;max-width:1080px;margin:0 auto;padding:42px 22px 30px;color:var(--text)}
 .game-home a{color:inherit;text-decoration:none}
 .game-hero{position:relative;min-height:390px;padding:48px 5.5% 28px;background:#101713;color:#f3f6ef;overflow:hidden}
 .game-hero:after{content:"";position:absolute;width:360px;height:360px;right:7%;top:8%;border:1px solid rgba(166,243,107,.3);border-radius:50%;box-shadow:0 0 0 35px rgba(166,243,107,.035),0 0 0 75px rgba(166,243,107,.025)}
