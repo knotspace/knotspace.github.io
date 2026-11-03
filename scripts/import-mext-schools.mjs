@@ -76,7 +76,7 @@ for (const url of SOURCES) {
       schoolCode: code, name, schoolType, ownership, prefecture, city, address, postalCode,
       establishedBy: pick(row, headers, [/設置者名/,/設置者/]),
       department: pick(row, headers, [/学科/,/学部/]),
-      integratedSchool: /中等教育学校|中高一貫/.test(schoolType + name),
+      integratedSchool: /中等教育学校|中高一貫|附属/.test(schoolType + name),
       officialUrl: '',
       sourceYear: '2026-05-01',
       source: '文部科学省 学校コード一覧'
@@ -107,5 +107,5 @@ const output = {
   fields: ['schoolCode','name','schoolType','ownership','prefecture','city','address','postalCode','establishedBy','department','integratedSchool','officialUrl','sourceYear','source'],
   schools
 };
-await writeFile(OUTPUT, JSON.stringify(output, null, 2) + '\n', 'utf8');
+await writeFile(OUTPUT, JSON.stringify(output) + '\n', 'utf8');
 console.log(`Imported ${schools.length} schools into ${OUTPUT}`);
