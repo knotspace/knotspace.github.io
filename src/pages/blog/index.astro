@@ -148,7 +148,7 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
   );
   const noResults = document.querySelector<HTMLElement>('#no-results');
 
-  let activeCategory = 'all';
+  let activeCategory = new URLSearchParams(window.location.search).get('category') || 'all';
 
   function filterPosts() {
     const keyword = searchInput?.value.trim().toLowerCase() ?? '';
@@ -207,6 +207,8 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
     });
   });
 
+  filterButtons.forEach((item) => item.classList.toggle('active', item.dataset.filter === activeCategory));
+  filterPosts();
   searchInput?.addEventListener('input', filterPosts);
   const randomButton = document.querySelector<HTMLButtonElement>('#random-article');
   randomButton?.addEventListener('click', () => {
