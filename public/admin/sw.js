@@ -1,4 +1,4 @@
-const CACHE_NAME = 'knot-cms-studio-v6';
+const CACHE_NAME = 'knot-cms-studio-v7';
 const SCOPE = '/admin/';
 const SHELL = [
   '/admin/',
@@ -7,6 +7,10 @@ const SHELL = [
   '/admin/admin.css',
   '/admin/editor-tools.js',
   '/admin/block-editor.js',
+  '/admin/gutenberg-editor.bundle.js',
+  '/admin/gutenberg-editor.bundle.css',
+  '/admin/gutenberg-editor.bundle.js',
+  '/admin/gutenberg-editor.bundle.css',
   '/admin/richtext-components.js',
   '/admin/admin-app-icon.svg',
   '/admin/knot-logo.svg',
