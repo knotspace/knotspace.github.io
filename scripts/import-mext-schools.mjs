@@ -61,7 +61,7 @@ for (const url of SOURCES) {
   console.log('Detected school CSV columns:', headers.slice(0, 20).join(' | '));
   for (const row of rows.slice(headerIndex + 1)) {
     const rawCode = pick(row, headers, [/^学校コード$/,/学校コード/]);
-    const code = rawCode.replace(/[-\\s]/g, '');
+    const code = rawCode.replace(/[-\s]/g, '');
     const name = pick(row, headers, [/学校名/,/学校名称/]);
     if (!code || code.length < 5 || !name) continue;
     if (pick(row, headers, [/廃止年月日/])) continue;
