@@ -1,6 +1,7 @@
 
 ---
 import '../styles/site/layout.css';
+import siteSettings from '../data/site-settings.json';
 
 interface Props {
   title: string;
@@ -34,6 +35,7 @@ const articleStructuredData = structuredItems.find((item) =>
 );
 const isArticlePage = Boolean(articleStructuredData);
 const BASE = import.meta.env.BASE_URL;
+const navHref = (path: string) => /^https?:\\/\\//i.test(path) ? path : `${BASE}${path.replace(/^\\/+/, '')}`;
 ---
 
 <!doctype html>
@@ -105,11 +107,7 @@ const BASE = import.meta.env.BASE_URL;
         </a>
 
         <nav aria-label="メインナビゲーション">
-          <a href={BASE}>ホーム</a>
-          <a href={`${BASE}blog/`}>記事一覧</a>
-          <a href={`${BASE}study/`}>Study</a>
-          <a href={`${BASE}bookmarks/`}>あとで読む</a>
-          <a href={`${BASE}about/`}>プロフィール</a><button
+          {siteSettings.navigation.map((item) => <a href={navHref(item.url)}>{item.label}</a>)}<button
             class="theme-toggle"
             id="theme-toggle"
             type="button"
@@ -140,8 +138,8 @@ const BASE = import.meta.env.BASE_URL;
         <a class="footer-brand" href={BASE}>
           KNOT<span class="brand-dot">.</span>
         </a>
-        <p>Web制作や日々の興味を記録する個人ブログ。</p>
-        <span>© {new Date().getFullYear()} KNOT. Built with Astro.</span>
+        <p>{siteSettings.footerText}</p>
+        <span>{siteSettings.footerNote} · © {new Date().getFullYear()} KNOT. Built with Astro.</span>
       </footer>
       
     </div>
