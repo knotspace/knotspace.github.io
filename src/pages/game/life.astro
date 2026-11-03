@@ -108,7 +108,8 @@ function buildStages(){
   ], 'MIDDLE');
   add('中学3年生','WINTER','高校受験に挑む','進路を決める時期。行きたい高校、学びたいこと、通学や校風。自分に合う場所を考える。','中学受験を選ばなかった人は、ここで高校受験に挑戦する。',[
    ['目標校に向けて最後まで勉強する',{study:12,health:-5},'目標を決め、最後まで努力を続けた。',{highExam:true}],
-   ['自分に合う学校を調べて選ぶ',{study:5,experience:5},'偏差値だけでなく、学びや環境も考えて進路を選んだ。',{highExam:true}]
+   ['自分に合う学校を調べて選ぶ',{study:5,experience:5},'偏差値だけでなく、学びや環境も考えて進路を選んだ。',{highExam:true}],
+   ['高校受験をせず、中卒で社会に出る',{experience:7},'高校へ進学せず、中学校卒業後に働く道を選んだ。',{highExam:false}]
   ],'HIGH EXAM');
   add('高校受験','FEBRUARY','高校受験本番','積み重ねた時間を胸に、試験会場へ。','結果がどうであっても、ここまで努力した経験は残る。',[
    ['落ち着いて解ける問題から進める',{study:5,health:3},'自分のペースで最後までやり切った。',{highResult:'pass'}],
@@ -120,8 +121,8 @@ function buildStages(){
    ['部活や行事にも積極的に参加する',{experience:8,friends:5},'学校生活の幅が広がった。']
   ], 'INTEGRATED');
  }
- if(state.decisions.highResult==='fail'){
-  add('中学卒業','MARCH','高校受験の結果、ここからの道を選ぶ','高校受験は不合格。悔しさはあるけれど、人生が終わるわけではない。中卒で働く道、専門技術を学ぶ道、もう一度挑戦する道もある。','高校卒業とは違うスタートになる。選んだ道で経験を積んでいこう。',[
+ if(state.decisions.highExam===false||state.decisions.highResult==='fail'){
+  add('中学卒業','MARCH','中学校卒業後、ここからの道を選ぶ','高校へ進学しない選択、または受験で悔しい結果になった場合も、人生は続いていく。中卒で働く道、専門技術を学ぶ道、自分で事業を始める道がある。','高校卒業とは違うスタートになる。選んだ道で経験を積んでいこう。',[
    ['中卒で就職する',{experience:8},'中学校卒業後、社会に出て働き始めた。',{career:'work',education:'middle'}],
    ['職業訓練や専門技術を学ぶ',{study:4,experience:7},'仕事に役立つ技術を身につける道を選んだ。',{career:'vocational',education:'middle'}],
    ['小さく事業を始める',{experience:9,health:-3},'自分の力で仕事をつくる挑戦を始めた。',{career:'startup',education:'middle'}]
