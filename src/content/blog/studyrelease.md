@@ -2,7 +2,7 @@
 title: "KNOT Studyを公開！理科・社会の問題演習を作ってみた"
 description: "理科・社会の問題を収録したKNOT Studyを紹介。作るときにこだわった点や、実際に開発して気づいたことをまとめました。"
 pubDate: 2026-11-02
-heroImage: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1400&auto=format&fit=crop"
+heroImage: "/blog-art/study-release.svg"
 category: "KNOT開発記録"
 ---
 
