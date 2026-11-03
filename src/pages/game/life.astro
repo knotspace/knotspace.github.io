@@ -42,7 +42,8 @@
 <script>
 import deviationData from '../../data/game/deviation-scores.json';
 const $=id=>document.getElementById(id), clamp=n=>Math.max(0,Math.min(100,n));
-const deviationMap = new Map((deviationData.scores || []).map(x=>[x.name.replace(/^(栃木県立|栃木県)/,''),x]));
+const normalizeSchoolName=name=>String(name||'').replace(/^(北海道|東京都|大阪府|京都府|.{2,3}県)立/,'').replace(/^栃木県/,'');
+const deviationMap = new Map((deviationData.scores || []).map(x=>[normalizeSchoolName(x.name),x]));
 const fallbackSchools = [
  {schoolCode:'seed-mxt-0901',name:'栃木県立宇都宮高等学校',schoolType:'高等学校',ownership:'公立',prefecture:'栃木県',deviation:72},
  {schoolCode:'seed-mxt-0902',name:'栃木県立宇都宮女子高等学校',schoolType:'高等学校',ownership:'公立',prefecture:'栃木県',deviation:70},
@@ -68,7 +69,7 @@ const fallbackSchools = [
  {schoolCode:'seed-mxt-0922',name:'国際医療福祉大学',schoolType:'大学',ownership:'私立',prefecture:'栃木県'}
 ];
 function enrichSchool(s){
- const key=String(s.name||'').replace(/^(栃木県立|栃木県)/,'');
+ const key=normalizeSchoolName(s.name);
  const score=deviationMap.get(key);
  return score?{...s,deviation:score.deviation,deviationCourse:score.course,deviationYear:deviationData.meta.year,deviationSource:deviationData.meta.source}:s;
 }
@@ -218,7 +219,7 @@ function schoolsForExam(tag){
  }).sort((a,b)=>(schoolDeviation(b)||0)-(schoolDeviation(a)||0));
 }
 function schoolDeviation(s){
- const n=Number(s.deviation ?? s.deviationValue ?? s.hensachi ?? deviationMap.get(String(s.name||'').replace(/^(栃木県立|栃木県)/,''))?.deviation);
+ const n=Number(s.deviation ?? s.deviationValue ?? s.hensachi ?? deviationMap.get(normalizeSchoolName(s.name))?.deviation);
  return Number.isFinite(n)&&n>0?n:null;
 }
 function render(){
@@ -260,7 +261,7 @@ function render(){
        filtered.forEach(school=>{
          const option=document.createElement('option');option.value=school.schoolCode||school.name;
          const dev=schoolDeviation(school);
-         option.textContent=school.name+'　／　偏差値 '+(dev??'未登録');
+         option.textContent=school.name+(school.deviationCourse?'（'+school.deviationCourse+'）':'')+'　／　偏差値 '+(dev??'未登録');
          select.append(option);
        });
        if(selected)select.value=selected.schoolCode||selected.name;
@@ -277,7 +278,7 @@ function render(){
        const detail=document.createElement('div');detail.className='selected-school';
        const dev=schoolDeviation(selected);
        detail.innerHTML='<span>出願先</span><strong></strong><b></b>';
-       detail.querySelector('strong').textContent=selected.name;
+       detail.querySelector('strong').textContent=selected.name+(selected.deviationCourse?'（'+selected.deviationCourse+'）':'');
        detail.querySelector('b').textContent='偏差値 '+(dev??'未登録');
        picker.append(detail);
      }
