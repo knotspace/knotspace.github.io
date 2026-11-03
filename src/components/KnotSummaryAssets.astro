@@ -1,0 +1,54 @@
+---
+import bank from '../data/study/knot-summary-assets.json';
+const { subject = '理科', unit = '' } = Astro.props;
+const selected = bank.resources.filter(item => item.subject === subject && item.unit === unit);
+---
+{selected.length > 0 && <section class="knot-summary-assets" aria-label="KNOT制作の追加教材">
+  <header class="assets-heading">
+    <div><span>KNOT ORIGINAL MATERIALS</span><h3>KNOT制作｜図解・資料・比較表</h3></div>
+    <small>{selected.length}点のオリジナル教材</small>
+  </header>
+  <div class="assets-grid">
+    {selected.map((item) => <article class:list={['asset-card', 'asset-'+item.type]} data-asset-id={item.id}>
+      <div class="asset-meta"><span>{item.type === 'diagram' ? '図解' : item.type === 'table' ? '比較・データ表' : '写真・資料画像'}</span><small>{item.id.toUpperCase()}</small></div>
+      <h4>{item.title}</h4>
+      <p class="asset-subtitle">{item.subtitle}</p>
+      {item.type === 'diagram' && <div class="asset-diagram">
+        {item.nodes.map((node,i) => <div class="asset-node"><small>{String(i+1).padStart(2,'0')}</small><b>{node}</b>{i < item.nodes.length-1 && <span class="asset-arrow" aria-hidden="true">→</span>}</div>)}
+      </div>}
+      {item.type === 'table' && <div class="asset-table-wrap"><table><thead><tr>{item.columns.map(col=><th>{col}</th>)}</tr></thead><tbody>{item.rows.map(row=><tr>{row.map(cell=><td>{cell}</td>)}</tr>)}</tbody></table></div>}
+      {item.type === 'image' && <figure class="asset-image"><a href={item.image.src} target="_blank" rel="noopener noreferrer"><img src={item.image.src} alt={item.image.alt} loading="lazy" /></a><figcaption>{item.image.caption}</figcaption></figure>}
+      {item.note && <p class="asset-note">{item.note}</p>}
+      <footer>KNOT制作・中学学習用</footer>
+    </article>)}
+  </div>
+</section>}
+<style>
+.knot-summary-assets{margin:22px 0 28px;padding:18px;border:1px solid var(--line);border-radius:15px;background:var(--surface)}
+.assets-heading{display:flex;align-items:end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.assets-heading span{font:9px ui-monospace,monospace;letter-spacing:.13em;color:var(--accent);font-weight:800}
+.assets-heading h3{font-size:16px;margin:5px 0 0}
+.assets-heading>small{font-size:10px;color:var(--muted)}
+.assets-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px}
+.asset-card{min-width:0;padding:14px;border:1px solid var(--line);border-radius:11px;background:var(--surface-soft)}
+.asset-meta{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.asset-meta span{font-size:10px;font-weight:800;color:var(--accent)}
+.asset-meta small{font:9px ui-monospace,monospace;color:var(--muted)}
+.asset-card h4{font-size:13px;line-height:1.6;margin:8px 0 3px}
+.asset-subtitle{font-size:10px;color:var(--muted);margin:0 0 11px}
+.asset-diagram{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;align-items:stretch}
+.asset-node{position:relative;display:flex;flex-direction:column;justify-content:center;gap:5px;min-height:78px;padding:8px 5px;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+.asset-node small{font:9px ui-monospace,monospace;color:var(--accent)}
+.asset-node b{font-size:10px;line-height:1.5;overflow-wrap:anywhere}
+.asset-arrow{position:absolute;right:-12px;top:50%;transform:translate(50%,-50%);color:var(--accent);font-weight:900;z-index:1}
+.asset-table-wrap{overflow-x:auto}
+.asset-table-wrap table{width:100%;min-width:360px;border-collapse:collapse;font-size:10px;line-height:1.65}
+.asset-table-wrap th,.asset-table-wrap td{padding:7px;border:1px solid var(--line);text-align:left;vertical-align:top}
+.asset-table-wrap th{background:var(--surface);color:var(--accent)}
+.asset-image{margin:0;display:grid;gap:7px}
+.asset-image img{width:100%;height:180px;object-fit:contain;border-radius:8px;background:var(--surface)}
+.asset-image figcaption{font-size:10px;line-height:1.6;color:var(--muted)}
+.asset-note{font-size:10px;line-height:1.75;margin:11px 0 0;color:var(--text)}
+.asset-card footer{margin-top:10px;padding-top:7px;border-top:1px solid var(--line);font-size:9px;color:var(--muted)}
+@media(max-width:520px){.knot-summary-assets{padding:12px}.assets-grid{grid-template-columns:1fr}.asset-diagram{gap:10px}.asset-node{min-height:74px}.asset-node b{font-size:9px}.asset-arrow{right:-9px}}
+</style>
