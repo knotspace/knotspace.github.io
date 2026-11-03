@@ -21,8 +21,8 @@ const motivationGroups = motivationData.groups;
     <header class="motivation-heading"><p class="eyebrow">YOUR FUTURE / 200 REMINDERS</p><h2>本気で学んだ、<span>その先の景色。</span></h2><p>その先に何が待っているかは、誰にも断言できない。どんな学校に進んでも、名前だけで未来が保証されるわけじゃない。大切なのは、そこで何を学び、何に挑み、どんな自分になっていくか。今の努力を、未来の自分の力に変えていこう。</p><div class="motivation-count"><strong>200</strong><span>のメッセージ</span><small>気になるところから読んでみよう。</small></div></header>
     <div class="motivation-groups">
       {motivationGroups.map((group, index) => <details class="motivation-group" open={index === 0}>
-        <summary><span class="group-number">{group.number}</span><span class="group-title">{group.title}</span><span class="group-count">20 WORDS</span></summary>
-        <ol>{group.items.map((item, itemIndex) => <li><span>{String(itemIndex + 1).padStart(2, '0')}</span><p>{item}</p></li>)}</ol>
+        <summary><span class="group-number">{group[0]}</span><span class="group-title">{group[1]}</span><span class="group-count">20 WORDS</span></summary>
+        <ol>{group[2].map((item, itemIndex) => <li><span>{String(itemIndex + 1).padStart(2, '0')}</span><p>{item}</p></li>)}</ol>
       </details>)}
     </div>
     <p class="motivation-note">※ここにある言葉は、学びや挑戦を後押しするためのKNOTオリジナルメッセージです。特定の学校への進学や、将来の成功を約束するものではありません。</p>
