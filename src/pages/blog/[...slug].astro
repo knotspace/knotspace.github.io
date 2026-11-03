@@ -183,12 +183,11 @@ const breadcrumbJsonLd = {
     </section>
   </article>
   <aside class="article-sidebar" aria-label="記事ナビゲーション">
+    <section class="article-side-widget"><h2>お知らせ</h2><p>KNOTの記事を読んでくれてありがとう！新しい記事も随時更新中。</p><a href={`${BASE}blog/`}>記事一覧を見る »</a></section>
     {toc.length > 0 && <nav class="article-side-widget side-toc" aria-label="サイドバーの目次">
-      <h2>この記事の目次</h2>
+      <h2>目次</h2>
       <ol>{toc.map((heading) => <li class:list={[`toc-level-${heading.depth}`]}><a href={`#${heading.slug}`} data-toc-link={heading.slug}>{heading.text}</a></li>)}</ol>
     </nav>}
-    <section class="article-side-widget"><h2>お知らせ</h2><p>KNOTの記事を読んでくれてありがとう！新しい記事も随時更新中。</p><a href={`${BASE}blog/`}>記事一覧を見る »</a></section>
-
   </aside>
   </div>
 </Layout>
