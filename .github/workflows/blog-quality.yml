@@ -12,6 +12,7 @@ on:
 permissions:
   contents: write
   issues: write
+  actions: write
 
 concurrency:
   group: knot-blog-quality
@@ -34,6 +35,7 @@ jobs:
         if: github.event_name != 'pull_request'
         run: node scripts/blog-quality.mjs --fix
       - name: Commit safe automatic corrections
+        id: autofix
         if: github.event_name != 'pull_request'
         shell: bash
         run: |
@@ -43,6 +45,9 @@ jobs:
             git add src/content/blog
             git commit -m 'chore: automatically remove duplicate blog images'
             git push
+            echo 'changed=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'changed=false' >> "$GITHUB_OUTPUT"
           fi
       - name: Check blog images and personal information
         run: node scripts/blog-quality.mjs
@@ -50,6 +55,17 @@ jobs:
         run: npm install --no-audit --no-fund
       - name: Build site
         run: npm run build
+      - name: Trigger deployment after automatic correction
+        if: steps.autofix.outputs.changed == 'true' && github.event_name != 'pull_request'
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b
+        with:
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'deploy.yml',
+              ref: 'main'
+            });
       - name: Report detected issue
         if: failure() && github.event_name != 'pull_request'
         uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b
