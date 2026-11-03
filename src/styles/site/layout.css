@@ -245,3 +245,7 @@
 }
 
 
+
+/* Keep mobile scrolling smooth on devices where backdrop blur is costly. */
+@media(max-width:700px){.site-header{backdrop-filter:none;background:var(--surface)}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
