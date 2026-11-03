@@ -59,7 +59,6 @@ const articleJsonLd = {
   inLanguage: 'ja-JP',
   articleSection: post.data.category,
   keywords: [...new Set([post.data.category, ...post.data.title.split(/[｜|：:、,\s]+/).filter((word) => word.length >= 2)])],
-  wordCount: articleText.replace(/\s/g, '').length,
   timeRequired: `PT${readingMinutes}M`,
   isAccessibleForFree: true,
   ...(post.data.heroImage ? { image: new URL(post.data.heroImage, Astro.url).href } : {}),
