@@ -41,13 +41,6 @@ const recent = posts.slice(1, 9);
           </div>
           <div class="slider-footer"><div class="slider-dots" id="slider-dots" aria-label="スライド選択">{posts.slice(0,4).map((post,index)=><button type="button" class:list={['slider-dot',{'is-active':index===0}]} data-slide={index} aria-label={`${index+1}番目の記事`} aria-current={index===0?'true':undefined}></button>)}</div><span class="slider-count"><strong id="slider-current">01</strong> / {String(Math.min(posts.length,4)).padStart(2,'0')}</span></div>
         </section>
-        <div class="home-latest-heading"><h2>新着記事</h2><span>最新の記事をピックアップ</span></div>
-        <div class="home-mini-grid">
-          {posts.slice(0, 4).map((post) => <a class="home-mini-card" href={`${BASE}blog/${post.id}/`}>
-            {post.data.heroImage && <img src={post.data.heroImage} alt="" loading="lazy" />}
-            <span class="mini-card-category">{post.data.category}</span><strong>{post.data.title}</strong><time>{dateFormat(post.data.pubDate)}</time>
-          </a>)}
-        </div>
         <script>
           const viewport = document.querySelector<HTMLElement>('#slider-viewport');
           const track = document.querySelector<HTMLElement>('#slider-track');
