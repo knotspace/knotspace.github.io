@@ -5,7 +5,6 @@ interface Props {
   description?: string;
   image?: string;
   noindex?: boolean;
-  studyMode?: boolean;
   structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
@@ -14,7 +13,6 @@ const {
   description = 'Web制作や日々の興味、ランニングなどを記録する個人ブログ。',
   image,
   noindex = false,
-  studyMode = false,
   structuredData,
 } = Astro.props;
 
@@ -34,12 +32,10 @@ const articleStructuredData = structuredItems.find((item) =>
 );
 const isArticlePage = Boolean(articleStructuredData);
 const BASE = import.meta.env.BASE_URL;
-const currentPath = Astro.url.pathname;
-const isStudyActive = (path: string) => currentPath === path || (currentPath.startsWith(path) && path !== `${BASE}study/`);
 ---
 
 <!doctype html>
-<html lang="ja" data-theme="dark" data-app-mode={studyMode ? "study" : "site"}>
+<html lang="ja" data-theme="dark" data-app-mode="site">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -52,14 +48,14 @@ const isStudyActive = (path: string) => currentPath === path || (currentPath.sta
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta name="site-base" content={BASE} />
     <link rel="canonical" href={canonicalURL} />
-    <link rel="manifest" href={studyMode ? `${BASE}study.webmanifest` : `${BASE}manifest.webmanifest`} />
+    <link rel="manifest" href={`${BASE}manifest.webmanifest`} />
 
     <link rel="alternate" type="application/rss+xml" title="KNOT RSS" href={`${BASE}rss.xml`} />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href={studyMode ? `${BASE}study-icon.svg` : `${BASE}favicon.svg?v=5`} sizes="any" />
-    <link rel="shortcut icon" href={studyMode ? `${BASE}study-icon.svg` : `${BASE}favicon.svg?v=5`} type="image/svg+xml" />
-    <link rel="apple-touch-icon" href={studyMode ? `${BASE}study-icon.svg` : `${BASE}favicon.svg?v=5`} />
+    <link rel="icon" type="image/svg+xml" href={`${BASE}favicon.svg?v=5`} sizes="any" />
+    <link rel="shortcut icon" href={`${BASE}favicon.svg?v=5`} type="image/svg+xml" />
+    <link rel="apple-touch-icon" href={`${BASE}favicon.svg?v=5`} />
 
     <script is:inline>
       try {
@@ -94,26 +90,10 @@ const isStudyActive = (path: string) => currentPath === path || (currentPath.sta
   </head>
 
   <body>
-    <div class:list={["site-shell", { "study-shell": studyMode, "study-app-shell": studyMode }]}>
-      {studyMode && <aside class="study-sidebar" aria-label="Studyメニュー">
-        <a class="study-brand" href={`${BASE}study/`}><span class="study-brand-mark">K</span><span><strong>KNOT<span>.</span></strong><small>STUDY</small></span></a>
-        <div class="sidebar-label">LEARN</div>
-        <a class:list={["study-nav-item", { active: currentPath === `${BASE}study/` }]} href={`${BASE}study/`}><span>⌂</span>ホーム</a>
-        <a class:list={["study-nav-item", { active: isStudyActive(`${BASE}study/foundation/`) || isStudyActive(`${BASE}study/solve/`) }]} href={`${BASE}study/foundation/`}><span>✎</span>基礎演習</a>
-        <a class:list={["study-nav-item", { active: isStudyActive(`${BASE}study/kosen/`) }]} href={`${BASE}study/kosen/`}><span>⌁</span>高専対策</a>
-        <a class:list={["study-nav-item", { active: isStudyActive(`${BASE}study/mock/`) }]} href={`${BASE}study/mock/`}><span>▤</span>模試に挑戦</a>
-        <div class="sidebar-label second">KNOWLEDGE</div>
-        <a class:list={["study-nav-item", { active: isStudyActive(`${BASE}study/summary/`) }]} href={`${BASE}study/summary/`}><span>▦</span>要点まとめ</a>
-        <a class:list={["study-nav-item", { active: isStudyActive(`${BASE}study/tools/`) }]} href={`${BASE}study/tools/`}><span>◷</span>学習ツール</a>
-        <div class="sidebar-spacer"></div>
-        <a class="study-back-site" href={BASE}><span>↗</span> KNOT本体へ戻る</a>
-        <div class="sidebar-foot">KNOT STUDY <span>·</span> LEARN EVERY DAY</div>
-      </aside>}
-      {studyMode && <header class="study-appbar">
-        <a class="study-mobile-brand" href={`${BASE}study/`}><span class="study-brand-mark">K</span><strong>KNOT<span>.</span> STUDY</strong></a>
-        <div class="study-appbar-right"><span class="study-appbar-caption">YOUR LEARNING SPACE</span><button class="theme-toggle study-theme-toggle" id="theme-toggle" type="button" aria-label="テーマを切り替える" title="テーマを切り替える"><span id="theme-icon">☀</span></button></div>
-      </header>}
-      {!studyMode && <header class="site-header">
+    <div class="site-shell">
+      
+      
+      <header class="site-header">
         <a class="brand" href={BASE} aria-label="KNOT ホーム">
           KNOT<span class="brand-dot">.</span>
         </a>
@@ -144,30 +124,25 @@ const isStudyActive = (path: string) => currentPath === path || (currentPath.sta
             ↗
           </a>
         </nav>
-      </header>}
+      </header>
 
-      <main class:list={{ "study-app-main": studyMode }}>
+      <main>
         <slot />
       </main>
 
       <aside id="pwa-install-prompt" class="pwa-prompt" hidden aria-live="polite">
-        <div><strong>{studyMode ? "KNOT Studyをアプリとして使う" : "KNOTをアプリとして使う"}</strong><p id="pwa-install-description">{studyMode ? "ホーム画面に追加すると、Studyをすぐに開けるよ。" : "ホーム画面に追加すると、次回からすぐに開けるよ。"}</p></div>
+        <div><strong>KNOTをアプリとして使う</strong><p id="pwa-install-description">ホーム画面に追加すると、次回からすぐに開けるよ。</p></div>
         <button id="pwa-install-button" type="button">インストール</button>
         <button id="pwa-install-close" type="button" aria-label="閉じる">×</button>
       </aside>
-      {!studyMode && <footer class="site-footer">
+      <footer class="site-footer">
         <a class="footer-brand" href={BASE}>
           KNOT<span class="brand-dot">.</span>
         </a>
         <p>Web制作や日々の興味を記録する個人ブログ。</p>
         <span>© {new Date().getFullYear()} KNOT. Built with Astro.</span>
-      </footer>}
-      {studyMode && <nav class="study-bottom-nav" aria-label="Study navigation">
-        <a class:list={{ active: currentPath === `${BASE}study/` }} href={`${BASE}study/`}><span>⌂</span><small>ホーム</small></a>
-        <a class:list={{ active: isStudyActive(`${BASE}study/foundation/`) || isStudyActive(`${BASE}study/solve/`) }} href={`${BASE}study/foundation/`}><span>✎</span><small>演習</small></a>
-        <a class:list={{ active: isStudyActive(`${BASE}study/summary/`) }} href={`${BASE}study/summary/`}><span>▦</span><small>要点</small></a>
-        <a class:list={{ active: isStudyActive(`${BASE}study/mock/`) }} href={`${BASE}study/mock/`}><span>▤</span><small>模試</small></a>
-      </nav>}
+      </footer>
+      
     </div>
 
     <script is:inline>
@@ -212,10 +187,7 @@ const isStudyActive = (path: string) => currentPath === path || (currentPath.sta
         if (!('serviceWorker' in navigator)) return;
         window.addEventListener('load', () => {
           const base = document.querySelector('meta[name="site-base"]')?.content || '/';
-          const isStudy = document.documentElement.dataset.appMode === 'study';
-          const worker = base + (isStudy ? 'study-sw.js' : 'sw.js');
-          const options = isStudy ? { scope: base + 'study/' } : undefined;
-          navigator.serviceWorker.register(worker, options).catch((error) => console.warn('KNOT offline support unavailable:', error));
+          navigator.serviceWorker.register(base + 'sw.js').catch((error) => console.warn('KNOT offline support unavailable:', error));
         });
         const prompt = document.getElementById('pwa-install-prompt');
         const installButton = document.getElementById('pwa-install-button');
@@ -225,7 +197,7 @@ const isStudyActive = (path: string) => currentPath === path || (currentPath.sta
         let installEvent;
         const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
         if (isStandalone) return;
-        const dismissKey = document.documentElement.dataset.appMode === 'study' ? 'knot-study-pwa-dismissed' : 'knot-pwa-dismissed';
+        const dismissKey = 'knot-pwa-dismissed';
         const dismissed = sessionStorage.getItem(dismissKey);
         window.addEventListener('beforeinstallprompt', (event) => {
           event.preventDefault();
@@ -262,49 +234,6 @@ const isStudyActive = (path: string) => currentPath === path || (currentPath.sta
 </html>
 
 <style is:global>
-  .study-shell{width:100%;max-width:none;margin:0;padding:0}
-  .study-app-shell{min-height:100dvh}
-  .study-sidebar{position:fixed;z-index:1100;inset:0 auto 0 0;width:236px;padding:26px 17px 18px;background:var(--surface);border-right:1px solid var(--line);display:flex;flex-direction:column}
-  .study-brand{display:flex;align-items:center;gap:11px;padding:0 8px 30px;color:var(--text)}
-  .study-brand-mark{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:var(--accent);color:#071426;font-size:21px;font-weight:950;box-shadow:0 6px 18px color-mix(in srgb,var(--accent) 25%,transparent)}
-  .study-brand>span:last-child{display:grid;gap:1px}.study-brand strong{font-size:18px;letter-spacing:-.07em}.study-brand strong span,.study-mobile-brand strong span{color:var(--accent)}.study-brand small{font:9px ui-monospace,monospace;letter-spacing:.2em;color:var(--muted)}
-  .sidebar-label{padding:0 11px;margin:2px 0 9px;color:var(--muted);font:9px ui-monospace,monospace;letter-spacing:.16em;font-weight:800}
-  .sidebar-label.second{margin-top:28px}
-  .study-nav-item{display:flex;align-items:center;gap:13px;min-height:44px;padding:0 12px;border-radius:10px;color:var(--muted);font-size:12px;font-weight:700;transition:background .15s,color .15s}
-  .study-nav-item>span{display:grid;place-items:center;width:22px;font-size:17px;color:var(--muted)}
-  .study-nav-item:hover{background:var(--surface-soft);color:var(--text)}
-  .study-nav-item.active{background:color-mix(in srgb,var(--accent) 13%,var(--surface));color:var(--accent)}
-  .study-nav-item.active>span{color:var(--accent)}
-  .sidebar-spacer{flex:1}
-  .study-back-site{display:flex;gap:9px;align-items:center;padding:12px;color:var(--muted);font-size:11px;border-top:1px solid var(--line)}
-  .study-back-site span{color:var(--accent)}
-  .sidebar-foot{padding:9px 12px 0;color:var(--muted);font:8px ui-monospace,monospace;letter-spacing:.1em;opacity:.7}
-  .sidebar-foot span{color:var(--accent)}
-  .study-appbar{position:fixed;z-index:1050;top:0;left:236px;right:0;height:68px;padding:0 30px;display:flex;align-items:center;justify-content:space-between;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
-  .study-mobile-brand{display:none;align-items:center;gap:9px;color:var(--text)}
-  .study-mobile-brand .study-brand-mark{width:30px;height:30px;font-size:16px;border-radius:9px}
-  .study-mobile-brand strong{font-size:14px;letter-spacing:-.04em}
-  .study-appbar-right{display:flex;align-items:center;gap:17px}
-  .study-appbar-caption{font:9px ui-monospace,monospace;letter-spacing:.14em;color:var(--muted)}
-  .study-theme-toggle{width:34px;height:34px;border-radius:10px}
-  .study-app-main{margin-left:236px;padding:68px 30px 30px;min-height:100dvh}
-  .study-bottom-nav{display:none}
-  .study-app-shell .pwa-prompt{bottom:22px}
-  .study-app-shell .study-app-main>main{min-height:calc(100dvh - 100px)}
-  @media(max-width:760px){
-    .study-sidebar{display:none}
-    .study-appbar{left:0;height:58px;padding:0 17px}
-    .study-mobile-brand{display:flex}
-    .study-appbar-caption{display:none}
-    .study-app-main{margin-left:0;padding:58px 17px 92px}
-    .study-bottom-nav{position:fixed;z-index:1200;left:0;right:0;bottom:0;display:grid;grid-template-columns:repeat(4,1fr);padding:7px 12px calc(7px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(20px);border-top:1px solid var(--line)}
-    .study-bottom-nav a{display:grid;justify-items:center;align-content:center;gap:3px;min-height:48px;color:var(--muted);border-radius:10px}
-    .study-bottom-nav a span{font-size:19px;line-height:1}
-    .study-bottom-nav a small{font-size:9px;font-weight:700}
-    .study-bottom-nav a.active{color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent)}
-    .study-app-shell .pwa-prompt{bottom:78px}
-  }
-  @media(min-width:761px){.study-appbar{justify-content:flex-end}}
   .pwa-prompt{position:fixed;z-index:9999;left:50%;bottom:22px;transform:translateX(-50%);width:min(560px,calc(100% - 28px));display:flex;align-items:center;gap:14px;padding:15px 16px;border:1px solid var(--line);border-radius:15px;background:var(--surface);color:var(--text);box-shadow:0 16px 50px rgba(0,0,0,.28)}
   .pwa-prompt[hidden]{display:none}
   .pwa-prompt>div{flex:1;min-width:0}.pwa-prompt strong{font-size:13px}.pwa-prompt p{font-size:11px;color:var(--muted);line-height:1.6;margin:4px 0 0}
@@ -552,7 +481,4 @@ const isStudyActive = (path: string) => currentPath === path || (currentPath.sta
 }
 
 
-  /* Study uses a full-width app frame; keep the site-wide width rule off it. */
-  .site-shell.study-shell{width:100%;max-width:none;margin:0;padding:0}
-  .study-app-main{min-width:0}
 </style>
