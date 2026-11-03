@@ -26,7 +26,6 @@ const websiteJsonLd = { '@context': 'https://schema.org', '@type': 'WebSite', na
 <a class="study-brand" href={`${BASE}study/`}><span class="study-brand-mark">K</span><span><strong>KNOT<span>.</span></strong><small>STUDY</small></span></a>
 <div class="sidebar-label">LEARN</div>
 <a class:list={["study-nav-item", { active: currentPath === `${BASE}study/` }]} href={`${BASE}study/`}><span>⌂</span>ホーム</a>
-<a class:list={["study-nav-item", { active: isActive(`${BASE}study/solve/`) }]} href={`${BASE}study/solve/`}><span>▣</span>問題演習</a>
 <a class:list={["study-nav-item", { active: isActive(`${BASE}study/foundation/`) }]} href={`${BASE}study/foundation/`}><span>✎</span>基礎演習</a>
 <a class:list={["study-nav-item", { active: isActive(`${BASE}study/kosen/`) }]} href={`${BASE}study/kosen/`}><span>⌁</span>高専対策</a>
 <a class:list={["study-nav-item", { active: isActive(`${BASE}study/mock/`) }]} href={`${BASE}study/mock/`}><span>▤</span>模試に挑戦</a>
@@ -47,7 +46,7 @@ const websiteJsonLd = { '@context': 'https://schema.org', '@type': 'WebSite', na
 </main>
 <aside id="pwa-install-prompt" class="pwa-prompt" hidden aria-live="polite"><div><strong>KNOT Studyをアプリとして使う</strong><p id="pwa-install-description">ホーム画面に追加すると、Studyをすぐに開けるよ。</p></div><button id="pwa-install-button" type="button">インストール</button><button id="pwa-install-close" type="button" aria-label="閉じる">×</button></aside>
 <nav class="study-bottom-nav" aria-label="Study navigation">
-<a class:list={{ active: currentPath === `${BASE}study/` }} href={`${BASE}study/`}><span>⌂</span><small>ホーム</small></a><a class:list={{ active: isActive(`${BASE}study/solve/`) }} href={`${BASE}study/solve/`}><span>▣</span><small>問題演習</small></a><a class:list={{ active: isActive(`${BASE}study/summary/`) }} href={`${BASE}study/summary/`}><span>▦</span><small>要点</small></a><a class:list={{ active: isActive(`${BASE}study/mock/`) }} href={`${BASE}study/mock/`}><span>▤</span><small>模試</small></a>
+<a class:list={{ active: currentPath === `${BASE}study/` }} href={`${BASE}study/`}><span>⌂</span><small>ホーム</small></a><a class:list={{ active: isActive(`${BASE}study/summary/`) }} href={`${BASE}study/summary/`}><span>▦</span><small>要点</small></a><a class:list={{ active: isActive(`${BASE}study/mock/`) }} href={`${BASE}study/mock/`}><span>▤</span><small>模試</small></a>
 </nav>
 </div>
 <script is:inline>
@@ -102,12 +101,12 @@ const websiteJsonLd = { '@context': 'https://schema.org', '@type': 'WebSite', na
 .study-maker-shortcut{color:var(--accent);font-size:10px;font-weight:800;padding:7px 10px;border:1px solid var(--line);border-radius:999px}
 .maker-nav{margin-top:5px;border-top:1px solid var(--line);padding-top:15px!important;color:var(--accent)!important}
 @media(max-width:760px){.study-maker-banner{align-items:flex-start;flex-wrap:wrap;gap:10px;margin-top:18px}.study-maker-banner>div:nth-child(2){width:calc(100% - 54px)}.study-maker-banner>a{margin-left:52px}.study-maker-shortcut{font-size:9px;padding:6px 8px}}
-html.quiz-active .study-maker-banner,html.kosen-quiz-active .study-maker-banner,html.solve-quiz-active .study-maker-banner{display:none!important}
+html.quiz-active .study-maker-banner,html.kosen-quiz-active .study-maker-banner .study-maker-banner{display:none!important}
 html.quiz-active .study-sidebar,html.quiz-active .study-appbar,html.quiz-active .study-bottom-nav,
 html.kosen-quiz-active .study-sidebar,html.kosen-quiz-active .study-appbar,html.kosen-quiz-active .study-bottom-nav,
-html.solve-quiz-active .study-sidebar,html.solve-quiz-active .study-appbar,html.solve-quiz-active .study-bottom-nav{display:none!important}
-html.quiz-active .study-app-main,html.kosen-quiz-active .study-app-main,html.solve-quiz-active .study-app-main{margin:0!important;padding:0!important;width:100%;height:100vh;min-height:100vh}
-html.quiz-active .study-app-main>main,html.kosen-quiz-active .study-app-main>main,html.solve-quiz-active .study-app-main>main{min-height:100vh}
-html.quiz-active .pwa-prompt,html.kosen-quiz-active .pwa-prompt,html.solve-quiz-active .pwa-prompt{display:none!important}
+html.solve-quiz-active .study-sidebar .study-appbar .study-bottom-nav{display:none!important}
+html.quiz-active .study-app-main,html.kosen-quiz-active .study-app-main .study-app-main{margin:0!important;padding:0!important;width:100%;height:100vh;min-height:100vh}
+html.quiz-active .study-app-main>main,html.kosen-quiz-active .study-app-main>main .study-app-main>main{min-height:100vh}
+html.quiz-active .pwa-prompt,html.kosen-quiz-active .pwa-prompt .pwa-prompt{display:none!important}
 </style>
 </body></html>
