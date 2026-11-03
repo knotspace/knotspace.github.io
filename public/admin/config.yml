@@ -131,3 +131,92 @@ collections:
           ## まとめ
 
           重要なポイントを振り返ります。
+
+  - name: site_management
+    label: サイト設定
+    files:
+      - name: homepage
+        label: トップページの紹介文
+        file: src/data/site-settings.json
+        format: json
+        fields:
+          - label: トップの小見出し
+            name: introKicker
+            widget: string
+            required: true
+          - label: 紹介文 1行目
+            name: introLine1
+            widget: string
+            required: true
+          - label: 紹介文 2行目
+            name: introLine2
+            widget: string
+            required: true
+          - label: サイト説明・検索結果向け
+            name: siteDescription
+            widget: text
+            required: true
+  - name: study_content
+    label: KNOT Study管理
+    files:
+      - name: foundation
+        label: 基礎網羅問題（428問）
+        file: src/data/study/study-foundation.json
+        format: json
+        fields:
+          - label: 問題一覧
+            name: questions
+            widget: list
+            collapsed: true
+            summary: "{{fields.topic}}｜{{fields.term}}"
+            fields:
+              - { label: ID, name: id, widget: string }
+              - { label: 教科, name: subject, widget: select, options: [{label: 理科, value: science}, {label: 社会, value: social}] }
+              - { label: 分野, name: topic, widget: string }
+              - { label: 用語, name: term, widget: string }
+              - { label: 問題文, name: prompt, widget: text }
+              - label: 選択肢
+                name: options
+                widget: list
+                field: { label: 選択肢, name: option, widget: string }
+              - { label: 正解番号（0から）, name: correct, widget: number, value_type: int, min: 0 }
+              - { label: 解説, name: explanation, widget: markdown }
+              - { label: 関連ページURL, name: link, widget: string, required: false }
+      - name: kosen
+        label: 高専入試対策問題（183問）
+        file: src/data/study/kosen-questions.json
+        format: json
+        fields:
+          - label: 問題一覧
+            name: questions
+            widget: list
+            collapsed: true
+            summary: "{{fields.topic}}｜{{fields.q}}"
+            fields:
+              - { label: ID, name: id, widget: string }
+              - { label: 教科, name: subject, widget: select, options: [理科, 社会] }
+              - { label: 分野・テーマ, name: topic, widget: string }
+              - { label: 難易度, name: level, widget: select, options: [基礎, 標準, 発展] }
+              - { label: 問題文, name: q, widget: text }
+              - label: 選択肢
+                name: choices
+                widget: list
+                field: { label: 選択肢, name: choice, widget: string }
+              - { label: 正解番号（0から）, name: answer, widget: number, value_type: int, min: 0 }
+              - { label: 解説, name: explanation, widget: markdown }
+              - { label: 関連ページURL, name: link, widget: string, required: false }
+      - name: quotes
+        label: Study名言集（100件）
+        file: src/data/study/study-quotes.json
+        format: json
+        fields:
+          - label: 名言一覧
+            name: quotes
+            widget: list
+            collapsed: true
+            summary: "{{fields.name}}｜{{fields.text}}"
+            fields:
+              - { label: 名前, name: name, widget: string }
+              - { label: 肩書き, name: era, widget: string }
+              - { label: 言葉, name: text, widget: text }
+              - { label: 補足・出典メモ, name: note, widget: text }
