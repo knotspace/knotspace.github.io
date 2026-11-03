@@ -13,12 +13,12 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', { year: 'num
 const dateTimeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Tokyo' });
 ---
 
-<Layout title="KNOT｜Web制作・PCソフト・Androidアプリ・読書の個人ブログ" description="Web制作・プログラミング、Windowsの無料ソフト、Androidアプリ、本・読書、英検や高校受験の勉強法。実際に調べたり使ったりしたことを記録するKNOTの個人ブログ。">
+<Layout title="KNOT｜気ままに書く、個人ブログ" description="日々気になったことや、使ってよかったもの、本のこと、勉強のことなどを気ままに書いているブログです。">
   <div class="personal-home">
     <section class="intro">
-      <div class="intro-topline"><span class="intro-kicker"><span class="live-dot"></span> INDEPENDENT WEBLOG</span><span class="intro-year">NO. 001 / 2026—</span></div>
-      <div class="intro-main"><h1>KNOT<span class="intro-period">.</span></h1><p>Web、読書、テクノロジー、学び。<br/>気になったことを、気になったままに。</p></div>
-      <div class="intro-bottom"><span>PERSONAL NOTES &amp; JOURNAL</span><span>SCROLL TO EXPLORE ↓</span></div>
+      <div class="intro-topline"><span class="intro-kicker"><span class="live-dot"></span> MY PERSONAL BLOG</span><span class="intro-year">ゆるく更新中</span></div>
+      <div class="intro-main"><h1>KNOT<span class="intro-period">.</span></h1><p>好きなことを、好きなように。<br/>日々のあれこれを、気ままに書いてます。</p></div>
+      <div class="intro-bottom"><span>日々のメモと、ちょっとした記録</span><span>気になる記事をどうぞ ↓</span></div>
     </section>
 
     <div class="home-rule"><span>人気の記事</span><span>注目の4記事</span></div>
@@ -52,7 +52,7 @@ const dateTimeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocal
 
     <footer class="home-foot">
       <div class="foot-categories">{categories.map((category) => <a href={`${BASE}blog/?category=${encodeURIComponent(category)}`}>{category}</a>)}</div>
-      <span>MADE WITH CURIOSITY. © KNOT {new Date().getFullYear()}</span>
+      <span>のんびり更新中。 © KNOT {new Date().getFullYear()}</span>
     </footer>
   </div>
 <script is:inline>
