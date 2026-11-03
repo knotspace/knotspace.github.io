@@ -166,15 +166,26 @@ function buildStages(){
   }
  }
  if(state.decisions.career==='vocational'){
-  add('専門学校1年','SKILLS','専門技術を身につける','実習や課題を通して、目指す仕事に必要な技術を学ぶ。','手を動かし、失敗し、できることを増やしていこう。',[
-   ['実習と作品づくりに全力を注ぐ',{experience:11,study:5,health:-2},'技術と実践力が伸びた。'],
-   ['資格取得に向けて勉強する',{study:10,experience:3},'目標に向けて知識を整理した。'],
-   ['現場での実習や交流を大切にする',{friends:5,experience:9},'仕事の現場を知る機会になった。']
-  ], 'VOCATIONAL');
-  add('専門学校2年','GRADUATION','学んだ技術を仕事へ','卒業が近づき、身につけた技術を活かす場所を探す。','就職して経験を積むか、自分のサービスを始めるか。',[
-   ['学んだ分野に就職する',{experience:8},'学んだ技術を活かせる仕事に進んだ。',{afterStudy:'work'}],
-   ['独立・起業に挑戦する',{experience:10,health:-3},'自分の技術で仕事をつくる道を選んだ。',{afterStudy:'startup'}]
-  ], 'VOCATIONAL');
+  add('専門学校受験','MARCH','専門学校の入試に挑戦','学びたい分野と学校を選び、入試に向けて準備してきた。','専門学校も学校ごとに選考方法が異なる。ここではゲーム内の目安で合否を判定する。',[
+   ['面接や作文で学ぶ意欲を伝える',{study:4,experience:5},'自分が学びたいことを言葉にして伝えた。',{vocationalResult:'pass'}],
+   ['基礎学力と実技の力を発揮する',{study:7,health:-2},'これまでの学びと経験を出し切った。',{vocationalResult:'pass'}]
+  ],'VOCATIONAL EXAM');
+  if(state.decisions.vocationalResult==='fail'){
+   add('専門学校受験結果','MARCH','専門学校の受験結果','今回は合格に届かなかった。別の道を選ぶこともできる。','高校卒業後の選択肢は一つではない。',[
+    ['高卒で就職する',{experience:8},'社会に出て経験を積む道を選んだ。',{career:'work'}],
+    ['自分で事業を始める',{experience:9,health:-3},'自分のアイデアを仕事にする挑戦を始めた。',{career:'startup'}]
+   ],'VOCATIONAL RESULT');
+  } else {
+   add('専門学校1年','SKILLS','専門技術を身につける','実習や課題を通して、目指す仕事に必要な技術を学ぶ。','手を動かし、失敗し、できることを増やしていこう。',[
+    ['実習と作品づくりに全力を注ぐ',{experience:11,study:5,health:-2},'技術と実践力が伸びた。'],
+    ['資格取得に向けて勉強する',{study:10,experience:3},'目標に向けて知識を整理した。'],
+    ['現場での実習や交流を大切にする',{friends:5,experience:9},'仕事の現場を知る機会になった。']
+   ], 'VOCATIONAL');
+   add('専門学校2年','GRADUATION','学んだ技術を仕事へ','卒業が近づき、身につけた技術を活かす場所を探す。','就職して経験を積むか、自分のサービスを始めるか。',[
+    ['学んだ分野に就職する',{experience:8},'学んだ技術を活かせる仕事に進んだ。',{afterStudy:'work'}],
+    ['独立・起業に挑戦する',{experience:10,health:-3},'自分の技術で仕事をつくる道を選んだ。',{afterStudy:'startup'}]
+   ], 'VOCATIONAL');
+  }
  }
  if(state.decisions.career==='work'||state.decisions.afterStudy==='work'){
   for(let y=1;y<=3;y++) add('社会人'+y+'年目','WORK','仕事'+y+'年目','仕事を通じて、責任やチームで働くことを学んでいく。','収入だけでなく、働き方、成長、生活とのバランスも考えよう。',[
@@ -206,6 +217,7 @@ function getExamType(tag){
  if(tag==='EXAM' && state.decisions.middleExam && !state.decisions.examResult) return '中学校';
  if(tag==='EXAM' && state.decisions.highExam && !state.decisions.highResult) return '高等学校';
  if(tag==='UNIVERSITY EXAM') return '大学';
+ if(tag==='VOCATIONAL EXAM') return '専門学校';
  return null;
 }
 function schoolsForExam(tag){
@@ -215,7 +227,7 @@ function schoolsForExam(tag){
  return schoolRecords.filter(x=>{
    const t=String(x.schoolType||'');
    const match=type==='中学校' ? (/中学校|中等教育学校/.test(t) && (x.integratedSchool || /中等教育学校/.test(t) || x.ownership==='私立')) :
-     type==='高等学校' ? /高等学校|中等教育学校|高等専門学校/.test(t) : /大学/.test(t);
+     type==='高等学校' ? /高等学校|中等教育学校|高等専門学校/.test(t) : type==='専門学校' ? /専修学校|各種学校/.test(t) : /大学/.test(t);
    return match && (!pref || x.prefecture===pref);
  }).sort((a,b)=>(schoolDeviation(b)||0)-(schoolDeviation(a)||0));
 }
@@ -294,7 +306,7 @@ function choose(o){
  if(o.decision){
    const decision={...o.decision};
    const current=stages[state.step];
-   if(['EXAM','UNIVERSITY EXAM'].includes(current.tag)){
+   if(['EXAM','UNIVERSITY EXAM','VOCATIONAL EXAM'].includes(current.tag)){
      const school=state.pendingSchool;
      if(school){
        const target=schoolDeviation(school) ?? (current.tag==='UNIVERSITY EXAM'?55:50);
@@ -304,6 +316,7 @@ function choose(o){
        if(decision.examResult)decision.examResult=result;
        if(decision.highResult)decision.highResult=result;
        if(decision.uniResult)decision.uniResult=result;
+       if(decision.vocationalResult)decision.vocationalResult=result;
        decision.selectedSchool={schoolCode:school.schoolCode,name:school.name,prefecture:school.prefecture,schoolType:school.schoolType,deviation:schoolDeviation(school)};
        state.lastExamResult={passed,school:school.name,score:Math.round(examScore),target};state.diary.push({title:'受験結果',log:school.name+'を受験。'+(passed?'合格！':'不合格。')+'（判定 '+Math.round(examScore)+' / 目安 '+target+'）',choice:passed?'合格':'不合格'});
        state.pendingSchool=null;
