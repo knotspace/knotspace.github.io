@@ -2,7 +2,7 @@ name: Gemini Dispatch
 
 on:
   pull_request:
-    types: [opened]
+    types: [opened, reopened, synchronize]
   issue_comment:
     types: [created]
 
@@ -22,8 +22,6 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       command: ${{ steps.route.outputs.command }}
-      request: ${{ steps.route.outputs.request }}
-      context: ${{ steps.route.outputs.context }}
     steps:
       - name: Determine Gemini task
         id: route
@@ -33,16 +31,10 @@ jobs:
         run: |
           if [ "$EVENT_NAME" = "pull_request" ]; then
             echo "command=review" >> "$GITHUB_OUTPUT"
-            echo "request=automatic PR review" >> "$GITHUB_OUTPUT"
-            echo "context=" >> "$GITHUB_OUTPUT"
           elif [[ "$COMMENT_BODY" == "@gemini-cli /approve"* ]]; then
             echo "command=execute" >> "$GITHUB_OUTPUT"
-            echo "request=approved plan execution" >> "$GITHUB_OUTPUT"
-            echo "context=${COMMENT_BODY#@gemini-cli /approve}" >> "$GITHUB_OUTPUT"
           else
             echo "command=plan" >> "$GITHUB_OUTPUT"
-            echo "request=prepare a plan only" >> "$GITHUB_OUTPUT"
-            echo "context=${COMMENT_BODY#@gemini-cli}" >> "$GITHUB_OUTPUT"
           fi
 
   review:
@@ -60,7 +52,7 @@ jobs:
     if: needs.route.outputs.command == 'plan'
     uses: ./.github/workflows/gemini-invoke.yml
     with:
-      additional_context: ${{ needs.route.outputs.context }}
+      additional_context: ""
     permissions:
       contents: read
       issues: write
