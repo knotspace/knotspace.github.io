@@ -38,9 +38,8 @@ function save(){try{localStorage.setItem(KEY,JSON.stringify(record));}catch{}}
 function fillTopics(){const subject=$('subject').value,select=$('topic'),previous=select.value;select.replaceChildren(new Option('すべての分野','all'));[...new Set(bank.filter(q=>subject==='all'||q.subject===(subject==='science'?'理科':'社会')).map(q=>q.topic))].forEach(t=>select.add(new Option(t,t)));if([...select.options].some(o=>o.value===previous))select.value=previous;}
 $('subject').addEventListener('change',fillTopics);fillTopics();
 function stats(){$('total').textContent=record.answered;$('correct').textContent=record.correct;$('rate').textContent=record.answered?Math.round(record.correct/record.answered*100)+'%':'—';}
-function enterQuizMode(){document.documentElement.classList.add('kosen-quiz-active');if(!document.fullscreenElement&&document.documentElement.requestFullscreen){document.documentElement.requestFullscreen().catch(()=>{});}}
-function leaveQuizMode(){document.documentElement.classList.remove('kosen-quiz-active');if(document.fullscreenElement&&document.exitFullscreen)document.exitFullscreen().catch(()=>{});}
-document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement)document.documentElement.classList.remove('kosen-quiz-active');});
+function enterQuizMode(){document.documentElement.classList.add('kosen-quiz-active');}
+function leaveQuizMode(){document.documentElement.classList.remove('kosen-quiz-active');}
 function start(){const workspace=$('workspace'),quiz=$('quiz'),result=$('result');if(!workspace||!quiz||!result)return;lastConfig={subject:$('subject').value,topic:$('topic').value,amount:$('amount').value};let pool=bank.filter(q=>q&&q.choices?.length===4&&Number.isInteger(q.answer)&&q.answer>=0&&q.answer<4&&(lastConfig.subject==='all'||q.subject===(lastConfig.subject==='science'?'理科':'社会'))&&(lastConfig.topic==='all'||q.topic===lastConfig.topic));if(lastConfig.amount==='wrong')pool=pool.filter(q=>record.wrong.includes(q.id));pool=pool.slice().sort(()=>Math.random()-.5);if(lastConfig.amount!=='all'&&lastConfig.amount!=='wrong')pool=pool.slice(0,Number(lastConfig.amount));if(!pool.length){$('meta').textContent='この条件の問題はまだありません';return;}set=pool;index=0;score=0;result.hidden=true;workspace.hidden=true;quiz.hidden=false;enterQuizMode();render();}
 function render(){locked=false;const q=set[index];$('meta').textContent=q.subject+' / '+q.topic+' / '+q.level;$('progressText').textContent=(index+1)+' / '+set.length;$('progress').style.width=(index/set.length*100)+'%';$('question').textContent=q.q;const figure=$('question-figure');if(q.figure){$('question-image').src=q.figure;$('question-image').alt=q.figureAlt||'問題資料';$('question-caption').textContent=q.figureAlt||'資料';figure.hidden=false;}else{figure.hidden=true;$('question-image').removeAttribute('src');}$('choices').replaceChildren();$('explanation').hidden=true;$('next').disabled=true;$('next').textContent=index===set.length-1?'結果を見る →':'次の問題 →';q.choices.forEach((choice,i)=>{const b=document.createElement('button');b.type='button';b.className='choice';const letter=document.createElement('b');letter.textContent=['A','B','C','D'][i];const text=document.createElement('span');text.textContent=choice;b.append(letter,text);b.addEventListener('click',()=>answer(i));$('choices').append(b);});}
 function answer(n){if(locked)return;locked=true;const q=set[index],ok=n===q.answer;if(ok){score++;record.correct++;record.wrong=record.wrong.filter(id=>id!==q.id);}else if(!record.wrong.includes(q.id))record.wrong.push(q.id);record.answered++;save();stats();[...$('choices').children].forEach((b,i)=>{b.disabled=true;if(i===q.answer)b.classList.add('correct');else if(i===n)b.classList.add('wrong');});const box=$('explanation');box.replaceChildren();const result=document.createElement('strong');result.textContent=ok?'正解':'不正解';const detail=document.createElement('p');detail.textContent=q.explanation;box.append(result,detail);if(q.link){const link=document.createElement('a');link.href=q.link;link.className='summary-link';link.textContent='関連する要点まとめを見る →';box.append(link);}box.hidden=false;$('next').disabled=false;}
@@ -65,4 +64,20 @@ html.kosen-quiz-active .choices{gap:clamp(10px,1.6vw,18px)}
 html.kosen-quiz-active .choice{min-height:clamp(76px,12vh,118px);font-size:clamp(14px,1.5vw,18px);padding:clamp(13px,2vw,22px);border-radius:16px}
 html.kosen-quiz-active .quiz-actions{margin:0}
 @media(max-width:620px){html.kosen-quiz-active .kosen-page{padding:10px}html.kosen-quiz-active #quiz{padding:16px 12px;gap:14px}html.kosen-quiz-active #question{font-size:20px}html.kosen-quiz-active .choices{grid-template-columns:1fr 1fr;gap:8px}html.kosen-quiz-active .choice{min-height:94px;padding:10px 8px;font-size:12px;gap:7px}}
+</style>
+
+<style is="global">
+@media(max-width:620px){
+  html.kosen-quiz-active,html.kosen-quiz-active body{height:auto!important;min-height:100%!important;overflow-x:hidden!important;overflow-y:auto!important}
+  html.kosen-quiz-active body main{height:auto!important;min-height:100dvh!important}
+  html.kosen-quiz-active .kosen-page{height:auto!important;min-height:100dvh!important;display:block!important;padding:14px 12px calc(24px + env(safe-area-inset-bottom))!important}
+  html.kosen-quiz-active #quiz{width:100%;height:auto!important;max-height:none!important;min-height:calc(100dvh - 28px);overflow:visible!important;display:flex!important;justify-content:flex-start!important;gap:18px!important;padding:20px 15px!important;margin:0!important}
+  html.kosen-quiz-active .choices{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:11px!important}
+  html.kosen-quiz-active .choice{width:100%;min-height:76px!important;height:auto!important;padding:16px 15px!important;border-radius:18px!important;font-size:15px!important;line-height:1.6!important;gap:13px!important;white-space:normal!important}
+  html.kosen-quiz-active .choice b{width:36px!important;height:36px!important;flex:0 0 36px!important;border-radius:11px!important;font-size:14px!important}
+  html.kosen-quiz-active #question{font-size:clamp(19px,5vw,23px)!important;line-height:1.65!important;overflow-wrap:anywhere}
+  html.kosen-quiz-active .question-figure img{max-height:38vh!important}
+  html.kosen-quiz-active .quiz-actions{position:sticky;bottom:0;background:var(--surface);padding:10px 0 max(8px,env(safe-area-inset-bottom));z-index:5}
+  html.kosen-quiz-active .quiz-actions button{min-height:48px!important}
+}
 </style>
