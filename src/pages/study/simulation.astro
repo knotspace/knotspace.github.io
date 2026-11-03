@@ -1,0 +1,147 @@
+---
+import StudyLayout from '../../layouts/StudyLayout.astro';
+---
+<StudyLayout title="高校生活シミュレーター｜KNOT Study" description="高校入学から3年間、選択を重ねて大学受験本番まで進む高校生活シミュレーション。">
+<main class="sim-page">
+  <a class="back-link" href="../">← Studyに戻る</a>
+  <header class="sim-hero">
+    <p class="eyebrow">KNOT LIFE SIMULATION / YOUR NEXT 3 YEARS</p>
+    <h1>その高校生活を、<span>今ここで。</span></h1>
+    <p>入学式から卒業、そして受験本番まで。勉強、部活、友達、挑戦。選択を重ねて、自分だけの3年間を歩こう。</p>
+    <div class="hero-tags"><span>3 YEARS</span><span>12 DECISIONS</span><span>MULTIPLE ENDINGS</span></div>
+  </header>
+  <section id="start-screen" class="panel start-panel">
+    <p class="eyebrow">NEW GAME</p><h2>高校生活を始めよう。</h2>
+    <label class="field-label" for="player-name">主人公の名前</label><input id="player-name" maxlength="12" placeholder="ニックネーム（任意）" />
+    <p class="field-label">どんな高校生活をイメージする？</p>
+    <div class="path-options">
+      <label><input type="radio" name="school-path" value="general" checked /><span><b>学びを深める</b><small>授業・探究・受験勉強を軸にする</small></span></label>
+      <label><input type="radio" name="school-path" value="tech" /><span><b>技術を究める</b><small>専門分野・実習・ものづくりに挑戦</small></span></label>
+      <label><input type="radio" name="school-path" value="free" /><span><b>自由に挑戦する</b><small>部活・行事・仲間との経験も大切に</small></span></label>
+    </div>
+    <button id="start-game" class="primary-button">入学する <span>→</span></button>
+    <p class="fine-print">これは未来を予言するものではなく、選択を楽しむフィクションのシミュレーションです。</p>
+  </section>
+  <section id="game-screen" hidden>
+    <div class="game-top"><div><p class="eyebrow">YOUR HIGH SCHOOL DIARY</p><h2 id="year-label">高校1年生</h2><p id="term-label">春・入学</p></div><div class="progress-wrap"><span id="progress-label">0 / 12</span><div class="progress-track"><i id="progress-bar"></i></div></div></div>
+    <div class="stats-panel" aria-label="現在のステータス">
+      <div><span>学力</span><strong id="stat-study">45</strong><i><b id="bar-study"></b></i></div>
+      <div><span>経験</span><strong id="stat-experience">35</strong><i><b id="bar-experience"></b></i></div>
+      <div><span>体調</span><strong id="stat-health">75</strong><i><b id="bar-health"></b></i></div>
+      <div><span>人間関係</span><strong id="stat-friends">40</strong><i><b id="bar-friends"></b></i></div>
+    </div>
+    <article class="event-card">
+      <div class="event-meta"><span id="event-season">APRIL / YEAR 1</span><span id="event-number">EPISODE 01</span></div>
+      <p class="event-scene" id="event-scene">春。新しい制服に袖を通した。</p>
+      <h3 id="event-title">入学式の日</h3>
+      <p id="event-description" class="event-description"></p>
+      <div id="choices" class="choices"></div>
+    </article>
+    <div class="diary-log"><h3>これまでの歩み</h3><ol id="diary-list"><li>高校生活が始まった。</li></ol></div>
+    <button id="save-exit" class="quiet-button">ここまでの記録を保存して閉じる</button>
+  </section>
+  <section id="result-screen" class="panel result-panel" hidden>
+    <p class="eyebrow">YOUR STORY / GRADUATION</p><h2 id="ending-title">3年間、おつかれさま。</h2>
+    <p id="ending-copy" class="ending-copy"></p>
+    <div class="result-stats" id="result-stats"></div>
+    <div class="result-message"><strong>この3年間で手に入れたもの。</strong><p id="result-reflection"></p></div>
+    <h3 class="timeline-heading">高校生活の記録</h3><ol id="final-diary" class="final-diary"></ol>
+    <div class="result-actions"><button id="restart-game" class="primary-button">もう一度、新しい3年間へ ↻</button><a href="../foundation/" class="secondary-button">今日の勉強を始める →</a></div>
+    <p class="fine-print">結果はゲーム内の数値による演出です。実際の進路や受験結果を予測・保証するものではありません。</p>
+  </section>
+</main>
+<script>
+const $ = (id) => document.getElementById(id);
+const events = [
+ {year:1,season:'APRIL',scene:'春。新しい制服に袖を通した。',title:'入学式、最初の一歩',desc:'知らない顔ばかりの教室。これから始まる毎日に、期待と少しの不安が入り混じる。',choices:[['まずは隣の人に話しかける',{friends:12,experience:5,health:2},'最初の友達ができた。緊張が少しほぐれた。'],['帰宅して学校の予習を始める',{study:10,health:-3},'新しい教科書を開いた。学ぶ準備は万全だ。'],['校内を歩いて気になる場所を探す',{experience:10,friends:4},'部室や図書室を見つけた。楽しみが増えた。']]},
+ {year:1,season:'MAY',scene:'授業のスピードが想像より速い。',title:'最初の定期テスト',desc:'範囲表が配られた。部活も始まり、時間の使い方が大切になってきた。',choices:[['毎日少しずつ復習する',{study:12,health:-2},'短時間でも机に向かう習慣ができた。'],['友達と問題を出し合う',{study:7,friends:8},'教え合うと理解が深まる。'],['直前にまとめて頑張る',{study:4,health:-10},'なんとか乗り切ったが、少し疲れた。']]},
+ {year:1,season:'JULY',scene:'初めての夏休みが近づく。',title:'夏休みの過ごし方',desc:'自由な時間が増える。何に時間を使うか、自分で決められる。',choices:[['苦手科目を集中して克服',{study:14,health:-5},'苦手だった単元が少しずつ分かってきた。'],['部活や趣味に全力で取り組む',{experience:13,health:5,friends:3},'夢中になれるものがあるっていい。'],['友達と出かけて思い出を作る',{friends:13,experience:5,health:4},'忘れられない夏の思い出ができた。']]},
+ {year:1,season:'OCTOBER',scene:'学校全体が文化祭の準備で盛り上がる。',title:'文化祭のステージ',desc:'クラスの出し物を決める会議。自分から動くか、支える側に回るか。',choices:[['企画を考えてリーダーに挑戦',{experience:13,friends:5,health:-4},'意見をまとめる難しさと面白さを知った。'],['仲間のアイデアを形にする',{friends:10,experience:8},'みんなで作り上げた達成感が残った。'],['勉強時間を確保して裏方を手伝う',{study:8,experience:3,health:2},'自分のペースを守りながら行事にも参加できた。']]},
+ {year:2,season:'APRIL',scene:'後輩が入学し、先輩と呼ばれるようになった。',title:'高校2年、新しい役割',desc:'学校生活にも慣れてきた。部活や委員会で後輩を支える機会が増えた。',choices:[['後輩に積極的に声をかける',{friends:10,experience:8},'頼られる経験が、自分の自信になった。'],['自分の専門・得意分野を深掘り',{study:10,experience:8},'興味のある分野をさらに学びたくなった。'],['新しい活動に参加してみる',{experience:14,health:-2},'初めての経験が視野を広げてくれた。']]},
+ {year:2,season:'JUNE',scene:'将来について考える授業があった。',title:'自分の興味を見つける',desc:'好きなこと、得意なこと、これから挑戦したいこと。少し立ち止まって考えてみる。',choices:[['気になる分野を調べて体験する',{study:7,experience:12},'調べるほど、知りたいことが増えていく。'],['先生や先輩に話を聞く',{experience:9,friends:8},'自分だけでは気づかなかった道を知った。'],['焦らず、いろいろなことを試す',{experience:10,health:5},'今すぐ答えを出さなくてもいいと思えた。']]},
+ {year:2,season:'AUGUST',scene:'夏。周りが少しずつ進路を意識し始めた。',title:'夏の挑戦',desc:'まとまった時間が取れる夏休み。今の自分に必要なことは何だろう。',choices:[['基礎を固めて学力を伸ばす',{study:15,health:-5},'分からないところを一つずつ解決した。'],['コンテストや資格に挑戦',{study:8,experience:12,health:-4},'結果以上に、挑戦した経験が残った。'],['生活リズムを整えて心身を充電',{health:14,friends:4},'休むことも次の挑戦への準備だ。']]},
+ {year:2,season:'NOVEMBER',scene:'模試の結果が返ってきた。',title:'思うようにいかない日',desc:'結果に一喜一憂する。友達の成績も気になる。でも、比べる相手は昨日の自分だ。',choices:[['間違いを分析して計画を立て直す',{study:12,experience:5,health:-3},'弱点が見えた。次にやることが明確になった。'],['先生に相談して勉強法を変える',{study:9,friends:5,experience:5},'一人で抱えずに相談してよかった。'],['いったん休んで気持ちを切り替える',{health:12,experience:2},'焦りが落ち着き、また前を向けた。']]},
+ {year:3,season:'APRIL',scene:'いよいよ最終学年。校舎の景色も少し違って見える。',title:'高校3年、最後の一年',desc:'行事も部活も、ひとつひとつが最後になっていく。これからの時間をどう使おう。',choices:[['目標を決めて受験勉強を本格化',{study:14,health:-5},'毎週の計画を立て、少しずつ前進した。'],['部活や行事を最後までやり切る',{experience:12,friends:8,health:-3},'仲間と過ごす時間を大切にできた。'],['勉強と学校生活のバランスを取る',{study:7,experience:7,health:5},'無理なく続けられるペースを見つけた。']]},
+ {year:3,season:'JUNE',scene:'進路について、具体的に考える時期になった。',title:'進む道を考える',desc:'得意なこと、学びたいこと、生活や環境。自分に合う道を考えて情報を集める。',choices:[['必要な科目を絞って対策する',{study:13,health:-4},'やるべきことが整理され、集中できた。'],['複数の選択肢を調べて比較する',{study:7,experience:10},'自分に合う環境を考える視点が増えた。'],['家族や先生とじっくり話す',{experience:7,friends:9,health:3},'周りの意見も聞きながら、自分の考えを深めた。']]},
+ {year:3,season:'SEPTEMBER',scene:'受験が近づき、周りの空気も変わってきた。',title:'ラストスパート',desc:'模試、過去問、苦手分野。やることは多い。ここで大切なのは、続けられる形を作ること。',choices:[['過去問を解いて弱点をつぶす',{study:15,health:-6},'本番を意識した演習で、課題がはっきりした。'],['友達と励まし合いながら進める',{study:8,friends:10,health:-2},'一緒に頑張る仲間の存在が支えになった。'],['睡眠と休憩を優先して整える',{health:14,study:3},'集中できる状態を保つことも実力のうち。']]},
+ {year:3,season:'JANUARY',scene:'本番の日がやってきた。積み重ねてきた時間を胸に、会場へ向かう。',title:'受験本番',desc:'これまでの選択も、うまくいかなかった日も、全部が今日につながっている。深呼吸して、目の前の一問に向き合おう。',choices:[['落ち着いて、解ける問題から取り組む',{study:8,health:4},'自分のペースを守り、最後までやり切った。'],['難問にも粘り強く挑戦する',{study:10,experience:4,health:-4},'最後まで考え抜いた。その経験は消えない。'],['自分を信じて、積み重ねた力を出す',{study:6,health:8,friends:2},'ここまで来た自分を認めて、試験を終えた。']]}
+];
+let state = null;
+const clamp = n => Math.max(0,Math.min(100,n));
+const terms = ['春','初夏','夏','秋','春','初夏','夏','秋','春','初夏','秋','冬'];
+function updateStats(){
+ for(const [key,label] of [['study','study'],['experience','experience'],['health','health'],['friends','friends']]){
+  const value=clamp(state.stats[key]); state.stats[key]=value;
+  $('stat-'+label).textContent=value;
+  $('bar-'+label).style.width=value+'%';
+ }
+ $('progress-label').textContent=state.step+' / 12';
+ $('progress-bar').style.width=(state.step/12*100)+'%';
+ $('year-label').textContent='高校'+(Math.floor(state.step/4)+1)+'年生';
+ $('term-label').textContent=terms[state.step]+'・'+(state.step===0?'入学':state.step===11?'受験本番':'学校生活');
+}
+function renderEvent(){
+ updateStats();
+ const e=events[state.step];
+ $('event-season').textContent=e.season+' / YEAR '+e.year;
+ $('event-number').textContent='EPISODE '+String(state.step+1).padStart(2,'0');
+ $('event-scene').textContent=e.scene;
+ $('event-title').textContent=e.title;
+ $('event-description').textContent=e.desc;
+ const choices=$('choices'); choices.replaceChildren();
+ e.choices.forEach(([label,effect,log],i)=>{
+  const b=document.createElement('button'); b.className='choice-button';
+  const strong=document.createElement('strong'); strong.textContent=String.fromCharCode(65+i)+'. '+label;
+  const small=document.createElement('small'); small.textContent='この選択をする';
+  b.append(strong,small);
+  b.addEventListener('click',()=>choose(effect,log,label));
+  choices.append(b);
+ });
+}
+function choose(effect,log,label){
+ Object.entries(effect).forEach(([k,v])=>state.stats[k]=clamp(state.stats[k]+v));
+ state.diary.push({title:events[state.step].title,choice:label,log});
+ state.step++;
+ try{localStorage.setItem('knot-highschool-sim-v1',JSON.stringify(state));}catch{}
+ if(state.step>=12) finish(); else renderEvent();
+}
+function finish(){
+ $('game-screen').hidden=true; $('result-screen').hidden=false;
+ const s=state.stats, total=s.study+s.experience+s.health+s.friends;
+ let title='自分だけの3年間を歩き切った。',copy='思い通りにいったことも、悩んだこともあった。それでも選び続けた3年間は、あなただけのもの。';
+ if(s.study>=75) title='積み重ねた努力が、自信になった。';
+ else if(s.experience>=75) title='挑戦が、視野を大きく広げた。';
+ else if(s.friends>=75) title='かけがえのない仲間と出会えた。';
+ else if(s.health>=75) title='自分のペースを大切にできた3年間。';
+ $('ending-title').textContent=title;
+ $('ending-copy').textContent=(state.name?state.name+'さんの':'あなたの')+'高校生活が終わった。'+copy+' 受験本番まで進んだ今、これからの道も自分で選んでいこう。';
+ $('result-stats').innerHTML='';
+ [['学力',s.study],['経験',s.experience],['体調',s.health],['人間関係',s.friends]].forEach(([label,val])=>{const d=document.createElement('div');const b=document.createElement('b');b.textContent=val;const span=document.createElement('span');span.textContent=label;d.append(b,span);$('result-stats').append(d);});
+ $('result-reflection').textContent=total>=290?'勉強も経験も、人とのつながりも大切にした。ひとつの正解に縛られず、自分に必要なものを選び取った。': '完璧な3年間でなくていい。うまくいかなかった選択も、次に活かせる経験になる。ここから先も、何度でも自分の道を選び直せる。';
+ $('final-diary').replaceChildren();
+ state.diary.forEach((item,i)=>{const li=document.createElement('li');const b=document.createElement('b');b.textContent=String(i+1).padStart(2,'0')+' / '+item.title;const p=document.createElement('p');p.textContent=item.log;li.append(b,p);$('final-diary').append(li);});
+ try{localStorage.removeItem('knot-highschool-sim-v1');}catch{}
+}
+function start(){
+ const selected=document.querySelector('input[name="school-path"]:checked')?.value||'general';
+ const initial=selected==='tech'?{study:48,experience:48,health:72,friends:35}:selected==='free'?{study:42,experience:48,health:80,friends:48}:{study:50,experience:38,health:72,friends:40};
+ state={name:$('player-name').value.trim(),path:selected,step:0,stats:initial,diary:[]};
+ $('start-screen').hidden=true;$('result-screen').hidden=true;$('game-screen').hidden=false;
+ renderEvent();
+ try{localStorage.setItem('knot-highschool-sim-v1',JSON.stringify(state));}catch{}
+}
+$('start-game').addEventListener('click',start);
+$('restart-game').addEventListener('click',()=>{ $('result-screen').hidden=true;$('start-screen').hidden=false;});
+$('save-exit').addEventListener('click',()=>{try{localStorage.setItem('knot-highschool-sim-v1',JSON.stringify(state));}catch{} $('game-screen').hidden=true;$('start-screen').hidden=false;});
+try{
+ const saved=JSON.parse(localStorage.getItem('knot-highschool-sim-v1')||'null');
+ if(saved&&saved.step>=0&&saved.step<12&&saved.stats&&Array.isArray(saved.diary)){
+  state=saved;$('player-name').value=saved.name||'';
+  $('start-screen').hidden=true;$('game-screen').hidden=false;renderEvent();
+ }
+}catch{}
+</script>
+<style>
+.sim-page{width:min(100%,900px);margin:0 auto;padding:25px 0 55px;color:var(--text)}.back-link{font-size:12px;color:var(--accent)}.sim-hero{padding:38px 0 27px}.eyebrow{font:9px ui-monospace,monospace;letter-spacing:.16em;color:var(--accent);font-weight:850}.sim-hero h1{font-size:clamp(34px,6vw,58px);line-height:1.2;letter-spacing:-.065em;margin:12px 0}.sim-hero h1 span{color:var(--accent)}.sim-hero>p:not(.eyebrow){max-width:650px;color:var(--muted);font-size:13px;line-height:1.9}.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:17px}.hero-tags span{padding:6px 9px;border:1px solid var(--line);border-radius:6px;color:var(--muted);font:8px ui-monospace,monospace;letter-spacing:.1em}.panel{padding:24px;border:1px solid var(--line);border-radius:17px;background:var(--surface)}.panel h2{font-size:23px;margin:6px 0 20px}.field-label{display:block;font-size:11px;font-weight:800;margin:17px 0 8px}.start-panel>input{width:100%;max-width:340px;padding:12px 13px;border:1px solid var(--line);border-radius:9px;background:var(--surface-soft);color:var(--text);font:inherit}.path-options{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.path-options label{cursor:pointer}.path-options input{position:absolute;opacity:0}.path-options label span{display:grid;gap:7px;height:100%;padding:14px;border:1px solid var(--line);border-radius:11px;background:var(--surface-soft)}.path-options input:checked+span{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}.path-options b{font-size:12px}.path-options small{font-size:10px;line-height:1.6;color:var(--muted)}.primary-button,.secondary-button{display:inline-flex;justify-content:center;align-items:center;gap:12px;margin-top:20px;padding:13px 18px;border:0;border-radius:9px;background:var(--accent);color:#071426;font:inherit;font-size:12px;font-weight:900;cursor:pointer;text-decoration:none}.fine-print{font-size:10px;line-height:1.7;color:var(--muted);margin:14px 0 0}.game-top{display:flex;align-items:end;justify-content:space-between;gap:15px;padding:17px 0}.game-top h2{font-size:25px;margin:4px 0}.game-top p:not(.eyebrow){font-size:11px;color:var(--muted);margin:0}.progress-wrap{width:min(180px,35%);font:10px ui-monospace,monospace;color:var(--muted)}.progress-track{height:6px;margin-top:8px;border-radius:8px;background:var(--surface-soft);overflow:hidden}.progress-track i{display:block;height:100%;width:0;background:var(--accent);transition:width .25s}.stats-panel{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:14px;border:1px solid var(--line);border-radius:13px;background:var(--surface)}.stats-panel>div{display:grid;grid-template-columns:1fr auto;gap:5px;align-items:center}.stats-panel span{font-size:10px;color:var(--muted)}.stats-panel strong{font-size:17px;font-variant-numeric:tabular-nums}.stats-panel i{grid-column:1/-1;height:5px;border-radius:5px;background:var(--surface-soft);overflow:hidden}.stats-panel i b{display:block;height:100%;width:45%;background:var(--accent);border-radius:5px;transition:width .2s}.event-card{margin-top:13px;padding:23px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 7%,var(--surface)),var(--surface))}.event-meta{display:flex;justify-content:space-between;font:9px ui-monospace,monospace;letter-spacing:.12em;color:var(--accent)}.event-scene{font-size:12px;color:var(--muted);line-height:1.8;margin:25px 0 5px}.event-card h3{font-size:clamp(22px,4vw,29px);letter-spacing:-.04em;margin:7px 0}.event-description{font-size:13px;line-height:1.9;color:var(--muted);margin:8px 0 19px}.choices{display:grid;gap:9px}.choice-button{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--text);text-align:left;cursor:pointer;font:inherit;transition:border-color .15s,transform .15s}.choice-button:hover{border-color:var(--accent);transform:translateY(-2px)}.choice-button strong{font-size:12px}.choice-button small{font-size:9px;color:var(--muted);white-space:nowrap}.diary-log{margin:17px 0;padding:16px;border:1px solid var(--line);border-radius:12px}.diary-log h3,.timeline-heading{font-size:13px;margin:0 0 9px}.diary-log ol{margin:0;padding-left:20px;color:var(--muted);font-size:10px;line-height:1.9}.quiet-button{border:0;background:transparent;color:var(--muted);font:inherit;font-size:10px;text-decoration:underline;cursor:pointer}.result-panel{margin-top:12px}.result-panel h2{font-size:clamp(25px,5vw,38px);letter-spacing:-.05em;margin:10px 0}.ending-copy{font-size:13px;line-height:2;color:var(--muted)}.result-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:20px 0}.result-stats div{display:grid;gap:4px;padding:13px;border-radius:10px;background:var(--surface-soft)}.result-stats b{font-size:25px}.result-stats span{font-size:10px;color:var(--muted)}.result-message{padding:17px;border-left:3px solid var(--accent);background:var(--surface-soft)}.result-message strong{font-size:12px}.result-message p{font-size:12px;line-height:1.8;color:var(--muted);margin:7px 0 0}.timeline-heading{margin:24px 0 10px}.final-diary{list-style:none;padding:0;margin:0}.final-diary li{padding:11px 0;border-bottom:1px solid var(--line)}.final-diary b{font-size:11px}.final-diary p{font-size:11px;color:var(--muted);margin:5px 0 0}.result-actions{display:flex;gap:10px;flex-wrap:wrap}.secondary-button{background:var(--surface-soft);color:var(--text);border:1px solid var(--line)}[hidden]{display:none!important}@media(max-width:650px){.sim-page{padding:18px 0 40px}.sim-hero{padding:28px 0 20px}.panel{padding:18px}.path-options{grid-template-columns:1fr}.path-options label span{grid-template-columns:1fr}.stats-panel{gap:8px;padding:11px}.stats-panel span{font-size:9px}.stats-panel strong{font-size:15px}.event-card{padding:17px}.choice-button{display:grid;gap:5px}.choice-button small{white-space:normal}.result-stats{grid-template-columns:repeat(2,1fr)}.game-top h2{font-size:21px}}
+</style>
+</StudyLayout>
