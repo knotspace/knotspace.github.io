@@ -45,7 +45,7 @@ const dirs = ['src','public','supabase','database'];
 const patterns = [
   {label:'email', regex:/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i},
   {label:'Japanese phone', regex:/(?:\+81[- ]?)?0\d{1,4}[- ]\d{1,4}[- ]\d{3,4}/},
-  {label:'Japanese postal code', regex:/〒?\d{3}-\d{4}/},
+  {label:'Japanese postal code', regex:/(?:〒|郵便番号[：: ]*)\d{3}-\d{4}/},
   {label:'specific school grade', regex:/(?:中学|高校)[1-3１-３]年生/}
 ];
 function walk(dir) {
