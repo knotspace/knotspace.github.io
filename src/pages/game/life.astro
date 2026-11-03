@@ -1037,7 +1037,8 @@ function renderLifeShell(){
     const i=G.L.stars.indexOf(txt);if(li.classList.contains("star")){if(i<0)G.L.stars.push(txt)}else if(i>=0)G.L.stars.splice(i,1)});
 }
 function renderTop(){const L=G.L,a=G.age;$("#age").innerHTML=`${a}<span>歳</span>`;
-  $("#subl").textContent=`${YEAR0+a}年 · ${L.name} · ${statusText()}`;$("#prog").style.width=Math.min(100,a/L.prefLE*100)+"%"}
+  const phase=a<=35?"あなたが選ぶ期間":"人生の自動進行";const dc=`選択 ${G.manualDecisions||0} · 自動 ${G.autoDecisions||0}`;
+  $("#subl").textContent=`${YEAR0+a}年 · ${L.name} · ${statusText()} · ${phase} · ${dc}`;$("#prog").style.width=Math.min(100,a/L.prefLE*100)+"%"}
 function statusText(){const L=G.L;const parts=[];
   parts.push(L.married?"既婚":L.partner?"恋人あり":L.wasMarried?"独身（離別・死別）":"独身");
   if(L.kids.length)parts.push(`子${L.kids.length}人`);
@@ -1227,7 +1228,7 @@ function makeLife(mode){
 function prepare(minutes,mode,era="now",seed=null){curLi=null;ERA=ERAS[era]||ERAS.now;YEAR0=ERA.y;
   if(seed==null)seed=Math.floor(Math.random()*2147483647);_rs=mulberry32(seed);
   const L=makeLife(mode);const base=minutes*60000/84;
-  G={L,base,mode,era:ERA.key,mult:1,paused:false,auto:false,skip:false,age:0,timer:null,queue:[],waiting:false,focus:null,cur:null,tab:"fam",
+  G={L,base,mode,era:ERA.key,mult:1,paused:false,auto:false,skip:false,manualDecisions:0,autoDecisions:0,age:0,timer:null,queue:[],waiting:false,focus:null,cur:null,tab:"fam",
      peers:[makePeer(),makePeer(),makePeer()],curve:survivalCurve(L.sex,calibrate(L.sex,L.prefLE)),dead:false,lastStats:null,id:Date.now(),still:matchMedia("(prefers-reduced-motion: reduce)").matches,frame:0};
   G.seed=seed;G.y0=YEAR0;_rs=null;
   G.birth=JSON.stringify({...L,used:[...L.used]});G.minutes=minutes;
@@ -1536,7 +1537,7 @@ window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredIns
 
 /* ================= 続きから ================= */
 function saveProgress(){if(!G||G.dead||G.waiting||!$("#log"))return;try{const L=G.L;
-  store.set("knot.life.save",{v:1,t:Date.now(),L:{...L,used:[...L.used]},G:{birth:G.birth,minutes:G.minutes,era:G.era,base:G.base,mode:G.mode,mult:G.mult,auto:G.auto,age:G.age,focus:G.focus,peers:G.peers,id:G.id,seed:G.seed,y0:G.y0,seed0:G.seed0,seedSw:G.seedSw,whatIfAt:G.whatIfAt,prev:G.prev,prevLab:G.prevLab},
+  store.set("knot.life.save",{v:1,t:Date.now(),L:{...L,used:[...L.used]},G:{birth:G.birth,minutes:G.minutes,era:G.era,base:G.base,mode:G.mode,mult:G.mult,auto:G.auto,age:G.age,focus:G.focus,peers:G.peers,id:G.id,seed:G.seed,y0:G.y0,seed0:G.seed0,seedSw:G.seedSw,whatIfAt:G.whatIfAt,prev:G.prev,prevLab:G.prevLab,manualDecisions:G.manualDecisions||0,autoDecisions:G.autoDecisions||0},
     log:$("#log").innerHTML,map:[...document.querySelectorAll("#map i")].map(i=>i.className)})}catch(e){}}
 function clearSave(){try{localStorage.removeItem("knot.life.save")}catch(e){}}
 function renderResume(){const d=store.get("knot.life.save",null),box=$("#resumeBox");if(!box)return;
@@ -1548,7 +1549,7 @@ function renderResume(){const d=store.get("knot.life.save",null),box=$("#resumeB
   $("#resumeGo").onclick=resume;
   $("#resumeDel").onclick=()=>{const b=$("#resumeDel");if(!b.dataset.armed){b.dataset.armed="1";b.textContent="本当に破棄する";return}clearSave();renderResume()}}
 function resume(){const d=store.get("knot.life.save",null);if(!d||!d.L||!d.G)return;const L=d.L;if(!L.friend){const sx=R()<0.5?"M":"F";L.friend={n:pick(SURN)+(sx==="M"?"くん":"さん"),sx,d:deathFrom(0,sx)}}L.used=new Set(L.used||[]);ERA=ERAS[d.G.era]||ERAS.now;YEAR0=d.G.y0||ERA.y;
-  L.pShown=L.partner||null;G={L,birth:d.G.birth,minutes:d.G.minutes,base:d.G.base,mode:d.G.mode,era:ERA.key,mult:d.G.mult||1,paused:true,auto:!!d.G.auto,skip:false,age:d.G.age,timer:null,queue:[],waiting:false,focus:d.G.focus,cur:null,tab:"fam",seed:d.G.seed,seed0:d.G.seed0,seedSw:d.G.seedSw,whatIfAt:d.G.whatIfAt,prev:d.G.prev,prevLab:d.G.prevLab,y0:d.G.y0||YEAR0,
+  L.pShown=L.partner||null;G={L,birth:d.G.birth,minutes:d.G.minutes,base:d.G.base,mode:d.G.mode,era:ERA.key,mult:d.G.mult||1,paused:true,auto:!!d.G.auto,skip:false,age:d.G.age,timer:null,queue:[],waiting:false,focus:d.G.focus,cur:null,tab:"fam",seed:d.G.seed,seed0:d.G.seed0,seedSw:d.G.seedSw,whatIfAt:d.G.whatIfAt,prev:d.G.prev,prevLab:d.G.prevLab,manualDecisions:d.G.manualDecisions||0,autoDecisions:d.G.autoDecisions||0,y0:d.G.y0||YEAR0,
      peers:d.G.peers,curve:survivalCurve(L.sex,calibrate(L.sex,L.prefLE)),dead:false,lastStats:null,id:d.G.id,still:matchMedia("(prefers-reduced-motion: reduce)").matches,frame:0};
   $("#start").hidden=true;renderLifeShell();
   $("#log").innerHTML=d.log||"";curLi=$("#log li");
@@ -1600,9 +1601,9 @@ function startCd(d){clearCd();const total=Math.round(clamp((d.reflect?15000:3000
 document.addEventListener("keydown",e=>{if(!G||!G.cur||$("#sheet").hidden||e.metaKey||e.ctrlKey||e.altKey)return;const tg=e.target&&e.target.tagName;if(tg==="INPUT"||tg==="TEXTAREA")return;
   const n=parseInt(e.key,10);if(n>=1&&n<=9){const b=$("#sheetIn").querySelectorAll(".opts button")[n-1];if(b){e.preventDefault();b.click()}}});
 function isWhatIfPoint(d){const W=G&&G.whatIfAt;return !!(W&&!W.done&&!G.replay&&d&&!d.reflect&&d.title.replace(/[。？]$/,"")===W.title&&G.age===W.age)}
-function choose(i){const d=G.cur;if(!d)return;const wiPoint=isWhatIfPoint(d);if(wiPoint&&d.opts[i]&&d.opts[i].t===G.whatIfAt.orig)return;clearCd();G.cur=null;const o=d.opts[i];if(!d.reflect){try{const pc=choicePct(d.title.replace(/[。？]$/,""),o.t);if(pc!=null)toast(`同じ選択をした人は <b>${pc}%</b>`,"pct")}catch(e){}}reseed(G.age*131+((G.L.decs||[]).length)*17+i+5);(G.L.decs=G.L.decs||[]).push([G.age,d.title.replace(/[。？]$/,""),o.t]);line(`▸ ${d.title.replace(/[。？]$/,"")} · 決断：${o.t}${G.tout?"（迷っているうちに、なりゆきで決まる）":""}`,"ch");if(G.replay&&G.replay.sw){const k=G.L.decs.length-1,sw=G.replay.sw.find(x=>x[0]===k);if(sw)G.seed=sw[1]}
+function choose(i){if(G){if(G._autoChoosing)G.autoDecisions=(G.autoDecisions||0)+1;else G.manualDecisions=(G.manualDecisions||0)+1}const d=G.cur;if(!d)return;const wiPoint=isWhatIfPoint(d);if(wiPoint&&d.opts[i]&&d.opts[i].t===G.whatIfAt.orig)return;clearCd();G.cur=null;const o=d.opts[i];if(!d.reflect){try{const pc=choicePct(d.title.replace(/[。？]$/,""),o.t);if(pc!=null)toast(`同じ選択をした人は <b>${pc}%</b>`,"pct")}catch(e){}}reseed(G.age*131+((G.L.decs||[]).length)*17+i+5);(G.L.decs=G.L.decs||[]).push([G.age,d.title.replace(/[。？]$/,""),o.t]);line(`▸ ${d.title.replace(/[。？]$/,"")} · 決断：${o.t}${G.tout?"（迷っているうちに、なりゆきで決まる）":""}`,"ch");if(G.replay&&G.replay.sw){const k=G.L.decs.length-1,sw=G.replay.sw.find(x=>x[0]===k);if(sw)G.seed=sw[1]}
   if(wiPoint){let h=7;for(const ch of o.t)h=Math.imul(h^ch.charCodeAt(0),16777619);G.seed=((G.seed^h)+Math.imul(G.L.whatIfN||1,2654435761))>>>0;G.seedSw=[...(G.seedSw||[]),[G.L.decs.length-1,G.seed]];G.whatIfAt.done=true;G.whatIfAt.chosen=o.t;G.L.whatIf={age:G.age,title:G.whatIfAt.title,orig:G.whatIfAt.orig,chosen:o.t};line(`ここから「もしも」の人生が始まる。前の人生では「${esc(G.whatIfAt.orig)}」を選んでいた。`,"big")}o.go&&o.go();try{partnerCheck()}catch(e){}renderScene();showNext()}
-function autoPick(){const d=G.cur;reseed(G.age*977+((G.L.decs||[]).length)*13+3);const wp=isWhatIfPoint(d);const o=weighted(d.opts,d.opts.map(o=>wp&&o.t===G.whatIfAt.orig?0:Math.max(0.05,o.w??1)));mark(G.age,"ch");choose(d.opts.indexOf(o))}
+function autoPick(){const d=G.cur;reseed(G.age*977+((G.L.decs||[]).length)*13+3);const wp=isWhatIfPoint(d);const o=weighted(d.opts,d.opts.map(o=>wp&&o.t===G.whatIfAt.orig?0:Math.max(0.05,o.w??1)));mark(G.age,"ch");G._autoChoosing=true;try{choose(d.opts.indexOf(o))}finally{G._autoChoosing=false}}
 
 function partnerCheck(){if(!G||!G.L)return;const L=G.L,tl=G.tl||[];G.tl=[];if(!L.partner){L.pShown=null;return}
   if(L.partner===L.pShown)return;(L.pHist=L.pHist||[]).includes(L.partner)||L.pHist.push(L.partner);if(tl.some(x=>x.includes(L.partner))){L.pShown=L.partner;return}
@@ -1610,6 +1611,7 @@ function partnerCheck(){if(!G||!G.L)return;const L=G.L,tl=G.tl||[];G.tl=[];if(!L
 function tick(){
   if(!G||G.dead||G.paused||G.waiting)return;
   const L=G.L;G.age++;const a=G.age;G.lines=0;G.bigN=0;reseed(a*31+7);if(L.income>0)L.peakInc=Math.max(L.peakInc||0,L.income);L.peakSav=Math.max(L.peakSav||0,(L.savings||0)+(L.invest||0));if(a>=75&&(L.job||L.silver))L.used.add("worked75");
+  if(a===36&&!G.auto){G.auto=true;const autoBtn=$("#bAuto");if(autoBtn)autoBtn.setAttribute("aria-pressed","true");line("36歳になりました。ここからは、これまでの選択をもとに人生が自動で進んでいきます。","big")}
   newYear(a);
   yearly(a);
   events(a);
@@ -3074,7 +3076,7 @@ function finish(a){const c=document.querySelector(".ctrl");if(c)c.hidden=true;
     <span class="label">${L.name} · ${pf(L.pref)}生まれ · ${L.cause}</span>
     <p class="big">${a}年の人生でした。</p>${L.cause==="自死"?`<div class="helpnote"><p>日本では年に約2万人が自ら命を絶っていて、10〜39歳では死因の1位です。この人生はシミュレーションですが、もしいま、あなた自身がつらい気持ちを抱えていたら、ひとりで抱えずに話してみてください。</p><p><b>よりそいホットライン</b> <a href="https://www.mhlw.go.jp/mamorouyokokoro/" target="_blank" rel="noopener">公式窓口を確認</a>（無料・24時間）<br><b>いのちの電話</b> <a href="https://www.mhlw.go.jp/mamorouyokokoro/" target="_blank" rel="noopener">公式窓口を確認</a>（無料・毎日16〜21時）<br><b>こころの健康相談統一ダイヤル</b> <a href="https://www.mhlw.go.jp/mamorouyokokoro/" target="_blank" rel="noopener">公式窓口を確認</a></p></div>`:""}${L.rare&&L.rare.length?`<p class="newbadge">めずらしい人生：${L.rare.map(r=>`${r[0]}（${r[1]}）`).join("、")}</p>`:""}
     <p>${story}${pf(L.pref)}の${L.sex==="M"?"男性":"女性"}の平均寿命より${Math.abs(diff)}年${diff>=0?"長く":"短く"}生きました。${a>=22?`最後の貯金は${Math.round(L.savings+L.invest).toLocaleString()}万円。`:""}</p>
-    <p class="note">最期の状態：健康 ${Math.round(v.health)} · 幸福 ${Math.round(v.happy)} · 知識 ${Math.round(v.know)} · 人間関係 ${Math.round(v.rel)}</p>
+    <p class="note">最期の状態：健康 ${Math.round(v.health)} · 幸福 ${Math.round(v.happy)} · 知識 ${Math.round(v.know)} · 人間関係 ${Math.round(v.rel)}</p><p class="note">人生の分岐：あなたが選んだ ${G.manualDecisions||0} 回 · 自動で決まった ${G.autoDecisions||0} 回</p>
     <p class="note">同じ日に生まれた3人：${peersTxt}。</p>
     ${(()=>{if(a<1||/戦死|抑留|空襲|原子爆弾|沖縄戦/.test(L.cause))return"";const row=CAUSE_T.find(r=>a<r[0]).slice(1);const w=row.map((v,i)=>[CAUSE_N[i],v*(L.sex==="F"&&(i===6||i===7)?0.5:1)]).filter(x=>x[0]!=="その他の病気").sort((x,y)=>y[1]-x[1]).slice(0,3);return `<p class="note">参考：${YEAR0+a<2000?"いまの":""}${a}歳前後の日本の${L.sex==="M"?"男性":"女性"}に多い死因は、${w.map(x=>x[0]).join("、")}（人口動態統計）。</p>`})()}
     <div id="crowdCmp">${crowdText(L,a)}</div>
