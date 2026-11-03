@@ -41,7 +41,7 @@ const articleText = (post.body ?? '').replace(/\!\[[^\]]*\]\([^)]*\)/g, ' ').rep
 const readingMinutes = Math.max(1, Math.ceil(articleText.replace(/\s/g, '').length / 500));
 const allPosts = (await getCollection('blog'))
   .filter((item) => item.id !== post.id && (!item.data.publishAt || item.data.publishAt <= new Date()))
-  .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf() || a.id.localeCompare(b.id));
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf() || b.id.localeCompare(a.id));
 const relatedPosts = allPosts.filter((item) => item.data.category === post.data.category).slice(0, 3);
 const recommendations = relatedPosts.length ? relatedPosts : allPosts.slice(0, 3);
 const articleUrl = new URL(`/blog/${post.id}/`, Astro.site ?? Astro.url).href;
@@ -213,54 +213,101 @@ const breadcrumbJsonLd = {
 <script is:inline>
 (() => {
   const progress = document.getElementById('reading-progress');
-  const button = document.getElementById('bookmark-button');
+  const bookmarkButton = document.getElementById('bookmark-button');
   const shareButton = document.getElementById('share-button');
   const likeButton = document.getElementById('like-button');
   const article = document.querySelector('[data-post-slug]');
-  if (progress) {
-    const update = () => { const max = document.documentElement.scrollHeight - window.innerHeight; progress.style.width = `${max > 0 ? Math.min(100, window.scrollY / max * 100) : 0}%`; };
-    window.addEventListener('scroll', update, { passive: true }); window.addEventListener('resize', update); update();
-  }
-  const copyArticleUrl = async (target) => {
+  const safeRead = (storage, key, fallback = null) => {
     try {
-      await navigator.clipboard.writeText(location.href);
-      target.textContent = '✓ コピーしました';
-      window.setTimeout(() => { target.textContent = target.dataset.shareCopy !== undefined ? 'URLをコピー' : '↗ リンクをコピー'; }, 1800);
+      const value = storage.getItem(key);
+      return value === null ? fallback : value;
     } catch {
-      target.textContent = 'コピーできませんでした';
+      return fallback;
     }
   };
+  const safeWrite = (storage, key, value) => {
+    try {
+      storage.setItem(key, value);
+      return true;
+    } catch {
+      return false;
+    }
+  };
+
+  if (progress) {
+    const update = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.width = (max > 0 ? Math.min(100, window.scrollY / max * 100) : 0) + '%';
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  }
+
+  const copyArticleUrl = async (target) => {
+    let copied = false;
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(location.href);
+        copied = true;
+      } else {
+        const field = document.createElement('textarea');
+        field.value = location.href;
+        field.setAttribute('readonly', '');
+        field.style.position = 'fixed';
+        field.style.opacity = '0';
+        document.body.appendChild(field);
+        field.select();
+        copied = document.execCommand('copy');
+        field.remove();
+      }
+    } catch {
+      copied = false;
+    }
+    target.textContent = copied ? '✓ コピーしました' : 'コピーできませんでした';
+    window.setTimeout(() => {
+      target.textContent = target.dataset.shareCopy !== undefined ? 'URLをコピー' : '↗ リンクをコピー';
+    }, 1800);
+  };
+
   if (shareButton) shareButton.addEventListener('click', () => copyArticleUrl(shareButton));
   document.querySelectorAll('[data-share-copy]').forEach((target) => {
     target.addEventListener('click', () => copyArticleUrl(target));
   });
+
   if (likeButton && article) {
     const SUPABASE_URL = 'https://rtzorqaigpeechqywjie.supabase.co';
     const SUPABASE_KEY = 'sb_publishable_-yhc0QqTEEZTBWi9jTcFRA_-AVi-iP6';
-    const slug = article.dataset.postSlug;
-    const likedKey = `knot-liked:${slug}`;
+    const slug = article.dataset.postSlug || '';
+    const likedKey = 'knot-liked:' + slug;
     const visitorKey = 'knot-visitor-id';
     const label = document.getElementById('like-label');
     const likeCount = document.getElementById('like-count');
     const viewCount = document.getElementById('view-count');
+    let likedInThisPage = false;
+    let visitorIdInMemory = '';
 
     const getVisitorId = () => {
-      let id = localStorage.getItem(visitorKey);
+      let id = safeRead(localStorage, visitorKey, '');
       if (!id) {
-        id = crypto.randomUUID();
-        localStorage.setItem(visitorKey, id);
+        try {
+          id = crypto.randomUUID();
+        } catch {
+          id = 'visitor-' + Math.random().toString(36).slice(2) + Date.now().toString(36);
+        }
+        if (!safeWrite(localStorage, visitorKey, id)) visitorIdInMemory = id;
       }
-      return id;
+      return id || visitorIdInMemory;
     };
 
     const headers = {
       apikey: SUPABASE_KEY,
-      Authorization: `Bearer ${SUPABASE_KEY}`,
+      Authorization: 'Bearer ' + SUPABASE_KEY,
       'Content-Type': 'application/json',
     };
 
     const paintLike = () => {
-      const liked = localStorage.getItem(likedKey) === '1';
+      const liked = likedInThisPage || safeRead(localStorage, likedKey, '') === '1';
       likeButton.setAttribute('aria-pressed', String(liked));
       likeButton.classList.toggle('liked', liked);
       likeButton.disabled = liked;
@@ -271,14 +318,14 @@ const breadcrumbJsonLd = {
     const loadStats = async () => {
       try {
         const response = await fetch(
-          `${SUPABASE_URL}/rest/v1/article_stats?slug=eq.${encodeURIComponent(slug)}&select=views,likes`,
+          SUPABASE_URL + '/rest/v1/article_stats?slug=eq.' + encodeURIComponent(slug) + '&select=views,likes',
           { headers }
         );
         if (!response.ok) throw new Error('stats request failed');
         const rows = await response.json();
         const stats = rows[0] || { views: 0, likes: 0 };
-        if (likeCount) likeCount.textContent = `${Number(stats.likes).toLocaleString('ja-JP')} いいね`;
-        if (viewCount) viewCount.textContent = `${Number(stats.views).toLocaleString('ja-JP')} 回`;
+        if (likeCount) likeCount.textContent = Number(stats.likes || 0).toLocaleString('ja-JP') + ' いいね';
+        if (viewCount) viewCount.textContent = Number(stats.views || 0).toLocaleString('ja-JP') + ' 回';
       } catch {
         if (likeCount) likeCount.textContent = 'いいね数を取得できません';
         if (viewCount) viewCount.textContent = '閲覧数を取得できません';
@@ -286,17 +333,20 @@ const breadcrumbJsonLd = {
     };
 
     const countView = async () => {
-      const viewedKey = `knot-viewed:${slug}:${new Date().toISOString().slice(0, 10)}`;
-      if (sessionStorage.getItem(viewedKey)) return;
-      sessionStorage.setItem(viewedKey, '1');
+      const today = new Date().toISOString().slice(0, 10);
+      const viewedKey = 'knot-viewed:' + slug + ':' + today;
+      if (safeRead(sessionStorage, viewedKey, '') === '1') return;
       try {
-        const response = await fetch(`${SUPABASE_URL}/rest/v1/rpc/increment_article_view`, {
+        const response = await fetch(SUPABASE_URL + '/rest/v1/rpc/increment_article_view', {
           method: 'POST',
           headers,
           body: JSON.stringify({ article_slug: slug }),
         });
         if (!response.ok) throw new Error('view count failed');
-      } catch {}
+        safeWrite(sessionStorage, viewedKey, '1');
+      } catch {
+        // Do not mark a failed request as counted; a later visit can retry.
+      }
       await loadStats();
     };
 
@@ -305,10 +355,11 @@ const breadcrumbJsonLd = {
     countView();
 
     likeButton.addEventListener('click', async () => {
-      if (localStorage.getItem(likedKey) === '1') return;
+      if (likedInThisPage || safeRead(localStorage, likedKey, '') === '1') return;
       likeButton.disabled = true;
+      if (label) label.textContent = '送信中…';
       try {
-        const response = await fetch(`${SUPABASE_URL}/rest/v1/rpc/like_article`, {
+        const response = await fetch(SUPABASE_URL + '/rest/v1/rpc/like_article', {
           method: 'POST',
           headers,
           body: JSON.stringify({
@@ -317,7 +368,8 @@ const breadcrumbJsonLd = {
           }),
         });
         if (!response.ok) throw new Error('like request failed');
-        localStorage.setItem(likedKey, '1');
+        likedInThisPage = true;
+        safeWrite(localStorage, likedKey, '1');
         paintLike();
         await loadStats();
       } catch {
@@ -326,11 +378,34 @@ const breadcrumbJsonLd = {
       }
     });
   }
-  if (button && article) {
-    const key = 'knot-bookmarks'; const slug = article.dataset.postSlug;
-    const read = () => { try { return JSON.parse(localStorage.getItem(key) || '[]'); } catch { return []; } };
-    const paint = () => { const saved = read().includes(slug); button.textContent = saved ? '★ 保存済み' : '☆ あとで読む'; button.setAttribute('aria-pressed', String(saved)); };
-    paint(); button.addEventListener('click', () => { const items = read(); const next = items.includes(slug) ? items.filter(x => x !== slug) : [...items, slug]; localStorage.setItem(key, JSON.stringify(next)); paint(); });
+
+  if (bookmarkButton && article) {
+    const key = 'knot-bookmarks';
+    const slug = article.dataset.postSlug || '';
+    const read = () => {
+      try {
+        const value = JSON.parse(safeRead(localStorage, key, '[]'));
+        return Array.isArray(value) ? value.filter(item => typeof item === 'string') : [];
+      } catch {
+        return [];
+      }
+    };
+    const paint = () => {
+      const saved = read().includes(slug);
+      bookmarkButton.textContent = saved ? '★ 保存済み' : '☆ あとで読む';
+      bookmarkButton.setAttribute('aria-pressed', String(saved));
+    };
+    paint();
+    bookmarkButton.addEventListener('click', () => {
+      const items = read();
+      const next = items.includes(slug) ? items.filter(item => item !== slug) : [...items, slug];
+      if (!safeWrite(localStorage, key, JSON.stringify(next))) {
+        bookmarkButton.textContent = '保存できませんでした';
+        window.setTimeout(paint, 1800);
+        return;
+      }
+      paint();
+    });
   }
 })();
 </script>
