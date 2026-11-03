@@ -30,6 +30,8 @@ jobs:
             echo "command=review" >> "$GITHUB_OUTPUT"
           elif [[ "$COMMENT_BODY" == "@gemini-cli /approve"* ]]; then
             echo "command=execute" >> "$GITHUB_OUTPUT"
+          elif [[ "$COMMENT_BODY" == "@gemini-cli /review"* ]]; then
+            echo "command=review" >> "$GITHUB_OUTPUT"
           else
             echo "command=plan" >> "$GITHUB_OUTPUT"
           fi
