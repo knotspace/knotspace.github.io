@@ -127,7 +127,7 @@ function togglePreview(){
       const value=esc(b.text||"").replace(/\n/g,"<br>");
       if(b.type==="heading")return '<h2 style="font-size:24px;margin:28px 0 12px">'+value+'</h2>';
       if(b.type==="quote")return '<blockquote style="border-left:4px solid #9aafa2;padding:8px 16px;color:#59645c">'+value+'</blockquote>';
-      if(b.type==="list")return '<ul>'+String(b.text||"").split("\\n").map(x=>'<li>'+esc(x)+'</li>').join("")+'</ul>';
+      if(b.type==="list")return '<ul>'+String(b.text||"").split("\n").map(x=>'<li>'+esc(x)+'</li>').join("")+'</ul>';
       if(b.type==="image")return '<figure><img src="'+esc(b.text||"")+'" alt="" style="max-width:100%;height:auto"><figcaption class="muted">画像</figcaption></figure>';
       if(b.type==="code")return '<pre style="background:#f2f2ef;padding:14px;overflow:auto"><code>'+value+'</code></pre>';
       if(b.type==="divider")return '<hr style="border:0;border-top:1px solid #ddd;margin:28px 0">';
