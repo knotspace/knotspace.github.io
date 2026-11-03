@@ -40,12 +40,11 @@ const fields = [
       <a class="menu-card primary-card" href="./foundation/"><span class="menu-icon">✎</span><small>FOUNDATION</small><h3>基礎演習</h3><p>{foundation.length.toLocaleString('ja-JP')}問から、分野を選んでテンポよく解こう。</p><b>演習を始める <i>→</i></b></a>
       <a class="menu-card" href="./kosen/"><span class="menu-icon">⌁</span><small>KO SEN EXAM</small><h3>高専対策</h3><p>{kosen.length.toLocaleString('ja-JP')}問の思考力問題で、入試に向けて鍛える。</p><b>挑戦する <i>→</i></b></a>
       <a class="menu-card" href="./mock/"><span class="menu-icon">▤</span><small>MOCK EXAM</small><h3>過去問模試</h3><p>公式過去問を使って、本番形式で実力を試そう。</p><b>模試を受ける <i>→</i></b></a>
-      <a class="menu-card" href="./summary/"><span class="menu-icon">▦</span><small>QUICK REVIEW</small><h3>要点まとめ</h3><p>理科・社会の7分野を、図や資料と一緒に整理。</p><b>要点を確認する <i>→</i></b></a>
     </div>
   </section>
 
   <section class="section-block">
-    <div class="section-heading"><div><p class="eyebrow">SUBJECT LIBRARY</p><h2>分野から学ぶ</h2></div><a href="./summary/">すべて見る →</a></div>
+    <div class="section-heading"><div><p class="eyebrow">SUBJECT LIBRARY</p><h2>分野別要点まとめ</h2></div><a href="./summary/">7分野をすべて見る →</a></div>
     <div class="subject-group"><div class="group-title"><span>SCIENCE</span><h3>理科</h3></div><div class="field-grid">{fields.filter(f=>f.group==='science').map(f=><a class="field-card" href={`./summary/${f.href}/`}><span class="field-icon">{f.icon}</span><span class="field-meta">{f.en}</span><strong>{f.name}</strong><small>{f.desc}</small><b>学習する ↗</b></a>)}</div></div>
     <div class="subject-group"><div class="group-title"><span>SOCIAL STUDIES</span><h3>社会</h3></div><div class="field-grid social-grid">{fields.filter(f=>f.group==='social').map(f=><a class="field-card" href={`./summary/${f.href}/`}><span class="field-icon">{f.icon}</span><span class="field-meta">{f.en}</span><strong>{f.name}</strong><small>{f.desc}</small><b>学習する ↗</b></a>)}</div></div>
   </section>
