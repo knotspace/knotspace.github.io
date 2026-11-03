@@ -16,7 +16,7 @@ const websiteJsonLd = { '@context': 'https://schema.org', '@type': 'WebSite', na
 <meta name="robots" content={noindex ? "noindex,follow" : "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"} />
 <meta name="googlebot" content={noindex ? "noindex,follow" : "index,follow,max-image-preview:large"} />
 <meta name="author" content="KNOT Study" /><meta name="color-scheme" content="dark light" /><meta name="referrer" content="strict-origin-when-cross-origin" /><meta name="site-base" content={BASE} />
-<link rel="canonical" href={canonicalURL} /><link rel="preconnect" href="https://images.unsplash.com" crossorigin /><link rel="manifest" href={`${BASE}study.webmanifest`} /><link rel="icon" type="image/svg+xml" href={`${BASE}study-icon.svg`} sizes="any" /><link rel="shortcut icon" href={`${BASE}study-icon.svg`} type="image/svg+xml" /><link rel="apple-touch-icon" href={`${BASE}study-icon.svg`} />
+<link rel="canonical" href={canonicalURL} /><link rel="preconnect" href="https://images.unsplash.com" crossorigin /><link rel="manifest" href={`${BASE}study/manifest.webmanifest`} /><link rel="icon" type="image/svg+xml" href={`${BASE}study/icon.svg`} sizes="any" /><link rel="shortcut icon" href={`${BASE}study/icon.svg`} type="image/svg+xml" /><link rel="apple-touch-icon" href={`${BASE}study/icon.svg`} />
 <meta property="og:type" content="website" /><meta property="og:locale" content="ja_JP" /><meta property="og:site_name" content="KNOT Study" /><meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:url" content={canonicalURL} /><meta property="og:image" content={pageImage} /><meta property="og:image:alt" content={`${title} | KNOT Study`} /><meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={title} /><meta name="twitter:description" content={description} /><meta name="twitter:image" content={pageImage} /><meta name="twitter:image:alt" content={`${title} | KNOT Study`} /><script type="application/ld+json" set:html={JSON.stringify(websiteJsonLd)} /><title>{title}</title>
 <script is:inline>try { const savedTheme = localStorage.getItem('knot-study-theme') || localStorage.getItem('knot-theme'); if (savedTheme === 'light' || savedTheme === 'dark') document.documentElement.dataset.theme = savedTheme; } catch {}</script>
 </head>
@@ -45,7 +45,46 @@ const websiteJsonLd = { '@context': 'https://schema.org', '@type': 'WebSite', na
 (() => { const button=document.getElementById('theme-toggle'),icon=document.getElementById('theme-icon'),root=document.documentElement;if(!button||!icon)return;const update=()=>{const dark=root.dataset.theme!=='light';icon.textContent=dark?'☀':'☾';button.setAttribute('aria-label',dark?'ライトモードに切り替える':'ダークモードに切り替える');document.querySelector('meta[name="theme-color"]')?.setAttribute('content',dark?'#0b1220':'#f7f8fa');};update();button.addEventListener('click',()=>{const next=root.dataset.theme==='dark'?'light':'dark';root.dataset.theme=next;try{localStorage.setItem('knot-study-theme',next);localStorage.setItem('knot-theme',next);}catch{}update();});})();
 </script>
 <script is:inline>
-(() => { if(!('serviceWorker'in navigator))return;window.addEventListener('load',()=>{const base=document.querySelector('meta[name="site-base"]')?.content||'/';navigator.serviceWorker.register(base+'study-sw.js',{scope:base+'study/'}).catch(error=>console.warn('KNOT Study offline support unavailable:',error));});const prompt=document.getElementById('pwa-install-prompt'),installButton=document.getElementById('pwa-install-button'),closeButton=document.getElementById('pwa-install-close'),description=document.getElementById('pwa-install-description');if(!prompt||!installButton||!closeButton)return;let installEvent;const dismissed=sessionStorage.getItem('knot-study-pwa-dismissed');if(window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true)return;window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();installEvent=event;if(!dismissed)prompt.hidden=false;});window.addEventListener('appinstalled',()=>{prompt.hidden=true;installEvent=null;});if(/iphone|ipad|ipod/i.test(navigator.userAgent)&&!dismissed){description.textContent='Safariの共有ボタンから「ホーム画面に追加」を選んでね。';installButton.hidden=true;prompt.hidden=false;}installButton.addEventListener('click',async()=>{if(!installEvent)return;installEvent.prompt();await installEvent.userChoice;installEvent=null;prompt.hidden=true;});closeButton.addEventListener('click',()=>{prompt.hidden=true;sessionStorage.setItem('knot-study-pwa-dismissed','1');});})();
+(() => {
+  if (!('serviceWorker' in navigator)) return;
+  window.addEventListener('load', () => {
+    const base = document.querySelector('meta[name="site-base"]')?.content || '/';
+    navigator.serviceWorker.register(base + 'study-sw.js', { scope: base + 'study/', updateViaCache: 'none' })
+      .then((registration) => registration.update())
+      .catch((error) => console.warn('KNOT Study offline support unavailable:', error));
+  });
+  const prompt = document.getElementById('pwa-install-prompt');
+  const installButton = document.getElementById('pwa-install-button');
+  const closeButton = document.getElementById('pwa-install-close');
+  const description = document.getElementById('pwa-install-description');
+  if (!prompt || !installButton || !closeButton) return;
+  let installEvent;
+  let dismissed = false;
+  try { dismissed = sessionStorage.getItem('knot-study-pwa-dismissed') === '1'; } catch {}
+  if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) return;
+  window.addEventListener('beforeinstallprompt', (event) => {
+    event.preventDefault();
+    installEvent = event;
+    if (!dismissed) prompt.hidden = false;
+  });
+  window.addEventListener('appinstalled', () => { prompt.hidden = true; installEvent = null; });
+  if (/iphone|ipad|ipod/i.test(navigator.userAgent) && !dismissed) {
+    description.textContent = 'Safariの共有ボタンから「ホーム画面に追加」を選んでね。';
+    installButton.hidden = true;
+    prompt.hidden = false;
+  }
+  installButton.addEventListener('click', async () => {
+    if (!installEvent) return;
+    installEvent.prompt();
+    await installEvent.userChoice;
+    installEvent = null;
+    prompt.hidden = true;
+  });
+  closeButton.addEventListener('click', () => {
+    prompt.hidden = true;
+    try { sessionStorage.setItem('knot-study-pwa-dismissed', '1'); } catch {}
+  });
+})();
 </script>
 <style is="global">
 html.quiz-active .study-sidebar,html.quiz-active .study-appbar,html.quiz-active .study-bottom-nav,
