@@ -54,7 +54,6 @@ const BASE = import.meta.env.BASE_URL;
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
     <link rel="dns-prefetch" href="https://giscus.app" />
     <link rel="dns-prefetch" href="https://rtzorqaigpeechqywjie.supabase.co" />
-    <link rel="manifest" href={`${BASE}manifest.webmanifest`} />
 
     <link rel="alternate" type="application/rss+xml" title="KNOT RSS" href={`${BASE}rss.xml`} />
 
@@ -137,11 +136,6 @@ const BASE = import.meta.env.BASE_URL;
         <slot />
       </main>
 
-      <aside id="pwa-install-prompt" class="pwa-prompt" hidden aria-live="polite">
-        <div><strong>KNOTをアプリとして使う</strong><p id="pwa-install-description">ホーム画面に追加すると、次回からすぐに開けるよ。</p></div>
-        <button id="pwa-install-button" type="button">インストール</button>
-        <button id="pwa-install-close" type="button" aria-label="閉じる">×</button>
-      </aside>
       <footer class="site-footer">
         <a class="footer-brand" href={BASE}>
           KNOT<span class="brand-dot">.</span>
@@ -190,46 +184,19 @@ const BASE = import.meta.env.BASE_URL;
       })();
     </script>
     <script is:inline>
-      (() => {
-        if (!('serviceWorker' in navigator)) return;
-        window.addEventListener('load', () => {
-          const base = document.querySelector('meta[name="site-base"]')?.content || '/';
-          navigator.serviceWorker.register(base + 'sw.js').catch((error) => console.warn('KNOT offline support unavailable:', error));
+      // KNOT本体はPWA化しない。旧ルートSWだけを解除し、Study/Adminの専用SWは残す。
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", async () => {
+          try {
+            const registrations = await navigator.serviceWorker.getRegistrations();
+            const rootScope = new URL(document.querySelector('meta[name="site-base"]')?.content || "/", location.origin).href;
+            await Promise.all(registrations.filter((registration) => registration.scope === rootScope).map((registration) => registration.unregister()));
+            const keys = await caches.keys();
+            await Promise.all(keys.filter((key) => key.startsWith("knot-shell-")).map((key) => caches.delete(key)));
+          } catch (error) { console.warn("旧KNOT PWAの解除に失敗しました:", error); }
         });
-        const prompt = document.getElementById('pwa-install-prompt');
-        const installButton = document.getElementById('pwa-install-button');
-        const closeButton = document.getElementById('pwa-install-close');
-        const description = document.getElementById('pwa-install-description');
-        if (!prompt || !installButton || !closeButton) return;
-        let installEvent;
-        const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
-        if (isStandalone) return;
-        const dismissKey = 'knot-pwa-dismissed';
-        const dismissed = sessionStorage.getItem(dismissKey);
-        window.addEventListener('beforeinstallprompt', (event) => {
-          event.preventDefault();
-          installEvent = event;
-          if (!dismissed) prompt.hidden = false;
-        });
-        window.addEventListener('appinstalled', () => { prompt.hidden = true; installEvent = null; });
-        if (/iphone|ipad|ipod/i.test(navigator.userAgent) && !dismissed) {
-          description.textContent = 'Safariの共有ボタンから「ホーム画面に追加」を選んでね。';
-          installButton.hidden = true;
-          prompt.hidden = false;
-        }
-        installButton.addEventListener('click', async () => {
-          if (!installEvent) return;
-          installEvent.prompt();
-          await installEvent.userChoice;
-          installEvent = null;
-          prompt.hidden = true;
-        });
-        closeButton.addEventListener('click', () => {
-          prompt.hidden = true;
-          sessionStorage.setItem(dismissKey, '1');
-        });
-      })();
-    </script><script is:inline id="knot-search-shortcut">
+      }
+    </script>ipt><script is:inline id="knot-search-shortcut">
       document.addEventListener('keydown', (event) => {
         if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
           event.preventDefault();
