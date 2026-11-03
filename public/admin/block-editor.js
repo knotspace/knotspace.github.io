@@ -1,0 +1,45 @@
+(() => {
+"use strict";
+const CMS=window.CMS,h=window.h,createClass=window.createClass;
+if(!CMS||!CMS.registerWidget||typeof h!=="function"||typeof createClass!=="function"){console.warn("KNOT block editor could not initialize.");return;}
+const TYPES={
+paragraph:{label:"段落",make:()=>({type:"paragraph",text:""})},
+heading:{label:"見出し",make:()=>({type:"heading",level:2,text:""})},
+image:{label:"画像",make:()=>({type:"image",src:"",alt:"",caption:""})},
+quote:{label:"引用",make:()=>({type:"quote",text:"",attribution:""})},
+callout:{label:"ポイント枠",make:()=>({type:"callout",title:"ポイント",text:"",style:"note"})},
+list:{label:"リスト",make:()=>({type:"list",items:"",ordered:false})},
+button:{label:"ボタン",make:()=>({type:"button",label:"詳しく見る",url:""})},
+divider:{label:"区切り線",make:()=>({type:"divider"})}
+};
+const values=v=>{if(v&&typeof v.toJS==="function")v=v.toJS();return Array.isArray(v)?v.map(x=>x&&typeof x.toJS==="function"?x.toJS():x).filter(Boolean):[];};
+const field=(label,value,change,multi)=>h("label",{className:"knot-block-field"},h("span",{},label),multi?h("textarea",{value:value||"",rows:4,placeholder:"ここに入力…",onChange:e=>change(e.target.value)}):h("input",{type:"text",value:value||"",placeholder:"ここに入力…",onChange:e=>change(e.target.value)}));
+const Control=createClass({
+getInitialState(){return{newType:"paragraph"};},
+change(i,patch){const a=values(this.props.value).map(x=>Object.assign({},x));a[i]=Object.assign({},a[i],patch);this.props.onChange(a);},
+add(){const a=values(this.props.value).slice();a.push(TYPES[this.state.newType].make());this.props.onChange(a);},
+move(i,d){const a=values(this.props.value).slice(),j=i+d;if(j<0||j>=a.length)return;const x=a.splice(i,1)[0];a.splice(j,0,x);this.props.onChange(a);},
+remove(i){const a=values(this.props.value).slice();a.splice(i,1);this.props.onChange(a);},
+duplicate(i){const a=values(this.props.value).slice();a.splice(i+1,0,Object.assign({},a[i]));this.props.onChange(a);},
+fields(b,i){const set=p=>this.change(i,p);switch(b.type){
+case"heading":return h("div",{className:"knot-block-fields"},field("見出し",b.text,v=>set({text:v})),h("label",{className:"knot-block-field"},h("span",{},"見出しレベル"),h("select",{value:String(b.level||2),onChange:e=>set({level:Number(e.target.value)})},h("option",{value:"2"},"H2"),h("option",{value:"3"},"H3"))));
+case"image":return h("div",{className:"knot-block-fields"},field("画像URL（/uploads/...）",b.src,v=>set({src:v})),field("代替テキスト",b.alt,v=>set({alt:v})),field("キャプション",b.caption,v=>set({caption:v})));
+case"quote":return h("div",{className:"knot-block-fields"},field("引用文",b.text,v=>set({text:v}),true),field("出典・人物名",b.attribution,v=>set({attribution:v})));
+case"callout":return h("div",{className:"knot-block-fields"},field("見出し",b.title,v=>set({title:v})),field("内容",b.text,v=>set({text:v}),true),h("label",{className:"knot-block-field"},h("span",{},"デザイン"),h("select",{value:b.style||"note",onChange:e=>set({style:e.target.value})},[["point","ポイント"],["note","補足"],["warning","注意"],["summary","まとめ"]].map(x=>h("option",{value:x[0],key:x[0]},x[1])))));
+case"list":return h("div",{className:"knot-block-fields"},field("項目（1行に1つ）",b.items,v=>set({items:v}),true),h("label",{className:"knot-block-check"},h("input",{type:"checkbox",checked:!!b.ordered,onChange:e=>set({ordered:e.target.checked})}),"番号付きリスト"));
+case"button":return h("div",{className:"knot-block-fields"},field("表示文字",b.label,v=>set({label:v})),field("リンク先URL",b.url,v=>set({url:v})));
+case"divider":return h("p",{className:"knot-block-help"},"記事内に区切り線を表示します。");
+default:return h("div",{className:"knot-block-fields"},field("文章",b.text,v=>set({text:v}),true));
+}},
+render(){const blocks=values(this.props.value);return h("section",{className:"knot-block-editor"},
+h("div",{className:"knot-block-editor-head"},h("div",{},h("strong",{},"本文ブロック"),h("small",{},"クリックして編集・上下移動・複製・削除ができます")),h("span",{className:"knot-block-count"},blocks.length+" ブロック")),
+blocks.length?blocks.map((raw,i)=>{const b=Object.assign({type:"paragraph"},raw),type=TYPES[b.type]?b.type:"paragraph";return h("article",{className:"knot-block-card",key:i},
+h("div",{className:"knot-block-card-head"},h("span",{className:"knot-block-type"},TYPES[type].label),h("div",{className:"knot-block-actions"},
+h("button",{type:"button",disabled:i===0,title:"上へ",onClick:()=>this.move(i,-1)},"↑"),
+h("button",{type:"button",disabled:i===blocks.length-1,title:"下へ",onClick:()=>this.move(i,1)},"↓"),
+h("button",{type:"button",onClick:()=>this.duplicate(i)},"複製"),
+h("button",{type:"button",className:"is-danger",onClick:()=>this.remove(i)},"削除"))),this.fields(Object.assign({},b,{type}),i));}):h("div",{className:"knot-block-empty"},"まだブロックがありません。下のボタンから本文を追加できます。"),
+h("div",{className:"knot-block-add"},h("select",{value:this.state.newType,onChange:e=>this.setState({newType:e.target.value})},Object.keys(TYPES).map(t=>h("option",{value:t,key:t},TYPES[t].label))),h("button",{type:"button",onClick:this.add},"＋ ブロックを追加")));}
+});
+CMS.registerWidget("knot-block-editor",Control);
+})();
