@@ -1,0 +1,41 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout studyMode title="大学生活を想像する｜KNOT Study" description="早稲田大学・東京大学・京都大学。それぞれの大学で過ごす日々を想像するKNOT Studyの特集。">
+<main class="university-page">
+  <a class="back" href="../">← Study に戻る</a>
+  <header class="hero">
+    <p class="eyebrow">KNOT STUDY / CAMPUS FEATURE</p>
+    <h1>もし、あなたが<br/><span>あの大学に行ったら。</span></h1>
+    <p class="lead">大学名を選ぶと、その先にある毎日が少しだけ見えてくる。<br/>講義、キャンパス、放課後。まだ知らない大学生活を想像してみよう。</p>
+  </header>
+  <section class="university-list" aria-label="大学を選ぶ">
+    <details class="university-item">
+      <summary><span class="no">01</span><span class="name">早稲田大学</span><span class="en">WASEDA UNIVERSITY</span><span class="plus">＋</span></summary>
+      <div class="detail">
+        <div class="visual waseda"><span>W</span><small>SHINJUKU / TOKYO</small></div>
+        <div class="detail-copy"><p class="tag">PRIVATE UNIVERSITY</p><h2>興味の数だけ、毎日が広がる。</h2><p>高田馬場からキャンパスへ。学部の学びに加えて、サークルや学生団体、学外での活動にも手を伸ばす。授業で出会ったテーマを、放課後に仲間と語り合いながら深めていく。自分から動けば、大学生活の選択肢がどんどん広がっていく。</p><small>自由な空気の中で、自分の興味を深掘りする。</small></div>
+      </div>
+    </details>
+    <details class="university-item">
+      <summary><span class="no">02</span><span class="name">東京大学</span><span class="en">THE UNIVERSITY OF TOKYO</span><span class="plus">＋</span></summary>
+      <div class="detail">
+        <div class="visual tokyo"><span>東</span><small>HONGO / TOKYO</small></div>
+        <div class="detail-copy"><p class="tag">NATIONAL UNIVERSITY</p><h2>知りたいことが、次の問いになる。</h2><p>本郷の歴史あるキャンパスで、さまざまな分野に触れながら学ぶ。異なる関心を持つ仲間との会話や講義をきっかけに、今まで知らなかったテーマに出会う。幅広い知識を土台に、自分が本当に追いかけたい問いを見つけていく。</p><small>学びを広げ、その先にある専門を見つける。</small></div>
+      </div>
+    </details>
+    <details class="university-item">
+      <summary><span class="no">03</span><span class="name">京都大学</span><span class="en">KYOTO UNIVERSITY</span><span class="plus">＋</span></summary>
+      <div class="detail">
+        <div class="visual kyoto"><span>京</span><small>YOSHIDA / KYOTO</small></div>
+        <div class="detail-copy"><p class="tag">NATIONAL UNIVERSITY</p><h2>自分だけの問いを、とことん追う。</h2><p>京都の街に囲まれたキャンパスで、自分の関心をじっくり掘り下げる。講義で生まれた疑問を図書館や研究室で調べ、仲間と議論する。決められた答えを覚えるだけではなく、自分なりの問いを育てていく毎日。</p><small>型にはまらず、自分の知的好奇心を追いかける。</small></div>
+      </div>
+    </details>
+  </section>
+  <p class="disclaimer">※大学の特色を参考にしたイメージコンテンツです。実際の学生生活・授業・制度を保証するものではありません。</p>
+  <section class="closing"><p>YOUR FUTURE IS STILL OPEN.</p><h2>どんな毎日を、選びたい？</h2><a href="../">Study のトップへ戻る ↗</a></section>
+</main>
+<style>
+.university-page{max-width:900px;margin:0 auto;padding:30px 0 60px}.back{font-size:11px;color:var(--muted);text-decoration:none}.hero{padding:56px 0 38px;border-bottom:1px solid var(--line)}.eyebrow,.tag{font:9px ui-monospace,monospace;letter-spacing:.16em;color:var(--accent);font-weight:800}.hero h1{font-size:clamp(38px,7vw,70px);line-height:1.17;letter-spacing:-.07em;margin:17px 0 20px;font-weight:900}.hero h1 span{color:var(--accent)}.lead{font-size:13px;line-height:2;color:var(--muted);margin:0}.university-list{margin-top:28px;border-top:1px solid var(--line)}.university-item{border-bottom:1px solid var(--line)}.university-item summary{display:grid;grid-template-columns:42px minmax(150px,1fr) minmax(150px,.8fr) 32px;gap:12px;align-items:center;padding:23px 8px;cursor:pointer;list-style:none}.university-item summary::-webkit-details-marker{display:none}.no{font:11px ui-monospace,monospace;color:var(--accent)}.name{font-size:20px;font-weight:850;letter-spacing:-.04em}.en{font:9px ui-monospace,monospace;color:var(--muted);letter-spacing:.1em}.plus{display:grid;place-items:center;width:29px;height:29px;border:1px solid var(--line);border-radius:50%;font-size:17px;color:var(--accent);transition:transform .25s,background .25s}.university-item[open] .plus{transform:rotate(45deg);background:var(--surface-soft)}.detail{display:grid;grid-template-columns:.8fr 1.2fr;gap:28px;padding:0 8px 28px;animation:reveal .25s ease}.visual{min-height:220px;display:flex;flex-direction:column;justify-content:space-between;padding:20px;color:white;overflow:hidden;position:relative}.visual:after{content:"";position:absolute;width:230px;height:230px;border:1px solid #ffffff55;border-radius:50%;right:-70px;top:25px}.visual span{font-size:100px;line-height:1;font-weight:900;letter-spacing:-.1em;opacity:.9}.visual small{font:9px ui-monospace,monospace;letter-spacing:.18em}.waseda{background:linear-gradient(135deg,#8d2637,#321d2b)}.tokyo{background:linear-gradient(135deg,#263d68,#18243c)}.kyoto{background:linear-gradient(135deg,#536c57,#263b32)}.detail-copy{align-self:center}.tag{margin:0}.detail-copy h2{font-size:21px;letter-spacing:-.045em;margin:10px 0}.detail-copy>p:not(.tag){font-size:12px;line-height:2;color:var(--muted);margin:0 0 12px}.detail-copy small{font-size:10px;color:var(--accent);font-weight:700}.disclaimer{font-size:9px;line-height:1.8;color:var(--muted);margin:16px 0}.closing{margin-top:48px;padding:28px 0;border-top:1px solid var(--line);text-align:center}.closing p{font:9px ui-monospace,monospace;letter-spacing:.16em;color:var(--accent)}.closing h2{font-size:25px;letter-spacing:-.05em;margin:9px 0 18px}.closing a{font-size:11px;color:var(--accent);font-weight:800;text-decoration:none}@keyframes reveal{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}@media(max-width:620px){.university-page{padding:22px 0 45px}.hero{padding:40px 0 28px}.hero h1{font-size:clamp(36px,10vw,54px)}.university-item summary{grid-template-columns:27px minmax(0,1fr) 29px;gap:8px;padding:18px 2px}.name{font-size:17px}.en{display:none}.detail{grid-template-columns:1fr;gap:17px;padding:0 2px 22px}.visual{min-height:155px}.visual span{font-size:76px}.detail-copy h2{font-size:19px}.closing h2{font-size:21px}}
+</style>
+</Layout>
