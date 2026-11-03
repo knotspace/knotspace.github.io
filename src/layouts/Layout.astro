@@ -12,7 +12,7 @@ interface Props {
 
 const {
   title,
-  description = 'Web制作や日々の興味、ランニングなどを記録する個人ブログ。',
+  description = '日々気になったことや、好きなものについて気ままに書いている個人ブログ。',
   image,
   noindex = false,
   structuredData,
@@ -26,7 +26,7 @@ const websiteJsonLd = {
   name: 'KNOT',
   url: Astro.site?.toString() ?? 'https://knotspace.github.io/',
   inLanguage: 'ja-JP',
-  description: 'Web制作、PC・アプリ、本・読書、勉強や日々の興味を記録する個人ブログ。',
+  description: '日々気になったことや、好きなものについて気ままに書いている個人ブログ。',
 };
 const structuredItems = structuredData ? (Array.isArray(structuredData) ? structuredData : [structuredData]) : [];
 const articleStructuredData = structuredItems.find((item) =>
