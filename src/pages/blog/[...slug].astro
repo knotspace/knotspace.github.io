@@ -87,7 +87,8 @@ const breadcrumbJsonLd = {
         </time>
 
         <span class="meta-divider"></span>
-        <span class="category-chip">{post.data.category}</span>\n        <span class="reading-time">約{readingMinutes}分で読めます</span>
+        <span class="category-chip">{post.data.category}</span>
+        <span class="reading-time">約{readingMinutes}分で読めます</span>
 
         {post.data.updatedDate && (
           <>
@@ -98,7 +99,8 @@ const breadcrumbJsonLd = {
       </div>
 
       <h1>{post.data.title}</h1>
-      <p class="description">{post.data.description}</p>\n      <div class="article-byline"><span>✎ KNOT</span><span>読了目安 約{readingMinutes}分</span><span>本文をゆっくり読んでね。</span></div>
+      <p class="description">{post.data.description}</p>
+      <div class="article-byline"><span>✎ KNOT</span><span>読了目安 約{readingMinutes}分</span><span>本文をゆっくり読んでね。</span></div>
     </header>
 
     {post.data.heroImage && (
