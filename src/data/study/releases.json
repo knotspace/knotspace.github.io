@@ -1,6 +1,19 @@
 {
   "releases": [
     {
+      "id": "831f763",
+      "publishedAt": "2026-11-03T21:33:03+09:00",
+      "title": "Improve subject-specific diagram matching in practice",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "高専対策"
+      ],
+      "files": [
+        "src/pages/study/kosen.astro"
+      ]
+    },
+    {
       "id": "727dc8b",
       "publishedAt": "2026-11-03T21:29:24+09:00",
       "title": "Add searchable 400-item KNOT diagram library",
