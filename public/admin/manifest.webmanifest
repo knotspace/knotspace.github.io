@@ -1,18 +1,21 @@
 {
-  "id": "/admin/",
-  "name": "KNOT Admin",
-  "short_name": "KNOT Admin",
-  "description": "KNOTブログ管理画面",
+  "id": "/admin/?app=knot-cms-studio",
+  "name": "KNOT CMS Studio",
+  "short_name": "KNOT CMS",
+  "description": "KNOT専用の独立したブログ管理アプリ",
   "lang": "ja",
   "start_url": "/admin/",
   "scope": "/admin/",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
   "orientation": "any",
-  "background_color": "#252c30",
-  "theme_color": "#252c30",
+  "background_color": "#111827",
+  "theme_color": "#111827",
+  "categories": ["productivity", "utilities"],
+  "prefer_related_applications": false,
   "icons": [
     {
-      "src": "/admin/knot-logo.svg",
+      "src": "/admin/admin-app-icon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any maskable"
