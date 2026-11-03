@@ -1,6 +1,19 @@
 {
   "releases": [
     {
+      "id": "0f412bb",
+      "publishedAt": "2026-11-03T21:54:12+09:00",
+      "title": "Add 200 KNOT-made summary learning resources",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "学習コンテンツ・データ"
+      ],
+      "files": [
+        "src/data/study/knot-summary-assets.json"
+      ]
+    },
+    {
       "id": "ab54400",
       "publishedAt": "2026-11-03T21:35:13+09:00",
       "title": "Fix civics summary diagram map syntax",
