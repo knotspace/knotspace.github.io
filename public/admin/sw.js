@@ -1,14 +1,37 @@
-const CACHE_NAME = 'knot-cms-studio-v2';
+const CACHE_NAME = 'knot-cms-studio-v3';
 const SCOPE = '/admin/';
 const SHELL = [
   '/admin/',
   '/admin/index.html',
   '/admin/admin.css',
   '/admin/editor-tools.js',
-  '/admin/decap-cms.js',
   '/admin/admin-app-icon.svg',
+  '/admin/knot-logo.svg',
   '/admin/manifest.webmanifest'
 ];
+const STATIC_ASSETS = new Set([
+  '/admin/',
+  '/admin/index.html',
+  '/admin/admin.css',
+  '/admin/editor-tools.js',
+  '/admin/decap-cms.js',
+  '/admin/admin-app-icon.svg',
+  '/admin/knot-logo.svg',
+  '/admin/manifest.webmanifest'
+]);
+
+async function refreshStaticAsset(request, cache) {
+  const response = await fetch(request, { cache: 'no-cache' });
+  const cacheControl = response.headers.get('Cache-Control') || '';
+  if (
+    response.ok &&
+    response.type === 'basic' &&
+    !/\\b(private|no-store)\\b/i.test(cacheControl)
+  ) {
+    await cache.put(request, response.clone()).catch(() => {});
+  }
+  return response;
+}
 
 self.addEventListener('install', (event) => {
   event.waitUntil((async () => {
@@ -44,13 +67,32 @@ self.addEventListener('fetch', (event) => {
 
   event.respondWith((async () => {
     const cache = await caches.open(CACHE_NAME);
+
+    // Static CMS assets are served from cache immediately on repeat visits.
+    // A background refresh keeps the next launch current without delaying this one.
+    if (STATIC_ASSETS.has(url.pathname)) {
+      const cached = await cache.match(request);
+      if (cached) {
+        event.waitUntil(refreshStaticAsset(request, cache).catch(() => {}));
+        return cached;
+      }
+      try {
+        return await refreshStaticAsset(request, cache);
+      } catch {
+        const shell = await cache.match('/admin/') || await cache.match('/admin/index.html');
+        if (shell && request.mode === 'navigate') return shell;
+        return Response.error();
+      }
+    }
+
+    // Keep config and other non-shell resources network-first.
     try {
       const response = await fetch(request, { cache: 'no-cache' });
       const cacheControl = response.headers.get('Cache-Control') || '';
       if (
         response.ok &&
         response.type === 'basic' &&
-        !/\b(private|no-store)\b/i.test(cacheControl)
+        !/\\b(private|no-store)\\b/i.test(cacheControl)
       ) {
         await cache.put(request, response.clone()).catch(() => {});
       }
