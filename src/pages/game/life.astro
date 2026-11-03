@@ -40,8 +40,14 @@
 </main>
 <script>
 import schoolData from '../../data/game/schools.json';
+import deviationData from '../../data/game/deviation-scores.json';
 const $=id=>document.getElementById(id), clamp=n=>Math.max(0,Math.min(100,n));
-const schoolRecords = schoolData.schools || [];
+const deviationMap = new Map((deviationData.scores || []).map(x=>[x.name.replace(/^(栃木県立|栃木県)/,''),x]));
+const schoolRecords = (schoolData.schools || []).map(s=>{
+ const key=String(s.name||'').replace(/^(栃木県立|栃木県)/,'');
+ const score=deviationMap.get(key);
+ return score?{...s,deviation:score.deviation,deviationCourse:score.course,deviationYear:deviationData.meta.year,deviationSource:deviationData.meta.source}:s;
+});
 const prefectures = schoolData.prefectures || ['北海道','東京都','栃木県','大阪府','福岡県'];
 const prefectureSelect=$('home-prefecture');
 prefectures.forEach(pref=>{const o=document.createElement('option');o.value=pref;o.textContent=pref;if(pref==='栃木県')o.selected=true;prefectureSelect.append(o);});
@@ -181,7 +187,7 @@ function schoolsForExam(tag){
  }).slice(0,60);
 }
 function schoolDeviation(s){
- const n=Number(s.deviation ?? s.deviationValue ?? s.hensachi);
+ const n=Number(s.deviation ?? s.deviationValue ?? s.hensachi ?? deviationMap.get(String(s.name||'').replace(/^(栃木県立|栃木県)/,''))?.deviation);
  return Number.isFinite(n)&&n>0?n:null;
 }
 function render(){
