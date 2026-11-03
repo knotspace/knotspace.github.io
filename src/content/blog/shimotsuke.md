@@ -2,7 +2,7 @@
 title: "下野模試とは？結果の見方と受験勉強への生かし方"
 description: "下野模試の基本や偏差値の見方、模試を受けた後にやっておきたい復習方法を中学生目線でまとめました。"
 pubDate: 2026-11-01
-heroImage: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1400&auto=format&fit=crop"
+heroImage: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1400&auto=format&fit=crop"
 category: "高校受験"
 tags: ["高校受験", "下野模試", "模試", "偏差値"]
 ---
