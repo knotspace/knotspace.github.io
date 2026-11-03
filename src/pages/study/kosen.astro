@@ -16,7 +16,7 @@ const topics = [...new Set(regularQuestions.map(q => q.topic))];
     <div class="hero-row"><div><h1>高専入試対策</h1><p>知識を覚えるだけじゃない。資料を読み、考えて、答えを導く。</p></div><span class="live">PRACTICE 01</span></div>
     <div class="hero-stats"><div><strong>{regularQuestions.length}</strong><small>理科・社会の演習問題</small></div><div><strong>{topics.length}</strong><small>出題テーマ</small></div><div><strong>2教科</strong><small>理科・社会</small></div></div>
   </header>
-  <div class="beta-banner"><b>β版</b><div><strong>理科・社会の重点対策</strong><p>通常演習・模試のどちらも理科のみ／社会のみ／理社ミックスを選択可能。過去問は大問ごとに（1）から順番に出題。全50問を収録。</p></div></div>
+  <div class="beta-banner"><b>β版</b><div><strong>理科・社会の重点対策</strong><p>通常演習・模試のどちらも理科のみ／社会のみ／理社ミックスを選択可能。過去問は大問ごとに（1）から順番に出題。全110問を収録。</p></div></div>
   <section class="source-note"><div><strong>問題の方針</strong><p>高専の学力検査で問われる、複数の情報を組み合わせる力・統計や地図を読み取る力を意識したオリジナル問題。過去問の文章や選択肢をそのまま転載せず、出題テーマを参考に作成している。</p><a href="https://www.kosen-k.go.jp/wp/wp-content/uploads/2026/02/04_2026_rika_mondai.pdf" target="_blank" rel="noopener noreferrer">令和8年度 理科・問題冊子（公式PDF） ↗</a><br><a href="https://www.kosen-k.go.jp/wp/wp-content/uploads/2026/02/04_2026_rika_seikai.pdf" target="_blank" rel="noopener noreferrer">理科・公式正解 ↗</a><br><a href="https://www.kosen-k.go.jp/wp/wp-content/uploads/2026/02/02_2026_syakai_mondai2.pdf" target="_blank" rel="noopener noreferrer">令和8年度 社会・問題冊子（公式PDF） ↗</a><br><a href="https://www.kosen-k.go.jp/wp/wp-content/uploads/2026/02/02_2026_syakai_seikai.pdf" target="_blank" rel="noopener noreferrer">社会・公式正解 ↗</a>
   <p class="data-sources"><strong>資料データの出典</strong><br><a href="/study-data/資料ダウンロード一覧.md" target="_blank" rel="noopener noreferrer">理科・社会の公的資料ダウンロード一覧 ↗</a><br><br><a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener noreferrer">国土地理院・地理院タイル（地形図・土地条件図） ↗</a><br><a href="https://www.data.jma.go.jp/risk/obsdl/" target="_blank" rel="noopener noreferrer">気象庁・過去の気象データ（CSVダウンロード） ↗</a></p>
   <small class="figure-credit">図版：KNOTオリジナル模式図。実際の地形図・観測値ではなく、地形や自然現象の読み取り練習用に作成。</small></div></section>
@@ -32,7 +32,7 @@ const topics = [...new Set(regularQuestions.map(q => q.topic))];
     <div class="quiz-actions"><button id="quit" class="secondary">中断する</button><button id="prev" class="secondary" disabled>← 前へ</button><button id="next" class="start" disabled>次の問題 →</button></div>
   </section>
   <section class="result" id="result" hidden><p class="eyebrow">YOUR RESULT</p><h2>演習終了！</h2><div class="score"><strong id="score">0</strong><span> / <span id="max">0</span> 問正解</span></div><p id="resultMessage"></p><div id="review" class="review-list" hidden></div><button class="start" id="retry">もう一度解く →</button></section>
-  <footer class="note">※模試モードには令和8年度の公式過去問22問と、過去問を参考にしたKNOTオリジナル類題28問を収録。公式問題は大問単位で（1）から最後までまとめて出題します。原文・図表は公式PDFで確認できます。</footer>
+  <footer class="note">※模試モードには令和8年度の公式過去問22問と、過去問を参考にしたKNOTオリジナル類題88問を収録（理科55問・社会55問）。公式問題は大問単位で（1）から最後までまとめて出題します。追加問題はKNOTオリジナル類題です。原文・図表は公式PDFで確認できます。</footer>
 </main>
 <script>
 import bank from '../../data/study/kosen-questions.json';
