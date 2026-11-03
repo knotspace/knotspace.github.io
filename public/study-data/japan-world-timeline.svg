@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+<title id="title">日本史と世界史の比較年表</title><desc id="desc">日本と世界の代表的な歴史の出来事を同じ時間軸で比較する学習用図解。</desc>
+<rect width="1200" height="620" rx="28" fill="#f7f8fb"/>
+<text x="60" y="66" font-family="sans-serif" font-size="30" font-weight="700" fill="#172033">日本史 × 世界史　同じ時代を比べる</text>
+<text x="60" y="100" font-family="sans-serif" font-size="16" fill="#596579">年号は代表的な目安。細かな出来事はページ内の比較年表で確認しよう。</text>
+<rect x="55" y="135" width="1090" height="190" rx="18" fill="#eaf2ff"/>
+<rect x="55" y="345" width="1090" height="220" rx="18" fill="#fff1e6"/>
+<text x="82" y="176" font-family="sans-serif" font-size="22" font-weight="700" fill="#2456a6">WORLD HISTORY / 世界</text>
+<text x="82" y="386" font-family="sans-serif" font-size="22" font-weight="700" fill="#a65320">JAPANESE HISTORY / 日本</text>
+<path d="M105 235 H1095" stroke="#2456a6" stroke-width="5" stroke-linecap="round"/>
+<path d="M105 455 H1095" stroke="#a65320" stroke-width="5" stroke-linecap="round"/>
+<g font-family="sans-serif" fill="#172033" text-anchor="middle">
+<g><circle cx="150" cy="235" r="11" fill="#2456a6"/><text x="150" y="207" font-size="16" font-weight="700">紀元前</text><text x="150" y="265" font-size="14">大河文明</text></g>
+<g><circle cx="340" cy="235" r="11" fill="#2456a6"/><text x="340" y="207" font-size="16" font-weight="700">紀元前6世紀</text><text x="340" y="265" font-size="14">仏教・孔子</text></g>
+<g><circle cx="530" cy="235" r="11" fill="#2456a6"/><text x="530" y="207" font-size="16" font-weight="700">7〜8世紀</text><text x="530" y="265" font-size="14">イスラム・唐</text></g>
+<g><circle cx="720" cy="235" r="11" fill="#2456a6"/><text x="720" y="207" font-size="16" font-weight="700">13〜15世紀</text><text x="720" y="265" font-size="14">モンゴル・ルネサンス</text></g>
+<g><circle cx="910" cy="235" r="11" fill="#2456a6"/><text x="910" y="207" font-size="16" font-weight="700">18〜19世紀</text><text x="910" y="265" font-size="14">革命・産業化</text></g>
+<g><circle cx="1090" cy="235" r="11" fill="#2456a6"/><text x="1090" y="207" font-size="16" font-weight="700">20世紀</text><text x="1090" y="265" font-size="14">世界大戦・冷戦</text></g>
+<g><circle cx="150" cy="455" r="11" fill="#a65320"/><text x="150" y="427" font-size="16" font-weight="700">縄文・弥生</text><text x="150" y="485" font-size="14">稲作・むら</text></g>
+<g><circle cx="340" cy="455" r="11" fill="#a65320"/><text x="340" y="427" font-size="16" font-weight="700">古墳・飛鳥</text><text x="340" y="485" font-size="14">ヤマト政権・律令</text></g>
+<g><circle cx="530" cy="455" r="11" fill="#a65320"/><text x="530" y="427" font-size="16" font-weight="700">奈良・平安</text><text x="530" y="485" font-size="14">遣唐使・国風文化</text></g>
+<g><circle cx="720" cy="455" r="11" fill="#a65320"/><text x="720" y="427" font-size="16" font-weight="700">鎌倉・室町</text><text x="720" y="485" font-size="14">武士・元寇</text></g>
+<g><circle cx="910" cy="455" r="11" fill="#a65320"/><text x="910" y="427" font-size="16" font-weight="700">江戸・明治</text><text x="910" y="485" font-size="14">幕藩体制・近代化</text></g>
+<g><circle cx="1090" cy="455" r="11" fill="#a65320"/><text x="1090" y="427" font-size="16" font-weight="700">昭和・平成</text><text x="1090" y="485" font-size="14">戦争・復興・現代</text></g>
+</g>
+<g stroke="#8792a4" stroke-width="2" stroke-dasharray="5 7" opacity=".75"><path d="M150 250 V440"/><path d="M340 250 V440"/><path d="M530 250 V440"/><path d="M720 250 V440"/><path d="M910 250 V440"/><path d="M1090 250 V440"/></g>
+<text x="600" y="600" font-family="sans-serif" font-size="15" text-anchor="middle" fill="#596579">KNOT Study 制作｜学習用の概略図</text>
+</svg>
