@@ -17,7 +17,7 @@ const TYPES={
 };
 const values=v=>{if(v&&typeof v.toJS==="function")v=v.toJS();return Array.isArray(v)?v.map(x=>x&&typeof x.toJS==="function"?x.toJS():x).filter(Boolean):[];};
 const field=(label,value,change,multi)=>h("label",{className:"knot-block-field"},h("span",{},label),multi?h("textarea",{value:value||"",rows:4,placeholder:"ここに入力…",onChange:e=>change(e.target.value)}):h("input",{type:"text",value:value||"",placeholder:"ここに入力…",onChange:e=>change(e.target.value)}));
-const inline=(tag,value,change,placeholder,extra={})=>h(tag,Object.assign({className:"knot-inline-edit",contentEditable:true,suppressContentEditableWarning:true,"data-placeholder":placeholder,onInput:e=>change(e.currentTarget.innerText),onBlur:e=>change(e.currentTarget.innerText)},extra),value||"");
+const inline=(tag,value,change,placeholder,extra={})=>h(tag,Object.assign({className:"knot-inline-edit",contentEditable:true,suppressContentEditableWarning:true,"data-placeholder":placeholder,onBlur:e=>change(e.currentTarget.innerText)},extra),value||"");
 const Control=createClass({
  getInitialState(){return{newType:"paragraph",dragIndex:null};},
  change(i,patch){const a=values(this.props.value).map(x=>Object.assign({},x));a[i]=Object.assign({},a[i],patch);this.props.onChange(a);},
