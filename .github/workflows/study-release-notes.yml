@@ -39,7 +39,7 @@ jobs:
           const head = process.env.HEAD_SHA;
           let changed = [];
           if (before && !/^0+$/.test(before)) {
-            changed = execFileSync('git', ['diff', '--name-only', before, head, '--', 'src/pages/study', 'src/data/study'], { encoding: 'utf8' }).trim().split('\n').filter(Boolean);
+            changed = execFileSync('git', ['diff', '--name-only', before, head, '--', 'src/pages/study', 'src/data/study'], { encoding: 'utf8' }).trim().split('\n').filter(path => path && path !== file);
           } else {
             changed = execFileSync('git', ['diff-tree', '--no-commit-id', '--name-only', '-r', head, '--', 'src/pages/study', 'src/data/study'], { encoding: 'utf8' }).trim().split('\n').filter(Boolean);
           }
