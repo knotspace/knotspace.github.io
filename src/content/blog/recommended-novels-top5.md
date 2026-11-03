@@ -68,7 +68,7 @@ category: "本・読書"
 
 ## 第1位『容疑者Xの献身』／東野圭吾
 
-<figure class="book-cover-figure"><img src="https://b-bunshun.ismcdn.jp/mwimgs/8/7/350/img_87e4b7e7c2b1f76e8c4a.jpg" alt="『容疑者Xの献身』の書影" loading="lazy" decoding="async" width="180" height="270" /><figcaption>書影出典：<a href="https://openlibrary.org/isbn/9784167110121" target="_blank" rel="noopener noreferrer">Open Library（ISBN 9784167110121）</a></figcaption></figure>
+<figure class="book-cover-figure"><img src="https://b-bunshun.ismcdn.jp/mwimgs/7/5/350/img_758daba297b46fa7c4ac3d01a38c8b0e569925.jpg" alt="『容疑者Xの献身』の書影" loading="lazy" decoding="async" width="180" height="270" /><figcaption>書影出典：<a href="https://openlibrary.org/isbn/9784167110121" target="_blank" rel="noopener noreferrer">Open Library（ISBN 9784167110121）</a></figcaption></figure>
 
 お待たせしました！今回の1位は、東野圭吾さんの『容疑者Xの献身』です！
 
