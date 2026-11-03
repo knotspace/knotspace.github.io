@@ -76,14 +76,27 @@ if(quoteBox){
 const dateEl=document.getElementById('today-date');
 if(dateEl)dateEl.textContent=new Intl.DateTimeFormat('ja-JP',{year:'numeric',month:'long',day:'numeric',weekday:'long'}).format(new Date());
 try{
- const saved=JSON.parse(localStorage.getItem('knot-foundation-v1')||'null')||{};
- const answered=Number.isFinite(saved.answered)?saved.answered:0;
- const correct=Number.isFinite(saved.correct)?saved.correct:0;
- const wrong=Array.isArray(saved.wrong)?saved.wrong.length:0;
- document.getElementById('record-answered').textContent=answered.toLocaleString('ja-JP');
- document.getElementById('record-accuracy').textContent=answered?Math.round(correct/answered*100):'—';
- document.getElementById('record-weak').textContent=wrong.toLocaleString('ja-JP');
- document.getElementById('record-note').textContent=answered?(`これまでに${answered}問に挑戦。苦手な問題は基礎演習の「苦手だけ」から復習できるよ。`):'まずは基礎演習を10問。解いた分だけ、ここに記録されるよ。';
+ const readRecord = key => {
+  try {
+   const value = JSON.parse(localStorage.getItem(key) || 'null') || {};
+   return {
+    answered: Number.isFinite(value.answered) ? value.answered : 0,
+    correct: Number.isFinite(value.correct) ? value.correct : 0,
+    wrong: Array.isArray(value.wrong) ? value.wrong.filter(id => typeof id === 'string') : []
+   };
+  } catch { return { answered: 0, correct: 0, wrong: [] }; }
+ };
+ const foundationRecord = readRecord('knot-foundation-v1');
+ const kosenRecord = readRecord('knot-kosen-record-v1');
+ const answered = foundationRecord.answered + kosenRecord.answered;
+ const correct = foundationRecord.correct + kosenRecord.correct;
+ const wrong = new Set([...foundationRecord.wrong, ...kosenRecord.wrong]).size;
+ document.getElementById('record-answered').textContent = answered.toLocaleString('ja-JP');
+ document.getElementById('record-accuracy').textContent = answered ? Math.round(correct / answered * 100) : '—';
+ document.getElementById('record-weak').textContent = wrong.toLocaleString('ja-JP');
+ document.getElementById('record-note').textContent = answered
+  ? `基礎演習と高専対策で合計${answered}問に挑戦。苦手な問題を復習していこう。`
+  : 'まずは基礎演習か高専対策を10問。解いた分だけ、ここに記録されるよ。';
 }catch{}
 </script>
 <style>
