@@ -153,8 +153,11 @@ collections:
               - { label: 区切り線, name: enabled, widget: boolean, default: true }
       - label: 旧形式の本文（Markdown）
         name: body
-        widget: markdown
+        widget: richtext
         required: false
+        modes: [rich_text, raw]
+        editor_components: [image, code-block, knot-callout, knot-button]
+        sanitize_preview: true
         hint: "上の本文ブロックで段落・見出し・画像・引用・囲み枠・リストなどを追加して並べ替えできます。旧記事の編集では下のMarkdown本文も使えます。個人情報は掲載しないでね。"
         buttons:
           - bold
@@ -302,8 +305,11 @@ collections:
               - { label: 区切り線, name: enabled, widget: boolean, default: true }
       - label: 旧形式の本文（Markdown）
         name: body
-        widget: markdown
+        widget: richtext
         required: true
+        modes: [rich_text, raw]
+        editor_components: [image, code-block, knot-callout, knot-button]
+        sanitize_preview: true
         buttons: [bold, italic, strikethrough, code, link, heading-two, heading-three, quote, bulleted-list, numbered-list]
         hint: "見出し・文章・画像・リンク・表などを組み合わせてページを作成できます。個人情報は掲載しないでね。"
   - name: page_management
