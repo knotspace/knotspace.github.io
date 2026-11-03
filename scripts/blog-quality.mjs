@@ -39,6 +39,7 @@ for (const name of files) {
   const file = path.join(blogDir, name);
   const original = fs.readFileSync(file, 'utf8');
   const hero = original.match(/^heroImage:\s*["']([^"']+)["']/m)?.[1];
+  if (!hero) failures.push(name + ':アイキャッチ画像が未設定');
   const images = collectImages(original);
   const localSeen = new Map();
   const removeLines = new Set();
