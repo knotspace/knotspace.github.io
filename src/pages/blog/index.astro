@@ -69,7 +69,8 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
             href={`${BASE}blog/${post.slug}/`}
             data-category={post.data.category}
             data-title={post.data.title}
-            data-description={post.data.description}\n            data-reading-time={readingTime(post.body)}
+            data-description={post.data.description}
+            data-reading-time={readingTime(post.body)}
           >
             <div class="post-thumbnail">
               {post.data.heroImage ? (
@@ -84,7 +85,8 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
                 <time datetime={post.data.pubDate.toISOString()}>
                   {dateFormat(post.data.pubDate)}
                 </time>
-                <span class="category-label">{post.data.category}</span>\n                <span class="reading-time">約{readingTime(post.body)}分</span>
+                <span class="category-label">{post.data.category}</span>
+                <span class="reading-time">約{readingTime(post.body)}分</span>
               </div>
 
               <h2>{post.data.title}</h2>
