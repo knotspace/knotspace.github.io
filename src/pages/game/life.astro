@@ -256,7 +256,7 @@ function render(){
  if(examType){
    picker.hidden=false;
    const heading=document.createElement('div');heading.className='picker-heading';
-   heading.innerHTML='<b>受験する学校を選ぼう</b><small>学校名の横に偏差値を表示。偏差値は模試・年度・コースで異なる参考値で、未登録校は標準難易度で判定します。</small>';
+   heading.innerHTML='<b>受験する学校を選ぼう</b><small>学校名の横に偏差値を表示。偏差値は2026年度の参考値（模試・コースにより異なる）。未登録校は標準難易度で判定します。</small>';
    picker.append(heading);
    const list=schoolsForExam(e.tag);
    const selected=state.pendingSchool;
@@ -325,6 +325,7 @@ function choose(o){
    Object.assign(state.decisions,decision);
  }
  const e=stages[state.step];state.diary.push({title:e.title,log:o.log,choice:o.label});
+ if(state.lastExamResult)state.lastExamResult=null;
  state.step++;buildStages();
  try{localStorage.setItem('knot-life-sim-v2',JSON.stringify(state));}catch{}
  render();
