@@ -34,8 +34,9 @@ const toc = headings.filter((heading) =>
   heading.depth === 2 || heading.depth === 3
 );
 
-const date = dateFormat(post.data.pubDate);
-const time = post.data.pubDate.toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Tokyo' });
+const isDateOnly = post.data.pubDate.getUTCHours() === 0 && post.data.pubDate.getUTCMinutes() === 0 && post.data.pubDate.getUTCSeconds() === 0;
+const date = post.data.pubDate.toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric', timeZone: isDateOnly ? 'UTC' : 'Asia/Tokyo' });
+const time = isDateOnly ? '00:00' : post.data.pubDate.toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Tokyo' });
 const articleText = (post.body ?? '').replace(/\!\[[^\]]*\]\([^)]*\)/g, ' ').replace(/<[^>]+>/g, ' ').replace(/[#>*_\x60~|\[\](){}]/g, ' ');
 const readingMinutes = Math.max(1, Math.ceil(articleText.replace(/\s/g, '').length / 500));
 const allPosts = (await getCollection('blog')).filter((item) => item.id !== post.id && (!item.data.publishAt || item.data.publishAt <= new Date()));
