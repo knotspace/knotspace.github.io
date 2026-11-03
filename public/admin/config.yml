@@ -172,6 +172,32 @@ collections:
             name: footerNote
             widget: string
             required: true
+  - name: custom_pages
+    label: 固定ページ（自由に作成）
+    label_singular: 固定ページ
+    folder: src/content/pages
+    create: true
+    delete: true
+    extension: md
+    format: frontmatter
+    slug: "{{slug}}"
+    preview_path: "{{slug}}/"
+    summary: "{{title}}"
+    sortable_fields: [title, pubDate]
+    fields:
+      - { label: ページタイトル, name: title, widget: string, required: true }
+      - { label: URLスラッグ, name: slug, widget: string, required: false, hint: "英数字とハイフン推奨。例：privacy-policy。既存ページと同じURLは使わないでね。" }
+      - { label: 検索結果向け説明文, name: description, widget: text, required: true }
+      - { label: 公開日, name: pubDate, widget: datetime, required: false }
+      - { label: 更新日, name: updatedDate, widget: datetime, required: false }
+      - { label: アイキャッチ画像, name: heroImage, widget: image, required: false }
+      - { label: 検索エンジンに表示しない, name: noindex, widget: boolean, default: false, required: false }
+      - label: 本文
+        name: body
+        widget: markdown
+        required: true
+        buttons: [bold, italic, strikethrough, code, link, heading-two, heading-three, quote, bulleted-list, numbered-list]
+        hint: "見出し・文章・画像・リンク・表などを組み合わせてページを作成できます。個人情報は掲載しないでね。"
   - name: page_management
     label: 固定ページ管理
     files:
