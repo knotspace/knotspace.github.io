@@ -1,6 +1,21 @@
 {
   "releases": [
     {
+      "id": "675093b",
+      "publishedAt": "2026-11-03T20:16:44+09:00",
+      "title": "Expand KNOT Study with five-subject KOSEN preparation (#35)",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "高専問題データ",
+        "高専対策"
+      ],
+      "files": [
+        "src/data/study/kosen-questions.json",
+        "src/pages/study/kosen.astro"
+      ]
+    },
+    {
       "id": "855f13c",
       "publishedAt": "2026-11-03T19:43:45+09:00",
       "title": "Add 100 deduplicated KNOT Study questions",
