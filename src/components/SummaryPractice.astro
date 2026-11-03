@@ -1,7 +1,28 @@
 ---
 import bank from '../data/study/study-questions.json';
+import foundation from '../data/study/study-foundation.json';
+import kosen from '../data/study/kosen-questions.json';
 const { slug, title } = Astro.props;
-const questions = bank.filter((item) => item.link === `/study/summary/${slug}/`);
+const target = `/study/summary/${slug}/`;
+const normalize = (item, question, choices, answer, explanation) => ({
+  id: item.id,
+  q: item[question],
+  a: item[choices],
+  c: item[answer],
+  e: item[explanation],
+  figure: item.figure,
+  figureAlt: item.figureAlt,
+  link: item.link
+});
+const groups = [
+  bank.filter((item) => item.link === target).map((item) => normalize(item, 'q', 'a', 'c', 'e')),
+  foundation.filter((item) => item.link === target).map((item) => normalize(item, 'prompt', 'options', 'correct', 'explanation')),
+  kosen.filter((item) => item.link === target).map((item) => normalize(item, 'q', 'choices', 'answer', 'explanation'))
+];
+const questions = [];
+for (let index = 0; index < Math.max(...groups.map((group) => group.length)); index++) {
+  for (const group of groups) if (group[index] && questions.length < 120) questions.push(group[index]);
+}
 ---
 <section class="summary-practice" data-summary-practice data-questions={JSON.stringify(questions)} data-title={title}>
   <div class="practice-intro">
