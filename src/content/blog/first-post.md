@@ -3,7 +3,7 @@ title: "Knotへようこそ！ブログ兼備忘録をスタートします"
 description: "KNOTを始めた理由や、このブログで書いていきたいことを紹介します。"
 pubDate: "2026-10-31"
 category: "お知らせ"
-heroImage: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1400&auto=format&fit=crop"
+heroImage: "/blog-art/welcome.svg"
 ---
 
 ## Knotへようこそ！
