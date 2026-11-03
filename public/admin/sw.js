@@ -1,4 +1,4 @@
-const CACHE_NAME = 'knot-cms-studio-v7';
+const CACHE_NAME = 'knot-cms-studio-v8';
 const SCOPE = '/admin/';
 const SHELL = [
   '/admin/',
