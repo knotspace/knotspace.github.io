@@ -209,8 +209,8 @@ const isStudyActive = (path: string) => currentPath === path || (currentPath.sta
         window.addEventListener('load', () => {
           const base = document.querySelector('meta[name="site-base"]')?.content || '/';
           const isStudy = document.documentElement.dataset.appMode === 'study';
-          const worker = isStudy ? `${'${base}'}study-sw.js` : `${'${base}'}sw.js`;
-          const options = isStudy ? { scope: `${'${base}'}study/` } : undefined;
+          const worker = base + (isStudy ? 'study-sw.js' : 'sw.js');
+          const options = isStudy ? { scope: base + 'study/' } : undefined;
           navigator.serviceWorker.register(worker, options).catch((error) => console.warn('KNOT offline support unavailable:', error));
         });
         const prompt = document.getElementById('pwa-install-prompt');
