@@ -132,13 +132,18 @@ const navHref = (path: string) => /^https?:\/\//i.test(path) ? path : BASE + pat
 
       <main>
         <slot />
+        <section class="knot-maker-banner" aria-label="KNOT制作">
+          <a class="knot-maker-mark" href={navHref('/studio/')}>K.</a>
+          <div class="knot-maker-copy"><span>INSIDE KNOT / MAKING LOG</span><strong>このサイトも、Studyも。KNOTが自分でつくっている。</strong><p>機能を考え、コードを書き、公開して、使いながら改善する。制作の裏側と更新記録をまとめています。</p></div>
+          <a class="knot-maker-link" href={navHref('/studio/')}>KNOT制作を見る <span>↗</span></a>
+        </section>
       </main>
 
       <footer class="site-footer">
         <a class="footer-brand" href={BASE}>
           KNOT<span class="brand-dot">.</span>
         </a>
-        <p>{siteSettings.footerText}</p>
+        <p>{siteSettings.footerText} <a href={navHref("/studio/")}>KNOT制作・開発記録 ↗</a></p>
         <span>{siteSettings.footerNote} · © {new Date().getFullYear()} KNOT. Built with Astro.</span>
       </footer>
       
@@ -204,6 +209,14 @@ const navHref = (path: string) => /^https?:\/\//i.test(path) ? path : BASE + pat
       });
     </script>
   </body>
+<style is="global">
+.knot-maker-banner{display:flex;align-items:center;gap:18px;margin:46px auto 0;padding:20px 22px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(115deg,color-mix(in srgb,var(--accent) 10%,var(--surface)),var(--surface));}
+.knot-maker-mark{display:grid;place-items:center;flex:0 0 48px;width:48px;height:48px;border-radius:14px;background:var(--accent);color:#081323;font-size:22px;font-weight:950;letter-spacing:-.1em}
+.knot-maker-copy{min-width:0;flex:1}.knot-maker-copy>span{display:block;color:var(--accent);font:9px ui-monospace,monospace;letter-spacing:.15em}.knot-maker-copy strong{display:block;margin-top:5px;font-size:14px;letter-spacing:-.02em}.knot-maker-copy p{margin:5px 0 0;color:var(--muted);font-size:11px;line-height:1.7}
+.knot-maker-link{display:inline-flex;align-items:center;gap:10px;white-space:nowrap;padding:11px 14px;border:1px solid var(--line);border-radius:999px;font-size:11px;font-weight:800;color:var(--text)}.knot-maker-link span{color:var(--accent)}
+.site-footer p a{margin-left:7px;color:var(--accent);font-weight:750}
+@media(max-width:620px){.knot-maker-banner{align-items:flex-start;flex-wrap:wrap;gap:12px;margin-top:32px;padding:16px}.knot-maker-mark{width:40px;height:40px;flex-basis:40px}.knot-maker-copy{width:calc(100% - 54px)}.knot-maker-copy strong{font-size:12px}.knot-maker-copy p{font-size:10px}.knot-maker-link{margin-left:52px;padding:9px 12px}}
+</style>
 </html>
 
 
