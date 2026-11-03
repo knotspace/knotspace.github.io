@@ -2,10 +2,13 @@
 title: "【新機能】KNOT Studyをリリースしました！理科・社会の入試対策をもっと手軽に"
 description: "KNOTに新機能「KNOT Study」が登場！理科・社会の920問を収録した学習機能や、ランダム演習・弱点判定・分野別演習・模試モードを紹介します。"
 pubDate: 2026-11-02
+heroImage: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1400&auto=format&fit=crop"
 category: "お知らせ"
 ---
 
 # KNOT Studyをリリースしました！
+
+![ノートパソコンで学習サービスを使うイメージ](https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&auto=format&fit=crop)
 
 こんにちは！
 
