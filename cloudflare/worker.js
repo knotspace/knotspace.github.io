@@ -82,8 +82,8 @@ function renderEditor(){
   root.innerHTML=
   '<label class="field-label" for="title">タイトル</label><input id="title" class="title-input" maxlength="200" placeholder="記事のタイトル">'+
   '<div class="meta"><div><label class="field-label" for="slug">URLスラッグ</label><input id="slug" class="control" maxlength="100" placeholder="my-first-post"></div><div><label class="field-label" for="status">状態</label><select id="status" class="control"><option value="draft">下書き</option><option value="review">レビュー待ち</option></select></div></div>'+
-  '<div class="blocks-head"><strong>本文ブロック</strong><span class="muted">ブロック形式で編集</span></div><div class="blocks" id="blocks"></div>'+
-  '<div class="toolbar"><button data-add="paragraph">＋ 段落</button><button data-add="heading">＋ 見出し</button><button data-add="quote">＋ 引用</button><button data-add="list">＋ リスト</button></div>'+
+  '<div class="blocks-head"><strong>本文ブロック</strong><button id="preview-toggle">プレビュー</button></div><div class="blocks" id="blocks"></div><div id="preview" class="blocks hidden"></div>'+
+  '<div class="toolbar"><button data-add="paragraph">＋ 段落</button><button data-add="heading">＋ 見出し</button><button data-add="quote">＋ 引用</button><button data-add="list">＋ リスト</button><button data-add="image">＋ 画像</button><button data-add="code">＋ コード</button><button data-add="divider">＋ 区切り線</button></div>'+
   '<div class="footer"><span class="status" id="save-status">未保存</span><button class="primary" id="save">保存する</button></div>';
   $("title").value=current.title||"";
   $("slug").value=current.slug||"";
@@ -92,6 +92,7 @@ function renderEditor(){
   $("slug").addEventListener("input",queueSave);
   $("status").addEventListener("change",queueSave);
   root.querySelectorAll("[data-add]").forEach(btn=>btn.addEventListener("click",()=>{blocks.push({type:btn.dataset.add,text:""});renderBlocks();queueSave();}));
+  $("preview-toggle").addEventListener("click",togglePreview);
   $("save").addEventListener("click",saveNow);
   renderBlocks();
 }
@@ -100,13 +101,40 @@ function renderBlocks(){
   blocks.forEach((block,index)=>{
     const wrap=document.createElement("div");wrap.className="block";wrap.dataset.type=block.type;
     const top=document.createElement("div");top.className="block-top";
-    const label=document.createElement("span");label.textContent=({paragraph:"段落",heading:"見出し",quote:"引用",list:"リスト"})[block.type]||"段落";
+    const labels={paragraph:"段落",heading:"見出し",quote:"引用",list:"リスト",image:"画像",code:"コード",divider:"区切り線"};
+    const label=document.createElement("span");label.textContent=labels[block.type]||"段落";
+    const actions=document.createElement("div");actions.style.display="flex";actions.style.gap="5px";
+    const move=(caption,delta)=>{const target=index+delta;if(target<0||target>=blocks.length)return;[blocks[index],blocks[target]]=[blocks[target],blocks[index]];renderBlocks();queueSave();};
+    const up=document.createElement("button");up.textContent="↑";up.title="上へ";up.style.padding="3px 8px";up.disabled=index===0;up.addEventListener("click",()=>move("up",-1));
+    const down=document.createElement("button");down.textContent="↓";down.title="下へ";down.style.padding="3px 8px";down.disabled=index===blocks.length-1;down.addEventListener("click",()=>move("down",1));
     const remove=document.createElement("button");remove.textContent="削除";remove.style.padding="3px 8px";remove.addEventListener("click",()=>{blocks.splice(index,1);renderBlocks();queueSave();});
-    top.append(label,remove);
-    const area=document.createElement("textarea");area.value=block.text||"";area.placeholder=block.type==="heading"?"見出しを入力":block.type==="list"?"項目を1行ずつ入力":"文章を入力...";
-    area.rows=block.type==="heading"?2:3;area.addEventListener("input",()=>{blocks[index].text=area.value;queueSave();});
-    wrap.append(top,area);root.append(wrap);
+    actions.append(up,down,remove);top.append(label,actions);
+    if(block.type!=="divider"){
+      const area=document.createElement("textarea");area.value=block.text||"";
+      area.placeholder=block.type==="heading"?"見出しを入力":block.type==="list"?"項目を1行ずつ入力":block.type==="image"?"画像のURLを入力":block.type==="code"?"コードを入力...":"文章を入力...";
+      area.rows=block.type==="heading"?2:3;area.addEventListener("input",()=>{blocks[index].text=area.value;queueSave();});
+      wrap.append(area);
+    }else{const note=document.createElement("span");note.className="muted";note.textContent="記事内に水平線を表示します";wrap.append(note);}
+    root.append(wrap);
   });
+}
+function togglePreview(){
+  const editing=$("blocks"), preview=$("preview"), button=$("preview-toggle");
+  const showing=preview.classList.contains("hidden");
+  if(showing){
+    const title=esc($("title").value||"タイトル未設定");
+    preview.innerHTML='<h1 style="font-size:30px;line-height:1.35">'+title+'</h1>'+blocks.map(b=>{
+      const value=esc(b.text||"").replace(/\n/g,"<br>");
+      if(b.type==="heading")return '<h2 style="font-size:24px;margin:28px 0 12px">'+value+'</h2>';
+      if(b.type==="quote")return '<blockquote style="border-left:4px solid #9aafa2;padding:8px 16px;color:#59645c">'+value+'</blockquote>';
+      if(b.type==="list")return '<ul>'+String(b.text||"").split("\\n").map(x=>'<li>'+esc(x)+'</li>').join("")+'</ul>';
+      if(b.type==="image")return '<figure><img src="'+esc(b.text||"")+'" alt="" style="max-width:100%;height:auto"><figcaption class="muted">画像</figcaption></figure>';
+      if(b.type==="code")return '<pre style="background:#f2f2ef;padding:14px;overflow:auto"><code>'+value+'</code></pre>';
+      if(b.type==="divider")return '<hr style="border:0;border-top:1px solid #ddd;margin:28px 0">';
+      return '<p style="line-height:2">'+value+'</p>';
+    }).join("");
+    editing.classList.add("hidden");preview.classList.remove("hidden");button.textContent="編集に戻る";
+  }else{preview.classList.add("hidden");editing.classList.remove("hidden");button.textContent="プレビュー";}
 }
 function queueSave(){
   dirty=true;setStatus("変更あり・自動保存待ち");
