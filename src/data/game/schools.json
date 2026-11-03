@@ -5,9 +5,10 @@
     "source": "文部科学省 学校コード一覧",
     "sourceUrl": "https://www.mext.go.jp/b_menu/toukei/mext_01087.html",
     "referenceDate": "2026-05-01",
-    "publishedDate": "2026-05-29",
-    "status": "import-pipeline-ready",
-    "note": "学校コード一覧を正規データとして取り込み、学校コードで重複を排除する。偏差値・入試倍率・学科等は別データとして年度と出典を保持する。"
+    "importedAt": "2026-11-03T11:51:56.675Z",
+    "status": "imported",
+    "count": 0,
+    "note": "学校コードで重複排除。偏差値・入試倍率・学科詳細は別途、年度と出典を付けて管理する。"
   },
   "prefectures": [
     "北海道",
