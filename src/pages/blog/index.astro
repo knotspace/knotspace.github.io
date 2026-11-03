@@ -548,4 +548,28 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
   .profile-logo{font-size:30px}
   .total-count{font-weight:700}
   @media(max-width:520px){.post-card{grid-template-columns:112px minmax(0,1fr);gap:12px}.post-thumbnail{width:112px;height:88px}.post-info h2{font-size:13px}.post-info p{display:block;font-size:10px;line-height:1.6}.read-more{display:inline-block;font-size:10px}.archive-header{padding-top:28px}}
+
+  /* WordPress-style archive refinements */
+  .archive-header{padding:25px 0 18px;border-bottom:2px solid var(--line)}
+  .archive-header .eyebrow{display:none}
+  .archive-header h1{font-size:27px;letter-spacing:-.03em;margin:0 0 7px}
+  .archive-header p{font-size:12px}
+  .content-layout{grid-template-columns:minmax(0,1fr) 280px;gap:34px;padding-top:24px}
+  .filter-area{padding:0 0 17px;background:none;border:0;border-bottom:1px solid var(--line);border-radius:0}
+  #article-search{border-radius:3px}
+  .category-filters{gap:0;margin-top:10px;border:1px solid var(--line);width:max-content;max-width:100%}
+  .filter-button{border:0;border-right:1px solid var(--line);border-radius:0;padding:8px 12px}
+  .post-card{grid-template-columns:180px minmax(0,1fr);gap:18px;padding:19px 0}
+  .post-thumbnail{width:180px;height:120px;border-radius:2px}
+  .post-info h2{font-size:16px;letter-spacing:0;margin:7px 0}
+  .post-info p{font-size:11px;line-height:1.8}
+  .widget{border:1px solid var(--line);border-radius:0;background:var(--surface);padding:0}
+  .widget-title{padding:11px 13px;border-bottom:1px solid var(--line);border-left:4px solid var(--accent);margin:0 0 12px}
+  .widget>p,.widget .profile-logo{margin-left:14px;margin-right:14px}
+  .category-list{padding:0 14px 10px}
+  .total-count{padding-bottom:12px}
+  .random-button{border-radius:3px}
+  @media(max-width:780px){.content-layout{grid-template-columns:1fr}.sidebar{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media(max-width:520px){.post-card{grid-template-columns:112px minmax(0,1fr);gap:12px}.post-thumbnail{width:112px;height:88px}.post-info p{display:block}.sidebar{display:flex}.category-filters{width:100%;overflow-x:auto}.filter-button{white-space:nowrap}}
+
 </style>
