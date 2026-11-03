@@ -8,8 +8,9 @@ const posts = (await getCollection('blog'))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf() || b.id.localeCompare(a.id));
 const categories = [...new Set(posts.map((post) => post.data.category))];
 const BASE = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
-const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'Asia/Tokyo' });
-const dateTimeFormat = (date: Date) => date.toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Tokyo' });
+const isDateOnly = (date: Date) => date.getUTCHours() === 0 && date.getUTCMinutes() === 0 && date.getUTCSeconds() === 0;
+const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', { year: 'numeric', month: 'short', day: 'numeric', timeZone: isDateOnly(date) ? 'UTC' : 'Asia/Tokyo' });
+const dateTimeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Tokyo' });
 ---
 
 <Layout title="KNOT | 個人ブログ" description="Web制作、PC・アプリ、本・読書、勉強。気になったことを自分のペースで記録する個人ブログ。">
@@ -100,7 +101,7 @@ const dateTimeFormat = (date: Date) => date.toLocaleTimeString('ja-JP', { hour: 
 <style>
 
 .popular-section{padding:28px 5.5% 0}
-.popular-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 28px}
+.popular-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 28px}.popular-card:nth-child(n+5){display:none}
 .popular-card{position:relative;display:grid;grid-template-columns:112px minmax(0,1fr) 18px;gap:15px;align-items:center;padding:17px 0;border-bottom:1px solid var(--line);min-width:0}
 .popular-card[hidden]{display:none!important}
 .popular-thumb{position:relative;width:112px;height:82px;overflow:hidden;background:var(--surface-soft)}
