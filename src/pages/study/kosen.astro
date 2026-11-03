@@ -5,7 +5,8 @@ import questionsData from '../../data/study/kosen-questions.json';
 import pastQuestionsData from '../../data/study/kosen-past-questions.json';
 const questions = questionsData.questions;
 const pastQuestions = pastQuestionsData.questions;
-const topics = [...new Set(questions.map(q => q.topic))];
+const regularQuestions = questions.filter(q => ['理科','社会'].includes(q.subject));
+const topics = [...new Set(regularQuestions.map(q => q.topic))];
 ---
 <StudyLayout title="高専入試対策｜KNOT Study" description="高専入試を意識した思考力・資料読解型のオリジナル演習問題。">
 <main class="kosen-page">
@@ -13,7 +14,7 @@ const topics = [...new Set(questions.map(q => q.topic))];
   <header class="hero">
     <p class="eyebrow">KNOT / KO SEN EXAM</p>
     <div class="hero-row"><div><h1>高専入試対策</h1><p>知識を覚えるだけじゃない。資料を読み、考えて、答えを導く。</p></div><span class="live">PRACTICE 01</span></div>
-    <div class="hero-stats"><div><strong>{questions.length}</strong><small>オリジナル問題</small></div><div><strong>{topics.length}</strong><small>出題テーマ</small></div><div><strong>2教科</strong><small>理科・社会</small></div></div>
+    <div class="hero-stats"><div><strong>{regularQuestions.length}</strong><small>理科・社会の演習問題</small></div><div><strong>{topics.length}</strong><small>出題テーマ</small></div><div><strong>2教科</strong><small>理科・社会</small></div></div>
   </header>
   <div class="beta-banner"><b>β版</b><div><strong>理科・社会の重点対策</strong><p>通常演習は理科・社会。模試モードでは公式過去問の大問を小問に分け、教科別に10問ずつ出題。</p></div></div>
   <section class="source-note"><div><strong>問題の方針</strong><p>高専の学力検査で問われる、複数の情報を組み合わせる力・統計や地図を読み取る力を意識したオリジナル問題。過去問の文章や選択肢をそのまま転載せず、出題テーマを参考に作成している。</p><a href="https://www.kosen-k.go.jp/wp/wp-content/uploads/2026/02/04_2026_rika_mondai.pdf" target="_blank" rel="noopener noreferrer">令和8年度 理科・問題冊子（公式PDF） ↗</a><br><a href="https://www.kosen-k.go.jp/wp/wp-content/uploads/2026/02/04_2026_rika_seikai.pdf" target="_blank" rel="noopener noreferrer">理科・公式正解 ↗</a><br><a href="https://www.kosen-k.go.jp/wp/wp-content/uploads/2026/02/02_2026_syakai_mondai2.pdf" target="_blank" rel="noopener noreferrer">令和8年度 社会・問題冊子（公式PDF） ↗</a><br><a href="https://www.kosen-k.go.jp/wp/wp-content/uploads/2026/02/02_2026_syakai_seikai.pdf" target="_blank" rel="noopener noreferrer">社会・公式正解 ↗</a>
