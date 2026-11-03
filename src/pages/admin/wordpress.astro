@@ -15,6 +15,11 @@ const playgroundUrl = 'https://playground.wordpress.net/?language=ja&wp=latest&u
       <a class="open-button" href={playgroundUrl} target="_blank" rel="noopener noreferrer">別画面で大きく開く ↗</a>
     </div>
 
+    <div class="bridge-link">
+      <div><strong>記事をKNOTのブログへ公開する</strong><p>WordPressで書いた記事をXMLで書き出して、KNOT用の記事ファイルに変換できます。</p></div>
+      <a href="/admin/wordpress/import/">記事を取り込む →</a>
+    </div>
+
     <div class="notice">
       <strong>最初に知っておいてね</strong>
       <p>WordPressはこのブラウザ内で動作します。記事や画像はWordPress Playground側のブラウザ保存領域に保存され、KNOTの公開サイトへはまだ自動反映されません。ブラウザのデータ削除などで失われる可能性があるため、作業後はPlaygroundの「Export」からZIPバックアップを保存してください。</p>
@@ -45,6 +50,9 @@ const playgroundUrl = 'https://playground.wordpress.net/?language=ja&wp=latest&u
   .intro{max-width:700px;margin:10px 0 0;color:var(--muted);font-size:13px;line-height:1.9}
   .open-button{flex:none;display:inline-flex;align-items:center;justify-content:center;padding:12px 17px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--text);font-size:12px;font-weight:800;text-decoration:none}
   .open-button:hover{border-color:var(--accent);color:var(--accent)}
+  .bridge-link{display:flex;justify-content:space-between;align-items:center;gap:18px;margin:0 0 16px;padding:16px 18px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--text)}
+  .bridge-link strong{font-size:13px}.bridge-link p{margin:4px 0 0;color:var(--muted);font-size:12px;line-height:1.7}
+  .bridge-link a{flex:none;padding:10px 14px;border-radius:999px;background:var(--accent);color:white;text-decoration:none;font-size:12px;font-weight:800}
   .notice{margin:0 0 16px;padding:15px 18px;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;background:var(--surface);color:var(--text)}
   .notice strong{font-size:12px}
   .notice p{margin:5px 0 0;color:var(--muted);font-size:12px;line-height:1.85}
