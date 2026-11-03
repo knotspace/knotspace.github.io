@@ -3380,7 +3380,7 @@ function recordLife(L){const A=loadAch();A.lives=(A.lives||0)+1;if(S.mode==="slo
 function achHTML(A){A=A||loadAch();const got=A.got||{};const n=ACHV.filter(a=>got[a[0]]).length;
   return`<details${n>1?" open":""}><summary><span class="label" style="color:var(--ink)">人生の実績　${n}／${ACHV.length}</span></summary><p class="muted" style="font-size:12px;margin:2px 0 8px">生まれた回数 ${A.lives||0}回・生まれた都道府県 ${Object.keys(A.prefs||{}).length}／47・クリアしたチャレンジ ${Object.keys(A.cleared||{}).length}／${CHALLENGES.length}</p><div class="achgrid">${ACHV.map(([id,name,desc])=>`<div class="ach ${got[id]?"on":""}" title="${esc(desc||name)}"><b>${got[id]?esc(name):"？？？"}</b>${got[id]?`<small>${esc(desc||"")}</small>`:`<small>${esc(name.slice(0,1)+"○".repeat(Math.min(7,name.length-1)))}</small>`}</div>`).join("")}</div></details>`}
 // ===== 計測（GoatCounter。未設定なら何もしない） =====
-const GC="https://1oku2380man.goatcounter.com";
+const GC="";
 function track(){}
 function showPlays(){}
 const TIP_URL="";// 応援（投げ銭）用 Stripe Payment Link
@@ -3761,7 +3761,7 @@ function drawCard(L){
     evs.forEach(e=>{g.fillStyle="#7daeff";g.font="700 22px 'IBM Plex Mono',monospace";g.textAlign="right";g.fillText(`${e.a}歳`,140,y);g.textAlign="left";g.fillStyle="#e8f1ff";g.font="500 23px 'Zen Kaku Gothic New',sans-serif";const ls=wrapW(g,e.t,W-240);ls.forEach((l,k)=>{g.fillText(l,160,y);y+=32});y+=6})}
   y+=26;g.fillStyle="#7daeff";g.font="700 28px 'Zen Kaku Gothic New',sans-serif";g.fillText(ra.p<.5?`この道をたどる人は ${ra.text}`:`どこにでもありそうで、ひとつしかない人生`,70,y);
   g.save();g.translate(W-150,130);g.rotate(-.12);g.strokeStyle="#7daeff";g.lineWidth=5;g.strokeRect(-60,-60,120,120);g.fillStyle="#7daeff";g.font="900 44px 'Zen Old Mincho',serif";g.textAlign="center";g.fillText("死亡",0,-6);g.fillText("届出",0,42);g.restore();
-  g.fillStyle="#9aa4b5";g.font="500 18px 'IBM Plex Mono',monospace";g.textAlign="right";g.fillText("rs-developing26.github.io/1oku2380man",W-70,y+40);if(nick()){g.font="500 20px 'Zen Kaku Gothic New',sans-serif";g.fillText("Player: "+nick(),W-70,y+70)}g.textAlign="left";
+  g.fillStyle="#9aa4b5";g.font="500 18px 'IBM Plex Mono',monospace";g.textAlign="right";g.fillText("knotspace.github.io/game/life",W-70,y+40);if(nick()){g.font="500 20px 'Zen Kaku Gothic New',sans-serif";g.fillText("Player: "+nick(),W-70,y+70)}g.textAlign="left";
   return y+100};
   cv.width=W;cv.height=2400;const H=Math.max(630,Math.ceil(draw(g0,2400)));cv.height=H;draw(cv.getContext("2d"),H);
   return cv;
@@ -3789,7 +3789,7 @@ function drawObit(L){
     y+=20;g.beginPath();g.moveTo(60,y);g.lineTo(W-60,y);g.stroke();y+=56;
     g.fillStyle="#3a4252";g.font=`italic 500 28px ${M}`;wrapW(g,"「"+epitaph(L)+"」",W-120).forEach(l=>{g.fillText(l,60,y);y+=42});
     y+=16;g.font=`500 24px ${G}`;g.fillStyle="#91a5bf";g.fillText(mo?"葬儀は近親者で行った。":"葬儀は行われなかった。",60,y);
-    y+=70;g.fillStyle="#9aa4b5";g.font=`500 18px 'IBM Plex Mono',monospace`;g.textAlign="right";g.fillText("rs-developing26.github.io/1oku2380man",W-60,y);g.textAlign="left";
+    y+=70;g.fillStyle="#9aa4b5";g.font=`500 18px 'IBM Plex Mono',monospace`;g.textAlign="right";g.fillText("knotspace.github.io/game/life",W-60,y);g.textAlign="left";
     return y+50};
   cv.width=W;cv.height=2000;const H=Math.max(900,Math.ceil(draw(cv.getContext("2d"),2000)));cv.height=H;draw(cv.getContext("2d"),H);return cv}
 function drawNenpyo(L){
@@ -3804,7 +3804,7 @@ function drawNenpyo(L){
     let y=250;const X=230;g.font=`500 28px ${G}`;{let yy=y,last=y;rows.forEach(r=>{last=yy;yy+=wrapW(g,r.t,W-X-90).length*40+42});g.strokeStyle="#213955";g.lineWidth=4;g.beginPath();g.moveTo(X,y);g.lineTo(X,last);g.stroke()}
     rows.forEach(r=>{g.fillStyle="#9aa4b5";g.font=`500 20px 'IBM Plex Mono',monospace`;g.textAlign="right";g.fillText(`${by+r.a}`,X-36,y-24);g.fillStyle=r.c;g.font=`700 30px 'IBM Plex Mono',monospace`;g.fillText(`${r.a}歳`,X-36,y+8);g.textAlign="left";
       g.fillStyle=r.c;g.beginPath();g.arc(X,y,10,0,7);g.fill();g.fillStyle="#e8f1ff";g.font=`500 28px ${G}`;const ls=wrapW(g,r.t,W-X-90);ls.forEach(l=>{g.fillText(l,X+34,y+10);y+=40});y+=42});
-    g.fillStyle="#9aa4b5";g.font=`500 18px 'IBM Plex Mono',monospace`;g.textAlign="right";g.fillText("rs-developing26.github.io/1oku2380man",W-60,y+20);g.textAlign="left";
+    g.fillStyle="#9aa4b5";g.font=`500 18px 'IBM Plex Mono',monospace`;g.textAlign="right";g.fillText("knotspace.github.io/game/life",W-60,y+20);g.textAlign="left";
     return y+70};
   cv.width=W;cv.height=4000;const H=Math.max(1350,Math.ceil(draw(cv.getContext("2d"),4000)));cv.height=H;draw(cv.getContext("2d"),H);return cv}
 
