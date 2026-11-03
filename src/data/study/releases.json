@@ -1,6 +1,21 @@
 {
   "releases": [
     {
+      "id": "a8aaae5",
+      "publishedAt": "2026-11-03T20:35:48+09:00",
+      "title": "Complete social past-paper large question one (#39)",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "学習コンテンツ・データ",
+        "高専対策"
+      ],
+      "files": [
+        "src/data/study/kosen-past-questions.json",
+        "src/pages/study/kosen.astro"
+      ]
+    },
+    {
       "id": "9266967",
       "publishedAt": "2026-11-03T20:34:07+09:00",
       "title": "Add mixed science/social mode and 50 grouped KOSEN questions (#38)",
