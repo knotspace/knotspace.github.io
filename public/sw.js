@@ -1,5 +1,5 @@
 const CACHE_NAME = 'knot-shell-v2';
-const APP_SHELL = ['/', '/study/', '/study/quotes/'];
+const APP_SHELL = ['/'];
 const PRIVATE_PATHS = ['/account', '/mypage', '/writer', '/admin'];
 
 function isPrivatePath(pathname) {
@@ -27,7 +27,7 @@ self.addEventListener('install', (event) => {
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys()
-      .then((keys) => Promise.all(keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))))
+      .then((keys) => Promise.all(keys.filter((key) => key.startsWith('knot-shell-') && key !== CACHE_NAME).map((key) => caches.delete(key))))
       .then(() => self.clients.claim())
   );
 });
