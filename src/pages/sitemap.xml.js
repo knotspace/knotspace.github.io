@@ -10,6 +10,7 @@ const escapeXml = (value) => String(value).replace(/[<>&"']/g, (character) => ({
 
 export async function GET({ site }) {
   const now = new Date();
+  const pages = (await getCollection('pages')).filter((page) => !page.data.noindex);
   const posts = (await getCollection('blog'))
     .filter((post) => !post.data.publishAt || post.data.publishAt <= now)
     .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
@@ -45,6 +46,11 @@ export async function GET({ site }) {
       loc: new URL(`/blog/${post.id}/`, site).href,
       lastmod: (post.data.updatedDate ?? post.data.pubDate).toISOString(),
       image: post.data.heroImage ? new URL(post.data.heroImage, site).href : null,
+    })),
+    ...pages.map((page) => ({
+      loc: new URL(`/p/${page.id}/`, site).href,
+      lastmod: page.data.updatedDate?.toISOString() ?? page.data.pubDate?.toISOString(),
+      image: page.data.heroImage ? new URL(page.data.heroImage, site).href : null,
     })),
   ];
 
