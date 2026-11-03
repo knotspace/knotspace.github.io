@@ -69,7 +69,7 @@ const dateTimeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocal
     const number = card.querySelector('.popular-number');
     if (number) number.textContent = String(index + 1).padStart(2, '0');
   });
-  showTop();
+  list.dataset.ready = "false";
   fetch(`${SUPABASE_URL}/rest/v1/article_stats?select=slug,views,likes`, { headers })
     .then(response => { if (!response.ok) throw new Error('stats unavailable'); return response.json(); })
     .then(rows => {
@@ -88,12 +88,15 @@ const dateTimeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocal
         if (label) label.textContent = `いいね ${stat.likes.toLocaleString('ja-JP')}`;
       });
       showTop();
+      list.dataset.ready = "true";
     })
     .catch(() => {
       cards.forEach(card => {
         const label = card.querySelector('.popular-stats');
         if (label) label.textContent = '';
       });
+      showTop();
+      list.dataset.ready = "true";
     });
 })();
 </script>
@@ -102,7 +105,7 @@ const dateTimeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocal
 <style>
 
 .popular-section{padding:28px 5.5% 0}
-.popular-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 28px}.popular-card:nth-child(n+5){display:none}
+.popular-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 28px;min-height:360px}.popular-list:not([data-ready="true"]) .popular-card{visibility:hidden}.popular-card:nth-child(n+5){display:none}
 .popular-card{position:relative;display:grid;grid-template-columns:112px minmax(0,1fr) 18px;gap:15px;align-items:center;padding:17px 0;border-bottom:1px solid var(--line);min-width:0}
 .popular-card[hidden]{display:none!important}
 .popular-thumb{position:relative;width:112px;height:82px;overflow:hidden;background:var(--surface-soft)}
