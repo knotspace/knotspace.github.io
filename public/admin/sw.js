@@ -1,4 +1,4 @@
-const CACHE_NAME = 'knot-cms-studio-v4';
+const CACHE_NAME = 'knot-cms-studio-v5';
 const SCOPE = '/admin/';
 const SHELL = [
   '/admin/',
@@ -6,6 +6,7 @@ const SHELL = [
   '/admin/decap-cms.js',
   '/admin/admin.css',
   '/admin/editor-tools.js',
+  '/admin/block-editor.js',
   '/admin/richtext-components.js',
   '/admin/admin-app-icon.svg',
   '/admin/knot-logo.svg',
