@@ -24,6 +24,9 @@ heroImage: "/blog-art/welcome.svg"
 
 ## このブログで書いていくこと
 
+<figure class="knot-infographic"><img src="/blog-art/blog-topics.svg" alt="KNOTブログで扱う勉強、読書、PC・Web制作、日々の発見の4つのテーマ" width="1000" height="560" loading="lazy" decoding="async" /><figcaption>KNOTで扱う4つのテーマ：KNOT制作</figcaption></figure>
+
+
 今のところ、こんなテーマを考えています。
 
 - **勉強・受験**：勉強してわかったこと、問題を解いて気づいたこと
