@@ -1,8 +1,8 @@
 import { createElement as el, createRoot, useEffect, useRef, useState } from '@wordpress/element';
-import { registerBlockType, getBlockType, createBlock } from '@wordpress/blocks';
+import { registerBlockType, getBlockType, createBlock, parse, serialize } from '@wordpress/blocks';
 import { registerCoreBlocks } from '@wordpress/block-library';
 import {
-  BlockEditorProvider, BlockList, BlockTools, Inserter, WritingFlow, ObserveTyping,
+  BlockEditorProvider, BlockList, BlockTools, BlockInspector, Inserter, WritingFlow, ObserveTyping,
   BlockEditorKeyboardShortcuts, useBlockProps, RichText
 } from '@wordpress/block-editor';
 import { SlotFillProvider, DropZoneProvider, Popover, SelectControl } from '@wordpress/components';
@@ -119,32 +119,35 @@ function asArray(value) {
 }
 
 function legacyToBlocks(value) {
-  return asArray(value).map(item => {
+  return asArray(value).flatMap(item => {
+    if (item.type === 'wordpress' && typeof item.html === 'string') return parse(item.html);
+    if (item.type === 'wordpress-block' && item.name) return [createBlock(item.name, item.attributes || {}, Array.isArray(item.innerBlocks) ? legacyToBlocks(item.innerBlocks) : [])];
     if (item.name && item.attributes) {
-      return createBlock(item.name, item.attributes || {}, Array.isArray(item.innerBlocks) ? legacyToBlocks(item.innerBlocks) : []);
+      return [createBlock(item.name, item.attributes || {}, Array.isArray(item.innerBlocks) ? legacyToBlocks(item.innerBlocks) : [])];
     }
     const type = item.type || item.blockType || 'paragraph';
-    if (type === 'heading') return createBlock('core/heading', { level: Number(item.level) === 3 ? 3 : 2, content: item.text || '' });
-    if (type === 'image') return createBlock('core/image', { url: item.src || item.image || '', alt: item.alt || '', caption: item.caption || '' });
-    if (type === 'quote') return createBlock('core/quote', { value: item.text || '', citation: item.attribution || '' });
+    if (type === 'heading') return [createBlock('core/heading', { level: Number(item.level) === 3 ? 3 : 2, content: item.text || '' })];
+    if (type === 'image') return [createBlock('core/image', { url: item.src || item.image || '', alt: item.alt || '', caption: item.caption || '' })];
+    if (type === 'quote') return [createBlock('core/quote', { value: item.text || '', citation: item.attribution || '' })];
     if (type === 'list') {
       const items = String(item.items || '').split('\n').map(text => text.trim()).filter(Boolean);
-      return createBlock('core/list', { ordered: !!item.ordered }, items.map(content => createBlock('core/list-item', { content })));
+      return [createBlock('core/list', { ordered: !!item.ordered }, items.map(content => createBlock('core/list-item', { content })));
     }
-    if (type === 'divider') return createBlock('core/separator');
-    if (type === 'callout') return createBlock('knot/callout', { title: item.title || 'ポイント', text: item.text || '', style: item.style || 'note' });
-    if (type === 'button') return createBlock('knot/button', { label: item.label || '詳しく見る', url: item.url || '' });
-    if (type === 'code') return createBlock('knot/code', { code: item.code || item.text || '', language: item.language || 'text' });
-    if (type === 'table') return createBlock('core/table', { head: item.head || [], body: item.rows || [] });
-    if (type === 'accordion') return createBlock('knot/accordion', { title: item.title || '詳しく見る', text: item.text || '' });
-    if (type === 'notice') return createBlock('knot/notice', { title: item.title || 'お知らせ', text: item.text || '', tone: item.tone || 'info' });
-    return createBlock('core/paragraph', { content: item.text || '' });
+    if (type === 'divider') return [createBlock('core/separator')];
+    if (type === 'callout') return [createBlock('knot/callout', { title: item.title || 'ポイント', text: item.text || '', style: item.style || 'note' })];
+    if (type === 'button') return [createBlock('knot/button', { label: item.label || '詳しく見る', url: item.url || '' })];
+    if (type === 'code') return [createBlock('knot/code', { code: item.code || item.text || '', language: item.language || 'text' })];
+    if (type === 'table') return [createBlock('core/table', { head: item.head || [], body: item.rows || [] })];
+    if (type === 'accordion') return [createBlock('knot/accordion', { title: item.title || '詳しく見る', text: item.text || '' })];
+    if (type === 'notice') return [createBlock('knot/notice', { title: item.title || 'お知らせ', text: item.text || '', tone: item.tone || 'info' })];
+    return [createBlock('core/paragraph', { content: item.text || '' })];
   });
 }
 
 function blocksToLegacy(blocks) {
   return blocks.map(block => {
     const a = block.attributes || {};
+    if (block.name.startsWith('core/')) return { type: 'wordpress', html: serialize([block]) };
     if (block.name === 'core/paragraph') return { type: 'paragraph', text: a.content || '' };
     if (block.name === 'core/code') return { type: 'code', code: a.content || '', language: 'text' };
     if (block.name === 'core/table') return { type: 'table', head: a.head || [], rows: a.body || [] };
@@ -197,7 +200,7 @@ function Editor({ value, onChange }) {
       value: blocks,
       onInput: update,
       onChange: update,
-      settings: { allowedBlockTypes: ['core/paragraph', 'core/heading', 'core/image', 'core/quote', 'core/list', 'core/separator', 'core/code', 'core/table', 'knot/callout', 'knot/button', 'knot/code', 'knot/accordion', 'knot/notice'] }
+      settings: { allowedBlockTypes: true, __experimentalBlockPatterns: [] }
     },
       el('div', { className: 'knot-gutenberg-editor' },
         el('div', { className: 'knot-gutenberg-topbar' },
@@ -243,6 +246,7 @@ function Editor({ value, onChange }) {
                   )
                 )
               : el(BlockTools, null,
+                  el(BlockInspector, null),
                   el(WritingFlow, null,
                     el(ObserveTyping, null,
                       el(BlockList, null)
