@@ -1,0 +1,103 @@
+---
+const { categories = [], limit = 17 } = Astro.props;
+---
+<section class="commons-gallery" data-categories={JSON.stringify(categories)} data-limit={limit} aria-label="関連資料画像">
+  <div class="commons-gallery-head">
+    <b>関連写真・図版・資料</b>
+    <span class="commons-gallery-count">Wikimedia Commons から資料を読み込み中…</span>
+  </div>
+  <div class="commons-gallery-grid"></div>
+  <p class="commons-gallery-credit">画像を選ぶとWikimedia Commonsの原資料ページが開きます。作者・ライセンス・利用条件は各資料ページで確認できます。</p>
+</section>
+<script>
+  const galleries = document.querySelectorAll('.commons-gallery:not([data-loaded])');
+  galleries.forEach(async (gallery) => {
+    gallery.dataset.loaded = 'true';
+    const categories = JSON.parse(gallery.dataset.categories || '[]');
+    const limit = Number(gallery.dataset.limit || 17);
+    const grid = gallery.querySelector('.commons-gallery-grid');
+    const count = gallery.querySelector('.commons-gallery-count');
+    const seen = new Set();
+    const items = [];
+
+    for (const category of categories) {
+      if (items.length >= limit) break;
+      try {
+        const params = new URLSearchParams({
+          action: 'query',
+          generator: 'categorymembers',
+          gcmtitle: 'Category:' + category,
+          gcmtype: 'file',
+          gcmlimit: String(Math.min(100, limit - items.length + 8)),
+          prop: 'imageinfo',
+          iiprop: 'url|extmetadata',
+          iiurlwidth: '560',
+          format: 'json',
+          origin: '*'
+        });
+        const response = await fetch('https://commons.wikimedia.org/w/api.php?' + params.toString());
+        if (!response.ok) continue;
+        const data = await response.json();
+        const pages = Object.values(data.query?.pages || {});
+        for (const page of pages) {
+          const info = page.imageinfo?.[0];
+          if (!info || seen.has(page.pageid) || !(info.thumburl || info.url) || !info.descriptionurl) continue;
+          seen.add(page.pageid);
+          const license = (info.extmetadata?.LicenseShortName?.value || 'ライセンス情報は原資料で確認').replace(/<[^>]*>/g, '').trim();
+          items.push({
+            title: (page.title || '').replace(/^File:/, '').replaceAll('_', ' '),
+            image: info.thumburl || info.url,
+            source: info.descriptionurl,
+            license
+          });
+          if (items.length >= limit) break;
+        }
+      } catch (error) {
+        // A failed category does not prevent the remaining categories from loading.
+      }
+    }
+
+    for (const item of items) {
+      const link = document.createElement('a');
+      link.className = 'commons-gallery-item';
+      link.href = item.source;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      const img = document.createElement('img');
+      img.src = item.image;
+      img.alt = item.title;
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      const caption = document.createElement('span');
+      caption.className = 'commons-gallery-title';
+      caption.textContent = item.title;
+      const license = document.createElement('small');
+      license.textContent = item.license;
+      link.append(img, caption, license);
+      grid.append(link);
+    }
+
+    count.textContent = items.length + '点を表示' + (items.length < limit ? '（カテゴリ内で取得できた資料）' : '');
+    if (!items.length) {
+      count.textContent = 'このカテゴリの資料を取得できませんでした';
+      const note = document.createElement('p');
+      note.className = 'commons-gallery-empty';
+      note.textContent = '別の資料カテゴリを順次追加します。';
+      grid.append(note);
+    }
+  });
+</script>
+<style is:global>
+.commons-gallery{margin:14px 0 20px;padding:13px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.commons-gallery-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:11px}
+.commons-gallery-head b{font-size:13px}
+.commons-gallery-count{font-size:10px;color:var(--muted)}
+.commons-gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(125px,1fr));gap:10px}
+.commons-gallery-item{display:grid;grid-template-rows:110px auto auto;gap:5px;min-width:0;text-decoration:none;color:var(--text);border:1px solid var(--line);border-radius:8px;padding:6px;background:var(--surface-soft)}
+.commons-gallery-item img{width:100%;height:110px;object-fit:contain;border-radius:5px;background:var(--surface)}
+.commons-gallery-title{font-size:10px;line-height:1.45;overflow-wrap:anywhere}
+.commons-gallery-item small{font-size:9px;line-height:1.3;color:var(--muted)}
+.commons-gallery-credit{font-size:10px;line-height:1.6;color:var(--muted);margin:10px 0 0}
+.commons-gallery-empty{font-size:11px;color:var(--muted)}
+@media(max-width:520px){.commons-gallery-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.commons-gallery-item{grid-template-rows:84px auto auto;padding:4px}.commons-gallery-item img{height:84px}}
+</style>
