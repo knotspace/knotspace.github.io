@@ -1,5 +1,6 @@
 ---
 import StudyLayout from '../../layouts/StudyLayout.astro';
+import '../../styles/study/quiz-ui.css';
 import questions from '../../data/study/kosen-questions.json';
 const topics = [...new Set(questions.map(q => q.topic))];
 ---
