@@ -1,6 +1,19 @@
 {
   "releases": [
     {
+      "id": "55bc3e6",
+      "publishedAt": "2026-11-03T21:10:20+09:00",
+      "title": "Improve KNOT past question explanations and separate standalone items",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "学習コンテンツ・データ"
+      ],
+      "files": [
+        "src/data/study/kosen-past-questions.json"
+      ]
+    },
+    {
       "id": "63ea6f9",
       "publishedAt": "2026-11-03T21:04:22+09:00",
       "title": "Set a unique canonical URL for legacy simulator redirect",
