@@ -23,7 +23,7 @@ const ADMIN_HTML = String.raw`<!doctype html>
 <header class="top"><div class="brand">KNOT <small>CONTENT STUDIO</small></div><div class="user"><span id="who">ログイン確認中...</span><button id="logout">ログアウト</button></div></header>
 <div id="login" class="login hidden"><h1>KNOT CMS</h1><p>記事を編集するには管理者としてログインしてください。</p><a href="/auth/login"><button class="primary">GitHubでログイン</button></a></div>
 <div id="app" class="layout hidden">
-<aside><div class="side-title">WORKSPACE</div><div class="nav active">▤　記事</div><div class="nav">◫　ページ <span class="muted">準備中</span></div><div class="nav">◷　編集履歴</div><div class="aside-note">KNOT CMS<br>記事は下書きとして保存されます。公開機能はまだ接続されていません。</div></aside>
+<aside><div class="side-title">WORKSPACE</div><div class="nav active">▤　記事</div><div class="nav">◫　ページ <span class="muted">準備中</span></div><a class="nav" href="https://knotspace.github.io/admin/wordpress/" target="_blank" rel="noopener noreferrer">▣　WordPress編集室 ↗</a><div class="nav">◷　編集履歴</div><div class="aside-note">KNOT CMS<br>記事は下書きとして保存されます。公開機能はまだ接続されていません。</div></aside>
 <main class="main">
 <div class="heading"><div><h1>記事</h1><div class="muted">記事の作成・編集・下書き管理</div></div><button class="primary" id="new">＋ 新しい記事</button></div>
 <div class="columns">
