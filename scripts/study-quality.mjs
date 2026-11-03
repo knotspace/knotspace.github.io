@@ -75,6 +75,47 @@ for (const bank of banks) {
   }
 }
 
+// 公式過去問の自動採点データも検証する。
+const mockFile = path.join(root, 'src/data/study/mock-2026-social.json');
+try {
+  const mock = JSON.parse(fs.readFileSync(mockFile, 'utf8'));
+  if (!Array.isArray(mock.questions)) {
+    errors.push('[高専過去問] 問題データが配列ではありません。');
+  } else {
+    if (mock.questions.length !== 25) errors.push(`[高専過去問] 問題数が25問ではありません（${mock.questions.length}問）。`);
+    const mockIds = new Set();
+    let points = 0;
+    for (const [index, question] of mock.questions.entries()) {
+      const label = `[高専過去問 / ${question?.id || index + 1}]`;
+      if (!question || typeof question !== 'object') {
+        errors.push(`${label} 問題データが不正です。`);
+        continue;
+      }
+      if (typeof question.id !== 'string' || mockIds.has(question.id)) errors.push(`${label} IDがないか重複しています。`);
+      mockIds.add(question.id);
+      if (!Array.isArray(question.choices) || question.choices.length < 4 || question.choices.length > 6) errors.push(`${label} 選択肢数が4〜6個ではありません。`);
+      if (!question.choices?.includes(question.correct)) errors.push(`${label} 正解が選択肢に含まれていません。`);
+      if (!Number.isInteger(question.points) || question.points !== 4) errors.push(`${label} 配点が4点ではありません。`);
+      points += Number(question.points) || 0;
+    }
+    if (points !== 100) errors.push(`[高専過去問] 配点合計が100点ではありません（${points}点）。`);
+  }
+  if (mock.minutes !== 50) errors.push('[高専過去問] 制限時間が50分ではありません。');
+  if (!mock.source?.problem || !mock.source?.answer) errors.push('[高専過去問] 公式問題・解答の出典URLがありません。');
+} catch (error) {
+  errors.push(`[高専過去問] 自動採点データを読み込めません: ${error.message}`);
+}
+
+for (const slug of ['physics', 'chemistry', 'biology', 'earth', 'geography', 'civics']) {
+  const summaryPath = path.join(root, `src/pages/study/summary/${slug}.astro`);
+  try {
+    const page = fs.readFileSync(summaryPath, 'utf8');
+    if (!page.includes(`<SummaryBoost slug="${slug}" />`)) errors.push(`[${slug}] 要点まとめの強化コンテンツが組み込まれていません。`);
+  } catch {
+    errors.push(`[${slug}] 要点まとめページを読み込めません。`);
+  }
+}
+
 for (const [question, count] of questionTexts) {
   if (count > 1) warnings.push(`同じ問題文が${count}件あります: ${question.slice(0, 50)}`);
 }
