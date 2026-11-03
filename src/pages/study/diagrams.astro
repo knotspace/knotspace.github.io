@@ -1,0 +1,29 @@
+---
+import StudyLayout from '../../layouts/StudyLayout.astro';
+import bank from '../../data/study/knot-diagrams.json';
+const diagrams = bank.diagrams;
+---
+<StudyLayout title="KNOTオリジナル図解400｜KNOT Study" description="理科200個・社会200個のオリジナル図解で、しくみや資料の読み取りを視覚的に理解する。">
+<main class="diagram-library">
+  <a class="back" href="/study/">← Studyに戻る</a>
+  <header><p class="eyebrow">KNOT STUDY / VISUAL LIBRARY</p><h1>KNOT制作 図解ライブラリ</h1><p>文章だけではつかみにくいしくみ・流れ・比較を、オリジナルの模式図で整理。すべてKNOTの学習用図解。</p><div class="totals"><b>400</b><span>オリジナル図解</span><b>200</b><span>理科</span><b>200</b><span>社会</span></div></header>
+  <section class="controls"><div class="filters"><button class="active" data-subject="all">すべて 400</button><button data-subject="理科">理科 200</button><button data-subject="社会">社会 200</button></div><input id="search" type="search" placeholder="単元・用語から検索"><p id="count" aria-live="polite">400個を表示</p></section>
+  <section id="grid" class="grid">
+  {diagrams.map(d=><article class="card" data-subject={d.subject} data-search={d.topic+' '+d.title+' '+d.nodes.map(n=>n.label).join(' ')}>
+    <div class="card-meta"><span>{d.subject}</span><small>{d.id.toUpperCase()}</small></div><h2>{d.title}</h2>
+    <div class:list={['visual','kind-'+d.kind]}>{d.nodes.map((n,i)=><div class="node"><small>{String(i+1).padStart(2,'0')}</small><b>{n.label}</b><span>{n.hint}</span></div>)}</div>
+    <p>{d.note}</p><footer>{d.explain}</footer>
+  </article>)}
+  </section>
+  <p id="empty" hidden>該当する図解が見つからないよ。別の言葉で検索してみてね。</p>
+</main>
+<script>
+const buttons=[...document.querySelectorAll('[data-subject]')],cards=[...document.querySelectorAll('.card')],search=document.getElementById('search'),count=document.getElementById('count'),empty=document.getElementById('empty');let subject='all';
+function filter(){const q=search.value.trim().toLocaleLowerCase();let n=0;cards.forEach(card=>{const ok=(subject==='all'||card.dataset.subject===subject)&&(!q||card.dataset.search.toLocaleLowerCase().includes(q));card.hidden=!ok;if(ok)n++;});count.textContent=n+'個を表示';empty.hidden=n>0;}
+buttons.forEach(button=>button.addEventListener('click',()=>{subject=button.dataset.subject;buttons.forEach(b=>b.classList.toggle('active',b===button));filter();}));
+search.addEventListener('input',filter);
+</script>
+<style>
+.diagram-library{max-width:1100px;margin:auto;padding:26px 0 60px}.back{font-size:12px;color:var(--accent)}header{padding:36px 0 24px;border-bottom:1px solid var(--line)}.eyebrow{font:10px ui-monospace,monospace;letter-spacing:.14em;color:var(--accent);font-weight:800}h1{font-size:clamp(30px,5vw,48px);letter-spacing:-.055em;margin:8px 0}.diagram-library header p:not(.eyebrow){font-size:13px;line-height:1.9;color:var(--muted);max-width:700px}.totals{display:flex;align-items:baseline;gap:8px;margin-top:17px;flex-wrap:wrap}.totals b{font-size:20px}.totals span{font-size:11px;color:var(--muted);margin-right:15px}.controls{position:sticky;top:0;z-index:3;padding:14px 0;background:var(--bg);display:grid;grid-template-columns:1fr minmax(200px,300px);gap:10px}.filters{display:flex;gap:7px;flex-wrap:wrap}.filters button{border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:9px;padding:9px 13px;font-size:11px;font-weight:750}.filters button.active{border-color:var(--accent);color:var(--accent);background:var(--surface-soft)}.controls input{width:100%;border:1px solid var(--line);border-radius:9px;background:var(--surface);color:var(--text);padding:10px 12px}.controls>p{grid-column:1/-1;font-size:10px;color:var(--muted);margin:0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.card{min-width:0;padding:16px;border:1px solid var(--line);border-radius:13px;background:var(--surface)}.card[hidden]{display:none}.card-meta{display:flex;justify-content:space-between;align-items:center;color:var(--accent);font-size:10px;font-weight:800}.card-meta small{font:9px ui-monospace,monospace;color:var(--muted)}.card h2{font-size:15px;line-height:1.55;margin:8px 0 13px}.visual{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px;align-items:stretch}.node{position:relative;display:grid;align-content:center;gap:4px;min-width:0;min-height:90px;padding:8px 5px;text-align:center;border:1px solid var(--line);border-radius:9px;background:var(--surface-soft)}.node:not(:last-child):after{content:'→';position:absolute;right:-14px;top:50%;transform:translate(50%,-50%);font-weight:900;color:var(--accent)}.node small{font:9px ui-monospace,monospace;color:var(--accent)}.node b{font-size:11px;line-height:1.45;overflow-wrap:anywhere}.node span{font-size:9px;line-height:1.35;color:var(--muted)}.kind-cycle .node{border-radius:50%;aspect-ratio:1;min-height:80px}.kind-cycle .node:not(:last-child):after{content:'↻'}.kind-compare,.kind-stack{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.kind-compare .node,.kind-stack .node{min-height:65px}.kind-compare .node:after,.kind-stack .node:after{display:none}.kind-data .node:nth-child(odd){transform:translateY(7px)}.kind-data .node:nth-child(even){transform:translateY(-7px)}.card>p{font-size:10px;line-height:1.7;color:var(--muted);margin:13px 0 7px}.card footer{font-size:11px;line-height:1.7;font-weight:650}#empty{padding:35px;text-align:center;color:var(--muted)}@media(max-width:720px){.diagram-library{padding:20px 0 42px}.controls{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.visual{gap:11px}.node{min-height:75px;padding:6px 3px}.node b{font-size:10px}.node span{font-size:8px}.node:not(:last-child):after{right:-11px;font-size:12px}.kind-cycle .node{min-height:65px}}
+</style>
+</StudyLayout>
