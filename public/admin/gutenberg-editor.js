@@ -2,7 +2,7 @@ import { createElement as el, createRoot, useEffect, useRef, useState } from '@w
 import { registerBlockType, getBlockType, createBlock } from '@wordpress/blocks';
 import { registerCoreBlocks } from '@wordpress/block-library';
 import {
-  BlockEditorProvider, BlockList, BlockTools, Inserter, WritingFlow, ObserveTyping,
+  BlockEditorProvider, BlockList, BlockTools, Inserter, WritingFlow, ObserveTyping, DropZoneProvider,
   BlockEditorKeyboardShortcuts, useBlockProps, RichText
 } from '@wordpress/block-editor';
 import { SlotFillProvider, Popover, SelectControl } from '@wordpress/components';
@@ -130,7 +130,13 @@ function Editor({ value, onChange }) {
   };
 
   return el(SlotFillProvider, null,
-    el(BlockEditorProvider, { value: blocks, onInput: update, onChange: update },
+    el(DropZoneProvider, null,
+    el(BlockEditorProvider, {
+      value: blocks,
+      onInput: update,
+      onChange: update,
+      settings: { allowedBlockTypes: ['core/paragraph', 'core/heading', 'core/image', 'core/quote', 'core/list', 'core/separator', 'knot/callout', 'knot/button'] }
+    },
       el('div', { className: 'knot-gutenberg-editor' },
         el('div', { className: 'knot-gutenberg-topbar' },
           el('strong', null, 'ブロックエディター'),
@@ -149,7 +155,7 @@ function Editor({ value, onChange }) {
         el(Popover.Slot, null)
       )
     )
-  );
+  ));
 }
 
 const roots = new WeakMap();
