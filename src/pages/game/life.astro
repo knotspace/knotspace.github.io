@@ -206,8 +206,8 @@ function schoolsForExam(tag){
  const pref=state.prefecture;
  return schoolRecords.filter(x=>{
    const t=String(x.schoolType||'');
-   const match=type==='中学校' ? /中学校|中等教育学校/.test(t) :
-     type==='高等学校' ? /高等学校|中等教育学校/.test(t) : /大学/.test(t);
+   const match=type==='中学校' ? (/中学校|中等教育学校/.test(t) && (x.integratedSchool || /中等教育学校/.test(t) || x.ownership==='私立')) :
+     type==='高等学校' ? /高等学校|中等教育学校|高等専門学校/.test(t) : /大学/.test(t);
    return match && (!pref || x.prefecture===pref);
  }).sort((a,b)=>(schoolDeviation(b)||0)-(schoolDeviation(a)||0));
 }
