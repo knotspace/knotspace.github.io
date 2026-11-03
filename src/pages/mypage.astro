@@ -9,7 +9,7 @@ const supabaseKey = 'sb_publishable_-yhc0QqTEEZTBWi9jTcFRA_-AVi-iP6';
     <header class="welcome"><span class="eyebrow">YOUR SPACE</span><h1>マイページ</h1><p id="user-email">ログイン情報を確認しています...</p></header>
     <section id="admin-panel" class="panel" hidden><span class="eyebrow">KNOT ADMIN</span><h2>管理人アカウント</h2><p>管理人権限が有効です。このアカウントはKNOTの管理者として登録されています。</p></section>
     <section id="writer-link" class="panel" hidden><span class="eyebrow">KNOT WRITER</span><h2>投稿者ワークスペース</h2><p>記事の下書きを作成・編集できます。公開操作はできません。</p><a href={BASE + 'writer/'}>記事を書く →</a></section>
-    <section id="invite-panel" class="panel" hidden><span class="eyebrow">WRITER MANAGEMENT</span><h2>投稿者を招待</h2><p>先に相手に通常のKNOTアカウントを作成してもらい、その登録メールアドレスに投稿者権限を付与します。ここで作るSQLをSupabaseのSQL Editorで実行してください。</p><form id="invite-form"><label>登録済みメールアドレス<input id="invite-email" type="email" required placeholder="writer@example.com" /></label><button type="submit">権限付与SQLを作成</button></form><textarea id="writer-sql" rows="4" readonly placeholder="ここにSQLが表示されます"></textarea><button id="copy-writer-sql" type="button">SQLをコピー</button><p id="invite-message" role="status"></p><h3>投稿者から届いた記事</h3><div id="admin-submissions">読み込み中...</div></section>
+    <section id="invite-panel" class="panel" hidden><span class="eyebrow">WRITER MANAGEMENT</span><h2>投稿者を招待</h2><p>先に相手にKNOTアカウントを作成してもらい、そのユーザー名に投稿者権限を付与します。ここで作るSQLをSupabaseのSQL Editorで実行してください。</p><form id="invite-form"><label>登録済みユーザー名<input id="invite-username" type="text" minlength="3" maxlength="20" required placeholder="knot_writer" /></label><button type="submit">権限付与SQLを作成</button></form><textarea id="writer-sql" rows="4" readonly placeholder="ここにSQLが表示されます"></textarea><button id="copy-writer-sql" type="button">SQLをコピー</button><p id="invite-message" role="status"></p><h3>投稿者から届いた記事</h3><div id="admin-submissions">読み込み中...</div></section>
     <section class="profile panel">
       <div><span class="eyebrow">PROFILE</span><h2>プロフィール</h2></div>
       <label>表示名<input id="display-name" maxlength="30" placeholder="表示名" /></label>
@@ -74,7 +74,7 @@ const supabaseKey = 'sb_publishable_-yhc0QqTEEZTBWi9jTcFRA_-AVi-iP6';
     const load = async () => {
       try {
         const user = await request('/auth/v1/user');
-        $('user-email').textContent = user.email || '';
+        $('user-email').textContent = user.user_metadata?.username ? '@' + user.user_metadata.username : 'ユーザー名未設定';
         const adminRows = await request('/rest/v1/knot_admins?select=user_id&user_id=eq.' + encodeURIComponent(user.id));
         if (adminRows.length) {
           $('admin-panel').hidden = false;
@@ -112,13 +112,13 @@ const supabaseKey = 'sb_publishable_-yhc0QqTEEZTBWi9jTcFRA_-AVi-iP6';
     }
     $('invite-form').addEventListener('submit', event => {
       event.preventDefault();
-      const email = $('invite-email').value.trim().replace(/'/g, "''");
-      if (!email) return;
-      $('writer-sql').value = "insert into public.knot_writer_roles (user_id) select id from auth.users where lower(email) = lower('" + email + "') on conflict (user_id) do nothing;";
+      const username = $('invite-username').value.trim().toLowerCase().replace(/'/g, "''");
+      if (!/^[a-z0-9_-]{3,20}$/.test(username)) { $('invite-message').textContent = 'ユーザー名は半角英数字・_・-の3〜20文字で入力してね。'; return; }
+      $('writer-sql').value = "insert into public.knot_writer_roles (user_id) select user_id from public.knot_usernames where username_norm = '" + username + "' on conflict (user_id) do nothing;";
       $('invite-message').textContent = "SQLを作成したよ。SupabaseのSQL Editorで実行してね。";
     });
     $('copy-writer-sql').addEventListener('click', async () => {
-      if (!$('writer-sql').value) { $('invite-message').textContent = "先にメールアドレスを入力してSQLを作成してね。"; return; }
+      if (!$('writer-sql').value) { $('invite-message').textContent = "先にユーザー名を入力してSQLを作成してね。"; return; }
       try { await navigator.clipboard.writeText($('writer-sql').value); $('invite-message').textContent = "SQLをコピーしました。"; }
       catch { $('invite-message').textContent = "SQL欄を選択して手動でコピーしてね。"; }
     });
