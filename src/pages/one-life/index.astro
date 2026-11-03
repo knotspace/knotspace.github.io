@@ -101,11 +101,12 @@ async function loadSchools(pref){
  }
 }
 prefectureSelect.addEventListener('change',()=>loadSchools(prefectureSelect.value));
-loadSchools(prefectureSelect.value);
-let state=null, stages=[],clockHandle=null,lastClockTick=0;
+let state=null, stages=[],stagesSignature=null,clockHandle=null,lastClockTick=0;
 const choices=(items)=>items.map(([label,effect,log,decision])=>({label,effect,log,decision}));
 function stage(year,season,title,scene,desc,opts,tag){return {year,season,title,scene,desc,opts:choices(opts),tag};}
 function buildStages(){
+ const signature=JSON.stringify([state?.decisions,state?.deathAge]);
+ if(stages.length&&signature===stagesSignature)return;
  const s=[];
  const add=(...args)=>s.push(stage(...args));
  const school=[['毎日少しずつ宿題と復習をする',{study:7},'机に向かう習慣が少しずつ身についた。'],['友達と遊びながらいろいろなことを経験する',{friends:7,experience:6},'友達との時間や遊びから多くを学んだ。'],['スポーツや習い事に打ち込む',{health:7,experience:6},'続けることの楽しさと難しさを知った。']];
@@ -246,6 +247,7 @@ function buildStages(){
  ],'DEATH');
  death.automatic=true;s.push(death);
  stages=s;
+ stagesSignature=signature;
  if(state)state.estimatedYears=Math.max(1,stages.length);
 }
 
@@ -285,7 +287,7 @@ function startClock(){
     try{localStorage.setItem('knot-life-sim-v2',JSON.stringify(state));}catch{}
    }
   }
- },100);
+ },250);
 }
 function updateClockUI(){
  const automatic=!!stages[state.step]?.automatic;
@@ -559,7 +561,7 @@ body.life-game-body{background:#f4f0e7;color:var(--text)}
 .life-clock span,.auto-control,#clock-message{font-size:11px;color:var(--muted)}
 .life-clock strong{font:700 15px ui-monospace,monospace}
 .clock-track{grid-column:1/-1;display:block;height:5px;background:#d8d0c2;border-radius:8px;overflow:hidden}
-.clock-track b{display:block;width:0;height:100%;background:var(--accent);transition:width .1s linear}
+.clock-track b{display:block;width:0;height:100%;background:var(--accent)}
 .clock-actions{display:flex;gap:5px;flex-wrap:wrap}
 .clock-actions button{border:1px solid #d4cbbb;background:#fffdf8;color:var(--text);padding:7px 11px;font:inherit;font-size:10px;cursor:pointer}
 .clock-actions button.active{background:var(--text);border-color:var(--text);color:white}
