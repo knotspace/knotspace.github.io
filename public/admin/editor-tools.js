@@ -5,6 +5,9 @@
 
   const style = document.createElement("style");
   style.textContent = `
+    .knot-privacy-warning{margin:0 0 10px;padding:10px 12px;border:1px solid #c58a4a88;border-radius:8px;background:#8a5b241c;color:var(--knot-admin-text,#d2dadd)}
+    .knot-privacy-warning strong{display:block;margin-bottom:4px;color:#e8b36e}
+    .knot-privacy-warning p{margin:0;font-size:11px;line-height:1.7}
     .knot-editor-tools{margin:10px 0 8px;padding:12px;border:1px solid var(--knot-admin-border,#465258);border-radius:10px;background:var(--knot-admin-surface,#30393e);color:var(--knot-admin-text,#d2dadd);font:13px/1.5 system-ui}
     .knot-tools-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:9px}
     .knot-tools-title{font-weight:700}
@@ -55,7 +58,7 @@
     el.dataset.knotTools = "1";
     const panel = document.createElement("section");
     panel.className = "knot-editor-tools";
-    panel.innerHTML = '<div class="knot-tools-top"><span class="knot-tools-title">✍️ 記事編集アシスト</span><span class="knot-tools-stats" aria-live="polite"></span></div><div class="knot-tools-buttons"></div><div class="knot-tools-help">ボタンを押すとカーソル位置にパーツが入るよ。吹き出し・枠の中の文章や名前を書き換えて使ってね。HTMLタグは消さず、中の文章だけ編集してね。</div>';
+    panel.innerHTML = '<div class="knot-privacy-warning"><strong>🔒 公開前の個人情報チェック</strong><p>本名・学校名・学年・住所・電話番号・メール・行動範囲・他人の名前は書かない。顔写真や場所が分かる画像も使わないでね。</p></div><div class="knot-tools-top"><span class="knot-tools-title">✍️ 記事編集アシスト</span><span class="knot-tools-stats" aria-live="polite"></span></div><div class="knot-tools-buttons"></div><div class="knot-tools-help">ボタンを押すとカーソル位置にパーツが入るよ。吹き出し・枠の中の文章や名前を書き換えて使ってね。HTMLタグは消さず、中の文章だけ編集してね。</div>';
     const buttons = panel.querySelector(".knot-tools-buttons");
     snippets.forEach(([label, value, selected]) => {
       const b = document.createElement("button");
