@@ -761,4 +761,42 @@ const breadcrumbJsonLd = {
   .side-toc li a.is-current{border:0;border-radius:9px;background:color-mix(in srgb,var(--accent) 12%,var(--surface));}
   .side-toc li.toc-level-3{padding-left:12px}
 
+
+  /* Sidebar TOC: fully rounded, soft navigation items */
+  .article-sidebar .article-side-widget.side-toc{
+    border:1px solid var(--line);
+    border-radius:20px;
+    overflow:hidden;
+    clip-path:inset(0 round 20px);
+    background:var(--surface);
+  }
+  .article-sidebar .side-toc h2{
+    border:0;
+    border-bottom:1px solid var(--line);
+    border-radius:0;
+    padding:15px 17px;
+    background:var(--surface-soft);
+  }
+  .article-sidebar .side-toc ol{padding:12px}
+  .article-sidebar .side-toc li{margin:3px 0}
+  .article-sidebar .side-toc li a{
+    border:0;
+    border-radius:12px;
+    padding:10px 12px;
+    background:transparent;
+    transform:none;
+    transition:background .2s ease,color .2s ease;
+  }
+  .article-sidebar .side-toc li a:hover{
+    border:0;
+    border-radius:12px;
+    background:var(--surface-soft);
+  }
+  .article-sidebar .side-toc li a.is-current{
+    border:0;
+    border-radius:12px;
+    background:color-mix(in srgb,var(--accent) 13%,var(--surface));
+    color:var(--accent);
+  }
+
 </style>
