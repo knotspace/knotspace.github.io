@@ -1,0 +1,43 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="GAME｜KNOT" description="KNOTのゲーム。人生シミュレーションや学びにつながるゲームを楽しもう。">
+<main class="game-home">
+  <header class="game-hero">
+    <p class="eyebrow">KNOT / GAME CENTER</p>
+    <h1>PLAY YOUR<br/><span>STORY.</span></h1>
+    <p class="lead">選択が、人生をつくっていく。<br/>KNOTのゲームで、まだ知らない自分の可能性を体験しよう。</p>
+    <div class="hero-meta"><span>GAMES & SIMULATIONS</span><span>YOUR CHOICE, YOUR STORY.</span></div>
+  </header>
+  <section class="game-section">
+    <div class="section-heading"><div><p class="eyebrow">AVAILABLE NOW</p><h2>ゲーム一覧</h2></div><span>01 / 01</span></div>
+    <a class="game-card" href="./life/">
+      <div class="game-art"><span class="art-kicker">LIFE SIMULATION</span><strong>YOUR<br/>LIFE.</strong><span class="art-bottom">FROM CHILDHOOD TO THE FUTURE</span><i>↗</i></div>
+      <div class="game-copy"><span class="game-status">PLAYABLE</span><h3>人生シミュレーター</h3><p>小学校から始まる、あなただけの人生。中学受験・高校受験・進路・仕事・起業。実在する全国の学校を選びながら、人生の選択を重ねていこう。</p><span class="play-link">ゲームを始める <b>→</b></span></div>
+    </a>
+    <div class="coming-card"><span>COMING NEXT</span><strong>NEW GAME</strong><p>新しいゲームを準備中。</p></div>
+  </section>
+  <footer class="game-foot"><span>KNOT GAME CENTER</span><span>MADE TO EXPLORE.</span></footer>
+</main>
+</Layout>
+<style>
+.game-home{--game-accent:#a6f36b;max-width:1080px;margin:0 auto;padding:42px 22px 30px;color:var(--text)}
+.game-home a{color:inherit;text-decoration:none}
+.game-hero{position:relative;min-height:390px;padding:48px 5.5% 28px;background:#101713;color:#f3f6ef;overflow:hidden}
+.game-hero:after{content:"";position:absolute;width:360px;height:360px;right:7%;top:8%;border:1px solid rgba(166,243,107,.3);border-radius:50%;box-shadow:0 0 0 35px rgba(166,243,107,.035),0 0 0 75px rgba(166,243,107,.025)}
+.eyebrow{font:10px ui-monospace,monospace;letter-spacing:.18em;color:#a6f36b;font-weight:800}
+.game-hero h1{position:relative;z-index:1;margin:35px 0 18px;font:900 clamp(58px,10vw,112px)/.82 Arial,sans-serif;letter-spacing:-.09em}
+.game-hero h1 span{color:#a6f36b}
+.game-hero .lead{position:relative;z-index:1;color:#c4cec1;font-size:13px;line-height:2}
+.hero-meta{position:relative;z-index:1;display:flex;justify-content:space-between;border-top:1px solid #344238;padding-top:13px;margin-top:36px;color:#8f9d8d;font:9px ui-monospace,monospace;letter-spacing:.12em}
+.game-section{padding:38px 5.5%}
+.section-heading{display:flex;justify-content:space-between;align-items:end;margin-bottom:20px}.section-heading h2{font-size:25px;margin:7px 0 0}.section-heading>span{font:10px ui-monospace,monospace;color:var(--muted)}
+.game-card{display:grid;grid-template-columns:1.05fr .95fr;border:1px solid var(--line);background:var(--surface);transition:transform .25s,border-color .25s}.game-card:hover{transform:translateY(-3px);border-color:#a6f36b}
+.game-art{position:relative;min-height:290px;padding:24px;background:#18251b;color:#f4f7ef;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between}
+.game-art:before{content:"";position:absolute;width:230px;height:230px;border:1px solid rgba(166,243,107,.35);border-radius:50%;right:-30px;top:30px;box-shadow:0 0 0 25px rgba(166,243,107,.04),0 0 0 55px rgba(166,243,107,.03)}
+.art-kicker,.art-bottom{position:relative;z-index:1;color:#a6f36b;font:9px ui-monospace,monospace;letter-spacing:.15em}.game-art strong{position:relative;z-index:1;font:900 clamp(55px,8vw,90px)/.8 Arial,sans-serif;letter-spacing:-.1em}.game-art i{position:absolute;right:22px;bottom:20px;font-size:28px;color:#a6f36b;font-style:normal}
+.game-copy{padding:30px;display:flex;flex-direction:column;align-items:flex-start}.game-status{padding:5px 8px;border:1px solid #a6f36b;color:#5d9b34;font:9px ui-monospace,monospace;letter-spacing:.1em}.game-copy h3{font-size:24px;margin:17px 0 9px}.game-copy p{font-size:12px;line-height:2;color:var(--muted);margin:0}.play-link{margin-top:auto;padding-top:25px;font-size:12px;font-weight:850}.play-link b{margin-left:15px;color:#78b746;font-size:18px}
+.coming-card{margin-top:18px;padding:19px 22px;border:1px dashed var(--line);display:grid;grid-template-columns:1fr 1fr;gap:5px 20px}.coming-card>span{font:9px ui-monospace,monospace;color:var(--muted);letter-spacing:.15em}.coming-card strong{text-align:right;font:11px ui-monospace,monospace}.coming-card p{grid-column:1/-1;margin:4px 0 0;color:var(--muted);font-size:11px}
+.game-foot{display:flex;justify-content:space-between;padding:18px 5.5%;border-top:1px solid var(--line);color:var(--muted);font:9px ui-monospace,monospace;letter-spacing:.12em}
+@media(max-width:700px){.game-home{padding:15px 10px}.game-hero{min-height:350px;padding:35px 6% 20px}.game-hero:after{right:-100px;top:60px}.game-hero h1{font-size:clamp(62px,17vw,92px)}.game-section{padding:27px 2%}.game-card{grid-template-columns:1fr}.game-art{min-height:230px}.game-copy{padding:22px}.game-copy p{font-size:11px}.game-foot{font-size:8px}}
+</style>
