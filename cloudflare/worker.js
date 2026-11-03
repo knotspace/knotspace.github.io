@@ -23,7 +23,7 @@ const ADMIN_HTML = String.raw`<!doctype html>
 <header class="top"><div class="brand">KNOT <small>CONTENT STUDIO</small></div><div class="user"><span id="who">ログイン確認中...</span><button id="logout">ログアウト</button></div></header>
 <div id="login" class="login hidden"><h1>KNOT CMS</h1><p>記事を編集するには管理者としてログインしてください。</p><a href="/auth/login"><button class="primary">GitHubでログイン</button></a></div>
 <div id="app" class="layout hidden">
-<aside><div class="side-title">WORKSPACE</div><div class="nav active">▤　記事</div><div class="nav">◫　ページ <span class="muted">準備中</span></div><a class="nav" href="https://knotspace.github.io/admin/wordpress/" target="_blank" rel="noopener noreferrer">▣　WordPress編集室 ↗</a><div class="nav">◷　編集履歴</div><div class="aside-note">KNOT CMS<br>記事は下書きとして保存されます。公開機能はまだ接続されていません。</div></aside>
+<aside><div class="side-title">WORKSPACE</div><div class="nav active">▤　記事</div><div class="nav">◫　ページ <span class="muted">準備中</span></div><a class="nav" href="https://knotspace.github.io/admin/wordpress/" target="_blank" rel="noopener noreferrer">▣　WordPress編集室 ↗</a><div class="nav">◷　編集履歴</div><div class="aside-note">KNOT CMS<br>記事の作成・編集・下書き保存・GitHub公開に対応。</div></aside>
 <main class="main">
 <div class="heading"><div><h1>記事</h1><div class="muted">記事の作成・編集・下書き管理</div></div><button class="primary" id="new">＋ 新しい記事</button></div>
 <div class="columns">
@@ -72,7 +72,7 @@ async function loadList(){
     data.documents.forEach(doc=>{
       const b=document.createElement("button");b.className="doc"+(current&&current.document_id===doc.document_id?" selected":"");
       const strong=document.createElement("strong");strong.textContent=doc.title;
-      const span=document.createElement("span");span.textContent=(doc.status==="review"?"レビュー":"下書き")+" ・ "+new Date(doc.updated_at).toLocaleString("ja-JP");
+      const span=document.createElement("span");span.textContent=(doc.status==="published"?"公開済み":doc.status==="review"?"レビュー":"下書き")+" ・ "+new Date(doc.updated_at).toLocaleString("ja-JP");
       b.append(strong,span);b.addEventListener("click",()=>openDoc(doc.document_id));root.append(b);
     });
   }catch(e){$("documents").innerHTML='<div class="empty">'+esc(e.message)+'</div>';}
@@ -84,7 +84,7 @@ function renderEditor(){
   '<div class="meta"><div><label class="field-label" for="slug">URLスラッグ</label><input id="slug" class="control" maxlength="100" placeholder="my-first-post"></div><div><label class="field-label" for="status">状態</label><select id="status" class="control"><option value="draft">下書き</option><option value="review">レビュー待ち</option></select></div></div>'+
   '<div class="blocks-head"><strong>本文ブロック</strong><button id="preview-toggle">プレビュー</button></div><div class="blocks" id="blocks"></div><div id="preview" class="blocks hidden"></div>'+
   '<div class="toolbar"><button data-add="paragraph">＋ 段落</button><button data-add="heading">＋ 見出し</button><button data-add="quote">＋ 引用</button><button data-add="list">＋ リスト</button><button data-add="image">＋ 画像</button><button data-add="code">＋ コード</button><button data-add="divider">＋ 区切り線</button></div>'+
-  '<div class="footer"><span class="status" id="save-status">未保存</span><button class="primary" id="save">保存する</button></div>';
+  '<div class="footer"><span class="status" id="save-status">未保存</span><div style="display:flex;gap:8px"><button id="save">下書き保存</button><button class="primary" id="publish">公開する ↗</button></div></div>';
   $("title").value=current.title||"";
   $("slug").value=current.slug||"";
   $("status").value=current.status||"draft";
@@ -93,7 +93,7 @@ function renderEditor(){
   $("status").addEventListener("change",queueSave);
   root.querySelectorAll("[data-add]").forEach(btn=>btn.addEventListener("click",()=>{blocks.push({type:btn.dataset.add,text:""});renderBlocks();queueSave();}));
   $("preview-toggle").addEventListener("click",togglePreview);
-  $("save").addEventListener("click",saveNow);
+  $("save").addEventListener("click",saveNow);\n  $("publish").addEventListener("click",publishNow);
   renderBlocks();
 }
 function renderBlocks(){
@@ -164,7 +164,7 @@ async function saveNow(){
   }catch(e){setStatus("保存エラー: "+e.message,true);}
   finally{saving=false;}
 }
-async function openDoc(id){
+async function publishNow(){\n  if(!current){setStatus("記事を選択してください",true);return;}\n  if(!confirm("この記事をKNOTのブログに公開しますか？"))return;\n  await saveNow();\n  if(!current||!current.document_id||dirty||!current.title){setStatus("先に記事を保存してください",true);return;}\n  setStatus("GitHubへ公開中...");\n  try{\n    const result=await api("/api/publish-document",{method:"POST",body:JSON.stringify({document_id:current.document_id})});\n    current=result.document||current;\n    setStatus("公開しました · "+(result.path||"GitHub"));\n    await loadList();\n    if(result.url)window.open(result.url,"_blank","noopener");\n  }catch(e){setStatus("公開エラー: "+e.message,true);}\n}\nasync function openDoc(id){
   if(dirty)await saveNow();
   try{
     const data=await api("/api/documents/"+id);current=data.document;
@@ -529,6 +529,65 @@ export default {
         return new Response(null, { status: 302, headers: redirectHeaders });
       } catch {
         return json({ error: "OAuth authentication failed" }, 502, origin, { "Set-Cookie": clearState });
+      }
+    }
+
+
+    if (url.pathname === "/api/publish-document" && request.method === "POST") {
+      const auth = await requireAdmin(request, env);
+      if (auth.response) return auth.response;
+      const csrfError = await requireCsrf(request, env);
+      if (csrfError) return csrfError;
+      let payload;
+      try { payload = await request.json(); } catch { return json({ error: "Invalid JSON body" }, 400, origin); }
+      const id = payload?.document_id;
+      if (typeof id !== "string" || !/^[a-f0-9-]{36}$/i.test(id)) return json({ error: "Invalid document ID" }, 400, origin);
+      try {
+        const row = await env.DB.prepare("SELECT * FROM cms_documents WHERE document_id = ?").bind(id).first();
+        if (!row) return json({ error: "Document not found" }, 404, origin);
+        const content = JSON.parse(row.content_json || "{}");
+        const sourceBlocks = Array.isArray(content.blocks) ? content.blocks : [];
+        const blocks = sourceBlocks.map((block) => {
+          const item = { ...block };
+          if (item.type === "image") { item.src = item.src || item.text || ""; delete item.text; }
+          if (item.type === "list") { item.items = item.items || item.text || ""; delete item.text; }
+          if (item.type === "code") { item.code = item.code || item.text || ""; delete item.text; }
+          return item;
+        });
+        const now = new Date().toISOString();
+        const quote = (value) => JSON.stringify(String(value ?? ""));
+        const markdown = [
+          "---",
+          "title: " + quote(row.title),
+          "description: " + quote(content.description || row.title),
+          "pubDate: " + quote(row.published_at || now),
+          "category: " + quote(content.category || "BLOG"),
+          "blocks: " + JSON.stringify(blocks),
+          "---",
+          ""
+        ].join("\\n");
+        const tokenRow = await env.DB.prepare("SELECT encrypted_token FROM cms_github_tokens WHERE user_login = ?").bind(auth.session.login).first();
+        if (!tokenRow?.encrypted_token) return json({ error: "GitHub公開権限がありません。いったんログアウトしてGitHubで再ログインしてください。" }, 401, origin);
+        const githubToken = await decryptSecret(tokenRow.encrypted_token, env.SESSION_SECRET);
+        const path = (row.collection === "pages" ? "src/content/pages/" : "src/content/blog/") + row.slug + ".md";
+        const apiUrl = "https://api.github.com/repos/knotspace/knotspace.github.io/contents/" + path;
+        const headers = { "Authorization": "Bearer " + githubToken, "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28", "User-Agent": "KNOT-CMS" };
+        const existing = await fetch(apiUrl, { headers });
+        let sha;
+        if (existing.status === 200) { const file = await existing.json(); sha = file.sha; }
+        else if (existing.status !== 404) return json({ error: "GitHubの公開先を確認できませんでした。" }, 502, origin);
+        const write = await fetch(apiUrl, {
+          method: "PUT",
+          headers: { ...headers, "Content-Type": "application/json" },
+          body: JSON.stringify({ message: "Publish KNOT article: " + row.slug, content: encodeBase64Utf8(markdown), branch: "main", ...(sha ? { sha } : {}) })
+        });
+        const result = await write.json();
+        if (!write.ok) return json({ error: result?.message || "GitHubへの公開に失敗しました。" }, 502, origin);
+        const publishedAt = row.published_at || now;
+        await env.DB.prepare("UPDATE cms_documents SET status = 'published', published_at = ?, updated_at = ? WHERE document_id = ?").bind(publishedAt, now, id).run();
+        return json({ published: true, path, url: "https://knotspace.github.io/" + (row.collection === "pages" ? "" : "blog/") + row.slug + "/", document: { ...row, status: "published", published_at: publishedAt, updated_at: now } }, 200, origin);
+      } catch (error) {
+        return json({ error: "公開に失敗しました。記事データまたはGitHub連携を確認してください。" }, 502, origin);
       }
     }
 
