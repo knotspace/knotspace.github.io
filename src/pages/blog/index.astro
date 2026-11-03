@@ -6,7 +6,7 @@ import Layout from '../../layouts/Layout.astro';
 const now = new Date();
 const posts = (await getCollection('blog'))
   .filter((post) => !post.data.publishAt || post.data.publishAt <= now)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf() || b.id.localeCompare(a.id));
 
 const categories = [...new Set(posts.map((post) => post.data.category))];
 const readingTime = (body = '') => Math.max(1, Math.ceil(body.replace(/\s/g, '').length / 500));
@@ -15,11 +15,8 @@ const BASE = import.meta.env.BASE_URL.endsWith('/')
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
 
-const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric'
-});
+const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'Asia/Tokyo' });
+const timeFormat = (date: Date) => date.toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Tokyo' });
 ---
 
 <Layout
@@ -83,7 +80,7 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
             <div class="post-info">
               <div class="post-meta">
                 <time datetime={post.data.pubDate.toISOString()}>
-                  {dateFormat(post.data.pubDate)}
+                  {dateFormat(post.data.pubDate)} {timeFormat(post.data.pubDate)}
                 </time>
                 <span class="category-label">{post.data.category}</span>
                 <span class="reading-time">約{readingTime(post.body)}分</span>
