@@ -6,6 +6,19 @@ import {
   BlockEditorKeyboardShortcuts, useBlockProps, RichText
 } from '@wordpress/block-editor';
 import { SlotFillProvider, DropZoneProvider, Popover, SelectControl } from '@wordpress/components';
+import { setLocaleData } from '@wordpress/i18n';
+
+// Gutenberg core labels used by KNOT's editor.
+setLocaleData({
+  'Add block': ['ブロックを追加'], 'Search': ['検索'], 'Search for a block': ['ブロックを検索'],
+  'Paragraph': ['段落'], 'Heading': ['見出し'], 'Image': ['画像'], 'Quote': ['引用'],
+  'List': ['リスト'], 'Bulleted list': ['箇条書き'], 'Numbered list': ['番号付きリスト'],
+  'Separator': ['区切り'], 'Text': ['テキスト'], 'Media': ['メディア'], 'Design': ['デザイン'],
+  'Move up': ['上へ移動'], 'Move down': ['下へ移動'], 'Remove block': ['ブロックを削除'],
+  'Duplicate': ['複製'], 'More options': ['その他のオプション'], 'Block settings': ['ブロック設定'],
+  'Write paragraph…': ['文章を入力…'], 'Add title': ['タイトルを追加'],
+}, 'default');
+setLocaleData({ 'Paragraph': ['段落'], 'Heading': ['見出し'], 'Image': ['画像'], 'Quote': ['引用'], 'List': ['リスト'], 'Separator': ['区切り'] }, 'core');
 
 import '@wordpress/components/build-style/style.css';
 import '@wordpress/block-editor/build-style/style.css';
@@ -140,19 +153,26 @@ function Editor({ value, onChange }) {
       el('div', { className: 'knot-gutenberg-editor' },
         el('div', { className: 'knot-gutenberg-topbar' },
           el('strong', null, 'ブロックエディター'),
-          el('span', null, 'クリックして直接編集・ブロックを追加'),
-          el(Inserter, { position: 'bottom right' })
+          el('span', null, '左側からブロックを選び、右側で文章を編集できます。')
         ),
         el(BlockEditorKeyboardShortcuts, null),
         el(Popover.Slot, { name: 'block-toolbar' }),
-        el(BlockTools, null,
-          el(WritingFlow, null,
-            el(ObserveTyping, null,
-              el(BlockList, null)
+        el('div', { className: 'knot-gutenberg-workspace' },
+          el('aside', { className: 'knot-gutenberg-block-panel' },
+            el('strong', { className: 'knot-gutenberg-panel-title' }, 'ブロックを追加'),
+            el('p', { className: 'knot-gutenberg-panel-help' }, '追加したいブロックを選んでください。'),
+            el(Inserter, { position: 'right-start', isQuick: false })
+          ),
+          el('main', { className: 'knot-gutenberg-canvas' },
+            el(BlockTools, null,
+              el(WritingFlow, null,
+                el(ObserveTyping, null,
+                  el(BlockList, null)
+                )
+              )
             )
           )
-        ),
-        el('div', { className: 'knot-gutenberg-bottom-inserter' }, el(Inserter, { position: 'bottom right' }))
+        )
       )
     ),
     el(Popover.Slot, null)
