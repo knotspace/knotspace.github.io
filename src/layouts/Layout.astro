@@ -107,7 +107,7 @@ const navHref = (path: string) => /^https?:\/\//i.test(path) ? path : BASE + pat
         </a>
 
         <nav aria-label="メインナビゲーション">
-          {siteSettings.navigation.map((item) => <a href={navHref(item.url)}>{item.label}</a>)}<button
+          {siteSettings.navigation.map((item) => <a href={navHref(item.url)}>{item.label}</a>)}<a href={navHref("/game/")}>GAME</a><button
             class="theme-toggle"
             id="theme-toggle"
             type="button"
