@@ -47,7 +47,7 @@ category: "本・読書"
 
 ## 第2位『海辺のカフカ』／村上春樹
 
-<figure class="book-cover-figure"><img src="https://covers.openlibrary.org/b/isbn/9784101001548-M.jpg" alt="『海辺のカフカ』の書影" loading="lazy" decoding="async" width="180" height="270" /><figcaption>書影出典：<a href="https://openlibrary.org/isbn/9784101001548" target="_blank" rel="noopener noreferrer">Open Library（ISBN 9784101001548）</a></figcaption></figure>
+<figure class="book-cover-figure"><img src="https://www.shinchosha.co.jp/images_v2/book/cover/100154/100154_m.jpg" alt="新潮文庫『海辺のカフカ〔上〕』の表紙。村上春樹著" loading="lazy" decoding="async" width="207" height="300" /><figcaption>書影出典：<a href="https://www.shinchosha.co.jp/book/100154/" target="_blank" rel="noopener noreferrer">新潮社公式『海辺のカフカ〔上〕』</a>（ISBN 9784101001548）</figcaption></figure>
 
 『海辺のカフカ』は、15歳の少年・田村カフカの物語などが交互に描かれる、独特な雰囲気の小説です！
 
