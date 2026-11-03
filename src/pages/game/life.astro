@@ -25,7 +25,7 @@
 </section>
 <section id="game-screen" hidden>
 <div class="game-top"><div><p class="eyebrow">YOUR LIFE JOURNEY</p><h2 id="year-label">小学1年生</h2><p id="term-label">春</p></div><div class="progress-wrap"><span id="progress-label">1 / 1</span><div class="progress-track"><i id="progress-bar"></i></div></div></div>
-<div class="life-controls"><div class="life-clock"><span>この1年の時間</span><strong id="year-time-label">--:--</strong><i class="clock-track"><b id="year-time-bar"></b></i></div><div class="clock-actions"><button id="pause-game" type="button">一時停止</button><button data-speed="1" class="speed-button active" type="button">1×</button><button data-speed="2" class="speed-button" type="button">2×</button><button data-speed="4" class="speed-button" type="button">4×</button><button data-speed="8" class="speed-button" type="button">8×</button><button data-speed="16" class="speed-button" type="button">16×</button></div><label class="auto-control"><input id="auto-choice" type="checkbox"/> 決断をおまかせ（時間切れで自動選択）</label><p id="clock-message">時間が進んでいます。選択すると次の年へ進みます。</p></div>
+<div class="life-controls"><div class="life-clock"><span>この1年の時間</span><strong id="year-time-label">--:--</strong><i class="clock-track"><b id="year-time-bar"></b></i></div><div class="clock-actions"><button id="pause-game" type="button">一時停止</button><button data-speed="1" class="speed-button active" type="button">1×</button><button data-speed="2" class="speed-button" type="button">2×</button><button data-speed="4" class="speed-button" type="button">4×</button><button data-speed="8" class="speed-button" type="button">8×</button><button data-speed="16" class="speed-button" type="button">16×</button></div><label class="auto-control"><input id="auto-choice" type="checkbox"/> 決断をおまかせ（時間切れで自動選択）</label><p id="clock-message">時間が進んでいます。1年分の時間が終わると決断できます。</p></div>
 <div class="stats-panel">
 <div><span>学力</span><strong id="stat-study">40</strong><i><b id="bar-study"></b></i></div><div><span>経験</span><strong id="stat-experience">30</strong><i><b id="bar-experience"></b></i></div><div><span>健康</span><strong id="stat-health">75</strong><i><b id="bar-health"></b></i></div><div><span>人とのつながり</span><strong id="stat-friends">35</strong><i><b id="bar-friends"></b></i></div>
 </div>
@@ -225,6 +225,7 @@ function buildStages(){
   ['もう一度、大きな挑戦をする',{experience:8,health:-2},'次の目標に向けて一歩を踏み出した。']
  ],'FUTURE');
  stages=s;
+ if(state)state.estimatedYears=Math.max(1,stages.length);
 }
 
 function renderArchive(){
@@ -357,7 +358,7 @@ function render(){
      }
    }
  }
- const canAnswer=(!examType||!!state.pendingSchool)&&!state.waitingChoice||(!examType||!!state.pendingSchool);
+ const canAnswer=(!examType||!!state.pendingSchool)&&!!state.waitingChoice;
  e.opts.forEach((o,i)=>{const b=document.createElement('button');b.className='choice-button';const strong=document.createElement('strong');strong.textContent=String.fromCharCode(65+i)+'. '+o.label;const small=document.createElement('small');small.textContent='この道を選ぶ';b.append(strong,small);b.disabled=!canAnswer;b.classList.toggle('is-disabled',!canAnswer);b.addEventListener('click',()=>choose(o));box.append(b);});
  $('diary-list').replaceChildren();state.diary.slice(-5).forEach(x=>{const li=document.createElement('li');li.textContent=x.title+' — '+x.log;$('diary-list').append(li);});
 }
@@ -440,7 +441,7 @@ function start(){
 }
 $('start-game').addEventListener('click',start);
 $('restart-game').addEventListener('click',()=>{$('result-screen').hidden=true;$('start-screen').hidden=false;});
-$('pause-game').addEventListener('click',()=>{if(!state)return;state.paused=!state.paused;if(state.paused){stopClock();$('clock-message').textContent='時間を一時停止中。';}else{$('clock-message').textContent='時間が進んでいます。選択すると次の年へ進みます。';startClock();}updateClockUI();});
+$('pause-game').addEventListener('click',()=>{if(!state)return;state.paused=!state.paused;if(state.paused){stopClock();$('clock-message').textContent='時間を一時停止中。';}else{$('clock-message').textContent='時間が進んでいます。1年分の時間が終わると決断できます。';startClock();}updateClockUI();});
 document.querySelectorAll('[data-speed]').forEach(b=>b.addEventListener('click',()=>{if(!state)return;state.speed=Number(b.dataset.speed);updateClockUI();}));
 $('auto-choice').addEventListener('change',e=>{if(state){state.auto=e.target.checked;if(state.auto)$('clock-message').textContent='おまかせ進行が有効。時間切れで選択肢を自動選択します。';else $('clock-message').textContent='決断は自分で選択します。';if(state.waitingChoice&&state.auto){state.waitingChoice=false;const current=stages[state.step];if(current?.opts?.length)choose(current.opts[Math.floor(Math.random()*current.opts.length)]);}}});
 
