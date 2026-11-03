@@ -285,7 +285,7 @@
     ],
     "correct": 2,
     "explanation": "光合成では光エネルギーを利用してデンプンなどの養分をつくり、酸素を放出する。",
-    "link": "/study/summary/physics/"
+    "link": "/study/summary/biology/"
   },
   {
     "id": "fb-019",
@@ -317,7 +317,7 @@
     ],
     "correct": 1,
     "explanation": "消化酵素などのはたらきで、栄養分を吸収できる形に分解する。",
-    "link": "/study/summary/chemistry/"
+    "link": "/study/summary/biology/"
   },
   {
     "id": "fb-021",
@@ -333,7 +333,7 @@
     ],
     "correct": 1,
     "explanation": "肺胞の壁は薄く、周囲を毛細血管が取り囲み、気体交換が行われる。",
-    "link": "/study/summary/chemistry/"
+    "link": "/study/summary/biology/"
   },
   {
     "id": "fb-022",
@@ -477,7 +477,7 @@
     ],
     "correct": 1,
     "explanation": "地球の公転周期は約1年。季節の変化に関係する。",
-    "link": "/study/summary/physics/"
+    "link": "/study/summary/earth/"
   },
   {
     "id": "fb-031",
@@ -493,7 +493,7 @@
     ],
     "correct": 1,
     "explanation": "地球は約24時間で1回自転し、昼と夜の変化に関係する。",
-    "link": "/study/summary/physics/"
+    "link": "/study/summary/earth/"
   },
   {
     "id": "fb-032",
@@ -829,7 +829,7 @@
     ],
     "correct": 1,
     "explanation": "国会・内閣・裁判所が権力を分担し、互いに抑制と均衡を保つ。",
-    "link": "/study/summary/physics/"
+    "link": "/study/summary/civics/"
   },
   {
     "id": "fb-053",
@@ -1085,7 +1085,7 @@
     ],
     "correct": 1,
     "explanation": "電気エネルギーによって化合物を分解する反応。水の電気分解では水素と酸素が発生する。",
-    "link": "/study/summary/physics/"
+    "link": "/study/summary/chemistry/"
   },
   {
     "id": "fb-069",
@@ -1133,7 +1133,7 @@
     ],
     "correct": 1,
     "explanation": "葉緑体には緑色の色素クロロフィルが含まれ、光合成の場となる。",
-    "link": "/study/summary/physics/"
+    "link": "/study/summary/biology/"
   },
   {
     "id": "fb-072",
@@ -1149,7 +1149,7 @@
     ],
     "correct": 1,
     "explanation": "気孔は主に葉の表皮にあり、二酸化炭素や酸素、水蒸気の出入りに関係する。",
-    "link": "/study/summary/chemistry/"
+    "link": "/study/summary/biology/"
   },
   {
     "id": "fb-073",
@@ -1261,7 +1261,7 @@
     ],
     "correct": 1,
     "explanation": "化石は地層ができた時代や環境を推定する手がかりになる。",
-    "link": "/study/summary/biology/"
+    "link": "/study/summary/earth/"
   },
   {
     "id": "fb-080",
@@ -1309,7 +1309,7 @@
     ],
     "correct": 1,
     "explanation": "マグニチュードは地震の規模を表し、震度は各地点での揺れの強さを表す。",
-    "link": "/study/summary/physics/"
+    "link": "/study/summary/earth/"
   },
   {
     "id": "fb-083",
@@ -1533,7 +1533,7 @@
     ],
     "correct": 1,
     "explanation": "楽市・楽座は商売の自由を広げ、城下町や商工業の発展を促した。",
-    "link": "/study/summary/geography/"
+    "link": "/study/summary/history/"
   },
   {
     "id": "fb-097",
@@ -1581,7 +1581,7 @@
     ],
     "correct": 1,
     "explanation": "平和主義は日本国憲法の三つの基本原則の一つで、第9条に関係する。",
-    "link": "/study/summary/physics/"
+    "link": "/study/summary/civics/"
   },
   {
     "id": "fb-100",
@@ -1613,7 +1613,7 @@
     ],
     "correct": 1,
     "explanation": "生存権は社会権の一つで、日本国憲法第25条に定められている。",
-    "link": "/study/summary/history/"
+    "link": "/study/summary/civics/"
   },
   {
     "id": "fb-102",
@@ -1661,7 +1661,7 @@
     ],
     "correct": 1,
     "explanation": "地方自治は住民に身近な行政を、地方公共団体と住民が担うしくみ。",
-    "link": "/study/summary/geography/"
+    "link": "/study/summary/civics/"
   },
   {
     "id": "fb-105",
@@ -1805,7 +1805,7 @@
     ],
     "correct": 2,
     "explanation": "塩化ナトリウムや塩酸などは電解質。",
-    "link": "/study/summary/physics/"
+    "link": "/study/summary/chemistry/"
   },
   {
     "id": "fb-126",
@@ -1821,7 +1821,7 @@
     ],
     "correct": 2,
     "explanation": "アミラーゼやペプシンなどが消化酵素にあたる。",
-    "link": "/study/summary/chemistry/"
+    "link": "/study/summary/biology/"
   },
   {
     "id": "fb-127",
@@ -1901,7 +1901,7 @@
     ],
     "correct": 1,
     "explanation": "生態系では生物どうしや環境との間に関係がある。",
-    "link": "/study/summary/physics/"
+    "link": "/study/summary/biology/"
   },
   {
     "id": "fb-138",
@@ -1965,7 +1965,7 @@
     ],
     "correct": 1,
     "explanation": "日周運動は地球の自転によって起こる。",
-    "link": "/study/summary/physics/"
+    "link": "/study/summary/earth/"
   },
   {
     "id": "fb-144",
@@ -1981,7 +1981,7 @@
     ],
     "correct": 0,
     "explanation": "年周運動は地球の公転によって起こる。",
-    "link": "/study/summary/physics/"
+    "link": "/study/summary/earth/"
   },
   {
     "id": "fb-148",
@@ -2349,7 +2349,7 @@
     ],
     "correct": 1,
     "explanation": "日周運動は地球の自転によって起こる。（確認ポイント：日周運動）",
-    "link": "/study/summary/physics/"
+    "link": "/study/summary/earth/"
   },
   {
     "id": "fb-148",
@@ -2461,7 +2461,7 @@
     ],
     "correct": 1,
     "explanation": "楽市・楽座は商売の自由を広げ、城下町や商工業の発展を促した。（確認ポイント：楽市・楽座）",
-    "link": "/study/summary/geography/"
+    "link": "/study/summary/history/"
   },
   {
     "id": "fb-155",
@@ -2525,7 +2525,7 @@
     ],
     "correct": 1,
     "explanation": "生存権は社会権の一つで、日本国憲法第25条に定められている。（確認ポイント：生存権）",
-    "link": "/study/summary/history/"
+    "link": "/study/summary/civics/"
   },
   {
     "id": "fb-159",
@@ -2701,7 +2701,7 @@
     ],
     "correct": 1,
     "explanation": "化石は地層ができた時代や環境を推定する手がかりになる。（確認ポイント：化石）",
-    "link": "/study/summary/biology/"
+    "link": "/study/summary/earth/"
   },
   {
     "id": "fb-170",
@@ -2813,7 +2813,7 @@
     ],
     "correct": 1,
     "explanation": "国会・内閣・裁判所が権力を分担し、互いに抑制と均衡を保つ。（確認ポイント：三権分立）",
-    "link": "/study/summary/physics/"
+    "link": "/study/summary/civics/"
   },
   {
     "id": "fb-177",
@@ -2861,7 +2861,7 @@
     ],
     "correct": 1,
     "explanation": "消化酵素などのはたらきで、栄養分を吸収できる形に分解する。（確認ポイント：消化）",
-    "link": "/study/summary/chemistry/"
+    "link": "/study/summary/biology/"
   },
   {
     "id": "fb-180",
@@ -2957,7 +2957,7 @@
     ],
     "correct": 1,
     "explanation": "平和主義は日本国憲法の三つの基本原則の一つで、第9条に関係する。（確認ポイント：平和主義）",
-    "link": "/study/summary/physics/"
+    "link": "/study/summary/civics/"
   },
   {
     "id": "fb-186",
@@ -2989,7 +2989,7 @@
     ],
     "correct": 1,
     "explanation": "地球の公転周期は約1年。季節の変化に関係する。（確認ポイント：公転）",
-    "link": "/study/summary/physics/"
+    "link": "/study/summary/earth/"
   },
   {
     "id": "fb-188",
@@ -3021,7 +3021,7 @@
     ],
     "correct": 1,
     "explanation": "地方自治は住民に身近な行政を、地方公共団体と住民が担うしくみ。（確認ポイント：地方自治）",
-    "link": "/study/summary/geography/"
+    "link": "/study/summary/civics/"
   },
   {
     "id": "fb-190",
@@ -3069,7 +3069,7 @@
     ],
     "correct": 1,
     "explanation": "気孔は主に葉の表皮にあり、二酸化炭素や酸素、水蒸気の出入りに関係する。（確認ポイント：気孔）",
-    "link": "/study/summary/chemistry/"
+    "link": "/study/summary/biology/"
   },
   {
     "id": "fb-193",
@@ -3149,7 +3149,7 @@
     ],
     "correct": 2,
     "explanation": "アミラーゼやペプシンなどが消化酵素にあたる。（確認ポイント：消化酵素）",
-    "link": "/study/summary/chemistry/"
+    "link": "/study/summary/biology/"
   },
   {
     "id": "fb-198",
@@ -3197,7 +3197,7 @@
     ],
     "correct": 1,
     "explanation": "マグニチュードは地震の規模を表し、震度は各地点での揺れの強さを表す。（確認ポイント：マグニチュード）",
-    "link": "/study/summary/physics/"
+    "link": "/study/summary/earth/"
   },
   {
     "id": "fb-201",
@@ -3213,7 +3213,7 @@
     ],
     "correct": 1,
     "explanation": "生態系では生物どうしや環境との間に関係がある。（確認ポイント：生態系）",
-    "link": "/study/summary/physics/"
+    "link": "/study/summary/biology/"
   },
   {
     "id": "fb-202",
@@ -3277,7 +3277,7 @@
     ],
     "correct": 0,
     "explanation": "年周運動は地球の公転によって起こる。（確認ポイント：年周運動）",
-    "link": "/study/summary/physics/"
+    "link": "/study/summary/earth/"
   },
   {
     "id": "fb-206",
@@ -3293,7 +3293,7 @@
     ],
     "correct": 2,
     "explanation": "光合成では光エネルギーを利用してデンプンなどの養分をつくり、酸素を放出する。（確認ポイント：光合成）",
-    "link": "/study/summary/physics/"
+    "link": "/study/summary/biology/"
   },
   {
     "id": "fb-207",
@@ -3789,7 +3789,7 @@
     ],
     "correct": 1,
     "explanation": "肺胞の壁は薄く、周囲を毛細血管が取り囲み、気体交換が行われる。（確認ポイント：肺胞）",
-    "link": "/study/summary/chemistry/"
+    "link": "/study/summary/biology/"
   },
   {
     "id": "fb-238",
@@ -3917,7 +3917,7 @@
     ],
     "correct": 1,
     "explanation": "地球は約24時間で1回自転し、昼と夜の変化に関係する。（確認ポイント：自転）",
-    "link": "/study/summary/physics/"
+    "link": "/study/summary/earth/"
   },
   {
     "id": "fb-246",
@@ -3933,7 +3933,7 @@
     ],
     "correct": 1,
     "explanation": "電気エネルギーによって化合物を分解する反応。水の電気分解では水素と酸素が発生する。（確認ポイント：電気分解）",
-    "link": "/study/summary/physics/"
+    "link": "/study/summary/chemistry/"
   },
   {
     "id": "fb-247",
@@ -4429,7 +4429,7 @@
     ],
     "correct": 1,
     "explanation": "葉緑体には緑色の色素クロロフィルが含まれ、光合成の場となる。（確認ポイント：葉緑体）",
-    "link": "/study/summary/physics/"
+    "link": "/study/summary/biology/"
   },
   {
     "id": "fb-278",
@@ -4509,7 +4509,7 @@
     ],
     "correct": 2,
     "explanation": "塩化ナトリウムや塩酸などは電解質。（確認ポイント：電解質）",
-    "link": "/study/summary/physics/"
+    "link": "/study/summary/chemistry/"
   },
   {
     "id": "fb-283",
@@ -4637,7 +4637,7 @@
     ],
     "correct": 1,
     "explanation": "日周運動は地球の自転によって起こる。（確認ポイント：日周運動）",
-    "link": "/study/summary/physics/"
+    "link": "/study/summary/earth/"
   },
   {
     "id": "fb-291",
@@ -4749,7 +4749,7 @@
     ],
     "correct": 1,
     "explanation": "楽市・楽座は商売の自由を広げ、城下町や商工業の発展を促した。（確認ポイント：楽市・楽座）",
-    "link": "/study/summary/geography/"
+    "link": "/study/summary/history/"
   },
   {
     "id": "fb-298",
@@ -4813,7 +4813,7 @@
     ],
     "correct": 1,
     "explanation": "生存権は社会権の一つで、日本国憲法第25条に定められている。（確認ポイント：生存権）",
-    "link": "/study/summary/history/"
+    "link": "/study/summary/civics/"
   },
   {
     "id": "fb-302",
@@ -4989,7 +4989,7 @@
     ],
     "correct": 1,
     "explanation": "化石は地層ができた時代や環境を推定する手がかりになる。（確認ポイント：化石）",
-    "link": "/study/summary/biology/"
+    "link": "/study/summary/earth/"
   },
   {
     "id": "fb-313",
@@ -5101,7 +5101,7 @@
     ],
     "correct": 1,
     "explanation": "国会・内閣・裁判所が権力を分担し、互いに抑制と均衡を保つ。（確認ポイント：三権分立）",
-    "link": "/study/summary/physics/"
+    "link": "/study/summary/civics/"
   },
   {
     "id": "fb-320",
@@ -5149,7 +5149,7 @@
     ],
     "correct": 1,
     "explanation": "消化酵素などのはたらきで、栄養分を吸収できる形に分解する。（確認ポイント：消化）",
-    "link": "/study/summary/chemistry/"
+    "link": "/study/summary/biology/"
   },
   {
     "id": "fb-323",
@@ -5245,7 +5245,7 @@
     ],
     "correct": 1,
     "explanation": "平和主義は日本国憲法の三つの基本原則の一つで、第9条に関係する。（確認ポイント：平和主義）",
-    "link": "/study/summary/physics/"
+    "link": "/study/summary/civics/"
   },
   {
     "id": "fb-329",
@@ -5277,7 +5277,7 @@
     ],
     "correct": 1,
     "explanation": "地球の公転周期は約1年。季節の変化に関係する。（確認ポイント：公転）",
-    "link": "/study/summary/physics/"
+    "link": "/study/summary/earth/"
   },
   {
     "id": "fb-331",
@@ -5309,7 +5309,7 @@
     ],
     "correct": 1,
     "explanation": "地方自治は住民に身近な行政を、地方公共団体と住民が担うしくみ。（確認ポイント：地方自治）",
-    "link": "/study/summary/geography/"
+    "link": "/study/summary/civics/"
   },
   {
     "id": "fb-333",
@@ -5357,7 +5357,7 @@
     ],
     "correct": 1,
     "explanation": "気孔は主に葉の表皮にあり、二酸化炭素や酸素、水蒸気の出入りに関係する。（確認ポイント：気孔）",
-    "link": "/study/summary/chemistry/"
+    "link": "/study/summary/biology/"
   },
   {
     "id": "fb-336",
@@ -5437,7 +5437,7 @@
     ],
     "correct": 2,
     "explanation": "アミラーゼやペプシンなどが消化酵素にあたる。（確認ポイント：消化酵素）",
-    "link": "/study/summary/chemistry/"
+    "link": "/study/summary/biology/"
   },
   {
     "id": "fb-341",
@@ -5485,7 +5485,7 @@
     ],
     "correct": 1,
     "explanation": "マグニチュードは地震の規模を表し、震度は各地点での揺れの強さを表す。（確認ポイント：マグニチュード）",
-    "link": "/study/summary/physics/"
+    "link": "/study/summary/earth/"
   },
   {
     "id": "fb-add-001",
@@ -5885,7 +5885,7 @@
     ],
     "correct": 2,
     "explanation": "肝臓：胆汁をつくり、養分の貯蔵や有害物質の分解にも関わる器官は何か。",
-    "link": "/study/summary/chemistry/"
+    "link": "/study/summary/biology/"
   },
   {
     "id": "fb-add-026",
@@ -5917,7 +5917,7 @@
     ],
     "correct": 1,
     "explanation": "毛細血管：血液と組織の間で物質交換が行われる、非常に細い血管は何か。",
-    "link": "/study/summary/chemistry/"
+    "link": "/study/summary/biology/"
   },
   {
     "id": "fb-add-028",
@@ -6125,7 +6125,7 @@
     ],
     "correct": 2,
     "explanation": "DNA：遺伝情報を記録している物質は何か。",
-    "link": "/study/summary/chemistry/"
+    "link": "/study/summary/biology/"
   },
   {
     "id": "fb-add-041",
@@ -6477,7 +6477,7 @@
     ],
     "correct": 3,
     "explanation": "条例：地方公共団体が、その地域の事務について制定する決まりは何か。",
-    "link": "/study/summary/geography/"
+    "link": "/study/summary/civics/"
   },
   {
     "id": "fb-add-063",
@@ -6685,7 +6685,7 @@
     ],
     "correct": 1,
     "explanation": "地方交付税：地方公共団体間の財政力の差を調整するため、国から配分される財源は何か。",
-    "link": "/study/summary/physics/"
+    "link": "/study/summary/civics/"
   },
   {
     "id": "fb-add-076",
@@ -6797,7 +6797,7 @@
     ],
     "correct": 2,
     "explanation": "UNESCO：教育・科学・文化を通じて国際協力を進める国連の専門機関は何か。",
-    "link": "/study/summary/physics/"
+    "link": "/study/summary/civics/"
   },
   {
     "id": "fb-add-083",
