@@ -47,4 +47,12 @@ const websiteJsonLd = { '@context': 'https://schema.org', '@type': 'WebSite', na
 <script is:inline>
 (() => { if(!('serviceWorker'in navigator))return;window.addEventListener('load',()=>{const base=document.querySelector('meta[name="site-base"]')?.content||'/';navigator.serviceWorker.register(base+'study-sw.js',{scope:base+'study/'}).catch(error=>console.warn('KNOT Study offline support unavailable:',error));});const prompt=document.getElementById('pwa-install-prompt'),installButton=document.getElementById('pwa-install-button'),closeButton=document.getElementById('pwa-install-close'),description=document.getElementById('pwa-install-description');if(!prompt||!installButton||!closeButton)return;let installEvent;const dismissed=sessionStorage.getItem('knot-study-pwa-dismissed');if(window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true)return;window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();installEvent=event;if(!dismissed)prompt.hidden=false;});window.addEventListener('appinstalled',()=>{prompt.hidden=true;installEvent=null;});if(/iphone|ipad|ipod/i.test(navigator.userAgent)&&!dismissed){description.textContent='Safariの共有ボタンから「ホーム画面に追加」を選んでね。';installButton.hidden=true;prompt.hidden=false;}installButton.addEventListener('click',async()=>{if(!installEvent)return;installEvent.prompt();await installEvent.userChoice;installEvent=null;prompt.hidden=true;});closeButton.addEventListener('click',()=>{prompt.hidden=true;sessionStorage.setItem('knot-study-pwa-dismissed','1');});})();
 </script>
+<style is="global">
+html.quiz-active .study-sidebar,html.quiz-active .study-appbar,html.quiz-active .study-bottom-nav,
+html.kosen-quiz-active .study-sidebar,html.kosen-quiz-active .study-appbar,html.kosen-quiz-active .study-bottom-nav,
+html.solve-quiz-active .study-sidebar,html.solve-quiz-active .study-appbar,html.solve-quiz-active .study-bottom-nav{display:none!important}
+html.quiz-active .study-app-main,html.kosen-quiz-active .study-app-main,html.solve-quiz-active .study-app-main{margin:0!important;padding:0!important;width:100%;height:100vh;min-height:100vh}
+html.quiz-active .study-app-main>main,html.kosen-quiz-active .study-app-main>main,html.solve-quiz-active .study-app-main>main{min-height:100vh}
+html.quiz-active .pwa-prompt,html.kosen-quiz-active .pwa-prompt,html.solve-quiz-active .pwa-prompt{display:none!important}
+</style>
 </body></html>
