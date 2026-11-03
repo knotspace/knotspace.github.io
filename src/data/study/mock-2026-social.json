@@ -1,0 +1,378 @@
+{
+  "exam": "令和8年度 国立高専入試 本試験",
+  "subject": "社会",
+  "minutes": 50,
+  "totalPoints": 100,
+  "source": {
+    "problem": "https://www.kosen-k.go.jp/wp/wp-content/uploads/2026/02/02_2026_syakai_mondai2.pdf",
+    "answer": "https://www.kosen-k.go.jp/wp/wp-content/uploads/2026/02/02_2026_syakai_seikai.pdf"
+  },
+  "questions": [
+    {
+      "id": "social-2026-01-01",
+      "section": "大問1",
+      "number": "1-1",
+      "label": "大問1・問1",
+      "choices": [
+        "ア",
+        "イ",
+        "ウ",
+        "エ"
+      ],
+      "correct": "エ",
+      "points": 4
+    },
+    {
+      "id": "social-2026-01-02",
+      "section": "大問1",
+      "number": "1-2",
+      "label": "大問1・問2",
+      "choices": [
+        "ア",
+        "イ",
+        "ウ",
+        "エ"
+      ],
+      "correct": "ア",
+      "points": 4
+    },
+    {
+      "id": "social-2026-01-03",
+      "section": "大問1",
+      "number": "1-3",
+      "label": "大問1・問3",
+      "choices": [
+        "ア",
+        "イ",
+        "ウ",
+        "エ",
+        "オ",
+        "カ"
+      ],
+      "correct": "ウ",
+      "points": 4
+    },
+    {
+      "id": "social-2026-01-04",
+      "section": "大問1",
+      "number": "1-4",
+      "label": "大問1・問4",
+      "choices": [
+        "ア",
+        "イ",
+        "ウ",
+        "エ"
+      ],
+      "correct": "イ",
+      "points": 4
+    },
+    {
+      "id": "social-2026-02-01",
+      "section": "大問2",
+      "number": "2-1",
+      "label": "大問2・問1",
+      "choices": [
+        "ア",
+        "イ",
+        "ウ",
+        "エ"
+      ],
+      "correct": "イ",
+      "points": 4
+    },
+    {
+      "id": "social-2026-02-02",
+      "section": "大問2",
+      "number": "2-2",
+      "label": "大問2・問2",
+      "choices": [
+        "ア",
+        "イ",
+        "ウ",
+        "エ",
+        "オ",
+        "カ"
+      ],
+      "correct": "ウ",
+      "points": 4
+    },
+    {
+      "id": "social-2026-02-03",
+      "section": "大問2",
+      "number": "2-3",
+      "label": "大問2・問3",
+      "choices": [
+        "ア",
+        "イ",
+        "ウ",
+        "エ"
+      ],
+      "correct": "イ",
+      "points": 4
+    },
+    {
+      "id": "social-2026-03-01",
+      "section": "大問3",
+      "number": "3-1",
+      "label": "大問3・問1",
+      "choices": [
+        "ア",
+        "イ",
+        "ウ",
+        "エ",
+        "オ",
+        "カ"
+      ],
+      "correct": "オ",
+      "points": 4
+    },
+    {
+      "id": "social-2026-03-02",
+      "section": "大問3",
+      "number": "3-2",
+      "label": "大問3・問2",
+      "choices": [
+        "ア",
+        "イ",
+        "ウ",
+        "エ"
+      ],
+      "correct": "ア",
+      "points": 4
+    },
+    {
+      "id": "social-2026-04-01",
+      "section": "大問4",
+      "number": "4-1",
+      "label": "大問4・問1",
+      "choices": [
+        "ア",
+        "イ",
+        "ウ",
+        "エ",
+        "オ",
+        "カ"
+      ],
+      "correct": "イ",
+      "points": 4
+    },
+    {
+      "id": "social-2026-04-02",
+      "section": "大問4",
+      "number": "4-2",
+      "label": "大問4・問2",
+      "choices": [
+        "ア",
+        "イ",
+        "ウ",
+        "エ"
+      ],
+      "correct": "エ",
+      "points": 4
+    },
+    {
+      "id": "social-2026-05-01",
+      "section": "大問5",
+      "number": "5-1",
+      "label": "大問5・問1",
+      "choices": [
+        "ア",
+        "イ",
+        "ウ",
+        "エ"
+      ],
+      "correct": "ア",
+      "points": 4
+    },
+    {
+      "id": "social-2026-05-02",
+      "section": "大問5",
+      "number": "5-2",
+      "label": "大問5・問2",
+      "choices": [
+        "ア",
+        "イ",
+        "ウ",
+        "エ",
+        "オ",
+        "カ"
+      ],
+      "correct": "イ",
+      "points": 4
+    },
+    {
+      "id": "social-2026-05-03",
+      "section": "大問5",
+      "number": "5-3",
+      "label": "大問5・問3",
+      "choices": [
+        "ア",
+        "イ",
+        "ウ",
+        "エ"
+      ],
+      "correct": "エ",
+      "points": 4
+    },
+    {
+      "id": "social-2026-06-01",
+      "section": "大問6",
+      "number": "6-1",
+      "label": "大問6・問1",
+      "choices": [
+        "ア",
+        "イ",
+        "ウ",
+        "エ"
+      ],
+      "correct": "ウ",
+      "points": 4
+    },
+    {
+      "id": "social-2026-06-02",
+      "section": "大問6",
+      "number": "6-2",
+      "label": "大問6・問2",
+      "choices": [
+        "ア",
+        "イ",
+        "ウ",
+        "エ"
+      ],
+      "correct": "イ",
+      "points": 4
+    },
+    {
+      "id": "social-2026-06-03",
+      "section": "大問6",
+      "number": "6-3",
+      "label": "大問6・問3",
+      "choices": [
+        "ア",
+        "イ",
+        "ウ",
+        "エ",
+        "オ",
+        "カ"
+      ],
+      "correct": "ウ",
+      "points": 4
+    },
+    {
+      "id": "social-2026-06-04",
+      "section": "大問6",
+      "number": "6-4",
+      "label": "大問6・問4",
+      "choices": [
+        "ア",
+        "イ",
+        "ウ",
+        "エ"
+      ],
+      "correct": "イ",
+      "points": 4
+    },
+    {
+      "id": "social-2026-07-01",
+      "section": "大問7",
+      "number": "7-1",
+      "label": "大問7・問1",
+      "choices": [
+        "ア",
+        "イ",
+        "ウ",
+        "エ"
+      ],
+      "correct": "ア",
+      "points": 4
+    },
+    {
+      "id": "social-2026-07-02",
+      "section": "大問7",
+      "number": "7-2",
+      "label": "大問7・問2",
+      "choices": [
+        "ア",
+        "イ",
+        "ウ",
+        "エ"
+      ],
+      "correct": "エ",
+      "points": 4
+    },
+    {
+      "id": "social-2026-07-03",
+      "section": "大問7",
+      "number": "7-3",
+      "label": "大問7・問3",
+      "choices": [
+        "ア",
+        "イ",
+        "ウ",
+        "エ",
+        "オ",
+        "カ"
+      ],
+      "correct": "カ",
+      "points": 4
+    },
+    {
+      "id": "social-2026-07-04",
+      "section": "大問7",
+      "number": "7-4",
+      "label": "大問7・問4",
+      "choices": [
+        "ア",
+        "イ",
+        "ウ",
+        "エ"
+      ],
+      "correct": "エ",
+      "points": 4
+    },
+    {
+      "id": "social-2026-08-01",
+      "section": "大問8",
+      "number": "8-1",
+      "label": "大問8・問1",
+      "choices": [
+        "ア",
+        "イ",
+        "ウ",
+        "エ",
+        "オ",
+        "カ"
+      ],
+      "correct": "ウ",
+      "points": 4
+    },
+    {
+      "id": "social-2026-08-02",
+      "section": "大問8",
+      "number": "8-2",
+      "label": "大問8・問2",
+      "choices": [
+        "ア",
+        "イ",
+        "ウ",
+        "エ"
+      ],
+      "correct": "エ",
+      "points": 4
+    },
+    {
+      "id": "social-2026-08-03",
+      "section": "大問8",
+      "number": "8-3",
+      "label": "大問8・問3",
+      "choices": [
+        "ア",
+        "イ",
+        "ウ",
+        "エ"
+      ],
+      "correct": "ウ",
+      "points": 4
+    }
+  ]
+}
