@@ -2,7 +2,7 @@
 import bank from '../data/study/knot-diagrams.json';
 const { subject = '理科', match = '', offset = 0, limit = 2, compact = false } = Astro.props;
 const all = bank.diagrams.filter(item => item.subject === subject);
-const terms = String(match).split(/[・／、s・]/).filter(word => word.length >= 2);
+const terms = String(match).split(/[・／、\\s]+/).filter(word => word.length >= 2);
 const ranked = all.map(item => ({ item, score: terms.reduce((sum, word) => sum + (item.topic.includes(word) || item.title.includes(word) ? 1 : 0), 0) })).filter(x => x.score > 0).sort((a,b) => b.score-a.score);
 const selected = (ranked.length ? ranked.map(x=>x.item) : all.slice(Math.max(0, Number(offset)||0)*5)).slice(0, Number(limit)||2);
 ---
