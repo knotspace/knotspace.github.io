@@ -26,7 +26,7 @@ async function refreshStaticAsset(request, cache) {
   if (
     response.ok &&
     response.type === 'basic' &&
-    !/\\b(private|no-store)\\b/i.test(cacheControl)
+    !/\b(private|no-store)\b/i.test(cacheControl)
   ) {
     await cache.put(request, response.clone()).catch(() => {});
   }
@@ -92,7 +92,7 @@ self.addEventListener('fetch', (event) => {
       if (
         response.ok &&
         response.type === 'basic' &&
-        !/\\b(private|no-store)\\b/i.test(cacheControl)
+        !/\b(private|no-store)\b/i.test(cacheControl)
       ) {
         await cache.put(request, response.clone()).catch(() => {});
       }
