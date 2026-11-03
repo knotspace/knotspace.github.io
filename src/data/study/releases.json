@@ -1,6 +1,19 @@
 {
   "releases": [
     {
+      "id": "343de9c",
+      "publishedAt": "2026-11-03T19:30:53+09:00",
+      "title": "Track daily Study progress across practice sessions",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "高専対策"
+      ],
+      "files": [
+        "src/pages/study/kosen.astro"
+      ]
+    },
+    {
       "id": "81adea1",
       "publishedAt": "2026-11-03T16:44:48+09:00",
       "title": "feat(study): add motivation center",
