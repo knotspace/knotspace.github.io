@@ -4,7 +4,7 @@ import bank from '../../data/study-questions.json';
 const science = bank.filter(q => q.subject === 'science').length;
 const social = bank.filter(q => q.subject === 'social').length;
 ---
-<Layout title="問題演習｜KNOT Study" description="理科・社会の問題演習">
+<Layout studyMode title="問題演習｜KNOT Study" description="理科・社会の問題演習">
 <main class="solve-page">
 <header class="solve-head"><div><a href="../">← Studyに戻る</a><p class="eyebrow">KNOT STUDY</p><h1>問題演習</h1><p class="muted">条件を選んで、さっそく始めよう。</p></div><div class="counts"><span>理科 {science}問</span><span>社会 {social}問</span></div></header>
 <section class="panel" id="settings">
