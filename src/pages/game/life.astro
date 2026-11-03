@@ -348,6 +348,7 @@ function render(){
  $('diary-list').replaceChildren();state.diary.slice(-5).forEach(x=>{const li=document.createElement('li');li.textContent=x.title+' — '+x.log;$('diary-list').append(li);});
 }
 function choose(o){
+ state.lastExamResult=null;
  Object.entries(o.effect||{}).forEach(([k,v])=>state.stats[k]=clamp(state.stats[k]+v));
  if(o.decision){
    const decision={...o.decision};
@@ -411,9 +412,9 @@ function start(){
 }
 $('start-game').addEventListener('click',start);
 $('restart-game').addEventListener('click',()=>{$('result-screen').hidden=true;$('start-screen').hidden=false;});
-$('pause-game').addEventListener('click',()=>{if(!state)return;state.paused=!state.paused;if(state.paused)stopClock();else startClock();updateClockUI();});
+$('pause-game').addEventListener('click',()=>{if(!state)return;state.paused=!state.paused;if(state.paused){stopClock();$('clock-message').textContent='時間を一時停止中。';}else{$('clock-message').textContent='時間が進んでいます。選択すると次の年へ進みます。';startClock();}updateClockUI();});
 document.querySelectorAll('[data-speed]').forEach(b=>b.addEventListener('click',()=>{if(!state)return;state.speed=Number(b.dataset.speed);updateClockUI();}));
-$('auto-choice').addEventListener('change',e=>{if(state){state.auto=e.target.checked;if(state.waitingChoice&&state.auto){state.waitingChoice=false;const current=stages[state.step];if(current?.opts?.length)choose(current.opts[Math.floor(Math.random()*current.opts.length)]);}}});
+$('auto-choice').addEventListener('change',e=>{if(state){state.auto=e.target.checked;if(state.auto)$('clock-message').textContent='おまかせ進行が有効。時間切れで選択肢を自動選択します。';else $('clock-message').textContent='決断は自分で選択します。';if(state.waitingChoice&&state.auto){state.waitingChoice=false;const current=stages[state.step];if(current?.opts?.length)choose(current.opts[Math.floor(Math.random()*current.opts.length)]);}}});
 
 $('save-exit').addEventListener('click',()=>{stopClock();try{localStorage.setItem('knot-life-sim-v2',JSON.stringify(state));}catch{}$('game-screen').hidden=true;$('start-screen').hidden=false;});
 try{const saved=JSON.parse(localStorage.getItem('knot-life-sim-v2')||'null');if(saved&&saved.stats&&saved.decisions&&saved.diary&&Number.isInteger(saved.step)){state=saved;state.durationMinutes=state.durationMinutes||30;state.estimatedYears=state.estimatedYears||20;state.speed=state.speed||1;state.yearRemaining=state.yearRemaining??clockYearLength();$('duration').value=String(state.durationMinutes);$('player-name').value=state.name||'';$('home-prefecture').value=state.prefecture||'栃木県';loadSchools($('home-prefecture').value);$('start-screen').hidden=true;$('game-screen').hidden=false;render();startClock();}}catch{}
