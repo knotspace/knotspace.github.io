@@ -100,8 +100,14 @@ const { categories = [], limit = 17 } = Astro.props;
 
     for (const category of categories) {
       if (items.length >= limit) break;
+      const before = items.length;
       addPages(await fetchCategoryFiles(category, limit - items.length + 5));
-      if (items.length < limit) addPages(await searchFiles(category, limit - items.length + 5));
+      // Search only when the category has no direct files; this avoids unnecessary API traffic.
+      if (items.length === before) addPages(await searchFiles(category, limit - items.length + 5));
+    }
+    // One final targeted search fills gaps without searching every category repeatedly.
+    if (items.length < limit && categories.length) {
+      addPages(await searchFiles(categories.slice(0, 4).join(' OR '), limit - items.length + 5));
     }
 
     let loaded = 0;
