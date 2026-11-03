@@ -256,7 +256,7 @@ function startClock(){
   if(state.yearRemaining<=0){
    stopClock();state.waitingChoice=true;
    $('clock-message').textContent=state.auto?'おまかせで今年の選択を進めます。':'今年の時間が経過した。選択肢から次の道を決めよう。';
-   if(state.auto){const current=stages[state.step];if(current?.opts?.length)choose(current.opts[Math.floor(Math.random()*current.opts.length)]);}
+   if(state.auto)chooseAutomatically();
    else {$('pause-game').textContent='再開';}
   }
  },100);
@@ -268,6 +268,16 @@ function updateClockUI(){
  $('pause-game').textContent=state.paused?'再開':'一時停止';
  $('auto-choice').checked=!!state.auto;
  document.querySelectorAll('[data-speed]').forEach(b=>b.classList.toggle('active',Number(b.dataset.speed)===(state.speed||1)));
+}
+function chooseAutomatically(){
+ const current=stages[state.step];if(!current?.opts?.length)return;
+ const type=getExamType(current.tag);
+ if(type&&!state.pendingSchool){
+  const available=schoolsForExam(current.tag);
+  if(available.length)state.pendingSchool=available[Math.floor(Math.random()*available.length)];
+  else {state.waitingChoice=true;state.auto=false;$('auto-choice').checked=false;$('clock-message').textContent='学校データを読み込めないため、受験校を選んでください。';render();return;}
+ }
+ choose(current.opts[Math.floor(Math.random()*current.opts.length)]);
 }
 function updateStats(){
  for(const k of ['study','experience','health','friends']){$('stat-'+k).textContent=state.stats[k];$('bar-'+k).style.width=state.stats[k]+'%';}
@@ -435,7 +445,7 @@ function start(){
  const t=document.querySelector('input[name="talent"]:checked')?.value||'balanced';
  const stats=t==='curious'?{study:48,experience:35,health:72,friends:32}:t==='social'?{study:35,experience:42,health:78,friends:48}:{study:40,experience:35,health:75,friends:38};
  state={name:$('player-name').value.trim(),prefecture:$('home-prefecture').value,stats,decisions:{},pendingSchool:null,step:0,diary:[],durationMinutes:Number($('duration').value)||30,estimatedYears:20,yearRemaining:null,speed:1,paused:false,auto:false,waitingChoice:false,archived:false};
- state.yearRemaining=clockYearLength();
+ state.yearRemaining=null;
  $('start-screen').hidden=true;$('result-screen').hidden=true;$('game-screen').hidden=false;render();startClock();
  try{localStorage.setItem('knot-life-sim-v2',JSON.stringify(state));}catch{}
 }
@@ -443,7 +453,7 @@ $('start-game').addEventListener('click',start);
 $('restart-game').addEventListener('click',()=>{$('result-screen').hidden=true;$('start-screen').hidden=false;});
 $('pause-game').addEventListener('click',()=>{if(!state)return;state.paused=!state.paused;if(state.paused){stopClock();$('clock-message').textContent='時間を一時停止中。';}else{$('clock-message').textContent='時間が進んでいます。1年分の時間が終わると決断できます。';startClock();}updateClockUI();});
 document.querySelectorAll('[data-speed]').forEach(b=>b.addEventListener('click',()=>{if(!state)return;state.speed=Number(b.dataset.speed);updateClockUI();}));
-$('auto-choice').addEventListener('change',e=>{if(state){state.auto=e.target.checked;if(state.auto)$('clock-message').textContent='おまかせ進行が有効。時間切れで選択肢を自動選択します。';else $('clock-message').textContent='決断は自分で選択します。';if(state.waitingChoice&&state.auto){state.waitingChoice=false;const current=stages[state.step];if(current?.opts?.length)choose(current.opts[Math.floor(Math.random()*current.opts.length)]);}}});
+$('auto-choice').addEventListener('change',e=>{if(state){state.auto=e.target.checked;if(state.auto)$('clock-message').textContent='おまかせ進行が有効。時間切れで選択肢を自動選択します。';else $('clock-message').textContent='決断は自分で選択します。';if(state.waitingChoice&&state.auto){state.waitingChoice=false;const current=stages[state.step];if(current?.opts?.length)chooseAutomatically();}}});
 
 $('save-exit').addEventListener('click',()=>{stopClock();try{localStorage.setItem('knot-life-sim-v2',JSON.stringify(state));}catch{}$('game-screen').hidden=true;$('start-screen').hidden=false;});
 renderArchive();
