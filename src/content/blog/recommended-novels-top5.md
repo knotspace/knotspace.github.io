@@ -15,6 +15,17 @@ category: "本・読書"
 
 ※作品ごとの読書状況や感想は、実際に読んだ範囲で更新していきます。内容の核心に触れるネタバレは避けています！
 
+<div class="knot-box knot-box-summary">
+  <p class="knot-box-title">この記事の要点</p>
+  <ul>
+    <li>紹介した5作品は、ミステリー・青春小説・不思議な世界観などジャンルがさまざま。</li>
+    <li>『コンビニ人間』は「普通」について考えさせられる作品。</li>
+    <li>『海辺のカフカ』は現実と幻想が交差する長編小説。</li>
+    <li>ランキングは好みによるものなので、気になった作品から手に取ってみよう。</li>
+  </ul>
+  <p class="knot-box-credit">要点まとめ：KNOT制作</p>
+</div>
+
 ## 第5位『コンビニ人間』／村田沙耶香
 
 <figure class="book-cover-figure"><img src="https://covers.openlibrary.org/b/isbn/9784167911300-M.jpg" alt="『コンビニ人間』の書影" loading="lazy" decoding="async" width="180" height="270" /><figcaption>書影出典：<a href="https://openlibrary.org/isbn/9784167911300" target="_blank" rel="noopener noreferrer">Open Library（ISBN 9784167911300）</a></figcaption></figure>
@@ -47,7 +58,7 @@ category: "本・読書"
 
 ## 第2位『海辺のカフカ』／村上春樹
 
-<figure class="book-cover-figure"><img src="https://covers.openlibrary.org/b/isbn/9784101001548-M.jpg" alt="『海辺のカフカ』の書影" loading="lazy" decoding="async" width="180" height="270" /><figcaption>書影出典：<a href="https://openlibrary.org/isbn/9784101001548" target="_blank" rel="noopener noreferrer">Open Library（ISBN 9784101001548）</a></figcaption></figure>
+<figure class="book-cover-figure"><img src="https://www.shinchosha.co.jp/images_v2/book/cover/100154/100154_m.jpg" alt="新潮文庫『海辺のカフカ〔上〕』の表紙。村上春樹著" loading="lazy" decoding="async" width="207" height="300" /><figcaption>書影出典：<a href="https://www.shinchosha.co.jp/book/100154/" target="_blank" rel="noopener noreferrer">新潮社公式『海辺のカフカ〔上〕』</a>（ISBN 9784101001548）</figcaption></figure>
 
 『海辺のカフカ』は、15歳の少年・田村カフカの物語などが交互に描かれる、独特な雰囲気の小説です！
 
