@@ -37,7 +37,7 @@ let record={answered:0,correct:0,wrong:[],review:{}},set=[],index=0,score=0,lock
 try{const v=JSON.parse(localStorage.getItem(KEY)||'null');if(v&&Number.isFinite(v.answered)&&Number.isFinite(v.correct)){record={answered:v.answered,correct:v.correct,wrong:Array.isArray(v.wrong)?v.wrong.filter(x=>typeof x==='string'):[],review:v.review&&typeof v.review==='object'?v.review:{}};}}catch{}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(record));}catch{}}
 function fillTopics(){const subject=$('subject').value,select=$('topic'),previous=select.value;select.replaceChildren(new Option('すべての分野','all'));[...new Set(bank.filter(q=>subject==='all'||q.subject===(subject==='science'?'理科':'社会')).map(q=>q.topic))].forEach(t=>select.add(new Option(t,t)));if([...select.options].some(o=>o.value===previous))select.value=previous;}
-$('subject').addEventListener('change',fillTopics);fillTopics();
+$('subject').addEventListener('change',fillTopics);fillTopics();if(new URLSearchParams(location.search).get('review')==='today')$('amount').value='review';
 function stats(){$('total').textContent=record.answered;$('correct').textContent=record.correct;$('rate').textContent=record.answered?Math.round(record.correct/record.answered*100)+'%':'—';}
 function enterQuizMode(){document.documentElement.classList.add('kosen-quiz-active');}
 function leaveQuizMode(){document.documentElement.classList.remove('kosen-quiz-active');}
