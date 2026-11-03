@@ -8,6 +8,9 @@ category: "KNOT開発記録"
 
 ## KNOT Studyを公開しました！
 
+<figure class="knot-infographic"><img src="/blog-art/study-modes.svg" alt="KNOT Studyのランダム演習、弱点判定、分野別演習、模試モードの4つの学習方法" width="1000" height="560" loading="lazy" decoding="async" /><figcaption>KNOT Studyの4つの演習モード：KNOT制作</figcaption></figure>
+
+
 お待たせしました！KNOTに新しい学習コンテンツ「KNOT Study」を追加しました！
 
 理科と社会の問題を解ける学習ページです。高校入試や高専入試の勉強をしていると、「問題を解いて、ちゃんと覚えてるか確認したい！」って思うこと、けっこうありますよね？それなら自分で作っちゃえ！と思って、ブラウザからすぐ演習できるものを作ってみました。
