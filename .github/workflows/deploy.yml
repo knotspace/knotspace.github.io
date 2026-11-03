@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "*/15 * * * *"
-    - cron: "0 15 31 3 *"
+    - cron: "0 15 30 11 *"
 
 permissions:
   contents: read
@@ -22,14 +22,15 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     outputs:
-      due: ${{ steps.schedule.outputs.due }}
+      due: ${{ steps.profile.outputs.due || steps.schedule.outputs.due }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Trigger annual profile refresh
-        if: github.event.schedule == '0 15 31 3 *'
+      - name: Trigger annual age refresh
+        id: profile
+        if: github.event.schedule == '0 15 30 11 *'
         run: echo "due=true" >> "$GITHUB_OUTPUT"
       - name: Release scheduled articles
         id: schedule
