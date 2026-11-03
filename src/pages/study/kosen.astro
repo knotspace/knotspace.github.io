@@ -1,6 +1,6 @@
 ---
 import StudyLayout from '../../layouts/StudyLayout.astro';
-import questions from '../../data/kosen-questions.json';
+import questions from '../../data/study/kosen-questions.json';
 const topics = [...new Set(questions.map(q => q.topic))];
 ---
 <StudyLayout title="高専入試対策｜KNOT Study" description="高専入試を意識した思考力・資料読解型のオリジナル演習問題。">
@@ -30,7 +30,7 @@ const topics = [...new Set(questions.map(q => q.topic))];
   <footer class="note">※この問題セットは学習用のオリジナル問題です。実際の入試問題・公式解答ではありません。</footer>
 </main>
 <script>
-import bank from '../../data/kosen-questions.json';
+import bank from '../../data/study/kosen-questions.json';
 const $=id=>document.getElementById(id), KEY='knot-kosen-record-v1';
 let record={answered:0,correct:0,wrong:[]},set=[],index=0,score=0,locked=false,lastConfig=null;
 try{const v=JSON.parse(localStorage.getItem(KEY)||'null');if(v&&Number.isFinite(v.answered)&&Number.isFinite(v.correct)){record={answered:v.answered,correct:v.correct,wrong:Array.isArray(v.wrong)?v.wrong.filter(x=>typeof x==='string'):[]};}}catch{}
