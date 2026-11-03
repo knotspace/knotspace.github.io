@@ -26,6 +26,7 @@ const pages = defineCollection({
     updatedDate: z.coerce.date().optional(),
     heroImage: z.string().url().or(z.string().startsWith('/')).optional(),
     noindex: z.boolean().default(false),
+    blocks: z.array(z.any()).optional(),
   }),
 });
 
