@@ -269,6 +269,31 @@ async function hmac(value, secret) {
   return new Uint8Array(await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(value)));
 }
 
+async function encryptSecret(value, secret) {
+  const keyBytes = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(secret));
+  const key = await crypto.subtle.importKey("raw", keyBytes, "AES-GCM", false, ["encrypt"]);
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const encrypted = new Uint8Array(await crypto.subtle.encrypt({ name: "AES-GCM", iv }, key, new TextEncoder().encode(value)));
+  return base64url(new Uint8Array([...iv, ...encrypted]));
+}
+
+async function decryptSecret(value, secret) {
+  const bytes = Uint8Array.from(decodeBase64url(value), c => c.charCodeAt(0));
+  const iv = bytes.slice(0, 12);
+  const payload = bytes.slice(12);
+  const keyBytes = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(secret));
+  const key = await crypto.subtle.importKey("raw", keyBytes, "AES-GCM", false, ["decrypt"]);
+  const plain = await crypto.subtle.decrypt({ name: "AES-GCM", iv }, key, payload);
+  return new TextDecoder().decode(plain);
+}
+
+function encodeBase64Utf8(value) {
+  const bytes = new TextEncoder().encode(value);
+  let binary = "";
+  for (const byte of bytes) binary += String.fromCharCode(byte);
+  return btoa(binary);
+}
+
 async function createSession(login, secret) {
   const payload = base64url(new TextEncoder().encode(JSON.stringify({
     login,
@@ -419,7 +444,7 @@ export default {
       const authorize = new URL("https://github.com/login/oauth/authorize");
       authorize.searchParams.set("client_id", env.GITHUB_CLIENT_ID);
       authorize.searchParams.set("redirect_uri", callback);
-      authorize.searchParams.set("scope", "read:user");
+      authorize.searchParams.set("scope", "read:user public_repo");
       authorize.searchParams.set("state", state);
       return new Response(null, {
         status: 302,
@@ -483,6 +508,14 @@ export default {
           });
         }
 
+        if (!env.DB) {
+          return json({ error: "Publishing storage is not configured. Apply migration 0002 first." }, 503, origin, { "Set-Cookie": clearState });
+        }
+        const encryptedToken = await encryptSecret(tokenData.access_token, env.SESSION_SECRET);
+        await env.DB.prepare(
+          "INSERT INTO cms_github_tokens (user_login, encrypted_token, updated_at) VALUES (?, ?, strftime('%Y-%m-%dT%H:%M:%fZ', 'now')) ON CONFLICT(user_login) DO UPDATE SET encrypted_token = excluded.encrypted_token, updated_at = excluded.updated_at"
+        ).bind(user.login, encryptedToken).run();
+
         const session = await createSession(user.login, env.SESSION_SECRET);
         const redirectHeaders = new Headers({
           "Location": url.origin + "/admin/?knot_login=success",
@@ -496,6 +529,62 @@ export default {
         return new Response(null, { status: 302, headers: redirectHeaders });
       } catch {
         return json({ error: "OAuth authentication failed" }, 502, origin, { "Set-Cookie": clearState });
+      }
+    }
+
+    if (url.pathname === "/api/publish-article" && request.method === "POST") {
+      const auth = await requireAdmin(request, env);
+      if (auth.response) return auth.response;
+      const csrfError = await requireCsrf(request, env);
+      if (csrfError) return csrfError;
+      if (!env.DB) return json({ error: "Publishing storage is not configured" }, 503, origin);
+      const declaredLength = Number(request.headers.get("Content-Length") || 0);
+      if (declaredLength > 300000) return json({ error: "Article file is too large" }, 413, origin);
+      let payload;
+      try {
+        const raw = await request.text();
+        if (new TextEncoder().encode(raw).length > 300000) return json({ error: "Article file is too large" }, 413, origin);
+        payload = JSON.parse(raw);
+      } catch {
+        return json({ error: "Invalid JSON body" }, 400, origin);
+      }
+      const slug = payload?.slug;
+      const content = payload?.content;
+      if (!validSlug(slug) || typeof content !== "string" || !content.trim() || content.length > 250000) {
+        return json({ error: "Invalid slug or article content" }, 400, origin);
+      }
+      try {
+        const row = await env.DB.prepare("SELECT encrypted_token FROM cms_github_tokens WHERE user_login = ?").bind(auth.session.login).first();
+        if (!row?.encrypted_token) return json({ error: "GitHub publish permission is missing. Log out and sign in again." }, 401, origin);
+        const githubToken = await decryptSecret(row.encrypted_token, env.SESSION_SECRET);
+        const apiUrl = "https://api.github.com/repos/knotspace/knotspace.github.io/contents/src/content/blog/" + slug + ".md";
+        const headers = {
+          "Authorization": "Bearer " + githubToken,
+          "Accept": "application/vnd.github+json",
+          "X-GitHub-Api-Version": "2022-11-28",
+          "User-Agent": "KNOT-CMS",
+        };
+        const existing = await fetch(apiUrl, { headers });
+        if (existing.status === 200) return json({ error: "This slug already exists. Change the slug before publishing." }, 409, origin);
+        if (existing.status !== 404) return json({ error: "GitHub could not check the target file." }, 502, origin);
+        const write = await fetch(apiUrl, {
+          method: "PUT",
+          headers: { ...headers, "Content-Type": "application/json" },
+          body: JSON.stringify({
+            message: "Publish WordPress article: " + slug,
+            content: encodeBase64Utf8(content),
+            branch: "main",
+          }),
+        });
+        const result = await write.json();
+        if (!write.ok) return json({ error: result?.message || "GitHub rejected the publish request." }, 502, origin);
+        return json({
+          published: true,
+          path: "src/content/blog/" + slug + ".md",
+          commit: result.commit?.html_url || null,
+        }, 201, origin);
+      } catch {
+        return json({ error: "Publishing failed. Check Worker logs and D1 migration." }, 502, origin);
       }
     }
 
