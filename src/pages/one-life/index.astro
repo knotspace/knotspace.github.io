@@ -294,7 +294,7 @@ function getExamType(tag){
 function schoolsForExam(tag){
  const type=getExamType(tag);
  if(!type)return [];
- const pref=state.prefecture;
+ const pref=state.examPrefecture||state.prefecture;
  return schoolRecords.filter(x=>{
    const t=String(x.schoolType||'');
    const match=type==='中学校' ? (/中学校|中等教育学校/.test(t) && (x.integratedSchool || /中等教育学校/.test(t) || x.ownership==='私立')) :
@@ -329,6 +329,15 @@ function render(){
    const heading=document.createElement('div');heading.className='picker-heading';
    heading.innerHTML='<b>受験する学校を選ぼう</b><small>学校名の横に偏差値を表示。偏差値は2026年度の参考値（模試・コースにより異なる）。未登録校は標準難易度で判定します。</small>';
    picker.append(heading);
+   const regionLabel=document.createElement('label');regionLabel.className='picker-region-label';regionLabel.textContent='受験する地域';
+   const region=document.createElement('select');region.className='school-select';
+   prefectures.forEach(pref=>{const option=document.createElement('option');option.value=pref;option.textContent=pref;region.append(option);});
+   region.value=state.examPrefecture||state.prefecture;
+   region.addEventListener('change',()=>{
+    state.examPrefecture=region.value;state.pendingSchool=null;schoolRecords=[];schoolsLoaded=false;
+    render();loadSchools(region.value);
+   });
+   picker.append(regionLabel,region);
    const list=schoolsForExam(e.tag);
    const selected=state.pendingSchool;
    if(!list.length){
@@ -444,8 +453,9 @@ function finish(){
 function start(){
  const t=document.querySelector('input[name="talent"]:checked')?.value||'balanced';
  const stats=t==='curious'?{study:48,experience:35,health:72,friends:32}:t==='social'?{study:35,experience:42,health:78,friends:48}:{study:40,experience:35,health:75,friends:38};
- state={name:$('player-name').value.trim(),prefecture:$('home-prefecture').value,stats,decisions:{},pendingSchool:null,step:0,diary:[],durationMinutes:Number($('duration').value)||30,estimatedYears:20,yearRemaining:null,speed:1,paused:false,auto:false,waitingChoice:false,archived:false};
+ state={name:$('player-name').value.trim(),prefecture:$('home-prefecture').value,examPrefecture:$('home-prefecture').value,stats,decisions:{},pendingSchool:null,step:0,diary:[],durationMinutes:Number($('duration').value)||30,estimatedYears:20,yearRemaining:null,speed:1,paused:false,auto:false,waitingChoice:false,archived:false};
  state.yearRemaining=null;
+ if(loadedPrefecture!==state.examPrefecture)loadSchools(state.examPrefecture);
  $('start-screen').hidden=true;$('result-screen').hidden=true;$('game-screen').hidden=false;render();startClock();
  try{localStorage.setItem('knot-life-sim-v2',JSON.stringify(state));}catch{}
 }
@@ -457,7 +467,7 @@ $('auto-choice').addEventListener('change',e=>{if(state){state.auto=e.target.che
 
 $('save-exit').addEventListener('click',()=>{stopClock();try{localStorage.setItem('knot-life-sim-v2',JSON.stringify(state));}catch{}$('game-screen').hidden=true;$('start-screen').hidden=false;});
 renderArchive();
-try{const saved=JSON.parse(localStorage.getItem('knot-life-sim-v2')||'null');if(saved&&saved.stats&&saved.decisions&&saved.diary&&Number.isInteger(saved.step)){state=saved;state.durationMinutes=state.durationMinutes||30;state.estimatedYears=state.estimatedYears||20;state.speed=state.speed||1;state.yearRemaining=state.yearRemaining??clockYearLength();$('duration').value=String(state.durationMinutes);$('player-name').value=state.name||'';$('home-prefecture').value=state.prefecture||'栃木県';loadSchools($('home-prefecture').value);$('start-screen').hidden=true;$('game-screen').hidden=false;render();startClock();}}catch{}
+try{const saved=JSON.parse(localStorage.getItem('knot-life-sim-v2')||'null');if(saved&&saved.stats&&saved.decisions&&saved.diary&&Number.isInteger(saved.step)){state=saved;state.durationMinutes=state.durationMinutes||30;state.examPrefecture=state.examPrefecture||state.prefecture;state.estimatedYears=state.estimatedYears||20;state.speed=state.speed||1;state.yearRemaining=state.yearRemaining??clockYearLength();$('duration').value=String(state.durationMinutes);$('player-name').value=state.name||'';$('home-prefecture').value=state.prefecture||'栃木県';loadSchools(state.examPrefecture||$('home-prefecture').value);$('start-screen').hidden=true;$('game-screen').hidden=false;render();startClock();}}catch{}
 </script>
 <style>
 :root{color-scheme:dark;--bg:#0b1018;--panel:#151e2b;--panel2:#1b2737;--surface:#151e2b;--surface-soft:#1b2737;--line:#2d3b4f;--text:#edf3fb;--muted:#9eacc0;--accent:#9cf06b;font-family:Inter,"Noto Sans JP",system-ui,sans-serif}
@@ -541,6 +551,6 @@ body.life-game-body{background:#f4f0e7;color:var(--text)}
 .achievement-list{margin:18px 0 25px;display:flex;flex-wrap:wrap;gap:7px}
 .achievement-list h3{width:100%;font-size:13px}
 .achievement-list span{padding:7px 10px;background:#eee8dc;color:#81503e;font-size:10px}
-</style>
+.picker-region-label{display:block;margin:8px 0;font-size:10px;color:var(--muted)}</style>
 </body>
 </html>
