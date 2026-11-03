@@ -131,7 +131,7 @@ function legacyToBlocks(value) {
     if (type === 'quote') return [createBlock('core/quote', { value: item.text || '', citation: item.attribution || '' })];
     if (type === 'list') {
       const items = String(item.items || '').split('\n').map(text => text.trim()).filter(Boolean);
-      return [createBlock('core/list', { ordered: !!item.ordered }, items.map(content => createBlock('core/list-item', { content })));
+      return [createBlock('core/list', { ordered: !!item.ordered }, items.map(content => createBlock('core/list-item', { content })))];
     }
     if (type === 'divider') return [createBlock('core/separator')];
     if (type === 'callout') return [createBlock('knot/callout', { title: item.title || 'ポイント', text: item.text || '', style: item.style || 'note' })];
