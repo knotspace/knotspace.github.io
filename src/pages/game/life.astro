@@ -239,7 +239,8 @@ function renderArchive(){
   card.append(title,meta,stats);list.append(card);
  });
 }
-\nfunction stopClock(){if(clockHandle){clearInterval(clockHandle);clockHandle=null;}}
+
+function stopClock(){if(clockHandle){clearInterval(clockHandle);clockHandle=null;}}
 function clockYearLength(){return (Number(state?.durationMinutes)||30)*60000/Math.max(1,state?.estimatedYears||20);}
 function startClock(){
  stopClock();if(!state||$('game-screen').hidden||state.paused||state.waitingChoice)return;
