@@ -53,7 +53,6 @@ const navHref = (path: string) => /^https?:\/\//i.test(path) ? path : BASE + pat
     <meta name="site-base" content={BASE} />
     <link rel="canonical" href={canonicalURL} />
     {image && <link rel="preload" as="image" href={pageImage} fetchpriority="high" />}
-    <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
     <link rel="dns-prefetch" href="https://giscus.app" />
     <link rel="dns-prefetch" href="https://rtzorqaigpeechqywjie.supabase.co" />
 
@@ -187,19 +186,24 @@ const navHref = (path: string) => /^https?:\/\//i.test(path) ? path : BASE + pat
       })();
     </script>
     <script is:inline>
-      // KNOT本体はPWA化しない。旧ルートSWだけを解除し、Study/Adminの専用SWは残す。
+      // 旧ルートSWの整理は一度だけ実行し、通常のページ表示では毎回キャッシュを走査しない。
       if ("serviceWorker" in navigator) {
-        window.addEventListener("load", async () => {
-          try {
-            const registrations = await navigator.serviceWorker.getRegistrations();
-            const rootScope = new URL(document.querySelector('meta[name="site-base"]')?.content || "/", location.origin).href;
-            await Promise.all(registrations.filter((registration) => registration.scope === rootScope).map((registration) => registration.unregister()));
-            const keys = await caches.keys();
-            await Promise.all(keys.filter((key) => key.startsWith("knot-shell-")).map((key) => caches.delete(key)));
-          } catch (error) { console.warn("旧KNOT PWAの解除に失敗しました:", error); }
-        });
+        let cleanupDone = false;
+        try { cleanupDone = localStorage.getItem("knot-legacy-sw-cleanup-v1") === "1"; } catch {}
+        if (!cleanupDone) {
+          window.addEventListener("load", async () => {
+            try {
+              const registrations = await navigator.serviceWorker.getRegistrations();
+              const rootScope = new URL(document.querySelector('meta[name="site-base"]')?.content || "/", location.origin).href;
+              await Promise.all(registrations.filter((registration) => registration.scope === rootScope).map((registration) => registration.unregister()));
+              const keys = await caches.keys();
+              await Promise.all(keys.filter((key) => key.startsWith("knot-shell-")).map((key) => caches.delete(key)));
+              try { localStorage.setItem("knot-legacy-sw-cleanup-v1", "1"); } catch {}
+            } catch (error) { console.warn("旧KNOT PWAの整理に失敗しました:", error); }
+          }, { once: true });
+        }
       }
-    </script>
+    </script>ipt>
     <script is:inline id="knot-search-shortcut">
       document.addEventListener('keydown', (event) => {
         if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
