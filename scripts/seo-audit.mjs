@@ -34,7 +34,7 @@ let indexableCount = 0;
 
 for (const file of htmlFiles) {
   const relative = path.relative(root, file).replaceAll(path.sep, '/');
-  if (relative.startsWith('admin/') || relative === '404.html' || /^google[0-9a-f]+\\.html$/i.test(relative)) continue;
+  if (relative.startsWith('admin/') || relative === '404.html' || /^google[0-9a-f]+\.html$/i.test(relative)) continue;
   const html = fs.readFileSync(file, 'utf8');
   const title = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1]?.trim() ?? '';
   const description = metaContent(html, 'description');
