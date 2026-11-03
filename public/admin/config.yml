@@ -171,6 +171,7 @@ collections:
           - quote
           - bulleted-list
           - numbered-list
+          - image
         default: |
           ## はじめに
 
@@ -310,8 +311,8 @@ collections:
         modes: [rich_text, raw]
         editor_components: [image, code-block, knot-callout, knot-button]
         sanitize_preview: true
-        buttons: [bold, italic, strikethrough, code, link, heading-two, heading-three, quote, bulleted-list, numbered-list]
-        hint: "見出し・文章・画像・リンク・表などを組み合わせてページを作成できます。個人情報は掲載しないでね。"
+        buttons: [bold, italic, strikethrough, code, link, heading-one, heading-two, heading-three, quote, bulleted-list, numbered-list, image]
+        hint: "WordPressのように本文を直接編集できます。画像ボタンからアップロード、見出し・太字・リンク・引用・リスト・コードブロックも追加できます。個人情報は掲載しないでね。"
   - name: page_management
     label: 固定ページ管理
     files:
