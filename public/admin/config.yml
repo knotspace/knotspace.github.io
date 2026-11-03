@@ -121,24 +121,6 @@ collections:
           - quote
           - bulleted-list
           - numbered-list
-        default: |
-          ## はじめに
-
-          この記事で紹介する内容を簡単にまとめます。
-
-          ## 本題
-
-          ### ポイント1
-
-          ここに内容を書きます。
-
-          ### ポイント2
-
-          ここに内容を書きます。
-
-          ## まとめ
-
-          重要なポイントを振り返ります。
 
   - name: site_management
     label: サイト設定
