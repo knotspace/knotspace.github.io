@@ -103,7 +103,7 @@ for (let i = 0; i < PREFECTURES.length; i++) {
   const pref = PREFECTURES[i];
   const file = String(i + 1).padStart(2, '0') + '.json';
   const list = byPrefecture.get(pref) || [];
-  await writeFile(path.join(publicDir, file), JSON.stringify({ prefecture: pref, count: list.length, schools: list }) + '\\n', 'utf8');
+  await writeFile(path.join(publicDir, file), JSON.stringify({ prefecture: pref, count: list.length, schools: list }) + '\n', 'utf8');
   prefectureFiles[pref] = { file, count: list.length };
 }
 const output = {
@@ -124,5 +124,5 @@ const output = {
   ownershipTypes,
   fields
 };
-await writeFile(OUTPUT, JSON.stringify(output) + '\\n', 'utf8');
+await writeFile(OUTPUT, JSON.stringify(output) + '\n', 'utf8');
 console.log(`Imported ${schools.length} schools into ${PREFECTURES.length} prefecture files.`);
