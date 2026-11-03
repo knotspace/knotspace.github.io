@@ -196,7 +196,8 @@ const BASE = import.meta.env.BASE_URL;
           } catch (error) { console.warn("旧KNOT PWAの解除に失敗しました:", error); }
         });
       }
-    </script>ipt><script is:inline id="knot-search-shortcut">
+    </script>
+    <script is:inline id="knot-search-shortcut">
       document.addEventListener('keydown', (event) => {
         if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
           event.preventDefault();
