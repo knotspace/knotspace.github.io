@@ -12,6 +12,7 @@ const blog = defineCollection({
     category: z.string().default('BLOG'),
     popularity: z.number().int().min(0).default(0),
     heroImage: z.string().url().or(z.string().startsWith('/')).optional(),
+    blocks: z.array(z.any()).optional(),
   }),
 });
 
