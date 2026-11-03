@@ -206,17 +206,16 @@ export default {
         }
 
         const session = await createSession(user.login, env.SESSION_SECRET);
-        return new Response(null, {
-          status: 302,
-          headers: {
-            "Location": "https://knotspace.github.io/admin/?knot_login=success",
-            "Cache-Control": "no-store",
-            "Set-Cookie": [
-              clearState,
-              "__Host-knot_session=" + session + "; Path=/; HttpOnly; Secure; SameSite=None; Max-Age=" + SESSION_TTL_SECONDS,
-            ].join(", "),
-          },
+        const redirectHeaders = new Headers({
+          "Location": "https://knotspace.github.io/admin/?knot_login=success",
+          "Cache-Control": "no-store",
         });
+        redirectHeaders.append("Set-Cookie", clearState);
+        redirectHeaders.append(
+          "Set-Cookie",
+          "__Host-knot_session=" + session + "; Path=/; HttpOnly; Secure; SameSite=None; Max-Age=" + SESSION_TTL_SECONDS,
+        );
+        return new Response(null, { status: 302, headers: redirectHeaders });
       } catch {
         return json({ error: "OAuth authentication failed" }, 502, origin, { "Set-Cookie": clearState });
       }
