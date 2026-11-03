@@ -84,14 +84,14 @@ const dateTimeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocal
         list.appendChild(card);
         const stat = stats.get(card.dataset.slug) || { views: 0, likes: 0 };
         const label = card.querySelector('.popular-stats');
-        if (label) label.textContent = `閲覧 ${stat.views.toLocaleString('ja-JP')} ・ いいね ${stat.likes.toLocaleString('ja-JP')}`;
+        if (label) label.textContent = `いいね ${stat.likes.toLocaleString('ja-JP')}`;
       });
       showTop();
     })
     .catch(() => {
       cards.forEach(card => {
         const label = card.querySelector('.popular-stats');
-        if (label) label.textContent = 'KNOTの記事';
+        if (label) label.textContent = '';
       });
     });
 })();
