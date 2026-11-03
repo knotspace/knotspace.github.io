@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
+import siteSettings from '../data/site-settings.json';
 
 const now = new Date();
 const posts = (await getCollection('blog'))
@@ -13,11 +14,11 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', { year: 'num
 const dateTimeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Tokyo' });
 ---
 
-<Layout title="KNOT｜Web制作・PCソフト・Androidアプリ・読書の個人ブログ" description="Web制作・プログラミング、Windowsの無料ソフト、Androidアプリ、本・読書、英検や高校受験の勉強法。実際に調べたり使ったりしたことを記録するKNOTの個人ブログ。">
+<Layout title="KNOT｜Web制作・PCソフト・Androidアプリ・読書の個人ブログ" description={siteSettings.siteDescription}>
   <div class="personal-home">
     <section class="intro">
-      <div class="intro-topline"><span class="intro-kicker"><span class="live-dot"></span> INDEPENDENT WEBLOG</span><span class="intro-year">NO. 001 / 2026—</span></div>
-      <div class="intro-main"><h1>KNOT<span class="intro-period">.</span></h1><p>Web、読書、テクノロジー、学び。<br/>気になったことを、気になったままに。</p></div>
+      <div class="intro-topline"><span class="intro-kicker"><span class="live-dot"></span> {siteSettings.introKicker}</span><span class="intro-year">NO. 001 / 2026—</span></div>
+      <div class="intro-main"><h1>KNOT<span class="intro-period">.</span></h1><p>{siteSettings.introLine1}<br/>{siteSettings.introLine2}</p></div>
       <div class="intro-bottom"><span>PERSONAL NOTES &amp; JOURNAL</span><span>SCROLL TO EXPLORE ↓</span></div>
     </section>
 
