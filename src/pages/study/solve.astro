@@ -1,6 +1,6 @@
 ---
 import StudyLayout from '../../layouts/StudyLayout.astro';
-import bank from '../../data/study-questions.json';
+import bank from '../../data/study/study-questions.json';
 const science = bank.filter(q => q.subject === 'science').length;
 const social = bank.filter(q => q.subject === 'social').length;
 ---
@@ -27,7 +27,7 @@ const social = bank.filter(q => q.subject === 'social').length;
 <section class="panel result" id="result" hidden><p class="eyebrow">RESULT</p><h2>おつかれさま！</h2><p class="score"><strong id="score">0</strong><span> / <span id="max">0</span> 問正解</span></p><p id="resultText" class="muted"></p><div class="buttons"><button class="primary" id="again">同じ条件でもう一度</button><a class="subtle link-button" href="../">Studyトップへ</a></div></section>
 </main>
 <script>
-import bank from '../../data/study-questions.json';
+import bank from '../../data/study/study-questions.json';
 const $=id=>document.getElementById(id);
 const KEY='knot-study-v2';
 let record={answered:0,correct:0,wrong:[]},questions=[],position=0,score=0,selected=false,lastConfig=null;
