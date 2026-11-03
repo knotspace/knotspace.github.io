@@ -1,0 +1,51 @@
+---
+import StudyLayout from '../../layouts/StudyLayout.astro';
+import releasesData from '../../data/study/releases.json';
+const BASE = import.meta.env.BASE_URL;
+const releases = [...releasesData.releases].sort((a,b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
+const features = [
+  { category: '演習', title: '基礎網羅問題', description: '理科・社会の7分野から問題を選び、10問・20問・全問で学習できます。間違えた問題は苦手リストに保存されます。', href: 'foundation/', steps: ['教科と分野を選ぶ', '問題数を選んで学習開始', '解説を確認し、苦手問題を解き直す'] },
+  { category: '入試対策', title: '高専入試対策', description: '高専入試を意識した問題に挑戦できます。分野や条件を選んで演習し、解答と解説を確認できます。', href: 'kosen/', steps: ['出題条件を選ぶ', '問題に解答する', '解説を読み、間違えた問題を復習する'] },
+  { category: '実戦', title: '過去問模試', description: '過去問を使った模試形式の演習です。本番を意識して時間を測りながら取り組めます。', href: 'mock/', steps: ['受験する模試を選ぶ', '本番を意識して解く', '終了後に結果を確認する'] },
+  { category: '知識', title: '分野別要点まとめ', description: '物理・化学・生物・地学・地理・歴史・公民の7分野を整理して確認できます。', href: 'summary/', steps: ['確認したい分野を選ぶ', '要点を読み進める', '演習問題と組み合わせて復習する'] },
+  { category: '学習管理', title: '集中タイマー・学習ログ', description: 'ポモドーロタイマー、ストップウォッチ、手動の学習記録に対応しています。', href: 'tools/', steps: ['集中・休憩モードを選ぶ', 'タイマーをスタートする', '集中セッションや学習時間を記録する'] },
+  { category: '学習サポート', title: '今日のひとこと・名言集', description: 'Studyホームで日替わりの言葉を表示。名言集から別の言葉も読めます。', href: 'quotes/', steps: ['Studyホームを開く', '今日のひとことを読む', '名言集でほかの言葉も確認する'] },
+  { category: '学習サポート', title: '学ぶ理由・大学生活ガイド', description: '学習の目的や、その先の進路・大学生活について読めるコンテンツです。', href: 'why/', steps: ['ページを開く', '気になるテーマを読む', '自分の目標を考えるきっかけにする'] },
+];
+const dateFormat = (value) => new Date(value).toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+---
+<StudyLayout title="リリースノート・使い方｜KNOT Study" description="KNOT Studyで現在使える機能、使い方、アップデート内容と更新日時をまとめています。">
+<main class="updates-page">
+  <a class="back" href={`${BASE}study/`}>← Studyホームに戻る</a>
+  <header class="hero">
+    <p class="eyebrow">KNOT STUDY / RELEASE NOTES</p>
+    <h1>Studyの更新情報。</h1>
+    <p>使える機能や使い方、追加・改善した内容をここにまとめています。Studyのアップデートに合わせて更新履歴も追加されます。</p>
+    <div class="hero-meta"><span>機能ガイド {features.length}項目</span><span>更新履歴 {releases.length}件</span></div>
+  </header>
+  <section class="release-section" id="history">
+    <div class="section-heading"><div><p class="eyebrow">WHAT'S NEW</p><h2>アップデート履歴</h2></div><span>新しい順</span></div>
+    {releases.length ? <div class="timeline">{releases.map((release) => <article class="release-item">
+      <div class="release-date"><time datetime={release.publishedAt}>{dateFormat(release.publishedAt)}</time><span>JST</span></div>
+      <div class="release-body"><span class="release-tag">{release.type || 'UPDATE'}</span><h3>{release.title}</h3><p>{release.summary}</p>
+        {release.details?.length ? <ul>{release.details.map((detail) => <li>{detail}</li>)}</ul> : null}
+        {release.files?.length ? <details><summary>変更されたファイル（{release.files.length}）</summary><ul class="file-list">{release.files.map((file) => <li><code>{file}</code></li>)}</ul></details> : null}
+      </div>
+    </article>)}</div> : <p class="empty">最初のStudyアップデートを準備中です。Studyの機能が更新されると、ここに履歴が追加されます。</p>}
+  </section>
+  <section class="feature-section" id="features">
+    <div class="section-heading"><div><p class="eyebrow">AVAILABLE FEATURES</p><h2>現在使える機能</h2></div><span>使い方ガイド</span></div>
+    <div class="feature-grid">{features.map((feature, index) => <article class="feature-card">
+      <div class="feature-top"><span>{String(index+1).padStart(2,'0')}</span><small>{feature.category}</small></div>
+      <h3>{feature.title}</h3><p>{feature.description}</p>
+      <details><summary>使い方を見る</summary><ol>{feature.steps.map(step => <li>{step}</li>)}</ol></details>
+      <a href={`${BASE}study/${feature.href}`}>この機能を開く ↗</a>
+    </article>)}</div>
+  </section>
+  <footer class="updates-footer"><span>最終更新はアップデート履歴の最新日時を確認してください。</span><a href={`${BASE}study/`}>KNOT Studyへ戻る →</a></footer>
+</main>
+</StudyLayout>
+<style>
+.updates-page{max-width:1000px;margin:0 auto;padding:30px 0 65px}.back{font-size:12px;color:var(--muted)}.hero{padding:30px 0 27px;border-bottom:1px solid var(--line)}.eyebrow{font:10px ui-monospace,monospace;letter-spacing:.16em;color:var(--accent);font-weight:850;margin:0 0 10px}.hero h1{font-size:clamp(32px,5vw,48px);letter-spacing:-.06em;margin:0 0 12px}.hero>p:not(.eyebrow){max-width:660px;color:var(--muted);font-size:13px;line-height:1.9}.hero-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}.hero-meta span,.feature-top small{font-size:10px;padding:6px 10px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}.release-section,.feature-section{padding-top:35px}.section-heading{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:17px}.section-heading .eyebrow{margin-bottom:5px}.section-heading h2{font-size:22px;letter-spacing:-.04em;margin:0}.section-heading>span{font-size:10px;color:var(--muted)}.timeline{border-left:1px solid var(--line);margin-left:7px}.release-item{position:relative;display:grid;grid-template-columns:185px minmax(0,1fr);gap:20px;padding:0 0 26px 22px}.release-item:before{content:"";position:absolute;left:-5px;top:4px;width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--bg)}.release-date{display:flex;flex-direction:column;gap:5px;font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}.release-date span{font-size:9px;letter-spacing:.12em}.release-body{padding:17px 18px;border:1px solid var(--line);border-radius:13px;background:var(--surface)}.release-tag{font:9px ui-monospace,monospace;letter-spacing:.1em;color:var(--accent)}.release-body h3,.feature-card h3{font-size:16px;margin:7px 0}.release-body p,.feature-card>p{font-size:12px;line-height:1.9;color:var(--muted);margin:0}.release-body ul,.feature-card ol{padding-left:19px;margin:12px 0 0;font-size:11px;line-height:1.9}.release-body details,.feature-card details{margin-top:13px;border-top:1px solid var(--line);padding-top:10px}.release-body summary,.feature-card summary{font-size:11px;font-weight:800;cursor:pointer}.file-list code{font-size:10px;overflow-wrap:anywhere}.empty{padding:20px;border:1px dashed var(--line);border-radius:12px;color:var(--muted);font-size:12px;line-height:1.8}.feature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.feature-card{padding:18px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}.feature-top{display:flex;justify-content:space-between;align-items:center}.feature-top>span{font:11px ui-monospace,monospace;color:var(--accent)}.feature-card h3{font-size:17px;margin:12px 0 7px}.feature-card>a{display:inline-block;margin-top:14px;color:var(--accent);font-size:11px;font-weight:850}.feature-card ol{margin-bottom:0}.updates-footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:35px;padding-top:17px;font-size:10px;color:var(--muted)}.updates-footer a{color:var(--accent);font-weight:800}
+@media(max-width:650px){.updates-page{padding:22px 0 50px}.release-item{grid-template-columns:1fr;gap:9px}.release-date{flex-direction:row;align-items:center}.feature-grid{grid-template-columns:1fr}.section-heading h2{font-size:19px}.release-body{padding:15px}}
+</style>
