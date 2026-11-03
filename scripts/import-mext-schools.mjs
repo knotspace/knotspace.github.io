@@ -63,6 +63,7 @@ for (const url of SOURCES) {
     const code = pick(row, headers, [/^学校コード$/,/学校コード/]);
     const name = pick(row, headers, [/学校名/,/学校名称/]);
     if (!code || !name) continue;
+    if (pick(row, headers, [/廃止年月日/])) continue;
     const typeCode = pick(row, headers, [/学校種/]) || code.slice(0, 2);
     const schoolType = TYPE_MAP[typeCode] || typeCode;
     const ownershipCode = pick(row, headers, [/設置区分/,/設置者区分/,/国公私立/]) || code.slice(4, 5);
