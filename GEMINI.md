@@ -11,6 +11,13 @@
 - Do not publish information about other identifiable people.
 - If a requested change appears to expose personal information, stop and ask for clarification.
 
+## Blog writing style
+- Write all new and revised Japanese blog articles in a light, natural, friendly `です・ます` style.
+- Keep the tone conversational and approachable, like a personal blog, but use polite sentence endings consistently. Prefer `ですよ`, `と思います`, and `してみましょう` over casual plain forms such as `だよ`, `と思う`, and `してみよう`.
+- Avoid both stiff academic/manual-like prose and excessive exclamation marks or repetitive sentence endings.
+- Preserve useful detail, factual accuracy, and the author’s natural voice. Do not invent personal experiences, claims, or sources.
+- Apply this style to the whole article, including introductions, headings where phrased as sentences, captions, and conclusions.
+
 ## Development rules
 - Preserve existing functionality unless the request explicitly asks to change it.
 - Prefer small, targeted changes over broad rewrites.
