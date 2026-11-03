@@ -172,6 +172,29 @@ collections:
             name: footerNote
             widget: string
             required: true
+  - name: page_management
+    label: 固定ページ管理
+    files:
+      - name: about
+        label: プロフィールページ
+        file: src/data/about-settings.json
+        format: json
+        fields:
+          - { label: 上部ラベル, name: eyebrow, widget: string }
+          - { label: 見出し 1行目, name: headingLine1, widget: string }
+          - { label: 見出し 2行目, name: headingLine2, widget: string }
+          - label: 紹介文
+            name: lead
+            widget: text
+            hint: "個人を特定できる学校名・住所・本名・連絡先などは書かないでね。"
+          - { label: ストーリーのラベル, name: storyEyebrow, widget: string }
+          - { label: ストーリー見出し, name: storyTitle, widget: string }
+          - label: 本文の段落
+            name: storyParagraphs
+            widget: list
+            field: { label: 段落, name: paragraph, widget: text }
+          - { label: 興味・関心, name: interests, widget: string }
+          - { label: 技術・ツール, name: tech, widget: string }
   - name: study_content
     label: KNOT Study管理
     files:
