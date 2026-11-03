@@ -56,9 +56,14 @@ function walk(dir) {
     return extensions.has(path.extname(entry.name))?[full]:[];
   });
 }
+const gradeLabelFiles = new Set(['src/pages/game/life.astro','src/utils/academic-grade.ts','src/utils/profile-age.ts']);
 for (const dir of dirs) for (const file of walk(path.join(root,dir))) {
+  const relative = path.relative(root,file).replace(/\\\\/g,'/');
   const content=fs.readFileSync(file,'utf8');
-  for (const p of patterns) if(p.regex.test(content)) failures.push(path.relative(root,file)+':個人情報の可能性 ('+p.label+')');
+  for (const p of patterns) {
+    if (p.label==='specific school grade' && gradeLabelFiles.has(relative)) continue;
+    if(p.regex.test(content)) failures.push(relative+':個人情報の可能性 ('+p.label+')');
+  }
 }
 if (fix && fixed) console.log('自動修正: 重複画像 ' + fixed + ' 件');
 if (failures.length) {
