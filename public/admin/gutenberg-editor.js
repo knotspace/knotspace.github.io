@@ -1,5 +1,5 @@
 import { createElement as el, createRoot, useEffect, useRef, useState } from '@wordpress/element';
-import { registerBlockType, createBlock } from '@wordpress/blocks';
+import { registerBlockType, getBlockType, createBlock } from '@wordpress/blocks';
 import { registerCoreBlocks } from '@wordpress/block-library';
 import {
   BlockEditorProvider, BlockList, BlockTools, Inserter, WritingFlow, ObserveTyping,
@@ -16,7 +16,7 @@ import './gutenberg-editor.css';
 
 registerCoreBlocks();
 
-if (!wpBlockRegistered('knot/callout')) {
+if (!getBlockType('knot/callout')) {
   registerBlockType('knot/callout', {
     apiVersion: 3,
     title: 'ポイント枠',
@@ -41,7 +41,7 @@ if (!wpBlockRegistered('knot/callout')) {
   });
 }
 
-if (!wpBlockRegistered('knot/button')) {
+if (!getBlockType('knot/button')) {
   registerBlockType('knot/button', {
     apiVersion: 3,
     title: 'リンクボタン',
@@ -62,10 +62,6 @@ if (!wpBlockRegistered('knot/button')) {
     ),
     save: () => null
   });
-}
-
-function wpBlockRegistered(name) {
-  return !!(window.wp && window.wp.blocks && window.wp.blocks.getBlockType && window.wp.blocks.getBlockType(name));
 }
 
 function asArray(value) {
