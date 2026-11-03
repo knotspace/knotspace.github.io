@@ -29,7 +29,7 @@ const recent = posts.slice(1, 9);
     <div class="home-columns">
       <main class="home-main">
         <div class="home-section-heading"><h1>記事</h1><span>ARTICLES</span></div>
-        {featured && <a class="featured-article" href={`${BASE}blog/${featured.slug}/`}>
+        {featured && <a class="featured-article" href={`${BASE}blog/${featured.id}/`}>
           {featured.data.heroImage && <img src={featured.data.heroImage} alt={featured.data.title} />}
           <div class="featured-copy"><div class="article-meta"><span>{featured.data.category}</span><time>{dateFormat(featured.data.pubDate)}</time></div><h2>{featured.data.title}</h2><p>{featured.data.description}</p><span class="continue-reading">続きを読む »</span></div>
         </a>}
@@ -38,13 +38,13 @@ const recent = posts.slice(1, 9);
           <button type="button" class="article-tab" id="tab-popular" role="tab" aria-selected="false" aria-controls="panel-popular">人気記事</button>
         </div>
         <section class="home-card-grid is-visible" id="panel-new" role="tabpanel" aria-labelledby="tab-new">
-          {recent.map((post, index) => <a class="home-post-card" href={`${BASE}blog/${post.slug}/`}>
+          {recent.map((post, index) => <a class="home-post-card" href={`${BASE}blog/${post.id}/`}>
             <div class="card-thumb">{post.data.heroImage ? <img src={post.data.heroImage} alt={post.data.title} loading="lazy" /> : <span>KNOT</span>}</div>
             <div class="card-details"><div class="article-meta"><span>{post.data.category}</span><time>{dateFormat(post.data.pubDate)}</time></div><h2>{post.data.title}</h2><p>{post.data.description}</p><span class="card-read">続きを読む »</span></div>
           </a>)}
         </section>
         <section class="home-card-grid" id="panel-popular" role="tabpanel" aria-labelledby="tab-popular" hidden>
-          {popular.map((post, index) => <a class="home-post-card" href={`${BASE}blog/${post.slug}/`}>
+          {popular.map((post, index) => <a class="home-post-card" href={`${BASE}blog/${post.id}/`}>
             <div class="card-thumb">{post.data.heroImage ? <img src={post.data.heroImage} alt={post.data.title} loading="lazy" /> : <span>KNOT</span>}<b class="card-rank">{index + 1}</b></div>
             <div class="card-details"><div class="article-meta"><span>{post.data.category}</span><time>{dateFormat(post.data.pubDate)}</time></div><h2>{post.data.title}</h2><p>{post.data.description}</p><span class="card-read">続きを読む »</span></div>
           </a>)}
@@ -62,7 +62,7 @@ const recent = posts.slice(1, 9);
       <aside class="home-sidebar">
         <section class="side-widget"><h2>このブログについて</h2><div class="side-profile"><strong>KNOT<span>.</span></strong><p>中学3年生が運営する個人ブログ。Web制作や読書、勉強など、興味のあることを記録しています。</p><a href={`${BASE}about/`}>プロフィール »</a></div></section>
         <section class="side-widget"><h2>カテゴリー</h2><ul>{categories.map((category) => <li><a href={`${BASE}blog/?category=${encodeURIComponent(category)}`}>{category}<span>›</span></a></li>)}</ul></section>
-        <section class="side-widget"><h2>最近の記事</h2><ol>{posts.slice(0, 5).map((post) => <li><a href={`${BASE}blog/${post.slug}/`}>{post.data.title}</a></li>)}</ol></section>
+        <section class="side-widget"><h2>最近の記事</h2><ol>{posts.slice(0, 5).map((post) => <li><a href={`${BASE}blog/${post.id}/`}>{post.data.title}</a></li>)}</ol></section>
         <section class="side-widget"><h2>KNOT Study</h2><p>勉強に使える問題・まとめを公開中。</p><a href={`${BASE}study/`}>Studyを開く »</a></section>
       </aside>
     </div>
