@@ -15,6 +15,10 @@ const json = (body: unknown, status = 200) =>
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
   if (req.method !== "POST") return json({ error: "Method not allowed" }, 405);
+  const declaredLength = Number(req.headers.get("content-length") ?? 0);
+  if (Number.isFinite(declaredLength) && declaredLength > 8192) {
+    return json({ error: "リクエストが大きすぎます。" }, 413);
+  }
 
   const supabaseUrl = Deno.env.get("SUPABASE_URL");
   const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
@@ -25,7 +29,13 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const { action, username, password, captchaToken } = await req.json();
+    const rawBody = await req.text();
+    if (rawBody.length > 8192) return json({ error: "リクエストが大きすぎます。" }, 413);
+    const payload = JSON.parse(rawBody);
+    if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
+      return json({ error: "リクエスト形式が正しくありません。" }, 400);
+    }
+    const { action, username, password, captchaToken } = payload;
     const cleanUsername = typeof username === "string" ? username.trim() : "";
     const usernameNorm = cleanUsername.toLowerCase();
 
@@ -45,7 +55,9 @@ Deno.serve(async (req) => {
       body: new URLSearchParams({ secret: turnstileSecret, response: captchaToken }),
     });
     const verification = await verify.json();
-    if (!verification.success) return json({ error: "本人確認に失敗しました。もう一度お試しください。" }, 400);
+    if (!verification.success || verification.hostname !== "knotspace.github.io") {
+      return json({ error: "本人確認に失敗しました。もう一度お試しください。" }, 400);
+    }
 
     const admin = createClient(supabaseUrl, serviceKey, { auth: { persistSession: false } });
     const auth = createClient(supabaseUrl, anonKey, { auth: { persistSession: false } });
