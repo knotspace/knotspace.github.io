@@ -133,5 +133,5 @@ if (errors.length) {
   for (const error of errors) console.error(`- ${error}`);
   process.exitCode = 1;
 } else {
-  console.log('問題形式・ID・正解番号・解説・関連リンクにエラーはありません。');
+  console.log('問題形式・ID・正解番号・解説・関連リンク・過去問自動採点データにエラーはありません。');
 }
