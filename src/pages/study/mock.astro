@@ -133,7 +133,7 @@ function startTimer(){
 }
 function pauseTimer(){
  if(finished)return;
- if(!paused){remaining=Math.max(0,Math.ceil((deadline-Date.now())/1000));paused=true;stopTimer();}
+ if(!paused){remaining=Math.max(0,Math.ceil((deadline-Date.now())/1000));if(remaining<=0){finishExam('time');return;}paused=true;stopTimer();}
  else{startTimer();}
  $('pause').textContent=paused?'再開する':'一時停止';saveDraft();drawClock();
 }
