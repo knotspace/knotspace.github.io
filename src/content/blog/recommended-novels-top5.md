@@ -2,7 +2,7 @@
 title: "読んでみてほしい小説TOP5"
 description: "ミステリーから不思議な世界観の作品まで、気になった小説を5作品紹介します。"
 pubDate: 2026-11-02
-heroImage: "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=1400&auto=format&fit=crop"
+heroImage: "/blog-art/novels.svg"
 updatedDate: 2026-11-03
 category: "本・読書"
 ---
@@ -15,7 +15,7 @@ category: "本・読書"
 
 ※作品ごとの読書状況や感想は、実際に読んだ範囲で更新していきます。内容の核心に触れるネタバレは避けています！
 
-![『コンビニ人間』の書影](https://covers.openlibrary.org/b/isbn/9784167911300-L.jpg)
+<figure class="book-cover-figure"><img src="https://covers.openlibrary.org/b/isbn/9784167911300-L.jpg" alt="『コンビニ人間』の書影" loading="lazy" decoding="async" width="300" height="450" /><figcaption>書影出典：<a href="https://openlibrary.org/isbn/9784167911300" target="_blank" rel="noopener noreferrer">Open Library（ISBN 9784167911300）</a></figcaption></figure>
 
 ## 第5位『コンビニ人間』／村田沙耶香
 
@@ -25,7 +25,7 @@ category: "本・読書"
 
 文章は比較的読み進めやすいのに、読み終わったあとに考えることがずっと残るタイプの小説です。短めの作品から読書を始めたい人も、ぜひ候補に入れてみてください！
 
-![『すべてがFになる』の書影](https://covers.openlibrary.org/b/isbn/9784062639248-L.jpg)
+<figure class="book-cover-figure"><img src="https://covers.openlibrary.org/b/isbn/9784062639248-L.jpg" alt="『すべてがFになる』の書影" loading="lazy" decoding="async" width="300" height="450" /><figcaption>書影出典：<a href="https://openlibrary.org/isbn/9784062639248" target="_blank" rel="noopener noreferrer">Open Library（ISBN 9784062639248）</a></figcaption></figure>
 
 ## 第4位『すべてがFになる』／森博嗣
 
@@ -35,7 +35,7 @@ category: "本・読書"
 
 専門的な話や難しい言葉も出てくるので、気軽にサクッと読める本とはちょっと違うかも。でも、その分、内容を理解しながらじっくり読み進めたい人には、きっと面白いと思います！
 
-![『君の膵臓をたべたい』の書影](https://covers.openlibrary.org/b/isbn/9784575525054-L.jpg)
+<figure class="book-cover-figure"><img src="https://covers.openlibrary.org/b/isbn/9784575525054-L.jpg" alt="『君の膵臓をたべたい』の書影" loading="lazy" decoding="async" width="300" height="450" /><figcaption>書影出典：<a href="https://openlibrary.org/isbn/9784575525054" target="_blank" rel="noopener noreferrer">Open Library（ISBN 9784575525054）</a></figcaption></figure>
 
 ## 第3位『君の膵臓をたべたい』／住野よる
 
@@ -45,7 +45,7 @@ category: "本・読書"
 
 青春小説を読んでみたい人や、読み終わったあとに少し考えさせられる作品を探している人におすすめしたいです。
 
-![『海辺のカフカ』の書影](https://covers.openlibrary.org/b/isbn/9784101001548-L.jpg)
+<figure class="book-cover-figure"><img src="https://covers.openlibrary.org/b/isbn/9784101001548-L.jpg" alt="『海辺のカフカ』の書影" loading="lazy" decoding="async" width="300" height="450" /><figcaption>書影出典：<a href="https://openlibrary.org/isbn/9784101001548" target="_blank" rel="noopener noreferrer">Open Library（ISBN 9784101001548）</a></figcaption></figure>
 
 ## 第2位『海辺のカフカ』／村上春樹
 
@@ -55,7 +55,7 @@ category: "本・読書"
 
 でも、全部が説明されるわけじゃないからこそ、自分なりに考えながら読む楽しさがありそう！長めの作品に挑戦したい人にも向いていると思います。
 
-![『容疑者Xの献身』の書影](https://covers.openlibrary.org/b/isbn/9784167110121-L.jpg)
+<figure class="book-cover-figure"><img src="https://covers.openlibrary.org/b/isbn/9784167110121-L.jpg" alt="『容疑者Xの献身』の書影" loading="lazy" decoding="async" width="300" height="450" /><figcaption>書影出典：<a href="https://openlibrary.org/isbn/9784167110121" target="_blank" rel="noopener noreferrer">Open Library（ISBN 9784167110121）</a></figcaption></figure>
 
 ## 第1位『容疑者Xの献身』／東野圭吾
 
