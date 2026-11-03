@@ -52,7 +52,7 @@ jobs:
     if: needs.route.outputs.command == 'plan'
     uses: ./.github/workflows/gemini-invoke.yml
     with:
-      additional_context: ""
+      additional_context: ${{ github.event.comment.body }}
     permissions:
       contents: read
       issues: write
@@ -64,7 +64,7 @@ jobs:
     if: needs.route.outputs.command == 'execute'
     uses: ./.github/workflows/gemini-plan-execute.yml
     with:
-      additional_context: ${{ needs.route.outputs.context }}
+      additional_context: ${{ github.event.comment.body }}
     permissions:
       contents: write
       issues: write
