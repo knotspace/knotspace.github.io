@@ -3,6 +3,9 @@ main = "worker.js"
 compatibility_date = "2026-11-03"
 workers_dev = true
 
+[vars]
+GITHUB_CLIENT_ID = "Ov23liKZTwb823I1zkA2"
+
 [[d1_databases]]
 binding = "DB"
 database_name = "knot-cms"
