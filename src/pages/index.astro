@@ -12,7 +12,7 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', { year: 'num
 const readingTime = (body = '') => Math.max(1, Math.ceil(body.replace(/\s/g, '').length / 500));
 const featured = posts[0];
 const popular = [...posts].sort((a, b) => (b.data.popularity ?? 0) - (a.data.popularity ?? 0) || b.data.pubDate.valueOf() - a.data.pubDate.valueOf()).slice(0, 8);
-const recent = posts.slice(0, 8);
+const recent = posts.slice(1, 9);
 ---
 <Layout title="KNOT | 個人ブログ" description="Web制作、PC・アプリ、本・読書、勉強や日々の興味を記録する個人ブログ。">
   <div class="home-blog">
