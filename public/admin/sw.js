@@ -1,21 +1,22 @@
-const CACHE_NAME = 'knot-admin-shell-v1';
+const CACHE_NAME = 'knot-cms-studio-v2';
+const SCOPE = '/admin/';
 const SHELL = [
   '/admin/',
   '/admin/index.html',
   '/admin/admin.css',
   '/admin/editor-tools.js',
   '/admin/decap-cms.js',
-  '/admin/knot-logo.svg',
+  '/admin/admin-app-icon.svg',
   '/admin/manifest.webmanifest'
 ];
 
 self.addEventListener('install', (event) => {
   event.waitUntil((async () => {
     const cache = await caches.open(CACHE_NAME);
-    await Promise.all(SHELL.map(async (url) => {
+    await Promise.all(SHELL.map(async (path) => {
       try {
-        const response = await fetch(url, { cache: 'reload' });
-        if (response.ok && response.type === 'basic') await cache.put(url, response);
+        const response = await fetch(path, { cache: 'reload' });
+        if (response.ok && response.type === 'basic') await cache.put(path, response);
       } catch {}
     }));
     await self.skipWaiting();
@@ -25,7 +26,9 @@ self.addEventListener('install', (event) => {
 self.addEventListener('activate', (event) => {
   event.waitUntil((async () => {
     const keys = await caches.keys();
-    await Promise.all(keys.filter((key) => key.startsWith('knot-admin-') && key !== CACHE_NAME).map((key) => caches.delete(key)));
+    await Promise.all(keys
+      .filter((key) => key.startsWith('knot-cms-studio-') && key !== CACHE_NAME)
+      .map((key) => caches.delete(key)));
     await self.clients.claim();
   })());
 });
@@ -33,15 +36,22 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const request = event.request;
   const url = new URL(request.url);
-  if (request.method !== 'GET' || url.origin !== self.location.origin || !url.pathname.startsWith('/admin/')) return;
+  if (
+    request.method !== 'GET' ||
+    url.origin !== self.location.origin ||
+    !url.pathname.startsWith(SCOPE)
+  ) return;
 
-  // Network first: CMS config, scripts and editor assets must not remain stale.
   event.respondWith((async () => {
     const cache = await caches.open(CACHE_NAME);
     try {
       const response = await fetch(request, { cache: 'no-cache' });
       const cacheControl = response.headers.get('Cache-Control') || '';
-      if (response.ok && response.type === 'basic' && !/\b(private|no-store)\b/i.test(cacheControl)) {
+      if (
+        response.ok &&
+        response.type === 'basic' &&
+        !/\b(private|no-store)\b/i.test(cacheControl)
+      ) {
         await cache.put(request, response.clone()).catch(() => {});
       }
       return response;
@@ -49,7 +59,7 @@ self.addEventListener('fetch', (event) => {
       const cached = await cache.match(request);
       if (cached) return cached;
       if (request.mode === 'navigate') {
-        const shell = await cache.match('/admin/');
+        const shell = await cache.match('/admin/') || await cache.match('/admin/index.html');
         if (shell) return shell;
       }
       return Response.error();
