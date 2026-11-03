@@ -3,7 +3,6 @@ import Layout from '../layouts/Layout.astro';
 const BASE = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 const supabaseUrl = 'https://rtzorqaigpeechqywjie.supabase.co';
 const supabaseKey = 'sb_publishable_-yhc0QqTEEZTBWi9jTcFRA_-AVi-iP6';
-// Cloudflare Turnstile の Sitekey を設定。Secret key はここに絶対に書かない。
 const turnstileSiteKey = '0x4AAAAAAFw3tWRvQprhMAu3';
 ---
 <Layout title="アカウント | KNOT" description="KNOTのアカウントにログイン、または新規登録。" noindex>
@@ -12,7 +11,7 @@ const turnstileSiteKey = '0x4AAAAAAFw3tWRvQprhMAu3';
     <section class="account-card">
       <span class="eyebrow">YOUR KNOT ACCOUNT</span>
       <h1 id="form-title">KNOTにログイン</h1>
-      <p class="intro" id="form-intro">アカウントを作成すると、学習やお気に入りを自分のページで管理できるようになります。</p>
+      <p class="intro" id="form-intro">ユーザー名とパスワードでログインできます。</p>
       <div class="tabs" role="tablist">
         <button type="button" class="tab active" id="login-tab">ログイン</button>
         <button type="button" class="tab" id="signup-tab">新規登録</button>
@@ -20,141 +19,105 @@ const turnstileSiteKey = '0x4AAAAAAFw3tWRvQprhMAu3';
       <aside class="security-notice" id="security-notice" hidden>
         <strong>🔒 登録前に確認してください</strong>
         <ul>
+          <li>ユーザー名は半角英数字・_・-の3〜20文字で設定してください。</li>
           <li>パスワードは他のサービスと使い回さず、KNOT専用のものを設定してください。</li>
-          <li>表示名に本名・住所・電話番号・学校名など、個人を特定できる情報を含めないでください。</li>
-          <li>プロフィールや投稿にも、個人を特定できる情報を掲載しないようご注意ください。</li>
+          <li>本名・住所・電話番号・学校名など、個人を特定できる情報は登録しないでください。</li>
         </ul>
-        <p>KNOTでは情報を安全に管理できるよう努めていますが、インターネット上の情報漏えいリスクを完全になくすことはできません。ご自身でも安全対策にご協力ください。</p>
+        <p>ユーザー名は他の人にも表示される場合があります。個人を特定できない名前を使ってね。</p>
       </aside>
       <form id="account-form">
-        <div id="turnstile-container" class="turnstile-wrap" hidden>
+        <div id="turnstile-container" class="turnstile-wrap">
           <div id="turnstile-widget"></div>
           <p class="captcha-help">不正な自動操作を防ぐための確認です。</p>
         </div>
-        <label>メールアドレス<input id="email" type="email" autocomplete="email" required placeholder="you@example.com" /></label>
-        <label>パスワード<input id="password" type="password" minlength="8" autocomplete="current-password" required placeholder="8文字以上" /></label>
+        <label>ユーザー名<input id="username" type="text" minlength="3" maxlength="20" autocomplete="username" autocapitalize="none" spellcheck="false" pattern="[A-Za-z0-9_-]{3,20}" required placeholder="knot_user" /></label>
+        <label>パスワード<input id="password" type="password" minlength="8" maxlength="72" autocomplete="current-password" required placeholder="8文字以上" /></label>
         <button class="submit" id="submit" type="submit">ログイン</button>
       </form>
       <p class="message" id="message" role="status" aria-live="polite"></p>
-      <p class="privacy">メールアドレスはログインに使用します。公開プロフィールやランキングは作成しません。</p>
+      <p class="privacy">メールアドレスの入力・確認は不要です。ユーザー名とパスワードだけで利用できます。</p>
     </section>
   </main>
   <script define:vars={{ supabaseUrl, supabaseKey, base: BASE, turnstileSiteKey }}>
     const $ = (id) => document.getElementById(id);
     const form = $('account-form');
+    let mode = 'login';
     let captchaToken = '';
     let turnstileWidgetId = null;
-    const turnstileConfigured = turnstileSiteKey && !turnstileSiteKey.startsWith('REPLACE_');
-    if (turnstileConfigured) {
-      $('turnstile-container').hidden = false;
-      const turnstileScript = document.createElement('script');
-      turnstileScript.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
-      turnstileScript.async = true;
-      turnstileScript.defer = true;
-      turnstileScript.onload = () => {
-        if (!window.turnstile) {
-          $('message').textContent = '本人確認を読み込めませんでした。ページを再読み込みしてください。';
-          return;
-        }
-        turnstileWidgetId = window.turnstile.render('#turnstile-widget', {
-          sitekey: turnstileSiteKey,
-          theme: 'auto',
-          callback: (token) => { captchaToken = token; },
-          'expired-callback': () => { captchaToken = ''; },
-          'error-callback': () => { captchaToken = ''; $('message').textContent = '本人確認に失敗しました。もう一度お試しください。'; }
-        });
-      };
-      turnstileScript.onerror = () => { $('message').textContent = '本人確認を読み込めませんでした。広告ブロッカー等を確認してください。'; };
-      document.head.appendChild(turnstileScript);
-    }
-    // Supabaseの確認メールから戻ったとき、URLフラグメントの認証情報を保存する
-    const callbackParams = new URLSearchParams(location.hash.replace(/^#/, ''));
-    const callbackError = callbackParams.get('error_description') || callbackParams.get('error');
-    if (callbackError) {
-      $('message').textContent = 'メール確認エラー: ' + callbackError.replace(/\\+/g, ' ');
-      history.replaceState(null, '', location.pathname + location.search);
-    } else if (callbackParams.get('access_token') && callbackParams.get('refresh_token')) {
-      const callbackSession = {
-        access_token: callbackParams.get('access_token'),
-        refresh_token: callbackParams.get('refresh_token'),
-        expires_at: Date.now() + Number(callbackParams.get('expires_in') || 3600) * 1000,
-        user: null
-      };
-      localStorage.setItem('knot-auth', JSON.stringify(callbackSession));
-      history.replaceState(null, '', location.pathname);
-      $('message').textContent = 'メール確認が完了しました。ログイン情報を確認しています...';
-      fetch(supabaseUrl + '/auth/v1/user', {
-        headers: { apikey: supabaseKey, Authorization: 'Bearer ' + callbackSession.access_token }
-      }).then((response) => {
-        if (!response.ok) throw new Error('認証情報を確認できませんでした');
-        return response.json();
-      }).then((user) => {
-        callbackSession.user = user;
-        localStorage.setItem('knot-auth', JSON.stringify(callbackSession));
-        location.replace(base + 'mypage/');
-      }).catch(() => {
-        localStorage.removeItem('knot-auth');
-        $('message').textContent = 'メール確認は完了しました。ログイン画面からログインしてください。';
-      });
-    }
-    let mode = 'login';
     const setMode = (next) => {
       mode = next;
       $('login-tab').classList.toggle('active', mode === 'login');
       $('signup-tab').classList.toggle('active', mode === 'signup');
       $('form-title').textContent = mode === 'login' ? 'KNOTにログイン' : 'アカウントを作成';
-      $('form-intro').textContent = mode === 'login' ? '登録したメールアドレスとパスワードでログイン。' : 'メールアドレスとパスワードを登録して、KNOTをもっと便利に。';
+      $('form-intro').textContent = mode === 'login' ? 'ユーザー名とパスワードでログインできます。' : 'ユーザー名とパスワードだけで登録できます。メールアドレスは不要です。';
       $('submit').textContent = mode === 'login' ? 'ログイン' : '新規登録';
       $('security-notice').hidden = mode !== 'signup';
       $('password').autocomplete = mode === 'login' ? 'current-password' : 'new-password';
       $('message').textContent = '';
       captchaToken = '';
-      if (turnstileConfigured && window.turnstile && turnstileWidgetId !== null) window.turnstile.reset(turnstileWidgetId);
+      if (window.turnstile && turnstileWidgetId !== null) window.turnstile.reset(turnstileWidgetId);
     };
     $('login-tab').addEventListener('click', () => setMode('login'));
     $('signup-tab').addEventListener('click', () => setMode('signup'));
-    const api = async (path, body) => {
-      const response = await fetch(supabaseUrl + path, { method: 'POST', headers: { apikey: supabaseKey, 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
-      const data = await response.json().catch(() => ({}));
-      if (!response.ok) throw new Error(data.msg || data.message || data.error_description || data.error || '処理に失敗しました。入力内容を確認してください。');
-      return data;
+
+    const turnstileScript = document.createElement('script');
+    turnstileScript.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+    turnstileScript.async = true;
+    turnstileScript.defer = true;
+    turnstileScript.onload = () => {
+      if (!window.turnstile) {
+        $('message').textContent = '本人確認を読み込めませんでした。ページを再読み込みしてください。';
+        return;
+      }
+      turnstileWidgetId = window.turnstile.render('#turnstile-widget', {
+        sitekey: turnstileSiteKey,
+        theme: 'auto',
+        callback: (token) => { captchaToken = token; },
+        'expired-callback': () => { captchaToken = ''; },
+        'error-callback': () => { captchaToken = ''; $('message').textContent = '本人確認に失敗しました。もう一度お試しください。'; }
+      });
     };
+    turnstileScript.onerror = () => { $('message').textContent = '本人確認を読み込めませんでした。広告ブロッカー等を確認してください。'; };
+    document.head.appendChild(turnstileScript);
+
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
       const submit = $('submit');
       submit.disabled = true;
       $('message').textContent = '処理中...';
       try {
-        if (turnstileConfigured && !captchaToken) throw new Error('先に本人確認を完了してください。');
-        const email = $('email').value.trim();
+        if (!captchaToken) throw new Error('先に本人確認を完了してください。');
+        const username = $('username').value.trim();
         const password = $('password').value;
-        let data;
-        if (mode === 'signup') {
-          const redirectTo = 'https://knotspace.github.io/account/';
-          data = await api('/auth/v1/signup?redirect_to=' + encodeURIComponent(redirectTo), { email, password, data: {}, gotrue_meta_security: { captcha_token: captchaToken || undefined } });
-          if (!data.access_token) {
-            $('message').textContent = '確認メールを送信しました。メール内のリンクから登録を完了してね。';
-            return;
-          }
-        } else {
-          data = await api('/auth/v1/token?grant_type=password', { email, password, gotrue_meta_security: { captcha_token: captchaToken || undefined } });
-        }
-        localStorage.setItem('knot-auth', JSON.stringify({ access_token: data.access_token, refresh_token: data.refresh_token, expires_at: Date.now() + (data.expires_in || 3600) * 1000, user: data.user }));
+        if (!/^[A-Za-z0-9_-]{3,20}$/.test(username)) throw new Error('ユーザー名は半角英数字・_・-の3〜20文字で入力してください。');
+        if (password.length < 8 || password.length > 72) throw new Error('パスワードは8〜72文字で入力してください。');
+        const response = await fetch(supabaseUrl + '/functions/v1/username-auth', {
+          method: 'POST',
+          headers: { apikey: supabaseKey, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: mode, username, password, captchaToken })
+        });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok || !data.access_token || !data.refresh_token) throw new Error(data.error || '処理に失敗しました。入力内容を確認してください。');
+        localStorage.setItem('knot-auth', JSON.stringify({
+          access_token: data.access_token,
+          refresh_token: data.refresh_token,
+          expires_at: Date.now() + (data.expires_in || 3600) * 1000,
+          user: data.user
+        }));
         location.href = base + 'mypage/';
       } catch (error) {
-        $('message').textContent = error.message;
+        $('message').textContent = error.message || '処理に失敗しました。';
       } finally {
         captchaToken = '';
-        if (turnstileConfigured && window.turnstile && turnstileWidgetId !== null) window.turnstile.reset(turnstileWidgetId);
+        if (window.turnstile && turnstileWidgetId !== null) window.turnstile.reset(turnstileWidgetId);
         submit.disabled = false;
       }
     });
     try {
       const existing = JSON.parse(localStorage.getItem('knot-auth') || 'null');
-      if (existing?.access_token) $('message').textContent = 'すでにログイン情報があります。マイページを開く場合はこちら。';
+      if (existing?.access_token) $('message').textContent = 'ログイン情報があります。マイページを開く場合はホームのアカウントアイコンを押してね。';
     } catch {}
   </script>
 </Layout>
 <style>
 .account-page{max-width:520px;margin:0 auto;padding:46px 0 75px}.back{display:inline-block;color:var(--muted);font-size:12px;margin-bottom:25px}.account-card{padding:30px;border:1px solid var(--line);border-radius:18px;background:var(--surface)}.eyebrow{color:var(--accent);font-size:10px;font-weight:800;letter-spacing:.16em}.account-card h1{margin:10px 0;color:var(--text);font-size:30px;letter-spacing:-.05em}.intro,.privacy{color:var(--muted);font-size:12px;line-height:1.9}.tabs{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:25px 0 20px;padding:4px;border-radius:11px;background:var(--bg)}.tab{padding:10px;border:0;border-radius:8px;background:transparent;color:var(--muted);font-size:12px;font-weight:700;cursor:pointer}.tab.active{background:var(--surface);color:var(--text);box-shadow:0 1px 5px #0002}form{display:grid;gap:15px}label{display:grid;gap:7px;color:var(--text);font-size:12px;font-weight:700}input{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--text);font:inherit;font-size:13px}input:focus{outline:2px solid var(--accent);outline-offset:1px}.submit{margin-top:5px;padding:13px;border:0;border-radius:10px;background:var(--accent);color:#fff;font-size:13px;font-weight:800;cursor:pointer}.submit:disabled{opacity:.55;cursor:wait}.message{min-height:22px;color:var(--accent);font-size:12px;line-height:1.8}.privacy{padding-top:15px;border-top:1px solid var(--line);font-size:10px}.turnstile-wrap{display:grid;justify-items:start;gap:5px}.captcha-help{margin:0;color:var(--muted);font-size:10px}.security-notice{margin:18px 0;padding:15px;border:1px solid #d6a84b66;border-radius:12px;background:color-mix(in srgb,#d6a84b 9%,var(--surface));color:var(--text);font-size:11px;line-height:1.85}.security-notice strong{font-size:12px}.security-notice ul{margin:9px 0;padding-left:19px}.security-notice li+li{margin-top:5px}.security-notice p{margin:9px 0 0;color:var(--muted);font-size:10px}@media(max-width:600px){.account-page{padding:32px 0 60px}.account-card{padding:22px}}
-</style>
