@@ -3846,7 +3846,7 @@ function endingResult(){
     <div class="again"><button class="btn big" id="again">もう一度生まれる</button><div class="again2"><button class="btn ghost" id="samepref">また${esc(L.home)}に生まれる</button>${L.kids.some(k=>!k.dead&&!k.out)?`<button class="btn ghost" id="rebirth">この人の子として生まれる</button>`:""}</div></div>
     ${REVIEW_API?`<button class="btn ghost" id="enshrine" style="width:100%">メモリアルに納める</button>`:""}
     <div class="sharebtns"><a class="btn" id="tweet" href="#" target="_blank" rel="noopener">Xに投稿する</a><button class="btn ghost" id="savecard">画像を保存</button><button class="btn ghost" id="copy">文章をコピー</button></div>
-    ${L.cause==="自殺"?`<p class="help">つらい気持ちを抱えているときは、相談できる窓口があります。よりそいホットライン 0120-279-338（24時間）、#いのちSOS 0120-061-338。</p>`:""}
+    ${L.cause==="自殺"?`<p class="help">つらい気持ちを抱えているときは、相談できる窓口があります。<a href="https://www.mhlw.go.jp/mamorouyokokoro/" target="_blank" rel="noopener">厚生労働省「まもろうよ こころ」相談窓口一覧</a>から、電話やSNSの相談先を確認できます。</p>`:""}
   </section>
   <section class="sheet end">
     <span class="label">記録の詳細</span>
