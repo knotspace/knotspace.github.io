@@ -4,15 +4,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, nofollow" />
-    <meta name="theme-color" content="#252c30" />
+    <meta name="application-name" content="KNOT CMS Studio" />
+    <meta name="theme-color" content="#111827" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="KNOT Admin" />
-    <title>KNOT Admin</title>
+    <meta name="apple-mobile-web-app-title" content="KNOT CMS" />
+    <title>KNOT CMS Studio</title>
     <link rel="manifest" href="/admin/manifest.webmanifest" />
-    <link rel="icon" href="/admin/knot-logo.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="/admin/knot-logo.svg" />
+    <link rel="icon" href="/admin/admin-app-icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/admin/admin-app-icon.svg" />
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
     <link rel="stylesheet" href="/admin/admin.css" />
   </head>
@@ -44,9 +45,16 @@
     <script defer src="/admin/decap-cms.js"></script>
     <script>
       if ("serviceWorker" in navigator) {
-        window.addEventListener("load", () => {
-          navigator.serviceWorker.register("/admin/sw.js", { scope: "/admin/", updateViaCache: "none" })
-            .catch((error) => console.warn("KNOT Admin offline shell unavailable:", error));
+        window.addEventListener("load", async () => {
+          try {
+            const registration = await navigator.serviceWorker.register("/admin/sw.js", {
+              scope: "/admin/",
+              updateViaCache: "none"
+            });
+            await registration.update();
+          } catch (error) {
+            console.warn("KNOT CMS Studio offline shell unavailable:", error);
+          }
         });
       }
     </script>
