@@ -2,5 +2,29 @@
   "introKicker": "INDEPENDENT WEBLOG",
   "introLine1": "Web、読書、テクノロジー、学び。",
   "introLine2": "気になったことを、気になったままに。",
-  "siteDescription": "Web制作・プログラミング、Windowsの無料ソフト、Androidアプリ、本・読書、英検や高校受験の勉強法。実際に調べたり使ったりしたことを記録するKNOTの個人ブログ。"
+  "siteDescription": "Web制作・プログラミング、Windowsの無料ソフト、Androidアプリ、本・読書、英検や高校受験の勉強法。実際に調べたり使ったりしたことを記録するKNOTの個人ブログ。",
+  "navigation": [
+    {
+      "label": "ホーム",
+      "url": "/"
+    },
+    {
+      "label": "記事一覧",
+      "url": "/blog/"
+    },
+    {
+      "label": "Study",
+      "url": "/study/"
+    },
+    {
+      "label": "あとで読む",
+      "url": "/bookmarks/"
+    },
+    {
+      "label": "プロフィール",
+      "url": "/about/"
+    }
+  ],
+  "footerText": "Web制作や日々の興味を記録する個人ブログ。",
+  "footerNote": "MADE WITH CURIOSITY."
 }
