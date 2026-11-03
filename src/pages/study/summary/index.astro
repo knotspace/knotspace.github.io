@@ -7,7 +7,6 @@ const society=[["geography","地理","世界・日本の地形、気候、産業
 <main class="summary-index">
   <a class="back" href="/study/">← Studyに戻る</a>
   <header><p class="eyebrow">KNOT STUDY / KNOWLEDGE BASE</p><h1>要点まとめ</h1><p>理科と社会を分けて、7分野の頻出用語・重要事項・資料の読み方を確認しよう。</p></header>
-  <a class="materials-link" href="/study/diagrams/"><span>400</span><div><b>KNOT制作・オリジナル図解ライブラリ</b><small>理科200個・社会200個。しくみ、流れ、比較を図で理解する →</small></div></a>
   <a class="materials-link" href="/study/summary/materials/"><span>200</span><div><b>入試頻出資料・写真ギャラリー</b><small>理科の実験図・観察写真、社会の地図・統計・年表をまとめて見る →</small></div></a>
   <section class="subject science"><div class="subject-head"><span>SCIENCE</span><div><h2>理科</h2><p>自然のしくみ・実験・観察</p></div></div><div class="field-grid">{science.map((f,i)=><a class="field" href={`/study/summary/${f[0]}/`}><span>0{i+1}</span><div><h3>{f[1]}</h3><p>{f[2]}</p><b>要点を確認する →</b></div></a>)}</div></section>
   <section class="subject society"><div class="subject-head"><span>SOCIAL STUDIES</span><div><h2>社会</h2><p>地理・歴史・公民</p></div></div><div class="field-grid">{society.map((f,i)=><a class="field" href={`/study/summary/${f[0]}/`}><span>0{i+1}</span><div><h3>{f[1]}</h3><p>{f[2]}</p><b>要点を確認する →</b></div></a>)}</div></section>
