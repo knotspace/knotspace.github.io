@@ -7,6 +7,175 @@ const ADMIN_GITHUB_LOGIN = "knotspace";
 const SESSION_TTL_SECONDS = 8 * 60 * 60;
 const MAX_DOCUMENT_BYTES = 200 * 1024;
 
+const ADMIN_HTML = String.raw`<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f7f7f5">
+<title>KNOT CMS</title>
+<style>
+:root{color-scheme:light;--bg:#f7f7f5;--panel:#fff;--ink:#20211f;--muted:#777a73;--line:#e8e8e2;--accent:#315c4b;--soft:#edf3ef;--danger:#a33b32}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer;border:1px solid var(--line);border-radius:9px;background:#fff;padding:9px 13px;color:var(--ink)}button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}button:disabled{opacity:.45;cursor:not-allowed}.top{height:62px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 24px;position:sticky;top:0;z-index:3}.brand{font-weight:800;letter-spacing:.12em}.brand small{font-weight:500;letter-spacing:0;color:var(--muted);margin-left:9px}.user{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:13px}.layout{display:grid;grid-template-columns:270px minmax(0,1fr);min-height:calc(100vh - 62px)}aside{border-right:1px solid var(--line);background:#fbfbf9;padding:22px 16px}.side-title{font-size:11px;letter-spacing:.12em;color:var(--muted);font-weight:700;padding:4px 10px 12px}.nav{display:flex;gap:10px;align-items:center;padding:10px;border-radius:9px;color:#454841}.nav.active{background:var(--soft);color:var(--accent);font-weight:700}.aside-note{font-size:12px;color:var(--muted);margin:28px 10px}.main{padding:30px;min-width:0;max-width:1180px;width:100%;margin:0 auto}.heading{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:22px}.heading h1{font-size:25px;margin:0;letter-spacing:-.03em}.muted{color:var(--muted);font-size:13px}.columns{display:grid;grid-template-columns:minmax(230px,310px) minmax(0,1fr);gap:20px;align-items:start}.panel{background:var(--panel);border:1px solid var(--line);border-radius:13px;overflow:hidden}.panel-head{padding:15px 17px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;font-weight:700}.list{padding:7px}.doc{display:block;width:100%;text-align:left;border:0;border-radius:9px;padding:12px;margin:2px 0;background:transparent}.doc:hover,.doc.selected{background:#f0f3ef}.doc strong{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.doc span{font-size:12px;color:var(--muted)}.empty{padding:28px 16px;text-align:center;color:var(--muted);font-size:13px}.editor{padding:22px}.field-label{font-size:12px;font-weight:700;color:var(--muted);display:block;margin:0 0 6px}.title-input{width:100%;border:0;border-bottom:1px solid var(--line);padding:5px 0 13px;font-size:27px;font-weight:750;outline:none;background:transparent}.meta{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin:18px 0 23px}.control{width:100%;border:1px solid var(--line);border-radius:8px;padding:9px 10px;background:#fff}.blocks-head{display:flex;align-items:center;justify-content:space-between;margin:25px 0 10px}.blocks{display:flex;flex-direction:column;gap:10px}.block{border:1px solid var(--line);border-radius:10px;padding:12px;background:#fff}.block-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;color:var(--muted);font-size:12px}.block textarea{width:100%;border:0;outline:0;resize:vertical;min-height:65px;line-height:1.8;background:transparent;color:var(--ink)}.block[data-type=heading] textarea{font-size:22px;font-weight:750;min-height:45px}.block[data-type=quote] textarea{border-left:3px solid #c8d7ce;padding-left:12px;font-style:italic}.toolbar{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.toolbar button{font-size:12px;padding:7px 10px}.footer{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid var(--line);margin-top:22px;padding-top:16px}.status{font-size:12px;color:var(--muted)}.status.error{color:var(--danger)}.history{margin-top:18px}.history-list{padding:12px 17px;font-size:12px;color:var(--muted)}.hidden{display:none!important}.login{max-width:460px;margin:12vh auto;padding:36px;background:#fff;border:1px solid var(--line);border-radius:16px;text-align:center}.login h1{letter-spacing:.1em}.login p{color:var(--muted)}@media(max-width:850px){.layout{grid-template-columns:1fr}aside{display:none}.main{padding:18px}.columns{grid-template-columns:1fr}.top{padding:0 15px}.user span{display:none}.heading h1{font-size:21px}.editor{padding:16px}.meta{grid-template-columns:1fr}.list-panel{max-height:300px;overflow:auto}}
+</style>
+</head>
+<body>
+<header class="top"><div class="brand">KNOT <small>CONTENT STUDIO</small></div><div class="user"><span id="who">ログイン確認中...</span><button id="logout">ログアウト</button></div></header>
+<div id="login" class="login hidden"><h1>KNOT CMS</h1><p>記事を編集するには管理者としてログインしてください。</p><a href="/auth/login"><button class="primary">GitHubでログイン</button></a></div>
+<div id="app" class="layout hidden">
+<aside><div class="side-title">WORKSPACE</div><div class="nav active">▤　記事</div><div class="nav">◫　ページ <span class="muted">準備中</span></div><div class="nav">◷　編集履歴</div><div class="aside-note">KNOT CMS<br>記事は下書きとして保存されます。公開機能はまだ接続されていません。</div></aside>
+<main class="main">
+<div class="heading"><div><h1>記事</h1><div class="muted">記事の作成・編集・下書き管理</div></div><button class="primary" id="new">＋ 新しい記事</button></div>
+<div class="columns">
+<section class="panel list-panel"><div class="panel-head"><span>記事一覧</span><button id="refresh">更新</button></div><div class="list" id="documents"><div class="empty">読み込み中...</div></div></section>
+<section>
+<div class="panel"><div class="editor" id="editor">
+<div class="empty">記事を選択するか「新しい記事」を押してください。</div>
+</div></div>
+<div class="panel history hidden" id="history"><div class="panel-head">編集履歴</div><div class="history-list" id="history-list">履歴はありません。</div></div>
+</section>
+</div>
+</main>
+</div>
+<script>
+(function(){
+const API="";
+let csrfToken="";
+let current=null;
+let blocks=[];
+let saveTimer=null;
+let saving=false;
+let dirty=false;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+async function api(path,options){
+  const opts=Object.assign({credentials:"same-origin",headers:{}},options||{});
+  if(opts.body){opts.headers["Content-Type"]="application/json";opts.headers["X-KNOT-CSRF"]=csrfToken;}
+  const res=await fetch(API+path,opts);
+  let data={};try{data=await res.json();}catch(e){}
+  if(!res.ok)throw new Error(data.error||("HTTP "+res.status));
+  return data;
+}
+function slugify(s){
+  const slug=String(s||"").toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,90);
+  return slug||("knot-"+Date.now().toString(36));
+}
+function setStatus(text,error){
+  const el=$("save-status");if(!el)return;
+  el.textContent=text;el.classList.toggle("error",!!error);
+}
+async function loadList(){
+  try{
+    const data=await api("/api/documents?limit=100");
+    const root=$("documents");root.replaceChildren();
+    if(!data.documents.length){root.innerHTML='<div class="empty">まだ記事がありません。<br>「新しい記事」から作成できます。</div>';return;}
+    data.documents.forEach(doc=>{
+      const b=document.createElement("button");b.className="doc"+(current&&current.document_id===doc.document_id?" selected":"");
+      const strong=document.createElement("strong");strong.textContent=doc.title;
+      const span=document.createElement("span");span.textContent=(doc.status==="review"?"レビュー":"下書き")+" ・ "+new Date(doc.updated_at).toLocaleString("ja-JP");
+      b.append(strong,span);b.addEventListener("click",()=>openDoc(doc.document_id));root.append(b);
+    });
+  }catch(e){$("documents").innerHTML='<div class="empty">'+esc(e.message)+'</div>';}
+}
+function renderEditor(){
+  const root=$("editor");
+  root.innerHTML=
+  '<label class="field-label" for="title">タイトル</label><input id="title" class="title-input" maxlength="200" placeholder="記事のタイトル">'+
+  '<div class="meta"><div><label class="field-label" for="slug">URLスラッグ</label><input id="slug" class="control" maxlength="100" placeholder="my-first-post"></div><div><label class="field-label" for="status">状態</label><select id="status" class="control"><option value="draft">下書き</option><option value="review">レビュー待ち</option></select></div></div>'+
+  '<div class="blocks-head"><strong>本文ブロック</strong><span class="muted">ブロック形式で編集</span></div><div class="blocks" id="blocks"></div>'+
+  '<div class="toolbar"><button data-add="paragraph">＋ 段落</button><button data-add="heading">＋ 見出し</button><button data-add="quote">＋ 引用</button><button data-add="list">＋ リスト</button></div>'+
+  '<div class="footer"><span class="status" id="save-status">未保存</span><button class="primary" id="save">保存する</button></div>';
+  $("title").value=current.title||"";
+  $("slug").value=current.slug||"";
+  $("status").value=current.status||"draft";
+  $("title").addEventListener("input",()=>{if(!current.slug||current.slug===slugify(current.title))$("slug").value=slugify($("title").value);queueSave();});
+  $("slug").addEventListener("input",queueSave);
+  $("status").addEventListener("change",queueSave);
+  root.querySelectorAll("[data-add]").forEach(btn=>btn.addEventListener("click",()=>{blocks.push({type:btn.dataset.add,text:""});renderBlocks();queueSave();}));
+  $("save").addEventListener("click",saveNow);
+  renderBlocks();
+}
+function renderBlocks(){
+  const root=$("blocks");root.replaceChildren();
+  blocks.forEach((block,index)=>{
+    const wrap=document.createElement("div");wrap.className="block";wrap.dataset.type=block.type;
+    const top=document.createElement("div");top.className="block-top";
+    const label=document.createElement("span");label.textContent=({paragraph:"段落",heading:"見出し",quote:"引用",list:"リスト"})[block.type]||"段落";
+    const remove=document.createElement("button");remove.textContent="削除";remove.style.padding="3px 8px";remove.addEventListener("click",()=>{blocks.splice(index,1);renderBlocks();queueSave();});
+    top.append(label,remove);
+    const area=document.createElement("textarea");area.value=block.text||"";area.placeholder=block.type==="heading"?"見出しを入力":block.type==="list"?"項目を1行ずつ入力":"文章を入力...";
+    area.rows=block.type==="heading"?2:3;area.addEventListener("input",()=>{blocks[index].text=area.value;queueSave();});
+    wrap.append(top,area);root.append(wrap);
+  });
+}
+function queueSave(){
+  dirty=true;setStatus("変更あり・自動保存待ち");
+  if(saveTimer)clearTimeout(saveTimer);
+  saveTimer=setTimeout(saveNow,1200);
+}
+function currentPayload(){
+  return {collection:current.collection||"blog",slug:$("slug").value.trim(),title:$("title").value.trim(),status:$("status").value,content:{type:"knot-document",version:1,blocks:blocks}};
+}
+async function saveNow(){
+  if(!current||saving)return;
+  if(saveTimer){clearTimeout(saveTimer);saveTimer=null;}
+  const payload=currentPayload();
+  if(!payload.title){setStatus("タイトルを入力してください",true);return;}
+  if(!payload.slug){setStatus("URLスラッグを入力してください",true);return;}
+  saving=true;setStatus("保存中...");
+  try{
+    let result;
+    if(current.document_id){
+      result=await api("/api/documents/"+current.document_id,{method:"PUT",body:JSON.stringify(payload)});
+    }else{
+      result=await api("/api/documents",{method:"POST",body:JSON.stringify(payload)});
+    }
+    current=result.document;dirty=false;
+    setStatus("保存済み · "+new Date().toLocaleTimeString("ja-JP"));
+    await loadList();
+  }catch(e){setStatus("保存エラー: "+e.message,true);}
+  finally{saving=false;}
+}
+async function openDoc(id){
+  if(dirty)await saveNow();
+  try{
+    const data=await api("/api/documents/"+id);current=data.document;
+    const c=current.content||{};blocks=Array.isArray(c.blocks)?c.blocks.map(b=>({type:b.type||"paragraph",text:b.text||""})):[];
+    $("history").classList.remove("hidden");renderEditor();await loadList();await loadHistory();
+  }catch(e){alert("記事を開けませんでした: "+e.message);}
+}
+async function loadHistory(){
+  if(!current||!current.document_id)return;
+  try{
+    const data=await api("/api/documents/"+current.document_id+"/revisions");
+    $("history-list").textContent=data.revisions.length?data.revisions.map(x=>new Date(x.created_at).toLocaleString("ja-JP")+" · "+(x.author_label||"admin")).join("\n"):"まだ編集履歴はありません。";
+    $("history-list").style.whiteSpace="pre-line";
+  }catch(e){$("history-list").textContent=e.message;}
+}
+function newDoc(){
+  if(dirty&&!confirm("未保存の変更があります。新しい記事を作成しますか？"))return;
+  current={collection:"blog",slug:"",title:"",status:"draft"};blocks=[{type:"paragraph",text:""}];dirty=false;
+  $("history").classList.add("hidden");renderEditor();$("title").focus();setStatus("新規記事・未保存");
+}
+async function boot(){
+  try{
+    const me=await api("/api/me");csrfToken=me.csrfToken;
+    $("who").textContent="@"+me.login;$("app").classList.remove("hidden");
+    await loadList();
+  }catch(e){$("login").classList.remove("hidden");$("who").textContent="未ログイン";}
+}
+$("new").addEventListener("click",newDoc);
+$("refresh").addEventListener("click",loadList);
+$("logout").addEventListener("click",async()=>{
+  try{await api("/auth/logout",{method:"POST",body:"{}"});}catch(e){}
+  location.href="/auth/login";
+});
+boot();
+})();
+</script>
+</body>
+</html>`;
+
 function corsHeaders(origin) {
   const headers = {
     "Vary": "Origin",
@@ -159,7 +328,7 @@ async function requireAdmin(request, env) {
 
 async function requireCsrf(request, env) {
   const origin = request.headers.get("Origin") || "";
-  if (!ALLOWED_ORIGINS.has(origin)) {
+  if (origin !== new URL(request.url).origin && !ALLOWED_ORIGINS.has(origin)) {
     return json({ error: "Origin is not allowed" }, 403, origin);
   }
   const sessionCookie = cookieValue(request, "__Host-knot_session");
@@ -182,6 +351,19 @@ export default {
         return new Response(null, { status: 403, headers: corsHeaders("") });
       }
       return new Response(null, { status: 204, headers: corsHeaders(origin) });
+    }
+
+    if ((url.pathname === "/admin" || url.pathname === "/admin/") && request.method === "GET") {
+      return new Response(ADMIN_HTML, {
+        status: 200,
+        headers: {
+          "Content-Type": "text/html; charset=utf-8",
+          "Cache-Control": "no-store",
+          "X-Content-Type-Options": "nosniff",
+          "Referrer-Policy": "no-referrer",
+          "Content-Security-Policy": "default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'self'; img-src https: data:; base-uri 'none'; form-action 'self'; frame-ancestors 'none'",
+        },
+      });
     }
 
     if (url.pathname === "/api/health" && request.method === "GET") {
@@ -275,7 +457,7 @@ export default {
 
         const session = await createSession(user.login, env.SESSION_SECRET);
         const redirectHeaders = new Headers({
-          "Location": "https://knotspace.github.io/admin/?knot_login=success",
+          "Location": url.origin + "/admin/?knot_login=success",
           "Cache-Control": "no-store",
         });
         redirectHeaders.append("Set-Cookie", clearState);
