@@ -9,6 +9,7 @@ const posts = (await getCollection('blog'))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const categories = [...new Set(posts.map((post) => post.data.category))];
+const readingTime = (body = '') => Math.max(1, Math.ceil(body.replace(/\s/g, '').length / 500));
 
 const BASE = import.meta.env.BASE_URL.endsWith('/')
   ? import.meta.env.BASE_URL
@@ -68,7 +69,7 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
             href={`${BASE}blog/${post.slug}/`}
             data-category={post.data.category}
             data-title={post.data.title}
-            data-description={post.data.description}
+            data-description={post.data.description}\n            data-reading-time={readingTime(post.body)}
           >
             <div class="post-thumbnail">
               {post.data.heroImage ? (
@@ -83,7 +84,7 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
                 <time datetime={post.data.pubDate.toISOString()}>
                   {dateFormat(post.data.pubDate)}
                 </time>
-                <span class="category-label">{post.data.category}</span>
+                <span class="category-label">{post.data.category}</span>\n                <span class="reading-time">約{readingTime(post.body)}分</span>
               </div>
 
               <h2>{post.data.title}</h2>
@@ -520,4 +521,29 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
       display: flex;
     }
   }
+
+  /* WordPress-inspired editorial archive */
+  .archive-header{padding:38px 0 24px;border-bottom:0}
+  .archive-header h1{font-size:clamp(32px,5vw,42px);letter-spacing:-.055em}
+  .archive-header>p{font-size:13px}
+  .content-layout{gap:42px;padding-top:20px}
+  .filter-area{padding:17px;background:var(--surface);border:1px solid var(--line);border-radius:8px}
+  #article-search{border-radius:4px;background:var(--bg)}
+  .category-filters{gap:7px}
+  .filter-button{border-radius:4px;padding:7px 11px}
+  .filter-button.active,.filter-button:hover{background:var(--accent);color:#fff}
+  .archive-list{border-top:0}
+  .post-card{grid-template-columns:190px minmax(0,1fr);gap:20px;padding:20px 0;border-bottom:1px solid var(--line)}
+  .post-thumbnail{width:190px;height:128px;border-radius:5px;background:linear-gradient(135deg,var(--surface),var(--code-bg))}
+  .post-info h2{font-size:17px;line-height:1.6;margin:9px 0}
+  .post-info p{font-size:12px;line-height:1.9}
+  .post-meta{gap:9px;font-size:10px}
+  .category-label{border:0;border-radius:3px;background:var(--accent);color:#fff;padding:4px 8px;font-weight:700}
+  .reading-time{font-size:10px;color:var(--muted)}
+  .read-more{color:var(--accent)}
+  .widget{border:0;border-top:2px solid var(--accent);border-radius:0;background:var(--surface);padding:18px}
+  .widget-title{font-size:15px;border-bottom:1px solid var(--line)}
+  .profile-logo{font-size:30px}
+  .total-count{font-weight:700}
+  @media(max-width:520px){.post-card{grid-template-columns:112px minmax(0,1fr);gap:12px}.post-thumbnail{width:112px;height:88px}.post-info h2{font-size:13px}.post-info p{display:block;font-size:10px;line-height:1.6}.read-more{display:inline-block;font-size:10px}.archive-header{padding-top:28px}}
 </style>
