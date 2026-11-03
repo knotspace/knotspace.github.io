@@ -220,6 +220,13 @@ const breadcrumbJsonLd = {
   const shareButton = document.getElementById('share-button');
   const likeButton = document.getElementById('like-button');
   const article = document.querySelector('[data-post-slug]');
+  // Markdown本文内の画像も遅延読み込みに統一し、表示負荷を抑える。
+  document.querySelectorAll('.article-content img').forEach((img) => {
+    if (!img.hasAttribute('loading')) img.loading = 'lazy';
+    if (!img.hasAttribute('decoding')) img.decoding = 'async';
+    img.style.maxWidth = '100%';
+    img.style.height = 'auto';
+  });
   const safeRead = (storage, key, fallback = null) => {
     try {
       const value = storage.getItem(key);
@@ -822,6 +829,10 @@ const breadcrumbJsonLd = {
   .article-content :global(tr:nth-child(even) td){background:var(--surface-soft)}
   .hero-image{border-radius:16px}
   .article-content :global(figure){margin:1.8em 0}
+  .article-content :global(.book-cover-figure){width:min(100%,260px);margin:28px auto 34px;text-align:center}
+  .article-content :global(.book-cover-figure img){display:block;width:auto;max-width:100%;max-height:390px;height:auto;object-fit:contain;margin:0 auto;border-radius:5px;box-shadow:0 8px 24px rgba(0,0,0,.13)}
+  .article-content :global(.book-cover-figure figcaption){margin-top:9px;font-size:11px;line-height:1.7;color:var(--muted)}
+  .article-content :global(.book-cover-figure figcaption a){font-weight:700}
   .article-content :global(figure img){display:block;margin:auto}
   .article-content :global( figcaption){font-size:11px;color:var(--muted);text-align:center}
   .post-end,.article-reaction,.share-panel,.related-list a{border-radius:3px}
