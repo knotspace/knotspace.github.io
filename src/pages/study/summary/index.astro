@@ -1,18 +1,4 @@
 ---
-import StudyLayout from '../../../layouts/StudyLayout.astro';
-const science=[["physics","物理","力・運動・電流・エネルギー"],["chemistry","化学","物質・化学変化・イオン"],["biology","生物","植物・人体・遺伝・生態系"],["earth","地学","天気・地震・火山・天体"]];
-const society=[["geography","地理","世界・日本の地形、気候、産業、統計"],["history","歴史","古代から現代までの政治・社会・文化"],["civics","公民","憲法・政治・経済・国際社会"]];
+const target = new URL('../foundation/', Astro.url);
 ---
-<StudyLayout title="理社の要点まとめ｜KNOT Study" description="中学理科・社会の7分野を単元別に整理した入試頻出要点まとめ。">
-<main class="summary-index">
-  <a class="back" href="/study/">← Studyに戻る</a>
-  <header><p class="eyebrow">KNOT STUDY / KNOWLEDGE BASE</p><h1>要点まとめ</h1><p>理科と社会を分けて、7分野の頻出用語・重要事項・資料の読み方を確認しよう。</p></header>
-  <a class="materials-link" href="/study/summary/materials/"><span>200</span><div><b>入試頻出資料・写真ギャラリー</b><small>理科の実験図・観察写真、社会の地図・統計・年表をまとめて見る →</small></div></a>
-  <section class="subject science"><div class="subject-head"><span>SCIENCE</span><div><h2>理科</h2><p>自然のしくみ・実験・観察</p></div></div><div class="field-grid">{science.map((f,i)=><a class="field" href={`/study/summary/${f[0]}/`}><span>0{i+1}</span><div><h3>{f[1]}</h3><p>{f[2]}</p><b>要点を確認する →</b></div></a>)}</div></section>
-  <section class="subject society"><div class="subject-head"><span>SOCIAL STUDIES</span><div><h2>社会</h2><p>地理・歴史・公民</p></div></div><div class="field-grid">{society.map((f,i)=><a class="field" href={`/study/summary/${f[0]}/`}><span>0{i+1}</span><div><h3>{f[1]}</h3><p>{f[2]}</p><b>要点を確認する →</b></div></a>)}</div></section>
-  <p class="note">※入試頻出事項を中心にした学習用まとめ。統計・制度の最新情報は公的資料も確認しよう。</p>
-</main>
-<style>
-.summary-index{max-width:900px;margin:0 auto;padding:30px 0 60px}.back{font-size:12px;color:var(--accent)}header{padding:35px 0 25px}.eyebrow,.subject-head>span{font:10px ui-monospace,monospace;letter-spacing:.14em;color:var(--accent);font-weight:800}h1{font-size:clamp(34px,6vw,50px);letter-spacing:-.06em;margin:10px 0}.summary-index header>p:last-child{font-size:13px;line-height:1.9;color:var(--muted);max-width:650px}.materials-link{display:flex;align-items:center;gap:15px;margin:20px 0;padding:16px 18px;border:1px solid var(--accent);border-radius:13px;background:var(--surface);text-decoration:none}.materials-link>span{font:800 24px ui-monospace,monospace;color:var(--accent)}.materials-link div{display:grid;gap:5px}.materials-link b{font-size:14px;color:var(--text)}.materials-link small{font-size:11px;line-height:1.6;color:var(--muted)}.subject{margin:24px 0 32px}.subject-head{display:flex;align-items:center;gap:14px;padding:0 0 12px;border-bottom:1px solid var(--line);margin-bottom:13px}.subject-head h2{font-size:24px;margin:0}.subject-head p{font-size:11px;color:var(--muted);margin:3px 0 0}.field-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.field{display:flex;gap:15px;padding:18px;border:1px solid var(--line);border-radius:13px;background:var(--surface);transition:.15s}.field:hover{border-color:var(--accent);transform:translateY(-2px)}.field>span{font:12px ui-monospace,monospace;color:var(--accent)}.field h3{font-size:19px;margin:0 0 5px}.field p{font-size:11px;line-height:1.7;color:var(--muted);margin:0 0 12px}.field b{font-size:11px;color:var(--accent)}.note{font-size:10px;color:var(--muted);margin-top:20px}@media(max-width:620px){.summary-index{padding:20px 0 42px}.field-grid{grid-template-columns:1fr}}
-</style>
-</StudyLayout>
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0;url={target.pathname}"><link rel="canonical" href={target.href}><title>基礎網羅問題へ</title></head><body><p><a href={target.href}>基礎網羅問題へ移動</a></p></body></html>
