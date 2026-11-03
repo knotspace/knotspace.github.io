@@ -2,6 +2,8 @@
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import siteSettings from '../data/site-settings.json';
+import { getAcademicGrade } from '../utils/academic-grade';
+const academicGrade = getAcademicGrade(new Date());
 
 const now = new Date();
 const posts = (await getCollection('blog'))
@@ -18,7 +20,7 @@ const dateTimeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocal
   <div class="personal-home">
     <section class="intro">
       <div class="intro-topline"><span class="intro-kicker"><span class="live-dot"></span> {siteSettings.introKicker}</span><span class="intro-year">NO. 001 / 2026—</span></div>
-      <div class="intro-main"><h1>KNOT<span class="intro-period">.</span></h1><p>{siteSettings.introLine1}<br/>{siteSettings.introLine2}</p></div>
+      <div class="intro-main"><h1>KNOT<span class="intro-period">.</span></h1><div class="intro-description"><p>{siteSettings.introLine1}<br/>{siteSettings.introLine2}</p><span class="school-grade">{academicGrade.label}</span></div></div>
       <div class="intro-bottom"><span>PERSONAL NOTES &amp; JOURNAL</span><span>SCROLL TO EXPLORE ↓</span></div>
     </section>
 
@@ -135,7 +137,7 @@ const dateTimeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocal
 .intro-main{display:flex;justify-content:space-between;align-items:flex-end;gap:25px;padding:40px 0 28px}
 .intro h1{font-family:Arial,Helvetica,sans-serif;font-size:clamp(76px,13vw,150px);line-height:.78;letter-spacing:-.105em;font-weight:900;margin:0;color:var(--text)}
 .intro-period{color:var(--home-accent)}
-.intro-main p{margin:0 2px 4px 0;color:var(--muted);font-size:12px;line-height:2.05;letter-spacing:.02em}
+.intro-main p{margin:0 2px 4px 0;color:var(--muted);font-size:12px;line-height:2.05;letter-spacing:.02em}\n.intro-description{display:grid;gap:10px;justify-items:start}.school-grade{display:inline-flex;padding:5px 10px;border:1px solid var(--line);border-radius:999px;color:var(--home-accent);font-size:10px;font-weight:800}
 .intro-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid var(--line);font:8px ui-monospace,monospace;letter-spacing:.14em;color:var(--muted)}
 .home-rule{display:flex;justify-content:space-between;align-items:center;padding:13px 5.5%;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:9px;letter-spacing:.18em;font-weight:850;color:var(--muted)}
 .lead-story{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);gap:6.5%;align-items:center;padding:38px 5.5% 45px}
