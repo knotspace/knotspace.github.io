@@ -83,3 +83,6 @@
 .knot-list-preview{padding:10px 14px;border-radius:8px;background:rgba(110,125,150,.08);line-height:1.9}
 .knot-button-preview{display:inline-block;margin-top:8px;padding:9px 18px;border-radius:999px;background:#263b65;color:#fff;font-weight:700;font-size:13px}
 .knot-divider-preview hr{border:0;border-top:1px solid var(--border,#ccd2df);margin:14px 0}
+
+/* Separate the legacy Markdown field from the visual Gutenberg editor. */
+.knot-gutenberg-widget{margin-bottom:48px!important}
