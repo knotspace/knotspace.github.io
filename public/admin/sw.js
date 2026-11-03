@@ -3,6 +3,7 @@ const SCOPE = '/admin/';
 const SHELL = [
   '/admin/',
   '/admin/index.html',
+  '/admin/decap-cms.js',
   '/admin/admin.css',
   '/admin/editor-tools.js',
   '/admin/richtext-components.js',
