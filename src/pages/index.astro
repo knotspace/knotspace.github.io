@@ -16,12 +16,9 @@ const others = posts.slice(1, 4);
 <Layout title="KNOT | 個人ブログ" description="Web制作、PC・アプリ、本・読書、勉強。気になったことを自分のペースで記録する個人ブログ。">
   <div class="personal-home">
     <section class="intro">
-      <div class="intro-kicker"><span class="live-dot"></span> PERSONAL WEBLOG <span class="intro-year">EST. 2026</span></div>
-      <h1>好きなことを、<br/><em>好きなように。</em></h1>
-      <div class="intro-bottom">
-        <p>Webをつくったり、本を読んだり、知らないことを調べたり。<br/>日々の興味を、気ままに残していく場所。</p>
-        <span class="intro-mark">K.</span>
-      </div>
+      <div class="intro-topline"><span class="intro-kicker"><span class="live-dot"></span> INDEPENDENT WEBLOG</span><span class="intro-year">NO. 001 / 2026—</span></div>
+      <div class="intro-main"><h1>KNOT<span class="intro-period">.</span></h1><p>Web、読書、テクノロジー、学び。<br/>気になったことを、気になったままに。</p></div>
+      <div class="intro-bottom"><span>PERSONAL NOTES &amp; JOURNAL</span><span>SCROLL TO EXPLORE ↓</span></div>
     </section>
 
     <div class="home-rule"><span>RECENTLY ON KNOT</span><span>01 — 04</span></div>
@@ -61,28 +58,6 @@ const others = posts.slice(1, 4);
       </section>
     )}
 
-    <section class="university-feature">
-      <div class="university-heading">
-        <div><span class="feature-kicker">WHY WE LEARN / FEATURE</span><h2>もし、あなたが<br/><em>あの大学に行ったら。</em></h2></div>
-        <p>大学名を選ぶと、その先にある毎日が少しだけ見えてくる。<br/>講義、キャンパス、放課後。まだ知らない大学生活を想像してみよう。</p>
-      </div>
-      <div class="university-list">
-        <details class="university-item">
-          <summary><span class="university-no">01</span><span class="university-name">早稲田大学</span><span class="university-en">WASEDA</span><span class="university-plus">＋</span></summary>
-          <div class="university-detail"><span class="university-tag">TOKYO / PRIVATE</span><p>高田馬場からキャンパスへ。学部もサークルも選択肢が多く、学びたいことを自分で広げていく毎日。授業のあとに学生街を歩けば、 議論の続きが始まるかもしれない。</p><small>自由な空気の中で、自分の興味を深掘りする。</small></div>
-        </details>
-        <details class="university-item">
-          <summary><span class="university-no">02</span><span class="university-name">東京大学</span><span class="university-en">THE UNIVERSITY OF TOKYO</span><span class="university-plus">＋</span></summary>
-          <div class="university-detail"><span class="university-tag">TOKYO / NATIONAL</span><p>本郷の歴史あるキャンパスで、分野の違う仲間と議論する。最初から専門を狭めず、幅広く学んだ先で、自分が本当に追いかけたい問いを見つけていく。</p><small>知りたいことが、次の知りたいことにつながる。</small></div>
-        </details>
-        <details class="university-item">
-          <summary><span class="university-no">03</span><span class="university-name">京都大学</span><span class="university-en">KYOTO UNIVERSITY</span><span class="university-plus">＋</span></summary>
-          <div class="university-detail"><span class="university-tag">KYOTO / NATIONAL</span><p>京都の街と大学が地続きになったような環境。自分のペースで研究や活動に没頭し、ひとつの疑問をとことん掘り下げる。寄り道さえ、学びの一部になる。</p><small>型にはまらず、自分だけの問いを追いかける。</small></div>
-        </details>
-      </div>
-      <div class="university-footnote">※大学の特色をもとにしたイメージコンテンツです。実際の学生生活や制度を保証するものではありません。</div>
-    </section>
-
     <section class="bottom-note">
       <div><span class="note-kicker">A LITTLE MORE</span><h2>このブログについて。</h2></div>
       <p>ここは、ひとりの書き手が興味を持ったことを自由に書いている個人ブログです。テーマは決めすぎず、そのとき面白いと思ったことを。</p>
@@ -101,15 +76,16 @@ const others = posts.slice(1, 4);
 .personal-home a{color:inherit;text-decoration:none}
 .site-footer{display:none!important}
 .site-header{background:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important;border-bottom:1px solid var(--line)!important;margin-top:8px!important;padding:0 8px!important;backdrop-filter:none!important}
-.intro{padding:56px 5.5% 44px;position:relative}
-.intro-kicker,.note-kicker{display:flex;align-items:center;gap:10px;font-size:9px;font-weight:850;letter-spacing:.2em;color:var(--muted)}
-.live-dot{width:7px;height:7px;border-radius:50%;background:var(--home-accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--home-accent) 14%,transparent)}
-.intro-year{margin-left:5px;opacity:.6}
-.intro h1{font-size:clamp(48px,8.3vw,94px);line-height:1.12;letter-spacing:-.085em;font-weight:900;margin:28px 0 24px}
-.intro h1 em{font-family:Georgia,"Times New Roman",serif;font-weight:500;letter-spacing:-.075em;color:var(--home-accent)}
-.intro-bottom{display:flex;justify-content:space-between;align-items:flex-end;gap:20px}
-.intro-bottom p{margin:0;color:var(--muted);font-size:13px;line-height:2.05;letter-spacing:.025em}
-.intro-mark{font-size:58px;line-height:.8;font-weight:950;letter-spacing:-.12em;color:var(--line);padding-right:8px}
+.intro{padding:34px 5.5% 23px;position:relative;border-bottom:1px solid var(--line)}
+.intro-topline{display:flex;justify-content:space-between;align-items:center}
+.intro-kicker,.note-kicker{display:flex;align-items:center;gap:10px;font-size:9px;font-weight:800;letter-spacing:.16em;color:var(--muted)}
+.intro-year{font:9px ui-monospace,monospace;letter-spacing:.12em;color:var(--muted)}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--home-accent)}
+.intro-main{display:flex;justify-content:space-between;align-items:flex-end;gap:25px;padding:40px 0 28px}
+.intro h1{font-family:Arial,Helvetica,sans-serif;font-size:clamp(76px,13vw,150px);line-height:.78;letter-spacing:-.105em;font-weight:900;margin:0;color:var(--text)}
+.intro-period{color:var(--home-accent)}
+.intro-main p{margin:0 2px 4px 0;color:var(--muted);font-size:12px;line-height:2.05;letter-spacing:.02em}
+.intro-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid var(--line);font:8px ui-monospace,monospace;letter-spacing:.14em;color:var(--muted)}
 .home-rule{display:flex;justify-content:space-between;align-items:center;padding:13px 5.5%;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:9px;letter-spacing:.18em;font-weight:850;color:var(--muted)}
 .lead-story{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);gap:6.5%;align-items:center;padding:38px 5.5% 45px}
 .lead-image{display:block;position:relative;aspect-ratio:1.34;overflow:hidden;background:var(--surface-soft)}
@@ -146,8 +122,7 @@ const others = posts.slice(1, 4);
 .home-foot{display:flex;justify-content:space-between;align-items:center;gap:18px;margin:18px 5.5% 0;padding:17px 0 5px;border-top:1px solid var(--line);font-size:9px;letter-spacing:.1em;color:var(--muted)}
 .foot-categories{display:flex;gap:13px;flex-wrap:wrap}.foot-categories a:hover{color:var(--home-accent)}
 @media(max-width:700px){
- .personal-home{padding-top:14px}.intro{padding:43px 3% 30px}.intro h1{font-size:clamp(48px,12vw,72px);margin:24px 0 18px}
- .intro-bottom p{font-size:11px}.intro-mark{font-size:43px}
+ .personal-home{padding-top:14px}.intro{padding:25px 3% 16px}.intro-main{padding:37px 0 25px;align-items:flex-start;flex-direction:column;gap:17px}.intro h1{font-size:clamp(78px,20vw,120px)}.intro-main p{font-size:11px}.intro-bottom{font-size:7px}
  .home-rule{padding:11px 3%}.lead-story{grid-template-columns:1fr;gap:22px;padding:23px 3% 31px}
  .lead-image{aspect-ratio:1.45}.lead-copy{padding:0 2px}.lead-copy h2{font-size:26px;margin:13px 0 9px}
  .other-stories{margin:0 3%}.story-row{grid-template-columns:25px 88px minmax(0,1fr) 15px;gap:11px;padding:14px 0}
@@ -155,27 +130,5 @@ const others = posts.slice(1, 4);
  .story-meta{font-size:9px;gap:8px}.bottom-note{grid-template-columns:1fr;gap:12px;margin:43px 3% 0;padding-top:20px}
  .bottom-note>a{grid-column:1}.home-foot{margin:14px 3% 0;align-items:flex-start;flex-direction:column;gap:12px}
 }
-.university-feature{margin:65px 5.5% 0;padding:32px 0 27px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.university-heading{display:grid;grid-template-columns:1fr 1fr;gap:8%;align-items:end;margin-bottom:28px}
-.feature-kicker{font-size:9px;font-weight:900;letter-spacing:.2em;color:var(--home-accent)}
-.university-heading h2{margin:15px 0 0;font-size:clamp(28px,4vw,43px);line-height:1.32;letter-spacing:-.06em;font-weight:900}
-.university-heading h2 em{font-family:Georgia,"Times New Roman",serif;font-weight:500;color:var(--home-accent)}
-.university-heading>p{margin:0 0 5px;color:var(--muted);font-size:11px;line-height:2}
-.university-list{border-top:1px solid var(--line)}
-.university-item{border-bottom:1px solid var(--line)}
-.university-item summary{display:grid;grid-template-columns:42px minmax(150px,1fr) minmax(120px,.7fr) 30px;gap:12px;align-items:center;padding:17px 5px;cursor:pointer;list-style:none}
-.university-item summary::-webkit-details-marker{display:none}
-.university-no{font-size:10px;color:var(--home-accent);font-weight:900;font-variant-numeric:tabular-nums}
-.university-name{font-size:17px;font-weight:850;letter-spacing:-.035em}
-.university-en{font-size:9px;color:var(--muted);letter-spacing:.13em}
-.university-plus{width:27px;height:27px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;font-size:16px;color:var(--home-accent);transition:transform .2s,background .2s}
-.university-item[open] .university-plus{transform:rotate(45deg);background:var(--surface-soft)}
-.university-detail{padding:0 50px 21px 59px;max-width:760px;animation:university-in .25s ease}
-.university-tag{font-size:8px;font-weight:900;letter-spacing:.17em;color:var(--home-accent)}
-.university-detail p{margin:10px 0;color:var(--text);font-size:12px;line-height:2}
-.university-detail small{color:var(--muted);font-size:10px}
-.university-footnote{margin-top:15px;color:var(--muted);font-size:9px;line-height:1.7}
-@keyframes university-in{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
-@media(max-width:700px){.university-feature{margin:44px 3% 0;padding:25px 0}.university-heading{grid-template-columns:1fr;gap:12px;margin-bottom:20px}.university-heading h2{font-size:33px}.university-heading>p{font-size:10px}.university-item summary{grid-template-columns:27px minmax(0,1fr) 25px;gap:8px;padding:15px 2px}.university-en{display:none}.university-name{font-size:15px}.university-detail{padding:0 12px 18px 37px}.university-detail p{font-size:11px}}
 @media(prefers-reduced-motion:reduce){.lead-image img,.image-open,.text-link span,.story-row,.row-thumb img,.row-arrow{transition:none!important}}
 </style>
