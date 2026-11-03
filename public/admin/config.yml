@@ -186,7 +186,6 @@ collections:
     sortable_fields: [title, pubDate]
     fields:
       - { label: ページタイトル, name: title, widget: string, required: true }
-      - { label: URLスラッグ, name: slug, widget: string, required: false, hint: "英数字とハイフン推奨。例：privacy-policy。既存ページと同じURLは使わないでね。" }
       - { label: 検索結果向け説明文, name: description, widget: text, required: true }
       - { label: 公開日, name: pubDate, widget: datetime, required: false }
       - { label: 更新日, name: updatedDate, widget: datetime, required: false }
