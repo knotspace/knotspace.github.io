@@ -61,6 +61,28 @@ const others = posts.slice(1, 4);
       </section>
     )}
 
+    <section class="university-feature">
+      <div class="university-heading">
+        <div><span class="feature-kicker">WHY WE LEARN / FEATURE</span><h2>もし、あなたが<br/><em>あの大学に行ったら。</em></h2></div>
+        <p>大学名を選ぶと、その先にある毎日が少しだけ見えてくる。<br/>講義、キャンパス、放課後。まだ知らない大学生活を想像してみよう。</p>
+      </div>
+      <div class="university-list">
+        <details class="university-item">
+          <summary><span class="university-no">01</span><span class="university-name">早稲田大学</span><span class="university-en">WASEDA</span><span class="university-plus">＋</span></summary>
+          <div class="university-detail"><span class="university-tag">TOKYO / PRIVATE</span><p>高田馬場からキャンパスへ。学部もサークルも選択肢が多く、学びたいことを自分で広げていく毎日。授業のあとに学生街を歩けば、 ચર્ચ論の続きが始まるかもしれない。</p><small>自由な空気の中で、自分の興味を深掘りする。</small></div>
+        </details>
+        <details class="university-item">
+          <summary><span class="university-no">02</span><span class="university-name">東京大学</span><span class="university-en">THE UNIVERSITY OF TOKYO</span><span class="university-plus">＋</span></summary>
+          <div class="university-detail"><span class="university-tag">TOKYO / NATIONAL</span><p>本郷の歴史あるキャンパスで、分野の違う仲間と議論する。最初から専門を狭めず、幅広く学んだ先で、自分が本当に追いかけたい問いを見つけていく。</p><small>知りたいことが、次の知りたいことにつながる。</small></div>
+        </details>
+        <details class="university-item">
+          <summary><span class="university-no">03</span><span class="university-name">京都大学</span><span class="university-en">KYOTO UNIVERSITY</span><span class="university-plus">＋</span></summary>
+          <div class="university-detail"><span class="university-tag">KYOTO / NATIONAL</span><p>京都の街と大学が地続きになったような環境。自分のペースで研究や活動に没頭し、ひとつの疑問をとことん掘り下げる。寄り道さえ、学びの一部になる。</p><small>型にはまらず、自分だけの問いを追いかける。</small></div>
+        </details>
+      </div>
+      <div class="university-footnote">※大学の特色をもとにしたイメージコンテンツです。実際の学生生活や制度を保証するものではありません。</div>
+    </section>
+
     <section class="bottom-note">
       <div><span class="note-kicker">A LITTLE MORE</span><h2>このブログについて。</h2></div>
       <p>ここは、ひとりの書き手が興味を持ったことを自由に書いている個人ブログです。テーマは決めすぎず、そのとき面白いと思ったことを。</p>
@@ -133,5 +155,27 @@ const others = posts.slice(1, 4);
  .story-meta{font-size:9px;gap:8px}.bottom-note{grid-template-columns:1fr;gap:12px;margin:43px 3% 0;padding-top:20px}
  .bottom-note>a{grid-column:1}.home-foot{margin:14px 3% 0;align-items:flex-start;flex-direction:column;gap:12px}
 }
+.university-feature{margin:65px 5.5% 0;padding:32px 0 27px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.university-heading{display:grid;grid-template-columns:1fr 1fr;gap:8%;align-items:end;margin-bottom:28px}
+.feature-kicker{font-size:9px;font-weight:900;letter-spacing:.2em;color:var(--home-accent)}
+.university-heading h2{margin:15px 0 0;font-size:clamp(28px,4vw,43px);line-height:1.32;letter-spacing:-.06em;font-weight:900}
+.university-heading h2 em{font-family:Georgia,"Times New Roman",serif;font-weight:500;color:var(--home-accent)}
+.university-heading>p{margin:0 0 5px;color:var(--muted);font-size:11px;line-height:2}
+.university-list{border-top:1px solid var(--line)}
+.university-item{border-bottom:1px solid var(--line)}
+.university-item summary{display:grid;grid-template-columns:42px minmax(150px,1fr) minmax(120px,.7fr) 30px;gap:12px;align-items:center;padding:17px 5px;cursor:pointer;list-style:none}
+.university-item summary::-webkit-details-marker{display:none}
+.university-no{font-size:10px;color:var(--home-accent);font-weight:900;font-variant-numeric:tabular-nums}
+.university-name{font-size:17px;font-weight:850;letter-spacing:-.035em}
+.university-en{font-size:9px;color:var(--muted);letter-spacing:.13em}
+.university-plus{width:27px;height:27px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;font-size:16px;color:var(--home-accent);transition:transform .2s,background .2s}
+.university-item[open] .university-plus{transform:rotate(45deg);background:var(--surface-soft)}
+.university-detail{padding:0 50px 21px 59px;max-width:760px;animation:university-in .25s ease}
+.university-tag{font-size:8px;font-weight:900;letter-spacing:.17em;color:var(--home-accent)}
+.university-detail p{margin:10px 0;color:var(--text);font-size:12px;line-height:2}
+.university-detail small{color:var(--muted);font-size:10px}
+.university-footnote{margin-top:15px;color:var(--muted);font-size:9px;line-height:1.7}
+@keyframes university-in{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:700px){.university-feature{margin:44px 3% 0;padding:25px 0}.university-heading{grid-template-columns:1fr;gap:12px;margin-bottom:20px}.university-heading h2{font-size:33px}.university-heading>p{font-size:10px}.university-item summary{grid-template-columns:27px minmax(0,1fr) 25px;gap:8px;padding:15px 2px}.university-en{display:none}.university-name{font-size:15px}.university-detail{padding:0 12px 18px 37px}.university-detail p{font-size:11px}}
 @media(prefers-reduced-motion:reduce){.lead-image img,.image-open,.text-link span,.story-row,.row-thumb img,.row-arrow{transition:none!important}}
 </style>
