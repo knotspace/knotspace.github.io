@@ -1,27 +1,26 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import aboutSettings from '../data/about-settings.json';
 const BASE = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
-<Layout title="プロフィール | KNOT" description="KNOTの運営者プロフィール。Web制作やプログラミング、ランニングについて。">
+<Layout title="プロフィール | KNOT" description={aboutSettings.lead}>
   <main class="about-page">
     <a class="back-link" href={BASE}>← ホームに戻る</a>
     <header class="intro">
-      <span class="eyebrow">ABOUT KNOT</span>
+      <span class="eyebrow">{aboutSettings.eyebrow}</span>
       <div class="logo">KNOT<span>.</span></div>
-      <h1>こんにちは。<br />KNOTを運営しています。</h1>
-      <p class="lead">好きなことを、好きなペースで記録する個人ブログです。</p>
+      <h1>{aboutSettings.headingLine1}<br />{aboutSettings.headingLine2}</h1>
+      <p class="lead">{aboutSettings.lead}</p>
     </header>
     <section class="about-card">
-      <span class="eyebrow">MY STORY</span>
-      <h2>Web制作との再会</h2>
-      <p>以前HTMLやCSSに触れたことをきっかけに、プログラミングに興味を持ちました。</p>
-      <p>しばらく離れていましたが、最近またWeb制作を始めたところ、すっかり夢中に。GitHubを活用しながら、静的サイトをベースにJavaScriptなどで機能を加えた、動きのあるWebサイトづくりに挑戦しています。</p>
-      <p>このKNOTでは、日々興味を持ったことや、実際に使ってよかったもの、趣味について発信しています。</p>
+      <span class="eyebrow">{aboutSettings.storyEyebrow}</span>
+      <h2>{aboutSettings.storyTitle}</h2>
+      {aboutSettings.storyParagraphs.map((paragraph) => <p>{paragraph}</p>)}
     </section>
     <section class="details">
       
-      <div><span>INTERESTS</span><strong>Web Development / Running</strong></div>
-      <div><span>TECH</span><strong>HTML / CSS / JavaScript / Astro</strong></div>
+      <div><span>INTERESTS</span><strong>{aboutSettings.interests}</strong></div>
+      <div><span>TECH</span><strong>{aboutSettings.tech}</strong></div>
     </section>
     <a class="back-blog" href={`${BASE}blog/`}>記事を読んでみる →</a>
   </main>
