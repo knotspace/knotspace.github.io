@@ -10,6 +10,21 @@ const safeInline = (value: unknown) => sanitizeHtml(String(value ?? ''), {
   transformTags: { a: sanitizeHtml.simpleTransform('a', { rel: 'nofollow noopener noreferrer' }, true) },
 });
 
+const safeBlockHtml = (value: unknown) => sanitizeHtml(String(value ?? ''), {
+  allowedTags: ['address','article','aside','blockquote','br','caption','cite','code','col','colgroup','dd','del','details','div','dl','dt','em','figcaption','figure','h1','h2','h3','h4','h5','h6','hr','i','img','kbd','li','ol','p','pre','s','small','span','strong','sub','summary','sup','table','tbody','td','tfoot','th','thead','tr','u','ul','video','audio','source','a'],
+  allowedAttributes: {
+    '*': ['class','id','style','aria-label','aria-hidden','role'],
+    a: ['href','target','rel','title'], img: ['src','alt','width','height','loading'],
+    td: ['colspan','rowspan'], th: ['colspan','rowspan','scope'],
+    ol: ['start','type'], video: ['controls','src','poster'], audio: ['controls','src'],
+    source: ['src','type'], col: ['span']
+  },
+  allowedSchemes: ['http','https','mailto','tel'],
+  allowedSchemesByTag: { img: ['http','https','data'] },
+  transformTags: { a: sanitizeHtml.simpleTransform('a', { rel: 'nofollow noopener noreferrer' }, true) }
+});
+
+
 export async function getStaticPaths() {
   const pages = await getCollection('pages');
   return pages.map((page) => ({
@@ -53,6 +68,7 @@ const pageJsonLd = {
     {page.data.heroImage && <img class="page-hero" src={page.data.heroImage} alt={page.data.title} loading="eager" decoding="async" />}
     <article class="page-content">
       {contentBlocks.length > 0 ? contentBlocks.map((block: any) => {
+        if (block.type === 'wordpress' && block.html) return <div class="wordpress-block-content" set:html={safeBlockHtml(block.html)} />;
         const type = block.type || block.blockType || 'paragraph';
         if (type === 'heading') return Number(block.level) === 3 ? <h3>{block.text}</h3> : <h2>{block.text}</h2>;
         if (type === 'image') return <figure><img src={block.src || block.image || ''} alt={block.alt || ''} loading="lazy" decoding="async" />{block.caption && <figcaption set:html={safeInline(block.caption)} />}</figure>;
