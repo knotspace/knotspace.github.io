@@ -1,6 +1,19 @@
 {
   "releases": [
     {
+      "id": "855f13c",
+      "publishedAt": "2026-11-03T19:43:45+09:00",
+      "title": "Add 100 deduplicated KNOT Study questions",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "演習問題データ"
+      ],
+      "files": [
+        "src/data/study/study-questions.json"
+      ]
+    },
+    {
       "id": "343de9c",
       "publishedAt": "2026-11-03T19:30:53+09:00",
       "title": "Track daily Study progress across practice sessions",
