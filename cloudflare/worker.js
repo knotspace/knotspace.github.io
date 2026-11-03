@@ -524,8 +524,13 @@ export default {
         }
 
         if (!env.DB) {
-          return json({ error: "Publishing storage is not configured. Apply migration 0002 first." }, 503, origin, { "Set-Cookie": clearState });
+          return json({ error: "Publishing storage is not configured." }, 503, origin, { "Set-Cookie": clearState });
         }
+        // Create the OAuth token table through the Worker D1 binding.
+        // This avoids requiring a separate D1 API token or manual migration.
+        await env.DB.prepare(
+          "CREATE TABLE IF NOT EXISTS cms_github_tokens (user_login TEXT PRIMARY KEY, encrypted_token TEXT NOT NULL, updated_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')))"
+        ).run();
         const encryptedToken = await encryptSecret(tokenData.access_token, env.SESSION_SECRET);
         await env.DB.prepare(
           "INSERT INTO cms_github_tokens (user_login, encrypted_token, updated_at) VALUES (?, ?, strftime('%Y-%m-%dT%H:%M:%fZ', 'now')) ON CONFLICT(user_login) DO UPDATE SET encrypted_token = excluded.encrypted_token, updated_at = excluded.updated_at"
@@ -581,6 +586,9 @@ export default {
           "---",
           ""
         ].join("\n");
+        await env.DB.prepare(
+          "CREATE TABLE IF NOT EXISTS cms_github_tokens (user_login TEXT PRIMARY KEY, encrypted_token TEXT NOT NULL, updated_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')))"
+        ).run();
         const tokenRow = await env.DB.prepare("SELECT encrypted_token FROM cms_github_tokens WHERE user_login = ?").bind(auth.session.login).first();
         if (!tokenRow?.encrypted_token) return json({ error: "GitHub公開権限がありません。いったんログアウトしてGitHubで再ログインしてください。" }, 401, origin);
         const githubToken = await decryptSecret(tokenRow.encrypted_token, env.SESSION_SECRET);
@@ -630,8 +638,11 @@ export default {
         return json({ error: "Invalid slug or article content" }, 400, origin);
       }
       try {
+        await env.DB.prepare(
+          "CREATE TABLE IF NOT EXISTS cms_github_tokens (user_login TEXT PRIMARY KEY, encrypted_token TEXT NOT NULL, updated_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')))"
+        ).run();
         const row = await env.DB.prepare("SELECT encrypted_token FROM cms_github_tokens WHERE user_login = ?").bind(auth.session.login).first();
-        if (!row?.encrypted_token) return json({ error: "GitHub publish permission is missing. Log out and sign in again." }, 401, origin);
+        if (!row?.encrypted_token) return json({ error: "GitHub公開用の接続がまだありません。いったんログアウトしてGitHubで再ログインしてください。" }, 401, origin);
         const githubToken = await decryptSecret(row.encrypted_token, env.SESSION_SECRET);
         const apiUrl = "https://api.github.com/repos/knotspace/knotspace.github.io/contents/src/content/blog/" + slug + ".md";
         const headers = {
