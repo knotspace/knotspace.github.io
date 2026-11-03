@@ -96,11 +96,66 @@ collections:
         widget: image
         required: false
         hint: "記事一覧や記事上部に表示する画像。顔写真・制服・住所や学校が分かる背景・位置情報付き写真は使わないでね。"
-      - label: 本文
+      - label: 本文ブロック（WordPress風）
+        name: blocks
+        widget: list
+        required: false
+        collapsed: false
+        summary: "{{type}}｜{{fields.text}}"
+        types:
+          - label: 段落
+            name: paragraph
+            widget: object
+            fields:
+              - { label: 文章, name: text, widget: text }
+          - label: 見出し
+            name: heading
+            widget: object
+            fields:
+              - { label: 見出し文字, name: text, widget: string }
+              - { label: 見出しレベル, name: level, widget: select, options: [{label: H2, value: 2}, {label: H3, value: 3}], default: 2 }
+          - label: 画像
+            name: image
+            widget: object
+            fields:
+              - { label: 画像, name: src, widget: image }
+              - { label: 代替テキスト, name: alt, widget: string, required: false }
+              - { label: キャプション, name: caption, widget: string, required: false }
+          - label: 引用
+            name: quote
+            widget: object
+            fields:
+              - { label: 引用文, name: text, widget: text }
+              - { label: 出典・人物名, name: attribution, widget: string, required: false }
+          - label: ポイント・補足枠
+            name: callout
+            widget: object
+            fields:
+              - { label: 見出し, name: title, widget: string }
+              - { label: 内容, name: text, widget: text }
+              - { label: デザイン, name: style, widget: select, options: [point, note, warning, summary], default: note }
+          - label: リスト
+            name: list
+            widget: object
+            fields:
+              - { label: 項目（1行に1つ）, name: items, widget: text }
+              - { label: 番号付きリスト, name: ordered, widget: boolean, default: false }
+          - label: ボタン
+            name: button
+            widget: object
+            fields:
+              - { label: 表示文字, name: label, widget: string }
+              - { label: リンク先, name: url, widget: string }
+          - label: 区切り線
+            name: divider
+            widget: object
+            fields:
+              - { label: 区切り線, name: enabled, widget: boolean, default: true }
+      - label: 旧形式の本文（Markdown）
         name: body
         widget: markdown
-        required: true
-        hint: "本名・学校名・学年・住所・電話番号・メール・行動範囲・他人の名前など個人が分かる情報は絶対に書かない。体験談も場所や日付をぼかしてね。見出し・太字などはツールバーから挿入できるよ。"
+        required: false
+        hint: "上の本文ブロックで段落・見出し・画像・引用・囲み枠・リストなどを追加して並べ替えできます。旧記事の編集では下のMarkdown本文も使えます。個人情報は掲載しないでね。"
         buttons:
           - bold
           - italic
