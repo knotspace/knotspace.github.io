@@ -74,7 +74,7 @@ function renderQuestionDiagram(q){
  '歴史':['古代','縄文','弥生','江戸','明治','鎌倉','室町','歴史','戦国','平安'],
  '公民':['憲法','国会','経済','税','選挙','国際','人権','内閣','裁判','地方自治']
  };
- const root=(q.topic||'').split('・')[0],words=[...(aliases[root]||[]),(q.topic||'').split('・').slice(1).join(' '),...(q.q||'').match(/[一-龠ぁ-んァ-ヶー]{2,}/g)||[]];
+ const root=(q.topic||'').split('・')[0],words=[...(aliases[root]||[]),root,(q.topic||'').split('・').slice(1).join(' '),...(q.q||'').match(/[一-龠ぁ-んァ-ヶー]{2,}/g)||[]];
  let candidates=diagramBank.diagrams.filter(d=>d.subject===q.subject&&words.some(w=>w&&w.length>=2&&(d.topic.includes(w)||w.includes(d.topic))));
  if(!candidates.length)candidates=diagramBank.diagrams.filter(d=>d.subject===q.subject);
  const hash=Array.from((q.topic||'')+' '+q.q).reduce((n,c)=>n+c.charCodeAt(0),0),d=candidates[hash%candidates.length];
