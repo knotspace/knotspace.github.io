@@ -3,6 +3,7 @@ import StudyLayout from '../layouts/StudyLayout.astro';
 import foundation from '../data/study/study-foundation.json';
 import kosen from '../data/study/kosen-questions.json';
 import studyQuestions from '../data/study/study-questions.json';
+const totalStudyQuestions = studyQuestions.length + foundation.length + kosen.length;
 import quotes from '../data/study/study-quotes.json';
 const science = foundation.filter(q => q.subject === 'science').length;
 const social = foundation.filter(q => q.subject === 'social').length;
@@ -30,7 +31,7 @@ const fields = [
   </section>
 
   <section class="stats-strip" aria-label="学習問題数">
-    <div><small>QUESTION BANK</small><strong>{studyQuestions.length.toLocaleString('ja-JP')}</strong><span>総合演習問題</span></div>
+    <div><small>QUESTION BANK</small><strong>{totalStudyQuestions.toLocaleString('ja-JP')}</strong><span>総合演習問題</span></div>
     <div><small>FOUNDATION</small><strong>{foundation.length.toLocaleString('ja-JP')}</strong><span>基礎問題</span></div>
     <div><small>KO SEN</small><strong>{kosen.length.toLocaleString('ja-JP')}</strong><span>高専対策問題</span></div>
     <div><small>SUBJECTS</small><strong>7</strong><span>学習分野</span></div>
@@ -39,7 +40,7 @@ const fields = [
   <section class="section-block">
     <div class="section-heading"><div><p class="eyebrow">PICK UP</p><h2>学習メニュー</h2></div><span>今日やることを選ぼう</span></div>
     <div class="menu-grid">
-      <a class="menu-card primary-card" href="./solve/"><span class="menu-icon">✎</span><small>QUESTION BANK</small><h3>総合問題演習</h3><p>{studyQuestions.length.toLocaleString('ja-JP')}問から、理科・社会を分野別に解こう。</p><b>演習を始める <i>→</i></b></a>
+      <a class="menu-card primary-card" href="./solve/"><span class="menu-icon">✎</span><small>QUESTION BANK</small><h3>総合問題演習</h3><p>{totalStudyQuestions.toLocaleString('ja-JP')}問から、理科・社会を分野別に解こう。</p><b>演習を始める <i>→</i></b></a>
       <a class="menu-card" href="./foundation/"><span class="menu-icon">◇</span><small>FOUNDATION</small><h3>基礎演習</h3><p>{foundation.length.toLocaleString('ja-JP')}問で、重要語句と基本知識を確認。</p><b>演習を始める <i>→</i></b></a>
       <a class="menu-card" href="./kosen/"><span class="menu-icon">⌁</span><small>KO SEN EXAM</small><h3>高専対策</h3><p>{kosen.length.toLocaleString('ja-JP')}問の思考力問題で、入試に向けて鍛える。</p><b>挑戦する <i>→</i></b></a>
       <a class="menu-card" href="./mock/"><span class="menu-icon">▤</span><small>MOCK EXAM</small><h3>過去問模試</h3><p>公式過去問を使って、本番形式で実力を試そう。</p><b>模試を受ける <i>→</i></b></a>
