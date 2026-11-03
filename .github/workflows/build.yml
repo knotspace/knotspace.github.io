@@ -25,5 +25,7 @@ jobs:
           node-version: 24
       - name: Install dependencies
         run: npm install --no-audit --no-fund
+      - name: Check study question bank
+        run: npm run study:check
       - name: Build Astro site
         run: npm run build
