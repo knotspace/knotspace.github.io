@@ -181,7 +181,7 @@ collections:
     extension: md
     format: frontmatter
     slug: "{{slug}}"
-    preview_path: "{{slug}}/"
+    preview_path: "p/{{slug}}/"
     summary: "{{title}}"
     sortable_fields: [title, pubDate]
     fields:
