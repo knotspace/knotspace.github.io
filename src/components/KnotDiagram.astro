@@ -1,0 +1,41 @@
+---
+import bank from '../data/study/knot-diagrams.json';
+const { subject = '理科', match = '', offset = 0, limit = 2, compact = false } = Astro.props;
+const all = bank.diagrams.filter(item => item.subject === subject);
+const terms = String(match).split(/[・／、s・]/).filter(word => word.length >= 2);
+const ranked = all.map(item => ({ item, score: terms.reduce((sum, word) => sum + (item.topic.includes(word) || item.title.includes(word) ? 1 : 0), 0) })).filter(x => x.score > 0).sort((a,b) => b.score-a.score);
+const selected = (ranked.length ? ranked.map(x=>x.item) : all.slice(Math.max(0, Number(offset)||0)*5)).slice(0, Number(limit)||2);
+---
+{selected.length > 0 && <section class:list={['knot-diagrams', compact && 'compact']} aria-label="KNOTオリジナル図解">
+  <div class="diagram-heading"><span>KNOT ORIGINAL DIAGRAMS</span><b>{subject}の図解</b><small>学習用にKNOTが作成したオリジナル模式図</small></div>
+  <div class="diagram-grid">
+    {selected.map((diagram) => <article class="diagram-card" data-diagram-id={diagram.id}>
+      <div class="diagram-card-head"><span>{diagram.id.toUpperCase()}</span><b>{diagram.title}</b></div>
+      <div class:list={['diagram-visual', 'kind-'+diagram.kind]}>
+        {diagram.nodes.map((node,i) => <div class="diagram-node"><small>{String(i+1).padStart(2,'0')}</small><strong>{node.label}</strong><span>{node.hint}</span></div>)}
+      </div>
+      <p>{diagram.note}</p>
+      <div class="diagram-caption">{diagram.explain}</div>
+    </article>)}
+  </div>
+</section>}
+<style>
+.knot-diagrams{margin:18px 0 22px;padding:17px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.diagram-heading{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;margin-bottom:13px}
+.diagram-heading>span{font:9px ui-monospace,monospace;letter-spacing:.12em;color:var(--accent);font-weight:800}
+.diagram-heading>b{font-size:14px}.diagram-heading>small{font-size:10px;color:var(--muted)}
+.diagram-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px}
+.diagram-card{min-width:0;border:1px solid var(--line);border-radius:11px;padding:13px;background:var(--surface-soft)}
+.diagram-card-head{display:grid;gap:4px;margin-bottom:12px}.diagram-card-head span{font:9px ui-monospace,monospace;color:var(--accent)}.diagram-card-head b{font-size:13px;line-height:1.55}
+.diagram-visual{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px;align-items:stretch;position:relative}
+.diagram-node{position:relative;display:grid;align-content:center;gap:4px;min-width:0;min-height:84px;padding:8px 6px;text-align:center;border:1px solid var(--line);border-radius:9px;background:var(--surface)}
+.diagram-node:not(:last-child):after{content:'→';position:absolute;right:-14px;top:50%;transform:translate(50%,-50%);font-weight:900;color:var(--accent);font-size:14px}
+.diagram-node small{font:9px ui-monospace,monospace;color:var(--accent)}.diagram-node strong{font-size:11px;line-height:1.45;overflow-wrap:anywhere}.diagram-node span{font-size:9px;line-height:1.35;color:var(--muted)}
+.kind-cycle .diagram-node{border-radius:50%;min-height:82px;aspect-ratio:1;padding:5px}.kind-cycle .diagram-node:not(:last-child):after{content:'↻'}
+.kind-compare{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.kind-compare .diagram-node{min-height:60px}.kind-compare .diagram-node:after{display:none}
+.kind-data .diagram-node:nth-child(odd){transform:translateY(7px)}.kind-data .diagram-node:nth-child(even){transform:translateY(-7px)}
+.kind-stack{grid-template-columns:1fr 1fr;gap:8px}.kind-stack .diagram-node{min-height:58px}.kind-stack .diagram-node:after{display:none}
+.diagram-card>p{font-size:10px;line-height:1.7;color:var(--muted);margin:12px 0 7px}.diagram-caption{font-size:11px;line-height:1.7;font-weight:650}
+.compact{padding:12px}.compact .diagram-grid{grid-template-columns:1fr}.compact .diagram-card{padding:10px}
+@media(max-width:520px){.knot-diagrams{padding:12px}.diagram-visual{gap:11px}.diagram-node{min-height:75px;padding:6px 3px}.diagram-node strong{font-size:10px}.diagram-node span{font-size:8px}.diagram-node:not(:last-child):after{right:-11px;font-size:12px}.kind-cycle .diagram-node{min-height:65px}}
+</style>
