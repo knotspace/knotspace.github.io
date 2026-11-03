@@ -50,9 +50,9 @@ collections:
         name: pubDate
         widget: datetime
         hint: "記事を公開する日付。"
-        format: "YYYY-MM-DD"
+        format: "YYYY-MM-DDTHH:mm:ssZ"
         date_format: "YYYY-MM-DD"
-        time_format: false
+        time_format: "HH:mm"
         required: true
       - label: 予約公開日時
         name: publishAt
