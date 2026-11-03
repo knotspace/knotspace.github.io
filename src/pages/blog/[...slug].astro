@@ -114,6 +114,13 @@ const breadcrumbJsonLd = {
 
 
 
+    {toc.length > 0 && <nav class="article-toc" aria-label="この記事の目次">
+      <details open>
+        <summary><span>この記事の目次</span><span class="article-toc-count">{toc.length}項目</span></summary>
+        <ol>{toc.map((heading) => <li class:list={[`toc-level-${heading.depth}`]}><a href={`#${heading.slug}`} data-toc-link={heading.slug}>{heading.text}</a></li>)}</ol>
+      </details>
+    </nav>}
+
     <div class="article-content">
       <Content />
     </div>
@@ -174,7 +181,7 @@ const breadcrumbJsonLd = {
   </article>
   <aside class="article-sidebar" aria-label="記事ナビゲーション">
     <section class="article-side-widget"><h2>お知らせ</h2><p>KNOTの記事を読んでくれてありがとう！新しい記事も随時更新中。</p><a href={`${BASE}blog/`}>記事一覧を見る »</a></section>
-    {toc.length > 0 && <nav class="article-side-widget side-toc" aria-label="目次"><h2>目次</h2><ol>{toc.map((heading) => <li class:list={[`toc-level-${heading.depth}`]}><a href={`#${heading.slug}`} data-toc-link={heading.slug}>{heading.text}</a></li>)}</ol></nav>}
+
   </aside>
   </div>
 </Layout>
@@ -710,6 +717,20 @@ const breadcrumbJsonLd = {
   .hero-image{max-height:430px;margin:22px 0 28px;border-radius:3px}
   .toc{border-radius:2px;padding:18px 22px;margin:25px 0 32px}
   .article-content{font-size:15px;line-height:2.05}
+  .article-toc{margin:24px 0 34px;border:1px solid var(--line);border-radius:18px;background:var(--surface);overflow:hidden}
+  .article-toc details{padding:0}
+  .article-toc summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 19px;cursor:pointer;list-style:none;font-size:13px;font-weight:850;color:var(--text)}
+  .article-toc summary::-webkit-details-marker{display:none}
+  .article-toc summary::after{content:"＋";color:var(--accent);font-size:16px}
+  .article-toc details[open] summary::after{content:"−"}
+  .article-toc-count{margin-left:auto;color:var(--muted);font-size:10px;font-weight:600}
+  .article-toc ol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3px 14px;margin:0;padding:4px 18px 17px;list-style:none}
+  .article-toc li{min-width:0;margin:0;padding:0}
+  .article-toc li.toc-level-3{padding-left:13px}
+  .article-toc a{display:block;padding:7px 10px;border-radius:9px;color:var(--article-text);font-size:11px;line-height:1.6;text-decoration:none;overflow-wrap:anywhere}
+  .article-toc a:hover,.article-toc a.is-current{background:var(--surface-soft);color:var(--accent)}
+  .article-content :global(h2),.article-content :global(h3){scroll-margin-top:88px}
+  @media(max-width:560px){.article-toc ol{grid-template-columns:1fr}.article-toc{margin:20px 0 28px}}
   .article-content :global(h2){border-left:4px solid var(--accent);padding:5px 0 5px 13px;margin:2em 0 .8em;font-size:22px}
   .article-content :global(h3){font-size:18px;margin:1.7em 0 .6em}
   .article-content :global(img){max-width:100%;height:auto}
