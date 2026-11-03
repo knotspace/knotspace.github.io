@@ -60,15 +60,16 @@ for (const url of SOURCES) {
   const headers = rows[headerIndex].map(v => v.replace(/^\uFEFF/, '').trim());
   console.log('Detected school CSV columns:', headers.slice(0, 20).join(' | '));
   for (const row of rows.slice(headerIndex + 1)) {
-    const code = pick(row, headers, [/^学校コード$/,/学校コード/]);
+    const rawCode = pick(row, headers, [/^学校コード$/,/学校コード/]);
+    const code = rawCode.replace(/[-\\s]/g, '');
     const name = pick(row, headers, [/学校名/,/学校名称/]);
-    if (!code || !name) continue;
+    if (!code || code.length < 5 || !name) continue;
     if (pick(row, headers, [/廃止年月日/])) continue;
-    const typeCode = pick(row, headers, [/学校種/]) || code.slice(0, 2);
+    const typeCode = code.slice(0, 2);
     const schoolType = TYPE_MAP[typeCode] || typeCode;
-    const ownershipCode = pick(row, headers, [/設置区分/,/設置者区分/,/国公私立/]) || code.slice(4, 5);
+    const ownershipCode = code.slice(4, 5);
     const ownership = OWNERSHIP_MAP[ownershipCode] || ownershipCode;
-    const prefectureCode = pick(row, headers, [/都道府県番号/]) || code.slice(2, 4);
+    const prefectureCode = code.slice(2, 4);
     const prefecture = PREFECTURES[Number(prefectureCode) - 1] || pick(row, headers, [/都道府県/]);
     const city = pick(row, headers, [/市区町村/]);
     const address = pick(row, headers, [/所在地/,/住所/]);
