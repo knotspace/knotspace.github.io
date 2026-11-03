@@ -1,0 +1,50 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('pages');
+  return pages.map((page) => ({
+    params: { slug: page.id },
+    props: { page },
+  }));
+}
+
+const { page } = Astro.props;
+const { Content, headings } = await render(page);
+const canonicalUrl = new URL(`/p/${page.id}/`, Astro.site ?? Astro.url).href;
+const pageJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: page.data.title,
+  description: page.data.description,
+  url: canonicalUrl,
+  inLanguage: 'ja-JP',
+  isPartOf: { '@type': 'WebSite', name: 'KNOT', url: 'https://knotspace.github.io/' },
+};
+---
+<Layout
+  title={`${page.data.title} | KNOT`}
+  description={page.data.description}
+  image={page.data.heroImage}
+  noindex={page.data.noindex}
+  structuredData={pageJsonLd}
+>
+  <main class="cms-page">
+    <nav class="breadcrumbs" aria-label="パンくずリスト">
+      <a href="/">ホーム</a><span aria-hidden="true">/</span><span>{page.data.title}</span>
+    </nav>
+    <header class="page-header">
+      <span class="eyebrow">KNOT / PAGE</span>
+      <h1>{page.data.title}</h1>
+      <p>{page.data.description}</p>
+      {page.data.updatedDate && <time datetime={page.data.updatedDate.toISOString()}>最終更新：{page.data.updatedDate.toLocaleDateString('ja-JP')}</time>}
+    </header>
+    {page.data.heroImage && <img class="page-hero" src={page.data.heroImage} alt={page.data.title} loading="eager" decoding="async" />}
+    <article class="page-content"><Content /></article>
+    <footer class="page-footer"><a href="/">KNOT ホームへ戻る →</a></footer>
+  </main>
+</Layout>
+<style>
+.cms-page{max-width:860px;margin:0 auto;padding:28px 0 90px}.breadcrumbs{display:flex;gap:10px;align-items:center;color:var(--muted);font-size:12px}.breadcrumbs a{color:var(--muted)}.page-header{padding:54px 0 38px;border-bottom:1px solid var(--line)}.eyebrow{color:var(--accent);font-size:10px;font-weight:800;letter-spacing:.16em}.page-header h1{margin:14px 0;font-size:clamp(30px,5vw,46px);line-height:1.35;letter-spacing:-.05em;color:var(--text)}.page-header p{margin:0;color:var(--muted);line-height:1.9}.page-header time{display:block;margin-top:14px;color:var(--muted);font-size:12px}.page-hero{display:block;width:100%;max-height:460px;object-fit:cover;border-radius:18px;margin:30px 0}.page-content{max-width:740px;margin:36px auto;color:var(--article-text);font-size:15px;line-height:2.15;overflow-wrap:anywhere}.page-content :global(h2){margin:2.2em 0 .8em;color:var(--text);font-size:1.55em;line-height:1.5}.page-content :global(h3){margin:1.8em 0 .6em;color:var(--text);font-size:1.2em}.page-content :global(img){max-width:100%;height:auto;border-radius:14px}.page-content :global(table){display:block;max-width:100%;overflow-x:auto;border-collapse:collapse}.page-content :global(a){color:var(--accent);text-underline-offset:3px}.page-footer{padding-top:24px;border-top:1px solid var(--line);text-align:center}.page-footer a{color:var(--accent);font-weight:700}@media(max-width:600px){.cms-page{padding:22px 0 60px}.page-header{padding:38px 0 28px}.page-content{font-size:14px}}
+</style>
