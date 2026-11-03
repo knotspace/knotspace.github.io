@@ -74,6 +74,7 @@ const breadcrumbJsonLd = {
   structuredData={[articleJsonLd, breadcrumbJsonLd]}
 >
   <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
+  <div class="article-layout">
   <article class="post" data-post-slug={post.id}>
     <div class="article-tools"><span>この記事を読む</span><div class="tool-actions"><button id="share-button" type="button">↗ リンクをコピー</button><button id="bookmark-button" type="button" aria-pressed="false">☆ あとで読む</button></div></div>
     <a class="back-link" href={`${BASE}blog/`}>
@@ -107,25 +108,7 @@ const breadcrumbJsonLd = {
       <img class="hero-image" src={post.data.heroImage} alt={post.data.title} loading="eager" fetchpriority="high" decoding="async" />
     )}
 
-    {toc.length > 0 && (
-      <nav class="toc" aria-label="目次">
-        <div class="toc-heading">
-          <span class="toc-icon">☷</span>
-          <span>目次</span>
-          <span class="toc-count">{toc.length}項目</span>
-        </div>
 
-        <ol>
-          {toc.map((heading) => (
-            <li class:list={[`toc-level-${heading.depth}`]}>
-              <a href={`#${heading.slug}`}>
-                {heading.text}
-              </a>
-            </li>
-          ))}
-        </ol>
-      </nav>
-    )}
 
     <div class="article-content">
       <Content />
@@ -185,7 +168,33 @@ const breadcrumbJsonLd = {
       </div>
     </section>
   </article>
+  <aside class="article-sidebar" aria-label="記事ナビゲーション">
+    <section class="article-side-widget"><h2>お知らせ</h2><p>KNOTの記事を読んでくれてありがとう！新しい記事も随時更新中。</p><a href={`${BASE}blog/`}>記事一覧を見る »</a></section>
+    {toc.length > 0 && <nav class="article-side-widget side-toc" aria-label="目次"><h2>目次</h2><ol>{toc.map((heading) => <li class:list={[`toc-level-${heading.depth}`]}><a href={`#${heading.slug}`} data-toc-link={heading.slug}>{heading.text}</a></li>)}</ol></nav>}
+  </aside>
+  </div>
 </Layout>
+
+<script is:inline>
+(() => {
+  const links = Array.from(document.querySelectorAll('[data-toc-link]'));
+  const headings = links.map(link => document.getElementById(link.dataset.tocLink)).filter(Boolean);
+  if (!links.length || !headings.length) return;
+  const activate = (id) => links.forEach(link => {
+    const active = link.dataset.tocLink === id;
+    link.classList.toggle('is-current', active);
+    if (active) link.setAttribute('aria-current', 'location');
+    else link.removeAttribute('aria-current');
+  });
+  const observer = new IntersectionObserver(entries => {
+    const visible = entries.filter(entry => entry.isIntersecting).sort((a,b) => a.boundingClientRect.top - b.boundingClientRect.top);
+    if (visible[0]) activate(visible[0].target.id);
+  }, { rootMargin: '-12% 0px -72% 0px', threshold: 0 });
+  headings.forEach(heading => observer.observe(heading));
+  if (location.hash) activate(decodeURIComponent(location.hash.slice(1)));
+  else activate(headings[0].id);
+})();
+</script>
 
 <script is:inline>
 (() => {
@@ -313,6 +322,22 @@ const breadcrumbJsonLd = {
 </script>
 
 <style>
+  .article-layout{display:grid;grid-template-columns:minmax(0,760px) 270px;gap:38px;align-items:start;max-width:1100px;margin:0 auto}
+  .article-layout .post{width:100%;max-width:none;min-width:0}
+  .article-sidebar{position:sticky;top:24px;display:flex;flex-direction:column;gap:18px;padding-top:48px}
+  .article-side-widget{border:1px solid var(--line);background:var(--surface);padding:0}
+  .article-side-widget h2{margin:0;padding:12px 14px;border-bottom:1px solid var(--line);border-left:4px solid var(--accent);font-size:14px}
+  .article-side-widget p{margin:12px 14px;color:var(--muted);font-size:11px;line-height:1.8}
+  .article-side-widget>a{display:block;margin:0 14px 14px;color:var(--accent);font-size:11px;font-weight:700}
+  .side-toc{max-height:calc(100vh - 170px);overflow:auto}
+  .side-toc ol{list-style:none;margin:0;padding:9px 12px 12px}
+  .side-toc li{margin:0;padding:0}
+  .side-toc li a{display:block;padding:8px 9px;border-left:2px solid transparent;color:var(--muted);font-size:11px;line-height:1.65;transition:color .15s,border-color .15s,background .15s}
+  .side-toc li.toc-level-3{padding-left:12px}
+  .side-toc li a:hover{color:var(--accent)}
+  .side-toc li a.is-current{border-left-color:var(--accent);color:var(--accent);background:var(--surface-soft);font-weight:800}
+  @media(max-width:1050px){.article-layout{grid-template-columns:minmax(0,1fr) 235px;gap:24px}}
+  @media(max-width:760px){.article-layout{display:flex;flex-direction:column;gap:24px}.article-layout .post{padding-top:25px}.article-sidebar{position:static;width:100%;padding-top:0;display:grid;grid-template-columns:1fr}.side-toc{max-height:none}.side-toc ol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}}
   .reading-progress{position:fixed;z-index:1000;top:0;left:0;width:0;height:3px;background:var(--accent);transition:width .08s linear}
   .article-tools{display:flex;justify-content:space-between;align-items:center;margin:0 0 20px;color:var(--muted);font-size:11px}
   .tool-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.article-tools button{border:1px solid var(--line);border-radius:999px;padding:8px 13px;background:var(--surface);color:var(--text);font-size:11px;font-weight:700;cursor:pointer}
