@@ -2,8 +2,8 @@
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import siteSettings from '../data/site-settings.json';
-import { getAcademicGrade } from '../utils/academic-grade';
-const academicGrade = getAcademicGrade(new Date());
+import { getAge } from '../utils/profile-age';
+const age = getAge(new Date());
 
 const now = new Date();
 const posts = (await getCollection('blog'))
@@ -20,7 +20,7 @@ const dateTimeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocal
   <div class="personal-home">
     <section class="intro">
       <div class="intro-topline"><span class="intro-kicker"><span class="live-dot"></span> {siteSettings.introKicker}</span><span class="intro-year">NO. 001 / 2026—</span></div>
-      <div class="intro-main"><h1>KNOT<span class="intro-period">.</span></h1><div class="intro-description"><p>{siteSettings.introLine1}<br/>{siteSettings.introLine2}</p><span class="school-grade">{academicGrade.label}</span></div></div>
+      <div class="intro-main"><h1>KNOT<span class="intro-period">.</span></h1><div class="intro-description"><p>{siteSettings.introLine1}<br/>{siteSettings.introLine2}</p><span class="school-grade">{age}歳</span></div></div>
       <div class="intro-bottom"><span>PERSONAL NOTES &amp; JOURNAL</span><span>SCROLL TO EXPLORE ↓</span></div>
     </section>
 
