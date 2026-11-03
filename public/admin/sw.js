@@ -1,10 +1,11 @@
-const CACHE_NAME = 'knot-cms-studio-v3';
+const CACHE_NAME = 'knot-cms-studio-v4';
 const SCOPE = '/admin/';
 const SHELL = [
   '/admin/',
   '/admin/index.html',
   '/admin/admin.css',
   '/admin/editor-tools.js',
+  '/admin/richtext-components.js',
   '/admin/admin-app-icon.svg',
   '/admin/knot-logo.svg',
   '/admin/manifest.webmanifest'
@@ -14,6 +15,7 @@ const STATIC_ASSETS = new Set([
   '/admin/index.html',
   '/admin/admin.css',
   '/admin/editor-tools.js',
+  '/admin/richtext-components.js',
   '/admin/decap-cms.js',
   '/admin/admin-app-icon.svg',
   '/admin/knot-logo.svg',
