@@ -25,7 +25,6 @@ export async function GET({ site }) {
     '/study/kosen/',
     '/study/mock/',
     '/study/quotes/',
-    '/study/solve/',
     '/study/summary/',
     '/study/summary/biology/',
     '/study/summary/chemistry/',
