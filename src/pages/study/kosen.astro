@@ -56,7 +56,7 @@ function renderReview(){const root=$('review');root.replaceChildren();root.hidde
 $('start').addEventListener('click',start);$('retry').addEventListener('click',()=>{$('result').hidden=true;$('workspace').hidden=false;if(lastConfig){$('subject').value=lastConfig.subject;fillTopics();$('topic').value=lastConfig.topic;$('amount').value=lastConfig.amount;$('mode').value=lastConfig.mode;}start();});
 $('prev').addEventListener('click',()=>{if(index>0){index--;render();}});
 $('next').addEventListener('click',()=>{if(mode==='practice'&&answers[index]===null)return;if(index===set.length-1)finish();else{index++;render();}});
-$('quit').addEventListener('click',()=>{if(mode==='exam'&&!confirm('テストを終了して、ここまでの回答を採点しますか？'))return;stopTimer();leaveQuizMode();$('quiz').hidden=true;$('workspace').hidden=false;});
+$('quit').addEventListener('click',()=>{if(mode==='exam'){if(!confirm('テストを終了して、ここまでの回答を採点しますか？'))return;finish();return;}stopTimer();leaveQuizMode();$('quiz').hidden=true;$('workspace').hidden=false;});
 stats();
 </script>
 <style>
