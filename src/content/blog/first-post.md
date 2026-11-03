@@ -3,7 +3,7 @@ title: "Knotへようこそ！ブログ兼備忘録をスタートします"
 description: "GitHub PagesとAstroを使って作成した「Knot」の最初の投稿です。日々学んだことや興味のあることをまとめていきます。"
 pubDate: "2026-11-01"
 category: "お知らせ"
-heroImage: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800"
+heroImage: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1400&auto=format&fit=crop"
 ---
 
 ## はじめに
