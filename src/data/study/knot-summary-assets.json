@@ -1,12 +1,12 @@
 {
-  "version": 1,
+  "version": 2,
   "counts": {
-    "total": 200,
-    "science": 115,
-    "social": 85,
-    "diagrams": 107,
+    "total": 120,
+    "science": 69,
+    "social": 51,
+    "diagrams": 40,
     "tables": 80,
-    "images": 13
+    "images": 0
   },
   "resources": [
     {
