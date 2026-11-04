@@ -86,3 +86,57 @@
 
 /* Separate the legacy Markdown field from the visual Gutenberg editor. */
 .knot-gutenberg-widget{margin-bottom:48px!important}
+
+/* Smartphone usability */
+:root{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+html,body,#nc-root{min-width:0;max-width:100%}
+#nc-root{overflow-x:clip}
+#knot-theme-toggle{position:fixed;z-index:10000;top:max(8px,env(safe-area-inset-top));right:max(10px,env(safe-area-inset-right));min-height:42px;padding:8px 13px;border:1px solid #65717a;border-radius:999px;font:650 13px/1.2 system-ui,sans-serif;cursor:pointer}
+#nc-root button,#nc-root [role=button],#nc-root input,#nc-root select,#nc-root textarea{touch-action:manipulation;box-sizing:border-box;max-width:100%}
+#nc-root button,#nc-root [role=button]{min-height:42px}
+#nc-root input,#nc-root select,#nc-root textarea{font-size:16px}
+#nc-root textarea{line-height:1.7}
+#nc-root img,#nc-root video,#nc-root iframe{max-width:100%}
+#nc-root [role=dialog],#nc-root [aria-modal=true]{max-height:calc(100dvh - 20px - env(safe-area-inset-top) - env(safe-area-inset-bottom));overflow:auto;overscroll-behavior:contain}
+.knot-block-editor,.knot-gutenberg-editor,.knot-editor-tools{min-width:0;max-width:100%}
+.knot-block-card,.knot-live-canvas,.knot-gutenberg-canvas,.knot-preview-frame{overflow-wrap:anywhere}
+.knot-block-actions button,.knot-block-add button,.knot-tools-buttons button{min-height:44px;padding:9px 12px;touch-action:manipulation}
+.knot-tools-buttons{gap:8px}
+@media(max-width:760px){
+ body{overflow-x:hidden}
+ #nc-root{padding-bottom:max(18px,env(safe-area-inset-bottom))}
+ #nc-root main,#nc-root [role=main]{min-width:0;max-width:100%}
+ #nc-root input:not([type=checkbox]):not([type=radio]),#nc-root select,#nc-root textarea{min-height:44px;font-size:16px!important}
+ #nc-root textarea{min-height:110px}
+ #nc-root button,#nc-root [role=button]{min-height:44px}
+ #nc-root [role=dialog],#nc-root [aria-modal=true]{width:calc(100vw - 16px)!important;max-width:calc(100vw - 16px)!important;margin:8px;border-radius:12px}
+ .knot-block-editor{padding:10px;gap:10px}
+ .knot-block-card{padding:11px}
+ .knot-block-fields{grid-template-columns:minmax(0,1fr)}
+ .knot-block-field input,.knot-block-field textarea,.knot-block-field select,.knot-block-add select{width:100%;min-height:44px;font-size:16px}
+ .knot-block-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%}
+ .knot-block-actions button{width:100%;min-height:44px}
+ .knot-block-add{display:grid;grid-template-columns:minmax(0,1fr)}
+ .knot-block-add button,.knot-block-add select{width:100%;max-width:none;min-height:46px}
+ .knot-editor-tools{padding:10px}
+ .knot-tools-top{align-items:flex-start;flex-direction:column;gap:4px}
+ .knot-tools-buttons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+ .knot-tools-buttons button{width:100%;min-height:44px;white-space:normal}
+ .knot-gutenberg-editor{padding:8px;min-height:0}
+ .knot-gutenberg-topbar{align-items:flex-start;flex-direction:column;gap:6px}
+ .knot-gutenberg-workspace{grid-template-columns:minmax(0,1fr);gap:10px}
+ .knot-gutenberg-block-panel{position:static;min-height:0;padding:10px}
+ .knot-gutenberg-block-panel .block-editor-inserter__toggle{width:100%;min-height:46px}
+ .knot-gutenberg-canvas{min-width:0;min-height:300px;padding:8px}
+ .knot-gutenberg-canvas .block-editor-block-list__layout{min-height:280px;padding:16px 12px}
+ .knot-gutenberg-bottom-inserter{width:100%}
+ .knot-preview-toolbar{align-items:stretch}
+ .knot-preview-sizes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%}
+ .knot-preview-sizes button{min-height:42px}
+ .knot-preview-frame.knot-preview-mobile{width:100%;box-sizing:border-box;padding:16px 12px}
+}
+@media(max-width:380px){
+ .knot-tools-buttons,.knot-block-actions{grid-template-columns:minmax(0,1fr)}
+ #knot-theme-toggle{top:max(6px,env(safe-area-inset-top));right:max(6px,env(safe-area-inset-right));min-height:38px;padding:7px 10px}
+}
+@media(prefers-reduced-motion:reduce){#nc-root *,.knot-gutenberg-editor *{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
