@@ -1,0 +1,245 @@
+{
+  "meta": {
+    "title": "2026年度 高校偏差値データ",
+    "basis": "模試・情報サイトが公表する高校受験向け参考値。公式値ではない。学校・学科・コース・模試によって異なる。",
+    "year": 2026,
+    "source": "みんなの高校情報 2026年度版 / 栃木県高校偏差値一覧",
+    "sourceUrls": [
+      "https://www.minkou.jp/hischool/exam/tochigi/deviation/?c=2",
+      "https://www.minkou.jp/hischool/ranking/deviation/r%3D6/area%3Dkyushu/pref%3Dtochigi/",
+      "https://www.minkou.jp/hischool/ranking/deviation/r%3D1/u%3D6/se%3D1/",
+      "https://www.minkou.jp/hischool/ranking/deviation/c%3D3/"
+    ],
+    "note": "同一学校内に複数コースがある場合はコース差を含む参考値。ゲーム内の合否判定用の目安であり、合格を保証しない。 全国の代表校も順次追加。偏差値は模試・コースで異なるため参考値として表示。 栃木県の高校は2026年度の公立・私立別一覧を参照し、学科・コースを明記。"
+  },
+  "scores": [
+    {
+      "name": "宇都宮高等学校",
+      "prefecture": "栃木県",
+      "deviation": 72,
+      "course": "普通科"
+    },
+    {
+      "name": "宇都宮女子高等学校",
+      "prefecture": "栃木県",
+      "deviation": 70,
+      "course": "普通科"
+    },
+    {
+      "name": "石橋高等学校",
+      "prefecture": "栃木県",
+      "deviation": 66,
+      "course": "普通科"
+    },
+    {
+      "name": "栃木高等学校",
+      "prefecture": "栃木県",
+      "deviation": 66,
+      "course": "普通科"
+    },
+    {
+      "name": "宇都宮東高等学校",
+      "prefecture": "栃木県",
+      "deviation": 65,
+      "course": "普通科"
+    },
+    {
+      "name": "栃木女子高等学校",
+      "prefecture": "栃木県",
+      "deviation": 63,
+      "course": "普通科"
+    },
+    {
+      "name": "小山工業高等専門学校",
+      "prefecture": "栃木県",
+      "deviation": 62,
+      "course": "機械工学科・電気電子創造工学科・物質工学科・建築学科"
+    },
+    {
+      "name": "宇都宮中央高等学校",
+      "prefecture": "栃木県",
+      "deviation": 61,
+      "course": "普通科"
+    },
+    {
+      "name": "大田原高等学校",
+      "prefecture": "栃木県",
+      "deviation": 61,
+      "course": "普通科"
+    },
+    {
+      "name": "鹿沼高等学校",
+      "prefecture": "栃木県",
+      "deviation": 60,
+      "course": "普通科"
+    },
+    {
+      "name": "小山高等学校",
+      "prefecture": "栃木県",
+      "deviation": 59,
+      "course": "普通科"
+    },
+    {
+      "name": "作新学院高等学校",
+      "prefecture": "栃木県",
+      "deviation": 71,
+      "course": "トップ英進部 SⅠクラス"
+    },
+    {
+      "name": "佐野日本大学高等学校",
+      "prefecture": "栃木県",
+      "deviation": 69,
+      "course": "普通科 特別進学コースαクラス"
+    },
+    {
+      "name": "國學院大學栃木高等学校",
+      "prefecture": "栃木県",
+      "deviation": 68,
+      "course": "普通科 特別選抜Sコース"
+    },
+    {
+      "name": "幸福の科学学園高等学校",
+      "prefecture": "栃木県",
+      "deviation": 69,
+      "course": "普通科"
+    },
+    {
+      "name": "宇都宮短期大学附属高等学校",
+      "prefecture": "栃木県",
+      "deviation": 69,
+      "course": "普通科 特別選抜コース"
+    },
+    {
+      "name": "白鴎大学足利高等学校",
+      "prefecture": "栃木県",
+      "deviation": 63,
+      "course": "普通科 特別進学コースSクラス"
+    },
+    {
+      "name": "文星芸術大学附属高等学校",
+      "prefecture": "栃木県",
+      "deviation": 63,
+      "course": "英進科Ⅰ類"
+    },
+    {
+      "name": "灘高等学校",
+      "prefecture": "兵庫県",
+      "deviation": 78,
+      "course": "普通科"
+    },
+    {
+      "name": "お茶の水女子大学附属高等学校",
+      "prefecture": "東京都",
+      "deviation": 77,
+      "course": "普通科"
+    },
+    {
+      "name": "筑波大学附属高等学校",
+      "prefecture": "東京都",
+      "deviation": 77,
+      "course": "普通科"
+    },
+    {
+      "name": "筑波大学附属駒場高等学校",
+      "prefecture": "東京都",
+      "deviation": 77,
+      "course": "普通科"
+    },
+    {
+      "name": "開成高等学校",
+      "prefecture": "東京都",
+      "deviation": 77,
+      "course": "普通科"
+    },
+    {
+      "name": "ラ・サール高等学校",
+      "prefecture": "鹿児島県",
+      "deviation": 77,
+      "course": "普通科"
+    },
+    {
+      "name": "慶應義塾女子高等学校",
+      "prefecture": "東京都",
+      "deviation": 76,
+      "course": "普通科"
+    },
+    {
+      "name": "慶應義塾志木高等学校",
+      "prefecture": "埼玉県",
+      "deviation": 75,
+      "course": "普通科"
+    },
+    {
+      "name": "北野高等学校",
+      "prefecture": "大阪府",
+      "deviation": 75,
+      "course": "文理学科"
+    },
+    {
+      "name": "膳所高等学校",
+      "prefecture": "滋賀県",
+      "deviation": 76,
+      "course": "理数科"
+    },
+    {
+      "name": "神戸高等学校",
+      "prefecture": "兵庫県",
+      "deviation": 75,
+      "course": "総合理学科"
+    },
+    {
+      "name": "大宮高等学校",
+      "prefecture": "埼玉県",
+      "deviation": 74,
+      "course": "理数科"
+    },
+    {
+      "name": "日比谷高等学校",
+      "prefecture": "東京都",
+      "deviation": 74,
+      "course": "普通科"
+    },
+    {
+      "name": "佐野高等学校",
+      "prefecture": "栃木県",
+      "deviation": 54,
+      "course": "普通科"
+    },
+    {
+      "name": "宇都宮北高等学校",
+      "prefecture": "栃木県",
+      "deviation": 58,
+      "course": "普通科"
+    },
+    {
+      "name": "矢板東高等学校",
+      "prefecture": "栃木県",
+      "deviation": 58,
+      "course": "普通科"
+    },
+    {
+      "name": "足利高等学校",
+      "prefecture": "栃木県",
+      "deviation": 57,
+      "course": "普通科"
+    },
+    {
+      "name": "真岡高等学校",
+      "prefecture": "栃木県",
+      "deviation": 57,
+      "course": "普通科"
+    },
+    {
+      "name": "佐野東高等学校",
+      "prefecture": "栃木県",
+      "deviation": 51,
+      "course": "普通科"
+    },
+    {
+      "name": "大田原女子高等学校",
+      "prefecture": "栃木県",
+      "deviation": 55,
+      "course": "普通科"
+    }
+  ]
+}
