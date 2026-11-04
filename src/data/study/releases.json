@@ -1,6 +1,19 @@
 {
   "releases": [
     {
+      "id": "4e2c85d",
+      "publishedAt": "2026-11-04T16:46:28+09:00",
+      "title": "Add public high school entrance exam lesson series",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "Study画面・機能"
+      ],
+      "files": [
+        "src/pages/study/public-exam.astro"
+      ]
+    },
+    {
       "id": "7ef5dab",
       "publishedAt": "2026-11-04T16:33:08+09:00",
       "title": "Fix question bank loading in Study quiz",
