@@ -6,6 +6,8 @@ heroImage: "/blog-art/novels.svg"
 updatedDate: 2026-11-03
 category: "本・読書"
 ---
+<figure class="source-photo"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Reading_a_book_indoors_during_a_quiet_afternoon.jpg?width=1280" alt="静かな時間に本を読むイメージ。" loading="lazy" decoding="async" width="1280" height="853" /><figcaption>静かな時間に本を読むイメージ。 写真：Shixart1985 / <a href="https://commons.wikimedia.org/wiki/File:Reading_a_book_indoors_during_a_quiet_afternoon.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>・<a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener noreferrer">CC BY 2.0</a></figcaption></figure>
+
 
 ## 読んでみてほしい小説TOP5
 
