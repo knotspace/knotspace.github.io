@@ -1,6 +1,19 @@
 {
   "releases": [
     {
+      "id": "1259c9d",
+      "publishedAt": "2026-11-04T20:51:03+09:00",
+      "title": "Add personal ema wish board to Study",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "Study画面・機能"
+      ],
+      "files": [
+        "src/pages/study/ema.astro"
+      ]
+    },
+    {
       "id": "c5c395b",
       "publishedAt": "2026-11-04T19:55:32+09:00",
       "title": "Math R7/R8: analysis ledger, beta verification and source-note corrections",
