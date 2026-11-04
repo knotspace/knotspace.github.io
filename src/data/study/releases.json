@@ -1,6 +1,19 @@
 {
   "releases": [
     {
+      "id": "826e210",
+      "publishedAt": "2026-11-04T19:42:19+09:00",
+      "title": "Record recovered PDF locations in source ledger (ChatGPT library, not in repo)",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "学習コンテンツ・データ"
+      ],
+      "files": [
+        "src/data/study/kosen/source-ledger.json"
+      ]
+    },
+    {
       "id": "2caa2ee",
       "publishedAt": "2026-11-04T19:28:28+09:00",
       "title": "Expand KNOT knowledge base with 15 detailed learning modules",
