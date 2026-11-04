@@ -71,7 +71,7 @@ const websiteJsonLd = { '@context': 'https://schema.org', '@type': 'WebSite', na
   let dismissed = false;
   try { dismissed = sessionStorage.getItem(secretPage ? 'kosen-absolute-pwa-dismissed' : 'knot-study-pwa-dismissed') === '1'; } catch {}
   if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) return;
-  window.addEventListener('knot-secret-unlocked', () => { if (installEvent && !dismissed) prompt.hidden = false; });
+  window.addEventListener('knot-secret-unlocked', () => { if (dismissed) return; if (installEvent) prompt.hidden = false; if (/iphone|ipad|ipod/i.test(navigator.userAgent)) { description.textContent = 'Safariの共有ボタンから「ホーム画面に追加」を選んでね。'; installButton.hidden = true; prompt.hidden = false; } });
   window.addEventListener('beforeinstallprompt', (event) => {
     event.preventDefault();
     installEvent = event;
