@@ -1,7 +1,7 @@
 ---
 import '../styles/study/layout.css';
-interface Props { title: string; description?: string; noindex?: boolean; }
-const { title, description = '理科・社会の基礎網羅問題に取り組める学習スペース。', noindex = false } = Astro.props;
+interface Props { title: string; description?: string; noindex?: boolean; manifestUrl?: string; }
+const { title, description = '理科・社会の基礎網羅問題に取り組める学習スペース。', noindex = false, manifestUrl } = Astro.props;
 const BASE = import.meta.env.BASE_URL;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 const currentPath = Astro.url.pathname;
@@ -16,7 +16,7 @@ const websiteJsonLd = { '@context': 'https://schema.org', '@type': 'WebSite', na
 <meta name="robots" content={noindex ? "noindex,follow" : "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"} />
 <meta name="googlebot" content={noindex ? "noindex,follow" : "index,follow,max-image-preview:large"} />
 <meta name="author" content="KNOT Study" /><meta name="color-scheme" content="dark light" /><meta name="referrer" content="strict-origin-when-cross-origin" /><meta name="site-base" content={BASE} />
-<link rel="canonical" href={canonicalURL} /><link rel="manifest" href={`${BASE}study/manifest.webmanifest`} /><link rel="icon" type="image/svg+xml" href={`${BASE}study/icon.svg?v=2`} sizes="any" /><link rel="shortcut icon" href={`${BASE}study/icon.svg?v=2`} type="image/svg+xml" /><link rel="apple-touch-icon" href={`${BASE}study/icon.svg?v=2`} />
+<link rel="canonical" href={canonicalURL} /><link rel="manifest" href={manifestUrl || `${BASE}study/manifest.webmanifest`} /><link rel="icon" type="image/svg+xml" href={`${BASE}study/icon.svg?v=2`} sizes="any" /><link rel="shortcut icon" href={`${BASE}study/icon.svg?v=2`} type="image/svg+xml" /><link rel="apple-touch-icon" href={`${BASE}study/icon.svg?v=2`} />
 <meta property="og:type" content="website" /><meta property="og:locale" content="ja_JP" /><meta property="og:site_name" content="KNOT Study" /><meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:url" content={canonicalURL} /><meta property="og:image" content={pageImage} /><meta property="og:image:alt" content={`${title} | KNOT Study`} /><meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={title} /><meta name="twitter:description" content={description} /><meta name="twitter:image" content={pageImage} /><meta name="twitter:image:alt" content={`${title} | KNOT Study`} /><script type="application/ld+json" set:html={JSON.stringify(websiteJsonLd)} /><title>{title}</title>
 <script is:inline>try { const savedTheme = localStorage.getItem('knot-study-theme') || localStorage.getItem('knot-theme'); if (savedTheme === 'light' || savedTheme === 'dark') document.documentElement.dataset.theme = savedTheme; } catch {}</script>
 </head>
@@ -38,7 +38,7 @@ const websiteJsonLd = { '@context': 'https://schema.org', '@type': 'WebSite', na
   <a href={`${BASE}studio/`}>制作の裏側を見る ↗</a>
 </section>
 </main>
-<aside id="pwa-install-prompt" class="pwa-prompt" hidden aria-live="polite"><div><strong>KNOT Studyをアプリとして使う</strong><p id="pwa-install-description">ホーム画面に追加すると、Studyをすぐに開けるよ。</p></div><button id="pwa-install-button" type="button">インストール</button><button id="pwa-install-close" type="button" aria-label="閉じる">×</button></aside>
+<aside id="pwa-install-prompt" class="pwa-prompt" hidden aria-live="polite"><div><strong id="pwa-install-title">KNOT Studyをアプリとして使う</strong><p id="pwa-install-description">ホーム画面に追加すると、Studyをすぐに開けるよ。</p></div><button id="pwa-install-button" type="button">インストール</button><button id="pwa-install-close" type="button" aria-label="閉じる">×</button></aside>
 <nav class="study-bottom-nav" aria-label="Study navigation">
 <a class:list={{ active: currentPath === `${BASE}study/` }} href={`${BASE}study/`}><span>⌂</span><small>ホーム</small></a><a class:list={{ active: isActive(`${BASE}study/foundation/`) }} href={`${BASE}study/foundation/`}><span>✎</span><small>問題演習</small></a><a class:list={{ active: isActive(`${BASE}study/summary/`) }} href={`${BASE}study/summary/`}><span>▤</span><small>要点まとめ</small></a>
 </nav>
@@ -58,18 +58,27 @@ const websiteJsonLd = { '@context': 'https://schema.org', '@type': 'WebSite', na
   const installButton = document.getElementById('pwa-install-button');
   const closeButton = document.getElementById('pwa-install-close');
   const description = document.getElementById('pwa-install-description');
+  const title = document.getElementById('pwa-install-title');
   if (!prompt || !installButton || !closeButton) return;
+  const secretPage = location.pathname.includes('/quiet-practice-7c2e91/');
+  const hasSecretAccess = () => { try { return sessionStorage.getItem('knot-study-secret-unlocked') === '1'; } catch { return false; } };
+  const canPrompt = () => !secretPage || hasSecretAccess();
+  if (secretPage) {
+    if (title) title.textContent = '高専絶対合格をアプリとして使う';
+    if (description) description.textContent = '秘密モードにログインすると、この学習ページをアプリとして追加できるよ。';
+  }
   let installEvent;
   let dismissed = false;
-  try { dismissed = sessionStorage.getItem('knot-study-pwa-dismissed') === '1'; } catch {}
+  try { dismissed = sessionStorage.getItem(secretPage ? 'kosen-absolute-pwa-dismissed' : 'knot-study-pwa-dismissed') === '1'; } catch {}
   if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) return;
+  window.addEventListener('knot-secret-unlocked', () => { if (installEvent && !dismissed) prompt.hidden = false; });
   window.addEventListener('beforeinstallprompt', (event) => {
     event.preventDefault();
     installEvent = event;
-    if (!dismissed) prompt.hidden = false;
+    if (!dismissed && canPrompt()) prompt.hidden = false;
   });
   window.addEventListener('appinstalled', () => { prompt.hidden = true; installEvent = null; });
-  if (/iphone|ipad|ipod/i.test(navigator.userAgent) && !dismissed) {
+  if (/iphone|ipad|ipod/i.test(navigator.userAgent) && !dismissed && canPrompt()) {
     description.textContent = 'Safariの共有ボタンから「ホーム画面に追加」を選んでね。';
     installButton.hidden = true;
     prompt.hidden = false;
@@ -83,7 +92,7 @@ const websiteJsonLd = { '@context': 'https://schema.org', '@type': 'WebSite', na
   });
   closeButton.addEventListener('click', () => {
     prompt.hidden = true;
-    try { sessionStorage.setItem('knot-study-pwa-dismissed', '1'); } catch {}
+    try { sessionStorage.setItem(secretPage ? 'kosen-absolute-pwa-dismissed' : 'knot-study-pwa-dismissed', '1'); } catch {}
   });
 })();
 </script>
