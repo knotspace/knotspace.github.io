@@ -93,9 +93,19 @@ const websiteJsonLd = { '@context': 'https://schema.org', '@type': 'WebSite', na
 .study-maker-shortcut{color:var(--accent);font-size:10px;font-weight:800;padding:7px 10px;border:1px solid var(--line);border-radius:999px}
 .maker-nav{margin-top:5px;border-top:1px solid var(--line);padding-top:15px!important;color:var(--accent)!important}
 @media(max-width:760px){.study-maker-banner{align-items:flex-start;flex-wrap:wrap;gap:10px;margin-top:18px}.study-maker-banner>div:nth-child(2){width:calc(100% - 54px)}.study-maker-banner>a{margin-left:52px}.study-maker-shortcut{font-size:9px;padding:6px 8px}}
-html.quiz-active .study-sidebar,html.quiz-active .study-appbar,html.quiz-active .study-bottom-nav .study-sidebar .study-appbar .study-bottom-nav,html.private-quiz-active .study-sidebar,html.private-quiz-active .study-appbar,html.private-quiz-active .study-bottom-nav{display:none!important}
-html.quiz-active .study-app-main .study-app-main,html.private-quiz-active .study-app-main{margin:0!important;padding:0!important;width:100%;height:100vh;min-height:100vh}
-html.quiz-active .study-app-main>main .study-app-main>main,html.private-quiz-active .study-app-main>main{min-height:100vh}
-html.quiz-active .study-maker-banner .study-maker-banner,html.private-quiz-active .study-maker-banner,html.quiz-active .pwa-prompt .pwa-prompt,html.private-quiz-active .pwa-prompt{display:none!important}
+html.quiz-active .study-sidebar,
+html.quiz-active .study-appbar,
+html.quiz-active .study-bottom-nav,
+html.private-quiz-active .study-sidebar,
+html.private-quiz-active .study-appbar,
+html.private-quiz-active .study-bottom-nav{display:none!important}
+html.quiz-active .study-app-main,
+html.private-quiz-active .study-app-main{margin:0!important;padding:0!important;width:100%!important;height:100vh!important;min-height:100vh!important}
+html.quiz-active .study-app-main>main,
+html.private-quiz-active .study-app-main>main{width:100%!important;min-height:100vh!important}
+html.quiz-active .study-maker-banner,
+html.private-quiz-active .study-maker-banner,
+html.quiz-active .pwa-prompt,
+html.private-quiz-active .pwa-prompt{display:none!important}
 </style>
 </body></html>
