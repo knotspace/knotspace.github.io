@@ -265,20 +265,22 @@ function renderArchive(){
 
 function stopClock(){if(clockHandle){clearInterval(clockHandle);clockHandle=null;}}
 function clockYearLength(){return (Number(state?.durationMinutes)||30)*60000/Math.max(1,state?.estimatedYears||20);}
+function isLowChoicePeriod(e=stages[state?.step]){return !!e&&!e.automatic&&!getExamType(e.tag)&&(e.opts?.length??0)<=2;}
 function startClock(){
  stopClock();if(!state||$('game-screen').hidden||state.paused||state.waitingChoice)return;
  lastClockTick=Date.now();
  clockHandle=setInterval(()=>{
   if(!state||state.paused||state.waitingChoice)return;
   const now=Date.now(),delta=Math.min(1000,now-lastClockTick);lastClockTick=now;
-  state.yearRemaining=Math.max(0,(state.yearRemaining??clockYearLength())-delta*(state.speed||1));
+  const periodSpeed=isLowChoicePeriod()?2:1;
+   state.yearRemaining=Math.max(0,(state.yearRemaining??clockYearLength())-delta*(state.speed||1)*periodSpeed);
   const total=clockYearLength(),pct=Math.max(0,Math.min(100,(1-state.yearRemaining/total)*100));
   $('year-time-label').textContent=state.yearRemaining>0?Math.ceil(state.yearRemaining/1000)+'秒':'決断の時間';
   $('year-time-bar').style.width=pct+'%';
   if(state.yearRemaining<=0){
    stopClock();state.waitingChoice=true;
    const automatic=!!stages[state.step]?.automatic;
-   $('clock-message').textContent=automatic?'36歳以降の人生が5倍速で自動進行しています。':state.auto?'おまかせで今年の選択を進めます。':'今年の時間が経過した。選択肢から次の道を決めよう。';
+   $('clock-message').textContent=automatic?'36歳以降の人生が5倍速で自動進行しています。':state.auto?'おまかせで今年の選択を進めます。':isLowChoicePeriod()?'この時期は選択が少ないため、時間が自動で2倍速になります。':'今年の時間が経過した。選択肢から次の道を決めよう。';
    if(state.auto||automatic)chooseAutomatically();
    else {
     $('pause-game').textContent='再開';
@@ -411,6 +413,7 @@ function render(){
  const canAnswer=!automatic&&(!examType||!!state.pendingSchool)&&!!state.waitingChoice;
  $('choices').hidden=automatic;
  if(automatic)$('clock-message').textContent='36歳以降は5倍速・選択なしで自動進行します。';
+  else if(isLowChoicePeriod())$('clock-message').textContent='この時期は選択が少ないため、時間が自動で2倍速になります。';
  e.opts.forEach((o,i)=>{if(automatic)return;const b=document.createElement('button');b.className='choice-button';const strong=document.createElement('strong');strong.textContent=String.fromCharCode(65+i)+'. '+o.label;const small=document.createElement('small');small.textContent='この道を選ぶ';b.append(strong,small);b.disabled=!canAnswer;b.classList.toggle('is-disabled',!canAnswer);b.addEventListener('click',()=>choose(o));box.append(b);});
  $('diary-list').replaceChildren();state.diary.slice(-5).forEach(x=>{const li=document.createElement('li');li.textContent=x.title+' — '+x.log;$('diary-list').append(li);});
 }
