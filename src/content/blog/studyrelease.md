@@ -5,6 +5,8 @@ pubDate: 2026-11-02
 heroImage: "/blog-art/study-release.svg"
 category: "KNOT開発記録"
 ---
+<figure class="source-photo"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Study_Desk,_Eavan_Boland_Library.jpg?width=1280" alt="図書館の学習スペース。" loading="lazy" decoding="async" width="1280" height="853" /><figcaption>図書館の学習スペース。 写真：Orf3us / <a href="https://commons.wikimedia.org/wiki/File:Study_Desk,_Eavan_Boland_Library.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>・<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></figcaption></figure>
+
 
 ## KNOT Studyを公開しました！
 
