@@ -1,0 +1,61 @@
+---
+import StudyLayout from '../../layouts/StudyLayout.astro';
+const lessons = [
+  { id:'ja-01', subject:'国語', unit:'説明的文章', level:'標準', title:'筆者の主張を読み取る', prompt:'次の文章を読んで、筆者が最も伝えたいことを選びなさい。\n\n「便利な道具が増えるほど、私たちは時間を節約できるようになった。しかし、空いた時間を何に使うかを考えなければ、忙しさの形が変わるだけである。大切なのは道具を使うこと自体ではなく、それによって生まれた時間をどう生かすかという視点だ。」', options:['便利な道具はできるだけ使わない方がよい。','時間を節約する道具を開発することが最も重要だ。','道具で生まれた時間をどう使うかが重要だ。','忙しさをなくすには、仕事の量を減らすしかない。'], answer:2, answerText:'③ 道具で生まれた時間をどう使うかが重要だ。', explanation:'最後の一文「大切なのは〜どう生かすかという視点だ」が筆者の主張。直前の「忙しさの形が変わるだけ」は、便利さだけでは問題が解決しないことを示す。', point:'主張問題は、結論を示す接続語や「大切なのは」「必要なのは」などの表現に注目する。' },
+  { id:'ja-02', subject:'国語', unit:'文法', level:'基礎', title:'品詞を見分ける', prompt:'次の文の「静かに」の品詞として正しいものを選びなさい。\n\n「図書館では静かに本を読もう。」', options:['形容詞','形容動詞','副詞','連体詞'], answer:2, answerText:'③ 副詞', explanation:'「静かに」は動詞「読む」を詳しく説明している。形容動詞「静かだ」の連用形だが、文中での働き・品詞分類は形容動詞。選択肢の正解は②。', point:'活用形だけでなく、元の言い切りの形に戻して品詞を判断する。', answer:1, answerText:'② 形容動詞' },
+  { id:'ma-01', subject:'数学', unit:'関数', level:'標準', title:'一次関数の変化の割合', prompt:'一次関数 y＝−2x＋5 について、x の値が −1 から 3 まで増加するとき、y の増加量を求めなさい。', options:['−8','−4','4','8'], answer:0, answerText:'① −8', explanation:'x＝−1 のとき y＝7、x＝3 のとき y＝−1。したがって y の増加量は −1−7＝−8。一次関数では「yの増加量＝変化の割合×xの増加量」でも求められる。', point:'増加量は「後の値−前の値」。減少した場合は負の数になる。' },
+  { id:'ma-02', subject:'数学', unit:'確率', level:'標準', title:'さいころの確率', prompt:'大小2個のさいころを同時に投げる。出た目の和が 9 になる確率を求めなさい。', options:['1/12','1/9','1/6','1/4'], answer:0, answerText:'① 1/12', explanation:'大小2個のさいころの出方は 6×6＝36 通り。和が9になるのは (3,6)、(4,5)、(5,4)、(6,3) の4通り。よって 4/36＝1/9。正解は②。', point:'和が9になる組は4通り。全36通りなので確率は4/36＝1/9。', answer:1, answerText:'② 1/9' },
+  { id:'en-01', subject:'英語', unit:'文法・読解', level:'標準', title:'現在完了の経験', prompt:'空欄に入る最も適切な語句を選びなさい。\n\nI (　　 ) visited Kyoto three times.', options:['have','has','was','am'], answer:0, answerText:'① have', explanation:'「3回訪れたことがある」という経験を表す現在完了。主語 I には have を使い、have＋過去分詞の形にする。', point:'経験用法は ever / never / once / twice / three times などが手がかり。' },
+  { id:'en-02', subject:'英語', unit:'語順整序', level:'標準', title:'不定詞を使った表現', prompt:'次の語句を正しい順に並べたとき、3番目にくる語を選びなさい。\n\n( to / I / want / a doctor / be ).', options:['I','want','to','a doctor'], answer:2, answerText:'③ to', explanation:'正しい語順は I want to be a doctor.「私は医者になりたい」。want to＋動詞の原形で「〜したい」。', point:'want の後ろは to＋動詞の原形。be a doctor で「医者になる」。' },
+  { id:'sc-01', subject:'理科', unit:'電流・回路', level:'標準', title:'オームの法則', prompt:'抵抗 6Ω の電熱線に 3V の電圧を加えた。流れる電流は何Aか。', options:['0.2A','0.5A','2A','18A'], answer:1, answerText:'② 0.5A', explanation:'オームの法則 V＝RI より、I＝V÷R＝3÷6＝0.5。電流は 0.5A。', point:'V・I・R のうち求めたい量を式変形してから代入する。' },
+  { id:'sc-02', subject:'理科', unit:'化学変化', level:'標準', title:'化学変化と質量', prompt:'密閉した容器の中で化学変化を起こした。反応の前後で容器全体の質量はどうなるか。', options:['必ず大きくなる','必ず小さくなる','変化しない','反応の種類だけで決まる'], answer:2, answerText:'③ 変化しない', explanation:'密閉容器では物質が外へ出たり外から入ったりしない。化学変化の前後で原子の種類と数は変わらないため、全体の質量は保存される。', point:'質量保存の法則は、気体が発生する反応でも密閉して全体を測れば成り立つ。' },
+  { id:'so-01', subject:'社会', unit:'地理', level:'標準', title:'雨温図の読み取り', prompt:'ある地域は、年間を通して気温が高く、雨季と乾季がはっきりしている。この地域の気候として最も適切なものを選びなさい。', options:['地中海性気候','サバナ気候','西岸海洋性気候','冷帯湿潤気候'], answer:1, answerText:'② サバナ気候', explanation:'サバナ気候は熱帯に分布し、年間を通して高温で、雨季と乾季が明瞭。雨温図では降水量の季節差に注目する。', point:'気温の高さと降水量の季節変化をセットで見る。' },
+  { id:'so-02', subject:'社会', unit:'公民', level:'標準', title:'日本国憲法の三原則', prompt:'日本国憲法の三原則に含まれないものを選びなさい。', options:['国民主権','基本的人権の尊重','平和主義','三権分立'], answer:3, answerText:'④ 三権分立', explanation:'三原則は国民主権・基本的人権の尊重・平和主義。三権分立は、権力の集中を防ぐために立法・行政・司法を分ける仕組み。', point:'「憲法の三原則」と「政治の仕組み」を混同しない。' }
+];
+const subjects = ['すべて','国語','数学','英語','理科','社会'];
+---
+<StudyLayout title="公立高校入試問題精講｜KNOT Study" description="公立高校入試の頻出テーマを、オリジナル問題と詳しい解説で学ぶ5教科演習。">
+<main class="exam-page">
+  <a class="back-link" href="../">← Studyホーム</a>
+  <header class="exam-hero">
+    <p class="eyebrow">KNOT STUDY / ENTRANCE EXAM</p>
+    <div class="hero-row"><div><p class="series">PUBLIC HIGH SCHOOL EXAMINATION</p><h1>公立高校入試<br/><span>問題精講</span></h1></div><div class="hero-mark">精<br/>講</div></div>
+    <p class="lead">解けるだけで終わらせない。考え方・解法・得点につながるポイントまで、一問ずつ丁寧に理解する。</p>
+    <div class="hero-tags"><span>5教科対応</span><span>解答・詳しい解説</span><span>入試頻出テーマ</span></div>
+  </header>
+  <section class="method">
+    <div><b>01</b><strong>問題を解く</strong><p>入試を意識したオリジナル問題に挑戦。</p></div>
+    <div><b>02</b><strong>解法を確認</strong><p>正解だけでなく、考え方の筋道を読む。</p></div>
+    <div><b>03</b><strong>得点力に変える</strong><p>最後に「入試での着眼点」を整理。</p></div>
+  </section>
+  <section class="lesson-area">
+    <div class="section-title"><div><p class="eyebrow">LESSON LIBRARY</p><h2>問題精講</h2></div><span id="lesson-count">全10講</span></div>
+    <div class="subject-tabs" role="group" aria-label="教科で絞り込む">
+      {subjects.map((s,i)=><button type="button" class:list={{active:i===0}} data-subject={s}>{s}</button>)}
+    </div>
+    <div class="lesson-list">
+      {lessons.map((q,i)=><article class="lesson-card" data-card-subject={q.subject}>
+        <div class="lesson-top"><span class="lesson-number">LECTURE {String(i+1).padStart(2,'0')}</span><span class="lesson-level">{q.level}</span></div>
+        <div class="lesson-meta"><span>{q.subject}</span><span>{q.unit}</span></div>
+        <h3>{q.title}</h3>
+        <p class="problem">{q.prompt}</p>
+        <div class="options">{q.options.map((o,j)=><div class="option"><b>{['①','②','③','④'][j]}</b><span>{o}</span></div>)}</div>
+        <details class="solution">
+          <summary>解答・解説を読む <span>＋</span></summary>
+          <div class="solution-body"><p class="answer-label">正解</p><h4>{q.answerText}</h4><p>{q.explanation}</p><div class="exam-point"><b>入試での着眼点</b><p>{q.point}</p></div></div>
+        </details>
+      </article>)}
+    </div>
+    <p class="empty-state" hidden>この教科の講義は準備中です。</p>
+  </section>
+  <footer class="exam-foot"><span>KNOT STUDY · ORIGINAL EDITION</span><span>問題・解説はKNOT制作のオリジナル教材</span></footer>
+</main>
+<script>
+const tabs=[...document.querySelectorAll('[data-subject]')], cards=[...document.querySelectorAll('[data-card-subject]')], count=document.getElementById('lesson-count'), empty=document.querySelector('.empty-state');
+tabs.forEach(tab=>tab.addEventListener('click',()=>{const subject=tab.dataset.subject;tabs.forEach(t=>t.classList.toggle('active',t===tab));let visible=0;cards.forEach(card=>{const show=subject==='すべて'||card.dataset.cardSubject===subject;card.hidden=!show;if(show)visible++;});count.textContent='全'+visible+'講';empty.hidden=visible!==0;}));
+document.querySelectorAll('.solution').forEach(details=>details.addEventListener('toggle',()=>{const mark=details.querySelector('summary span');if(mark)mark.textContent=details.open?'−':'＋';}));
+</script>
+<style>
+.exam-page{max-width:980px;margin:0 auto;padding:20px 0 48px;color:var(--text)}.back-link{display:inline-block;color:var(--muted);font-size:11px;text-decoration:none;margin:0 0 15px}.exam-hero{position:relative;overflow:hidden;padding:clamp(25px,5vw,48px);border:1px solid var(--line);border-radius:22px;background:linear-gradient(130deg,#111c31,#172b4a 62%,#203c61);color:#f5f8ff}.exam-hero:after{content:"";position:absolute;width:270px;height:270px;border:1px solid #ffffff16;border-radius:50%;right:-75px;top:-100px;box-shadow:0 0 0 28px #ffffff08,0 0 0 58px #ffffff05}.eyebrow{margin:0 0 10px;color:var(--accent);font:800 9px ui-monospace,monospace;letter-spacing:.16em}.exam-hero .eyebrow{color:#9fc7ff}.hero-row{display:flex;align-items:center;justify-content:space-between;gap:20px;position:relative;z-index:1}.series{font:9px ui-monospace,monospace;letter-spacing:.16em;color:#b3c8e5;margin:0 0 12px}.exam-hero h1{font-size:clamp(34px,7vw,62px);line-height:1.12;letter-spacing:-.07em;margin:0}.exam-hero h1 span{color:#9fc7ff}.hero-mark{width:82px;height:82px;display:grid;place-content:center;text-align:center;border:1px solid #ffffff55;border-radius:20px;color:#c7ddff;font-size:25px;font-weight:900;line-height:1.2;transform:rotate(5deg);flex:0 0 auto}.lead{max-width:620px;color:#d0dced;font-size:13px;line-height:1.9;margin:20px 0}.hero-tags{display:flex;gap:8px;flex-wrap:wrap}.hero-tags span{padding:7px 10px;border:1px solid #ffffff35;border-radius:999px;color:#e4edfa;font-size:10px}.method{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:15px 0 34px}.method>div{padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}.method b{display:block;color:var(--accent);font:800 10px ui-monospace,monospace;margin-bottom:12px}.method strong{font-size:13px}.method p{margin:6px 0 0;color:var(--muted);font-size:10px;line-height:1.7}.section-title{display:flex;justify-content:space-between;align-items:end;margin-bottom:15px}.section-title h2{font-size:25px;letter-spacing:-.05em;margin:0}.section-title>span{color:var(--muted);font-size:10px}.subject-tabs{display:flex;gap:7px;overflow:auto;padding:2px 0 12px}.subject-tabs button{flex:0 0 auto;padding:9px 15px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--muted);font-size:11px;font-weight:750}.subject-tabs button.active{background:var(--accent);border-color:var(--accent);color:#081426}.lesson-list{display:grid;gap:14px}.lesson-card{padding:clamp(17px,3vw,25px);border:1px solid var(--line);border-radius:16px;background:var(--surface)}.lesson-card[hidden]{display:none}.lesson-top,.lesson-meta{display:flex;align-items:center;gap:8px}.lesson-top{justify-content:space-between}.lesson-number{color:var(--accent);font:800 9px ui-monospace,monospace;letter-spacing:.12em}.lesson-level{padding:4px 8px;border-radius:5px;background:var(--surface-soft);color:var(--muted);font-size:9px}.lesson-meta{margin-top:13px;color:var(--muted);font-size:10px}.lesson-meta span:first-child{color:var(--accent);font-weight:800}.lesson-card h3{font-size:19px;letter-spacing:-.04em;margin:6px 0 14px}.problem{white-space:pre-line;margin:0;padding:16px;border-radius:11px;background:var(--surface-soft);font-size:13px;line-height:1.95}.options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0 17px}.option{display:flex;gap:10px;align-items:flex-start;padding:11px;border:1px solid var(--line);border-radius:9px;font-size:12px;line-height:1.6}.option b{color:var(--accent);flex:0 0 auto}.solution{border-top:1px solid var(--line);padding-top:13px}.solution summary{display:flex;justify-content:space-between;align-items:center;cursor:pointer;list-style:none;color:var(--accent);font-size:12px;font-weight:850}.solution summary::-webkit-details-marker{display:none}.solution-body{padding-top:15px;font-size:12px;line-height:1.9}.answer-label{margin:0;color:var(--muted);font-size:9px;font-weight:800;letter-spacing:.12em}.solution-body h4{font-size:17px;margin:3px 0 8px}.solution-body>p:not(.answer-label){margin:0;color:var(--muted)}.exam-point{margin-top:13px;padding:13px;border-left:3px solid var(--accent);background:var(--surface-soft);border-radius:0 9px 9px 0}.exam-point b{font-size:10px;color:var(--accent)}.exam-point p{margin:4px 0 0;color:var(--text)}.empty-state{padding:28px;text-align:center;color:var(--muted);font-size:12px}.exam-foot{display:flex;justify-content:space-between;gap:10px;margin-top:30px;padding-top:15px;border-top:1px solid var(--line);color:var(--muted);font-size:9px}.exam-foot span:first-child{font-family:ui-monospace,monospace;letter-spacing:.1em}@media(max-width:620px){.exam-page{padding:14px 0 32px}.hero-mark{width:62px;height:62px;font-size:20px}.method{grid-template-columns:1fr;gap:8px;margin-bottom:25px}.method>div{padding:13px}.method b{margin-bottom:5px}.options{grid-template-columns:1fr}.exam-foot{flex-direction:column}.exam-hero{padding:25px 20px}}
+</style>
+</StudyLayout>
