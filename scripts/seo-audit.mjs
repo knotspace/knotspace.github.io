@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import vm from 'node:vm';
 
 const root = path.resolve('dist');
 const errors = [];
@@ -36,6 +37,14 @@ for (const file of htmlFiles) {
   const relative = path.relative(root, file).replaceAll(path.sep, '/');
   if (relative.startsWith('admin/') || relative === '404.html' || /^google[0-9a-f]+\.html$/i.test(relative)) continue;
   const html = fs.readFileSync(file, 'utf8');
+  if (relative === 'game/university/index.html' || relative === '青の分岐点/index.html') {
+    let inlineIndex = 0;
+    for (const script of html.matchAll(/<script\\b(?![^>]*\\bsrc=)[^>]*>([\\s\\S]*?)<\\/script>/gi)) {
+      try { new vm.Script(script[1], { filename: relative + '#inline-' + inlineIndex }); }
+      catch (error) { errors.push(relative + ': inline JavaScript syntax error (' + error.message + ')'); }
+      inlineIndex++;
+    }
+  }
   const title = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1]?.trim() ?? '';
   const description = metaContent(html, 'description');
   const canonical = html.match(/<link\b(?=[^>]*\brel=["']canonical["'])[^>]*\bhref=["']([^"']+)["'][^>]*>/i)?.[1] ?? '';
