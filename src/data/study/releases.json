@@ -1,6 +1,19 @@
 {
   "releases": [
     {
+      "id": "5ac06ee",
+      "publishedAt": "2026-11-04T19:16:25+09:00",
+      "title": "Clarify exact past bank classification counts",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "学習コンテンツ・データ"
+      ],
+      "files": [
+        "src/data/study/private-past-bank.json"
+      ]
+    },
+    {
       "id": "b25cdd5",
       "publishedAt": "2026-11-04T19:15:13+09:00",
       "title": "Refine past mode timing, question list labels and source review details",
