@@ -16,8 +16,8 @@
 <meta name="twitter:image" content="https://knotspace.github.io/青の分岐点/og.png?v=2">
 <meta name="theme-color" content="#24407a">
 <link rel="manifest" href="manifest.json">
-<link rel="icon" href="icon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" href="/favicon.svg?v=7" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/favicon.svg?v=7">
 <script data-goatcounter="https://1oku2380man.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 <style>@font-face{font-family:"PeFix";src:local("Hiragino Sans"),local("HiraginoSans-W3"),local("Noto Sans JP"),local("Noto Sans CJK JP"),local("Yu Gothic"),local("Meiryo");unicode-range:U+30DA,U+30D9,U+30DB,U+30DC,U+30DD}@font-face{font-family:"PeFixM";src:local("Hiragino Mincho ProN"),local("Noto Serif JP"),local("Yu Mincho");unicode-range:U+30DA,U+30D9,U+30DB,U+30DC,U+30DD}
 :root{color-scheme:light dark}body{margin:0;font-size:14px;font-family:system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}#pz.paused{background:var(--shu);color:#fff;border-color:var(--shu)}
@@ -347,7 +347,7 @@ details[open]>.dsum::after{content:"▴"}
 </style>
 </head>
 <body>
-<a id="authorx" href="https://x.com/RS_Developing" target="_blank" rel="noopener" onclick="try{track('authorx','作者のX')}catch(e){}" aria-label="作者のXアカウント">𝕏 作者</a>
+<a id="authorx" href="https://knotspace.github.io/" aria-label="KNOT">𝕏 作者</a>
 
 <div class="wrap" id="app"></div>
 
@@ -3361,7 +3361,7 @@ function achHTML(A){A=A||loadAch();const got=A.got||{};const n=ACHV.filter(a=>go
 const GC="https://1oku2380man.goatcounter.com";
 function track(path,title){try{if(window.goatcounter&&goatcounter.count)goatcounter.count({path,title,event:true})}catch(e){}}
 function showPlays(){try{if(!window.goatcounter)return;const fmt=n=>n>=10000?(Math.floor(n/1000)/10).toFixed(1).replace(/\.0$/,"")+"万":n.toLocaleString();fetch(GC+"/counter/life-start.json").then(r=>r.ok?r.json():null).then(d=>{const l=d&&d.count?+String(d.count).replace(/[^\d]/g,""):0,el=$("#plays");if(!el||!l)return;el.hidden=false;el.innerHTML=`これまでに <b class="num">${fmt(l)}</b> 人がここで生まれました`}).catch(()=>{})}catch(e){}}
-const TIP_URL="https://buy.stripe.com/5kQbJ11vr5nbaRWf9DfEk00";// 応援（投げ銭）用 Stripe Payment Link
+const TIP_URL="https://knotspace.github.io/";// 応援（投げ銭）用 Stripe Payment Link
 const FEEDBACK_FORM="https://docs.google.com/forms/d/e/1FAIpQLSdtPM2QVNYgRauZELgml-Zwhtph6O69Ly9YW4ERHg84Re38Hg/viewform";// ご意見用Googleフォームの共有URL（入っていればこれを優先）
 const REVIEW_API="";// みんなのレビュー（Apps ScriptのウェブアプリURL。未設定なら非表示）
 async function loadReviews(el){if(!REVIEW_API||!el)return;try{const r=await fetch(REVIEW_API,{cache:"no-store"});const d=await r.json();const rv=d.reviews||[];el.innerHTML=`<span class="label">みんなのレビュー（${d.total||0}件）</span>`+(rv.length?`<div class="mem" style="margin-top:6px">${rv.map(x=>`<div style="display:block"><p style="margin:0;font-size:14px">${esc(x.t)}</p><span class="muted" style="font-size:11px">${esc(x.n)}　${x.p?esc(x.p)+(x.ti?"「"+esc(x.ti)+"」":"")+(x.a!==""?x.a+"歳":"")+(x.c?"・"+esc(x.c):"")+"　":""}${esc(x.d)}</span></div>`).join("")}</div>`:`<p class="muted" style="font-size:13px">まだありません。最初のレビューを書いてください。</p>`)}catch(e){el.innerHTML=""}}
