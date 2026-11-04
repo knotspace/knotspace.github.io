@@ -28,8 +28,9 @@
   ],
   "stats": {
     "indexedTopics": 237,
-    "authoredModules": 10,
-    "outlineTopics": 227
+    "authoredModules": 25,
+    "outlineTopics": 237,
+    "totalRecords": 262
   },
   "topicRecords": [
     {
@@ -5163,6 +5164,634 @@
       "diagrams": [
         "需要曲線・供給曲線と均衡価格"
       ]
+    },
+    {
+      "id": "s1-physics-lens",
+      "title": "凸レンズの像",
+      "subject": "science",
+      "grade": 1,
+      "field": "物理",
+      "status": "authored",
+      "explanation": "凸レンズは光を屈折させ、物体の位置によって実像または虚像をつくる。実像はスクリーンに映せ、虚像は映せない。",
+      "keyTerms": [
+        {
+          "term": "焦",
+          "definition": "点"
+        },
+        {
+          "term": "焦",
+          "definition": "点"
+        },
+        {
+          "term": "実",
+          "definition": "像"
+        },
+        {
+          "term": "虚",
+          "definition": "像"
+        }
+      ],
+      "corePoints": [
+        "光軸に平行な光はレンズ通過後に反対側の焦点を通る",
+        "レンズの中心を通る光は直進する",
+        "物体が焦点の外側か内側かを確認して像の性質を判断する"
+      ],
+      "commonErrors": [
+        "焦点の位置を像の位置と混同する",
+        "虚像をスクリーンに映せると考える"
+      ],
+      "questionPatterns": [
+        "光線の作図",
+        "物体距離と像の大きさの比較"
+      ],
+      "sourceBasis": "中学理科の標準学習範囲。参照サイトの単元構成を参考にKNOT独自に整理。",
+      "examFrequency": "未判定：栃木県過去問との照合が必要。",
+      "diagramNeeds": [],
+      "reviewStatus": "KNOT初稿・要教科書照合"
+    },
+    {
+      "id": "s1-physics-sound",
+      "title": "音の性質",
+      "subject": "science",
+      "grade": 1,
+      "field": "物理",
+      "status": "authored",
+      "explanation": "音は物体の振動によって生じ、空気などの物質を振動として伝わる。音の高さは振動数、大きさは振幅と関係する。",
+      "keyTerms": [
+        {
+          "term": "振",
+          "definition": "動"
+        },
+        {
+          "term": "振",
+          "definition": "動"
+        },
+        {
+          "term": "振",
+          "definition": "幅"
+        }
+      ],
+      "corePoints": [
+        "音源の振動が周囲の物質に伝わる",
+        "振動数が大きいほど高い音",
+        "振幅が大きいほど大きな音"
+      ],
+      "commonErrors": [
+        "音の大きさと高さを混同する",
+        "音は真空中も伝わると考える"
+      ],
+      "questionPatterns": [
+        "波形から振幅・振動数を比較",
+        "音の速さ・到着時間の計算"
+      ],
+      "sourceBasis": "中学理科の標準学習範囲。参照サイトの単元構成を参考にKNOT独自に整理。",
+      "examFrequency": "未判定：栃木県過去問との照合が必要。",
+      "diagramNeeds": [],
+      "reviewStatus": "KNOT初稿・要教科書照合"
+    },
+    {
+      "id": "s1-physics-spring",
+      "title": "ばねとフックの法則",
+      "subject": "science",
+      "grade": 1,
+      "field": "物理",
+      "status": "authored",
+      "explanation": "ばねの伸びは、弾性の範囲内では加えた力の大きさに比例する。ばね自体の長さではなく、自然長からの伸びを使う。",
+      "keyTerms": [
+        {
+          "term": "自",
+          "definition": "然"
+        },
+        {
+          "term": "伸",
+          "definition": "び"
+        },
+        {
+          "term": "比",
+          "definition": "例"
+        }
+      ],
+      "corePoints": [
+        "ばねの伸び=力に比例（弾性限界内）",
+        "複数のばねでは直列・並列の条件を区別する"
+      ],
+      "commonErrors": [
+        "ばね全体の長さを伸びとして計算する",
+        "比例関係を超える範囲にも法則を適用する"
+      ],
+      "questionPatterns": [
+        "グラフの傾きから1Nあたりの伸びを読む",
+        "おもりの個数と伸びの比例計算"
+      ],
+      "sourceBasis": "中学理科の標準学習範囲。参照サイトの単元構成を参考にKNOT独自に整理。",
+      "examFrequency": "未判定：栃木県過去問との照合が必要。",
+      "diagramNeeds": [],
+      "reviewStatus": "KNOT初稿・要教科書照合"
+    },
+    {
+      "id": "s1-chem-gases",
+      "title": "気体の性質と集め方",
+      "subject": "science",
+      "grade": 1,
+      "field": "化学",
+      "status": "authored",
+      "explanation": "気体は色・におい・水への溶けやすさ・空気との密度差などで性質を調べる。捕集方法は水への溶けやすさと空気との密度差を基準に選ぶ。",
+      "keyTerms": [
+        {
+          "term": "水",
+          "definition": "上"
+        },
+        {
+          "term": "上",
+          "definition": "方"
+        },
+        {
+          "term": "下",
+          "definition": "方"
+        }
+      ],
+      "corePoints": [
+        "水に溶けにくい気体は水上置換が適する",
+        "水に溶けやすい気体は空気との密度差を利用する",
+        "代表例：酸素・水素・二酸化炭素・アンモニア"
+      ],
+      "commonErrors": [
+        "空気より軽い/重いだけで捕集法を決める",
+        "アンモニアを水上置換で集める"
+      ],
+      "questionPatterns": [
+        "気体の性質から捕集法を選ぶ",
+        "発生装置・確認方法を説明する"
+      ],
+      "sourceBasis": "中学理科の標準学習範囲。参照サイトの単元構成を参考にKNOT独自に整理。",
+      "examFrequency": "未判定：栃木県過去問との照合が必要。",
+      "diagramNeeds": [],
+      "reviewStatus": "KNOT初稿・要教科書照合"
+    },
+    {
+      "id": "s2-biology-digestion",
+      "title": "消化と吸収",
+      "subject": "science",
+      "grade": 2,
+      "field": "生物",
+      "status": "authored",
+      "explanation": "食物中の大きな栄養分子は消化酵素などのはたらきで吸収されやすい小さな物質に分解され、小腸で吸収される。",
+      "keyTerms": [
+        {
+          "term": "消",
+          "definition": "化"
+        },
+        {
+          "term": "消",
+          "definition": "化"
+        },
+        {
+          "term": "柔",
+          "definition": "毛"
+        }
+      ],
+      "corePoints": [
+        "デンプンは最終的にブドウ糖などへ分解",
+        "タンパク質はアミノ酸へ分解",
+        "脂肪は脂肪酸とモノグリセリドなどへ分解",
+        "小腸の柔毛は表面積を大きくする"
+      ],
+      "commonErrors": [
+        "胆汁を消化酵素と誤認する",
+        "胃だけで栄養分の吸収が完了すると考える"
+      ],
+      "questionPatterns": [
+        "消化液と分解する栄養分の対応",
+        "だ液の対照実験",
+        "小腸の構造と吸収の理由"
+      ],
+      "sourceBasis": "中学理科の標準学習範囲。参照サイトの単元構成を参考にKNOT独自に整理。",
+      "examFrequency": "未判定：栃木県過去問との照合が必要。",
+      "diagramNeeds": [],
+      "reviewStatus": "KNOT初稿・要教科書照合"
+    },
+    {
+      "id": "s2-biology-circulation",
+      "title": "血液循環",
+      "subject": "science",
+      "grade": 2,
+      "field": "生物",
+      "status": "authored",
+      "explanation": "心臓の拍動によって血液が肺や全身を循環する。肺循環では血液が酸素を取り込み、全身循環では酸素などを各組織へ運ぶ。",
+      "keyTerms": [
+        {
+          "term": "動",
+          "definition": "脈"
+        },
+        {
+          "term": "静",
+          "definition": "脈"
+        },
+        {
+          "term": "毛",
+          "definition": "細"
+        },
+        {
+          "term": "肺",
+          "definition": "循"
+        },
+        {
+          "term": "体",
+          "definition": "循"
+        }
+      ],
+      "corePoints": [
+        "血管の名称は酸素量ではなく心臓との向きで決まる",
+        "肺で二酸化炭素を放出し酸素を受け取る",
+        "毛細血管で組織と物質交換する"
+      ],
+      "commonErrors": [
+        "動脈は必ず酸素の多い血液と覚える",
+        "肺動脈・肺静脈の例外を見落とす"
+      ],
+      "questionPatterns": [
+        "血液の流れを矢印で追う",
+        "血液成分のはたらきを対応",
+        "肺循環・体循環の経路判定"
+      ],
+      "sourceBasis": "中学理科の標準学習範囲。参照サイトの単元構成を参考にKNOT独自に整理。",
+      "examFrequency": "未判定：栃木県過去問との照合が必要。",
+      "diagramNeeds": [],
+      "reviewStatus": "KNOT初稿・要教科書照合"
+    },
+    {
+      "id": "s2-physics-power",
+      "title": "電力・電力量・熱量",
+      "subject": "science",
+      "grade": 2,
+      "field": "物理",
+      "status": "authored",
+      "explanation": "電力は電気器具が単位時間あたりに使う電気エネルギー。電力量は使用時間を含めたエネルギー量である。",
+      "keyTerms": [
+        {
+          "term": "電",
+          "definition": "力"
+        },
+        {
+          "term": "電",
+          "definition": "力"
+        },
+        {
+          "term": "電",
+          "definition": "流"
+        }
+      ],
+      "corePoints": [
+        "電力P=電圧V×電流I",
+        "電力量E=電力P×時間t",
+        "時間の単位を式に合わせてそろえる"
+      ],
+      "commonErrors": [
+        "電力と電力量を混同する",
+        "分を秒に直す必要がある場面を見落とす",
+        "WhとJの換算を忘れる"
+      ],
+      "questionPatterns": [
+        "電力・電力量の計算",
+        "電気器具の表示から電流を求める",
+        "使用時間と消費エネルギーの比較"
+      ],
+      "sourceBasis": "中学理科の標準学習範囲。参照サイトの単元構成を参考にKNOT独自に整理。",
+      "examFrequency": "未判定：栃木県過去問との照合が必要。",
+      "diagramNeeds": [],
+      "reviewStatus": "KNOT初稿・要教科書照合"
+    },
+    {
+      "id": "s2-chem-reaction-equation",
+      "title": "化学反応式",
+      "subject": "science",
+      "grade": 2,
+      "field": "化学",
+      "status": "authored",
+      "explanation": "化学反応式は反応前後の原子の種類と数が等しくなるように係数をつけて表す。化学変化で原子そのものが消えたり増えたりするわけではない。",
+      "keyTerms": [
+        {
+          "term": "化",
+          "definition": "学"
+        },
+        {
+          "term": "係",
+          "definition": "数"
+        },
+        {
+          "term": "原",
+          "definition": "子"
+        }
+      ],
+      "corePoints": [
+        "反応前後で元素ごとの原子数を数える",
+        "化学式の右下の数字は変えず、前の係数で調整する",
+        "係数は最も簡単な整数比にする"
+      ],
+      "commonErrors": [
+        "化学式の右下の数字を書き換える",
+        "原子数ではなく物質の種類の数をそろえる"
+      ],
+      "questionPatterns": [
+        "反応式の係数決定",
+        "粒子モデルと反応式の対応",
+        "質量保存との関係"
+      ],
+      "sourceBasis": "中学理科の標準学習範囲。参照サイトの単元構成を参考にKNOT独自に整理。",
+      "examFrequency": "未判定：栃木県過去問との照合が必要。",
+      "diagramNeeds": [],
+      "reviewStatus": "KNOT初稿・要教科書照合"
+    },
+    {
+      "id": "s3-chem-neutralization",
+      "title": "酸・アルカリと中和",
+      "subject": "science",
+      "grade": 3,
+      "field": "化学",
+      "status": "authored",
+      "explanation": "酸性の水溶液中の水素イオンとアルカリ性の水溶液中の水酸化物イオンが結びついて水ができる反応を中和という。",
+      "keyTerms": [
+        {
+          "term": "酸",
+          "definition": "："
+        },
+        {
+          "term": "ア",
+          "definition": "ル"
+        },
+        {
+          "term": "中",
+          "definition": "和"
+        },
+        {
+          "term": "塩",
+          "definition": "："
+        }
+      ],
+      "corePoints": [
+        "H⁺とOH⁻が結びついてH₂Oになる",
+        "中和後の水溶液に塩が残ることがある",
+        "指示薬の色は液性や過不足を判断する手がかり"
+      ],
+      "commonErrors": [
+        "中和すれば必ず中性になると考える",
+        "蒸発後に残る結晶をすべて食塩とする"
+      ],
+      "questionPatterns": [
+        "指示薬の色の変化",
+        "加えた水溶液の体積と中和点",
+        "イオンの数の変化"
+      ],
+      "sourceBasis": "中学理科の標準学習範囲。参照サイトの単元構成を参考にKNOT独自に整理。",
+      "examFrequency": "未判定：栃木県過去問との照合が必要。",
+      "diagramNeeds": [],
+      "reviewStatus": "KNOT初稿・要教科書照合"
+    },
+    {
+      "id": "s3-physics-work",
+      "title": "仕事と仕事率",
+      "subject": "science",
+      "grade": 3,
+      "field": "物理",
+      "status": "authored",
+      "explanation": "物理でいう仕事は、物体に力を加えて力の向きに移動させたときの量。仕事率は単位時間あたりの仕事を表す。",
+      "keyTerms": [
+        {
+          "term": "仕",
+          "definition": "事"
+        },
+        {
+          "term": "仕",
+          "definition": "事"
+        },
+        {
+          "term": "単",
+          "definition": "位"
+        }
+      ],
+      "corePoints": [
+        "仕事(J)=力(N)×力の向きに動いた距離(m)",
+        "仕事率(W)=仕事(J)÷時間(s)",
+        "摩擦や道具の重さを含めるか問題文を確認する"
+      ],
+      "commonErrors": [
+        "持ち上げずに支えているだけでも仕事をしたとする",
+        "移動距離の単位をcmのまま代入する"
+      ],
+      "questionPatterns": [
+        "斜面・滑車の仕事",
+        "仕事率の比較",
+        "道具を使っても仕事の原理が成り立つ条件"
+      ],
+      "sourceBasis": "中学理科の標準学習範囲。参照サイトの単元構成を参考にKNOT独自に整理。",
+      "examFrequency": "未判定：栃木県過去問との照合が必要。",
+      "diagramNeeds": [],
+      "reviewStatus": "KNOT初稿・要教科書照合"
+    },
+    {
+      "id": "soc-geography-climate",
+      "title": "世界の気候と雨温図",
+      "subject": "social",
+      "grade": null,
+      "field": "地理",
+      "status": "authored",
+      "explanation": "気候は気温や降水量の長期的な特徴。雨温図では月ごとの気温と降水量の変化を読み、緯度・季節風・海流・地形などと結びつける。",
+      "keyTerms": [
+        {
+          "term": "気",
+          "definition": "温"
+        },
+        {
+          "term": "降",
+          "definition": "水"
+        },
+        {
+          "term": "雨",
+          "definition": "温"
+        }
+      ],
+      "corePoints": [
+        "気温の年較差と降水量の季節変化を見る",
+        "北半球・南半球で季節が逆になることを考慮",
+        "気候区分は気温・降水の特徴と関連づける"
+      ],
+      "commonErrors": [
+        "気温の折れ線と降水量の棒を取り違える",
+        "南半球の季節を北半球と同じに読む"
+      ],
+      "questionPatterns": [
+        "雨温図から気候・地域を推定",
+        "季節風と降水の関係",
+        "気候と農業・生活の関係"
+      ],
+      "sourceBasis": "中学社会の標準学習範囲。参照サイトの単元構成を参考にKNOT独自に整理。",
+      "examFrequency": "未判定：栃木県過去問との照合が必要。",
+      "diagramNeeds": [],
+      "reviewStatus": "KNOT初稿・要教科書照合"
+    },
+    {
+      "id": "soc-geography-japan-regions",
+      "title": "日本の地方と産業",
+      "subject": "social",
+      "grade": null,
+      "field": "地理",
+      "status": "authored",
+      "explanation": "日本各地方の自然環境・人口・産業・交通の特徴を、地形や気候、歴史的背景と結びつけて比較する。",
+      "keyTerms": [
+        {
+          "term": "太",
+          "definition": "平"
+        },
+        {
+          "term": "促",
+          "definition": "成"
+        },
+        {
+          "term": "高",
+          "definition": "原"
+        }
+      ],
+      "corePoints": [
+        "地図上の位置を確認してから産業・気候を結びつける",
+        "統計では単位・割合・対象年を確認する"
+      ],
+      "commonErrors": [
+        "地方名だけ暗記し地形・産業の理由を説明できない",
+        "生産額と生産量、割合と実数を混同する"
+      ],
+      "questionPatterns": [
+        "都道府県・地方の位置",
+        "産業統計の比較",
+        "自然条件と産業の関係を記述"
+      ],
+      "sourceBasis": "中学社会の標準学習範囲。参照サイトの単元構成を参考にKNOT独自に整理。",
+      "examFrequency": "未判定：栃木県過去問との照合が必要。",
+      "diagramNeeds": [],
+      "reviewStatus": "KNOT初稿・要教科書照合"
+    },
+    {
+      "id": "soc-history-meiji",
+      "title": "明治維新と近代国家の形成",
+      "subject": "social",
+      "grade": null,
+      "field": "歴史",
+      "status": "authored",
+      "explanation": "明治政府は中央集権化や身分制度の改革、徴兵制・地租改正・殖産興業などを進め、近代国家の仕組みを整えた。",
+      "keyTerms": [
+        {
+          "term": "版",
+          "definition": "籍"
+        },
+        {
+          "term": "廃",
+          "definition": "藩"
+        },
+        {
+          "term": "地",
+          "definition": "租"
+        },
+        {
+          "term": "徴",
+          "definition": "兵"
+        }
+      ],
+      "corePoints": [
+        "改革の目的と社会への影響を対応させる",
+        "改革の順序と国内外の背景を年表で整理する"
+      ],
+      "commonErrors": [
+        "版籍奉還と廃藩置県を同じ改革とする",
+        "地租改正の税の納め方を年貢と混同する"
+      ],
+      "questionPatterns": [
+        "改革の年代整序",
+        "政策と目的の組合せ",
+        "改革が社会に与えた影響の記述"
+      ],
+      "sourceBasis": "中学社会の標準学習範囲。参照サイトの単元構成を参考にKNOT独自に整理。",
+      "examFrequency": "未判定：栃木県過去問との照合が必要。",
+      "diagramNeeds": [],
+      "reviewStatus": "KNOT初稿・要教科書照合"
+    },
+    {
+      "id": "soc-civics-constitution",
+      "title": "日本国憲法の三原則",
+      "subject": "social",
+      "grade": null,
+      "field": "公民",
+      "status": "authored",
+      "explanation": "日本国憲法は国民主権・基本的人権の尊重・平和主義を基本原理とする。各原理を具体的な制度や条文の考え方と結びつけて理解する。",
+      "keyTerms": [
+        {
+          "term": "国",
+          "definition": "民"
+        },
+        {
+          "term": "基",
+          "definition": "本"
+        },
+        {
+          "term": "平",
+          "definition": "和"
+        }
+      ],
+      "corePoints": [
+        "三原則を具体例に対応させる",
+        "憲法と法律、国民の権利と義務を区別する"
+      ],
+      "commonErrors": [
+        "国民主権を国会主権と誤解する",
+        "基本的人権は無制限だと考える"
+      ],
+      "questionPatterns": [
+        "事例から関係する原則を選ぶ",
+        "憲法の基本原理を説明",
+        "権利の制約が認められる条件を考える"
+      ],
+      "sourceBasis": "中学社会の標準学習範囲。参照サイトの単元構成を参考にKNOT独自に整理。",
+      "examFrequency": "未判定：栃木県過去問との照合が必要。",
+      "diagramNeeds": [],
+      "reviewStatus": "KNOT初稿・要教科書照合"
+    },
+    {
+      "id": "soc-civics-election",
+      "title": "選挙と民主政治",
+      "subject": "social",
+      "grade": null,
+      "field": "公民",
+      "status": "authored",
+      "explanation": "選挙は国民が代表者を選び政治に意思を反映させる仕組み。選挙制度の特徴や投票率、政党・世論の役割を理解する。",
+      "keyTerms": [
+        {
+          "term": "普",
+          "definition": "通"
+        },
+        {
+          "term": "平",
+          "definition": "等"
+        },
+        {
+          "term": "直",
+          "definition": "接"
+        }
+      ],
+      "corePoints": [
+        "小選挙区制と比例代表制の特徴を比較する",
+        "選挙制度の長所・短所を一方だけで判断しない"
+      ],
+      "commonErrors": [
+        "衆議院と参議院の選挙制度を混同する",
+        "投票率と得票率を同じものとする"
+      ],
+      "questionPatterns": [
+        "制度の比較表",
+        "選挙結果・投票率の資料読解",
+        "制度の長所短所を記述"
+      ],
+      "sourceBasis": "中学社会の標準学習範囲。参照サイトの単元構成を参考にKNOT独自に整理。",
+      "examFrequency": "未判定：栃木県過去問との照合が必要。",
+      "diagramNeeds": [],
+      "reviewStatus": "KNOT初稿・要教科書照合"
     }
   ],
   "schema": {
