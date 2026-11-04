@@ -166,3 +166,6 @@
     var go=function(){walk(document.body);document.title=T(document.title);mo.observe(document.body,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:["placeholder","title","aria-label","value"]});hide.remove()};
     if(document.body)go();else document.addEventListener("DOMContentLoaded",go)}).catch(function(){hide.remove()});
 })();
+// KNOT release notes loader (legacy one-life route)
+document.addEventListener("DOMContentLoaded",function(){var rn=document.createElement("script");rn.src="/release-notes.js";rn.dataset.releaseApp="life";rn.defer=true;document.head.appendChild(rn);},{once:true});
+
