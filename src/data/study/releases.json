@@ -1,6 +1,19 @@
 {
   "releases": [
     {
+      "id": "fd464df",
+      "publishedAt": "2026-11-04T19:07:27+09:00",
+      "title": "Explain lattice point formula by direct row counting",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "学習コンテンツ・データ"
+      ],
+      "files": [
+        "src/data/study/private-math-beta.json"
+      ]
+    },
+    {
       "id": "727ba30",
       "publishedAt": "2026-11-04T19:05:16+09:00",
       "title": "要点まとめの重複・未設定資料を整理",
