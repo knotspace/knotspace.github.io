@@ -5,6 +5,8 @@ description: "英検3級の勉強や実際に使いやすい参考書をもと�
 pubDate: "2026-11-03T00:00:00.000Z"
 category: "英語・勉強法"
 ---
+<figure class="source-photo"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Child_sits_at_desk_completing_schoolwork_near_window_with_globe,_books,_and_pictures.jpg?width=1280" alt="自宅で机に向かう学習風景。" loading="lazy" decoding="async" width="1280" height="853" /><figcaption>自宅で机に向かう学習風景。 写真：Shixart1985 / <a href="https://commons.wikimedia.org/wiki/File:Child_sits_at_desk_completing_schoolwork_near_window_with_globe,_books,_and_pictures.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>・<a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener noreferrer">CC BY 2.0</a></figcaption></figure>
+
 
 英語の偏差値、60以上にしたくない？　公立高校入試で70点以上取りたい！って思ってる人、けっこう多いんじゃない？
 
