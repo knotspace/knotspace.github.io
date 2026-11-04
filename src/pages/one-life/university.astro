@@ -6,16 +6,17 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <meta name="theme-color" content="#090b12"/>
-<meta name="description" content="受験戦争 — 青の分岐点と同じゲームシステムで、幼少期から受験、その先までを歩む人生シミュレーション。"/><link rel="canonical" href="https://knotspace.github.io/one-life/university/"/><link rel="icon" href="/favicon.svg?v=6" type="image/svg+xml"/><link rel="shortcut icon" href="/favicon.svg?v=6" type="image/svg+xml"/><link rel="apple-touch-icon" href="/favicon.svg?v=6"/>
+<meta name="description" content="受験戦争。青の分岐点と同じゲームエンジンで、受験と人生の分岐を体験するシミュレーション。"/><link rel="canonical" href="https://knotspace.github.io/one-life/university/"/><link rel="icon" href="/favicon.svg?v=6" type="image/svg+xml"/><link rel="shortcut icon" href="/favicon.svg?v=6" type="image/svg+xml"/><link rel="apple-touch-icon" href="/favicon.svg?v=6"/>
 <title>受験戦争｜人生シミュレーション</title>
 <style>.beta-mode-link{display:inline-flex;margin-top:18px;padding:10px 16px;border:1px solid #315d79;border-radius:999px;color:#315d79;text-decoration:none;font-size:12px;font-weight:800;transition:background .2s,color .2s}.beta-mode-link:hover{background:#315d79;color:#fff}</style>
 </head>
 <body class="life-game-body">
 <main class="sim-page">
-<header class="sim-hero"><p class="eyebrow">JUKEN WARS / LIFE SIMULATION</p><h1>受験<span>戦争。</span></h1><p>ひとりぶんの人生を、小学校から若年期まで。出会い、学び、受験、進路。選択の積み重ねが、まだ知らない未来へつながっていく。</p><div class="hero-tags"><span>ONE LIFE</span><span>YOUR CHOICES</span><span>YOUR FUTURE</span></div></header>
+<header class="sim-hero"><p class="eyebrow">JUKEN WARS / LIFE SIMULATION</p><h1>受験<span>戦争。</span></h1><p>ひとりぶんの人生を、小学校から若年期まで。学び、受験、進路。選択の積み重ねが、まだ知らない未来へつながっていく。</p><div class="hero-tags"><span>ONE LIFE</span><span>YOUR CHOICES</span><span>YOUR FUTURE</span></div></header>
 <section id="start-screen" class="panel start-panel">
-<p class="eyebrow">A NEW BATTLE</p><h2>受験へ向かう人生を始める。</h2>
-<p class="birth-intro">名前も、生まれた場所も、これから歩む人生も。最初のクリックで、ひとつの人生が生まれる。</p>
+<p class="eyebrow">A NEW JOURNEY</p><h2>これからの人生を設定する。</h2>
+<input id="player-name" type="hidden" value=""/><select id="home-prefecture" class="native-select" hidden><option value="">出生地は抽選で決定</option></select>
+<p class="birth-intro">最初のボタンを押すと、この人生の出生届が作成されます。氏名・生年月日・出生地はその瞬間に決まります。</p>
 <label class="field-label" for="duration">人生を体験する時間</label><select id="duration" class="native-select"><option value="10">約10分（テンポよく体験）</option><option value="30" selected>約30分（じっくり体験）</option><option value="60">約60分（深く体験）</option><option value="90">約90分（人生をじっくり追う）</option></select>
 <p class="field-label">35歳以降の進め方</p><div class="path-options"><label><input type="radio" name="after35-mode" value="choose" checked/><span><b>自分で選択する</b><small>35歳以降も毎年の選択肢から人生を決める</small></span></label><label><input type="radio" name="after35-mode" value="auto"/><span><b>自動で進める</b><small>35歳までは選択し、その後は5倍速で自動進行</small></span></label></div><p class="field-label">生まれ持った個性を選ぼう</p><div class="path-options">
 <label><input type="radio" name="talent" value="balanced" checked/><span><b>バランス型</b><small>学力・体力・人間関係を平均的に伸ばす</small></span></label>
@@ -26,8 +27,8 @@
 <section id="birth-certificate-screen" class="panel birth-certificate" hidden>
  <p class="eyebrow">OFFICIAL RECORD / BIRTH REGISTRATION</p>
  <div class="birth-paper">
-  <div class="birth-paper-head"><span>出生届</span><small>受験戦争・人生記録 第001号</small></div>
-  <p class="birth-subtitle">次の人生が、この世界に生まれました。</p>
+  <div class="birth-paper-head"><span>出生届</span><small>受験戦争・人生記録</small></div>
+  <p class="birth-subtitle">この世界に、新しい人生が生まれました。</p>
   <dl class="birth-details">
    <div><dt>氏名</dt><dd id="birth-name">—</dd></div>
    <div><dt>性別</dt><dd id="birth-gender">—</dd></div>
@@ -36,7 +37,7 @@
   </dl>
   <p class="birth-stamp">受 理</p>
  </div>
- <p class="birth-note">この情報は今回の人生用にランダムで生成されました。ここから物語が始まります。</p>
+ <p class="birth-note">出生情報はランダムに生成された架空の設定です。出生届を受理すると人生が始まります。</p>
  <button id="accept-birth" class="primary-button">出生届を受理して人生を始める →</button>
  <button id="back-to-registration" class="secondary-button">戻る</button>
 </section>
@@ -57,7 +58,7 @@
 <div class="result-actions"><button id="restart-game" class="primary-button">別の人生を歩む ↻</button></div><p class="fine-print">ゲーム内の選択と数値から作るフィクションの展望です。現実の人生はこの結果に固定されず、何度でも選び直せます。</p>
 </section>
 </main>
-<footer class="independent-footer"><p>受験戦争 — 選ばなかった道にも、人生がある。</p><nav><a href="/">KNOT</a><a href="/study/">KNOT Study</a><a href="/" aria-label="作者 KNOT">作者：KNOT</a></nav><small>このゲームは独立した創作シミュレーションです。現実の人生や受験結果を予測するものではありません。</small><div class="credit-note"><p>この日本版は、世界版のアイデアをお借りして作りました。</p><p>世界版 <a href="https://1in8b.life/" target="_blank" rel="noopener noreferrer">1 in 8 Billion</a> by <a href="https://x.com/jins__earth" target="_blank" rel="noopener noreferrer">Jin (@jins__earth)</a></p><p>日本版 <a href="https://rs-developing26.github.io/1oku2380man/" target="_blank" rel="noopener noreferrer">1.2億分の一</a> by <a href="https://x.com/RS_Developing" target="_blank" rel="noopener noreferrer">RS Developing</a></p><p>この受験戦争は世界版と日本版のアイデアをお借りして作りました。本家もぜひ遊んでみてください。</p></div></footer>
+<footer class="independent-footer"><p>青の分岐点 — 選ばなかった道にも、人生がある。</p><nav><a href="/">KNOT</a><a href="/study/">KNOT Study</a><a href="/" aria-label="作者 KNOT">作者：KNOT</a></nav><small>このゲームは独立した創作シミュレーションです。現実の人生や受験結果を予測するものではありません。</small><div class="credit-note"><p>この日本版は、世界版のアイデアをお借りして作りました。</p><p>世界版 <a href="https://1in8b.life/" target="_blank" rel="noopener noreferrer">1 in 8 Billion</a> by <a href="https://x.com/jins__earth" target="_blank" rel="noopener noreferrer">Jin (@jins__earth)</a></p><p>日本版 <a href="https://rs-developing26.github.io/1oku2380man/" target="_blank" rel="noopener noreferrer">1.2億分の一</a> by <a href="https://x.com/RS_Developing" target="_blank" rel="noopener noreferrer">RS Developing</a></p><p>この青の分岐点は世界版と日本版のアイデアをお借りして作りました。本家もぜひ遊んでみてください。</p></div></footer>
 <script>
 import deviationData from '../../data/game/deviation-scores.json';
 const $=id=>document.getElementById(id), clamp=n=>Math.max(0,Math.min(100,n));
@@ -432,7 +433,7 @@ function render(){
  $('choices').hidden=automatic;
  if(automatic)$('clock-message').textContent='36歳以降は5倍速・選択なしで自動進行します。';
   else if(isLowChoicePeriod())$('clock-message').textContent='この時期は選択が少ないため、時間が自動で2倍速になります。';
- e.opts.forEach((o,i)=>{if(automatic)return;const b=document.createElement('button');b.className='choice-button';const strong=document.createElement('strong');strong.textContent=String.fromCharCode(65+i)+'. '+o.label;const small=document.createElement('small');small.textContent=o.log||'この選択を選ぶ';b.append(strong,small);b.disabled=!canAnswer;b.classList.toggle('is-disabled',!canAnswer);b.addEventListener('click',()=>choose(o));box.append(b);});
+ e.opts.forEach((o,i)=>{if(automatic)return;const b=document.createElement('button');b.className='choice-button';const strong=document.createElement('strong');strong.textContent=String.fromCharCode(65+i)+'. '+o.label;const small=document.createElement('small');small.textContent='この道を選ぶ';b.append(strong,small);b.disabled=!canAnswer;b.classList.toggle('is-disabled',!canAnswer);b.addEventListener('click',()=>choose(o));box.append(b);});
  $('diary-list').replaceChildren();state.diary.slice(-5).forEach(x=>{const li=document.createElement('li');li.textContent=x.title+' — '+x.log;$('diary-list').append(li);});
 }
 function choose(o){
@@ -515,46 +516,41 @@ function finish(){
   localStorage.removeItem('knot-life-sim-v2');
  }catch{}
 }
-function createBirthCertificate(){
- const familyNames=['佐藤','鈴木','高橋','田中','伊藤','渡辺','山本','中村','小林','加藤','吉田','山田','佐々木','山口','松本','井上','木村','林','清水','斎藤'];
- const givenNames={男:['湊','蓮','陽翔','樹','悠真','蒼','大和','律','颯太','新'],女:['陽菜','凛','結衣','葵','紬','芽依','莉子','詩','美月','さくら']};
- const gender=Math.random()<0.5?'男':'女';
- const name=familyNames[Math.floor(Math.random()*familyNames.length)]+givenNames[gender][Math.floor(Math.random()*givenNames[gender].length)];
- const year=2013+Math.floor(Math.random()*5),month=1+Math.floor(Math.random()*12);
- const day=1+Math.floor(Math.random()*new Date(year,month,0).getDate());
- const prefecture=prefectures[Math.floor(Math.random()*prefectures.length)];
- state={...(state||{}),birthInfo:{name,gender,year,month,day,prefecture}};
- $('birth-name').textContent=name;
- $('birth-gender').textContent=gender;
- $('birth-date').textContent=year+'年'+month+'月'+day+'日';
- $('birth-place').textContent=prefecture;
- $('start-screen').hidden=true;
- $('birth-certificate-screen').hidden=false;
-}
 function start(){
- const birth=state?.birthInfo;
- if(!birth){createBirthCertificate();return;}
- const randomPrefecture=birth.prefecture;
- $('home-prefecture').value=randomPrefecture;
  const t=document.querySelector('input[name="talent"]:checked')?.value||'balanced';
  const stats=t==='curious'?{study:48,experience:35,health:72,happiness:48,friends:32}:t==='social'?{study:35,experience:42,health:78,happiness:60,friends:48}:{study:40,experience:35,health:75,happiness:52,friends:38};
- state={birthInfo:birth,name:birth.name,prefecture:$('home-prefecture').value,examPrefecture:$('home-prefecture').value,after35Mode:document.querySelector('input[name="after35-mode"]:checked')?.value||'choose',stats,decisions:{},pendingSchool:null,step:0,diary:[],durationMinutes:Number($('duration').value)||30,estimatedYears:20,deathAge:78+Math.floor(Math.random()*19),yearRemaining:null,speed:1,paused:false,auto:false,waitingChoice:false,archived:false};
+ state={name:$('player-name').value.trim(),prefecture:$('home-prefecture').value,examPrefecture:$('home-prefecture').value,after35Mode:document.querySelector('input[name="after35-mode"]:checked')?.value||'choose',stats,decisions:{},pendingSchool:null,step:0,diary:[],durationMinutes:Number($('duration').value)||30,estimatedYears:20,deathAge:78+Math.floor(Math.random()*19),yearRemaining:null,speed:1,paused:false,auto:false,waitingChoice:false,archived:false};
  state.yearRemaining=null;
  if(loadedPrefecture!==state.examPrefecture)loadSchools(state.examPrefecture);
  $('start-screen').hidden=true;$('result-screen').hidden=true;$('game-screen').hidden=false;render();startClock();
  try{localStorage.setItem('knot-life-sim-v2',JSON.stringify(state));}catch{}
 }
+let pendingBirthInfo=null;
+function createBirthCertificate(){
+ const surnames=['佐藤','鈴木','高橋','田中','伊藤','渡辺','山本','中村','小林','加藤','吉田','山田','佐々木','山口','松本','井上','木村','林','清水','斎藤'];
+ const given={男:['湊','蓮','陽翔','樹','悠真','蒼','大和','律','颯太','新'],女:['陽菜','凛','結衣','葵','紬','芽依','莉子','詩','美月','さくら']};
+ const gender=Math.random()<.5?'男':'女';
+ const name=surnames[Math.floor(Math.random()*surnames.length)]+given[gender][Math.floor(Math.random()*given[gender].length)];
+ const year=2013+Math.floor(Math.random()*5),month=1+Math.floor(Math.random()*12);
+ const day=1+Math.floor(Math.random()*new Date(year,month,0).getDate());
+ const prefecture=prefectures[Math.floor(Math.random()*prefectures.length)];
+ pendingBirthInfo={name,gender,year,month,day,prefecture};
+ $('player-name').value=name;$('home-prefecture').value=prefecture;
+ $('birth-name').textContent=name;$('birth-gender').textContent=gender;
+ $('birth-date').textContent=year+'年'+month+'月'+day+'日';$('birth-place').textContent=prefecture;
+ $('start-screen').hidden=true;$('birth-certificate-screen').hidden=false;
+}
 $('start-game').addEventListener('click',createBirthCertificate);
-$('accept-birth').addEventListener('click',start);
+$('accept-birth').addEventListener('click',()=>{start();if(state){state.birthInfo=pendingBirthInfo;try{localStorage.setItem('knot-life-sim-v2',JSON.stringify(state));}catch{}}});
 $('back-to-registration').addEventListener('click',()=>{$('birth-certificate-screen').hidden=true;$('start-screen').hidden=false;});
-$('restart-game').addEventListener('click',()=>{$('result-screen').hidden=true;$('birth-certificate-screen').hidden=true;$('start-screen').hidden=false;state=null;});
+$('restart-game').addEventListener('click',()=>{$('result-screen').hidden=true;$('start-screen').hidden=false;});
 $('pause-game').addEventListener('click',()=>{if(!state)return;state.paused=!state.paused;if(state.paused){stopClock();$('clock-message').textContent='時間を一時停止中。';}else{$('clock-message').textContent='時間が進んでいます。1年分の時間が終わると決断できます。';startClock();}updateClockUI();});document.querySelectorAll('[data-speed]').forEach(b=>b.addEventListener('click',()=>{if(!state)return;state.speed=Number(b.dataset.speed);updateClockUI();}));
 $('auto-choice').addEventListener('change',e=>{if(state){state.auto=e.target.checked;if(state.auto)$('clock-message').textContent='おまかせ進行が有効。時間切れで選択肢を自動選択します。';else $('clock-message').textContent='決断は自分で選択します。';if(state.waitingChoice&&state.auto){state.waitingChoice=false;const current=stages[state.step];if(current?.opts?.length)chooseAutomatically();}}});
 
 $('save-exit').addEventListener('click',()=>{stopClock();try{localStorage.setItem('knot-life-sim-v2',JSON.stringify(state));}catch{}$('game-screen').hidden=true;$('start-screen').hidden=false;$('continue-game').hidden=false;});
 $('continue-game').addEventListener('click',()=>{if(!state)return;$('start-screen').hidden=true;$('game-screen').hidden=false;render();startClock();});
 renderArchive();
-try{const saved=JSON.parse(localStorage.getItem('knot-life-sim-v2')||'null');if(saved&&saved.stats&&saved.decisions&&saved.diary&&Number.isInteger(saved.step)){state=saved;state.durationMinutes=state.durationMinutes||30;state.deathAge=state.deathAge|| (78+Math.floor(Math.random()*19));state.stats.happiness=state.stats.happiness??50;state.examPrefecture=state.examPrefecture||state.prefecture;state.estimatedYears=state.estimatedYears||20;state.speed=state.speed||1;state.yearRemaining=state.yearRemaining??clockYearLength();$('duration').value=String(state.durationMinutes);$('home-prefecture').value=state.prefecture||state.birthInfo?.prefecture||'栃木県';loadSchools(state.examPrefecture||$('home-prefecture').value);$('start-screen').hidden=true;$('game-screen').hidden=false;render();startClock();}}catch{}
+try{const saved=JSON.parse(localStorage.getItem('knot-life-sim-v2')||'null');if(saved&&saved.stats&&saved.decisions&&saved.diary&&Number.isInteger(saved.step)){state=saved;state.durationMinutes=state.durationMinutes||30;state.deathAge=state.deathAge|| (78+Math.floor(Math.random()*19));state.stats.happiness=state.stats.happiness??50;state.examPrefecture=state.examPrefecture||state.prefecture;state.estimatedYears=state.estimatedYears||20;state.speed=state.speed||1;state.yearRemaining=state.yearRemaining??clockYearLength();$('duration').value=String(state.durationMinutes);$('player-name').value=state.name||'';$('home-prefecture').value=state.prefecture||'栃木県';loadSchools(state.examPrefecture||$('home-prefecture').value);$('start-screen').hidden=true;$('game-screen').hidden=false;render();startClock();}}catch{}
 </script>
 <style>
 :root{color-scheme:dark;--bg:#0b1018;--panel:#151e2b;--panel2:#1b2737;--surface:#151e2b;--surface-soft:#1b2737;--line:#2d3b4f;--text:#edf3fb;--muted:#9eacc0;--accent:#9cf06b;font-family:Inter,"Noto Sans JP",system-ui,sans-serif}
@@ -638,9 +634,7 @@ body.life-game-body{background:#f4f0e7;color:var(--text)}
 .achievement-list{margin:18px 0 25px;display:flex;flex-wrap:wrap;gap:7px}
 .achievement-list h3{width:100%;font-size:13px}
 .achievement-list span{padding:7px 10px;background:#eee8dc;color:#81503e;font-size:10px}
-.picker-region-label{display:block;margin:8px 0;font-size:10px;color:var(--muted)}
-
-/* 受験戦争：テーマと操作性の最終上書き（元CSSより後に適用） */
+.picker-region-label{display:block;margin:8px 0;font-size:10px;color:var(--muted)}/* 受験戦争：テーマと操作性の最終上書き（元CSSより後に適用） */
 :root{color-scheme:dark;--bg:#090b12;--panel:#121722;--panel2:#191f2d;--surface:#121722;--surface-soft:#191f2d;--line:#30394b;--text:#f1f3fa;--muted:#a0a9bb;--accent:#b5a0ff;font-family:Inter,"Noto Sans JP",system-ui,sans-serif}
 body.life-game-body{background:radial-gradient(ellipse at 50% -20%,#292344 0%,#090b12 62%);color:var(--text)}
 .sim-page{color:var(--text)}.sim-hero{border-color:var(--line)}.eyebrow,.event-meta{color:var(--accent)}.sim-hero h1,.panel h2{color:var(--text)}.sim-hero h1 span{color:var(--accent)}.sim-hero>p:not(.eyebrow),.event-scene,.event-description{color:var(--muted)}
@@ -736,6 +730,20 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid 
 .choice-button:not(:disabled):hover{border-color:var(--accent);background:#242c40;transform:translateY(-1px)}
 .choice-button:disabled{opacity:.52;cursor:wait}
 @media(max-width:650px){.birth-details>div{grid-template-columns:76px minmax(0,1fr);padding:13px 0}.birth-stamp{right:15px;bottom:13px}.choice-button{min-height:76px;padding:15px}.choice-button strong{font-size:14px}.choice-button small{font-size:11px}}
+
+
+.birth-intro{margin:12px 0 22px;color:var(--muted);font-size:13px;line-height:1.9}
+.birth-certificate{max-width:680px;margin:18px auto;padding:clamp(18px,5vw,34px);background:var(--panel);border:1px solid var(--line);border-radius:18px}
+.birth-paper{position:relative;margin:18px 0;padding:clamp(18px,5vw,32px);border:1px solid #5a526f;border-radius:8px;background:linear-gradient(145deg,#191e2d,#111621);overflow:hidden}
+.birth-paper-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.birth-paper-head span{font-size:clamp(26px,6vw,36px);font-weight:900;letter-spacing:.18em}
+.birth-paper-head small{font-size:10px;color:var(--muted)}
+.birth-subtitle{margin:18px 0;color:var(--muted);font-size:12px}
+.birth-details{margin:0}.birth-details>div{display:grid;grid-template-columns:100px minmax(0,1fr);gap:12px;padding:15px 0;border-bottom:1px solid #30394b}
+.birth-details dt{font-size:12px;color:var(--muted)}.birth-details dd{margin:0;font-size:clamp(15px,4vw,19px);font-weight:800;overflow-wrap:anywhere}
+.birth-stamp{position:absolute;right:22px;bottom:18px;margin:0;padding:7px 11px;border:2px solid #bd8297;border-radius:4px;color:#e0a8bd;font-weight:900;letter-spacing:.2em;transform:rotate(-9deg);opacity:.8}
+.birth-note{font-size:11px;line-height:1.8;color:var(--muted)}.birth-certificate .secondary-button{margin-top:9px;width:100%;min-height:44px}
+@media(max-width:650px){.birth-details>div{grid-template-columns:76px minmax(0,1fr);padding:13px 0}.birth-stamp{right:15px;bottom:13px}}
 </style>
 </body>
 </html>
