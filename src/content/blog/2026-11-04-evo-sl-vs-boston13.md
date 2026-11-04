@@ -19,6 +19,8 @@ heroImage: "/blog-art/evo-sl-vs-boston13.svg"
 
 もちろん、これは全員に当てはまる評価じゃないよ。シューズは足の形や走り方、使う目的によって合う・合わないがあるからね。
 
+<figure class="editorial-figure"><img src="/blog-art/evo-sl-weight-comparison.svg" alt="EVO SLは約224グラム、BOSTON 13は約255グラム。片足約31グラムの重量差を比較した図" loading="lazy" decoding="async" width="1000" height="560" /><figcaption>27cm片足の公表重量を比較</figcaption></figure>
+
 ## EVO SLとボストン13のスペックを比較！
 
 まずは公式情報をもとに、基本的な違いを見てみよう。
