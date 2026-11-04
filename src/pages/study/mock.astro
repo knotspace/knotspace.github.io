@@ -1,4 +1,12 @@
 ---
-const target = new URL('../foundation/', Astro.url);
+import StudyLayout from '../../layouts/StudyLayout.astro';
 ---
-<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0;url={target.pathname}"><link rel="canonical" href={target.href}><title>基礎網羅問題へ</title></head><body><p><a href={target.href}>基礎網羅問題へ移動</a></p></body></html>
+<StudyLayout title="ページ移動のお知らせ｜KNOT Study" description="このページはStudyの学習メニューに統合されました。新しい学習ページから続けて利用できます。" noindex={true}>
+<main style="max-width:760px;margin:0 auto;padding:48px 0">
+  <p style="color:var(--accent);font-size:10px;letter-spacing:.15em">KNOT STUDY / PAGE UPDATE</p>
+  <h1 style="font-size:clamp(28px,5vw,42px)">ページを移動しました</h1>
+  <p style="color:var(--muted);line-height:1.9">この学習メニューは新しいStudyページに統合されました。下のリンクから学習を続けてね。</p>
+  <a href="../foundation/" style="display:inline-flex;margin-top:16px;padding:13px 18px;border-radius:9px;background:var(--accent);color:#071426;font-weight:800">基礎網羅問題へ進む →</a>
+  <p><a href="../" style="color:var(--muted)">Studyホームへ戻る</a></p>
+</main>
+</StudyLayout>
