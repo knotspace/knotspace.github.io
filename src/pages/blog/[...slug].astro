@@ -271,7 +271,14 @@ const breadcrumbJsonLd = {
   const article = document.querySelector('[data-post-slug]');
   // Markdown本文内の画像も遅延読み込みに統一し、表示負荷を抑える。
   document.querySelectorAll('.article-content img').forEach((img) => {
-    if (!img.hasAttribute('loading')) img.loading = 'lazy';
+    const isKnotArtwork = img.matches('.knot-figure img, img[src*="/blog-art/"], img[alt*="KNOT"]');
+    // スマホではKNOT制作図の遅延読み込みが表示タイミングによって止まらないよう、先に読み込む。
+    if (isKnotArtwork && window.matchMedia('(max-width: 760px)').matches) {
+      img.loading = 'eager';
+      img.fetchPriority = 'auto';
+    } else if (!img.hasAttribute('loading')) {
+      img.loading = 'lazy';
+    }
     if (!img.hasAttribute('decoding')) img.decoding = 'async';
     img.style.maxWidth = '100%';
     img.style.height = 'auto';
@@ -966,6 +973,48 @@ const breadcrumbJsonLd = {
     border-radius:12px;
     background:color-mix(in srgb,var(--accent) 13%,var(--surface));
     color:var(--accent);
+  }
+
+  /* KNOTオリジナル図版：スマホでも画像・SVGを確実に画面幅へ収める */
+  .article-content :global(.knot-figure),
+  .article-content :global(figure:has(img[src*="/blog-art/"])){
+    display:block;
+    width:100%;
+    max-width:100%;
+    min-width:0;
+    margin:24px auto;
+    overflow:visible;
+  }
+  .article-content :global(.knot-figure img),
+  .article-content :global(img[src*="/blog-art/"]),
+  .article-content :global(svg){
+    display:block;
+    width:auto;
+    max-width:100%;
+    height:auto;
+    margin-left:auto;
+    margin-right:auto;
+    object-fit:contain;
+  }
+  @media(max-width:760px){
+    .article-content{min-width:0;width:100%;overflow-wrap:anywhere}
+    .article-content :global(.knot-figure),
+    .article-content :global(figure:has(img[src*="/blog-art/"])){
+      width:100%;
+      max-width:100%;
+      padding:0;
+      margin:20px 0;
+    }
+    .article-content :global(.knot-figure img),
+    .article-content :global(img[src*="/blog-art/"]),
+    .article-content :global(svg){
+      width:100%;
+      max-width:100%;
+      height:auto;
+      max-height:none;
+      object-fit:contain;
+    }
+    .article-content :global(figure){min-width:0;max-width:100%}
   }
 
 </style>
