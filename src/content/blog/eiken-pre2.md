@@ -5,6 +5,8 @@ pubDate: "2026-11-01T00:00:00.000Z"
 heroImage: "/blog-art/eiken-pre2.svg"
 category: "英検・勉強法"
 ---
+<figure class="source-photo"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Studying.jpg?width=1280" alt="机に向かって学習する様子。" loading="lazy" decoding="async" width="1280" height="853" /><figcaption>机に向かって学習する様子。 写真：Gnarlycraig / <a href="https://commons.wikimedia.org/wiki/File:Studying.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>・<a href="https://creativecommons.org/publicdomain/mark/1.0/" target="_blank" rel="noopener noreferrer">Public domain</a></figcaption></figure>
+
 
 ## 英検準2級に合格するまでに意識したこと
 
