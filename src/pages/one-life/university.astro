@@ -43,6 +43,14 @@ body.life-game-body{background:radial-gradient(ellipse at 50% -20%,#292344 0%,#0
 <article class="event-card"><div class="event-meta"><span id="event-season">LIFE STAGE</span><span id="event-number">EPISODE 01</span></div><p id="event-scene" class="event-scene"></p><h3 id="event-title"></h3><p id="event-description" class="event-description"></p><div id="school-picker" class="school-picker" hidden></div><div id="choices" class="choices"></div></article>
 <div class="life-map"><div class="life-map-head"><strong>人生の軌跡</strong><span id="life-age-label">START</span></div><div class="life-map-track"><i id="life-map-progress"></i></div></div><div class="diary-log"><h3>人生の記録</h3><ol id="diary-list"></ol></div><button id="save-exit" class="quiet-button">ここまでの記録を保存して閉じる</button>
 </section>
+<div id="decision-overlay" class="decision-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="decision-heading">
+  <section class="decision-sheet">
+    <p class="decision-kicker">YOUR DECISION</p>
+    <h2 id="decision-heading">この先の道を選ぼう。</h2>
+    <p class="decision-hint">選んだ道が、この先の人生につながっていく。</p>
+    <div id="decision-choices" class="decision-choices"></div>
+  </section>
+</div>
 <section id="result-screen" class="panel result-panel" hidden>
 <p class="eyebrow">YOUR LIFE / YOUNG ADULTHOOD</p><h2 id="ending-title">あなたの人生の、その先へ。</h2><p id="ending-copy" class="ending-copy"></p><div id="result-stats" class="result-stats"></div><div id="achievement-list" class="achievement-list"></div>
 <div class="result-message"><strong>この人生で育てたもの</strong><p id="result-reflection"></p></div><h3 class="timeline-heading">歩んできた人生</h3><ol id="final-diary" class="final-diary"></ol>
@@ -295,8 +303,7 @@ function startClock(){
    if(state.auto||automatic)chooseAutomatically();
    else {
     $('pause-game').textContent='再開';
-    const canChoose=!getExamType(stages[state.step]?.tag)||!!state.pendingSchool;
-    document.querySelectorAll('.choice-button').forEach(button=>button.disabled=!canChoose);
+    render();
     try{localStorage.setItem('knot-life-sim-v2',JSON.stringify(state));}catch{}
    }
   }
@@ -365,7 +372,7 @@ function render(){
    const note=document.createElement('small');note.textContent=state.lastExamResult.passed?'おめでとう！選んだ学校への進学ルートに進みます。':'今回は不合格。ここから別の進路を選べます。';
    banner.append(label,detail,note);
  }else banner.hidden=true;
- const box=$('choices');box.replaceChildren();
+ const box=$('decision-choices');box.replaceChildren();
  const picker=$('school-picker');picker.replaceChildren();picker.hidden=true;
  const examType=getExamType(e.tag);
  if(examType){
@@ -422,7 +429,7 @@ function render(){
  }
  const automatic=!!e.automatic;
  const canAnswer=!automatic&&(!examType||!!state.pendingSchool)&&!!state.waitingChoice;
- $('choices').hidden=automatic;
+ $('choices').hidden=true;\n $('decision-overlay').hidden=automatic||!state.waitingChoice;
  if(automatic)$('clock-message').textContent='36歳以降は5倍速・選択なしで自動進行します。';
   else if(isLowChoicePeriod())$('clock-message').textContent='この時期は選択が少ないため、時間が自動で2倍速になります。';
  e.opts.forEach((o,i)=>{if(automatic)return;const b=document.createElement('button');b.className='choice-button';const strong=document.createElement('strong');strong.textContent=String.fromCharCode(65+i)+'. '+o.label;const small=document.createElement('small');small.textContent='この道を選ぶ';b.append(strong,small);b.disabled=!canAnswer;b.classList.toggle('is-disabled',!canAnswer);b.addEventListener('click',()=>choose(o));box.append(b);});
@@ -610,5 +617,21 @@ body.life-game-body{background:#f4f0e7;color:var(--text)}
 .achievement-list h3{width:100%;font-size:13px}
 .achievement-list span{padding:7px 10px;background:#eee8dc;color:#81503e;font-size:10px}
 .picker-region-label{display:block;margin:8px 0;font-size:10px;color:var(--muted)}</style>
+
+/* 青の分岐点と同じ「決断」オーバーレイ式の選択画面 */
+.decision-overlay{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:18px;background:rgba(3,6,12,.78);backdrop-filter:blur(8px)}
+.decision-overlay[hidden]{display:none!important}
+.decision-sheet{width:min(100%,620px);max-height:min(86vh,760px);overflow:auto;padding:clamp(22px,4vw,34px);border:1px solid #39445b;border-radius:18px;background:linear-gradient(155deg,#171d2a,#0d121c);color:#f1f3fa;box-shadow:0 24px 90px #000b;animation:decision-in .22s ease-out}
+.decision-kicker{margin:0 0 10px;color:#b5a0ff;font:800 10px ui-monospace,monospace;letter-spacing:.18em}
+.decision-sheet h2{margin:0;font-size:clamp(22px,4vw,30px);letter-spacing:-.04em;color:#f1f3fa}
+.decision-hint{margin:9px 0 20px;color:#a0a9bb;font-size:12px;line-height:1.8}
+.decision-choices{display:grid;gap:10px}
+.decision-choices .choice-button{min-height:64px;padding:16px 18px;border:1px solid #38445a;border-radius:11px;background:#1a2231;color:#f1f3fa;text-align:left;display:flex;align-items:center;justify-content:space-between;gap:14px;cursor:pointer;transition:border-color .16s,background .16s,transform .16s}
+.decision-choices .choice-button:hover{border-color:#b5a0ff;background:#242b40;transform:translateY(-1px)}
+.decision-choices .choice-button:disabled{opacity:.45;cursor:wait;transform:none}
+.decision-choices .choice-button strong{font-size:13px;line-height:1.6}
+.decision-choices .choice-button small{flex:none;color:#b5a0ff;font-size:10px}
+@keyframes decision-in{from{opacity:0;transform:translateY(12px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(max-width:600px){.decision-overlay{align-items:end;padding:0;background:rgba(3,6,12,.82)}.decision-sheet{width:100%;max-height:88dvh;padding:24px 18px calc(22px + env(safe-area-inset-bottom));border-radius:20px 20px 0 0;border-bottom:0}.decision-choices .choice-button{min-height:60px;padding:14px;border-radius:10px}.decision-choices .choice-button strong{font-size:12px}}
 </body>
 </html>
