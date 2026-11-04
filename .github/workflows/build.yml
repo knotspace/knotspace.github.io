@@ -25,6 +25,10 @@ jobs:
           node-version: 24
       - name: Install dependencies
         run: npm install --no-audit --no-fund
+      - name: Validate Study question banks
+        run: npm run study:validate
+      - name: Independently verify KOSEN math answers
+        run: python scripts/study/verify-math-beta.py
       - name: Build Astro site
         env:
           PUBLIC_SUPABASE_URL: ${{ secrets.PUBLIC_SUPABASE_URL }}
