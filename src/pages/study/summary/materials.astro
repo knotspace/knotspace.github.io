@@ -1,4 +1,4 @@
 ---
-const target = new URL('/study/foundation/', Astro.site ?? Astro.url);
+import StudySummaryPage from '../../../components/StudySummaryPage.astro';
 ---
-<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta http-equiv="refresh" content={`0;url=${target.href}`}><link rel="canonical" href={target.href}><title>基礎網羅問題へ</title></head><body><p><a href={target.href}>基礎網羅問題へ移動</a></p></body></html>
+<StudySummaryPage title="図解・資料ライブラリ" subject="全教科" topic="materials" description="理科・社会のオリジナル図解107点、整理表80点、写真・資料13点を単元別にまとめて確認できます。" intro="200点の図解・表・資料を横断して、知識を視覚的に整理する。" />
