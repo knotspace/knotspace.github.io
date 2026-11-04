@@ -1,4 +1,4 @@
 ---
-const target = new URL('../foundation/', Astro.url);
+import StudySummaryPage from '../../../components/StudySummaryPage.astro';
 ---
-<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0;url={target.pathname}"><link rel="canonical" href={target.href}><title>基礎網羅問題へ</title></head><body><p><a href={target.href}>基礎網羅問題へ移動</a></p></body></html>
+<StudySummaryPage title="物理" subject="理科" topic="physics" description="力・運動・電気・仕事・エネルギー・光と音を、公式と図解で体系的に整理。頻出の考え方や単位、回路の比較も確認できます。" intro="力・運動・電気・エネルギー・光と音を、公式の意味から理解する。" />
