@@ -17,7 +17,7 @@
 <label class="field-label" for="player-name">主人公の名前</label><input id="player-name" maxlength="12" placeholder="ニックネーム（任意）"/>
 <label class="field-label" for="home-prefecture">暮らし始める都道府県</label><select id="home-prefecture" class="native-select"><option value="">都道府県を選択</option></select>
 <label class="field-label" for="duration">人生を体験する時間</label><select id="duration" class="native-select"><option value="10">約10分（テンポよく体験）</option><option value="30" selected>約30分（じっくり体験）</option><option value="60">約60分（深く体験）</option><option value="90">約90分（人生をじっくり追う）</option></select>
-<p class="field-label">生まれ持った個性を選ぼう</p><div class="path-options">
+<p class="field-label">35歳以降の進め方</p><div class="path-options"><label><input type="radio" name="after35-mode" value="choose" checked/><span><b>自分で選択する</b><small>35歳以降も毎年の選択肢から人生を決める</small></span></label><label><input type="radio" name="after35-mode" value="auto"/><span><b>自動で進める</b><small>35歳までは選択し、その後は5倍速で自動進行</small></span></label></div><p class="field-label">生まれ持った個性を選ぼう</p><div class="path-options">
 <label><input type="radio" name="talent" value="balanced" checked/><span><b>バランス型</b><small>学力・体力・人間関係を平均的に伸ばす</small></span></label>
 <label><input type="radio" name="talent" value="curious"/><span><b>探究型</b><small>知りたいことを深く掘り下げる</small></span></label>
 <label><input type="radio" name="talent" value="social"/><span><b>社交型</b><small>人との出会いや経験から成長する</small></span></label>
@@ -105,7 +105,7 @@ let state=null, stages=[],stagesSignature=null,clockHandle=null,lastClockTick=0;
 const choices=(items)=>items.map(([label,effect,log,decision])=>({label,effect,log,decision}));
 function stage(year,season,title,scene,desc,opts,tag){return {year,season,title,scene,desc,opts:choices(opts),tag};}
 function buildStages(){
- const signature=JSON.stringify([state?.decisions,state?.deathAge]);
+ const signature=JSON.stringify([state?.decisions,state?.deathAge,state?.after35Mode]);
  if(stages.length&&signature===stagesSignature)return;
  const s=[];
  const add=(...args)=>s.push(stage(...args));
@@ -232,15 +232,16 @@ function buildStages(){
    ['新しい挑戦や環境の変化を選ぶ',{experience:8,health:-2},'新しい環境に飛び込み、経験を重ねた。']
   ],'CHOICE AGE');
  }
- // 36歳以降は選択肢を出さず、5倍速で人生が自動進行する。
+ // 36歳以降は開始時に選んだモードで進行する。
  state.deathAge=state.deathAge|| (78+Math.floor(Math.random()*19));
  for(let age=36;age<state.deathAge;age++){
-  const automatic=stage(age+'歳','LIFE',''+age+'歳の日々','時間は静かに流れていく。仕事や暮らし、人との関係にも少しずつ変化が訪れる。','36歳以降は選択を行わず、人生が自動で進んでいく。',[
-   ['日々を重ねる',{experience:2,happiness:1},'いつもの日々を重ねた。'],
-   ['人とのつながりが続く',{friends:2,happiness:2},'家族や友人とのつながりに支えられた。'],
-   ['新しい出来事が訪れる',{experience:3,study:1},'思いがけない出来事から新しい経験を得た。']
-  ],'AUTOMATIC');
-  automatic.automatic=true;s.push(automatic);
+  const selectable=state.after35Mode==='choose';
+  const later=stage(age+'歳','LIFE',''+age+'歳の日々','仕事、暮らし、人間関係。年齢を重ねるなかで、新しい変化や選択が訪れる。',selectable?'これまでの経験をもとに、これからの生き方を自分で選ぼう。':'36歳以降は選択を行わず、人生が5倍速で自動進行する。',[
+   ['仕事や学びをさらに深める',{study:4,experience:5},'仕事や学びを通じて、新しい力を身につけた。'],
+   ['家族や友人との時間を大切にする',{friends:6,happiness:5},'身近な人との時間を大切にし、暮らしを整えた。'],
+   ['新しい環境や挑戦に踏み出す',{experience:7,health:-2},'変化を恐れず、新しい挑戦を始めた。']
+  ],'LATER LIFE');
+  later.automatic=!selectable;s.push(later);
  }
  const death=stage(state.deathAge+'歳','LIFE END','人生の最終章','長い時間を歩き、たくさんの出会いと出来事を重ねてきた。','これまでの人生を振り返る時が来た。',[
   ['人生を振り返る',{happiness:0},'人生の幕を閉じた。']
@@ -500,7 +501,7 @@ function finish(){
 function start(){
  const t=document.querySelector('input[name="talent"]:checked')?.value||'balanced';
  const stats=t==='curious'?{study:48,experience:35,health:72,happiness:48,friends:32}:t==='social'?{study:35,experience:42,health:78,happiness:60,friends:48}:{study:40,experience:35,health:75,happiness:52,friends:38};
- state={name:$('player-name').value.trim(),prefecture:$('home-prefecture').value,examPrefecture:$('home-prefecture').value,stats,decisions:{},pendingSchool:null,step:0,diary:[],durationMinutes:Number($('duration').value)||30,estimatedYears:20,deathAge:78+Math.floor(Math.random()*19),yearRemaining:null,speed:1,paused:false,auto:false,waitingChoice:false,archived:false};
+ state={name:$('player-name').value.trim(),prefecture:$('home-prefecture').value,examPrefecture:$('home-prefecture').value,after35Mode:document.querySelector('input[name="after35-mode"]:checked')?.value||'choose',stats,decisions:{},pendingSchool:null,step:0,diary:[],durationMinutes:Number($('duration').value)||30,estimatedYears:20,deathAge:78+Math.floor(Math.random()*19),yearRemaining:null,speed:1,paused:false,auto:false,waitingChoice:false,archived:false};
  state.yearRemaining=null;
  if(loadedPrefecture!==state.examPrefecture)loadSchools(state.examPrefecture);
  $('start-screen').hidden=true;$('result-screen').hidden=true;$('game-screen').hidden=false;render();startClock();
