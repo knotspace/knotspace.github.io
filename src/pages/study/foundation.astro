@@ -44,7 +44,8 @@ const social = bank.filter(q => q.subject === 'social').length;
   </section>
 </div>
 <script>
-import bank from '../../data/study/study-foundation.json';
+import foundationData from '../../data/study/study-foundation.json';
+const bank = foundationData.questions;
 const $ = id => document.getElementById(id);
 const KEY = 'knot-foundation-v1';
 let record = { answered: 0, correct: 0, wrong: [] }, questions = [], index = 0, score = 0, selected = false, lastConfig = null;
