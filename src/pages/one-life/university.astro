@@ -1,0 +1,65 @@
+---
+---
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f4f0e7">
+<meta name="description" content="青の分岐点・大学受験モード ベータ版">
+<link rel="icon" href="/favicon.svg?v=6" type="image/svg+xml">
+<title>大学受験モード β｜青の分岐点</title>
+<style>
+:root{color-scheme:light;--ink:#202b35;--muted:#71808b;--paper:#f4f0e7;--card:#fffdf8;--line:#e5dfd3;--blue:#315d79;--blue2:#dce9ef;--orange:#d77952}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,"Noto Sans JP",sans-serif;line-height:1.7}.wrap{width:min(900px,calc(100% - 32px));margin:auto;padding:30px 0 60px}.top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:14px}.top a{color:var(--muted);text-decoration:none;font-size:13px}.tag{font:700 10px ui-monospace,monospace;letter-spacing:.16em;color:var(--blue)}h1{font-size:clamp(34px,7vw,62px);letter-spacing:-.06em;line-height:1.1;margin:20px 0 8px}.sub{color:var(--muted);margin:0 0 26px}.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:clamp(18px,4vw,30px);box-shadow:0 8px 30px #34404a0a;margin:18px 0}.panel h2{font-size:21px;margin:0 0 12px}.eyebrow{font:700 10px ui-monospace,monospace;letter-spacing:.14em;color:var(--muted)}.field{display:grid;gap:7px;margin:16px 0}.field label{font-weight:700;font-size:13px}.field select,.field input{font:inherit;padding:12px 13px;border:1px solid var(--line);border-radius:10px;background:white;color:var(--ink);width:100%}.btn{border:0;border-radius:999px;background:var(--blue);color:white;font:700 14px inherit;padding:13px 22px;cursor:pointer}.btn.secondary{background:var(--blue2);color:var(--blue)}.btn:disabled{opacity:.4;cursor:not-allowed}.choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin-top:16px}.choice{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;text-align:left;cursor:pointer;color:var(--ink);font:inherit}.choice:hover{border-color:var(--blue)}.choice strong{display:block}.choice small{display:block;color:var(--muted);margin-top:5px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.stat{background:#f7f5ef;border-radius:12px;padding:12px}.stat span{display:block;color:var(--muted);font-size:11px}.stat b{font-size:24px;font-variant-numeric:tabular-nums}.bar{height:5px;background:#e5e1d8;border-radius:9px;overflow:hidden;margin-top:6px}.bar i{display:block;height:100%;background:var(--blue)}.notice{background:#f5eee6;border-left:3px solid var(--orange);padding:12px 14px;border-radius:5px;font-size:12px;color:#65564c}.result{font-size:26px;font-weight:800;color:var(--blue)}.hidden{display:none!important}.muted{color:var(--muted);font-size:12px}.history{padding-left:20px}.history li{margin:8px 0}.univ-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}.univ{border:1px solid var(--line);border-radius:12px;padding:13px;background:white}.univ b{display:block}.univ span{font-size:12px;color:var(--muted)}footer{font-size:11px;color:var(--muted);text-align:center;padding-top:24px}@media(max-width:560px){.stats{grid-template-columns:repeat(2,1fr)}.top{align-items:flex-start;gap:10px}.panel{border-radius:14px}}
+</style>
+</head>
+<body><main class="wrap">
+<header class="top"><span class="tag">AO NO BUNKITEN / BETA 01</span><a href="/one-life/">人生シミュレーションへ ↗</a></header>
+<h1>大学受験モード<span style="color:var(--orange)">.</span></h1>
+<p class="sub">高校生活、模試、出願、そして浪人。選択を重ねて、目標の合格をつかもう。</p>
+<section id="start" class="panel">
+<p class="eyebrow">A NEW CHALLENGE</p><h2>受験のスタート地点を決める。</h2>
+<div class="field"><label for="student">主人公の名前（任意）</label><input id="student" maxlength="12" placeholder="名前・ニックネーム"></div>
+<div class="field"><label for="school">高校の学習環境</label><select id="school"><option value="0">標準的な学習環境</option><option value="5">学習意欲の高い環境（少し有利）</option><option value="-3">自分で学習計画を立てる環境</option></select></div>
+<div class="field"><label for="goal">最初の志望レベル</label><select id="goal"><option value="70">最難関に挑戦</option><option value="62" selected>難関を目指す</option><option value="53">実力相応から上を狙う</option><option value="43">幅広く合格を目指す</option></select></div>
+<button class="btn" id="begin">この受験を始める →</button>
+<p class="muted">※ベータ版のため、大学の難易度・合格判定はゲーム用の仮設定です。実際の偏差値や合格可能性を示すものではありません。</p>
+</section>
+<section id="play" class="hidden">
+<div class="panel"><div class="eyebrow" id="phase">HIGH SCHOOL / YEAR 1</div><h2 id="heading">高校生活が始まる。</h2><p id="story"></p><div class="stats" id="stats"></div></div>
+<div class="panel"><h2 id="prompt">この時期をどう過ごす？</h2><div class="choices" id="choices"></div></div>
+<div class="panel"><p class="eyebrow">LATEST MOCK EXAM</p><div id="mock">まだ模試を受けていません。</div><button id="mockBtn" class="btn secondary">模試を受ける</button></div>
+<div class="panel"><p class="eyebrow">YOUR JOURNEY</p><ol id="history" class="history"></ol></div>
+</section>
+<section id="ending" class="panel hidden"><p class="eyebrow">YOUR RESULT</p><h2 id="endTitle">受験結果</h2><p id="endText"></p><div id="endStats" class="stats"></div><h3>受験の記録</h3><ol id="endHistory" class="history"></ol><button class="btn" id="again">もう一度挑戦する ↻</button></section>
+<footer>青の分岐点 — 大学受験モード β版。ゲーム内の数値・合否はフィクションです。</footer>
+</main>
+<script>
+(()=>{
+const $=id=>document.getElementById(id),clamp=(n,a=0,b=100)=>Math.max(a,Math.min(b,n)),rnd=(a,b)=>Math.random()*(b-a)+a;
+let g=null;
+const tiers=[{name:"最難関クラス",need:78,examples:"東京大学・京都大学など（例）"},{name:"難関クラス",need:68,examples:"難関国公立・早慶など（例）"},{name:"準難関クラス",need:58,examples:"上位国公立・難関私大など（例）"},{name:"標準クラス",need:48,examples:"幅広い国公立・私立など（例）"},{name:"基礎・安全校クラス",need:38,examples:"合格可能性を広く確保する選択肢"}];
+function log(s){g.logs.unshift(s);renderHistory()}
+function stats(){const arr=[["学力",g.ability],["集中力",g.focus],["体力",g.health],["経験",g.experience]];$("stats").innerHTML=arr.map(([n,v])=>'<div class="stat"><span>'+n+'</span><b>'+Math.round(v)+'</b><div class="bar"><i style="width:'+clamp(v)+'%"></i></div></div>').join("")}
+function renderHistory(){$("history").innerHTML=g.logs.slice(0,12).map(x=>"<li>"+x+"</li>").join("")}
+function stage(title,story,prompt,opts){$("phase").textContent=g.phase;$("heading").textContent=title;$("story").textContent=story;$("prompt").textContent=prompt;$("choices").innerHTML=opts.map((o,i)=>'<button class="choice" data-i="'+i+'"><strong>'+o.t+'</strong><small>'+o.d+'</small></button>').join("");$("choices").querySelectorAll("button").forEach(b=>b.onclick=()=>opts[+b.dataset.i].go());stats()}
+function start(){g={name:$("student").value.trim()||"あなた",ability:35+ +$("school").value,focus:55,health:75,experience:35,goal:+$("goal").value,year:1,round:0,ronin:0,logs:[],mock:0,done:false};$("start").classList.add("hidden");$("ending").classList.add("hidden");$("play").classList.remove("hidden");highYear()}
+function highYear(){g.phase="HIGH SCHOOL / YEAR "+g.year;$("mock").textContent="まだ模試を受けていません。";$("mockBtn").disabled=false;
+const opts=[
+{t:"毎日の授業と復習を徹底する",d:"学力が安定して伸びる。体力を少し消耗。",go:()=>{g.ability+=7;g.focus+=5;g.health-=3;nextTerm("授業と復習を積み重ねた。")}},
+{t:"得意科目を徹底的に伸ばす",d:"得意分野が武器になる。苦手分野は残りやすい。",go:()=>{g.ability+=9;g.focus+=2;g.experience+=2;nextTerm("得意科目を磨き、強みをつくった。")}},
+{t:"部活・行事と勉強を両立する",d:"経験と体力が伸びる。学力の伸びはゆるやか。",go:()=>{g.ability+=3;g.health+=7;g.experience+=9;nextTerm("学校生活を楽しみながら、勉強も続けた。")}},
+{t:"勉強計画を見直し、効率を上げる",d:"集中力と学習効率を高める。",go:()=>{g.ability+=5;g.focus+=10;g.health+=2;nextTerm("自分に合う学習方法を見つけた。")}}
+];stage(g.year+"年生の学び",g.year===1?"高校生活が始まった。今の過ごし方が、受験学年の自分につながっていく。":g.year===2?"学習内容が難しくなり、進路を意識する時期。":"いよいよ受験学年。模試の結果を見ながら、志望校を考える。","この1年の軸を選ぼう。",opts)}
+function nextTerm(message){g.ability=clamp(g.ability);g.focus=clamp(g.focus);g.health=clamp(g.health);g.experience=clamp(g.experience);log("高校"+g.year+"年："+message);if(g.year<3){g.year++;highYear()}else{examPrep()}}
+function takeMock(){let score=clamp(Math.round(g.ability+rnd(-7,7)+(g.focus-50)*.12+(g.health-60)*.08));g.mock=score;$("mock").innerHTML='<div class="result">模試偏差値 '+score+'</div><p class="muted">今回の結果。体調や問題との相性で上下することがある。</p>';$("mockBtn").disabled=true;log("模試の偏差値："+score)}
+function examPrep(){g.phase="ENTRANCE EXAM";stage("出願校を決める","これまでの模試や学力をもとに、どのレベルに挑戦するか決めよう。挑戦校だけでなく、合格を確保する戦略も大切。","受験校のレベルを選ぼう。",tiers.map(t=>({t:t.name,d:"目安："+t.examples+" ／ ゲーム内基準 "+t.need,go:()=>{g.target=t;entrance()}})))}
+function entrance(){let performance=g.ability+(g.focus-50)*.13+(g.health-60)*.09+rnd(-9,8);let pass=performance>=g.target.need;g.phase="RESULT / "+(g.ronin?"浪人"+g.ronin+"年目":"現役");log((g.ronin?"浪人"+g.ronin+"年目":"現役")+"："+g.target.name+"に"+(pass?"合格":"不合格")+"（判定値 "+Math.round(performance)+"）");if(pass){finish(true,performance)}else{failed(performance)}}
+function failed(performance){if(g.ronin>=2){finish(false,performance);return}stage("悔しい結果。でも、ここで終わりじゃない。","今回の挑戦では合格に届かなかった。もう一度挑戦するなら、学力だけでなく生活や気持ちの管理も必要になる。","どうする？",[{t:"浪人して再挑戦する",d:"もう1年、受験勉強を続ける。成績が伸びる可能性も、下がる可能性もある。",go:()=>{g.ronin++;roninYear()}},{t:"別の進路へ進む",d:"進学先を変える、学び直す、働くなど別の道へ。",go:()=>finish(false,performance,true)}])}
+function roninYear(){g.phase="RONIN / YEAR "+g.ronin;let drop=Math.max(0,(55-g.focus)*.12+(55-g.health)*.1+g.ronin*1.5);g.ability=clamp(g.ability-drop);stage("浪人生活 "+g.ronin+"年目","高校生活とは違い、自分で一日のリズムをつくる必要がある。孤独や焦りで集中力が落ちることも。","この1年の過ごし方を選ぼう。",[{t:"計画を立てて毎日やり切る",d:"学力と集中力を伸ばす。負担は大きい。",go:()=>{g.ability+=10;g.focus+=5;g.health-=8;roninFinish("計画的に学習を続けた。")}},{t:"苦手科目を中心に立て直す",d:"弱点を減らす。全体の伸びは堅実。",go:()=>{g.ability+=7;g.focus+=3;g.health-=3;roninFinish("苦手分野を重点的にやり直した。")}},{t:"ペースを落として心身を整える",d:"体力と集中力を回復。学力は維持しにくい。",go:()=>{g.ability-=2;g.focus+=8;g.health+=12;roninFinish("生活リズムを整え、無理のない学習を続けた。")}},{t:"勉強が思うように進まない",d:"焦りや疲れが重なり、成績が下がることも。",go:()=>{g.ability-=8;g.focus-=8;g.health-=5;roninFinish("思うように勉強が進まず、苦しい時期を過ごした。")}}])}
+function roninFinish(msg){g.ability=clamp(g.ability);g.focus=clamp(g.focus);g.health=clamp(g.health);log("浪人"+g.ronin+"年目："+msg);examPrep()}
+function finish(pass,performance,alternate=false){$("play").classList.add("hidden");$("ending").classList.remove("hidden");$("endTitle").textContent=pass?"合格。新しい場所から、次の一歩へ。":alternate?"別の道を選ぶ。":"挑戦はここで一区切り。";$("endText").textContent=pass?g.name+"は"+g.target.name+"に合格した。"+(g.ronin?"浪人を経てつかんだ合格。":"現役でつかんだ合格。")+" 最終学力 "+Math.round(g.ability)+"。":alternate?"受験以外の道へ進む決断をした。ここからの選択も、人生の一部になる。":"今回の受験では合格に届かなかった。結果だけでなく、ここまでの経験も次の道につながっていく。";$("endStats").innerHTML=[["最終学力",g.ability],["集中力",g.focus],["体力",g.health],["浪人年数",g.ronin]].map(([n,v])=>'<div class="stat"><span>'+n+'</span><b>'+Math.round(v)+'</b></div>').join("");$("endHistory").innerHTML=g.logs.map(x=>"<li>"+x+"</li>").join("")}
+$("begin").onclick=start;$("mockBtn").onclick=takeMock;$("again").onclick=()=>{$("ending").classList.add("hidden");$("start").classList.remove("hidden")};
+})();
+</script></body></html>
