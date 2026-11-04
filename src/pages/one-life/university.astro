@@ -5,11 +5,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#f4f0e7">
-<meta name="description" content="青の分岐点・大学受験モード ベータ版">
+<meta name="theme-color" content="#0b0d14">
+<meta name="description" content="受験戦争 — 選択と努力で未来を切り開く大学受験シミュレーション。">
 <link rel="canonical" href="https://knotspace.github.io/one-life/university/">
 <link rel="icon" href="/favicon.svg?v=6" type="image/svg+xml">
-<title>大学受験モード β｜青の分岐点</title>
+<title>受験戦争 β</title>
 <style>.beta-mode-link{display:inline-flex;margin-top:18px;padding:10px 16px;border:1px solid #315d79;border-radius:999px;color:#315d79;text-decoration:none;font-size:12px;font-weight:800;transition:background .2s,color .2s}.beta-mode-link:hover{background:#315d79;color:#fff}
 .life-controls{margin:15px 0;padding:16px 18px;background:var(--panel2);border:1px solid var(--line);display:grid;gap:10px;border-radius:12px}
 .life-clock{display:grid;grid-template-columns:1fr auto;align-items:center;gap:5px}
@@ -119,11 +119,43 @@ body.life-game-body{background:#f4f0e7;color:var(--text)}
 .field input{width:100%;max-width:340px;padding:12px 13px;border:1px solid var(--line);border-radius:4px;background:#fffdf8;color:var(--text);font:inherit}
 .field{display:grid;gap:7px;margin:14px 0}
 .field label{font-size:12px;font-weight:700;color:var(--muted)}
+
+/* JUKEN WARS — dark midnight identity */
+:root{color-scheme:dark;--bg:#090b12;--panel:#121722;--panel2:#191f2d;--surface:#121722;--surface-soft:#191f2d;--line:#30394b;--text:#f1f3fa;--muted:#a0a9bb;--accent:#b5a0ff;font-family:Inter,"Noto Sans JP",system-ui,sans-serif}
+body.life-game-body{background:radial-gradient(ellipse at 50% -20%,#292344 0%,#090b12 62%);color:var(--text)}
+.sim-page{color:var(--text)}
+.sim-hero{border-color:var(--line)}
+.eyebrow,.event-meta{color:var(--accent)}
+.sim-hero h1,.panel h2{color:var(--text)}
+.sim-hero h1 span{color:var(--accent)}
+.sim-hero>p:not(.eyebrow),.event-scene,.event-description{color:var(--muted)}
+.hero-tags span{border-color:var(--line);color:var(--muted)}
+.panel,.stats-panel,.event-card,.diary-log{background:var(--panel);border-color:var(--line);box-shadow:0 8px 28px #0005}
+.start-panel>input,.native-select,.school-select,.school-search,.field input{background:#0d121d;color:var(--text);border-color:var(--line)}
+.path-options label span,.choice-button{background:#171e2b;border-color:var(--line);color:var(--text)}
+.path-options input:checked+span{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.primary-button{background:var(--accent);color:#100d1c}
+.progress-track,.stats-panel i,.clock-track,.life-map-track{background:#283144}
+.progress-track i,.stats-panel i b,.clock-track b,.life-map-track i{background:var(--accent)}
+.event-card{background:linear-gradient(145deg,#1b2030,#111722)}
+.choice-button:hover{border-color:var(--accent);background:#20263a}
+.life-controls,.life-map,.start-note,.result-message,.selected-school,.school-picker{background:#171e2b;border-color:var(--line);color:var(--muted)}
+.clock-actions button{background:#171e2b;border-color:var(--line);color:var(--text)}
+.clock-actions button.active{background:var(--accent);border-color:var(--accent);color:#100d1c}
+.exam-result-banner{background:#20263a;border-color:#45405e;color:var(--text)}
+.exam-result-banner.passed{background:#172b25;border-color:#5a9b78}.exam-result-banner.failed{background:#321e29;border-color:#a45e79}
+.result-message{border-left-color:var(--accent)}
+.independent-footer{border-color:var(--line);color:var(--muted)}
+.independent-footer p{color:var(--text)}
+.independent-footer a,.back-link{color:var(--accent)}
+.quiet-button{background:transparent;color:var(--muted);border-color:var(--line)}
+.achievement-list span{background:#27233a;color:#d0c3ff}
+
 </style>
 </head>
 <body class="life-game-body">
 <main class="sim-page">
-<header class="sim-hero"><p class="eyebrow">AO NO BUNKITEN / UNIVERSITY MODE β</p><h1>青の<span>分岐点。</span></h1><p>誕生から大学受験、そしてその先へ。出会い、学び、受験、進路。選択の積み重ねが、まだ知らない未来へつながっていく。</p><div class="hero-tags"><span>ONE LIFE</span><span>YOUR CHOICES</span><span>YOUR FUTURE</span></div><a class="beta-mode-link" href="/one-life/">← 青の分岐点 本編へ戻る</a></header>
+<header class="sim-hero"><p class="eyebrow">JUKEN WARS / UNIVERSITY EXAM SIMULATION β</p><h1>受験<span>戦争。</span></h1><p>幼少期から高校生活、そして大学受験へ。努力だけでは決まらない。選択と偶然が交差する、もうひとつの受験シミュレーション。</p><div class="hero-tags"><span>ONE LIFE</span><span>EXAM BATTLE</span><span>YOUR FUTURE</span></div><a class="beta-mode-link" href="/one-life/">← 青の分岐点 本編へ戻る</a></header>
 <section id="start" class="panel start-panel">
 <p class="eyebrow">A NEW JOURNEY</p><h2>これからの人生を設定する。</h2>
 <label class="field-label" for="student">主人公の名前</label><input id="student" maxlength="12" placeholder="ニックネーム（任意）"/>
