@@ -28,6 +28,7 @@ const websiteJsonLd = { '@context': 'https://schema.org', '@type': 'WebSite', na
 <a class:list={["study-nav-item", { active: currentPath === `${BASE}study/` }]} href={`${BASE}study/`}><span>⌂</span>ホーム</a>
 <a class:list={["study-nav-item", { active: isActive(`${BASE}study/foundation/`) }]} href={`${BASE}study/foundation/`}><span>✎</span>基礎網羅問題</a>
 <a class:list={["study-nav-item", { active: isActive(`${BASE}study/public-exam/`) }]} href={`${BASE}study/public-exam/`}><span>▣</span>公立高校入試問題精講</a>\n<a class:list={["study-nav-item", { active: isActive(`${BASE}study/summary/`) }]} href={`${BASE}study/summary/`}><span>▤</span>要点まとめ</a>
+<a class:list={["study-nav-item", { active: isActive(`${BASE}study/ema/`) }]} href={`${BASE}study/ema/`}><span>絵</span>合格祈願の絵馬</a>
 <div class="sidebar-spacer"></div><a class="study-back-site" href={BASE}><span>↗</span> KNOT本体へ戻る</a><div class="sidebar-foot">KNOT STUDY <span>·</span> LEARN EVERY DAY</div>
 </aside>
 <header class="study-appbar"><a class="study-mobile-brand" href={`${BASE}study/`}><span class="study-brand-mark">K</span><strong>KNOT<span>.</span> STUDY</strong></a><div class="study-appbar-right"><a class="study-maker-shortcut" href={`${BASE}studio/`}>KNOT制作 ↗</a><span class="study-appbar-caption">YOUR LEARNING SPACE</span><button class="theme-toggle study-theme-toggle" id="theme-toggle" type="button" aria-label="テーマを切り替える" title="テーマを切り替える"><span id="theme-icon">☀</span></button></div></header>
@@ -40,7 +41,7 @@ const websiteJsonLd = { '@context': 'https://schema.org', '@type': 'WebSite', na
 </main>
 <aside id="pwa-install-prompt" class="pwa-prompt" hidden aria-live="polite"><div><strong id="pwa-install-title">KNOT Studyをアプリとして使う</strong><p id="pwa-install-description">ホーム画面に追加すると、Studyをすぐに開けるよ。</p></div><button id="pwa-install-button" type="button">インストール</button><button id="pwa-install-close" type="button" aria-label="閉じる">×</button></aside>
 <nav class="study-bottom-nav" aria-label="Study navigation">
-<a class:list={{ active: currentPath === `${BASE}study/` }} href={`${BASE}study/`}><span>⌂</span><small>ホーム</small></a><a class:list={{ active: isActive(`${BASE}study/foundation/`) }} href={`${BASE}study/foundation/`}><span>✎</span><small>問題演習</small></a><a class:list={{ active: isActive(`${BASE}study/summary/`) }} href={`${BASE}study/summary/`}><span>▤</span><small>要点まとめ</small></a>
+<a class:list={{ active: currentPath === `${BASE}study/` }} href={`${BASE}study/`}><span>⌂</span><small>ホーム</small></a><a class:list={{ active: isActive(`${BASE}study/foundation/`) }} href={`${BASE}study/foundation/`}><span>✎</span><small>問題演習</small></a><a class:list={{ active: isActive(`${BASE}study/summary/`) }} href={`${BASE}study/summary/`}><span>▤</span><small>要点まとめ</small></a><a class:list={{ active: isActive(`${BASE}study/ema/`) }} href={`${BASE}study/ema/`}><span>絵</span><small>絵馬</small></a>
 </nav>
 </div>
 <script is:inline>
