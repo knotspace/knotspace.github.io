@@ -5,7 +5,7 @@
   if (!script || !appId || document.getElementById('knot-release-trigger')) return;
   const dataUrl = new URL('release-notes.json', script.src).href;
   const style = document.createElement('style');
-  style.textContent = \`
+  style.textContent = `
     #knot-release-trigger{position:fixed;right:18px;bottom:18px;z-index:99980;display:flex;align-items:center;gap:8px;padding:11px 15px;border:1px solid rgba(148,163,184,.38);border-radius:999px;background:#111827;color:#f8fafc;box-shadow:0 8px 28px #0003;font:700 12px/1.2 system-ui,sans-serif;cursor:pointer}
     #knot-release-trigger:hover{transform:translateY(-2px);border-color:#60a5fa}
     #knot-release-trigger .knot-rn-dot{width:7px;height:7px;border-radius:50%;background:#60a5fa}
@@ -37,7 +37,7 @@
     html[data-theme="dark"] #knot-release-panel{background:#111827;color:#e5e7eb;border-color:#334155}html[data-theme="dark"] .knot-rn-head,html[data-theme="dark"] .knot-rn-entry,html[data-theme="dark"] .knot-rn-foot{border-color:#334155}html[data-theme="dark"] .knot-rn-close{color:#e5e7eb;border-color:#475569}html[data-theme="dark"] .knot-rn-tab{color:#cbd5e1;border-color:#475569}html[data-theme="dark"] .knot-rn-tab[aria-selected="true"]{color:#fff;border-color:#3b82f6;background:#1d4ed8}html[data-theme="dark"] .knot-rn-entry p,html[data-theme="dark"] .knot-rn-devbox p{color:#cbd5e1}html[data-theme="dark"] .knot-rn-devbox{background:#1e293b;border-color:#475569}html[data-theme="dark"] .knot-rn-tag{background:#334155;color:#e2e8f0}html[data-theme="dark"] .knot-rn-devbox a{color:#93c5fd}
     @media(max-width:520px){#knot-release-trigger{right:12px;bottom:12px;padding:10px 13px}#knot-release-overlay{padding:9px}#knot-release-panel{max-height:88vh;border-radius:16px}.knot-rn-head{padding:18px 17px 13px}.knot-rn-title{font-size:20px}.knot-rn-tabs{padding:11px 17px 0}.knot-rn-list{padding:8px 17px 18px}.knot-rn-foot{padding:10px 17px}}
     @media print{#knot-release-trigger,#knot-release-overlay{display:none!important}}
-  \`;
+  `;
   document.head.appendChild(style);
   const trigger = document.createElement('button');
   trigger.id = 'knot-release-trigger';
