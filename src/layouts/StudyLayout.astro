@@ -26,7 +26,8 @@ const websiteJsonLd = { '@context': 'https://schema.org', '@type': 'WebSite', na
 <a class="study-brand" href={`${BASE}study/`}><span class="study-brand-mark">K</span><span><strong>KNOT<span>.</span></strong><small>STUDY</small></span></a>
 <div class="sidebar-label">LEARN</div>
 <a class:list={["study-nav-item", { active: currentPath === `${BASE}study/` }]} href={`${BASE}study/`}><span>⌂</span>ホーム</a>
-<a class:list={["study-nav-item", { active: isActive(`${BASE}study/foundation/`) }]} href={`${BASE}study/foundation/`}><span>✎</span>基礎網羅問題</a>\n<a class:list={["study-nav-item", { active: isActive(`${BASE}study/summary/`) }]} href={`${BASE}study/summary/`}><span>▤</span>要点まとめ</a>
+<a class:list={["study-nav-item", { active: isActive(`${BASE}study/foundation/`) }]} href={`${BASE}study/foundation/`}><span>✎</span>基礎網羅問題</a>
+<a class:list={["study-nav-item", { active: isActive(`${BASE}study/public-exam/`) }]} href={`${BASE}study/public-exam/`}><span>▣</span>公立高校入試問題精講</a>\n<a class:list={["study-nav-item", { active: isActive(`${BASE}study/summary/`) }]} href={`${BASE}study/summary/`}><span>▤</span>要点まとめ</a>
 <div class="sidebar-spacer"></div><a class="study-back-site" href={BASE}><span>↗</span> KNOT本体へ戻る</a><div class="sidebar-foot">KNOT STUDY <span>·</span> LEARN EVERY DAY</div>
 </aside>
 <header class="study-appbar"><a class="study-mobile-brand" href={`${BASE}study/`}><span class="study-brand-mark">K</span><strong>KNOT<span>.</span> STUDY</strong></a><div class="study-appbar-right"><a class="study-maker-shortcut" href={`${BASE}studio/`}>KNOT制作 ↗</a><span class="study-appbar-caption">YOUR LEARNING SPACE</span><button class="theme-toggle study-theme-toggle" id="theme-toggle" type="button" aria-label="テーマを切り替える" title="テーマを切り替える"><span id="theme-icon">☀</span></button></div></header>
