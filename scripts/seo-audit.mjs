@@ -38,8 +38,8 @@ for (const file of htmlFiles) {
   if (relative.startsWith('admin/') || relative === '404.html' || /^google[0-9a-f]+\.html$/i.test(relative)) continue;
   const html = fs.readFileSync(file, 'utf8');
   if (relative === 'game/university/index.html' || relative === '青の分岐点/index.html') {
+    let inlineIndex = 0;
     for (const script of html.matchAll(/<script\b(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/gi)) {
-    for (const script of html.matchAll(/<script\\b(?![^>]*\\bsrc=)[^>]*>([\\s\\S]*?)<\\/script>/gi)) {
       try { new vm.Script(script[1], { filename: relative + '#inline-' + inlineIndex }); }
       catch (error) { errors.push(relative + ': inline JavaScript syntax error (' + error.message + ')'); }
       inlineIndex++;
