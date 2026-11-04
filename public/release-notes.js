@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   const script = document.currentScript;
-  const appId = document.documentElement.dataset.releaseApp;
+  const appId = script.dataset.releaseApp || document.documentElement.dataset.releaseApp;
   if (!script || !appId || document.getElementById('knot-release-trigger')) return;
   const dataUrl = new URL('release-notes.json', script.src).href;
   const style = document.createElement('style');
