@@ -1,4 +1,4 @@
-const CACHE = 'knot-study-v4';
+const CACHE = 'knot-study-v5';
 const SCOPE = new URL('./study/', self.location.href).pathname;
 
 self.addEventListener('install', (event) => {
