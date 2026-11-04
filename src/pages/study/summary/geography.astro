@@ -1,4 +1,4 @@
 ---
-const target = new URL('../foundation/', Astro.url);
+import StudySummaryPage from '../../../components/StudySummaryPage.astro';
 ---
-<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0;url={target.pathname}"><link rel="canonical" href={target.href}><title>基礎網羅問題へ</title></head><body><p><a href={target.href}>基礎網羅問題へ移動</a></p></body></html>
+<StudySummaryPage title="地理" subject="社会" topic="geography" description="世界と日本の地形・気候・産業・人口・貿易を比較表や資料で整理。地図・統計を読む視点も確認できます。" intro="地図・気候・産業・統計を結びつけ、地域ごとの特色を説明できるようにする。" />
