@@ -6,13 +6,13 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <meta name="theme-color" content="#f4f0e7"/>
-<meta name="description" content="小学校から若年期まで、自分の選択で人生を進める本格人生シミュレーション。"/><link rel="canonical" href="https://knotspace.github.io/game/university/"/><link rel="icon" href="/favicon.svg?v=6" type="image/svg+xml"/><link rel="shortcut icon" href="/favicon.svg?v=6" type="image/svg+xml"/><link rel="apple-touch-icon" href="/favicon.svg?v=6"/>
-<title>青の分岐点｜人生シミュレーション</title>
+<meta name="description" content="幼少期から高校・大学受験、進学後まで。選択と努力で未来が分岐する受験シミュレーション。"/><link rel="canonical" href="https://knotspace.github.io/game/university/"/><link rel="icon" href="/favicon.svg?v=6" type="image/svg+xml"/><link rel="shortcut icon" href="/favicon.svg?v=6" type="image/svg+xml"/><link rel="apple-touch-icon" href="/favicon.svg?v=6"/>
+<title>受験戦争｜人生シミュレーション</title>
 <style>.beta-mode-link{display:inline-flex;margin-top:18px;padding:10px 16px;border:1px solid #315d79;border-radius:999px;color:#315d79;text-decoration:none;font-size:12px;font-weight:800;transition:background .2s,color .2s}.beta-mode-link:hover{background:#315d79;color:#fff}</style>
 </head>
 <body class="life-game-body">
 <main class="sim-page">
-<header class="sim-hero"><p class="eyebrow">AO NO BUNKITEN / LIFE SIMULATION</p><h1>青の<span>分岐点。</span></h1><p>ひとりぶんの人生を、小学校から若年期まで。出会い、学び、受験、進路。選択の積み重ねが、まだ知らない未来へつながっていく。</p><div class="hero-tags"><span>ONE LIFE</span><span>YOUR CHOICES</span><span>YOUR FUTURE</span></div></header>
+<header class="sim-hero"><p class="eyebrow">JUKEN SENSO / EXAM LIFE SIMULATION</p><h1>受験<span>戦争。</span></h1><p>幼少期から大学受験まで。学校選び、日々の勉強、模試、入試。積み重ねた選択が進路と未来を変えていく。</p><div class="hero-tags"><span>JUKEN WARS</span><span>YOUR EFFORT</span><span>YOUR FUTURE</span></div></header>
 <section id="start-screen" class="panel start-panel">
 <p class="eyebrow">A NEW JOURNEY</p><h2>これからの人生を設定する。</h2>
 <label class="field-label" for="player-name">主人公の名前</label><input id="player-name" maxlength="12" placeholder="ニックネーム（任意）"/>
@@ -35,15 +35,15 @@
 <div class="life-map"><div class="life-map-head"><strong>人生の軌跡</strong><span id="life-age-label">START</span></div><div class="life-map-track"><i id="life-map-progress"></i></div></div><div class="diary-log"><h3>人生の記録</h3><ol id="diary-list"></ol></div><button id="save-exit" class="quiet-button">ここまでの記録を保存して閉じる</button>
 </section>
 <section id="result-screen" class="panel result-panel" hidden>
-<p class="eyebrow">YOUR LIFE / YOUNG ADULTHOOD</p><h2 id="ending-title">あなたの人生の、その先へ。</h2><p id="ending-copy" class="ending-copy"></p><div id="result-stats" class="result-stats"></div><div id="achievement-list" class="achievement-list"></div>
+<p class="eyebrow">YOUR EXAM JOURNEY / FUTURE</p><h2 id="ending-title">あなたの人生の、その先へ。</h2><p id="ending-copy" class="ending-copy"></p><div id="result-stats" class="result-stats"></div><div id="achievement-list" class="achievement-list"></div>
 <div class="result-message"><strong>この人生で育てたもの</strong><p id="result-reflection"></p></div><h3 class="timeline-heading">歩んできた人生</h3><ol id="final-diary" class="final-diary"></ol>
 <div class="result-message future-box"><strong>この若年期から考えられる、その後の未来</strong><p id="future-copy"></p></div>
 <div class="result-actions"><button id="restart-game" class="primary-button">別の人生を歩む ↻</button></div><p class="fine-print">ゲーム内の選択と数値から作るフィクションの展望です。現実の人生はこの結果に固定されず、何度でも選び直せます。</p>
 </section>
 </main>
-<footer class="independent-footer"><p>青の分岐点 — 選ばなかった道にも、人生がある。</p><nav><a href="/">KNOT</a><a href="/study/">KNOT Study</a><a href="/" aria-label="作者 KNOT">作者：KNOT</a></nav><small>このゲームは独立した創作シミュレーションです。現実の人生や受験結果を予測するものではありません。</small><div class="credit-note"><p>この日本版は、世界版のアイデアをお借りして作りました。</p><p>世界版 <a href="https://1in8b.life/" target="_blank" rel="noopener noreferrer">1 in 8 Billion</a> by <a href="https://x.com/jins__earth" target="_blank" rel="noopener noreferrer">Jin (@jins__earth)</a></p><p>日本版 <a href="https://rs-developing26.github.io/1oku2380man/" target="_blank" rel="noopener noreferrer">1.2億分の一</a> by <a href="https://x.com/RS_Developing" target="_blank" rel="noopener noreferrer">RS Developing</a></p><p>この青の分岐点は世界版と日本版のアイデアをお借りして作りました。本家もぜひ遊んでみてください。</p></div></footer>
+<footer class="independent-footer"><p>受験戦争 — 選んだ道を、努力で切り拓け。</p><nav><a href="/">KNOT</a><a href="/study/">KNOT Study</a><a href="/" aria-label="作者 KNOT">作者：KNOT</a></nav><small>このゲームは独立した創作シミュレーションです。現実の人生や受験結果を予測するものではありません。</small><div class="credit-note"><p>受験戦争は、青の分岐点のゲームエンジンを基にした独立版です。</p><p>世界版 <a href="https://1in8b.life/" target="_blank" rel="noopener noreferrer">1 in 8 Billion</a> by <a href="https://x.com/jins__earth" target="_blank" rel="noopener noreferrer">Jin (@jins__earth)</a></p><p>日本版 <a href="https://rs-developing26.github.io/1oku2380man/" target="_blank" rel="noopener noreferrer">1.2億分の一</a> by <a href="https://x.com/RS_Developing" target="_blank" rel="noopener noreferrer">RS Developing</a></p><p>受験戦争は学習・進路選択を題材にした創作シミュレーションです。</p></div></footer>
 <script>
-import deviationData from '../../data/game/deviation-scores.json';
+import deviationData from '../../data/game/university/deviation-scores.json';
 const $=id=>document.getElementById(id), clamp=n=>Math.max(0,Math.min(100,n));
 const normalizeSchoolName=name=>String(name||'').replace(/^(北海道|東京都|大阪府|京都府|.{2,3}県)立/,'').replace(/^栃木県/,'');
 const deviationMap = new Map((deviationData.scores || []).map(x=>[normalizeSchoolName(x.name),x]));
@@ -87,7 +87,7 @@ async function loadSchools(pref){
  loadedPrefecture=pref;schoolsLoaded=false;schoolRecords=[];
  const file=String(index+1).padStart(2,'0')+'.json';
  try{
-  const response=await fetch('/data/game/schools/'+file);
+  const response=await fetch('/data/game/university/schools/'+file);
   if(!response.ok)throw new Error('school chunk unavailable');
   const data=await response.json();
   if(loadedPrefecture!==pref)return;
@@ -255,7 +255,7 @@ function buildStages(){
 
 function renderArchive(){
  const list=$('past-life-list');if(!list)return;list.replaceChildren();
- let archive=[];try{archive=JSON.parse(localStorage.getItem('one-life-archive-v1')||'[]');}catch{}
+ let archive=[];try{archive=JSON.parse(localStorage.getItem('jukensenso-archive-v1')||'[]');}catch{}
  if(!archive.length){const p=document.createElement('p');p.className='archive-empty';p.textContent='まだ人生の記録はありません。最初の人生を最後まで歩んでみよう。';list.append(p);return;}
  archive.slice(0,10).forEach((item,i)=>{
   const card=document.createElement('article');card.className='archive-card';
@@ -288,7 +288,7 @@ function startClock(){
     $('pause-game').textContent='再開';
     const canChoose=!getExamType(stages[state.step]?.tag)||!!state.pendingSchool;
     document.querySelectorAll('.choice-button').forEach(button=>button.disabled=!canChoose);
-    try{localStorage.setItem('knot-life-sim-v2',JSON.stringify(state));}catch{}
+    try{localStorage.setItem('jukensenso-life-sim-v1',JSON.stringify(state));}catch{}
    }
   }
  },250);
