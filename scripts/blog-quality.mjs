@@ -64,7 +64,13 @@ const publicHelplineFiles = new Set([
   'public/青の分岐点/i18n/zh.json'
 ]);
 // These files use grade labels as generic fictional simulation stages, not as personal profile data.
-const gradeLabelFiles = new Set(['src/pages/game/life.astro','src/pages/one-life/index.astro','src/utils/academic-grade.ts','src/utils/profile-age.ts']);
+const gradeLabelFiles = new Set([
+  'src/pages/game/life.astro',
+  'src/pages/one-life/index.astro',
+  'src/pages/one-life/university.astro',
+  'src/utils/academic-grade.ts',
+  'src/utils/profile-age.ts'
+]);
 for (const dir of dirs) for (const file of walk(path.join(root,dir))) {
   const relative = path.relative(root,file);
   const content=fs.readFileSync(file,'utf8');
