@@ -32,7 +32,7 @@ const topics = [...new Set(regularQuestions.map(q => q.topic))];
       const form = document.getElementById('secret-login');
       const input = document.getElementById('secret-password');
       const error = document.getElementById('secret-error');
-      const PASSWORD = 'kosen';
+      const PASSWORD = 'knot-private';
       const KEY = 'knot-study-secret-unlocked';
       const unlock = () => { root.classList.remove('is-locked'); gate.remove(); };
       try { if (sessionStorage.getItem(KEY) === '1') unlock(); } catch {}
