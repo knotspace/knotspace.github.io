@@ -1,6 +1,19 @@
 {
   "releases": [
     {
+      "id": "f466f7c",
+      "publishedAt": "2026-11-04T19:11:21+09:00",
+      "title": "基礎網羅問題に応用モードと出典表示を追加",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "基礎演習"
+      ],
+      "files": [
+        "src/pages/study/foundation.astro"
+      ]
+    },
+    {
       "id": "b7c75f0",
       "publishedAt": "2026-11-04T19:10:39+09:00",
       "title": "要点まとめ資料の収録数メタデータを修正",
