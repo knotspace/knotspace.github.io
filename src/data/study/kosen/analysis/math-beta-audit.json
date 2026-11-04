@@ -1,0 +1,154 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-04",
+  "target": "src/data/study/private-math-beta.json (13問)",
+  "tools": [
+    "scripts/study/verify-math-beta.py",
+    "scripts/study/compute-math-r8.py"
+  ],
+  "result": {
+    "answersCorrect": 13,
+    "answersIncorrect": 0,
+    "officialKeyMatched": 6,
+    "independentRecomputeOnly": 7,
+    "note": "正答は13問とも正しい。ただし令和8年度6問と令和7年度大問3(1)(別問題化したため)の計7問は公式正解表での照合ではなく独立計算による確認。",
+    "reconstructionCounts": {
+      "same-setting": 11,
+      "derived": 1,
+      "changed": 1
+    }
+  },
+  "findings": [
+    {
+      "severity": "high",
+      "text": "13問中11問は原本の小問と同じ設定・同じ問いを四択にしただけ、1問(b2-03)は原本の答えの一部(傾き)を問うだけで、条件を変えて別問題にしたのは1問(b3-01)のみ。指示書が求める「問う力を抽出して条件・設定・図表を新しく構成した再構成問題」ではなく、公開リポジトリ上では原本設問の実質的な転載になりうる。新DBの公開問題には使わない方針とし、既存画面の互換のため当面は削除しない。置き換えは未決(利用者の判断待ち)。"
+    },
+    {
+      "severity": "medium",
+      "text": "kosen-math-2025-b3-01 の出典注記が、原本の条件(弧の比)と異なるのに同じ条件を使ったと読める表現だった。注記を訂正済み。"
+    },
+    {
+      "severity": "low",
+      "text": "正解位置は選択肢1(0始まり)が0問、選択肢2が6問、3が5問、4が2問で偏りがある(0番目が正解の問題が無い)。"
+    }
+  ],
+  "items": [
+    {
+      "id": "kosen-math-2025-b2-01",
+      "correspondsTo": "2025 大問2(1)",
+      "reconstruction": "same-setting",
+      "reason": "原本と同じ設定・同じ問い(aの値)を四択にしただけ",
+      "answerVerified": true,
+      "verifiedAgainst": "official-key",
+      "registeredAnswer": "18"
+    },
+    {
+      "id": "kosen-math-2025-b3-01",
+      "correspondsTo": "2025 大問3(1)",
+      "reconstruction": "changed",
+      "reason": "弧の比→弦の比、問う量も角度→長さに変更。旧注記は原本と同じ条件と誤解させる表現だった(訂正済み)",
+      "answerVerified": true,
+      "verifiedAgainst": "independent-recompute",
+      "registeredAnswer": "8cm"
+    },
+    {
+      "id": "kosen-math-2025-b4-01",
+      "correspondsTo": "2025 大問4(1)ア",
+      "reconstruction": "same-setting",
+      "reason": "原本の小問と同じ値(P[-3,2])",
+      "answerVerified": true,
+      "verifiedAgainst": "official-key",
+      "registeredAnswer": "9"
+    },
+    {
+      "id": "kosen-math-2026-b2-01",
+      "correspondsTo": "2026 大問2(2)",
+      "reconstruction": "same-setting",
+      "reason": "原本の穴埋め(一般式)を選択肢にしただけ",
+      "answerVerified": true,
+      "verifiedAgainst": "independent-recompute",
+      "registeredAnswer": "3n/2＋4"
+    },
+    {
+      "id": "kosen-math-2026-b3-01",
+      "correspondsTo": "2026 大問3(1)",
+      "reconstruction": "same-setting",
+      "reason": "原本は80秒の読み取りから速さを導く。本問は速さを与えており易化",
+      "answerVerified": true,
+      "verifiedAgainst": "independent-recompute",
+      "registeredAnswer": "150m"
+    },
+    {
+      "id": "kosen-math-2026-b4-01",
+      "correspondsTo": "2026 大問4(1)",
+      "reconstruction": "same-setting",
+      "reason": "原本と同じ設問(切り口の形)",
+      "answerVerified": true,
+      "verifiedAgainst": "independent-recompute",
+      "registeredAnswer": "六角形"
+    },
+    {
+      "id": "kosen-math-2025-b2-02",
+      "correspondsTo": "2025 大問2(2)",
+      "reconstruction": "same-setting",
+      "reason": "原本と同じ条件(整数座標・xは6より大きい)",
+      "answerVerified": true,
+      "verifiedAgainst": "official-key",
+      "registeredAnswer": "(9,2)"
+    },
+    {
+      "id": "kosen-math-2025-b2-03",
+      "correspondsTo": "2025 大問2(3)",
+      "reconstruction": "derived",
+      "reason": "原本の直線ABの式のうち傾きだけを問う",
+      "answerVerified": true,
+      "verifiedAgainst": "official-key",
+      "registeredAnswer": "−1/3"
+    },
+    {
+      "id": "kosen-math-2025-b4-02",
+      "correspondsTo": "2025 大問4(2)",
+      "reconstruction": "same-setting",
+      "reason": "選択肢4つとも原本の選択肢(11択のうち)と同一の式",
+      "answerVerified": true,
+      "verifiedAgainst": "official-key",
+      "registeredAnswer": "P[A[T[x,2],3],4]"
+    },
+    {
+      "id": "kosen-math-2025-b4-04",
+      "correspondsTo": "2025 大問4(4)",
+      "reconstruction": "same-setting",
+      "reason": "原本の数列を言い換えただけ(答え150)",
+      "answerVerified": true,
+      "verifiedAgainst": "official-key",
+      "registeredAnswer": "150"
+    },
+    {
+      "id": "kosen-math-2026-b2-02",
+      "correspondsTo": "2026 大問2(1)前半",
+      "reconstruction": "same-setting",
+      "reason": "原本と同じ(6番目の三角形の格子点数)",
+      "answerVerified": true,
+      "verifiedAgainst": "independent-recompute",
+      "registeredAnswer": "13個"
+    },
+    {
+      "id": "kosen-math-2026-b3-02",
+      "correspondsTo": "2026 大問3(2)",
+      "reconstruction": "same-setting",
+      "reason": "原本と同じ(係数a)。出会う点のデータを与えている",
+      "answerVerified": true,
+      "verifiedAgainst": "independent-recompute",
+      "registeredAnswer": "1/6"
+    },
+    {
+      "id": "kosen-math-2026-b3-03",
+      "correspondsTo": "2026 大問3(3)前半",
+      "reconstruction": "same-setting",
+      "reason": "原本の前半(Bさんの速さ)。後半(出会う地点84m)は未出題",
+      "answerVerified": true,
+      "verifiedAgainst": "independent-recompute",
+      "registeredAnswer": "1.5m"
+    }
+  ]
+}
