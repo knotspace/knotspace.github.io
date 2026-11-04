@@ -10,7 +10,28 @@
 <link rel="canonical" href="https://knotspace.github.io/one-life/university/">
 <link rel="icon" href="/favicon.svg?v=6" type="image/svg+xml">
 <title>大学受験モード β｜青の分岐点</title>
-<style>.beta-mode-link{display:inline-flex;margin-top:18px;padding:10px 16px;border:1px solid #315d79;border-radius:999px;color:#315d79;text-decoration:none;font-size:12px;font-weight:800;transition:background .2s,color .2s}.beta-mode-link:hover{background:#315d79;color:#fff}</style>
+<style>.beta-mode-link{display:inline-flex;margin-top:18px;padding:10px 16px;border:1px solid #315d79;border-radius:999px;color:#315d79;text-decoration:none;font-size:12px;font-weight:800;transition:background .2s,color .2s}.beta-mode-link:hover{background:#315d79;color:#fff}
+.life-controls{margin:15px 0;padding:16px 18px;background:var(--panel2);border:1px solid var(--line);display:grid;gap:10px;border-radius:12px}
+.life-clock{display:grid;grid-template-columns:1fr auto;align-items:center;gap:5px}
+.life-clock span,.auto-control,#clock-message{font-size:11px;color:var(--muted)}
+.life-clock strong{font:700 15px ui-monospace,monospace}
+.clock-track{grid-column:1/-1;display:block;height:5px;background:var(--line);border-radius:8px;overflow:hidden}
+.clock-track b{display:block;width:0;height:100%;background:var(--accent)}
+.clock-actions{display:flex;gap:5px;flex-wrap:wrap}
+.clock-actions button{border:1px solid var(--line);background:var(--surface-soft);color:var(--text);padding:7px 11px;font:inherit;font-size:10px;cursor:pointer;border-radius:7px}
+.clock-actions button.active{background:var(--accent);border-color:var(--accent);color:#071426}
+.auto-control{display:flex;align-items:center;gap:7px}
+#clock-message{margin:0}
+.birthplace-label{display:inline-block;margin:0;padding:10px 13px;border:1px solid var(--line);border-radius:8px;background:var(--surface-soft);font-size:12px;color:var(--accent);font-weight:800}
+.start-note{margin:16px 0;padding:12px 14px;background:var(--surface-soft);color:var(--muted);font-size:11px;line-height:1.8;border:1px solid var(--line);border-radius:9px}
+.independent-footer{max-width:1000px;margin:0 auto;padding:28px 22px 42px;border-top:1px solid var(--line);color:var(--muted);text-align:center}
+.independent-footer p{font-size:13px;color:var(--text)}
+.independent-footer nav{display:flex;justify-content:center;gap:18px;margin:13px}
+.independent-footer a{color:var(--accent);font-size:11px}
+.independent-footer small{font-size:9px;line-height:1.7}
+.credit-note{margin-top:15px}
+@media(max-width:650px){.life-controls{padding:13px}.clock-actions button{padding:8px 10px}}
+</style>
 <style>
 :root{color-scheme:dark;--bg:#0b1018;--panel:#151e2b;--panel2:#1b2737;--surface:#151e2b;--surface-soft:#1b2737;--line:#2d3b4f;--text:#edf3fb;--muted:#9eacc0;--accent:#9cf06b;font-family:Inter,"Noto Sans JP",system-ui,sans-serif}
 *{box-sizing:border-box}body.life-game-body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% -20%,#23344c 0%,#0b1018 58%);color:var(--text)}
@@ -102,17 +123,24 @@ body.life-game-body{background:#f4f0e7;color:var(--text)}
 </head>
 <body class="life-game-body">
 <main class="sim-page">
-<header class="sim-hero"><p class="eyebrow">AO NO BUNKITEN / UNIVERSITY MODE β</p><h1>青の<span>分岐点。</span></h1><p>誕生から幼少期、小学校、中学校、高校へ。選択の積み重ねの先に、大学受験とその後の未来が待っている。</p><div class="hero-tags"><span>ONE LIFE</span><span>YOUR CHOICES</span><span>UNIVERSITY MODE</span></div><a class="beta-mode-link" href="/one-life/">← 青の分岐点 本編へ戻る</a></header>
+<header class="sim-hero"><p class="eyebrow">AO NO BUNKITEN / UNIVERSITY MODE β</p><h1>青の<span>分岐点。</span></h1><p>誕生から大学受験、そしてその先へ。出会い、学び、受験、進路。選択の積み重ねが、まだ知らない未来へつながっていく。</p><div class="hero-tags"><span>ONE LIFE</span><span>YOUR CHOICES</span><span>YOUR FUTURE</span></div><a class="beta-mode-link" href="/one-life/">← 青の分岐点 本編へ戻る</a></header>
 <section id="start" class="panel start-panel">
-<p class="eyebrow">A NEW JOURNEY</p><h2>0歳から、人生を始める。</h2>
-<div class="field"><label for="student">主人公の名前</label><input id="student" maxlength="12" placeholder="ニックネーム（任意）"/></div>
-<div class="start-note">0歳から人生が始まり、幼少期・小学校・中学校・高校を経て大学受験へ。選択によって学力や経験が変化し、浪人も選べる。</div>
+<p class="eyebrow">A NEW JOURNEY</p><h2>これからの人生を設定する。</h2>
+<label class="field-label" for="student">主人公の名前</label><input id="student" maxlength="12" placeholder="ニックネーム（任意）"/>
+<label class="field-label">生まれた場所</label><p id="birthplace-label" class="birthplace-label">開始時にランダムで決まります。</p>
+<label class="field-label" for="duration">人生を体験する時間</label><select id="duration" class="native-select"><option value="10">約10分（テンポよく体験）</option><option value="30" selected>約30分（じっくり体験）</option><option value="60">約60分（深く体験）</option><option value="90">約90分（じっくり体験）</option></select>
+<p class="field-label">生まれ持った個性を選ぼう</p><div class="path-options">
+<label><input type="radio" name="talent" value="balanced" checked/><span><b>バランス型</b><small>学力・集中力・体力・経験を平均的に伸ばす</small></span></label>
+<label><input type="radio" name="talent" value="curious"/><span><b>探究型</b><small>学力と集中力が伸びやすい</small></span></label>
+<label><input type="radio" name="talent" value="social"/><span><b>社交型</b><small>経験と人との関わりから成長する</small></span></label>
+</div>
+<div class="start-note">生まれた都道府県は毎回ランダム。幼少期・小学校・中学校・高校を経て大学受験へ。浪人も含め、選択によって人生が変化する。</div>
 <button id="begin" class="primary-button">この人生を始める →</button>
 <p class="fine-print">大学の難易度・合否はゲーム内の仮設定です。実際の合格可能性を示すものではありません。</p>
 </section>
 <section id="play" hidden>
-<div class="game-top"><div><p class="eyebrow" id="phase">EARLY CHILDHOOD / AGE 0</p><h2 id="heading">0歳・幼少期</h2><p id="story"></p></div><div class="progress-wrap"><span id="age-label">AGE 0</span><div class="progress-track"><i id="age-progress"></i></div></div></div>
-<div class="stats-panel" id="stats"></div>
+<div class="game-top"><div><p class="eyebrow" id="phase">YOUR LIFE JOURNEY</p><h2 id="heading">0歳・幼少期</h2><p id="story"></p></div><div class="progress-wrap"><span id="age-label">AGE 0</span><div class="progress-track"><i id="age-progress"></i></div></div></div>
+<div class="life-controls"><div class="life-clock"><span>この1年の時間</span><strong id="year-time-label">--:--</strong><i class="clock-track"><b id="year-time-bar"></b></i></div><div class="clock-actions"><button id="pause-game" type="button">一時停止</button><button data-speed="1" class="speed-button active" type="button">1×</button><button data-speed="2" class="speed-button" type="button">2×</button><button data-speed="4" class="speed-button" type="button">4×</button><button data-speed="8" class="speed-button" type="button">8×</button></div><label class="auto-control"><input id="auto-choice" type="checkbox"/> 決断をおまかせ（時間切れで自動選択）</label><p id="clock-message">時間が進んでいます。選択肢を選んで進めよう。</p></div><div class="stats-panel" id="stats"></div>
 <article class="event-card"><div class="event-meta"><span id="event-tag">LIFE STAGE</span><span id="event-number">EPISODE 01</span></div><p id="event-scene" class="event-scene"></p><h3 id="prompt"></h3><p id="event-description" class="event-description"></p><div id="choices" class="choices"></div></article>
 <div class="life-map"><div class="life-map-head"><strong>人生の軌跡</strong><span id="life-age-label">AGE 0</span></div><div class="life-map-track"><i id="life-map-progress"></i></div></div>
 <div class="diary-log"><h3>人生の記録</h3><ol id="history"></ol></div>
@@ -130,7 +158,15 @@ function log(s){g.logs.unshift(s);renderHistory()}
 function stats(){const arr=[["学力",g.ability],["集中力",g.focus],["体力",g.health],["経験",g.experience]];$("stats").innerHTML=arr.map(([n,v])=>'<div><span>'+n+'</span><strong>'+Math.round(v)+'</strong><i><b style="width:'+clamp(v)+'%"></b></i></div>').join("")}
 function renderHistory(){$("history").innerHTML=g.logs.slice(0,12).map(x=>"<li>"+x+"</li>").join("")}
 function stage(title,story,prompt,opts){$("phase").textContent=g.phase;$("heading").textContent=title;$("story").textContent=story;$("prompt").textContent=prompt;$("event-tag").textContent=g.phase;$("event-number").textContent="AGE "+g.age+" / EPISODE "+String(g.logs.length+1).padStart(2,"0");$("event-scene").textContent=story;$("event-description").textContent=prompt;$("age-label").textContent="AGE "+g.age;$("life-age-label").textContent="AGE "+g.age;$("age-progress").style.width=(g.age/18*100)+"%";$("life-map-progress").style.width=(g.age/18*100)+"%";$("choices").innerHTML=opts.map((o,i)=>'<button class="choice-button" data-i="'+i+'"><strong>'+o.t+'</strong><small>'+o.d+'</small></button>').join("");$("choices").querySelectorAll("button").forEach(b=>b.onclick=()=>opts[+b.dataset.i].go());stats();renderHistory()}
-function start(){g={name:$("student").value.trim()||"あなた",ability:35,focus:55,health:75,experience:35,goal:62,age:0,ronin:0,logs:[],mock:0,done:false};$("start").hidden=true;$("ending").hidden=true;$("play").hidden=false;lifeYear()}
+function start(){
+const prefectures=["北海道","青森県","岩手県","宮城県","秋田県","山形県","福島県","茨城県","栃木県","群馬県","埼玉県","千葉県","東京都","神奈川県","新潟県","富山県","石川県","福井県","山梨県","長野県","岐阜県","静岡県","愛知県","三重県","滋賀県","京都府","大阪府","兵庫県","奈良県","和歌山県","鳥取県","島根県","岡山県","広島県","山口県","徳島県","香川県","愛媛県","高知県","福岡県","佐賀県","長崎県","熊本県","大分県","宮崎県","鹿児島県","沖縄県"];
+const birthplace=prefectures[Math.floor(Math.random()*prefectures.length)];
+const talent=document.querySelector('input[name="talent"]:checked')?.value||"balanced";
+const bonus=talent==="curious"?{ability:8,focus:7,health:0,experience:0}:talent==="social"?{ability:0,focus:0,health:5,experience:9}:{ability:3,focus:3,health:3,experience:3};
+g={name:$("student").value.trim()||"あなた",birthplace,talent,ability:35+bonus.ability,focus:55+bonus.focus,health:75+bonus.health,experience:35+bonus.experience,goal:62,age:0,ronin:0,logs:[],mock:0,done:false,duration:Number($("duration").value)||30,speed:1,paused:false};
+$("birthplace-label").textContent="出生地："+birthplace;
+$("start").hidden=true;$("ending").hidden=true;$("play").hidden=false;lifeYear();startClock();
+}
 function lifeYear(){
 const a=g.age,school=[{t:"毎日少しずつ宿題と復習をする",d:"机に向かう習慣が身につく。",go:()=>lifeAdvance("毎日少しずつ学び、基礎を積み重ねた。",7,0,0,1)},{t:"友達と遊びながらいろいろなことを経験する",d:"人との関わりや遊びから学ぶ。",go:()=>lifeAdvance("友達との時間や遊びから多くを学んだ。",0,0,5,7)},{t:"スポーツや習い事に打ち込む",d:"続ける力と経験が伸びる。",go:()=>lifeAdvance("スポーツや習い事に打ち込み、経験を重ねた。",1,0,6,6)}];
 const middle=[{t:"授業と復習を大切にする",d:"基礎を積み重ね、学ぶ力を伸ばす。",go:()=>lifeAdvance("授業と復習を大切にし、基礎を積み重ねた。",8,4,-2,1)},{t:"部活動や学校行事に力を入れる",d:"仲間と取り組む経験が増える。",go:()=>lifeAdvance("部活動や学校行事に力を入れた。",1,0,-2,8)},{t:"勉強と遊びのバランスを取る",d:"無理をしすぎず、毎日を充実させる。",go:()=>lifeAdvance("勉強と遊びのバランスを取った。",4,2,3,4)}];
@@ -144,15 +180,29 @@ g.phase=(a<=5?"EARLY CHILDHOOD":a<=11?"ELEMENTARY SCHOOL":a<=14?"JUNIOR HIGH SCH
 $("mockBtn").disabled=a<15;$("mockBtn").textContent=a<15?"高校生から模試を受けられます":"模試を受ける";
 stage(title,story,"この時期をどう過ごす？",opts);
 }
-function lifeAdvance(message,study,focus,health,experience){g.ability=clamp(g.ability+study);g.focus=clamp(g.focus+focus);g.health=clamp(g.health+health);g.experience=clamp(g.experience+experience);log((g.age===0?"誕生":g.age+"歳")+ "："+message);g.age++;if(g.age<=17)lifeYear();else examPrep()}
+function lifeAdvance(message,study,focus,health,experience){stopClock();g.ability=clamp(g.ability+study);g.focus=clamp(g.focus+focus);g.health=clamp(g.health+health);g.experience=clamp(g.experience+experience);log((g.age===0?"誕生":g.age+"歳")+ "："+message);g.age++;if(g.age<=17){lifeYear();startClock()}else examPrep()}
 function nextTerm(message){g.ability=clamp(g.ability);g.focus=clamp(g.focus);g.health=clamp(g.health);g.experience=clamp(g.experience);log("高校"+g.year+"年："+message);if(g.year<3){g.year++;highYear()}else{examPrep()}}
+function stopClock(){if(g?.clockHandle){clearInterval(g.clockHandle);g.clockHandle=null}}
+function startClock(){
+ stopClock();if(!g)return;g.yearRemaining=(Number(g.duration)||30)*60000/18;g.clockStarted=Date.now();
+ g.clockHandle=setInterval(()=>{
+  if(!g||g.paused)return;
+  const elapsed=Date.now()-g.clockStarted;g.clockStarted=Date.now();g.yearRemaining=Math.max(0,g.yearRemaining-elapsed*(g.speed||1));
+  $("year-time-label").textContent=Math.ceil(g.yearRemaining/1000)+"秒";
+  $("year-time-bar").style.width=(100*(1-g.yearRemaining/((Number(g.duration)||30)*60000/18)))+"%";
+  if(g.yearRemaining<=0){stopClock();$("clock-message").textContent="時間切れ。選択肢から進めよう。";if($("auto-choice").checked){const first=$("choices").querySelector("button");if(first)first.click()}}
+ },250);
+}
+$("pause-game").onclick=()=>{g.paused=!g.paused;$("pause-game").textContent=g.paused?"再開":"一時停止";if(!g.paused){g.clockStarted=Date.now();startClock()}};
+document.querySelectorAll("[data-speed]").forEach(b=>b.onclick=()=>{g.speed=Number(b.dataset.speed);document.querySelectorAll("[data-speed]").forEach(x=>x.classList.toggle("active",x===b))});
 function takeMock(){let score=clamp(Math.round(g.ability+rnd(-7,7)+(g.focus-50)*.12+(g.health-60)*.08));g.mock=score;$("mock").innerHTML='<div class="result">模試偏差値 '+score+'</div><p class="muted">今回の結果。体調や問題との相性で上下することがある。</p>';$("mockBtn").disabled=true;log("模試の偏差値："+score)}
 function examPrep(){g.phase="ENTRANCE EXAM";stage("出願校を決める","これまでの模試や学力をもとに、どのレベルに挑戦するか決めよう。挑戦校だけでなく、合格を確保する戦略も大切。","受験校のレベルを選ぼう。",tiers.map(t=>({t:t.name,d:"目安："+t.examples+" ／ ゲーム内基準 "+t.need,go:()=>{g.target=t;entrance()}})))}
-function entrance(){let performance=g.ability+(g.focus-50)*.13+(g.health-60)*.09+rnd(-9,8);let pass=performance>=g.target.need;g.phase="RESULT / "+(g.ronin?"浪人"+g.ronin+"年目":"現役");log((g.ronin?"浪人"+g.ronin+"年目":"現役")+"："+g.target.name+"に"+(pass?"合格":"不合格")+"（判定値 "+Math.round(performance)+"）");if(pass){finish(true,performance)}else{failed(performance)}}
+function entrance(){stopClock();let performance=g.ability+(g.focus-50)*.13+(g.health-60)*.09+rnd(-9,8);let pass=performance>=g.target.need;g.phase="RESULT / "+(g.ronin?"浪人"+g.ronin+"年目":"現役");log((g.ronin?"浪人"+g.ronin+"年目":"現役")+"："+g.target.name+"に"+(pass?"合格":"不合格")+"（判定値 "+Math.round(performance)+"）");if(pass){finish(true,performance)}else{failed(performance)}}
 function failed(performance){if(g.ronin>=2){finish(false,performance);return}stage("悔しい結果。でも、ここで終わりじゃない。","今回の挑戦では合格に届かなかった。もう一度挑戦するなら、学力だけでなく生活や気持ちの管理も必要になる。","どうする？",[{t:"浪人して再挑戦する",d:"もう1年、受験勉強を続ける。成績が伸びる可能性も、下がる可能性もある。",go:()=>{g.ronin++;roninYear()}},{t:"別の進路へ進む",d:"進学先を変える、学び直す、働くなど別の道へ。",go:()=>finish(false,performance,true)}])}
 function roninYear(){g.phase="RONIN / YEAR "+g.ronin;let drop=Math.max(0,(55-g.focus)*.12+(55-g.health)*.1+g.ronin*1.5);g.ability=clamp(g.ability-drop);stage("浪人生活 "+g.ronin+"年目","高校生活とは違い、自分で一日のリズムをつくる必要がある。孤独や焦りで集中力が落ちることも。","この1年の過ごし方を選ぼう。",[{t:"計画を立てて毎日やり切る",d:"学力と集中力を伸ばす。負担は大きい。",go:()=>{g.ability+=10;g.focus+=5;g.health-=8;roninFinish("計画的に学習を続けた。")}},{t:"苦手科目を中心に立て直す",d:"弱点を減らす。全体の伸びは堅実。",go:()=>{g.ability+=7;g.focus+=3;g.health-=3;roninFinish("苦手分野を重点的にやり直した。")}},{t:"ペースを落として心身を整える",d:"体力と集中力を回復。学力は維持しにくい。",go:()=>{g.ability-=2;g.focus+=8;g.health+=12;roninFinish("生活リズムを整え、無理のない学習を続けた。")}},{t:"勉強が思うように進まない",d:"焦りや疲れが重なり、成績が下がることも。",go:()=>{g.ability-=8;g.focus-=8;g.health-=5;roninFinish("思うように勉強が進まず、苦しい時期を過ごした。")}}])}
 function roninFinish(msg){g.ability=clamp(g.ability);g.focus=clamp(g.focus);g.health=clamp(g.health);log("浪人"+g.ronin+"年目："+msg);examPrep()}
-function finish(pass,performance,alternate=false){$("play").hidden=true;$("ending").hidden=false;$("endTitle").textContent=pass?"合格。新しい場所から、次の一歩へ。":alternate?"別の道を選ぶ。":"挑戦はここで一区切り。";$("endText").textContent=pass?g.name+"は"+g.target.name+"に合格した。"+(g.ronin?"浪人を経てつかんだ合格。":"現役でつかんだ合格。")+" 最終学力 "+Math.round(g.ability)+"。":alternate?"受験以外の道へ進む決断をした。ここからの選択も、人生の一部になる。":"今回の受験では合格に届かなかった。結果だけでなく、ここまでの経験も次の道につながっていく。";$("endStats").innerHTML=[["最終学力",g.ability],["集中力",g.focus],["体力",g.health],["浪人年数",g.ronin]].map(([n,v])=>'<div><span>'+n+'</span><b>'+Math.round(v)+'</b></div>').join("");$("endHistory").innerHTML=g.logs.map(x=>"<li>"+x+"</li>").join("")}
-$("begin").onclick=start;$("mockBtn").onclick=takeMock;$("again").onclick=()=>{$("ending").hidden=true;$("start").hidden=false};
+function finish(pass,performance,alternate=false){stopClock();$("play").hidden=true;$("ending").hidden=false;$("endTitle").textContent=pass?"合格。新しい場所から、次の一歩へ。":alternate?"別の道を選ぶ。":"挑戦はここで一区切り。";$("endText").textContent=pass?g.name+"は"+g.target.name+"に合格した。"+(g.ronin?"浪人を経てつかんだ合格。":"現役でつかんだ合格。")+" 最終学力 "+Math.round(g.ability)+"。":alternate?"受験以外の道へ進む決断をした。ここからの選択も、人生の一部になる。":"今回の受験では合格に届かなかった。結果だけでなく、ここまでの経験も次の道につながっていく。";$("endStats").innerHTML=[["最終学力",g.ability],["集中力",g.focus],["体力",g.health],["浪人年数",g.ronin]].map(([n,v])=>'<div><span>'+n+'</span><b>'+Math.round(v)+'</b></div>').join("");$("endHistory").innerHTML=g.logs.map(x=>"<li>"+x+"</li>").join("")}
+$("begin").onclick=start;$("mockBtn").onclick=takeMock;$("again").onclick=()=>{$("ending").hidden=true;$("start").hidden=false;$("birthplace-label").textContent="開始時にランダムで決まります。"};
+$("begin").onclick=start; $("birthplace-label").textContent="開始時にランダムで決まります。";
 })();
 </script></body></html>
