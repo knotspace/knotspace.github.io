@@ -2971,7 +2971,7 @@
         "Dは各項の係数を足しすぎている。"
       ],
       "takeaway": "根号の中を平方数×残りに分解し、同じ根号の項だけを足し引きする。",
-      "link": "/study/summary/"
+      "link": "/study/summary/math/"
     },
     {
       "id": "kos-math-002",
@@ -2999,7 +2999,7 @@
         "49は符号を誤って7²とした場合など。"
       ],
       "takeaway": "負の数を引くときは足し算に直す。代入前に公式の形を見抜くと速い。",
-      "link": "/study/summary/"
+      "link": "/study/summary/math/"
     },
     {
       "id": "kos-math-003",
@@ -3028,7 +3028,7 @@
         "1本目・2本目の両方を満たさない。"
       ],
       "takeaway": "選択肢問題でも、代入して両方の式を満たすか必ず検算する。",
-      "link": "/study/summary/"
+      "link": "/study/summary/math/"
     },
     {
       "id": "kos-math-004",
@@ -3057,7 +3057,7 @@
         "Dは符号が合わない。"
       ],
       "takeaway": "二次方程式は因数分解した後、各因数を0とおく。",
-      "link": "/study/summary/"
+      "link": "/study/summary/math/"
     },
     {
       "id": "kos-math-005",
@@ -3086,7 +3086,7 @@
         "判別式の計算が違う。"
       ],
       "takeaway": "解の公式では b の符号を括弧ごと代入する。",
-      "link": "/study/summary/"
+      "link": "/study/summary/math/"
     },
     {
       "id": "kos-math-006",
@@ -3114,7 +3114,7 @@
         "傾きとxの増加量を掛けていない。"
       ],
       "takeaway": "一次関数の変化量＝傾き×xの増加量。−2×4＝−8でも求められる。",
-      "link": "/study/summary/"
+      "link": "/study/summary/math/"
     },
     {
       "id": "kos-math-007",
@@ -3142,7 +3142,7 @@
         "Dは上に3移動。"
       ],
       "takeaway": "xの中に入るのは左右移動、式全体の外に足すのは上下移動。",
-      "link": "/study/summary/"
+      "link": "/study/summary/math/"
     },
     {
       "id": "kos-math-008",
@@ -3170,7 +3170,7 @@
         "両方の符号が違う。"
       ],
       "takeaway": "y＝a(x−p)²＋q の頂点は (p,q)。",
-      "link": "/study/summary/"
+      "link": "/study/summary/math/"
     },
     {
       "id": "kos-math-009",
@@ -3199,7 +3199,7 @@
         "面積比を誤っている。"
       ],
       "takeaway": "長さは相似比、面積は相似比の2乗、体積は3乗。",
-      "link": "/study/summary/"
+      "link": "/study/summary/math/"
     },
     {
       "id": "kos-math-010",
@@ -3227,7 +3227,7 @@
         "2/3としている。"
       ],
       "takeaway": "おうぎ形は中心角÷360°を円周に掛ける。",
-      "link": "/study/summary/"
+      "link": "/study/summary/math/"
     },
     {
       "id": "kos-math-011",
@@ -3255,7 +3255,7 @@
         "二乗の扱いが違う。"
       ],
       "takeaway": "直角三角形では斜辺が最も長い。計算後に大きさも確認する。",
-      "link": "/study/summary/"
+      "link": "/study/summary/math/"
     },
     {
       "id": "kos-math-012",
@@ -3283,7 +3283,7 @@
         "単位や掛け算が違う。"
       ],
       "takeaway": "角柱・円柱は底面積×高さ。三角形の底面積は先に1/2を掛ける。",
-      "link": "/study/summary/"
+      "link": "/study/summary/math/"
     },
     {
       "id": "kos-math-013",
@@ -3311,7 +3311,7 @@
         "4を素数と誤認している。"
       ],
       "takeaway": "1は素数ではない。2は唯一の偶数の素数。",
-      "link": "/study/summary/"
+      "link": "/study/summary/math/"
     },
     {
       "id": "kos-math-014",
@@ -3340,7 +3340,7 @@
         "分母を12としている。"
       ],
       "takeaway": "さいころ2個は順序を区別する。 (2,6)と(6,2)は別の場合。",
-      "link": "/study/summary/"
+      "link": "/study/summary/math/"
     },
     {
       "id": "kos-math-015",
@@ -3368,7 +3368,7 @@
         "公差の扱いが違う。"
       ],
       "takeaway": "第n項は「初項＋公差×(n−1)」。項数より1少ない回数だけ増える。",
-      "link": "/study/summary/"
+      "link": "/study/summary/math/"
     },
     {
       "id": "kos-math-016",
@@ -3397,7 +3397,7 @@
         "時間の合計が違う。"
       ],
       "takeaway": "同じ距離を往復する平均速度は速さの単純平均にならない。",
-      "link": "/study/summary/"
+      "link": "/study/summary/math/"
     },
     {
       "id": "kos-math-017",
@@ -3425,7 +3425,7 @@
         "計算が大きすぎる。"
       ],
       "takeaway": "割引後価格＝定価×(1−割引率)。逆算は割引後価格÷残る割合。",
-      "link": "/study/summary/"
+      "link": "/study/summary/math/"
     },
     {
       "id": "kos-math-018",
@@ -3454,7 +3454,7 @@
         "12では434。"
       ],
       "takeaway": "連続整数は中央をnと置くと式が対称になり、計算しやすい。",
-      "link": "/study/summary/"
+      "link": "/study/summary/math/"
     },
     {
       "id": "kos-math-019",
@@ -3482,7 +3482,7 @@
         "比例と取り違えている。"
       ],
       "takeaway": "反比例はxが何倍になるとyはその逆数倍になる。",
-      "link": "/study/summary/"
+      "link": "/study/summary/math/"
     },
     {
       "id": "kos-math-020",
@@ -3510,7 +3510,7 @@
         "一直線の角と混同。"
       ],
       "takeaway": "角度問題は、平行・垂直・一直線・対頂角のどの条件かを先に確認する。",
-      "link": "/study/summary/"
+      "link": "/study/summary/math/"
     },
     {
       "id": "kos-math-021",
@@ -3539,7 +3539,7 @@
         "和が13。"
       ],
       "takeaway": "x²＋bx＋cは、積c・和bとなる2数を探す。",
-      "link": "/study/summary/"
+      "link": "/study/summary/math/"
     },
     {
       "id": "kos-math-022",
@@ -3568,7 +3568,7 @@
         "±√8は同値だが選択肢の形としては同じ値。"
       ],
       "takeaway": "平方完成は、定数項を移項して平方の形を作る。",
-      "link": "/study/summary/"
+      "link": "/study/summary/math/"
     },
     {
       "id": "kos-math-023",
@@ -3597,7 +3597,7 @@
         "切片の計算が違う。"
       ],
       "takeaway": "2点を通る一次関数は、まず傾き＝yの増加量÷xの増加量。",
-      "link": "/study/summary/"
+      "link": "/study/summary/math/"
     },
     {
       "id": "kos-math-024",
@@ -3625,7 +3625,7 @@
         "比が逆。"
       ],
       "takeaway": "小さい三角形と大きい三角形を比べるときは、対応する辺を同じ順序で並べる。",
-      "link": "/study/summary/"
+      "link": "/study/summary/math/"
     },
     {
       "id": "kos-math-025",
@@ -3653,7 +3653,7 @@
         "全ての並び方を数えている。"
       ],
       "takeaway": "隣り合う条件は、対象をひとまとまりにして並べる。",
-      "link": "/study/summary/"
+      "link": "/study/summary/math/"
     },
     {
       "id": "kos-math-026",
@@ -3682,7 +3682,7 @@
         "140円では高すぎる。"
       ],
       "takeaway": "文章題は未知数を決め、数量の関係を式にする。",
-      "link": "/study/summary/"
+      "link": "/study/summary/math/"
     },
     {
       "id": "kos-math-027",
@@ -3711,7 +3711,7 @@
         "半径より長くなっている。"
       ],
       "takeaway": "円の中心から弦に下ろした垂線は弦を二等分する。",
-      "link": "/study/summary/"
+      "link": "/study/summary/math/"
     },
     {
       "id": "kos-math-028",
@@ -3738,7 +3738,7 @@
         "合計を足してしまっている。"
       ],
       "takeaway": "平均＝合計÷個数。合計を求めるときは平均×個数。",
-      "link": "/study/summary/"
+      "link": "/study/summary/math/"
     },
     {
       "id": "kos-math-029",
@@ -3767,7 +3767,7 @@
         "150gでは約4.6%。"
       ],
       "takeaway": "濃度の問題は、食塩の量（溶質）を一定として式を立てる。",
-      "link": "/study/summary/"
+      "link": "/study/summary/math/"
     },
     {
       "id": "kos-math-030",
@@ -3796,7 +3796,7 @@
         "22は条件を満たすが7より大きい。"
       ],
       "takeaway": "余りの条件は、まず一方の条件に合う数を並べて絞り込む。",
-      "link": "/study/summary/"
+      "link": "/study/summary/math/"
     },
     {
       "id": "kos-sci-001",
