@@ -94,7 +94,10 @@ body.life-game-body{background:#f4f0e7;color:var(--text)}
 .achievement-list{margin:18px 0 25px;display:flex;flex-wrap:wrap;gap:7px}
 .achievement-list h3{width:100%;font-size:13px}
 .achievement-list span{padding:7px 10px;background:#eee8dc;color:#81503e;font-size:10px}
-.picker-region-label{display:block;margin:8px 0;font-size:10px;color:var(--muted)}</style>
+.picker-region-label{display:block;margin:8px 0;font-size:10px;color:var(--muted)}
+.hidden{display:none!important}
+.field input{width:100%;max-width:340px;padding:12px 13px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--text);font:inherit}
+</style>
 </head>
 <body class="life-game-body"><main class="sim-page">
 <header class="sim-hero"><p class="eyebrow">AO NO BUNKITEN / UNIVERSITY MODE β</p><h1>大学受験モード<span>.</span></h1><p>誕生から幼少期、小学校、中学校、高校へ。青の分岐点本編の選択をベースに、大学受験と浪人まで歩む。</p><div class="hero-tags"><span>ONE LIFE</span><span>YOUR CHOICES</span><span>UNIVERSITY</span></div><a class="back-link" href="/one-life/">← 青の分岐点へ戻る</a></header>
@@ -102,7 +105,7 @@ body.life-game-body{background:#f4f0e7;color:var(--text)}
 <p class="eyebrow">A LIFE FROM ZERO</p><h2>0歳から、人生を始める。</h2>
 <div class="field"><label for="student">主人公の名前（任意）</label><input id="student" maxlength="12" placeholder="名前・ニックネーム"></div>
 <p class="muted">0歳から始まり、幼少期・小学校・中学校・高校を経て、大学受験まで進みます。進路や日々の選択は、青の分岐点本編の流れをベースにしています。</p>
-<button class="btn" id="begin">この受験を始める →</button>
+<button class="primary-button" id="begin">この受験を始める →</button>
 <p class="muted">※ベータ版のため、大学の難易度・合格判定はゲーム用の仮設定です。実際の偏差値や合格可能性を示すものではありません。</p>
 </section>
 <section id="play" class="hidden">
@@ -111,9 +114,9 @@ body.life-game-body{background:#f4f0e7;color:var(--text)}
 <article class="event-card"><div class="event-meta"><span id="event-tag">LIFE STAGE</span><span id="event-number">EPISODE 01</span></div><p id="event-scene" class="event-scene"></p><h3 id="prompt"></h3><p id="event-description" class="event-description"></p><div id="choices" class="choices"></div></article>
 <div class="life-map"><div class="life-map-head"><strong>人生の軌跡</strong><span id="life-age-label">AGE 0</span></div><div class="life-map-track"><i id="life-map-progress"></i></div></div>
 <div class="diary-log"><h3>人生の記録</h3><ol id="history" class="history"></ol></div>
-<div class="panel"><p class="eyebrow">LATEST MOCK EXAM</p><div id="mock">まだ模試を受けていません。</div><button id="mockBtn" class="secondary-button">模試を受ける</button></div>
+<div class="panel"><p class="eyebrow">LATEST MOCK EXAM</p><div id="mock">まだ模試を受けていません。</div><button id="mockBtn" class="secondary-button" id="mockBtn">模試を受ける</button></div>
 </section>
-<section id="ending" class="panel hidden"><p class="eyebrow">YOUR RESULT</p><h2 id="endTitle">受験結果</h2><p id="endText"></p><div id="endStats" class="stats"></div><h3>受験の記録</h3><ol id="endHistory" class="history"></ol><button class="btn" id="again">もう一度挑戦する ↻</button></section>
+<section id="ending" class="panel hidden"><p class="eyebrow">YOUR RESULT</p><h2 id="endTitle">受験結果</h2><p id="endText"></p><div id="endStats" class="result-stats"></div><h3>受験の記録</h3><ol id="endHistory" class="history"></ol><button class="btn" id="again">もう一度挑戦する ↻</button></section>
 <footer class="independent-footer">青の分岐点 — 大学受験モード β版。ゲーム内の数値・合否はフィクションです。</footer>
 </main>
 <script>
@@ -147,7 +150,7 @@ function entrance(){let performance=g.ability+(g.focus-50)*.13+(g.health-60)*.09
 function failed(performance){if(g.ronin>=2){finish(false,performance);return}stage("悔しい結果。でも、ここで終わりじゃない。","今回の挑戦では合格に届かなかった。もう一度挑戦するなら、学力だけでなく生活や気持ちの管理も必要になる。","どうする？",[{t:"浪人して再挑戦する",d:"もう1年、受験勉強を続ける。成績が伸びる可能性も、下がる可能性もある。",go:()=>{g.ronin++;roninYear()}},{t:"別の進路へ進む",d:"進学先を変える、学び直す、働くなど別の道へ。",go:()=>finish(false,performance,true)}])}
 function roninYear(){g.phase="RONIN / YEAR "+g.ronin;let drop=Math.max(0,(55-g.focus)*.12+(55-g.health)*.1+g.ronin*1.5);g.ability=clamp(g.ability-drop);stage("浪人生活 "+g.ronin+"年目","高校生活とは違い、自分で一日のリズムをつくる必要がある。孤独や焦りで集中力が落ちることも。","この1年の過ごし方を選ぼう。",[{t:"計画を立てて毎日やり切る",d:"学力と集中力を伸ばす。負担は大きい。",go:()=>{g.ability+=10;g.focus+=5;g.health-=8;roninFinish("計画的に学習を続けた。")}},{t:"苦手科目を中心に立て直す",d:"弱点を減らす。全体の伸びは堅実。",go:()=>{g.ability+=7;g.focus+=3;g.health-=3;roninFinish("苦手分野を重点的にやり直した。")}},{t:"ペースを落として心身を整える",d:"体力と集中力を回復。学力は維持しにくい。",go:()=>{g.ability-=2;g.focus+=8;g.health+=12;roninFinish("生活リズムを整え、無理のない学習を続けた。")}},{t:"勉強が思うように進まない",d:"焦りや疲れが重なり、成績が下がることも。",go:()=>{g.ability-=8;g.focus-=8;g.health-=5;roninFinish("思うように勉強が進まず、苦しい時期を過ごした。")}}])}
 function roninFinish(msg){g.ability=clamp(g.ability);g.focus=clamp(g.focus);g.health=clamp(g.health);log("浪人"+g.ronin+"年目："+msg);examPrep()}
-function finish(pass,performance,alternate=false){$("play").classList.add("hidden");$("ending").classList.remove("hidden");$("endTitle").textContent=pass?"合格。新しい場所から、次の一歩へ。":alternate?"別の道を選ぶ。":"挑戦はここで一区切り。";$("endText").textContent=pass?g.name+"は"+g.target.name+"に合格した。"+(g.ronin?"浪人を経てつかんだ合格。":"現役でつかんだ合格。")+" 最終学力 "+Math.round(g.ability)+"。":alternate?"受験以外の道へ進む決断をした。ここからの選択も、人生の一部になる。":"今回の受験では合格に届かなかった。結果だけでなく、ここまでの経験も次の道につながっていく。";$("endStats").innerHTML=[["最終学力",g.ability],["集中力",g.focus],["体力",g.health],["浪人年数",g.ronin]].map(([n,v])=>'<div class="stat"><span>'+n+'</span><b>'+Math.round(v)+'</b></div>').join("");$("endHistory").innerHTML=g.logs.map(x=>"<li>"+x+"</li>").join("")}
+function finish(pass,performance,alternate=false){$("play").classList.add("hidden");$("ending").classList.remove("hidden");$("endTitle").textContent=pass?"合格。新しい場所から、次の一歩へ。":alternate?"別の道を選ぶ。":"挑戦はここで一区切り。";$("endText").textContent=pass?g.name+"は"+g.target.name+"に合格した。"+(g.ronin?"浪人を経てつかんだ合格。":"現役でつかんだ合格。")+" 最終学力 "+Math.round(g.ability)+"。":alternate?"受験以外の道へ進む決断をした。ここからの選択も、人生の一部になる。":"今回の受験では合格に届かなかった。結果だけでなく、ここまでの経験も次の道につながっていく。";$("endStats").innerHTML=[["最終学力",g.ability],["集中力",g.focus],["体力",g.health],["浪人年数",g.ronin]].map(([n,v])=>'<div><span>'+n+'</span><b>'+Math.round(v)+'</b></div>').join("");$("endHistory").innerHTML=g.logs.map(x=>"<li>"+x+"</li>").join("")}
 $("begin").onclick=start;$("mockBtn").onclick=takeMock;$("again").onclick=()=>{$("ending").classList.add("hidden");$("start").classList.remove("hidden")};
 })();
 </script></body></html>
