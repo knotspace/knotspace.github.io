@@ -1,6 +1,19 @@
 {
   "releases": [
     {
+      "id": "810b54e",
+      "publishedAt": "2026-11-04T18:54:29+09:00",
+      "title": "Add KOSEN basic questions grounded in 2025 and 2026 past papers",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "学習コンテンツ・データ"
+      ],
+      "files": [
+        "src/data/study/private-practice-bank.json"
+      ]
+    },
+    {
       "id": "a3c0521",
       "publishedAt": "2026-11-04T18:50:16+09:00",
       "title": "Correct earthquake arrival-time answer key",
