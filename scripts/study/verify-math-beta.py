@@ -128,10 +128,59 @@ def main():
     check("kosen-math-2025-b2-03", str(slope), OFFICIAL_R7["2-3"], value=chosen("kosen-math-2025-b2-03").replace("−", "-"))
 
     # 大問4(2): (2x+3)^4 になる式。各選択肢をxの複数の値で評価。
-    def parse_prog(s):
-        s = s.replace("[", "(").replace("]", ")")
-        env = {"A": A, "T": T, "P": P}
-        return lambda x: eval(s, {"__builtins__": {}}, {**env, "x": x})
+    def parse_prog(source):
+        """A/T/P と x・整数・入れ子の [] だけを解釈する安全な小型パーサー。eval は使わない。"""
+        import re
+
+        tokens = []
+        pos = 0
+        token_re = re.compile(r"\s*(A|T|P|x|-?\d+|[\[\](),])")
+        while pos < len(source):
+            match = token_re.match(source, pos)
+            if not match:
+                raise ValueError(f"不正なプログラム表記: {source[pos:]}")
+            tokens.append(match.group(1))
+            pos = match.end()
+        index = 0
+
+        def take(expected=None):
+            nonlocal index
+            if index >= len(tokens):
+                raise ValueError("プログラム式が途中で終わっています")
+            token = tokens[index]
+            if expected is not None and token != expected:
+                raise ValueError(f"{expected} が必要ですが {token} でした")
+            index += 1
+            return token
+
+        def parse_value(x_value):
+            token = take()
+            if token == "x":
+                return x_value
+            if re.fullmatch(r"-?\d+", token):
+                return int(token)
+            if token in ("A", "T", "P"):
+                take("[")
+                left = parse_value(x_value)
+                take(",")
+                right = parse_value(x_value)
+                take("]")
+                if token == "A":
+                    return left + right
+                if token == "T":
+                    return left * right
+                return left ** right
+            raise ValueError(f"使用できないトークン: {token}")
+
+        def evaluate(x_value):
+            nonlocal index
+            index = 0
+            value = parse_value(x_value)
+            if index != len(tokens):
+                raise ValueError("式の末尾に余分なトークンがあります")
+            return value
+
+        return evaluate
     xs = [Fraction(v) for v in (-3, -1, 0, 1, 2, 5, Fraction(1, 2))]
     only_one_correct("kosen-math-2025-b4-02",
                      lambda c: all(parse_prog(c)(x) == (2 * x + 3) ** 4 for x in xs))
