@@ -22,7 +22,6 @@ export async function GET({ site }) {
     '/blog/',
     '/study/',
     '/study/foundation/',
-    '/study/mock/',
     '/study/quotes/',
     '/study/summary/',
     '/study/summary/biology/',
@@ -34,7 +33,6 @@ export async function GET({ site }) {
     '/study/summary/physics/',
     '/study/tools/',
     '/study/university/',
-    '/study/why/',
     '/timer/',
   ];
 
