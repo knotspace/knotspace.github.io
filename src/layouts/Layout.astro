@@ -39,7 +39,7 @@ const navHref = (path: string) => /^https?:\/\//i.test(path) ? path : BASE + pat
 ---
 
 <!doctype html>
-<html lang="ja" data-theme="dark" data-app-mode="site">
+<html lang="ja" data-theme="dark" data-app-mode="site" data-release-app="knot">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -212,7 +212,8 @@ const navHref = (path: string) => /^https?:\/\//i.test(path) ? path : BASE + pat
         }
       });
     </script>
-  </body>
+  <script is:inline src="/release-notes.js" defer></script>
+</body>
 <style is="global">
 .knot-maker-banner{display:flex;align-items:center;gap:18px;margin:46px auto 0;padding:20px 22px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(115deg,color-mix(in srgb,var(--accent) 10%,var(--surface)),var(--surface));}
 .knot-maker-mark{display:grid;place-items:center;flex:0 0 48px;width:48px;height:48px;border-radius:14px;background:var(--accent);color:#081323;font-size:22px;font-weight:950;letter-spacing:-.1em}
