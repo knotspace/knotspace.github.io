@@ -5,10 +5,10 @@ import foundationData from '../data/study/study-foundation.json';
 interface Props { title: string; subject: string; topic: string; description: string; intro: string; }
 const { title, subject, topic, description, intro } = Astro.props;
 const matchesTopic = (unit: string) => topic === 'all' || (topic === 'materials' ? true : topic === 'physics' ? /力|電流|運動|仕事|エネルギー|音・光/.test(unit) : topic === 'chemistry' ? /物質|水溶液|溶解|原子|分子|化学|酸化|還元|酸・アルカリ|気体/.test(unit) : topic === 'biology' ? /植物|動物|血液|刺激|生殖|遺伝|生態系/.test(unit) : topic === 'earth' ? /火山|火成岩|地震|地層|気象|太陽|月|星/.test(unit) : topic === 'geography' ? /世界|日本の地形|農林水産|人口|貿易/.test(unit) : topic === 'history' ? /旧石器|飛鳥|鎌倉|安土|明治|昭和/.test(unit) : topic === 'civics' ? /憲法|国会|地方自治|経済|金融|国際社会/.test(unit) : false);
-const resources = assetsData.resources.filter(item => item.subject === subject && matchesTopic(item.unit));
+const resources = assetsData.resources.filter(item => (subject === '全教科' || item.subject === subject) && matchesTopic(item.unit));
 const groups = [...new Map(resources.map(item => [item.unit, resources.filter(x => x.unit === item.unit)])).entries()].map(([unit, items]) => ({ unit, items }));
 const subjectCode = subject === '理科' ? 'science' : 'social';
-const terms = foundationData.questions.filter(q => q.subject === subjectCode && (topic === 'all' || topic === 'materials' ? true : q.topic === ({physics:'物理',chemistry:'化学',biology:'生物',earth:'地学',geography:'地理',history:'歴史',civics:'公民'}[topic])));
+const terms = foundationData.questions.filter(q => (subject === '全教科' || q.subject === subjectCode) && (topic === 'all' || topic === 'materials' ? true : q.topic === ({physics:'物理',chemistry:'化学',biology:'生物',earth:'地学',geography:'地理',history:'歴史',civics:'公民'}[topic])));
 ---
 <StudyLayout title={title + '｜要点まとめ｜KNOT Study'} description={description}>
 <main class="summary-page">
