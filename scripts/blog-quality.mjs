@@ -66,6 +66,7 @@ const publicHelplineFiles = new Set([
 // These files use grade labels as generic fictional simulation stages, not as personal profile data.
 const gradeLabelFiles = new Set([
   'src/pages/game/life.astro',
+  'src/pages/game/university.astro',
   'src/pages/one-life/index.astro',
   'src/pages/one-life/university.astro',
   'src/utils/academic-grade.ts',
