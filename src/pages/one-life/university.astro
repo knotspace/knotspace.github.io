@@ -45,14 +45,21 @@ function log(s){g.logs.unshift(s);renderHistory()}
 function stats(){const arr=[["学力",g.ability],["集中力",g.focus],["体力",g.health],["経験",g.experience]];$("stats").innerHTML=arr.map(([n,v])=>'<div class="stat"><span>'+n+'</span><b>'+Math.round(v)+'</b><div class="bar"><i style="width:'+clamp(v)+'%"></i></div></div>').join("")}
 function renderHistory(){$("history").innerHTML=g.logs.slice(0,12).map(x=>"<li>"+x+"</li>").join("")}
 function stage(title,story,prompt,opts){$("phase").textContent=g.phase;$("heading").textContent=title;$("story").textContent=story;$("prompt").textContent=prompt;$("choices").innerHTML=opts.map((o,i)=>'<button class="choice" data-i="'+i+'"><strong>'+o.t+'</strong><small>'+o.d+'</small></button>').join("");$("choices").querySelectorAll("button").forEach(b=>b.onclick=()=>opts[+b.dataset.i].go());stats()}
-function start(){g={name:$("student").value.trim()||"あなた",ability:35+ +$("school").value,focus:55,health:75,experience:35,goal:+$("goal").value,year:1,round:0,ronin:0,logs:[],mock:0,done:false};$("start").classList.add("hidden");$("ending").classList.add("hidden");$("play").classList.remove("hidden");highYear()}
-function highYear(){g.phase="HIGH SCHOOL / YEAR "+g.year;$("mock").textContent="まだ模試を受けていません。";$("mockBtn").disabled=false;
-const opts=[
-{t:"毎日の授業と復習を徹底する",d:"学力が安定して伸びる。体力を少し消耗。",go:()=>{g.ability+=7;g.focus+=5;g.health-=3;nextTerm("授業と復習を積み重ねた。")}},
-{t:"得意科目を徹底的に伸ばす",d:"得意分野が武器になる。苦手分野は残りやすい。",go:()=>{g.ability+=9;g.focus+=2;g.experience+=2;nextTerm("得意科目を磨き、強みをつくった。")}},
-{t:"部活・行事と勉強を両立する",d:"経験と体力が伸びる。学力の伸びはゆるやか。",go:()=>{g.ability+=3;g.health+=7;g.experience+=9;nextTerm("学校生活を楽しみながら、勉強も続けた。")}},
-{t:"勉強計画を見直し、効率を上げる",d:"集中力と学習効率を高める。",go:()=>{g.ability+=5;g.focus+=10;g.health+=2;nextTerm("自分に合う学習方法を見つけた。")}}
-];stage(g.year+"年生の学び",g.year===1?"高校生活が始まった。今の過ごし方が、受験学年の自分につながっていく。":g.year===2?"学習内容が難しくなり、進路を意識する時期。":"いよいよ受験学年。模試の結果を見ながら、志望校を考える。","この1年の軸を選ぼう。",opts)}
+function start(){g={name:$("student").value.trim()||"あなた",ability:35+ +$("school").value,focus:55,health:75,experience:35,goal:+$("goal").value,age:0,ronin:0,logs:[],mock:0,done:false};$("start").classList.add("hidden");$("ending").classList.add("hidden");$("play").classList.remove("hidden");lifeYear()}
+function lifeYear(){
+const a=g.age,school=[{t:"毎日少しずつ宿題と復習をする",d:"机に向かう習慣が身につく。",go:()=>lifeAdvance("毎日少しずつ学び、基礎を積み重ねた。",7,0,0,1)},{t:"友達と遊びながらいろいろなことを経験する",d:"人との関わりや遊びから学ぶ。",go:()=>lifeAdvance("友達との時間や遊びから多くを学んだ。",0,0,5,7)},{t:"スポーツや習い事に打ち込む",d:"続ける力と経験が伸びる。",go:()=>lifeAdvance("スポーツや習い事に打ち込み、経験を重ねた。",1,0,6,6)}];
+const middle=[{t:"授業と復習を大切にする",d:"基礎を積み重ね、学ぶ力を伸ばす。",go:()=>lifeAdvance("授業と復習を大切にし、基礎を積み重ねた。",8,4,-2,1)},{t:"部活動や学校行事に力を入れる",d:"仲間と取り組む経験が増える。",go:()=>lifeAdvance("部活動や学校行事に力を入れた。",1,0,-2,8)},{t:"勉強と遊びのバランスを取る",d:"無理をしすぎず、毎日を充実させる。",go:()=>lifeAdvance("勉強と遊びのバランスを取った。",4,2,3,4)}];
+const high=[{t:"学びを深め、資格や検定にも挑戦する",d:"知識と技術を自分の力にする。",go:()=>lifeAdvance("学びを深め、資格や検定にも挑戦した。",8,4,-2,3)},{t:"部活・行事・仲間との経験を大切にする",d:"学校生活の幅と人とのつながりを広げる。",go:()=>lifeAdvance("部活や行事、仲間との経験を大切にした。",2,1,0,8)},{t:"興味のある分野を見つけて挑戦する",d:"夢中になれる分野を探す。",go:()=>lifeAdvance("興味のある分野を見つけて挑戦した。",5,5,0,8)}];
+let title,story,opts;
+if(a<=5){title=""+a+"歳・幼少期";story=a===0?"誕生。まだ何も知らない世界で、少しずつ周囲との関わりが始まる。":"家族や周囲の人との毎日。遊びや体験を通して、世界を知っていく。";opts=[{t:"家族とたくさん会話し、安心できる環境で過ごす",d:"心身の土台と人とのつながりを育てる。",go:()=>lifeAdvance("家族との関わりのなかで、安心できる土台を育てた。",0,3,5,3)},{t:"外で遊び、いろいろなものに触れる",d:"好奇心と体力、経験を育てる。",go:()=>lifeAdvance("外で遊び、さまざまな体験を重ねた。",0,0,8,7)},{t:"絵本や知育遊びに親しむ",d:"言葉や考える力の芽を育てる。",go:()=>lifeAdvance("絵本や知育遊びに親しみ、考える力の芽を育てた。",5,2,0,3)}]}
+else if(a<=11){title="小学"+(a-5)+"年生";story=a===6?"ランドセルを背負い、小学校生活が始まる。":"授業、友達、休み時間。毎日の小さな経験が、これからの自分をつくっていく。";opts=school}
+else if(a<=14){title="中学"+(a-11)+"年生";story=a===12?"新しい制服、新しい教室。中学校生活が始まる。":"勉強も部活も少しずつ本格的になってきた。";opts=middle}
+else{title="高校"+(a-14)+"年生";story=a===15?"新しい校舎、新しい仲間。高校生活が始まる。":a===16?"学校生活に慣れ、自分の得意や興味が見えてきた。":"最後の学年。卒業後の進路を具体的に考える時期。";opts=high}
+g.phase=(a<=5?"EARLY CHILDHOOD":a<=11?"ELEMENTARY SCHOOL":a<=14?"JUNIOR HIGH SCHOOL":"HIGH SCHOOL")+" / AGE "+a;
+$("mockBtn").disabled=a<15;$("mockBtn").textContent=a<15?"高校生から模試を受けられます":"模試を受ける";
+stage(title,story,"この時期をどう過ごす？",opts);
+}
+function lifeAdvance(message,study,focus,health,experience){g.ability=clamp(g.ability+study);g.focus=clamp(g.focus+focus);g.health=clamp(g.health+health);g.experience=clamp(g.experience+experience);log((g.age===0?"誕生":g.age+"歳")+ "："+message);g.age++;if(g.age<=17)lifeYear();else examPrep()}
 function nextTerm(message){g.ability=clamp(g.ability);g.focus=clamp(g.focus);g.health=clamp(g.health);g.experience=clamp(g.experience);log("高校"+g.year+"年："+message);if(g.year<3){g.year++;highYear()}else{examPrep()}}
 function takeMock(){let score=clamp(Math.round(g.ability+rnd(-7,7)+(g.focus-50)*.12+(g.health-60)*.08));g.mock=score;$("mock").innerHTML='<div class="result">模試偏差値 '+score+'</div><p class="muted">今回の結果。体調や問題との相性で上下することがある。</p>';$("mockBtn").disabled=true;log("模試の偏差値："+score)}
 function examPrep(){g.phase="ENTRANCE EXAM";stage("出願校を決める","これまでの模試や学力をもとに、どのレベルに挑戦するか決めよう。挑戦校だけでなく、合格を確保する戦略も大切。","受験校のレベルを選ぼう。",tiers.map(t=>({t:t.name,d:"目安："+t.examples+" ／ ゲーム内基準 "+t.need,go:()=>{g.target=t;entrance()}})))}
