@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+<title id="title">EVO SL vs BOSTON 13</title>
+<desc id="desc">EVO SLとBOSTON 13のランニングシューズ比較を表すグラフィック</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#101827"/><stop offset="1" stop-color="#243b55"/></linearGradient><linearGradient id="accent" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#74e6c2"/><stop offset="1" stop-color="#b4f3dd"/></linearGradient></defs>
+<rect width="1200" height="630" fill="url(#bg)"/>
+<circle cx="1000" cy="100" r="230" fill="#fff" opacity=".035"/><circle cx="120" cy="570" r="260" fill="#fff" opacity=".035"/>
+<text x="76" y="112" fill="#a9bacb" font-family="Arial,sans-serif" font-size="28" letter-spacing="7">ADIZERO COMPARISON</text>
+<text x="76" y="235" fill="#fff" font-family="Arial,sans-serif" font-size="92" font-weight="700">EVO SL</text>
+<text x="76" y="300" fill="url(#accent)" font-family="Arial,sans-serif" font-size="40" font-weight="700">VS</text>
+<text x="76" y="380" fill="#fff" font-family="Arial,sans-serif" font-size="72" font-weight="700">BOSTON 13</text>
+<path d="M80 440 H1120" stroke="#ffffff" stroke-opacity=".22" stroke-width="2"/>
+<text x="80" y="510" fill="#d8e3ed" font-family="Arial,sans-serif" font-size="32">軽さで選ぶなら、どっち？</text>
+<rect x="900" y="480" width="220" height="76" rx="38" fill="url(#accent)"/>
+<text x="1010" y="529" fill="#10221f" font-family="Arial,sans-serif" font-size="29" font-weight="700" text-anchor="middle">EVO SL 推し</text>
+</svg>
