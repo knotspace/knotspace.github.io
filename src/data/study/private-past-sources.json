@@ -1,0 +1,80 @@
+{
+  "title": "KNOT Study 高専入試過去問資料データベース",
+  "description": "ユーザーがアップロードした国立高等専門学校入学者選抜統一学力検査の資料一覧。原本PDFはこの公開リポジトリには転載せず、ファイル名・年度・教科・正解資料の有無を管理する。",
+  "notice": "公式問題PDFの著作権・再配布条件を確認できていないため、原本ファイル自体は公開リポジトリへ再アップロードしていない。問題モードに掲載する場合は、出典年度・教科・大問・小問を記録し、公式問題の原文転載とKNOT再構成問題を明確に区別する。",
+  "sources": [
+    {
+      "file": "02_2025_syakai_mondai.pdf",
+      "year": "令和7年度",
+      "subject": "社会",
+      "kind": "問題冊子",
+      "uploaded": true,
+      "answerKey": "02_2025_syakai_seikai.pdf"
+    },
+    {
+      "file": "02_2025_syakai_seikai.pdf",
+      "year": "令和7年度",
+      "subject": "社会",
+      "kind": "正解表",
+      "uploaded": true
+    },
+    {
+      "file": "02_2026_syakai_mondai2.pdf",
+      "year": "令和8年度",
+      "subject": "社会",
+      "kind": "問題冊子",
+      "uploaded": true,
+      "answerKey": null
+    },
+    {
+      "file": "03_2025_sugaku_mondai.pdf",
+      "year": "令和7年度",
+      "subject": "数学",
+      "kind": "問題冊子",
+      "uploaded": true,
+      "answerKey": "03_2025_sugaku_seikai.pdf"
+    },
+    {
+      "file": "03_2025_sugaku_seikai.pdf",
+      "year": "令和7年度",
+      "subject": "数学",
+      "kind": "正解表",
+      "uploaded": true
+    },
+    {
+      "file": "03_2026_sugaku_mondai.pdf",
+      "year": "令和8年度",
+      "subject": "数学",
+      "kind": "問題冊子",
+      "uploaded": true,
+      "answerKey": null
+    },
+    {
+      "file": "04_2025_rika_mondai.pdf",
+      "year": "令和7年度",
+      "subject": "理科",
+      "kind": "問題冊子",
+      "uploaded": true,
+      "answerKey": null
+    },
+    {
+      "file": "04_2026_rika_mondai.pdf",
+      "year": "令和8年度",
+      "subject": "理科",
+      "kind": "問題冊子",
+      "uploaded": true,
+      "answerKey": "04_2026_rika_seikai.pdf"
+    },
+    {
+      "file": "04_2026_rika_seikai.pdf",
+      "year": "令和8年度",
+      "subject": "理科",
+      "kind": "正解表",
+      "uploaded": true
+    }
+  ],
+  "questionModePlan": {
+    "basic": "計算量が少ない四択中心のKNOTオリジナル問題。知識・理解・資料判断を中心にする。",
+    "past": "年度・教科・大問単位で本番形式。原本問題とKNOT再構成問題を別管理し、配点・制限時間・解答方式を資料から確認して登録する。"
+  }
+}
