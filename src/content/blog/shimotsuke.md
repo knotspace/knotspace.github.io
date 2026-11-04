@@ -6,6 +6,8 @@ heroImage: "/blog-art/exam.svg"
 category: "高校受験"
 tags: ["高校受験", "下野模試", "模試", "偏差値"]
 ---
+<figure class="source-photo"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Students_sitting_on_a_desk.jpg?width=1280" alt="試験前に学習する学生たち。" loading="lazy" decoding="async" width="1280" height="853" /><figcaption>試験前に学習する学生たち。 写真：Kwameghana (Bright Kwame Ayisi) / <a href="https://commons.wikimedia.org/wiki/File:Students_sitting_on_a_desk.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>・<a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener noreferrer">CC0 1.0</a></figcaption></figure>
+
 
 ## 下野模試とは？結果の見方と受験勉強への生かし方
 
