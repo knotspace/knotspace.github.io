@@ -9,8 +9,8 @@ const qs = examData.questions.map(q => ({...q, subject:q.subject==='science'?'�
 <header class="hero"><p class="eyebrow">TOCHIGI PREFECTURAL HIGH SCHOOL EXAM</p><h1>公立高校入試<br/><span>問題精講</span></h1><p>基礎網羅問題と同じ操作で、1問ずつ解答。選択肢をタップすると正誤と解説が表示されるよ。</p><div class="tags"><span>栃木県立高校入試</span><span>理科・社会</span><span>1問ずつ演習</span></div></header>
 <section class="panel" id="settings">
 <div class="heading"><div><p class="eyebrow">START LEARNING</p><h2>学習内容を選ぶ</h2></div><a class="db-link" href="../past-exams/">過去問データベース ↗</a></div>
-<div class="filters"><label>教科<select id="subject"><option value="all">理科・社会</option><option value="理科">理科</option><option value="社会">社会</option></select></label><label>問題数<select id="amount"><option value="all">全問</option><option value="5">5問</option><option value="10">10問</option></select></label></div>
-<div class="stats"><div><b>8</b><small>収録問題</small></div><div><b>4</b><small>理科</small></div><div><b>4</b><small>社会</small></div><div><b id="recordScore">0</b><small>今回の正解数</small></div></div>
+<div class="filters"><label>教科<select id="subject"><option value="all">理科・社会</option><option value="理科">理科</option><option value="社会">社会</option></select></label><label>問題数<select id="amount"><option value="20">20問</option><option value="50">50問</option><option value="100">100問</option><option value="all">全問</option><option value="5">5問</option><option value="10">10問</option></select></label></div>
+<div class="stats"><div><b>200</b><small>収録問題</small></div><div><b>100</b><small>理科</small></div><div><b>100</b><small>社会</small></div><div><b id="recordScore">0</b><small>今回の正解数</small></div></div>
 <button class="primary" id="start">学習を始める <span>→</span></button>
 <p class="note">間違えた問題も、解説を読んで次へ進もう。</p>
 </section>
