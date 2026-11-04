@@ -10,7 +10,8 @@
     "astro": "astro",
     "prebuild": "node scripts/copy-decap-cms.mjs",
     "postbuild": "node scripts/seo-audit.mjs",
-    "import:schools": "node scripts/import-mext-schools.mjs"
+    "import:schools": "node scripts/import-mext-schools.mjs",
+    "study:validate": "node scripts/study/validate-question-banks.mjs"
   },
   "dependencies": {
     "astro": "^7.4.5",
