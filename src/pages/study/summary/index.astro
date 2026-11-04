@@ -2,6 +2,7 @@
 import StudyLayout from '../../../layouts/StudyLayout.astro';
 import assetsData from '../../../data/study/knot-summary-assets.json';
 import foundationData from '../../../data/study/study-foundation.json';
+import mathBetaData from '../../../data/study/private-math-beta.json';
 const subjects = [
  {key:'physics',title:'物理',label:'PHYSICS',desc:'力・運動・電気・エネルギー・光と音',count:foundationData.questions.filter(q=>q.topic==='物理').length},
  {key:'chemistry',title:'化学',label:'CHEMISTRY',desc:'物質・水溶液・化学変化・イオン',count:foundationData.questions.filter(q=>q.topic==='化学').length},
@@ -10,6 +11,7 @@ const subjects = [
  {key:'geography',title:'地理',label:'GEOGRAPHY',desc:'世界と日本の自然・産業・人口・地域',count:foundationData.questions.filter(q=>q.topic==='地理').length},
  {key:'history',title:'歴史',label:'HISTORY',desc:'古代から現代まで、時代の流れと因果関係',count:foundationData.questions.filter(q=>q.topic==='歴史').length},
  {key:'civics',title:'公民',label:'CIVICS',desc:'憲法・政治・経済・国際社会',count:foundationData.questions.filter(q=>q.topic==='公民').length},
+ {key:'math',title:'数学（β版）',label:'MATHEMATICS / BETA',desc:'高専入試の大問1〜4を読み込んだ基本・標準問題と要点整理',count:mathBetaData.questions.length},
  {key:'materials',title:'図解・資料ライブラリ',label:'VISUAL LIBRARY',desc:'理科・社会の図解、比較表、資料をまとめて確認',count:assetsData.resources.length}
 ];
 ---
