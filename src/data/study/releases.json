@@ -1,6 +1,19 @@
 {
   "releases": [
     {
+      "id": "f8bee50",
+      "publishedAt": "2026-11-04T15:11:33+09:00",
+      "title": "Add password gate to Study secret mode",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "Study画面・機能"
+      ],
+      "files": [
+        "src/pages/study/quiet-practice-7c2e91.astro"
+      ]
+    },
+    {
       "id": "bd0564e",
       "publishedAt": "2026-11-04T15:03:06+09:00",
       "title": "Mark personal practice page as noindex",
