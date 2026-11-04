@@ -1,6 +1,19 @@
 {
   "releases": [
     {
+      "id": "b7c75f0",
+      "publishedAt": "2026-11-04T19:10:39+09:00",
+      "title": "要点まとめ資料の収録数メタデータを修正",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "学習コンテンツ・データ"
+      ],
+      "files": [
+        "src/data/study/knot-summary-assets.json"
+      ]
+    },
+    {
       "id": "c5277ab",
       "publishedAt": "2026-11-04T19:09:28+09:00",
       "title": "Rename secret mode beta banner for KOSEN practice",
