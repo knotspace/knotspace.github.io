@@ -136,7 +136,7 @@ body.life-game-body{background:#f4f0e7;color:var(--text)}
 </div>
 <div class="start-note">生まれた都道府県は毎回ランダム。幼少期・小学校・中学校・高校を経て大学受験へ。浪人も含め、選択によって人生が変化する。</div>
 <button id="begin" class="primary-button">この人生を始める →</button>
-<p class="fine-print">大学の難易度・合否はゲーム内の仮設定です。実際の合格可能性を示すものではありません。</p>
+<p class="fine-print">大学の難易度・合否はゲーム内の仮設定です。実際の合格可能性を示すものではありません。</p><section id="past-life-archive" class="past-life-archive"><h3>これまでに歩んだ人生</h3><p>この端末に保存された人生の記録がここに残ります。</p><div id="past-life-list"></div></section>
 </section>
 <section id="play" hidden>
 <div class="game-top"><div><p class="eyebrow" id="phase">YOUR LIFE JOURNEY</p><h2 id="heading">0歳・幼少期</h2><p id="story"></p></div><div class="progress-wrap"><span id="age-label">AGE 0</span><div class="progress-track"><i id="age-progress"></i></div></div></div>
@@ -156,9 +156,14 @@ let g=null;
 const tiers=[{name:"最難関クラス",need:78,examples:"東京大学・京都大学など（例）"},{name:"難関クラス",need:68,examples:"難関国公立・早慶など（例）"},{name:"準難関クラス",need:58,examples:"上位国公立・難関私大など（例）"},{name:"標準クラス",need:48,examples:"幅広い国公立・私立など（例）"},{name:"基礎・安全校クラス",need:38,examples:"合格可能性を広く確保する選択肢"}];
 function log(s){g.logs.unshift(s);renderHistory()}
 function stats(){const arr=[["学力",g.ability],["集中力",g.focus],["体力",g.health],["経験",g.experience]];$("stats").innerHTML=arr.map(([n,v])=>'<div><span>'+n+'</span><strong>'+Math.round(v)+'</strong><i><b style="width:'+clamp(v)+'%"></b></i></div>').join("")}
+function renderArchive(){
+const list=$("past-life-list");if(!list)return;let items=[];try{items=JSON.parse(localStorage.getItem("university-life-archive-v1")||"[]")}catch{}
+if(!items.length){list.textContent="まだ人生の記録はありません。";return}
+items.slice(0,10).forEach((item,i)=>{const card=document.createElement("article");card.className="archive-card";const title=document.createElement("strong");title.textContent=(i+1)+". "+item.name+" — "+item.outcome;const meta=document.createElement("small");meta.textContent=new Date(item.date).toLocaleDateString("ja-JP")+" / 出生地："+item.birthplace;card.append(title,meta);list.append(card)});
+}
 function renderHistory(){$("history").innerHTML=g.logs.slice(0,12).map(x=>"<li>"+x+"</li>").join("")}
 function stage(title,story,prompt,opts){$("phase").textContent=g.phase;$("heading").textContent=title;$("story").textContent=story;$("prompt").textContent=prompt;$("event-tag").textContent=g.phase;$("event-number").textContent="AGE "+g.age+" / EPISODE "+String(g.logs.length+1).padStart(2,"0");$("event-scene").textContent=story;$("event-description").textContent=prompt;$("age-label").textContent="AGE "+g.age;$("life-age-label").textContent="AGE "+g.age;$("age-progress").style.width=(g.age/18*100)+"%";$("life-map-progress").style.width=(g.age/18*100)+"%";$("choices").innerHTML=opts.map((o,i)=>'<button class="choice-button" data-i="'+i+'"><strong>'+o.t+'</strong><small>'+o.d+'</small></button>').join("");$("choices").querySelectorAll("button").forEach(b=>b.onclick=()=>opts[+b.dataset.i].go());stats();renderHistory()}
-function start(){
+function start(){renderArchive();
 const prefectures=["北海道","青森県","岩手県","宮城県","秋田県","山形県","福島県","茨城県","栃木県","群馬県","埼玉県","千葉県","東京都","神奈川県","新潟県","富山県","石川県","福井県","山梨県","長野県","岐阜県","静岡県","愛知県","三重県","滋賀県","京都府","大阪府","兵庫県","奈良県","和歌山県","鳥取県","島根県","岡山県","広島県","山口県","徳島県","香川県","愛媛県","高知県","福岡県","佐賀県","長崎県","熊本県","大分県","宮崎県","鹿児島県","沖縄県"];
 const birthplace=prefectures[Math.floor(Math.random()*prefectures.length)];
 const talent=document.querySelector('input[name="talent"]:checked')?.value||"balanced";
@@ -172,7 +177,7 @@ const a=g.age,school=[{t:"毎日少しずつ宿題と復習をする",d:"机に�
 const middle=[{t:"授業と復習を大切にする",d:"基礎を積み重ね、学ぶ力を伸ばす。",go:()=>lifeAdvance("授業と復習を大切にし、基礎を積み重ねた。",8,4,-2,1)},{t:"部活動や学校行事に力を入れる",d:"仲間と取り組む経験が増える。",go:()=>lifeAdvance("部活動や学校行事に力を入れた。",1,0,-2,8)},{t:"勉強と遊びのバランスを取る",d:"無理をしすぎず、毎日を充実させる。",go:()=>lifeAdvance("勉強と遊びのバランスを取った。",4,2,3,4)}];
 const high=[{t:"学びを深め、資格や検定にも挑戦する",d:"知識と技術を自分の力にする。",go:()=>lifeAdvance("学びを深め、資格や検定にも挑戦した。",8,4,-2,3)},{t:"部活・行事・仲間との経験を大切にする",d:"学校生活の幅と人とのつながりを広げる。",go:()=>lifeAdvance("部活や行事、仲間との経験を大切にした。",2,1,0,8)},{t:"興味のある分野を見つけて挑戦する",d:"夢中になれる分野を探す。",go:()=>lifeAdvance("興味のある分野を見つけて挑戦した。",5,5,0,8)}];
 let title,story,opts;
-if(a<=5){title=""+a+"歳・幼少期";story=a===0?"誕生。まだ何も知らない世界で、少しずつ周囲との関わりが始まる。":"家族や周囲の人との毎日。遊びや体験を通して、世界を知っていく。";opts=[{t:"家族とたくさん会話し、安心できる環境で過ごす",d:"心身の土台と人とのつながりを育てる。",go:()=>lifeAdvance("家族との関わりのなかで、安心できる土台を育てた。",0,3,5,3)},{t:"外で遊び、いろいろなものに触れる",d:"好奇心と体力、経験を育てる。",go:()=>lifeAdvance("外で遊び、さまざまな体験を重ねた。",0,0,8,7)},{t:"絵本や知育遊びに親しむ",d:"言葉や考える力の芽を育てる。",go:()=>lifeAdvance("絵本や知育遊びに親しみ、考える力の芽を育てた。",5,2,0,3)}]}
+if(a<=5){title=""+a+"歳・幼少期";story=a===0?"誕生。"+g.birthplace+"で、まだ何も知らない世界との関わりが始まる。":"家族や周囲の人との毎日。遊びや体験を通して、世界を知っていく。";opts=[{t:"家族とたくさん会話し、安心できる環境で過ごす",d:"心身の土台と人とのつながりを育てる。",go:()=>lifeAdvance("家族との関わりのなかで、安心できる土台を育てた。",0,3,5,3)},{t:"外で遊び、いろいろなものに触れる",d:"好奇心と体力、経験を育てる。",go:()=>lifeAdvance("外で遊び、さまざまな体験を重ねた。",0,0,8,7)},{t:"絵本や知育遊びに親しむ",d:"言葉や考える力の芽を育てる。",go:()=>lifeAdvance("絵本や知育遊びに親しみ、考える力の芽を育てた。",5,2,0,3)}]}
 else if(a<=11){title="小学"+(a-5)+"年生";story=a===6?"ランドセルを背負い、小学校生活が始まる。":"授業、友達、休み時間。毎日の小さな経験が、これからの自分をつくっていく。";opts=school}
 else if(a<=14){title="中学"+(a-11)+"年生";story=a===12?"新しい制服、新しい教室。中学校生活が始まる。":"勉強も部活も少しずつ本格的になってきた。";opts=middle}
 else{title="高校"+(a-14)+"年生";story=a===15?"新しい校舎、新しい仲間。高校生活が始まる。":a===16?"学校生活に慣れ、自分の得意や興味が見えてきた。":"最後の学年。卒業後の進路を具体的に考える時期。";opts=high}
@@ -201,8 +206,8 @@ function entrance(){stopClock();let performance=g.ability+(g.focus-50)*.13+(g.he
 function failed(performance){if(g.ronin>=2){finish(false,performance);return}stage("悔しい結果。でも、ここで終わりじゃない。","今回の挑戦では合格に届かなかった。もう一度挑戦するなら、学力だけでなく生活や気持ちの管理も必要になる。","どうする？",[{t:"浪人して再挑戦する",d:"もう1年、受験勉強を続ける。成績が伸びる可能性も、下がる可能性もある。",go:()=>{g.ronin++;roninYear()}},{t:"別の進路へ進む",d:"進学先を変える、学び直す、働くなど別の道へ。",go:()=>finish(false,performance,true)}])}
 function roninYear(){g.phase="RONIN / YEAR "+g.ronin;let drop=Math.max(0,(55-g.focus)*.12+(55-g.health)*.1+g.ronin*1.5);g.ability=clamp(g.ability-drop);stage("浪人生活 "+g.ronin+"年目","高校生活とは違い、自分で一日のリズムをつくる必要がある。孤独や焦りで集中力が落ちることも。","この1年の過ごし方を選ぼう。",[{t:"計画を立てて毎日やり切る",d:"学力と集中力を伸ばす。負担は大きい。",go:()=>{g.ability+=10;g.focus+=5;g.health-=8;roninFinish("計画的に学習を続けた。")}},{t:"苦手科目を中心に立て直す",d:"弱点を減らす。全体の伸びは堅実。",go:()=>{g.ability+=7;g.focus+=3;g.health-=3;roninFinish("苦手分野を重点的にやり直した。")}},{t:"ペースを落として心身を整える",d:"体力と集中力を回復。学力は維持しにくい。",go:()=>{g.ability-=2;g.focus+=8;g.health+=12;roninFinish("生活リズムを整え、無理のない学習を続けた。")}},{t:"勉強が思うように進まない",d:"焦りや疲れが重なり、成績が下がることも。",go:()=>{g.ability-=8;g.focus-=8;g.health-=5;roninFinish("思うように勉強が進まず、苦しい時期を過ごした。")}}])}
 function roninFinish(msg){g.ability=clamp(g.ability);g.focus=clamp(g.focus);g.health=clamp(g.health);log("浪人"+g.ronin+"年目："+msg);examPrep()}
-function finish(pass,performance,alternate=false){stopClock();$("play").hidden=true;$("ending").hidden=false;$("endTitle").textContent=pass?"合格。新しい場所から、次の一歩へ。":alternate?"別の道を選ぶ。":"挑戦はここで一区切り。";$("endText").textContent=pass?g.name+"は"+g.target.name+"に合格した。"+(g.ronin?"浪人を経てつかんだ合格。":"現役でつかんだ合格。")+" 最終学力 "+Math.round(g.ability)+"。":alternate?"受験以外の道へ進む決断をした。ここからの選択も、人生の一部になる。":"今回の受験では合格に届かなかった。結果だけでなく、ここまでの経験も次の道につながっていく。";$("endStats").innerHTML=[["最終学力",g.ability],["集中力",g.focus],["体力",g.health],["浪人年数",g.ronin]].map(([n,v])=>'<div><span>'+n+'</span><b>'+Math.round(v)+'</b></div>').join("");$("endHistory").innerHTML=g.logs.map(x=>"<li>"+x+"</li>").join("")}
+function finish(pass,performance,alternate=false){stopClock();try{const archive=JSON.parse(localStorage.getItem("university-life-archive-v1")||"[]");archive.unshift({name:g.name,birthplace:g.birthplace,outcome:pass?"大学受験合格":alternate?"別の進路":"受験終了",date:new Date().toISOString()});localStorage.setItem("university-life-archive-v1",JSON.stringify(archive.slice(0,10)))}catch{}$("play").hidden=true;$("ending").hidden=false;$("endTitle").textContent=pass?"合格。新しい場所から、次の一歩へ。":alternate?"別の道を選ぶ。":"挑戦はここで一区切り。";$("endText").textContent=pass?g.name+"は"+g.target.name+"に合格した。"+(g.ronin?"浪人を経てつかんだ合格。":"現役でつかんだ合格。")+" 最終学力 "+Math.round(g.ability)+"。":alternate?"受験以外の道へ進む決断をした。ここからの選択も、人生の一部になる。":"今回の受験では合格に届かなかった。結果だけでなく、ここまでの経験も次の道につながっていく。";$("endStats").innerHTML=[["最終学力",g.ability],["集中力",g.focus],["体力",g.health],["浪人年数",g.ronin]].map(([n,v])=>'<div><span>'+n+'</span><b>'+Math.round(v)+'</b></div>').join("");$("endHistory").innerHTML=g.logs.map(x=>"<li>"+x+"</li>").join("")}
 $("begin").onclick=start;$("mockBtn").onclick=takeMock;$("again").onclick=()=>{$("ending").hidden=true;$("start").hidden=false;$("birthplace-label").textContent="開始時にランダムで決まります。"};
-$("begin").onclick=start; $("birthplace-label").textContent="開始時にランダムで決まります。";
+$("begin").onclick=start; renderArchive(); $("birthplace-label").textContent="開始時にランダムで決まります。";
 })();
 </script></body></html>
