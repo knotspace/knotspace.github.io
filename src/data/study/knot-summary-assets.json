@@ -1,12 +1,12 @@
 {
   "version": 2,
   "counts": {
-    "total": 120,
-    "science": 69,
+    "total": 122,
+    "science": 71,
     "social": 51,
     "diagrams": 40,
     "tables": 80,
-    "images": 0
+    "images": 2
   },
   "resources": [
     {
@@ -3087,6 +3087,36 @@
           "政府開発援助"
         ]
       ],
+      "source": "KNOT制作"
+    },
+    {
+      "id": "ks-original-121",
+      "subject": "理科",
+      "unit": "植物のつくり・光合成",
+      "type": "image",
+      "title": "光合成の対照実験｜光と葉緑体の条件",
+      "subtitle": "ふ入りの葉と遮光部分でデンプンのでき方を比較",
+      "image": {
+        "src": "/study/diagrams/photosynthesis-leaf-test.svg",
+        "alt": "ふ入りの葉の一部をアルミニウムはくでおおい、日光に当ててヨウ素液で調べる実験の模式図",
+        "caption": "KNOT制作の模式図。青紫色になる部分と遮光部分を比較する。"
+      },
+      "note": "ヨウ素液が青紫色になるのはデンプンがある部分。緑色で光が当たった部分だけが青紫色になることから、光と葉緑体の両方が光合成に必要だと考える。",
+      "source": "KNOT制作"
+    },
+    {
+      "id": "ks-original-122",
+      "subject": "理科",
+      "unit": "地震・震源・地震波",
+      "type": "image",
+      "title": "P波・S波の到着と初期微動継続時間",
+      "subtitle": "地震計の記録から2つの波の到着時刻を読む",
+      "image": {
+        "src": "/study/diagrams/earthquake-wave-arrival.svg",
+        "alt": "地震計の記録でP波が先に到着し、S波が後に到着することと初期微動継続時間を示した模式図",
+        "caption": "KNOT制作の模式図。P波到着からS波到着までが初期微動継続時間。"
+      },
+      "note": "初期微動継続時間＝S波の到着時刻−P波の到着時刻。震源距離を求めるときは、P波とS波の速さの違いを使って連立して考える。",
       "source": "KNOT制作"
     }
   ]
