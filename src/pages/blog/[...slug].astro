@@ -1017,4 +1017,25 @@ const breadcrumbJsonLd = {
     .article-content :global(figure){min-width:0;max-width:100%}
   }
 
+
+  /* Mobile hero artwork: show the complete image without cropping. */
+  .post > .hero-image {
+    display: block;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    aspect-ratio: 1200 / 630;
+    object-fit: contain !important;
+    object-position: center;
+  }
+  @media (max-width: 760px) {
+    .post > .hero-image {
+      width: 100% !important;
+      height: auto !important;
+      max-height: none !important;
+      margin: 18px 0 23px;
+      object-fit: contain !important;
+    }
+  }
 </style>
