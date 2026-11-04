@@ -10,21 +10,138 @@
     "verified": "問題冊子・正解・訂正通知を突き合わせ、分析台帳に反映済み"
   },
   "findings": {
-    "2026-11-04": "リポジトリmainの全ファイルと直近1000コミットの履歴を調査。PDFは一度も含まれていない。作業セッションの添付領域も空。下記10ファイルは『ユーザーが過去の会話に添付した』という記録だけが存在し、今回のセッションでは読めない。"
+    "2026-11-04": "リポジトリmainの全ファイルと直近1000コミットの履歴を調査。PDFは一度も含まれていない。作業セッションの添付領域も空。下記10ファイルは『ユーザーが過去の会話に添付した』という記録だけが存在し、今回のセッションでは読めない。",
+    "2026-11-04-recovery": "利用者の記録(kosen-source-recovery.md)により、PDFはChatGPTのファイルライブラリに存在し、GitHubには未アップロードと確認された。このセッションからは読めないため、添付が必要。上記に別名4ファイルを追記。"
   },
   "sources": [
-    { "id": "r7-soc-q", "file": "02_2025_syakai_mondai.pdf", "year": "令和7年度", "subject": "社会", "kind": "問題冊子", "answerKeyId": "r7-soc-a", "status": "not-available" },
-    { "id": "r7-soc-a", "file": "02_2025_syakai_seikai.pdf", "year": "令和7年度", "subject": "社会", "kind": "正解表", "status": "not-available" },
-    { "id": "r8-soc-q", "file": "02_2026_syakai_mondai2.pdf", "year": "令和8年度", "subject": "社会", "kind": "問題冊子", "answerKeyId": null, "status": "not-available", "note": "正解表の台帳記録なし。" },
-    { "id": "r7-math-q", "file": "03_2025_sugaku_mondai.pdf", "year": "令和7年度", "subject": "数学", "kind": "問題冊子", "answerKeyId": "r7-math-a", "status": "not-available" },
-    { "id": "r7-math-a", "file": "03_2025_sugaku_seikai.pdf", "year": "令和7年度", "subject": "数学", "kind": "正解表", "status": "not-available" },
-    { "id": "r8-math-q", "file": "03_2026_sugaku_mondai.pdf", "year": "令和8年度", "subject": "数学", "kind": "問題冊子", "answerKeyId": null, "status": "not-available", "note": "正解表の台帳記録なし。数学β版の令和8年度分(5問)は正答の独立検証ができていない。" },
-    { "id": "r7-sci-q", "file": "04_2025_rika_mondai.pdf", "year": "令和7年度", "subject": "理科", "kind": "問題冊子", "answerKeyId": null, "status": "not-available", "note": "正解表の台帳記録なし。" },
-    { "id": "r8-sci-q", "file": "04_2026_rika_mondai.pdf", "year": "令和8年度", "subject": "理科", "kind": "問題冊子(訂正/取扱通知を含む)", "answerKeyId": "r8-sci-a", "status": "not-available", "note": "設問6(問1)2は不成立として全受験者に得点措置(既存台帳の記述。原本未確認)。問題冊子内の訂正箇所も分析時に反映する。" },
-    { "id": "r8-sci-a", "file": "04_2026_rika_seikai.pdf", "year": "令和8年度", "subject": "理科", "kind": "正解表", "status": "not-available" }
+    {
+      "id": "r7-soc-q",
+      "file": "02_2025_syakai_mondai.pdf",
+      "year": "令和7年度",
+      "subject": "社会",
+      "kind": "問題冊子",
+      "answerKeyId": "r7-soc-a",
+      "status": "not-available"
+    },
+    {
+      "id": "r7-soc-a",
+      "file": "02_2025_syakai_seikai.pdf",
+      "year": "令和7年度",
+      "subject": "社会",
+      "kind": "正解表",
+      "status": "not-available"
+    },
+    {
+      "id": "r8-soc-q",
+      "file": "02_2026_syakai_mondai2.pdf",
+      "year": "令和8年度",
+      "subject": "社会",
+      "kind": "問題冊子",
+      "answerKeyId": null,
+      "status": "not-available",
+      "note": "正解表の台帳記録なし。"
+    },
+    {
+      "id": "r7-math-q",
+      "file": "03_2025_sugaku_mondai.pdf",
+      "year": "令和7年度",
+      "subject": "数学",
+      "kind": "問題冊子",
+      "answerKeyId": "r7-math-a",
+      "status": "not-available"
+    },
+    {
+      "id": "r7-math-a",
+      "file": "03_2025_sugaku_seikai.pdf",
+      "year": "令和7年度",
+      "subject": "数学",
+      "kind": "正解表",
+      "status": "not-available"
+    },
+    {
+      "id": "r8-math-q",
+      "file": "03_2026_sugaku_mondai.pdf",
+      "year": "令和8年度",
+      "subject": "数学",
+      "kind": "問題冊子",
+      "answerKeyId": null,
+      "status": "not-available",
+      "note": "正解表の台帳記録なし。数学β版の令和8年度分(5問)は正答の独立検証ができていない。"
+    },
+    {
+      "id": "r7-sci-q",
+      "file": "04_2025_rika_mondai.pdf",
+      "year": "令和7年度",
+      "subject": "理科",
+      "kind": "問題冊子",
+      "answerKeyId": null,
+      "status": "not-available",
+      "note": "正解表の台帳記録なし。"
+    },
+    {
+      "id": "r8-sci-q",
+      "file": "04_2026_rika_mondai.pdf",
+      "year": "令和8年度",
+      "subject": "理科",
+      "kind": "問題冊子(訂正/取扱通知を含む)",
+      "answerKeyId": "r8-sci-a",
+      "status": "not-available",
+      "note": "設問6(問1)2は不成立として全受験者に得点措置(既存台帳の記述。原本未確認)。問題冊子内の訂正箇所も分析時に反映する。"
+    },
+    {
+      "id": "r8-sci-a",
+      "file": "04_2026_rika_seikai.pdf",
+      "year": "令和8年度",
+      "subject": "理科",
+      "kind": "正解表",
+      "status": "not-available"
+    },
+    {
+      "id": "r7-sci-alt",
+      "file": "R7理科.pdf",
+      "year": "令和7年度",
+      "subject": "理科",
+      "kind": "資料(種別未確認)",
+      "status": "not-available",
+      "possibleDuplicateOf": "r7-sci-q",
+      "note": "docs/study/kosen-source-recovery.md に記載。ページ数・内容・ハッシュで重複照合が必要。"
+    },
+    {
+      "id": "r8-sci-alt",
+      "file": "r8理科.pdf",
+      "year": "令和8年度",
+      "subject": "理科",
+      "kind": "資料(種別未確認)",
+      "status": "not-available",
+      "possibleDuplicateOf": "r8-sci-q",
+      "note": "docs/study/kosen-source-recovery.md に記載。ページ数・内容・ハッシュで重複照合が必要。"
+    },
+    {
+      "id": "r7-soc-alt",
+      "file": "R7社会.pdf",
+      "year": "令和7年度",
+      "subject": "社会",
+      "kind": "資料(種別未確認)",
+      "status": "not-available",
+      "possibleDuplicateOf": "r7-soc-q",
+      "note": "docs/study/kosen-source-recovery.md に記載。ページ数・内容・ハッシュで重複照合が必要。"
+    },
+    {
+      "id": "r8-soc-alt",
+      "file": "R8社会.pdf",
+      "year": "令和8年度",
+      "subject": "社会",
+      "kind": "資料(種別未確認)",
+      "status": "not-available",
+      "possibleDuplicateOf": "r8-soc-q",
+      "note": "docs/study/kosen-source-recovery.md に記載。ページ数・内容・ハッシュで重複照合が必要。"
+    }
   ],
   "notCovered": {
-    "subjects": ["英語", "国語"],
+    "subjects": [
+      "英語",
+      "国語"
+    ],
     "note": "国語・英語は原本ファイルの記録自体がない。存在すると決めつけず、追加添付を依頼する。"
   },
   "legacyLedgerIssues": [
