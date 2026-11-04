@@ -7158,7 +7158,8 @@
       "correct": 2,
       "explanation": "並列回路では各抵抗に電源と同じ6.0 Vがかかる。6 Ωには6.0÷6＝1.0 A、3 Ωには6.0÷3＝2.0 Aが流れる。分岐前の電流は和なので1.0＋2.0＝3.0 A。",
       "link": "/study/summary/physics/",
-      "questionType": "application"
+      "questionType": "application",
+      "sourceNote": "KNOTオリジナル問題。基礎知識を使って条件・資料・計算結果を判断する練習。"
     },
     {
       "id": "app-002",
@@ -7176,7 +7177,8 @@
       "correct": 2,
       "explanation": "密閉容器では気体を含めて外へ出入りしないため、反応前後で全体の質量は保存される。反応前は12.0＋8.0＝20.0 g。未反応物が残っていても全体の質量は20.0 gのまま。",
       "link": "/study/summary/chemistry/",
-      "questionType": "application"
+      "questionType": "application",
+      "sourceNote": "KNOTオリジナル問題。基礎知識を使って条件・資料・計算結果を判断する練習。"
     },
     {
       "id": "app-003",
@@ -7194,7 +7196,8 @@
       "correct": 1,
       "explanation": "中性点を過ぎると水酸化ナトリウムが過剰になり、水酸化物イオンが残るためアルカリ性を示す。水酸化ナトリウム由来のナトリウムイオンも水溶液中に存在する。塩酸由来の塩化物イオンも残るが、アルカリ性の原因ではない。",
       "link": "/study/summary/chemistry/",
-      "questionType": "application"
+      "questionType": "application",
+      "sourceNote": "KNOTオリジナル問題。基礎知識を使って条件・資料・計算結果を判断する練習。"
     },
     {
       "id": "app-004",
@@ -7212,7 +7215,8 @@
       "correct": 0,
       "explanation": "ヨウ素液で青紫色になるのはデンプンがある部分。ふ入りの葉では葉緑体のある緑色部分、アルミニウムはくでおおわず光が当たった部分が青紫色になる。光と葉緑体の両方が光合成に必要だと判断できる。",
       "link": "/study/summary/biology/",
-      "questionType": "application"
+      "questionType": "application",
+      "sourceNote": "KNOTオリジナル問題。基礎知識を使って条件・資料・計算結果を判断する練習。"
     },
     {
       "id": "app-005",
@@ -7230,7 +7234,8 @@
       "correct": 0,
       "explanation": "全身から戻った血液は大静脈を通って右心房、右心室へ進み、肺動脈で肺へ送られる。肺で二酸化炭素を放出し酸素を受け取った血液は肺静脈で左心房へ戻る。",
       "link": "/study/summary/biology/",
-      "questionType": "application"
+      "questionType": "application",
+      "sourceNote": "KNOTオリジナル問題。基礎知識を使って条件・資料・計算結果を判断する練習。"
     },
     {
       "id": "app-006",
@@ -7248,7 +7253,8 @@
       "correct": 2,
       "explanation": "到着時刻の差は12秒。震源距離をx kmとすると、S波とP波の到着時間の差は x/3−x/6＝12。x/6＝12よりx＝72 km。",
       "link": "/study/summary/earth/",
-      "questionType": "application"
+      "questionType": "application",
+      "sourceNote": "KNOTオリジナル問題。基礎知識を使って条件・資料・計算結果を判断する練習。"
     },
     {
       "id": "app-007",
@@ -7266,7 +7272,8 @@
       "correct": 1,
       "explanation": "湿度＝実際の水蒸気量÷その気温での飽和水蒸気量×100。9.0÷17.3×100≒52.0％。小数の割り算では、最後に百分率へ直すことを忘れない。",
       "link": "/study/summary/earth/",
-      "questionType": "application"
+      "questionType": "application",
+      "sourceNote": "KNOTオリジナル問題。基礎知識を使って条件・資料・計算結果を判断する練習。"
     },
     {
       "id": "app-008",
@@ -7284,7 +7291,8 @@
       "correct": 2,
       "explanation": "夏に高温となり、梅雨・台風などの影響で夏に降水量が多く、冬の寒さが比較的穏やかな特徴は温暖湿潤気候に当てはまる。地中海性気候は夏に乾燥し、冬に雨が多い。",
       "link": "/study/summary/geography/",
-      "questionType": "application"
+      "questionType": "application",
+      "sourceNote": "KNOTオリジナル問題。基礎知識を使って条件・資料・計算結果を判断する練習。"
     },
     {
       "id": "app-009",
@@ -7302,7 +7310,8 @@
       "correct": 1,
       "explanation": "人口密度＝人口÷面積。240,000÷300＝800。人口を「万人」のまま計算せず、人に直してから割ると単位の誤りを防げる。",
       "link": "/study/summary/geography/",
-      "questionType": "application"
+      "questionType": "application",
+      "sourceNote": "KNOTオリジナル問題。基礎知識を使って条件・資料・計算結果を判断する練習。"
     },
     {
       "id": "app-010",
@@ -7320,7 +7329,8 @@
       "correct": 1,
       "explanation": "殖産興業は、欧米の技術や制度を取り入れて産業を発展させ、近代国家の基盤をつくる政策。富岡製糸場などの官営工場は、技術の導入・模範の提示・人材育成などの役割を担った。",
       "link": "/study/summary/history/",
-      "questionType": "application"
+      "questionType": "application",
+      "sourceNote": "KNOTオリジナル問題。基礎知識を使って条件・資料・計算結果を判断する練習。"
     },
     {
       "id": "app-011",
@@ -7338,7 +7348,8 @@
       "correct": 1,
       "explanation": "農地改革では、政府が地主の小作地などを買い上げて小作人に売り渡し、自作農を増やした。地主制を弱め、農村の民主化を進める戦後改革の一つ。",
       "link": "/study/summary/history/",
-      "questionType": "application"
+      "questionType": "application",
+      "sourceNote": "KNOTオリジナル問題。基礎知識を使って条件・資料・計算結果を判断する練習。"
     },
     {
       "id": "app-012",
@@ -7356,7 +7367,8 @@
       "correct": 1,
       "explanation": "一般に価格が上がると、消費者は購入を控えるため需要量は減り、企業は販売による利益を見込んで供給量を増やす。需要曲線は右下がり、供給曲線は右上がりになる。",
       "link": "/study/summary/civics/",
-      "questionType": "application"
+      "questionType": "application",
+      "sourceNote": "KNOTオリジナル問題。基礎知識を使って条件・資料・計算結果を判断する練習。"
     },
     {
       "id": "app-013",
@@ -7374,7 +7386,8 @@
       "correct": 2,
       "explanation": "小選挙区制は1つの選挙区から原則1人を選ぶ制度。大政党に有利になりやすく、死票が多くなりやすい。一方、比例代表制は政党の得票に応じて議席を配分する。",
       "link": "/study/summary/civics/",
-      "questionType": "application"
+      "questionType": "application",
+      "sourceNote": "KNOTオリジナル問題。基礎知識を使って条件・資料・計算結果を判断する練習。"
     }
   ]
 }
