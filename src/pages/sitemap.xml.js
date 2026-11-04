@@ -22,7 +22,6 @@ export async function GET({ site }) {
     '/blog/',
     '/study/',
     '/study/foundation/',
-    '/study/kosen/',
     '/study/mock/',
     '/study/quotes/',
     '/study/summary/',
