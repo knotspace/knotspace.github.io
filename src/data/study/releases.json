@@ -1,6 +1,19 @@
 {
   "releases": [
     {
+      "id": "7ef5dab",
+      "publishedAt": "2026-11-04T16:33:08+09:00",
+      "title": "Fix question bank loading in Study quiz",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "基礎演習"
+      ],
+      "files": [
+        "src/pages/study/foundation.astro"
+      ]
+    },
+    {
       "id": "135b409",
       "publishedAt": "2026-11-04T16:32:57+09:00",
       "title": "Fix mobile answer selection in Study foundation quiz",
