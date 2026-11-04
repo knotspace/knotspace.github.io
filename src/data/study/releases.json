@@ -1,6 +1,19 @@
 {
   "releases": [
     {
+      "id": "2caa2ee",
+      "publishedAt": "2026-11-04T19:28:28+09:00",
+      "title": "Expand KNOT knowledge base with 15 detailed learning modules",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "学習コンテンツ・データ"
+      ],
+      "files": [
+        "src/data/study/knowledge-base-v1.json"
+      ]
+    },
+    {
       "id": "dbd7068",
       "publishedAt": "2026-11-04T19:17:05+09:00",
       "title": "参考サイトの中学理社単元テーマ索引を追加",
