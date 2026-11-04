@@ -1,6 +1,19 @@
 {
   "releases": [
     {
+      "id": "135b409",
+      "publishedAt": "2026-11-04T16:32:57+09:00",
+      "title": "Fix mobile answer selection in Study foundation quiz",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "基礎演習"
+      ],
+      "files": [
+        "src/pages/study/foundation.astro"
+      ]
+    },
+    {
       "id": "c74d85d",
       "publishedAt": "2026-11-04T15:57:48+09:00",
       "title": "Restore private practice password",
