@@ -10,7 +10,7 @@ const pageImage = new URL('/og-default.svg', Astro.site ?? Astro.url).href;
 const websiteJsonLd = { '@context': 'https://schema.org', '@type': 'WebSite', name: 'KNOT Study', url: new URL('study/', Astro.site ?? Astro.url).href, inLanguage: 'ja-JP', description };
 ---
 <!doctype html>
-<html lang="ja" data-theme="dark" data-app-mode="study">
+<html lang="ja" data-theme="dark" data-app-mode="study" data-release-app="study">
 <head>
 <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="theme-color" content="#0b1220" /><meta name="description" content={description} />
 <meta name="robots" content={noindex ? "noindex,follow" : "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"} />
@@ -119,4 +119,5 @@ html.private-quiz-active .study-maker-banner,
 html.quiz-active .pwa-prompt,
 html.private-quiz-active .pwa-prompt{display:none!important}
 </style>
+<script is:inline src="/release-notes.js" defer></script>
 </body></html>
