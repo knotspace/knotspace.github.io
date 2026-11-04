@@ -1,6 +1,19 @@
 {
   "releases": [
     {
+      "id": "0509efb",
+      "publishedAt": "2026-11-04T21:30:59+09:00",
+      "title": "Remove literal newline escape text from Study page",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "Study画面・機能"
+      ],
+      "files": [
+        "src/pages/study/university.astro"
+      ]
+    },
+    {
       "id": "4ecc278",
       "publishedAt": "2026-11-04T20:57:14+09:00",
       "title": "Handle empty Supabase REST responses",
