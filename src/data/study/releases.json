@@ -27,32 +27,6 @@
       ]
     },
     {
-      "id": "5b0f44c",
-      "publishedAt": "2026-11-04T07:37:24+09:00",
-      "title": "Remove unused retired Study question bank",
-      "type": "STUDY UPDATE",
-      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
-      "details": [
-        "学習コンテンツ・データ"
-      ],
-      "files": [
-        "src/data/study/kosen-past-questions.json"
-      ]
-    },
-    {
-      "id": "8a60a40",
-      "publishedAt": "2026-11-03T23:03:37+09:00",
-      "title": "Polish KOSEN filters and add keyboard answer shortcuts",
-      "type": "STUDY UPDATE",
-      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
-      "details": [
-        "基礎網羅問題"
-      ],
-      "files": [
-        "src/pages/study/kosen.astro"
-      ]
-    },
-    {
       "id": "0f412bb",
       "publishedAt": "2026-11-03T21:54:12+09:00",
       "title": "Add 200 KNOT-made summary learning resources",
@@ -92,19 +66,6 @@
       ]
     },
     {
-      "id": "831f763",
-      "publishedAt": "2026-11-03T21:33:03+09:00",
-      "title": "Improve subject-specific diagram matching in practice",
-      "type": "STUDY UPDATE",
-      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
-      "details": [
-        "基礎網羅問題"
-      ],
-      "files": [
-        "src/pages/study/kosen.astro"
-      ]
-    },
-    {
       "id": "727dc8b",
       "publishedAt": "2026-11-03T21:29:24+09:00",
       "title": "Add searchable 400-item KNOT diagram library",
@@ -141,32 +102,6 @@
       ],
       "files": [
         "src/pages/study/simulation.astro"
-      ]
-    },
-    {
-      "id": "cf987f2",
-      "publishedAt": "2026-11-03T21:12:56+09:00",
-      "title": "Add question-specific reasoning for all KNOT past-paper choices",
-      "type": "STUDY UPDATE",
-      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
-      "details": [
-        "学習コンテンツ・データ"
-      ],
-      "files": [
-        "src/data/study/kosen-past-questions.json"
-      ]
-    },
-    {
-      "id": "55bc3e6",
-      "publishedAt": "2026-11-03T21:10:20+09:00",
-      "title": "Improve KNOT past question explanations and separate standalone items",
-      "type": "STUDY UPDATE",
-      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
-      "details": [
-        "学習コンテンツ・データ"
-      ],
-      "files": [
-        "src/data/study/kosen-past-questions.json"
       ]
     },
     {
@@ -287,92 +222,6 @@
       ]
     },
     {
-      "id": "38123c2",
-      "publishedAt": "2026-11-03T20:36:41+09:00",
-      "title": "Sort subquestions in original order within each large question (#40)",
-      "type": "STUDY UPDATE",
-      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
-      "details": [
-        "基礎網羅問題"
-      ],
-      "files": [
-        "src/pages/study/kosen.astro"
-      ]
-    },
-    {
-      "id": "a8aaae5",
-      "publishedAt": "2026-11-03T20:35:48+09:00",
-      "title": "Complete social past-paper large question one (#39)",
-      "type": "STUDY UPDATE",
-      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
-      "details": [
-        "学習コンテンツ・データ",
-        "基礎網羅問題"
-      ],
-      "files": [
-        "src/data/study/kosen-past-questions.json",
-        "src/pages/study/kosen.astro"
-      ]
-    },
-    {
-      "id": "9266967",
-      "publishedAt": "2026-11-03T20:34:07+09:00",
-      "title": "Add mixed science/social mode and 50 grouped KOSEN questions (#38)",
-      "type": "STUDY UPDATE",
-      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
-      "details": [
-        "学習コンテンツ・データ",
-        "基礎網羅問題"
-      ],
-      "files": [
-        "src/data/study/kosen-past-questions.json",
-        "src/pages/study/kosen.astro"
-      ]
-    },
-    {
-      "id": "1ff67f3",
-      "publishedAt": "2026-11-03T20:24:43+09:00",
-      "title": "Add ten-question science and social KOSEN past-paper mock mode (#37)",
-      "type": "STUDY UPDATE",
-      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
-      "details": [
-        "学習コンテンツ・データ",
-        "基礎網羅問題"
-      ],
-      "files": [
-        "src/data/study/kosen-past-questions.json",
-        "src/pages/study/kosen.astro"
-      ]
-    },
-    {
-      "id": "51363dd",
-      "publishedAt": "2026-11-03T20:19:47+09:00",
-      "title": "Restrict KOSEN regular practice to science and social studies (#36)",
-      "type": "STUDY UPDATE",
-      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
-      "details": [
-        "基礎網羅問題"
-      ],
-      "files": [
-        "src/pages/study/kosen.astro"
-      ]
-    },
-    {
-      "id": "675093b",
-      "publishedAt": "2026-11-03T20:16:44+09:00",
-      "title": "Expand KNOT Study with five-subject KOSEN preparation (#35)",
-      "type": "STUDY UPDATE",
-      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
-      "details": [
-        "基礎問題データ",
-        "基礎網羅問題"
-      ],
-      "files": [
-        "src/data/study/kosen-questions.json",
-        "src/pages/study/kosen.astro"
-      ]
-    },
-    {
       "id": "855f13c",
       "publishedAt": "2026-11-03T19:43:45+09:00",
       "title": "Add 100 deduplicated KNOT Study questions",
@@ -383,19 +232,6 @@
       ],
       "files": [
         "src/data/study/study-questions.json"
-      ]
-    },
-    {
-      "id": "343de9c",
-      "publishedAt": "2026-11-03T19:30:53+09:00",
-      "title": "Track daily Study progress across practice sessions",
-      "type": "STUDY UPDATE",
-      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
-      "details": [
-        "基礎網羅問題"
-      ],
-      "files": [
-        "src/pages/study/kosen.astro"
       ]
     },
     {
