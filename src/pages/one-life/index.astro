@@ -467,7 +467,7 @@ function finish(){
  if(d.education==='middle')route=(d.career==='work'?'中卒で就職':d.career==='vocational'?'中卒後に専門技術を学ぶ':'中卒後に起業');
  let title=s.experience>75?'挑戦を重ね、自分の道を切り開いた。':s.study>75?'学びを力に変えた人生。':s.friends>75?'人とのつながりに恵まれた人生。':'自分の選択で歩んだ人生。';
  $('ending-title').textContent=title;
- $('ending-copy').textContent=(state.name?state.name+'さん':'あなた')+'は、誕生から'+state.deathAge+'歳までの人生を歩んだ。35歳までは自分で選択し、36歳からは時の流れに身を任せながら、出会い、仕事、暮らし、さまざまな出来事を重ねた。最終的には「'+route+'」の道を歩み、'+state.deathAge+'歳で人生の幕を閉じた。';
+ $('ending-copy').textContent=(state.name?state.name+'さん':'あなた')+'は、誕生から'+state.deathAge+'歳までの人生を歩んだ。'+(state.after35Mode==='choose'?'35歳以降も自分で選択を重ね、':'36歳以降は自動進行に身を任せ、')+'出会い、仕事、暮らし、さまざまな出来事を重ねた。最終的には「'+route+'」の道を歩み、'+state.deathAge+'歳で人生の幕を閉じた。';
  $('result-stats').replaceChildren();[['学力',s.study],['経験',s.experience],['健康',s.health],['幸福',s.happiness],['人とのつながり',s.friends]].forEach(([k,v])=>{const el=document.createElement('div'),b=document.createElement('b'),sp=document.createElement('span');b.textContent=v;sp.textContent=k;el.append(b,sp);$('result-stats').append(el);});
  $('result-reflection').textContent='35歳までに自分で選んだ道と、その後に訪れた予想外の出来事。そのすべてが、この人生を形づくった。学力や収入だけでは測れない、あなただけの一生だった。';
  const achievements=[];
