@@ -1,6 +1,19 @@
 {
   "releases": [
     {
+      "id": "dbd7068",
+      "publishedAt": "2026-11-04T19:17:05+09:00",
+      "title": "参考サイトの中学理社単元テーマ索引を追加",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "学習コンテンツ・データ"
+      ],
+      "files": [
+        "src/data/study/reference-topic-index.json"
+      ]
+    },
+    {
       "id": "5ac06ee",
       "publishedAt": "2026-11-04T19:16:25+09:00",
       "title": "Clarify exact past bank classification counts",
