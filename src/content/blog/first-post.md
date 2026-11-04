@@ -5,6 +5,8 @@ pubDate: "2026-10-31"
 category: "お知らせ"
 heroImage: "/blog-art/welcome.svg"
 ---
+<figure class="source-photo"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Programming_code.jpg?width=1280" alt="コードを書いてWeb制作を進めるイメージ。" loading="lazy" decoding="async" width="1280" height="853" /><figcaption>コードを書いてWeb制作を進めるイメージ。 写真：Martin Vorel / <a href="https://commons.wikimedia.org/wiki/File:Programming_code.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>・<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></figcaption></figure>
+
 
 ## Knotへようこそ！
 
