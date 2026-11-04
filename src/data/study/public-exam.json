@@ -1,0 +1,3806 @@
+{
+  "version": 1,
+  "total": 200,
+  "questions": [
+    {
+      "id": "pe-001",
+      "subject": "science",
+      "topic": "物理",
+      "term": "力",
+      "prompt": "物体の形や運動の状態を変化させるはたらきは何か。",
+      "options": [
+        "力",
+        "圧力",
+        "仕事",
+        "エネルギー"
+      ],
+      "correct": 0,
+      "explanation": "力は物体の運動の状態や形を変えるはたらき。単位はN（ニュートン）。",
+      "link": "/study/summary/physics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-002",
+      "subject": "science",
+      "topic": "物理",
+      "term": "浮力",
+      "prompt": "水中の物体が、重力と反対向きに水から受ける力は何か。",
+      "options": [
+        "摩擦力",
+        "弾性力",
+        "浮力",
+        "磁力"
+      ],
+      "correct": 2,
+      "explanation": "浮力は液体や気体の中の物体にはたらく、上向きの力。",
+      "link": "/study/summary/physics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-003",
+      "subject": "science",
+      "topic": "物理",
+      "term": "仕事率",
+      "prompt": "一定時間あたりにする仕事の大きさを何というか。",
+      "options": [
+        "効率",
+        "仕事率",
+        "圧力",
+        "電力量"
+      ],
+      "correct": 1,
+      "explanation": "仕事率は仕事をする速さ。仕事率〔W〕＝仕事〔J〕÷時間〔s〕。",
+      "link": "/study/summary/physics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-004",
+      "subject": "science",
+      "topic": "物理",
+      "term": "直列回路",
+      "prompt": "電流の流れる道筋が1本だけの回路を何というか。",
+      "options": [
+        "並列回路",
+        "直列回路",
+        "分岐回路",
+        "短絡回路"
+      ],
+      "correct": 1,
+      "explanation": "直列回路では電流の通り道が1本で、回路のどこでも電流は等しい。",
+      "link": "/study/summary/physics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-005",
+      "subject": "science",
+      "topic": "物理",
+      "term": "熱量",
+      "prompt": "物体が受け取ったり失ったりした熱の量を何というか。",
+      "options": [
+        "電力量",
+        "熱量",
+        "仕事率",
+        "圧力"
+      ],
+      "correct": 1,
+      "explanation": "熱量の単位はJ（ジュール）。水の温度変化などから求められる。",
+      "link": "/study/summary/physics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-006",
+      "subject": "science",
+      "topic": "物理",
+      "term": "磁界",
+      "prompt": "磁石の力がはたらく空間を何というか。",
+      "options": [
+        "電界",
+        "磁界",
+        "音場",
+        "重力場"
+      ],
+      "correct": 1,
+      "explanation": "磁界の向きは方位磁針のN極が指す向きで表す。",
+      "link": "/study/summary/physics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-007",
+      "subject": "science",
+      "topic": "物理",
+      "term": "力のつり合い",
+      "prompt": "一つの物体にはたらく複数の力が打ち消し合い、物体の運動状態が変わらない状態を何というか。",
+      "options": [
+        "力のつり合い",
+        "慣性",
+        "作用・反作用",
+        "仕事"
+      ],
+      "correct": 0,
+      "explanation": "力がつり合う条件は、二力なら大きさが等しく、同一直線上で向きが反対であること。",
+      "link": "/study/summary/physics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-008",
+      "subject": "science",
+      "topic": "物理",
+      "term": "電力量",
+      "prompt": "電力と時間の積で表される、電気器具が使った電気エネルギーは何か。",
+      "options": [
+        "電圧",
+        "電力",
+        "抵抗",
+        "電力量"
+      ],
+      "correct": 3,
+      "explanation": "電力量は電力×時間で求め、単位にはWhやJを使う。",
+      "link": "/study/summary/physics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-009",
+      "subject": "science",
+      "topic": "物理",
+      "term": "反射",
+      "prompt": "光が鏡などの面に当たってはね返る現象は何か。",
+      "options": [
+        "吸収",
+        "反射",
+        "屈折",
+        "分散"
+      ],
+      "correct": 1,
+      "explanation": "反射では入射角と反射角が等しい。",
+      "link": "/study/summary/physics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-010",
+      "subject": "science",
+      "topic": "物理",
+      "term": "仕事率",
+      "prompt": "確認問題：一定時間あたりにする仕事の大きさを何というか。",
+      "options": [
+        "効率",
+        "仕事率",
+        "圧力",
+        "電力量"
+      ],
+      "correct": 1,
+      "explanation": "仕事率は仕事をする速さ。仕事率〔W〕＝仕事〔J〕÷時間〔s〕。（確認ポイント：仕事率）",
+      "link": "/study/summary/physics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-011",
+      "subject": "science",
+      "topic": "物理",
+      "term": "共鳴",
+      "prompt": "共鳴について正しい説明を選べ。物体に固有振動数と同じ振動を加えたとき、振幅が大きくなる現象は何か。",
+      "options": [
+        "反射",
+        "共鳴",
+        "屈折",
+        "干渉"
+      ],
+      "correct": 1,
+      "explanation": "共鳴では外から加える振動数が固有振動数と一致し、振幅が大きくなる。（確認ポイント：共鳴）",
+      "link": "/study/summary/physics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-012",
+      "subject": "science",
+      "topic": "物理",
+      "term": "浮力",
+      "prompt": "浮力について正しい説明を選べ。水中の物体が、重力と反対向きに水から受ける力は何か。",
+      "options": [
+        "摩擦力",
+        "弾性力",
+        "浮力",
+        "磁力"
+      ],
+      "correct": 2,
+      "explanation": "浮力は液体や気体の中の物体にはたらく、上向きの力。（確認ポイント：浮力）",
+      "link": "/study/summary/physics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-013",
+      "subject": "science",
+      "topic": "物理",
+      "term": "電力量",
+      "prompt": "電力量について正しい説明を選べ。電力と時間の積で表される、電気器具が使った電気エネルギーは何か。",
+      "options": [
+        "電圧",
+        "電力",
+        "抵抗",
+        "電力量"
+      ],
+      "correct": 3,
+      "explanation": "電力量は電力×時間で求め、単位にはWhやJを使う。（確認ポイント：電力量）",
+      "link": "/study/summary/physics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-014",
+      "subject": "science",
+      "topic": "物理",
+      "term": "オームの法則",
+      "prompt": "確認問題：電圧・電流・抵抗の関係を表す法則は何か。",
+      "options": [
+        "フレミングの法則",
+        "反射の法則",
+        "オームの法則",
+        "質量保存の法則"
+      ],
+      "correct": 2,
+      "explanation": "オームの法則は V＝RI。電圧V、電流I、抵抗Rの関係を表す。（確認ポイント：オームの法則）",
+      "link": "/study/summary/physics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-015",
+      "subject": "science",
+      "topic": "物理",
+      "term": "仕事",
+      "prompt": "仕事について正しい説明を選べ。物体に力を加え、その力の向きに動かしたときの量は何か。",
+      "options": [
+        "仕事",
+        "仕事率",
+        "運動量",
+        "熱量"
+      ],
+      "correct": 0,
+      "explanation": "仕事〔J〕＝力〔N〕×力の向きに動いた距離〔m〕。（確認ポイント：仕事）",
+      "link": "/study/summary/physics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-016",
+      "subject": "science",
+      "topic": "物理",
+      "term": "慣性",
+      "prompt": "慣性について正しい説明を選べ。物体が運動の状態を保とうとする性質は何か。",
+      "options": [
+        "反作用",
+        "浮力",
+        "慣性",
+        "作用"
+      ],
+      "correct": 2,
+      "explanation": "外から力を受けない、または力がつり合うと運動の状態は変わらない。（確認ポイント：慣性）",
+      "link": "/study/summary/physics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-017",
+      "subject": "science",
+      "topic": "物理",
+      "term": "屈折",
+      "prompt": "確認問題：光が異なる物質の境界で進む向きを変える現象は何か。",
+      "options": [
+        "反射",
+        "屈折",
+        "分散",
+        "回折"
+      ],
+      "correct": 1,
+      "explanation": "光が空気と水など異なる物質の境界を通るとき、進む向きが変わる現象。（確認ポイント：屈折）",
+      "link": "/study/summary/physics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-018",
+      "subject": "science",
+      "topic": "物理",
+      "term": "仕事率",
+      "prompt": "仕事率について正しい説明を選べ。一定時間あたりにする仕事の大きさを何というか。",
+      "options": [
+        "効率",
+        "仕事率",
+        "圧力",
+        "電力量"
+      ],
+      "correct": 1,
+      "explanation": "仕事率は仕事をする速さ。仕事率〔W〕＝仕事〔J〕÷時間〔s〕。（確認ポイント：仕事率）",
+      "link": "/study/summary/physics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-019",
+      "subject": "science",
+      "topic": "物理",
+      "term": "共鳴",
+      "prompt": "確認問題：物体に固有振動数と同じ振動を加えたとき、振幅が大きくなる現象は何か。",
+      "options": [
+        "反射",
+        "共鳴",
+        "屈折",
+        "干渉"
+      ],
+      "correct": 1,
+      "explanation": "共鳴では外から加える振動数が固有振動数と一致し、振幅が大きくなる。（確認ポイント：共鳴）",
+      "link": "/study/summary/physics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-020",
+      "subject": "science",
+      "topic": "物理",
+      "term": "浮力",
+      "prompt": "確認問題：水中の物体が、重力と反対向きに水から受ける力は何か。",
+      "options": [
+        "摩擦力",
+        "弾性力",
+        "浮力",
+        "磁力"
+      ],
+      "correct": 2,
+      "explanation": "浮力は液体や気体の中の物体にはたらく、上向きの力。（確認ポイント：浮力）",
+      "link": "/study/summary/physics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-021",
+      "subject": "science",
+      "topic": "物理",
+      "term": "合力",
+      "prompt": "複数の力を合わせて、同じはたらきをする1つの力にしたものは何か。",
+      "options": [
+        "浮力",
+        "分力",
+        "摩擦力",
+        "合力"
+      ],
+      "correct": 3,
+      "explanation": "合力：複数の力を合わせて、同じはたらきをする1つの力にしたものは何か。",
+      "link": "/study/summary/physics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-022",
+      "subject": "science",
+      "topic": "物理",
+      "term": "圧力の単位",
+      "prompt": "圧力を表すSI単位は何か。",
+      "options": [
+        "J",
+        "W",
+        "Pa",
+        "N"
+      ],
+      "correct": 2,
+      "explanation": "圧力の単位：圧力を表すSI単位は何か。",
+      "link": "/study/summary/physics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-023",
+      "subject": "science",
+      "topic": "物理",
+      "term": "直列回路の電流",
+      "prompt": "直列回路の各部分を流れる電流の大きさはどうなるか。",
+      "options": [
+        "抵抗が大きいほど大きい",
+        "どこでも等しい",
+        "電源から遠いほど小さい",
+        "必ず0になる"
+      ],
+      "correct": 1,
+      "explanation": "直列回路の電流：直列回路の各部分を流れる電流の大きさはどうなるか。",
+      "link": "/study/summary/physics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-024",
+      "subject": "science",
+      "topic": "物理",
+      "term": "位置エネルギー",
+      "prompt": "高い位置にある物体が位置によってもつエネルギーは何か。",
+      "options": [
+        "運動エネルギー",
+        "位置エネルギー",
+        "光エネルギー",
+        "音エネルギー"
+      ],
+      "correct": 1,
+      "explanation": "位置エネルギー：高い位置にある物体が位置によってもつエネルギーは何か。",
+      "link": "/study/summary/physics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-025",
+      "subject": "science",
+      "topic": "物理",
+      "term": "音の振動数",
+      "prompt": "音の振動数が大きいほど、音の高さはどうなるか。",
+      "options": [
+        "変わらない",
+        "低くなる",
+        "必ず小さくなる",
+        "高くなる"
+      ],
+      "correct": 3,
+      "explanation": "音の振動数：音の振動数が大きいほど、音の高さはどうなるか。",
+      "link": "/study/summary/physics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-026",
+      "subject": "science",
+      "topic": "化学",
+      "term": "原子",
+      "prompt": "物質をつくる基本的な粒子で、元素の性質を示す最小の粒子は何か。",
+      "options": [
+        "分子",
+        "原子",
+        "イオン",
+        "電子殻"
+      ],
+      "correct": 1,
+      "explanation": "原子は物質を構成する基本粒子。原子核と電子からできている。",
+      "link": "/study/summary/chemistry/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-027",
+      "subject": "science",
+      "topic": "化学",
+      "term": "化合物",
+      "prompt": "2種類以上の元素が化学的に結びついてできた純物質は何か。",
+      "options": [
+        "単体",
+        "混合物",
+        "化合物",
+        "元素"
+      ],
+      "correct": 2,
+      "explanation": "水や二酸化炭素のように、複数の元素からできた純物質を化合物という。",
+      "link": "/study/summary/chemistry/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-028",
+      "subject": "science",
+      "topic": "化学",
+      "term": "質量保存の法則",
+      "prompt": "化学変化の前後で、反応に関係する物質全体の質量が変わらない法則は何か。",
+      "options": [
+        "定比例の法則",
+        "質量保存の法則",
+        "慣性の法則",
+        "電磁誘導の法則"
+      ],
+      "correct": 1,
+      "explanation": "化学変化の前後で原子の種類と数は変わらないため、全体の質量は保存される。",
+      "link": "/study/summary/chemistry/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-029",
+      "subject": "science",
+      "topic": "化学",
+      "term": "イオン",
+      "prompt": "原子や原子団が電子を失ったり受け取ったりして電気を帯びた粒子は何か。",
+      "options": [
+        "分子",
+        "イオン",
+        "同位体",
+        "中性子"
+      ],
+      "correct": 1,
+      "explanation": "電子を失うと陽イオン、電子を受け取ると陰イオンになる。",
+      "link": "/study/summary/chemistry/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-030",
+      "subject": "science",
+      "topic": "化学",
+      "term": "蒸留",
+      "prompt": "液体を加熱して気体にし、それを冷やして再び液体にすることで分ける方法は何か。",
+      "options": [
+        "ろ過",
+        "蒸留",
+        "再結晶",
+        "抽出"
+      ],
+      "correct": 1,
+      "explanation": "蒸留は沸点の違いなどを利用して液体を分離する方法。",
+      "link": "/study/summary/chemistry/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-031",
+      "subject": "science",
+      "topic": "化学",
+      "term": "溶解度",
+      "prompt": "一定量の水に溶ける物質の限度量を何というか。",
+      "options": [
+        "濃度",
+        "溶解度",
+        "質量",
+        "密度"
+      ],
+      "correct": 1,
+      "explanation": "溶解度は通常、一定温度で水100gに溶ける溶質の質量で表す。",
+      "link": "/study/summary/chemistry/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-032",
+      "subject": "science",
+      "topic": "化学",
+      "term": "電気分解",
+      "prompt": "電解質の水溶液などに電流を流して、物質を分解する化学変化は何か。",
+      "options": [
+        "中和",
+        "電気分解",
+        "蒸留",
+        "還元"
+      ],
+      "correct": 1,
+      "explanation": "電気エネルギーによって化合物を分解する反応。水の電気分解では水素と酸素が発生する。",
+      "link": "/study/summary/chemistry/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-033",
+      "subject": "science",
+      "topic": "化学",
+      "term": "化学反応式",
+      "prompt": "化学変化を化学式と矢印を使って表した式は何か。",
+      "options": [
+        "イオン式",
+        "化学反応式",
+        "分子模型",
+        "元素記号"
+      ],
+      "correct": 1,
+      "explanation": "化学反応式では、反応の前後で原子の種類と数が等しくなるように係数をつける。",
+      "link": "/study/summary/chemistry/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-034",
+      "subject": "science",
+      "topic": "化学",
+      "term": "塩",
+      "prompt": "酸の陰イオンとアルカリの陽イオンなどからできる、中和で生じる物質は何か。",
+      "options": [
+        "塩",
+        "酸",
+        "アルカリ",
+        "単体"
+      ],
+      "correct": 0,
+      "explanation": "塩（えん）は食塩だけでなく、さまざまな化合物を含む。",
+      "link": "/study/summary/chemistry/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-035",
+      "subject": "science",
+      "topic": "化学",
+      "term": "化学変化",
+      "prompt": "化学変化について正しい説明を選べ。別の物質に変わり、もとの物質とは性質が異なる物質ができる変化は何か。",
+      "options": [
+        "状態変化",
+        "化学変化",
+        "溶解",
+        "蒸留"
+      ],
+      "correct": 1,
+      "explanation": "化学変化では原子の組み合わせが変わり、新しい物質ができる。（確認ポイント：化学変化）",
+      "link": "/study/summary/chemistry/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-036",
+      "subject": "science",
+      "topic": "化学",
+      "term": "発熱反応",
+      "prompt": "確認問題：化学変化にともなって周囲に熱を放出する反応は何か。",
+      "options": [
+        "吸熱反応",
+        "発熱反応",
+        "中和反応",
+        "置換反応"
+      ],
+      "correct": 1,
+      "explanation": "発熱反応では反応の前後で周囲の温度が上がる。（確認ポイント：発熱反応）",
+      "link": "/study/summary/chemistry/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-037",
+      "subject": "science",
+      "topic": "化学",
+      "term": "分子",
+      "prompt": "水分子 H₂O をつくる原子の種類と数の組み合わせとして正しいものはどれか。",
+      "options": [
+        "水素原子2個と酸素原子1個",
+        "水素原子1個と酸素原子2個",
+        "水素原子2個だけ",
+        "酸素原子2個だけ"
+      ],
+      "correct": 0,
+      "explanation": "化学式 H₂O の下付きの数字は、その元素の原子の数を表す。Hには数字がないので1個、Oには2が付いていないため1個。したがって水素原子2個と酸素原子1個からできている。",
+      "link": "/study/summary/chemistry/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-038",
+      "subject": "science",
+      "topic": "化学",
+      "term": "質量パーセント濃度",
+      "prompt": "質量パーセント濃度について正しい説明を選べ。溶液全体の質量に対する溶質の質量の割合を百分率で表したものは何か。",
+      "options": [
+        "体積パーセント",
+        "質量パーセント濃度",
+        "密度",
+        "溶解度"
+      ],
+      "correct": 1,
+      "explanation": "質量パーセント濃度＝溶質の質量÷溶液の質量×100。（確認ポイント：質量パーセント濃度）",
+      "link": "/study/summary/chemistry/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-039",
+      "subject": "science",
+      "topic": "化学",
+      "term": "飽和水溶液",
+      "prompt": "確認問題：ある温度で、それ以上溶質を溶かすことができない水溶液は何か。",
+      "options": [
+        "希薄溶液",
+        "飽和水溶液",
+        "濃厚溶液",
+        "コロイド"
+      ],
+      "correct": 1,
+      "explanation": "飽和水溶液には、その温度で溶ける限度まで溶質が溶けている。（確認ポイント：飽和水溶液）",
+      "link": "/study/summary/chemistry/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-040",
+      "subject": "science",
+      "topic": "化学",
+      "term": "電離",
+      "prompt": "電離について正しい説明を選べ。物質が水に溶けて陽イオンと陰イオンに分かれることは何か。",
+      "options": [
+        "融解",
+        "蒸発",
+        "凝固",
+        "電離"
+      ],
+      "correct": 3,
+      "explanation": "塩化ナトリウムなどの電解質は水溶液中で電離する。（確認ポイント：電離）",
+      "link": "/study/summary/chemistry/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-041",
+      "subject": "science",
+      "topic": "化学",
+      "term": "中和",
+      "prompt": "確認問題：酸の性質とアルカリの性質が互いに打ち消し合う反応は何か。",
+      "options": [
+        "電気分解",
+        "中和",
+        "酸化",
+        "蒸発"
+      ],
+      "correct": 1,
+      "explanation": "中和では酸とアルカリが反応し、塩と水ができる。（確認ポイント：中和）",
+      "link": "/study/summary/chemistry/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-042",
+      "subject": "science",
+      "topic": "化学",
+      "term": "還元",
+      "prompt": "確認問題：酸化物から酸素が取り除かれる化学変化は何か。",
+      "options": [
+        "燃焼",
+        "電離",
+        "還元",
+        "酸化"
+      ],
+      "correct": 2,
+      "explanation": "還元は酸化と反対向きの変化として説明できる。（確認ポイント：還元）",
+      "link": "/study/summary/chemistry/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-043",
+      "subject": "science",
+      "topic": "化学",
+      "term": "溶解度",
+      "prompt": "確認問題：一定量の水に溶ける物質の限度量を何というか。",
+      "options": [
+        "濃度",
+        "溶解度",
+        "質量",
+        "密度"
+      ],
+      "correct": 1,
+      "explanation": "溶解度は通常、一定温度で水100gに溶ける溶質の質量で表す。（確認ポイント：溶解度）",
+      "link": "/study/summary/chemistry/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-044",
+      "subject": "science",
+      "topic": "化学",
+      "term": "化学変化",
+      "prompt": "確認問題：別の物質に変わり、もとの物質とは性質が異なる物質ができる変化は何か。",
+      "options": [
+        "状態変化",
+        "化学変化",
+        "溶解",
+        "蒸留"
+      ],
+      "correct": 1,
+      "explanation": "化学変化では原子の組み合わせが変わり、新しい物質ができる。（確認ポイント：化学変化）",
+      "link": "/study/summary/chemistry/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-045",
+      "subject": "science",
+      "topic": "化学",
+      "term": "発熱反応",
+      "prompt": "発熱反応について正しい説明を選べ。化学変化にともなって周囲に熱を放出する反応は何か。",
+      "options": [
+        "吸熱反応",
+        "発熱反応",
+        "中和反応",
+        "置換反応"
+      ],
+      "correct": 1,
+      "explanation": "発熱反応では反応の前後で周囲の温度が上がる。（確認ポイント：発熱反応）",
+      "link": "/study/summary/chemistry/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-046",
+      "subject": "science",
+      "topic": "化学",
+      "term": "分子",
+      "prompt": "酸素分子 O₂ と水分子 H₂O に共通する特徴はどれか。",
+      "options": [
+        "複数の原子が化学的に結びついている",
+        "必ず同じ種類の原子だけでできている",
+        "原子核を持たない",
+        "どちらも1個の原子だけでできている"
+      ],
+      "correct": 0,
+      "explanation": "分子は、複数の原子が化学的に結びついてできた粒子。O₂は酸素原子2個、H₂Oは水素原子2個と酸素原子1個からできている。異なる種類の原子が結びついた分子もある。",
+      "link": "/study/summary/chemistry/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-047",
+      "subject": "science",
+      "topic": "化学",
+      "term": "質量パーセント濃度",
+      "prompt": "確認問題：溶液全体の質量に対する溶質の質量の割合を百分率で表したものは何か。",
+      "options": [
+        "体積パーセント",
+        "質量パーセント濃度",
+        "密度",
+        "溶解度"
+      ],
+      "correct": 1,
+      "explanation": "質量パーセント濃度＝溶質の質量÷溶液の質量×100。（確認ポイント：質量パーセント濃度）",
+      "link": "/study/summary/chemistry/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-048",
+      "subject": "science",
+      "topic": "化学",
+      "term": "溶媒",
+      "prompt": "水溶液で、溶質を溶かしている液体は何か。",
+      "options": [
+        "溶質",
+        "溶媒",
+        "結晶",
+        "気体"
+      ],
+      "correct": 1,
+      "explanation": "溶媒：水溶液で、溶質を溶かしている液体は何か。",
+      "link": "/study/summary/chemistry/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-049",
+      "subject": "science",
+      "topic": "化学",
+      "term": "触媒",
+      "prompt": "化学反応を速めるが、反応の前後でそれ自体は変化しない物質は何か。",
+      "options": [
+        "指示薬",
+        "溶媒",
+        "沈殿",
+        "触媒"
+      ],
+      "correct": 3,
+      "explanation": "触媒：化学反応を速めるが、反応の前後でそれ自体は変化しない物質は何か。",
+      "link": "/study/summary/chemistry/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-050",
+      "subject": "science",
+      "topic": "化学",
+      "term": "陰イオン",
+      "prompt": "原子や原子団が電子を受け取り、負の電荷をもつ粒子は何か。",
+      "options": [
+        "陽子",
+        "原子核",
+        "陰イオン",
+        "陽イオン"
+      ],
+      "correct": 2,
+      "explanation": "陰イオン：原子や原子団が電子を受け取り、負の電荷をもつ粒子は何か。",
+      "link": "/study/summary/chemistry/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-051",
+      "subject": "science",
+      "topic": "生物",
+      "term": "細胞",
+      "prompt": "生物の体をつくる基本単位は何か。",
+      "options": [
+        "組織",
+        "器官",
+        "細胞",
+        "個体"
+      ],
+      "correct": 2,
+      "explanation": "細胞は生物の体をつくる基本単位。植物細胞には細胞壁や葉緑体などがある。",
+      "link": "/study/summary/biology/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-052",
+      "subject": "science",
+      "topic": "生物",
+      "term": "蒸散",
+      "prompt": "植物の体内の水が水蒸気となって主に気孔から出ていく現象は何か。",
+      "options": [
+        "蒸散",
+        "吸収",
+        "呼吸",
+        "受粉"
+      ],
+      "correct": 0,
+      "explanation": "蒸散は主に葉の気孔から水蒸気が出ていく現象。",
+      "link": "/study/summary/biology/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-053",
+      "subject": "science",
+      "topic": "生物",
+      "term": "反射",
+      "prompt": "刺激に対して、意識とは関係なく起こるすばやい反応は何か。",
+      "options": [
+        "反射",
+        "学習",
+        "感覚",
+        "随意運動"
+      ],
+      "correct": 0,
+      "explanation": "反射は脳で意識して判断する前に起こる、すばやい反応。",
+      "link": "/study/summary/biology/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-054",
+      "subject": "science",
+      "topic": "生物",
+      "term": "葉緑体",
+      "prompt": "植物細胞にあり、光合成が行われる緑色の小器官は何か。",
+      "options": [
+        "ミトコンドリア",
+        "葉緑体",
+        "核",
+        "液胞"
+      ],
+      "correct": 1,
+      "explanation": "葉緑体には緑色の色素クロロフィルが含まれ、光合成の場となる。",
+      "link": "/study/summary/biology/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-055",
+      "subject": "science",
+      "topic": "生物",
+      "term": "師管",
+      "prompt": "葉でつくられた養分を植物の体全体へ運ぶ管は何か。",
+      "options": [
+        "道管",
+        "師管",
+        "気孔",
+        "根毛"
+      ],
+      "correct": 1,
+      "explanation": "師管は光合成でつくられた養分などを運ぶ。",
+      "link": "/study/summary/biology/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-056",
+      "subject": "science",
+      "topic": "生物",
+      "term": "心臓",
+      "prompt": "血液を全身に送り出すポンプの役割をする器官は何か。",
+      "options": [
+        "肺",
+        "心臓",
+        "胃",
+        "腎臓"
+      ],
+      "correct": 1,
+      "explanation": "心臓は収縮と拡張を繰り返し、血液を循環させる。",
+      "link": "/study/summary/biology/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-057",
+      "subject": "science",
+      "topic": "生物",
+      "term": "柔毛",
+      "prompt": "小腸の内側に多数あり、養分を吸収する表面積を大きくする突起は何か。",
+      "options": [
+        "根毛",
+        "柔毛",
+        "肺胞",
+        "気孔"
+      ],
+      "correct": 1,
+      "explanation": "柔毛があることで小腸の表面積が大きくなる。",
+      "link": "/study/summary/biology/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-058",
+      "subject": "science",
+      "topic": "生物",
+      "term": "受粉",
+      "prompt": "花粉がめしべの柱頭につくことは何か。",
+      "options": [
+        "受精",
+        "発芽",
+        "結実",
+        "受粉"
+      ],
+      "correct": 3,
+      "explanation": "受粉の後、花粉管が伸びて受精につながる。",
+      "link": "/study/summary/biology/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-059",
+      "subject": "science",
+      "topic": "生物",
+      "term": "反射",
+      "prompt": "反射について正しい説明を選べ。刺激に対して、意識とは関係なく起こるすばやい反応は何か。",
+      "options": [
+        "反射",
+        "学習",
+        "感覚",
+        "随意運動"
+      ],
+      "correct": 0,
+      "explanation": "反射は脳で意識して判断する前に起こる、すばやい反応。（確認ポイント：反射）",
+      "link": "/study/summary/biology/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-060",
+      "subject": "science",
+      "topic": "生物",
+      "term": "動脈",
+      "prompt": "動脈について正しい説明を選べ。心臓から送り出された血液が流れる血管は何か。",
+      "options": [
+        "静脈",
+        "毛細血管",
+        "リンパ管",
+        "動脈"
+      ],
+      "correct": 3,
+      "explanation": "動脈は心臓から出る血液が流れる血管。（確認ポイント：動脈）",
+      "link": "/study/summary/biology/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-061",
+      "subject": "science",
+      "topic": "生物",
+      "term": "分解者",
+      "prompt": "分解者について正しい説明を選べ。生物の遺骸や排出物を分解し、無機物に戻す生物を何というか。",
+      "options": [
+        "生産者",
+        "消費者",
+        "分解者",
+        "捕食者"
+      ],
+      "correct": 2,
+      "explanation": "菌類や細菌類などの分解者は、有機物を分解して物質を自然界に戻す。（確認ポイント：分解者）",
+      "link": "/study/summary/biology/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-062",
+      "subject": "science",
+      "topic": "生物",
+      "term": "光合成",
+      "prompt": "光合成について正しい説明を選べ。植物が光エネルギーを使い、二酸化炭素と水から養分をつくるはたらきは何か。",
+      "options": [
+        "呼吸",
+        "蒸散",
+        "光合成",
+        "消化"
+      ],
+      "correct": 2,
+      "explanation": "光合成では光エネルギーを利用してデンプンなどの養分をつくり、酸素を放出する。（確認ポイント：光合成）",
+      "link": "/study/summary/biology/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-063",
+      "subject": "science",
+      "topic": "生物",
+      "term": "静脈",
+      "prompt": "静脈について正しい説明を選べ。全身から心臓へ戻る血液が流れる血管は何か。",
+      "options": [
+        "毛細血管",
+        "気管",
+        "静脈",
+        "動脈"
+      ],
+      "correct": 2,
+      "explanation": "静脈には血液の逆流を防ぐ弁があるものが多い。（確認ポイント：静脈）",
+      "link": "/study/summary/biology/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-064",
+      "subject": "science",
+      "topic": "生物",
+      "term": "道管",
+      "prompt": "道管について正しい説明を選べ。根から吸収した水や無機養分を運ぶ管は何か。",
+      "options": [
+        "師管",
+        "道管",
+        "気孔",
+        "維管束鞘"
+      ],
+      "correct": 1,
+      "explanation": "道管は水や無機養分を根から茎・葉へ運ぶ。（確認ポイント：道管）",
+      "link": "/study/summary/biology/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-065",
+      "subject": "science",
+      "topic": "生物",
+      "term": "食物連鎖",
+      "prompt": "食物連鎖について正しい説明を選べ。生物どうしが食べる・食べられる関係でつながることを何というか。",
+      "options": [
+        "食物連鎖",
+        "遷移",
+        "共生",
+        "分解"
+      ],
+      "correct": 0,
+      "explanation": "食物連鎖では、生物を通じて物質やエネルギーが移動する。（確認ポイント：食物連鎖）",
+      "link": "/study/summary/biology/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-066",
+      "subject": "science",
+      "topic": "生物",
+      "term": "受粉",
+      "prompt": "受粉について正しい説明を選べ。花粉がめしべの柱頭につくことは何か。",
+      "options": [
+        "受精",
+        "発芽",
+        "結実",
+        "受粉"
+      ],
+      "correct": 3,
+      "explanation": "受粉の後、花粉管が伸びて受精につながる。（確認ポイント：受粉）",
+      "link": "/study/summary/biology/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-067",
+      "subject": "science",
+      "topic": "生物",
+      "term": "師管",
+      "prompt": "師管について正しい説明を選べ。葉でつくられた養分を植物の体全体へ運ぶ管は何か。",
+      "options": [
+        "道管",
+        "師管",
+        "気孔",
+        "根毛"
+      ],
+      "correct": 1,
+      "explanation": "師管は光合成でつくられた養分などを運ぶ。（確認ポイント：師管）",
+      "link": "/study/summary/biology/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-068",
+      "subject": "science",
+      "topic": "生物",
+      "term": "消化",
+      "prompt": "消化について正しい説明を選べ。食物を吸収されやすい小さな物質に分解するはたらきは何か。",
+      "options": [
+        "循環",
+        "消化",
+        "排出",
+        "同化"
+      ],
+      "correct": 1,
+      "explanation": "消化酵素などのはたらきで、栄養分を吸収できる形に分解する。（確認ポイント：消化）",
+      "link": "/study/summary/biology/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-069",
+      "subject": "science",
+      "topic": "生物",
+      "term": "消化酵素",
+      "prompt": "消化酵素について正しい説明を選べ。食物を吸収しやすい小さな物質に分解するはたらきをもつ物質は何か。",
+      "options": [
+        "抗体",
+        "色素",
+        "消化酵素",
+        "ホルモン"
+      ],
+      "correct": 2,
+      "explanation": "アミラーゼやペプシンなどが消化酵素にあたる。（確認ポイント：消化酵素）",
+      "link": "/study/summary/biology/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-070",
+      "subject": "science",
+      "topic": "生物",
+      "term": "小腸の柔毛",
+      "prompt": "小腸の内壁に多数あり、養分を吸収する表面積を大きくする突起は何か。",
+      "options": [
+        "肺胞",
+        "柔毛",
+        "気孔",
+        "根毛"
+      ],
+      "correct": 1,
+      "explanation": "小腸の柔毛：小腸の内壁に多数あり、養分を吸収する表面積を大きくする突起は何か。",
+      "link": "/study/summary/biology/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-071",
+      "subject": "science",
+      "topic": "生物",
+      "term": "毛細血管",
+      "prompt": "血液と組織の間で物質交換が行われる、非常に細い血管は何か。",
+      "options": [
+        "大動脈",
+        "毛細血管",
+        "大静脈",
+        "リンパ管"
+      ],
+      "correct": 1,
+      "explanation": "毛細血管：血液と組織の間で物質交換が行われる、非常に細い血管は何か。",
+      "link": "/study/summary/biology/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-072",
+      "subject": "science",
+      "topic": "生物",
+      "term": "血小板",
+      "prompt": "出血したとき血液を固めるはたらきに関わる成分は何か。",
+      "options": [
+        "リンパ球だけ",
+        "赤血球",
+        "白血球",
+        "血小板"
+      ],
+      "correct": 3,
+      "explanation": "血小板：出血したとき血液を固めるはたらきに関わる成分は何か。",
+      "link": "/study/summary/biology/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-073",
+      "subject": "science",
+      "topic": "生物",
+      "term": "個体群",
+      "prompt": "同じ地域に生息する、同じ種類の生物の集まりは何か。",
+      "options": [
+        "群集",
+        "生態系",
+        "食物網",
+        "個体群"
+      ],
+      "correct": 3,
+      "explanation": "個体群：同じ地域に生息する、同じ種類の生物の集まりは何か。",
+      "link": "/study/summary/biology/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-074",
+      "subject": "science",
+      "topic": "生物",
+      "term": "裸子植物",
+      "prompt": "胚珠が子房に包まれず、むき出しになっている植物のグループは何か。",
+      "options": [
+        "コケ植物",
+        "被子植物",
+        "シダ植物",
+        "裸子植物"
+      ],
+      "correct": 3,
+      "explanation": "裸子植物：胚珠が子房に包まれず、むき出しになっている植物のグループは何か。",
+      "link": "/study/summary/biology/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-075",
+      "subject": "science",
+      "topic": "生物",
+      "term": "受精",
+      "prompt": "精子と卵が合体して新しい個体のもとになる細胞をつくることは何か。",
+      "options": [
+        "蒸散",
+        "発芽",
+        "分裂",
+        "受精"
+      ],
+      "correct": 3,
+      "explanation": "受精：精子と卵が合体して新しい個体のもとになる細胞をつくることは何か。",
+      "link": "/study/summary/biology/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-076",
+      "subject": "science",
+      "topic": "地学",
+      "term": "震源",
+      "prompt": "地下で地震が発生した場所を何というか。",
+      "options": [
+        "震央",
+        "震源",
+        "断層",
+        "火口"
+      ],
+      "correct": 1,
+      "explanation": "震源は地下で地震が発生した場所。震源の真上の地表の点が震央。",
+      "link": "/study/summary/earth/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-077",
+      "subject": "science",
+      "topic": "地学",
+      "term": "初期微動",
+      "prompt": "P波によって起こる、地震の最初の小さな揺れは何か。",
+      "options": [
+        "主要動",
+        "初期微動",
+        "余震",
+        "液状化"
+      ],
+      "correct": 1,
+      "explanation": "P波は速く伝わり、先に到着して初期微動を起こす。",
+      "link": "/study/summary/earth/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-078",
+      "subject": "science",
+      "topic": "地学",
+      "term": "湿度",
+      "prompt": "空気中に含まれる水蒸気量が、その気温での飽和水蒸気量に対して何％かを表す量は何か。",
+      "options": [
+        "気圧",
+        "湿度",
+        "風力",
+        "降水量"
+      ],
+      "correct": 1,
+      "explanation": "湿度〔％〕＝空気中の水蒸気量÷飽和水蒸気量×100。",
+      "link": "/study/summary/earth/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-079",
+      "subject": "science",
+      "topic": "地学",
+      "term": "日食",
+      "prompt": "月が太陽と地球の間に入り、太陽の一部または全部が隠される現象は何か。",
+      "options": [
+        "月食",
+        "日食",
+        "満月",
+        "金環運動"
+      ],
+      "correct": 1,
+      "explanation": "日食は太陽—月—地球の順にほぼ一直線に並んだときに起こる。",
+      "link": "/study/summary/earth/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-080",
+      "subject": "science",
+      "topic": "地学",
+      "term": "化石",
+      "prompt": "地層に残された、過去の生物の体や生活の跡を何というか。",
+      "options": [
+        "鉱物",
+        "化石",
+        "火山灰",
+        "岩脈"
+      ],
+      "correct": 1,
+      "explanation": "化石は地層ができた時代や環境を推定する手がかりになる。",
+      "link": "/study/summary/earth/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-081",
+      "subject": "science",
+      "topic": "地学",
+      "term": "マグニチュード",
+      "prompt": "地震そのものの規模や放出されたエネルギーの大きさを表す値は何か。",
+      "options": [
+        "震度",
+        "マグニチュード",
+        "初期微動",
+        "震央"
+      ],
+      "correct": 1,
+      "explanation": "マグニチュードは地震の規模を表し、震度は各地点での揺れの強さを表す。",
+      "link": "/study/summary/earth/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-082",
+      "subject": "science",
+      "topic": "地学",
+      "term": "季節",
+      "prompt": "地球の公転と地軸の傾きによって生じる、春夏秋冬の変化を何というか。",
+      "options": [
+        "潮汐",
+        "季節",
+        "日周運動",
+        "月の満ち欠け"
+      ],
+      "correct": 1,
+      "explanation": "地軸が傾いたまま地球が公転するため、季節によって太陽の高さや昼の長さが変わる。",
+      "link": "/study/summary/earth/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-083",
+      "subject": "science",
+      "topic": "地学",
+      "term": "寒冷前線",
+      "prompt": "寒気が暖気の下にもぐりこみ、暖気を急に押し上げる前線は何か。",
+      "options": [
+        "温暖前線",
+        "停滞前線",
+        "閉塞前線",
+        "寒冷前線"
+      ],
+      "correct": 3,
+      "explanation": "寒冷前線付近では短時間に強い雨が降ることがある。",
+      "link": "/study/summary/earth/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-084",
+      "subject": "science",
+      "topic": "地学",
+      "term": "年周運動",
+      "prompt": "地球の公転によって、星座が季節ごとに変わって見える見かけの動きは何か。",
+      "options": [
+        "年周運動",
+        "日周運動",
+        "自転",
+        "月の満ち欠け"
+      ],
+      "correct": 0,
+      "explanation": "年周運動は地球の公転によって起こる。",
+      "link": "/study/summary/earth/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-085",
+      "subject": "science",
+      "topic": "地学",
+      "term": "初期微動",
+      "prompt": "初期微動について正しい説明を選べ。P波によって起こる、地震の最初の小さな揺れは何か。",
+      "options": [
+        "主要動",
+        "初期微動",
+        "余震",
+        "液状化"
+      ],
+      "correct": 1,
+      "explanation": "P波は速く伝わり、先に到着して初期微動を起こす。（確認ポイント：初期微動）",
+      "link": "/study/summary/earth/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-086",
+      "subject": "science",
+      "topic": "地学",
+      "term": "季節",
+      "prompt": "確認問題：地球の公転と地軸の傾きによって生じる、春夏秋冬の変化を何というか。",
+      "options": [
+        "潮汐",
+        "季節",
+        "日周運動",
+        "月の満ち欠け"
+      ],
+      "correct": 1,
+      "explanation": "地軸が傾いたまま地球が公転するため、季節によって太陽の高さや昼の長さが変わる。（確認ポイント：季節）",
+      "link": "/study/summary/earth/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-087",
+      "subject": "science",
+      "topic": "地学",
+      "term": "震源",
+      "prompt": "確認問題：地下で地震が発生した場所を何というか。",
+      "options": [
+        "震央",
+        "震源",
+        "断層",
+        "火口"
+      ],
+      "correct": 1,
+      "explanation": "震源は地下で地震が発生した場所。震源の真上の地表の点が震央。（確認ポイント：震源）",
+      "link": "/study/summary/earth/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-088",
+      "subject": "science",
+      "topic": "地学",
+      "term": "マグニチュード",
+      "prompt": "マグニチュードについて正しい説明を選べ。地震そのものの規模や放出されたエネルギーの大きさを表す値は何か。",
+      "options": [
+        "震度",
+        "マグニチュード",
+        "初期微動",
+        "震央"
+      ],
+      "correct": 1,
+      "explanation": "マグニチュードは地震の規模を表し、震度は各地点での揺れの強さを表す。（確認ポイント：マグニチュード）",
+      "link": "/study/summary/earth/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-089",
+      "subject": "science",
+      "topic": "地学",
+      "term": "火成岩",
+      "prompt": "確認問題：マグマが冷え固まってできた岩石を何というか。",
+      "options": [
+        "堆積岩",
+        "変成岩",
+        "火成岩",
+        "石灰岩"
+      ],
+      "correct": 2,
+      "explanation": "火成岩には、地下深くでゆっくり冷えた深成岩と、地表付近で急に冷えた火山岩がある。（確認ポイント：火成岩）",
+      "link": "/study/summary/earth/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-090",
+      "subject": "science",
+      "topic": "地学",
+      "term": "震央",
+      "prompt": "確認問題：震源の真上にあたる地表の地点を何というか。",
+      "options": [
+        "震央",
+        "震源",
+        "震度",
+        "マグニチュード"
+      ],
+      "correct": 0,
+      "explanation": "震央は震源の真上にあたる地表の地点。（確認ポイント：震央）",
+      "link": "/study/summary/earth/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-091",
+      "subject": "science",
+      "topic": "地学",
+      "term": "積乱雲",
+      "prompt": "積乱雲について正しい説明を選べ。強い上昇気流によって発達し、雷や激しい雨をもたらす雲は何か。",
+      "options": [
+        "巻雲",
+        "層雲",
+        "積乱雲",
+        "高積雲"
+      ],
+      "correct": 2,
+      "explanation": "積乱雲は縦に大きく発達し、雷雨や突風、ひょうなどをもたらすことがある。（確認ポイント：積乱雲）",
+      "link": "/study/summary/earth/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-092",
+      "subject": "science",
+      "topic": "地学",
+      "term": "湿度",
+      "prompt": "湿度について正しい説明を選べ。空気中に含まれる水蒸気量が、その気温での飽和水蒸気量に対して何％かを表す量は何か。",
+      "options": [
+        "気圧",
+        "湿度",
+        "風力",
+        "降水量"
+      ],
+      "correct": 1,
+      "explanation": "湿度〔％〕＝空気中の水蒸気量÷飽和水蒸気量×100。（確認ポイント：湿度）",
+      "link": "/study/summary/earth/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-093",
+      "subject": "science",
+      "topic": "地学",
+      "term": "日周運動",
+      "prompt": "日周運動について正しい説明を選べ。地球の自転によって、天体が1日に1回東から西へ動いて見える見かけの動きは何か。",
+      "options": [
+        "自転",
+        "日周運動",
+        "年周運動",
+        "公転"
+      ],
+      "correct": 1,
+      "explanation": "日周運動は地球の自転によって起こる。（確認ポイント：日周運動）",
+      "link": "/study/summary/earth/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-094",
+      "subject": "science",
+      "topic": "地学",
+      "term": "化石",
+      "prompt": "化石について正しい説明を選べ。地層に残された、過去の生物の体や生活の跡を何というか。",
+      "options": [
+        "鉱物",
+        "化石",
+        "火山灰",
+        "岩脈"
+      ],
+      "correct": 1,
+      "explanation": "化石は地層ができた時代や環境を推定する手がかりになる。（確認ポイント：化石）",
+      "link": "/study/summary/earth/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-095",
+      "subject": "science",
+      "topic": "地学",
+      "term": "寒冷前線",
+      "prompt": "確認問題：寒気が暖気の下にもぐりこみ、暖気を急に押し上げる前線は何か。",
+      "options": [
+        "温暖前線",
+        "停滞前線",
+        "閉塞前線",
+        "寒冷前線"
+      ],
+      "correct": 3,
+      "explanation": "寒冷前線付近では短時間に強い雨が降ることがある。（確認ポイント：寒冷前線）",
+      "link": "/study/summary/earth/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-096",
+      "subject": "science",
+      "topic": "地学",
+      "term": "マグニチュード",
+      "prompt": "確認問題：地震そのものの規模や放出されたエネルギーの大きさを表す値は何か。",
+      "options": [
+        "震度",
+        "マグニチュード",
+        "初期微動",
+        "震央"
+      ],
+      "correct": 1,
+      "explanation": "マグニチュードは地震の規模を表し、震度は各地点での揺れの強さを表す。（確認ポイント：マグニチュード）",
+      "link": "/study/summary/earth/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-097",
+      "subject": "science",
+      "topic": "地学",
+      "term": "海溝",
+      "prompt": "海洋プレートが別のプレートの下へ沈み込む場所にできる深い溝は何か。",
+      "options": [
+        "海嶺",
+        "海溝",
+        "扇状地",
+        "三角州"
+      ],
+      "correct": 1,
+      "explanation": "海溝：海洋プレートが別のプレートの下へ沈み込む場所にできる深い溝は何か。",
+      "link": "/study/summary/earth/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-098",
+      "subject": "science",
+      "topic": "地学",
+      "term": "深成岩",
+      "prompt": "マグマが地下深くでゆっくり冷え固まってできた岩石は何か。",
+      "options": [
+        "変成岩",
+        "火山岩",
+        "堆積岩",
+        "深成岩"
+      ],
+      "correct": 3,
+      "explanation": "深成岩：マグマが地下深くでゆっくり冷え固まってできた岩石は何か。",
+      "link": "/study/summary/earth/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-099",
+      "subject": "science",
+      "topic": "地学",
+      "term": "示相化石",
+      "prompt": "地層が堆積した当時の環境を知る手がかりとなる化石は何か。",
+      "options": [
+        "示圧化石",
+        "示準化石",
+        "示温化石",
+        "示相化石"
+      ],
+      "correct": 3,
+      "explanation": "示相化石：地層が堆積した当時の環境を知る手がかりとなる化石は何か。",
+      "link": "/study/summary/earth/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-100",
+      "subject": "science",
+      "topic": "地学",
+      "term": "高気圧",
+      "prompt": "周囲より気圧が高く、中心付近で下降気流が生じやすい領域は何か。",
+      "options": [
+        "前線",
+        "台風の目だけ",
+        "高気圧",
+        "低気圧"
+      ],
+      "correct": 2,
+      "explanation": "高気圧：周囲より気圧が高く、中心付近で下降気流が生じやすい領域は何か。",
+      "link": "/study/summary/earth/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-101",
+      "subject": "social",
+      "topic": "地理",
+      "term": "緯度",
+      "prompt": "赤道を0度として、南北の位置を表す角度は何か。",
+      "options": [
+        "経度",
+        "緯度",
+        "標高",
+        "縮尺"
+      ],
+      "correct": 1,
+      "explanation": "緯度は赤道を基準に南北の位置を表し、北緯・南緯で示す。",
+      "link": "/study/summary/geography/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-102",
+      "subject": "social",
+      "topic": "地理",
+      "term": "経度",
+      "prompt": "本初子午線を0度として、東西の位置を表す角度は何か。",
+      "options": [
+        "緯度",
+        "経度",
+        "標高",
+        "方位"
+      ],
+      "correct": 1,
+      "explanation": "経度は本初子午線を基準に東西の位置を表し、東経・西経で示す。",
+      "link": "/study/summary/geography/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-103",
+      "subject": "social",
+      "topic": "地理",
+      "term": "モンスーン",
+      "prompt": "季節によって風向きが変わる、アジアなどで見られる季節風を何というか。",
+      "options": [
+        "偏西風",
+        "貿易風",
+        "モンスーン",
+        "極風"
+      ],
+      "correct": 2,
+      "explanation": "モンスーンは季節によって風向きが変わり、アジアの降水や農業に大きく関係する。",
+      "link": "/study/summary/geography/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-104",
+      "subject": "social",
+      "topic": "地理",
+      "term": "促成栽培",
+      "prompt": "温室などを利用して作物の出荷時期を早める栽培方法は何か。",
+      "options": [
+        "抑制栽培",
+        "促成栽培",
+        "輪作",
+        "混作"
+      ],
+      "correct": 1,
+      "explanation": "促成栽培は温室などで生育を早め、通常より早く出荷する方法。",
+      "link": "/study/summary/geography/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-105",
+      "subject": "social",
+      "topic": "地理",
+      "term": "人口密度",
+      "prompt": "一定面積あたりに住む人口を何というか。",
+      "options": [
+        "人口増加率",
+        "人口密度",
+        "人口ピラミッド",
+        "昼夜間人口"
+      ],
+      "correct": 1,
+      "explanation": "人口密度＝人口÷面積。一般に1平方キロメートルあたりの人口で表す。",
+      "link": "/study/summary/geography/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-106",
+      "subject": "social",
+      "topic": "地理",
+      "term": "縮尺",
+      "prompt": "地図上の距離と実際の距離の比を何というか。",
+      "options": [
+        "方位",
+        "縮尺",
+        "等高線",
+        "経度"
+      ],
+      "correct": 1,
+      "explanation": "縮尺を使うと、地図上の長さから実際の距離を求められる。",
+      "link": "/study/summary/geography/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-107",
+      "subject": "social",
+      "topic": "地理",
+      "term": "扇状地",
+      "prompt": "山地から平地に出た川が土砂を堆積させてつくる、扇形の地形は何か。",
+      "options": [
+        "三角州",
+        "扇状地",
+        "リアス海岸",
+        "カルデラ"
+      ],
+      "correct": 1,
+      "explanation": "扇状地は水はけがよく、果樹園などに利用されることが多い。",
+      "link": "/study/summary/geography/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-108",
+      "subject": "social",
+      "topic": "地理",
+      "term": "稲作",
+      "prompt": "水田で米を栽培する農業を何というか。",
+      "options": [
+        "畑作",
+        "稲作",
+        "酪農",
+        "園芸農業"
+      ],
+      "correct": 1,
+      "explanation": "稲作は水田で稲を育てる農業で、アジアの季節風地域などで盛ん。",
+      "link": "/study/summary/geography/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-109",
+      "subject": "social",
+      "topic": "地理",
+      "term": "酪農",
+      "prompt": "牛や羊などを飼育し、牛乳や乳製品を生産する農業は何か。",
+      "options": [
+        "酪農",
+        "近郊農業",
+        "焼畑農業",
+        "混合農業"
+      ],
+      "correct": 0,
+      "explanation": "酪農は乳牛などを飼育し、生乳や乳製品を生産する農業。",
+      "link": "/study/summary/geography/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-110",
+      "subject": "social",
+      "topic": "地理",
+      "term": "人口ピラミッド",
+      "prompt": "年齢別・男女別の人口構成を表したグラフは何か。",
+      "options": [
+        "人口密度図",
+        "人口ピラミッド",
+        "雨温図",
+        "階級区分図"
+      ],
+      "correct": 1,
+      "explanation": "人口ピラミッドの形から、年齢構成や少子高齢化の進み方などを読み取れる。",
+      "link": "/study/summary/geography/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-111",
+      "subject": "social",
+      "topic": "地理",
+      "term": "季節風",
+      "prompt": "季節によって風向きが変わる風は何か。",
+      "options": [
+        "季節風",
+        "偏西風",
+        "貿易風",
+        "海陸風"
+      ],
+      "correct": 0,
+      "explanation": "日本では冬に北西、夏に南東寄りの季節風が吹く。",
+      "link": "/study/summary/geography/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-112",
+      "subject": "social",
+      "topic": "地理",
+      "term": "抑制栽培",
+      "prompt": "涼しい高冷地などで、出荷時期を遅らせる栽培方法は何か。",
+      "options": [
+        "焼畑農業",
+        "抑制栽培",
+        "促成栽培",
+        "二毛作"
+      ],
+      "correct": 1,
+      "explanation": "高冷地の気候を利用して、夏に高原野菜などを出荷する。",
+      "link": "/study/summary/geography/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-113",
+      "subject": "social",
+      "topic": "地理",
+      "term": "地形図",
+      "prompt": "土地の高低や土地利用、道路などを縮尺に応じて表した地図は何か。",
+      "options": [
+        "世界地図",
+        "地形図",
+        "主題図",
+        "統計地図"
+      ],
+      "correct": 1,
+      "explanation": "地形図では等高線や地図記号を使って地表の様子を表す。",
+      "link": "/study/summary/geography/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-114",
+      "subject": "social",
+      "topic": "地理",
+      "term": "扇状地",
+      "prompt": "扇状地について正しい説明を選べ。山地から平地に出た川が土砂を堆積させてつくる、扇形の地形は何か。",
+      "options": [
+        "三角州",
+        "扇状地",
+        "リアス海岸",
+        "カルデラ"
+      ],
+      "correct": 1,
+      "explanation": "扇状地は水はけがよく、果樹園などに利用されることが多い。（確認ポイント：扇状地）",
+      "link": "/study/summary/geography/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-115",
+      "subject": "social",
+      "topic": "地理",
+      "term": "排他的経済水域",
+      "prompt": "確認問題：沿岸国が水産資源や海底資源を管理できる、沿岸から原則200海里までの水域は何か。",
+      "options": [
+        "排他的経済水域",
+        "領海",
+        "公海",
+        "接続水域"
+      ],
+      "correct": 0,
+      "explanation": "排他的経済水域では資源の探査・利用などの権利が認められる。（確認ポイント：排他的経済水域）",
+      "link": "/study/summary/geography/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-116",
+      "subject": "social",
+      "topic": "地理",
+      "term": "促成栽培",
+      "prompt": "促成栽培について正しい説明を選べ。温室などを利用して作物の出荷時期を早める栽培方法は何か。",
+      "options": [
+        "抑制栽培",
+        "促成栽培",
+        "輪作",
+        "混作"
+      ],
+      "correct": 1,
+      "explanation": "促成栽培は温室などで生育を早め、通常より早く出荷する方法。（確認ポイント：促成栽培）",
+      "link": "/study/summary/geography/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-117",
+      "subject": "social",
+      "topic": "地理",
+      "term": "偏西風",
+      "prompt": "偏西風について正しい説明を選べ。中緯度地域の上空で、西から東へ吹く卓越風は何か。",
+      "options": [
+        "貿易風",
+        "季節風",
+        "極東風",
+        "偏西風"
+      ],
+      "correct": 3,
+      "explanation": "偏西風は日本付近の天気の変化にも関係する。（確認ポイント：偏西風）",
+      "link": "/study/summary/geography/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-118",
+      "subject": "social",
+      "topic": "地理",
+      "term": "縮尺",
+      "prompt": "確認問題：地図上の距離と実際の距離の比を何というか。",
+      "options": [
+        "方位",
+        "縮尺",
+        "等高線",
+        "経度"
+      ],
+      "correct": 1,
+      "explanation": "縮尺を使うと、地図上の長さから実際の距離を求められる。（確認ポイント：縮尺）",
+      "link": "/study/summary/geography/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-119",
+      "subject": "social",
+      "topic": "地理",
+      "term": "三角州",
+      "prompt": "三角州について正しい説明を選べ。川が河口付近で土砂を堆積させてつくる地形は何か。",
+      "options": [
+        "扇状地",
+        "三角州",
+        "台地",
+        "盆地"
+      ],
+      "correct": 1,
+      "explanation": "三角州は河口付近にできる低く平らな地形で、水田などに利用される。（確認ポイント：三角州）",
+      "link": "/study/summary/geography/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-120",
+      "subject": "social",
+      "topic": "地理",
+      "term": "緯度",
+      "prompt": "緯度について正しい説明を選べ。赤道を0度として、南北の位置を表す角度は何か。",
+      "options": [
+        "経度",
+        "緯度",
+        "標高",
+        "縮尺"
+      ],
+      "correct": 1,
+      "explanation": "緯度は赤道を基準に南北の位置を表し、北緯・南緯で示す。（確認ポイント：緯度）",
+      "link": "/study/summary/geography/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-121",
+      "subject": "social",
+      "topic": "地理",
+      "term": "工業地域",
+      "prompt": "工業地域について正しい説明を選べ。工場が集中し、工業生産が盛んな地域を何というか。",
+      "options": [
+        "工業地域",
+        "商業圏",
+        "農業地域",
+        "過疎地域"
+      ],
+      "correct": 0,
+      "explanation": "工業地域には工場や関連産業が集まり、交通・港湾などと結びつく。（確認ポイント：工業地域）",
+      "link": "/study/summary/geography/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-122",
+      "subject": "social",
+      "topic": "地理",
+      "term": "貿易",
+      "prompt": "確認問題：国と国との間で商品やサービスを売買することを何というか。",
+      "options": [
+        "流通",
+        "貿易",
+        "金融",
+        "観光"
+      ],
+      "correct": 1,
+      "explanation": "輸出は外国へ売ること、輸入は外国から買うこと。（確認ポイント：貿易）",
+      "link": "/study/summary/geography/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-123",
+      "subject": "social",
+      "topic": "地理",
+      "term": "抑制栽培",
+      "prompt": "抑制栽培について正しい説明を選べ。涼しい高冷地などで、出荷時期を遅らせる栽培方法は何か。",
+      "options": [
+        "焼畑農業",
+        "抑制栽培",
+        "促成栽培",
+        "二毛作"
+      ],
+      "correct": 1,
+      "explanation": "高冷地の気候を利用して、夏に高原野菜などを出荷する。（確認ポイント：抑制栽培）",
+      "link": "/study/summary/geography/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-124",
+      "subject": "social",
+      "topic": "地理",
+      "term": "稲作",
+      "prompt": "稲作について正しい説明を選べ。水田で米を栽培する農業を何というか。",
+      "options": [
+        "畑作",
+        "稲作",
+        "酪農",
+        "園芸農業"
+      ],
+      "correct": 1,
+      "explanation": "稲作は水田で稲を育てる農業で、アジアの季節風地域などで盛ん。（確認ポイント：稲作）",
+      "link": "/study/summary/geography/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-125",
+      "subject": "social",
+      "topic": "地理",
+      "term": "経度",
+      "prompt": "経度について正しい説明を選べ。本初子午線を0度として、東西の位置を表す角度は何か。",
+      "options": [
+        "緯度",
+        "経度",
+        "標高",
+        "方位"
+      ],
+      "correct": 1,
+      "explanation": "経度は本初子午線を基準に東西の位置を表し、東経・西経で示す。（確認ポイント：経度）",
+      "link": "/study/summary/geography/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-126",
+      "subject": "social",
+      "topic": "地理",
+      "term": "人口密度",
+      "prompt": "人口密度について正しい説明を選べ。一定面積あたりに住む人口を何というか。",
+      "options": [
+        "人口増加率",
+        "人口密度",
+        "人口ピラミッド",
+        "昼夜間人口"
+      ],
+      "correct": 1,
+      "explanation": "人口密度＝人口÷面積。一般に1平方キロメートルあたりの人口で表す。（確認ポイント：人口密度）",
+      "link": "/study/summary/geography/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-127",
+      "subject": "social",
+      "topic": "地理",
+      "term": "人口ピラミッド",
+      "prompt": "確認問題：年齢別・男女別の人口構成を表したグラフは何か。",
+      "options": [
+        "人口密度図",
+        "人口ピラミッド",
+        "雨温図",
+        "階級区分図"
+      ],
+      "correct": 1,
+      "explanation": "人口ピラミッドの形から、年齢構成や少子高齢化の進み方などを読み取れる。（確認ポイント：人口ピラミッド）",
+      "link": "/study/summary/geography/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-128",
+      "subject": "social",
+      "topic": "地理",
+      "term": "排他的経済水域",
+      "prompt": "排他的経済水域について正しい説明を選べ。沿岸国が水産資源や海底資源を管理できる、沿岸から原則200海里までの水域は何か。",
+      "options": [
+        "排他的経済水域",
+        "領海",
+        "公海",
+        "接続水域"
+      ],
+      "correct": 0,
+      "explanation": "排他的経済水域では資源の探査・利用などの権利が認められる。（確認ポイント：排他的経済水域）",
+      "link": "/study/summary/geography/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-129",
+      "subject": "social",
+      "topic": "地理",
+      "term": "酪農",
+      "prompt": "酪農について正しい説明を選べ。牛や羊などを飼育し、牛乳や乳製品を生産する農業は何か。",
+      "options": [
+        "酪農",
+        "近郊農業",
+        "焼畑農業",
+        "混合農業"
+      ],
+      "correct": 0,
+      "explanation": "酪農は乳牛などを飼育し、生乳や乳製品を生産する農業。（確認ポイント：酪農）",
+      "link": "/study/summary/geography/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-130",
+      "subject": "social",
+      "topic": "地理",
+      "term": "時差",
+      "prompt": "時差について正しい説明を選べ。経度の違いによって生じる、地点間の時刻の差を何というか。",
+      "options": [
+        "季節差",
+        "時差",
+        "気温差",
+        "標高差"
+      ],
+      "correct": 1,
+      "explanation": "地球は24時間で360度自転するため、経度15度でおよそ1時間の時差が生じる。（確認ポイント：時差）",
+      "link": "/study/summary/geography/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-131",
+      "subject": "social",
+      "topic": "地理",
+      "term": "縮尺",
+      "prompt": "縮尺について正しい説明を選べ。地図上の距離と実際の距離の比を何というか。",
+      "options": [
+        "方位",
+        "縮尺",
+        "等高線",
+        "経度"
+      ],
+      "correct": 1,
+      "explanation": "縮尺を使うと、地図上の長さから実際の距離を求められる。（確認ポイント：縮尺）",
+      "link": "/study/summary/geography/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-132",
+      "subject": "social",
+      "topic": "地理",
+      "term": "プランテーション",
+      "prompt": "熱帯・亜熱帯地域で、輸出向け作物を大規模に栽培する農園は何か。",
+      "options": [
+        "焼畑農業",
+        "近郊農業",
+        "混合農業",
+        "プランテーション"
+      ],
+      "correct": 3,
+      "explanation": "プランテーション：熱帯・亜熱帯地域で、輸出向け作物を大規模に栽培する農園は何か。",
+      "link": "/study/summary/geography/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-133",
+      "subject": "social",
+      "topic": "地理",
+      "term": "企業的農業",
+      "prompt": "大規模な土地と機械を利用し、市場向けに効率よく生産する農業は何か。",
+      "options": [
+        "自給的農業",
+        "企業的農業",
+        "焼畑農業",
+        "遊牧"
+      ],
+      "correct": 1,
+      "explanation": "企業的農業：大規模な土地と機械を利用し、市場向けに効率よく生産する農業は何か。",
+      "link": "/study/summary/geography/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-134",
+      "subject": "social",
+      "topic": "地理",
+      "term": "過密",
+      "prompt": "人口や都市機能が狭い地域に集中しすぎた状態は何か。",
+      "options": [
+        "人口転換",
+        "過疎",
+        "限界集落",
+        "過密"
+      ],
+      "correct": 3,
+      "explanation": "過密：人口や都市機能が狭い地域に集中しすぎた状態は何か。",
+      "link": "/study/summary/geography/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-135",
+      "subject": "social",
+      "topic": "歴史",
+      "term": "縄文時代",
+      "prompt": "打製石器や土器を使い、狩りや採集を中心とした生活が営まれた時代は何か。",
+      "options": [
+        "弥生時代",
+        "縄文時代",
+        "古墳時代",
+        "奈良時代"
+      ],
+      "correct": 1,
+      "explanation": "縄文時代は土器や弓矢などを使い、狩り・採集・漁労を中心に生活した。",
+      "link": "/study/summary/history/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-136",
+      "subject": "social",
+      "topic": "歴史",
+      "term": "弥生時代",
+      "prompt": "水田稲作が広まり、金属器も使われるようになった時代は何か。",
+      "options": [
+        "縄文時代",
+        "弥生時代",
+        "平安時代",
+        "鎌倉時代"
+      ],
+      "correct": 1,
+      "explanation": "弥生時代には大陸から稲作や金属器が伝わり、むらやくにが発達した。",
+      "link": "/study/summary/history/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-137",
+      "subject": "social",
+      "topic": "歴史",
+      "term": "大化の改新",
+      "prompt": "645年に始まった、中大兄皇子らによる政治改革を何というか。",
+      "options": [
+        "建武の新政",
+        "大化の改新",
+        "明治維新",
+        "享保の改革"
+      ],
+      "correct": 1,
+      "explanation": "大化の改新は645年に始まり、豪族中心の政治から天皇中心の国家づくりを目指した。",
+      "link": "/study/summary/history/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-138",
+      "subject": "social",
+      "topic": "歴史",
+      "term": "鎌倉幕府",
+      "prompt": "源頼朝が武士による政権を開いた場所はどこか。",
+      "options": [
+        "京都",
+        "鎌倉",
+        "江戸",
+        "奈良"
+      ],
+      "correct": 1,
+      "explanation": "源頼朝は鎌倉を本拠地として武士の政権を築いた。",
+      "link": "/study/summary/history/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-139",
+      "subject": "social",
+      "topic": "歴史",
+      "term": "室町幕府",
+      "prompt": "足利尊氏が開いた幕府は何か。",
+      "options": [
+        "鎌倉幕府",
+        "室町幕府",
+        "江戸幕府",
+        "平氏政権"
+      ],
+      "correct": 1,
+      "explanation": "足利尊氏が京都に開いた武家政権が室町幕府。",
+      "link": "/study/summary/history/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-140",
+      "subject": "social",
+      "topic": "歴史",
+      "term": "明治維新",
+      "prompt": "明治政府が進めた、近代国家をつくるための一連の改革を何というか。",
+      "options": [
+        "享保の改革",
+        "明治維新",
+        "大化の改新",
+        "文明開化"
+      ],
+      "correct": 1,
+      "explanation": "明治維新では廃藩置県、徴兵令、地租改正など近代国家づくりの改革が進められた。",
+      "link": "/study/summary/history/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-141",
+      "subject": "social",
+      "topic": "歴史",
+      "term": "飛鳥時代",
+      "prompt": "聖徳太子や大化の改新などに代表される時代は何か。",
+      "options": [
+        "飛鳥時代",
+        "奈良時代",
+        "平安時代",
+        "鎌倉時代"
+      ],
+      "correct": 0,
+      "explanation": "飛鳥時代には仏教が広まり、中央集権国家への改革が進められた。",
+      "link": "/study/summary/history/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-142",
+      "subject": "social",
+      "topic": "歴史",
+      "term": "摂関政治",
+      "prompt": "藤原氏が天皇の外戚となり、摂政や関白として行った政治は何か。",
+      "options": [
+        "院政",
+        "摂関政治",
+        "執権政治",
+        "武家政治"
+      ],
+      "correct": 1,
+      "explanation": "藤原氏は摂政・関白の地位を利用して、平安時代に政治の実権を握った。",
+      "link": "/study/summary/history/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-143",
+      "subject": "social",
+      "topic": "歴史",
+      "term": "応仁の乱",
+      "prompt": "1467年に始まり、戦国時代のきっかけとなった争乱は何か。",
+      "options": [
+        "承久の乱",
+        "応仁の乱",
+        "壬申の乱",
+        "島原の乱"
+      ],
+      "correct": 1,
+      "explanation": "応仁の乱で京都が荒廃し、各地の守護大名らが争う戦国時代へ向かった。",
+      "link": "/study/summary/history/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-144",
+      "subject": "social",
+      "topic": "歴史",
+      "term": "参勤交代",
+      "prompt": "江戸幕府が大名に江戸と領地を往復させた制度は何か。",
+      "options": [
+        "鎖国",
+        "参勤交代",
+        "廃藩置県",
+        "五人組"
+      ],
+      "correct": 1,
+      "explanation": "参勤交代は大名の経済力を弱め、幕府への服従を示させる目的もあった。",
+      "link": "/study/summary/history/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-145",
+      "subject": "social",
+      "topic": "歴史",
+      "term": "日清戦争",
+      "prompt": "1894年に日本と清との間で起こった戦争は何か。",
+      "options": [
+        "日露戦争",
+        "日清戦争",
+        "第一次世界大戦",
+        "太平洋戦争"
+      ],
+      "correct": 1,
+      "explanation": "日清戦争は1894年に始まり、下関条約が結ばれた。",
+      "link": "/study/summary/history/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-146",
+      "subject": "social",
+      "topic": "歴史",
+      "term": "承久の乱",
+      "prompt": "1221年、後鳥羽上皇が鎌倉幕府を倒そうとして起こした戦いは何か。",
+      "options": [
+        "保元の乱",
+        "承久の乱",
+        "応仁の乱",
+        "壬申の乱"
+      ],
+      "correct": 1,
+      "explanation": "幕府側が勝利し、朝廷を監視するため六波羅探題が置かれた。",
+      "link": "/study/summary/history/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-147",
+      "subject": "social",
+      "topic": "歴史",
+      "term": "御成敗式目",
+      "prompt": "1232年、北条泰時が定めた武士のための法律は何か。",
+      "options": [
+        "御成敗式目",
+        "武家諸法度",
+        "大宝律令",
+        "公事方御定書"
+      ],
+      "correct": 0,
+      "explanation": "御成敗式目は武士社会の慣習や道理をもとに定められた。",
+      "link": "/study/summary/history/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-148",
+      "subject": "social",
+      "topic": "歴史",
+      "term": "日米修好通商条約",
+      "prompt": "1858年に結ばれ、日本に領事裁判権を認め、関税自主権がなかった条約は何か。",
+      "options": [
+        "日米修好通商条約",
+        "日米和親条約",
+        "下関条約",
+        "ポーツマス条約"
+      ],
+      "correct": 0,
+      "explanation": "不平等条約の一つで、関税自主権の回復などが課題となった。",
+      "link": "/study/summary/history/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-149",
+      "subject": "social",
+      "topic": "歴史",
+      "term": "サンフランシスコ平和条約",
+      "prompt": "1951年に調印され、日本が主権を回復することになった条約は何か。",
+      "options": [
+        "日米安全保障条約",
+        "ポーツマス条約",
+        "ベルサイユ条約",
+        "サンフランシスコ平和条約"
+      ],
+      "correct": 3,
+      "explanation": "1952年に発効し、日本は独立を回復した。",
+      "link": "/study/summary/history/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-150",
+      "subject": "social",
+      "topic": "歴史",
+      "term": "大政奉還",
+      "prompt": "確認問題：1867年、徳川慶喜が政権を朝廷に返したことは何か。",
+      "options": [
+        "版籍奉還",
+        "大政奉還",
+        "王政復古",
+        "廃藩置県"
+      ],
+      "correct": 1,
+      "explanation": "大政奉還によって江戸幕府の政治は終わりに向かった。（確認ポイント：大政奉還）",
+      "link": "/study/summary/history/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-151",
+      "subject": "social",
+      "topic": "歴史",
+      "term": "弥生時代",
+      "prompt": "弥生時代について正しい説明を選べ。水田稲作が広まり、金属器も使われるようになった時代は何か。",
+      "options": [
+        "縄文時代",
+        "弥生時代",
+        "平安時代",
+        "鎌倉時代"
+      ],
+      "correct": 1,
+      "explanation": "弥生時代には大陸から稲作や金属器が伝わり、むらやくにが発達した。（確認ポイント：弥生時代）",
+      "link": "/study/summary/history/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-152",
+      "subject": "social",
+      "topic": "歴史",
+      "term": "摂関政治",
+      "prompt": "確認問題：藤原氏が天皇の外戚となり、摂政や関白として行った政治は何か。",
+      "options": [
+        "院政",
+        "摂関政治",
+        "執権政治",
+        "武家政治"
+      ],
+      "correct": 1,
+      "explanation": "藤原氏は摂政・関白の地位を利用して、平安時代に政治の実権を握った。（確認ポイント：摂関政治）",
+      "link": "/study/summary/history/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-153",
+      "subject": "social",
+      "topic": "歴史",
+      "term": "承久の乱",
+      "prompt": "承久の乱について正しい説明を選べ。1221年、後鳥羽上皇が鎌倉幕府を倒そうとして起こした戦いは何か。",
+      "options": [
+        "保元の乱",
+        "承久の乱",
+        "応仁の乱",
+        "壬申の乱"
+      ],
+      "correct": 1,
+      "explanation": "幕府側が勝利し、朝廷を監視するため六波羅探題が置かれた。（確認ポイント：承久の乱）",
+      "link": "/study/summary/history/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-154",
+      "subject": "social",
+      "topic": "歴史",
+      "term": "飛鳥時代",
+      "prompt": "飛鳥時代について正しい説明を選べ。聖徳太子や大化の改新などに代表される時代は何か。",
+      "options": [
+        "飛鳥時代",
+        "奈良時代",
+        "平安時代",
+        "鎌倉時代"
+      ],
+      "correct": 0,
+      "explanation": "飛鳥時代には仏教が広まり、中央集権国家への改革が進められた。（確認ポイント：飛鳥時代）",
+      "link": "/study/summary/history/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-155",
+      "subject": "social",
+      "topic": "歴史",
+      "term": "参勤交代",
+      "prompt": "参勤交代について正しい説明を選べ。江戸幕府が大名に江戸と領地を往復させた制度は何か。",
+      "options": [
+        "鎖国",
+        "参勤交代",
+        "廃藩置県",
+        "五人組"
+      ],
+      "correct": 1,
+      "explanation": "参勤交代は大名の経済力を弱め、幕府への服従を示させる目的もあった。（確認ポイント：参勤交代）",
+      "link": "/study/summary/history/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-156",
+      "subject": "social",
+      "topic": "歴史",
+      "term": "大化の改新",
+      "prompt": "大化の改新について正しい説明を選べ。645年に始まった、中大兄皇子らによる政治改革を何というか。",
+      "options": [
+        "建武の新政",
+        "大化の改新",
+        "明治維新",
+        "享保の改革"
+      ],
+      "correct": 1,
+      "explanation": "大化の改新は645年に始まり、豪族中心の政治から天皇中心の国家づくりを目指した。（確認ポイント：大化の改新）",
+      "link": "/study/summary/history/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-157",
+      "subject": "social",
+      "topic": "歴史",
+      "term": "明治維新",
+      "prompt": "明治維新について正しい説明を選べ。明治政府が進めた、近代国家をつくるための一連の改革を何というか。",
+      "options": [
+        "享保の改革",
+        "明治維新",
+        "大化の改新",
+        "文明開化"
+      ],
+      "correct": 1,
+      "explanation": "明治維新では廃藩置県、徴兵令、地租改正など近代国家づくりの改革が進められた。（確認ポイント：明治維新）",
+      "link": "/study/summary/history/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-158",
+      "subject": "social",
+      "topic": "歴史",
+      "term": "御成敗式目",
+      "prompt": "御成敗式目について正しい説明を選べ。1232年、北条泰時が定めた武士のための法律は何か。",
+      "options": [
+        "御成敗式目",
+        "武家諸法度",
+        "大宝律令",
+        "公事方御定書"
+      ],
+      "correct": 0,
+      "explanation": "御成敗式目は武士社会の慣習や道理をもとに定められた。（確認ポイント：御成敗式目）",
+      "link": "/study/summary/history/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-159",
+      "subject": "social",
+      "topic": "歴史",
+      "term": "縄文時代",
+      "prompt": "確認問題：打製石器や土器を使い、狩りや採集を中心とした生活が営まれた時代は何か。",
+      "options": [
+        "弥生時代",
+        "縄文時代",
+        "古墳時代",
+        "奈良時代"
+      ],
+      "correct": 1,
+      "explanation": "縄文時代は土器や弓矢などを使い、狩り・採集・漁労を中心に生活した。（確認ポイント：縄文時代）",
+      "link": "/study/summary/history/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-160",
+      "subject": "social",
+      "topic": "歴史",
+      "term": "奈良時代",
+      "prompt": "奈良時代について正しい説明を選べ。710年に平城京に都が置かれて始まった時代は何か。",
+      "options": [
+        "平安時代",
+        "奈良時代",
+        "飛鳥時代",
+        "室町時代"
+      ],
+      "correct": 1,
+      "explanation": "710年に平城京へ遷都し、奈良時代が始まった。（確認ポイント：奈良時代）",
+      "link": "/study/summary/history/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-161",
+      "subject": "social",
+      "topic": "歴史",
+      "term": "墾田永年私財法",
+      "prompt": "確認問題：743年、新しく開墾した土地の永久私有を認めた法令は何か。",
+      "options": [
+        "班田収授法",
+        "御成敗式目",
+        "公地公民",
+        "墾田永年私財法"
+      ],
+      "correct": 3,
+      "explanation": "墾田永年私財法により荘園が広がるきっかけとなった。（確認ポイント：墾田永年私財法）",
+      "link": "/study/summary/history/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-162",
+      "subject": "social",
+      "topic": "歴史",
+      "term": "サンフランシスコ平和条約",
+      "prompt": "確認問題：1951年に調印され、日本が主権を回復することになった条約は何か。",
+      "options": [
+        "日米安全保障条約",
+        "ポーツマス条約",
+        "ベルサイユ条約",
+        "サンフランシスコ平和条約"
+      ],
+      "correct": 3,
+      "explanation": "1952年に発効し、日本は独立を回復した。（確認ポイント：サンフランシスコ平和条約）",
+      "link": "/study/summary/history/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-163",
+      "subject": "social",
+      "topic": "歴史",
+      "term": "平安京",
+      "prompt": "平安京について正しい説明を選べ。794年に桓武天皇が都を移した場所はどこか。",
+      "options": [
+        "平城京",
+        "平安京",
+        "藤原京",
+        "長岡京"
+      ],
+      "correct": 1,
+      "explanation": "794年、桓武天皇は都を平安京に移した。（確認ポイント：平安京）",
+      "link": "/study/summary/history/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-164",
+      "subject": "social",
+      "topic": "歴史",
+      "term": "大政奉還",
+      "prompt": "大政奉還について正しい説明を選べ。1867年、徳川慶喜が政権を朝廷に返したことは何か。",
+      "options": [
+        "版籍奉還",
+        "大政奉還",
+        "王政復古",
+        "廃藩置県"
+      ],
+      "correct": 1,
+      "explanation": "大政奉還によって江戸幕府の政治は終わりに向かった。（確認ポイント：大政奉還）",
+      "link": "/study/summary/history/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-165",
+      "subject": "social",
+      "topic": "歴史",
+      "term": "弥生時代",
+      "prompt": "確認問題：水田稲作が広まり、金属器も使われるようになった時代は何か。",
+      "options": [
+        "縄文時代",
+        "弥生時代",
+        "平安時代",
+        "鎌倉時代"
+      ],
+      "correct": 1,
+      "explanation": "弥生時代には大陸から稲作や金属器が伝わり、むらやくにが発達した。（確認ポイント：弥生時代）",
+      "link": "/study/summary/history/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-166",
+      "subject": "social",
+      "topic": "歴史",
+      "term": "摂関政治",
+      "prompt": "摂関政治について正しい説明を選べ。藤原氏が天皇の外戚となり、摂政や関白として行った政治は何か。",
+      "options": [
+        "院政",
+        "摂関政治",
+        "執権政治",
+        "武家政治"
+      ],
+      "correct": 1,
+      "explanation": "藤原氏は摂政・関白の地位を利用して、平安時代に政治の実権を握った。（確認ポイント：摂関政治）",
+      "link": "/study/summary/history/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-167",
+      "subject": "social",
+      "topic": "歴史",
+      "term": "承久の乱",
+      "prompt": "確認問題：1221年、後鳥羽上皇が鎌倉幕府を倒そうとして起こした戦いは何か。",
+      "options": [
+        "保元の乱",
+        "承久の乱",
+        "応仁の乱",
+        "壬申の乱"
+      ],
+      "correct": 1,
+      "explanation": "幕府側が勝利し、朝廷を監視するため六波羅探題が置かれた。（確認ポイント：承久の乱）",
+      "link": "/study/summary/history/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-168",
+      "subject": "social",
+      "topic": "公民",
+      "term": "日本国憲法",
+      "prompt": "日本の国の基本的なしくみや国民の権利・義務を定めた最高法規は何か。",
+      "options": [
+        "民法",
+        "日本国憲法",
+        "刑法",
+        "条例"
+      ],
+      "correct": 1,
+      "explanation": "日本国憲法は国の基本原則や統治のしくみ、国民の権利・義務を定める最高法規。",
+      "link": "/study/summary/civics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-169",
+      "subject": "social",
+      "topic": "公民",
+      "term": "基本的人権",
+      "prompt": "人が生まれながらに持つ、人間らしく生きるための権利を何というか。",
+      "options": [
+        "社会権",
+        "基本的人権",
+        "参政権",
+        "請求権"
+      ],
+      "correct": 1,
+      "explanation": "基本的人権は侵すことのできない永久の権利として憲法で保障される。",
+      "link": "/study/summary/civics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-170",
+      "subject": "social",
+      "topic": "公民",
+      "term": "内閣",
+      "prompt": "行政権を担当し、法律や予算に基づいて国の行政を行う機関は何か。",
+      "options": [
+        "国会",
+        "内閣",
+        "最高裁判所",
+        "会計検査院"
+      ],
+      "correct": 1,
+      "explanation": "内閣は行政権を担い、内閣総理大臣と国務大臣で構成される。",
+      "link": "/study/summary/civics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-171",
+      "subject": "social",
+      "topic": "公民",
+      "term": "需要と供給",
+      "prompt": "市場で、商品を買いたい量と売りたい量の関係を表す基本的な考え方は何か。",
+      "options": [
+        "需要と供給",
+        "税と社会保障",
+        "輸出と輸入",
+        "生産と分配"
+      ],
+      "correct": 0,
+      "explanation": "一般に需要が供給を上回ると価格は上がり、供給が需要を上回ると価格は下がる方向に働く。",
+      "link": "/study/summary/civics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-172",
+      "subject": "social",
+      "topic": "公民",
+      "term": "生存権",
+      "prompt": "健康で文化的な最低限度の生活を営む権利は何か。",
+      "options": [
+        "教育を受ける権利",
+        "生存権",
+        "参政権",
+        "請求権"
+      ],
+      "correct": 1,
+      "explanation": "生存権は社会権の一つで、日本国憲法第25条に定められている。",
+      "link": "/study/summary/civics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-173",
+      "subject": "social",
+      "topic": "公民",
+      "term": "違憲審査制",
+      "prompt": "法律や命令などが憲法に違反していないか、裁判所が判断する制度は何か。",
+      "options": [
+        "国民審査",
+        "違憲審査制",
+        "直接請求",
+        "弾劾裁判"
+      ],
+      "correct": 1,
+      "explanation": "裁判所は具体的な裁判で、法律などが憲法に違反するかを判断できる。",
+      "link": "/study/summary/civics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-174",
+      "subject": "social",
+      "topic": "公民",
+      "term": "内閣不信任決議",
+      "prompt": "衆議院が内閣を信任できないと意思表示する決議は何か。",
+      "options": [
+        "内閣不信任決議",
+        "弾劾裁判",
+        "国民審査",
+        "問責決議"
+      ],
+      "correct": 0,
+      "explanation": "可決された場合、内閣は10日以内に衆議院を解散しない限り総辞職する。",
+      "link": "/study/summary/civics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-175",
+      "subject": "social",
+      "topic": "公民",
+      "term": "比例代表制",
+      "prompt": "政党の得票数に応じて議席を配分する選挙制度は何か。",
+      "options": [
+        "直接請求制",
+        "制限選挙",
+        "比例代表制",
+        "小選挙区制"
+      ],
+      "correct": 2,
+      "explanation": "比例代表制は得票数を議席に反映させる制度。",
+      "link": "/study/summary/civics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-176",
+      "subject": "social",
+      "topic": "公民",
+      "term": "直接税",
+      "prompt": "税を納める人と、実際に税を負担する人が同じ税は何か。",
+      "options": [
+        "間接税",
+        "関税",
+        "消費税",
+        "直接税"
+      ],
+      "correct": 3,
+      "explanation": "所得税や法人税は直接税に分類される。",
+      "link": "/study/summary/civics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-177",
+      "subject": "social",
+      "topic": "公民",
+      "term": "国際連合",
+      "prompt": "第二次世界大戦後、国際平和と安全の維持などを目的に設立された組織は何か。",
+      "options": [
+        "NATO",
+        "国際連合",
+        "国際連盟",
+        "EU"
+      ],
+      "correct": 1,
+      "explanation": "国際連合は1945年に発足した。",
+      "link": "/study/summary/civics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-178",
+      "subject": "social",
+      "topic": "公民",
+      "term": "生存権",
+      "prompt": "生存権について正しい説明を選べ。健康で文化的な最低限度の生活を営む権利は何か。",
+      "options": [
+        "教育を受ける権利",
+        "生存権",
+        "参政権",
+        "請求権"
+      ],
+      "correct": 1,
+      "explanation": "生存権は社会権の一つで、日本国憲法第25条に定められている。（確認ポイント：生存権）",
+      "link": "/study/summary/civics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-179",
+      "subject": "social",
+      "topic": "公民",
+      "term": "三権分立",
+      "prompt": "三権分立について正しい説明を選べ。立法・行政・司法の権力を別々の機関に分け、権力の集中を防ぐしくみは何か。",
+      "options": [
+        "議院内閣制",
+        "三権分立",
+        "直接民主制",
+        "地方自治"
+      ],
+      "correct": 1,
+      "explanation": "国会・内閣・裁判所が権力を分担し、互いに抑制と均衡を保つ。（確認ポイント：三権分立）",
+      "link": "/study/summary/civics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-180",
+      "subject": "social",
+      "topic": "公民",
+      "term": "内閣不信任決議",
+      "prompt": "内閣不信任決議について正しい説明を選べ。衆議院が内閣を信任できないと意思表示する決議は何か。",
+      "options": [
+        "内閣不信任決議",
+        "弾劾裁判",
+        "国民審査",
+        "問責決議"
+      ],
+      "correct": 0,
+      "explanation": "可決された場合、内閣は10日以内に衆議院を解散しない限り総辞職する。（確認ポイント：内閣不信任決議）",
+      "link": "/study/summary/civics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-181",
+      "subject": "social",
+      "topic": "公民",
+      "term": "国民主権",
+      "prompt": "確認問題：国の政治のあり方を最終的に決める権限が国民にあるという原理は何か。",
+      "options": [
+        "基本的人権の尊重",
+        "国民主権",
+        "平和主義",
+        "三権分立"
+      ],
+      "correct": 1,
+      "explanation": "国民主権は日本国憲法の三つの基本原則の一つ。（確認ポイント：国民主権）",
+      "link": "/study/summary/civics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-182",
+      "subject": "social",
+      "topic": "公民",
+      "term": "衆議院",
+      "prompt": "衆議院について正しい説明を選べ。国会を構成する二つの議院のうち、任期が4年で解散がある議院はどれか。",
+      "options": [
+        "参議院",
+        "衆議院",
+        "最高裁判所",
+        "内閣"
+      ],
+      "correct": 1,
+      "explanation": "衆議院の任期は4年だが、解散がある。参議院の任期は6年で解散はない。（確認ポイント：衆議院）",
+      "link": "/study/summary/civics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-183",
+      "subject": "social",
+      "topic": "公民",
+      "term": "法の下の平等",
+      "prompt": "確認問題：すべての人が法の下で平等に扱われるという権利は何か。",
+      "options": [
+        "自由権",
+        "平等権",
+        "社会権",
+        "参政権"
+      ],
+      "correct": 1,
+      "explanation": "平等権は、性別や身分などによって不合理な差別を受けない権利。（確認ポイント：法の下の平等）",
+      "link": "/study/summary/civics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-184",
+      "subject": "social",
+      "topic": "公民",
+      "term": "累進課税",
+      "prompt": "確認問題：所得などが多くなるほど、より高い税率を適用する課税方法は何か。",
+      "options": [
+        "間接税",
+        "累進課税",
+        "定額税",
+        "関税"
+      ],
+      "correct": 1,
+      "explanation": "累進課税は所得が高いほど税率が高くなるしくみで、所得税などに採用されている。（確認ポイント：累進課税）",
+      "link": "/study/summary/civics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-185",
+      "subject": "social",
+      "topic": "公民",
+      "term": "需要と供給",
+      "prompt": "確認問題：市場で、商品を買いたい量と売りたい量の関係を表す基本的な考え方は何か。",
+      "options": [
+        "需要と供給",
+        "税と社会保障",
+        "輸出と輸入",
+        "生産と分配"
+      ],
+      "correct": 0,
+      "explanation": "一般に需要が供給を上回ると価格は上がり、供給が需要を上回ると価格は下がる方向に働く。（確認ポイント：需要と供給）",
+      "link": "/study/summary/civics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-186",
+      "subject": "social",
+      "topic": "公民",
+      "term": "供給",
+      "prompt": "確認問題：生産者や企業が商品やサービスを売ろうとする量は何か。",
+      "options": [
+        "供給",
+        "需要",
+        "消費",
+        "税収"
+      ],
+      "correct": 0,
+      "explanation": "供給量は価格や生産条件などの影響を受ける。（確認ポイント：供給）",
+      "link": "/study/summary/civics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-187",
+      "subject": "social",
+      "topic": "公民",
+      "term": "生存権",
+      "prompt": "確認問題：健康で文化的な最低限度の生活を営む権利は何か。",
+      "options": [
+        "教育を受ける権利",
+        "生存権",
+        "参政権",
+        "請求権"
+      ],
+      "correct": 1,
+      "explanation": "生存権は社会権の一つで、日本国憲法第25条に定められている。（確認ポイント：生存権）",
+      "link": "/study/summary/civics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-188",
+      "subject": "social",
+      "topic": "公民",
+      "term": "国際連合",
+      "prompt": "国際連合について正しい説明を選べ。第二次世界大戦後、国際平和と安全の維持などを目的に設立された組織は何か。",
+      "options": [
+        "NATO",
+        "国際連合",
+        "国際連盟",
+        "EU"
+      ],
+      "correct": 1,
+      "explanation": "国際連合は1945年に発足した。（確認ポイント：国際連合）",
+      "link": "/study/summary/civics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-189",
+      "subject": "social",
+      "topic": "公民",
+      "term": "内閣不信任決議",
+      "prompt": "確認問題：衆議院が内閣を信任できないと意思表示する決議は何か。",
+      "options": [
+        "内閣不信任決議",
+        "弾劾裁判",
+        "国民審査",
+        "問責決議"
+      ],
+      "correct": 0,
+      "explanation": "可決された場合、内閣は10日以内に衆議院を解散しない限り総辞職する。（確認ポイント：内閣不信任決議）",
+      "link": "/study/summary/civics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-190",
+      "subject": "social",
+      "topic": "公民",
+      "term": "立法",
+      "prompt": "国会が法律を制定するはたらきを何というか。",
+      "options": [
+        "司法",
+        "監査",
+        "立法",
+        "行政"
+      ],
+      "correct": 2,
+      "explanation": "立法：国会が法律を制定するはたらきを何というか。",
+      "link": "/study/summary/civics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-191",
+      "subject": "social",
+      "topic": "公民",
+      "term": "司法",
+      "prompt": "法律に基づいて争いを解決し、法を適用するはたらきは何か。",
+      "options": [
+        "行政",
+        "司法",
+        "立法",
+        "財政"
+      ],
+      "correct": 1,
+      "explanation": "司法：法律に基づいて争いを解決し、法を適用するはたらきは何か。",
+      "link": "/study/summary/civics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-192",
+      "subject": "social",
+      "topic": "公民",
+      "term": "直接請求",
+      "prompt": "住民が一定数の署名を集め、条例制定・改廃などを求める制度は何か。",
+      "options": [
+        "国民審査",
+        "直接請求",
+        "弾劾裁判",
+        "国政調査"
+      ],
+      "correct": 1,
+      "explanation": "直接請求：住民が一定数の署名を集め、条例制定・改廃などを求める制度は何か。",
+      "link": "/study/summary/civics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-193",
+      "subject": "social",
+      "topic": "公民",
+      "term": "表現の自由",
+      "prompt": "意見や考えを発表し、伝えることを保障する自由は何か。",
+      "options": [
+        "生存権",
+        "居住移転の自由",
+        "財産権",
+        "表現の自由"
+      ],
+      "correct": 3,
+      "explanation": "表現の自由：意見や考えを発表し、伝えることを保障する自由は何か。",
+      "link": "/study/summary/civics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-194",
+      "subject": "social",
+      "topic": "公民",
+      "term": "団結権",
+      "prompt": "労働者が労働組合をつくり、加入する権利は何か。",
+      "options": [
+        "請願権",
+        "団体交渉権",
+        "団体行動権",
+        "団結権"
+      ],
+      "correct": 3,
+      "explanation": "団結権：労働者が労働組合をつくり、加入する権利は何か。",
+      "link": "/study/summary/civics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-195",
+      "subject": "social",
+      "topic": "公民",
+      "term": "団体行動権",
+      "prompt": "労働者が要求実現のためにストライキなどを行う権利は何か。",
+      "options": [
+        "請願権",
+        "生存権",
+        "団体行動権",
+        "団結権"
+      ],
+      "correct": 2,
+      "explanation": "団体行動権：労働者が要求実現のためにストライキなどを行う権利は何か。",
+      "link": "/study/summary/civics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-196",
+      "subject": "social",
+      "topic": "公民",
+      "term": "消費者契約法",
+      "prompt": "不当な勧誘などによる消費者契約の取消しを認める場合がある法律は何か。",
+      "options": [
+        "会社法",
+        "刑法",
+        "消費者契約法",
+        "独占禁止法"
+      ],
+      "correct": 2,
+      "explanation": "消費者契約法：不当な勧誘などによる消費者契約の取消しを認める場合がある法律は何か。",
+      "link": "/study/summary/civics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-197",
+      "subject": "social",
+      "topic": "公民",
+      "term": "地方交付税",
+      "prompt": "地方公共団体間の財政力の差を調整するため、国から配分される財源は何か。",
+      "options": [
+        "関税",
+        "地方交付税",
+        "所得税",
+        "国債"
+      ],
+      "correct": 1,
+      "explanation": "地方交付税：地方公共団体間の財政力の差を調整するため、国から配分される財源は何か。",
+      "link": "/study/summary/civics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-198",
+      "subject": "social",
+      "topic": "公民",
+      "term": "円高",
+      "prompt": "外国通貨に対して円の価値が上がることは何か。",
+      "options": [
+        "円安",
+        "円高",
+        "インフレ",
+        "デフレ"
+      ],
+      "correct": 1,
+      "explanation": "円高：外国通貨に対して円の価値が上がることは何か。",
+      "link": "/study/summary/civics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-199",
+      "subject": "social",
+      "topic": "公民",
+      "term": "国際連合総会",
+      "prompt": "原則としてすべての加盟国が参加し、各国が1票をもつ国連の機関は何か。",
+      "options": [
+        "事務局",
+        "安全保障理事会",
+        "国際司法裁判所",
+        "国連総会"
+      ],
+      "correct": 3,
+      "explanation": "国際連合総会：原則としてすべての加盟国が参加し、各国が1票をもつ国連の機関は何か。",
+      "link": "/study/summary/civics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    },
+    {
+      "id": "pe-200",
+      "subject": "social",
+      "topic": "公民",
+      "term": "UNICEF",
+      "prompt": "子どもの権利や健康、教育などを支援する国連機関は何か。",
+      "options": [
+        "IMF",
+        "UNESCO",
+        "WHO",
+        "UNICEF"
+      ],
+      "correct": 3,
+      "explanation": "UNICEF：子どもの権利や健康、教育などを支援する国連機関は何か。",
+      "link": "/study/summary/civics/",
+      "sourceType": "KNOTオリジナル類題",
+      "sourceNote": "過去問で扱われた単元・考え方に関連する基礎確認問題。過去問本文の転載ではありません。",
+      "level": "基礎〜標準"
+    }
+  ]
+}
