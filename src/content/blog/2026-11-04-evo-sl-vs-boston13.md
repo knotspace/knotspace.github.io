@@ -6,6 +6,8 @@ updatedDate: 2026-11-04
 category: ランニング・シューズ
 heroImage: "/blog-art/evo-sl-vs-boston13.svg"
 ---
+<figure class="source-photo"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/An_Adidas_shoe.jpg?width=1280" alt="adidasランニングシューズの参考写真（EVO SL・BOSTON 13の実物写真ではありません）。" loading="lazy" decoding="async" width="1280" height="853" /><figcaption>adidasランニングシューズの参考写真（EVO SL・BOSTON 13の実物写真ではありません）。 写真：Patrik Ragnarsson / <a href="https://commons.wikimedia.org/wiki/File:An_Adidas_shoe.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>・<a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener noreferrer">CC BY 2.0</a></figcaption></figure>
+
 
 ## はじめに
 
