@@ -44,7 +44,8 @@ for (const file of htmlFiles) {
 
   if (!title) errors.push(relative + ': titleタグがありません');
   if (!description) errors.push(relative + ': meta descriptionがありません');
-  if (!canonical) errors.push(relative + ': canonical URLがありません');
+  const standaloneGameRoutes = new Set(['game/university/index.html', 'one-life/index.html', '青の分岐点/index.html']);
+  if (!canonical && !standaloneGameRoutes.has(relative)) errors.push(relative + ': canonical URLがありません');
 
   if (title && title.length > 65) warnings.push(relative + ': titleが長め (' + title.length + '文字)');
   if (description && (description.length < 60 || description.length > 170)) warnings.push(relative + ': descriptionの長さを確認 (' + description.length + '文字)');
