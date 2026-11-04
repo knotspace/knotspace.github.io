@@ -3843,6 +3843,76 @@ function endingResult(){
 function sourcesHTML(){return`<section class="sheet src">
   <p>出典：<a href="https://www.mhlw.go.jp/toukei/list/81-1a.html" target="_blank" rel="noopener">人口動態統計</a>／<a href="https://www.mhlw.go.jp/toukei/saikin/hw/life/tdfk20/index.html" target="_blank" rel="noopener">令和2年都道府県別生命表</a>／<a href="https://www.stat.go.jp/data/jinsui/2024np/index.html" target="_blank" rel="noopener">人口推計2024</a>／<a href="https://www.ipss.go.jp/syoushika/tohkei/Popular/Popular2024.asp" target="_blank" rel="noopener">人口統計資料集2024</a>／<a href="https://www.mhlw.go.jp/toukei/itiran/roudou/chingin/kouzou/z2024/" target="_blank" rel="noopener">令和6年賃金構造基本統計調査</a>／<a href="https://www.stat.go.jp/data/sav/sokuhou/nen/index.html" target="_blank" rel="noopener">家計調査 貯蓄・負債編2024</a>／<a href="https://www.minkou.jp/hischool/ranking/deviation/" target="_blank" rel="noopener">みんなの高校情報</a>／<a href="https://www.minkou.jp/university/ranking/deviation/" target="_blank" rel="noopener">みんなの大学情報</a>／公立高校の通学区域：<a href="https://www.pref.fukuoka.lg.jp/site/kyouiku/tuugakukuikikisoku.html" target="_blank" rel="noopener">福岡</a>・<a href="https://www.pref.iwate.jp/_res/projects/default_project/_page_/001/082/202/arikatabetten1.pdf" target="_blank" rel="noopener">岩手</a>・<a href="https://www.pref.yamagata.jp/documents/18276/siryo1.pdf" target="_blank" rel="noopener">山形</a>・<a href="https://www.pref.fukushima.lg.jp/uploaded/attachment/600080.pdf" target="_blank" rel="noopener">福島</a>・<a href="https://www.pref.chiba.lg.jp/kyouiku/seisaku/miryoku/gakku/" target="_blank" rel="noopener">千葉</a>・<a href="https://www.pref.gifu.lg.jp/uploaded/attachment/91924.pdf" target="_blank" rel="noopener">岐阜</a>・<a href="https://www.pref.aichi.jp/uploaded/attachment/51689.pdf" target="_blank" rel="noopener">愛知</a>・<a href="https://www.pref.mie.lg.jp/common/content/001039271.pdf" target="_blank" rel="noopener">三重</a>・<a href="https://www.pref.kyoto.jp/reiki/reiki_honbun/a300RG00000843.html" target="_blank" rel="noopener">京都</a>・<a href="https://www.hyogo-c.ed.jp/~gakuji-bo/公立高校通学区域（R5予定）.pdf" target="_blank" rel="noopener">兵庫</a>・<a href="https://www.pref.tokushima.lg.jp/file/attachment/929243.pdf" target="_blank" rel="noopener">徳島</a>・<a href="https://www.pref.kagawa.lg.jp/documents/14770/p04_08tugakukuiki.pdf" target="_blank" rel="noopener">香川</a>・<a href="https://www.pref.ehime.jp/uploaded/attachment/38041.pdf" target="_blank" rel="noopener">愛媛</a>・<a href="https://www.pref.saga.lg.jp/kyouiku/kiji00333853/3_33853_1_tsuugakukuiki.pdf" target="_blank" rel="noopener">佐賀</a>・<a href="https://www.pref.nagasaki.jp/fs/1/8/0/9/6/_/__________.pdf" target="_blank" rel="noopener">長崎</a>・<a href="https://www.pref.kumamoto.jp/uploaded/life/78141_100835_misc.pdf" target="_blank" rel="noopener">熊本</a>・<a href="https://www.pref.kagoshima.jp/ba05/kyoiku-bunka/school/koukou/nyushi/r6/documents/116170_20241017204221-1.pdf" target="_blank" rel="noopener">鹿児島</a>・<a href="https://www.pref.okinawa.jp/_res/projects/default_project/_page_/001/029/395/07gakku.pdf" target="_blank" rel="noopener">沖縄</a>（各県教育委員会）／<a href="https://www.mext.go.jp/content/20230524-mxt_syoto02-000030043_10.pdf" target="_blank" rel="noopener">文部科学省 通常の学級に在籍する特別な教育的支援を必要とする児童生徒に関する調査（2022）</a></p>
   <p>統計にない出来事の確率や収入はゲーム上の設定です。18歳以上向け。ベータ版。${FEEDBACK_FORM?`　<a href="${FEEDBACK_FORM}" target="_blank" rel="noopener">ご意見・不具合はこちら</a>`:""}</p></section>`}
+
+/* Route-specific scenarios; original UI, decision display and choice handling stay untouched. */
+const __KNOT_UNI=location.pathname.indexOf("/university/")!==-1;
+const __KNOT_HOME=home;
+home=function(){__KNOT_HOME();if(window.I18N&&I18N.lang&&I18N.lang!=="ja")return;
+ const h=document.querySelector(".hero h1"),l=document.querySelector(".hero .label"),p=document.querySelector(".hero .lead");
+ if(__KNOT_UNI){if(h)h.innerHTML="大学への分岐点<small>の人生</small>";if(l)l.textContent="大学受験・大学生活シミュレーション";if(p)p.textContent="中学・高校での学びから、志望校選び、入試、大学生活、卒業後の進路まで。ひとつひとつの選択が、その先の人生につながっていく。";document.title="大学への分岐点｜大学受験・大学生活シミュレーション";}
+ else{if(h)h.innerHTML="青の分岐点<small>の人生</small>";if(l)l.textContent="人生シミュレーション・選択の積み重ね";if(p)p.textContent="生まれる場所も、家族も、最初は選べない。それでも進学、仕事、人間関係、暮らしの分岐点で何を選ぶかは、自分で決められる。選択の積み重ねから、一度きりの人生を生きてみる。";document.title="青の分岐点｜人生シミュレーション";}
+};
+const __KNOT_STEP=stepYearAll;
+function __knotEvent(L,key,title,text,opts){if(L.flags[key])return null;L.flags[key]=1;return{moral:1,always:true,title,text,opts};}
+stepYearAll=function(L){
+ if(L&&L.alive&&L.flags){const a=L.age;
+  if(!__KNOT_UNI){
+   if(a===12)return __knotEvent(L,"blue12","12歳。中学校生活が始まる。何を大切にする？","勉強、部活動、友人、まだ知らない興味。すべてを完璧にはできない。",[
+    {t:"勉強を軸にする",s:"将来の選択肢を広げる",w:2,f(){L.flags.bluePath="学び";add(L,"k",7);log(L,"中学生のあいだ、毎日の勉強を習慣にした。","big")}},
+    {t:"部活や友人を大切にする",s:"今しかない時間を楽しむ",w:2,f(){L.flags.bluePath="人間関係";add(L,"r",7);add(L,"j",4);log(L,"勉強だけではない中学校生活を選んだ。","big")}},
+    {t:"興味のあることを探す",s:"好きなことを見つける",w:2,f(){L.flags.bluePath="探究";add(L,"k",3);add(L,"j",6);log(L,"気になったことを調べたり、試したりする時間を増やした。")}}
+   ]);
+   if(a===15)return __knotEvent(L,"blue15","15歳。高校卒業後の自分を想像してみた。","周りと同じ道を選ぶ必要はない。いまの自分が納得できる道はどれだろう。",[
+    {t:"高い目標に挑戦する",s:"難しくても第一志望を目指す",w:2,f(){L.flags.bluePath="挑戦";add(L,"k",6);add(L,"j",3);log(L,"簡単な道ではなく、自分が挑戦したい進路を選んだ。","big")}},
+    {t:"自分に合う環境を選ぶ",s:"無理なく続けられる道を探す",w:2,f(){L.flags.bluePath="自分らしさ";add(L,"h",3);add(L,"j",5);log(L,"偏差値や評判だけでなく、自分に合う環境を考えた。")}},
+    {t:"まだ決めず可能性を残す",s:"経験してから考える",w:2,f(){L.flags.bluePath="模索";add(L,"r",3);add(L,"j",4);log(L,"今すぐ将来をひとつに決めず、いろいろな経験をすることにした。")}}
+   ]);
+   if(a===22)return __knotEvent(L,"blue22","22歳。これからの暮らし方を考える。","仕事や学びだけでなく、どこで、誰と、どんな時間を過ごしたいか。",[
+    {t:"新しい土地へ出る",s:"環境を変えて挑戦する",w:2,f(){L.flags.blueLife="新天地";add(L,"j",4);add(L,"r",2);log(L,"慣れた場所を離れ、新しい環境に飛び込むことにした。","big")}},
+    {t:"慣れた地域で暮らす",s:"身近な人とのつながりを大切にする",w:2,f(){L.flags.blueLife="地元";add(L,"r",6);add(L,"h",2);log(L,"身近な人とのつながりを大切にしながら暮らすことにした。")}},
+    {t:"場所に縛られない働き方を探す",s:"自分の可能性を広げる",w:2,f(){L.flags.blueLife="自由";add(L,"k",3);add(L,"j",5);log(L,"住む場所に縛られない働き方や暮らし方を考え始めた。","big")}}
+   ]);
+   if(a===30)return __knotEvent(L,"blue30","30歳。これまでの選択を振り返る。","この先の10年を、何に使いたいだろう。",[
+    {t:"仕事でさらに上を目指す",s:"責任や収入を伸ばす",w:2,f(){add(L,"k",3);add(L,"j",2);log(L,"仕事で新しい役割に挑戦することにした。","big")}},
+    {t:"暮らしとのバランスを優先する",s:"時間や健康を大切にする",w:2,f(){add(L,"h",6);add(L,"j",5);log(L,"仕事だけに人生を使わず、暮らしとのバランスを大切にすることにした。")}},
+    {t:"新しいことを始める",s:"学び直しや転身に挑戦する",w:2,f(){add(L,"k",5);add(L,"j",4);log(L,"年齢を理由に諦めず、新しいことを始めることにした。","big")}}
+   ]);
+  }else{
+   if(a===15)return __knotEvent(L,"uni15","15歳。高校生活と、その先の進路。","大学に進むかどうかも、何を学ぶかも、まだ決めきらなくていい。",[
+    {t:"基礎学力を固める",s:"毎日の積み重ねを優先",w:2,f(){L.flags.uniPrep="基礎";add(L,"k",7);log(L,"高校で学ぶための基礎を、少しずつ固めることにした。","big")}},
+    {t:"部活動や課外活動にも打ち込む",s:"学び以外の経験も重ねる",w:2,f(){L.flags.uniPrep="活動";add(L,"r",5);add(L,"j",3);log(L,"勉強と並行して、部活動や課外活動にも本気で取り組むことにした。")}},
+    {t:"興味のある学問を探す",s:"学部・学科を調べ始める",w:2,f(){L.flags.uniPrep="探究";add(L,"k",4);add(L,"j",4);log(L,"大学の学部・学科を調べ、自分が学びたい分野を探し始めた。")}}
+   ]);
+   if(a===16)return __knotEvent(L,"uni16","16歳。大学入試に向けた準備を考える。","入試方式によって、必要な準備も高校生活の過ごし方も変わる。",[
+    {t:"一般選抜を中心に準備する",s:"教科の得点力を伸ばす",w:2,f(){L.flags.uniMethod="一般選抜";add(L,"k",7);add(L,"j",-2);log(L,"一般選抜を中心に、教科の勉強を進めることにした。","big")}},
+    {t:"推薦・総合型選抜も視野に入れる",s:"評定や活動実績も意識する",w:2,f(){L.flags.uniMethod="推薦・総合型";add(L,"k",3);add(L,"r",3);log(L,"定期テストや課外活動にも力を入れ、推薦・総合型選抜も調べることにした。")}},
+    {t:"複数の方式を並行して調べる",s:"選択肢を狭めない",w:2,f(){L.flags.uniMethod="併用";add(L,"k",4);add(L,"j",2);log(L,"入試方式をひとつに絞らず、複数の可能性を残すことにした。")}}
+   ]);
+   if(a===17)return __knotEvent(L,"uni17","17歳。模試の結果が返ってきた。","判定はあくまで現時点の目安。ここからどう動くかで、次の景色は変わる。",[
+    {t:"志望校のレベルを上げて挑戦する",s:"苦手科目を重点的に鍛える",w:2,f(){L.flags.uniAim="挑戦";add(L,"k",8);add(L,"j",-3);log(L,"模試の結果を受け止め、志望校に向けて勉強量を増やした。","big")}},
+    {t:"併願校と受験日程を固める",s:"合格の可能性を広げる",w:2,f(){L.flags.uniAim="堅実";add(L,"k",4);add(L,"h",2);log(L,"第一志望だけでなく、併願校や受験日程も具体的に決めた。")}},
+    {t:"学部・学科から見直す",s:"学びたい内容を優先する",w:2,f(){L.flags.uniAim="学問";add(L,"k",3);add(L,"j",4);log(L,"大学名だけでなく、何を学びたいかを軸に志望先を見直した。","big")}}
+   ]);
+   if(a===18)return __knotEvent(L,"uni18","18歳。受験を終え、次の一歩を決める。","結果だけで人生が決まるわけではない。ここからどう進むかを選ぶ。",[
+    {t:"合格した進学先で学び始める",s:"新しい環境に飛び込む",w:2,f(){L.flags.uniNext="進学";add(L,"j",4);add(L,"r",3);log(L.univ?"合格した大学への進学を決めた。":"進学できる学校を選び、新しい環境で学ぶことにした。","big")}},
+    {t:"もう一年、志望校に挑戦する",s:"受験勉強を続ける",w:1,f(){L.flags.uniNext="再挑戦";add(L,"k",5);add(L,"j",-2);log(L,"もう一年、志望校に挑戦する道を選んだ。","big")}},
+    {t:"大学以外の進路も考える",s:"専門分野や仕事から学ぶ",w:2,f(){L.flags.uniNext="別進路";add(L,"j",3);add(L,"r",2);log(L,"大学進学だけにこだわらず、自分に合う進路を考えることにした。")}}
+   ]);
+   if(a===20&&L.univ)return __knotEvent(L,"uni20","20歳。大学での学びを、次の段階へ。","講義の外にも、研究、留学、課外活動などの経験がある。",[
+    {t:"研究や専門分野を深める",s:"ゼミ・研究室に力を入れる",w:2,f(){add(L,"k",7);log(L,"専門分野の研究に力を入れ、ゼミや研究室で学ぶ時間を増やした。","big")}},
+    {t:"留学や学外活動に挑戦する",s:"大学の外へ世界を広げる",w:2,f(){add(L,"r",5);add(L,"j",4);log(L,"大学の外にも活動の場を広げ、新しい経験を積むことにした。","big")}},
+    {t:"資格や就職準備を進める",s:"卒業後を見据える",w:2,f(){add(L,"k",4);add(L,"h",2);log(L,"資格やインターンシップなど、卒業後を見据えた準備を始めた。")}}
+   ]);
+   if(a===22&&L.univ)return __knotEvent(L,"uni22","22歳。大学卒業後の進路を選ぶ。","大学院に進むか、就職するか。学んできたことをどう生かす？",[
+    {t:"大学院で研究を続ける",s:"専門性をさらに高める",w:2,f(){add(L,"k",6);log(L,"大学院に進み、研究を続けることにした。","big")}},
+    {t:"学んだ分野を生かして就職する",s:"社会で経験を積む",w:2,f(){add(L,"j",4);log(L,"大学で学んだことを生かせる仕事を探し、社会に出ることにした。","big")}},
+    {t:"進路を広げて考える",s:"資格・留学・別分野も検討",w:2,f(){add(L,"r",3);add(L,"k",3);log(L,"卒業のタイミングにこだわらず、自分の可能性を広げて考えることにした。")}}
+   ]);
+  }
+ }
+ return __KNOT_STEP(L);
+};
+
 home();
 </script>
 </body>
