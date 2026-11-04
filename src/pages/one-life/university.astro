@@ -22,8 +22,7 @@
 <section id="start" class="panel">
 <p class="eyebrow">A NEW CHALLENGE</p><h2>受験のスタート地点を決める。</h2>
 <div class="field"><label for="student">主人公の名前（任意）</label><input id="student" maxlength="12" placeholder="名前・ニックネーム"></div>
-<div class="field"><label for="school">高校の学習環境</label><select id="school"><option value="0">標準的な学習環境</option><option value="5">学習意欲の高い環境（少し有利）</option><option value="-3">自分で学習計画を立てる環境</option></select></div>
-<div class="field"><label for="goal">最初の志望レベル</label><select id="goal"><option value="70">最難関に挑戦</option><option value="62" selected>難関を目指す</option><option value="53">実力相応から上を狙う</option><option value="43">幅広く合格を目指す</option></select></div>
+<p class="muted">0歳から始まり、幼少期・小学校・中学校・高校を経て、大学受験まで進みます。進路や日々の選択は、青の分岐点本編の流れをベースにしています。</p>
 <button class="btn" id="begin">この受験を始める →</button>
 <p class="muted">※ベータ版のため、大学の難易度・合格判定はゲーム用の仮設定です。実際の偏差値や合格可能性を示すものではありません。</p>
 </section>
@@ -45,7 +44,7 @@ function log(s){g.logs.unshift(s);renderHistory()}
 function stats(){const arr=[["学力",g.ability],["集中力",g.focus],["体力",g.health],["経験",g.experience]];$("stats").innerHTML=arr.map(([n,v])=>'<div class="stat"><span>'+n+'</span><b>'+Math.round(v)+'</b><div class="bar"><i style="width:'+clamp(v)+'%"></i></div></div>').join("")}
 function renderHistory(){$("history").innerHTML=g.logs.slice(0,12).map(x=>"<li>"+x+"</li>").join("")}
 function stage(title,story,prompt,opts){$("phase").textContent=g.phase;$("heading").textContent=title;$("story").textContent=story;$("prompt").textContent=prompt;$("choices").innerHTML=opts.map((o,i)=>'<button class="choice" data-i="'+i+'"><strong>'+o.t+'</strong><small>'+o.d+'</small></button>').join("");$("choices").querySelectorAll("button").forEach(b=>b.onclick=()=>opts[+b.dataset.i].go());stats()}
-function start(){g={name:$("student").value.trim()||"あなた",ability:35+ +$("school").value,focus:55,health:75,experience:35,goal:+$("goal").value,age:0,ronin:0,logs:[],mock:0,done:false};$("start").classList.add("hidden");$("ending").classList.add("hidden");$("play").classList.remove("hidden");lifeYear()}
+function start(){g={name:$("student").value.trim()||"あなた",ability:35,focus:55,health:75,experience:35,goal:62,age:0,ronin:0,logs:[],mock:0,done:false};$("start").classList.add("hidden");$("ending").classList.add("hidden");$("play").classList.remove("hidden");lifeYear()}
 function lifeYear(){
 const a=g.age,school=[{t:"毎日少しずつ宿題と復習をする",d:"机に向かう習慣が身につく。",go:()=>lifeAdvance("毎日少しずつ学び、基礎を積み重ねた。",7,0,0,1)},{t:"友達と遊びながらいろいろなことを経験する",d:"人との関わりや遊びから学ぶ。",go:()=>lifeAdvance("友達との時間や遊びから多くを学んだ。",0,0,5,7)},{t:"スポーツや習い事に打ち込む",d:"続ける力と経験が伸びる。",go:()=>lifeAdvance("スポーツや習い事に打ち込み、経験を重ねた。",1,0,6,6)}];
 const middle=[{t:"授業と復習を大切にする",d:"基礎を積み重ね、学ぶ力を伸ばす。",go:()=>lifeAdvance("授業と復習を大切にし、基礎を積み重ねた。",8,4,-2,1)},{t:"部活動や学校行事に力を入れる",d:"仲間と取り組む経験が増える。",go:()=>lifeAdvance("部活動や学校行事に力を入れた。",1,0,-2,8)},{t:"勉強と遊びのバランスを取る",d:"無理をしすぎず、毎日を充実させる。",go:()=>lifeAdvance("勉強と遊びのバランスを取った。",4,2,3,4)}];
