@@ -1,0 +1,20 @@
+---
+const entries = [
+  { date: "2026-11-05", version: "v1.0.1", title: "Studyのリリースノート導線を追加", description: "Studyトップと各関連ページの最下部から、更新履歴を確認できるようにしました。" },
+  { date: "2026-11-05", version: "v1.0.1", title: "ゲームプロジェクトの更新履歴を整備", description: "ゲーム一覧および各ゲームページの最下部にリリースノートへのリンクを追加しました。" },
+  { date: "2026-11-05", version: "v1.0.1", title: "各サイトの更新情報を整理", description: "AAAサイトと位置をあてます！にも、フッターからリリースノートを開く導線を追加しました。" }
+];
+---
+<!doctype html>
+<html lang="ja">
+<head><meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" /><meta name="theme-color" content="#10131b" /><title>リリースノート｜KNOTSPACE</title></head>
+<body>
+<main>
+  <a href="https://knotspace.github.io/study/">← Studyへ戻る</a>
+  <header><p>KNOTSPACE / CHANGELOG</p><h1>リリースノート</h1><p>各サイトの機能追加・改善・修正の記録です。</p></header>
+  {entries.map((entry) => <article><small>{entry.date} · {entry.version}</small><h2>{entry.title}</h2><p>{entry.description}</p></article>)}
+</main>
+<style>
+:global(*){box-sizing:border-box} :global(body){margin:0;background:#0c1017;color:#eef3f8;font-family:system-ui,"Yu Gothic",sans-serif;line-height:1.8}main{max-width:820px;margin:auto;padding:36px 22px 80px}a{color:#91e2b7;text-decoration:none;font-size:12px}header{padding:54px 0 32px;border-bottom:1px solid #293545}header p:first-child,small{font-size:10px;letter-spacing:1.5px;color:#91e2b7;font-weight:800}h1{font-size:clamp(36px,7vw,54px);margin:10px 0;letter-spacing:-.06em}header p:last-child,article p{font-size:13px;color:#a8b4c2}article{padding:23px 0;border-bottom:1px solid #293545}h2{font-size:18px;margin:8px 0}article p{margin:0}
+</style>
+</body></html>
