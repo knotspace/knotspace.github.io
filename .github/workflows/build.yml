@@ -40,3 +40,11 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Check all built pages at mobile, tablet and desktop sizes
         run: npm run test:responsive
+      - name: Upload responsive audit screenshots
+        if: failure()
+        uses: actions/upload-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9
+        with:
+          name: knot-responsive-audit-screenshots
+          path: artifacts/responsive/
+          if-no-files-found: ignore
+          retention-days: 7
