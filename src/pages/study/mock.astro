@@ -1,12 +1,21 @@
 ---
-import StudyLayout from '../../layouts/StudyLayout.astro';
 ---
-<StudyLayout title="ページ移動のお知らせ｜KNOT Study" description="このページはStudyの学習メニューに統合されました。新しい学習ページから続けて利用できます。" noindex={true}>
-<main style="max-width:760px;margin:0 auto;padding:48px 0">
-  <p style="color:var(--accent);font-size:10px;letter-spacing:.15em">KNOT STUDY / PAGE UPDATE</p>
-  <h1 style="font-size:clamp(28px,5vw,42px)">ページを移動しました</h1>
-  <p style="color:var(--muted);line-height:1.9">この学習メニューは新しいStudyページに統合されました。下のリンクから学習を続けてね。</p>
-  <a href="../foundation/" style="display:inline-flex;margin-top:16px;padding:13px 18px;border-radius:9px;background:var(--accent);color:#071426;font-weight:800">基礎網羅問題へ進む →</a>
-  <p><a href="../" style="color:var(--muted)">Studyホームへ戻る</a></p>
-</main>
-</StudyLayout>
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <meta http-equiv="refresh" content="0;url=https://knotspace.github.io/study/" />
+  <link rel="canonical" href="https://knotspace.github.io/study/" />
+  <title>新しいStudyへ移動します</title>
+  <script>location.replace("https://knotspace.github.io/study/");</script>
+</head>
+<body>
+  <main>
+    <h1>新しいStudyへ移動します</h1>
+    <p>Studyは新しいサイトに移行しました。</p>
+    <p><a href="https://knotspace.github.io/study/">新しいStudyを開く</a></p>
+  </main>
+</body>
+</html>

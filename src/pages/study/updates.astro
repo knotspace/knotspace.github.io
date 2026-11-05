@@ -1,9 +1,21 @@
 ---
-import StudyLayout from '../../layouts/StudyLayout.astro';
-import releasesData from '../../data/study/releases.json';
-const releases = [...releasesData.releases].sort((a,b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
 ---
-<StudyLayout title="基礎網羅問題の更新情報｜KNOT Study" description="基礎網羅問題の更新履歴と使い方。">
-<main class="updates-page"><a class="back" href="../">← Studyホームへ戻る</a><header><p class="eyebrow">KNOT STUDY / UPDATES</p><h1>基礎網羅問題</h1><p>理科・社会の問題演習を、より使いやすくするための更新記録。</p></header><section class="feature-card"><p class="eyebrow">HOW TO USE</p><h2>学習の進め方</h2><ol><li>理科・社会から教科を選ぶ</li><li>分野と問題数を選んで学習を始める</li><li>解答後に正解と解説を確認する</li><li>間違えた問題は「苦手だけ」から解き直す</li></ol><a href="../foundation/">基礎網羅問題を始める →</a></section><section class="release-list"><h2>更新履歴</h2>{releases.map(item=><article><time>{item.publishedAt}</time><h3>{item.title}</h3><p>{item.summary}</p></article>)}</section></main>
-<style>.updates-page{max-width:850px;margin:0 auto;padding:28px 0 55px}.back{font-size:11px;color:var(--accent)}header{padding:35px 0 24px}.eyebrow{font:9px ui-monospace,monospace;letter-spacing:.15em;color:var(--accent);font-weight:850}h1{font-size:clamp(34px,6vw,48px);margin:8px 0;letter-spacing:-.06em}header>p:last-child,.feature-card li,.release-list p{font-size:12px;line-height:1.9;color:var(--muted)}.feature-card{padding:22px;border:1px solid var(--line);border-radius:15px;background:var(--surface)}.feature-card h2{margin:0;font-size:20px}.feature-card ol{padding-left:22px}.feature-card a{display:inline-block;margin-top:10px;color:var(--accent);font-size:12px;font-weight:800}.release-list{margin-top:30px}.release-list article{padding:16px 0;border-bottom:1px solid var(--line)}.release-list time{font-size:10px;color:var(--muted)}.release-list h3{font-size:15px;margin:5px 0}.release-list p{margin:0}</style>
-</StudyLayout>
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <meta http-equiv="refresh" content="0;url=https://knotspace.github.io/study/" />
+  <link rel="canonical" href="https://knotspace.github.io/study/" />
+  <title>新しいStudyへ移動します</title>
+  <script>location.replace("https://knotspace.github.io/study/");</script>
+</head>
+<body>
+  <main>
+    <h1>新しいStudyへ移動します</h1>
+    <p>Studyは新しいサイトに移行しました。</p>
+    <p><a href="https://knotspace.github.io/study/">新しいStudyを開く</a></p>
+  </main>
+</body>
+</html>

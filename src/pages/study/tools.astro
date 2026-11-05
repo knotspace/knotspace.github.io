@@ -1,60 +1,21 @@
 ---
-import StudyLayout from '../../layouts/StudyLayout.astro';
 ---
-<StudyLayout title="学習ツール｜KNOT Study" description="ポモドーロタイマー、ストップウォッチ、集中セッション記録。">
-<main class="tools">
-  <a class="back" href="../">← Studyに戻る</a>
-  <header class="hero"><p class="eyebrow">KNOT / FOCUS TOOLS</p><h1>集中するためのツール。</h1><p>時間を区切って、目の前の一問に集中しよう。</p></header>
-  <section class="tool-grid">
-    <article class="tool-card pomodoro">
-      <div class="card-head"><div><span class="eyebrow">01 / POMODORO</span><h2>ポモドーロタイマー</h2><p>25分集中して、5分休憩。4セット後は長めに休もう。</p></div><span class="tool-icon">◷</span></div>
-      <div class="mode-tabs" role="group" aria-label="タイマーのモード">
-        <button type="button" class="mode active" data-mode="focus">集中 25分</button><button type="button" class="mode" data-mode="short">短い休憩 5分</button><button type="button" class="mode" data-mode="long">長い休憩 15分</button>
-      </div>
-      <div class="timer-face"><svg viewBox="0 0 220 220" aria-hidden="true"><circle class="track" cx="110" cy="110" r="96"/><circle id="ring" class="ring" cx="110" cy="110" r="96"/></svg><div class="timer-readout"><strong id="clock">25:00</strong><small id="mode-label">FOCUS TIME</small></div></div>
-      <div class="timer-controls"><button id="start" class="primary">スタート</button><button id="reset" class="secondary">リセット</button><button id="skip" class="secondary">次へ →</button></div>
-      <div class="session-row"><span>今日の集中セット</span><strong id="sessions">0 セット</strong></div>
-      <p id="timer-status" class="status" role="status">準備できたらスタート。</p>
-    </article>
-    <article class="tool-card stopwatch">
-      <div class="card-head"><div><span class="eyebrow">02 / STOPWATCH</span><h2>ストップウォッチ</h2><p>自由な時間を計測。ラップタイムも残せる。</p></div><span class="tool-icon">⏱</span></div>
-      <div class="stopwatch-face"><strong id="stopwatch-clock">00:00.0</strong></div>
-      <div class="timer-controls"><button id="sw-start" class="primary">スタート</button><button id="sw-lap" class="secondary" disabled>ラップ</button><button id="sw-reset" class="secondary">リセット</button></div>
-      <ol id="laps" class="laps"><li class="empty">ラップはまだありません。</li></ol>
-    </article>
-  </section>
-  <section class="tool-card log-card"><span class="eyebrow">03 / STUDY LOG</span><h2>今日の学習記録</h2><strong id="today-minutes">0分</strong><div class="manual-log"><input id="log-subject" maxlength="30" placeholder="科目（例：数学）" value="自習"><input id="log-minutes" type="number" min="1" max="1440" placeholder="分" value="30"><button id="save-log" type="button">手動で記録</button></div><p id="log-status" class="status">集中セッションは自動で記録されます。</p><div id="log-history" class="log-history"></div><a class="mypage-link" href="../../timer/">タイマーだけを単体で使う →</a><br><a class="mypage-link" href="../../mypage/">マイページで学習履歴・クラウド同期を見る →</a></section><section class="tool-card tips"><span class="eyebrow">STUDY ROUTINE</span><h2>おすすめの使い方</h2><div class="steps"><div><b>01</b><strong>やることを1つ決める</strong><p>「数学の二次関数を5問」のように具体的に。</p></div><div><b>02</b><strong>25分だけ集中する</strong><p>通知を切って、ほかのページを閉じよう。</p></div><div><b>03</b><strong>休憩して次のセットへ</strong><p>4セット終わったら15分ほど休もう。</p></div></div></section>
-</main>
-<script>
-const $=id=>document.getElementById(id);
-const modes={focus:{seconds:1500,label:'FOCUS TIME'},short:{seconds:300,label:'SHORT BREAK'},long:{seconds:900,label:'LONG BREAK'}};
-let mode='focus',remaining=modes.focus.seconds,deadline=0,interval=null,running=false,completed=0;
-const LOG_KEY='knot-study-local-logs';let studyLogs=[];try{studyLogs=JSON.parse(localStorage.getItem(LOG_KEY)||'[]');if(!Array.isArray(studyLogs))studyLogs=[];}catch{studyLogs=[];}
-function saveFocusLog(){const row={date:new Date().toLocaleDateString('sv-SE'),subject:'自習',minutes:25};studyLogs.unshift(row);studyLogs=studyLogs.slice(0,100);localStorage.setItem(LOG_KEY,JSON.stringify(studyLogs));renderFocusLogs();}
-function renderFocusLogs(){const today=new Date().toLocaleDateString('sv-SE');const rows=studyLogs.filter(x=>x.date===today);$('today-minutes').textContent=rows.reduce((n,x)=>n+x.minutes,0)+'分';$('log-history').textContent=rows.length?rows.length+'回の集中セッションを記録':'今日の記録はまだありません。';}
-renderFocusLogs();
-const circumference=2*Math.PI*96;
-$('ring').style.strokeDasharray=String(circumference);
-$('ring').style.strokeDashoffset='0';
-function fmt(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
-function draw(){ $('clock').textContent=fmt(remaining);$('mode-label').textContent=modes[mode].label;$('ring').style.strokeDashoffset=String(circumference*(1-remaining/modes[mode].seconds));$('sessions').textContent=completed+' セット';$('start').textContent=running?'一時停止':'再開';}
-function stop(){if(interval!==null){clearInterval(interval);interval=null;}running=false;}
-function setMode(next){stop();mode=next;remaining=modes[mode].seconds;$('timer-status').textContent='モードを切り替えたよ。';document.querySelectorAll('[data-mode]').forEach(b=>b.classList.toggle('active',b.dataset.mode===mode));draw();}
-function tick(){remaining=Math.max(0,Math.ceil((deadline-Date.now())/1000));draw();if(remaining===0){const finishedMode=mode;stop();if(finishedMode==='focus'){completed++;saveFocusLog();$('timer-status').textContent='集中おつかれ！休憩しよう。';setMode(completed%4===0?'long':'short');}else{$('timer-status').textContent='休憩終了。次の集中を始めよう！';setMode('focus');}if('Notification'in window&&Notification.permission==='granted')new Notification('KNOT Study',{body:finishedMode==='focus'?'集中セッションが終了したよ。':'休憩が終わったよ。'});}}
-$('start').addEventListener('click',()=>{if(running){stop();$('timer-status').textContent='一時停止中。';draw();return;}if(remaining<=0)remaining=modes[mode].seconds;running=true;deadline=Date.now()+remaining*1000;interval=setInterval(tick,200);$('timer-status').textContent='集中中…';draw();if('Notification'in window&&Notification.permission==='default')Notification.requestPermission().catch(()=>{});});
-$('reset').addEventListener('click',()=>{stop();remaining=modes[mode].seconds;$('timer-status').textContent='リセットしたよ。';draw();});
-$('skip').addEventListener('click',()=>setMode(mode==='focus'?(completed%4===3?'long':'short'):'focus'));
-document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
-document.addEventListener('visibilitychange',()=>{if(running)tick();});
-let swRunning=false,swStart=0,swElapsed=0,swInterval=null,lapCount=0;
-function swFmt(ms){const t=Math.floor(ms/100);const mins=Math.floor(t/600);const secs=Math.floor(t/10)%60;return String(mins).padStart(2,'0')+':'+String(secs).padStart(2,'0')+'.'+(t%10);}
-function swDraw(){const now=swElapsed+(swRunning?performance.now()-swStart:0);$('stopwatch-clock').textContent=swFmt(now);}
-$('sw-start').addEventListener('click',()=>{if(swRunning){swElapsed+=performance.now()-swStart;swRunning=false;clearInterval(swInterval);swInterval=null;$('sw-start').textContent='再開';}else{swStart=performance.now();swRunning=true;swInterval=setInterval(swDraw,50);$('sw-start').textContent='一時停止';}$('sw-lap').disabled=!swRunning;swDraw();});
-$('sw-lap').addEventListener('click',()=>{if(!swRunning)return;lapCount++;const li=document.createElement('li');li.textContent='ラップ '+lapCount+'　'+swFmt(swElapsed+performance.now()-swStart);$('laps').querySelector('.empty')?.remove();$('laps').prepend(li);});
-$('sw-reset').addEventListener('click',()=>{swRunning=false;clearInterval(swInterval);swInterval=null;swElapsed=0;lapCount=0;$('sw-start').textContent='スタート';$('sw-lap').disabled=true;$('laps').replaceChildren(Object.assign(document.createElement('li'),{className:'empty',textContent:'ラップはまだありません。'}));swDraw();});
-draw();swDraw();
-</script>
-<style>
-.tools{max-width:900px;margin:0 auto;padding:34px 0 60px}.back{font-size:12px;color:var(--muted)}.hero{padding:30px 0 24px}.eyebrow{font:10px ui-monospace,monospace;letter-spacing:.15em;color:var(--accent);font-weight:800}.hero h1{font-size:clamp(30px,6vw,46px);letter-spacing:-.06em;margin:8px 0}.hero>p:last-child,.card-head p{font-size:12px;color:var(--muted);line-height:1.8}.tool-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.tool-card{border:1px solid var(--line);border-radius:16px;background:var(--surface);padding:22px}.card-head{display:flex;justify-content:space-between;gap:12px}.card-head h2,.tips h2{font-size:20px;margin:5px 0}.card-head p{margin:7px 0}.tool-icon{font-size:26px;color:var(--accent)}.mode-tabs{display:flex;gap:6px;margin:20px 0 8px}.mode{flex:1;border:1px solid var(--line);border-radius:8px;background:transparent;color:var(--muted);padding:9px 4px;font-size:10px;cursor:pointer}.mode.active{background:var(--accent);color:#fff;border-color:var(--accent)}.timer-face{position:relative;width:220px;height:220px;margin:8px auto}.timer-face svg{width:100%;height:100%;transform:rotate(-90deg)}.timer-face circle{fill:none;stroke-width:8}.track{stroke:var(--line)}.ring{stroke:var(--accent);stroke-linecap:round;transition:stroke-dashoffset .2s linear}.timer-readout{position:absolute;inset:0;display:grid;align-content:center;justify-items:center;gap:5px}.timer-readout strong{font-size:43px;font-variant-numeric:tabular-nums;letter-spacing:-.05em}.timer-readout small{font:9px ui-monospace,monospace;color:var(--muted);letter-spacing:.15em}.timer-controls{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:16px 0}.timer-controls button{border:1px solid var(--line);border-radius:9px;padding:10px 15px;font-size:11px;font-weight:800;cursor:pointer}.primary{background:var(--accent);color:#fff;border-color:var(--accent)!important}.secondary{background:transparent;color:var(--text)}button:disabled{opacity:.4;cursor:not-allowed}.session-row{display:flex;justify-content:space-between;padding-top:15px;border-top:1px solid var(--line);font-size:11px;color:var(--muted)}.session-row strong{color:var(--text)}.status{text-align:center;font-size:11px;color:var(--muted);min-height:18px}.stopwatch-face{display:grid;place-items:center;min-height:220px}.stopwatch-face strong{font-size:clamp(34px,5vw,48px);font-variant-numeric:tabular-nums;letter-spacing:-.05em}.laps{padding:0;list-style:none;max-height:160px;overflow:auto;margin:15px 0 0}.laps li{padding:9px 4px;border-top:1px solid var(--line);font-size:11px;font-variant-numeric:tabular-nums}.laps .empty{color:var(--muted);text-align:center}.log-card{margin-top:18px}.log-card>strong{display:block;font-size:32px;margin:12px 0}.manual-log{display:flex;gap:8px;flex-wrap:wrap}.manual-log input{min-width:0;padding:9px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--text)}.manual-log button{padding:9px 12px;border:0;border-radius:8px;background:var(--accent);color:#fff;font-size:11px;font-weight:800;cursor:pointer}.log-history{font-size:11px;color:var(--muted)}.mypage-link{display:inline-block;margin-top:12px;color:var(--accent);font-size:11px;font-weight:700}.tips{margin-top:18px}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}.steps>div{display:grid;gap:7px}.steps b{color:var(--accent);font:11px ui-monospace,monospace}.steps strong{font-size:12px}.steps p{font-size:11px;color:var(--muted);line-height:1.7;margin:0}@media(max-width:680px){.tools{padding:24px 0}.tool-grid{grid-template-columns:1fr}.tool-card{padding:17px}.steps{grid-template-columns:1fr;gap:18px}.mode{font-size:9px}}
-</style>
-</StudyLayout>
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <meta http-equiv="refresh" content="0;url=https://knotspace.github.io/study/" />
+  <link rel="canonical" href="https://knotspace.github.io/study/" />
+  <title>新しいStudyへ移動します</title>
+  <script>location.replace("https://knotspace.github.io/study/");</script>
+</head>
+<body>
+  <main>
+    <h1>新しいStudyへ移動します</h1>
+    <p>Studyは新しいサイトに移行しました。</p>
+    <p><a href="https://knotspace.github.io/study/">新しいStudyを開く</a></p>
+  </main>
+</body>
+</html>

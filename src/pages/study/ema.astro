@@ -1,64 +1,21 @@
 ---
-import StudyLayout from '../../layouts/StudyLayout.astro';
-const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL ?? '';
-const supabaseAnonKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY ?? '';
 ---
-<StudyLayout title="絵馬掲示板｜KNOT Study" description="全国の受験生が匿名で目標を共有し、応援し合える絵馬掲示板。">
-<main class="ema-page">
-<a class="back" href="../">← Studyトップへ</a>
-<header class="hero"><p class="eyebrow">KNOT STUDY / EMA COMMUNITY</p><h1>ひとりじゃない。<span>一緒に合格へ。</span></h1><p>目標を掲げて、仲間を応援しよう。受験生のための匿名絵馬掲示板。</p><div class="hero-stats"><span>ANONYMOUS · 匿名参加</span><span>ENCOURAGE · 応援し合う</span><span>NO DM · 個別連絡なし</span></div></header>
-<section class="panel"><div class="section-head"><div><p class="eyebrow">POST YOUR EMA</p><h2>新しい絵馬を書く</h2></div><span class="wood-mark">奉納</span></div>
-<form id="ema-form"><label for="category">カテゴリ</label><select id="category"><option>高校受験</option><option>高専受験</option><option>大学受験</option><option>資格・検定</option><option>勉強報告</option><option>質問・相談</option><option>その他</option></select>
-<label for="title">タイトル</label><input id="title" maxlength="48" placeholder="例：第一志望に絶対合格する！" required>
-<label for="body">本文</label><textarea id="body" maxlength="240" rows="4" placeholder="目標や決意、勉強の悩みを書こう（240字まで）" required></textarea>
-<div class="form-bottom"><span id="chars">0 / 240</span><button class="submit" type="submit">絵馬を投稿する ↗</button></div>
-<p class="privacy">投稿・返信は管理者の確認後に公開されます。本名・住所・学校のクラス・連絡先などは書かないでください。</p><p id="form-status" role="status"></p></form></section>
-<section class="panel"><div class="section-head"><div><p class="eyebrow">COMMUNITY BOARD</p><h2>みんなの絵馬</h2></div><span id="count">準備中</span></div>
-<div class="toolbar"><div id="filters" class="filters"><button class="filter active" data-cat="すべて">すべて</button><button class="filter" data-cat="高校受験">高校受験</button><button class="filter" data-cat="高専受験">高専受験</button><button class="filter" data-cat="大学受験">大学受験</button><button class="filter" data-cat="勉強報告">勉強報告</button><button class="filter" data-cat="質問・相談">質問・相談</button></div><select id="sort"><option value="new">新着順</option><option value="popular">応援が多い順</option></select></div>
-<div id="posts" class="ema-grid" aria-live="polite"></div><p id="empty" class="empty" hidden>まだ公開された絵馬はありません。</p><p id="status" class="status" role="status"></p></section>
-<aside class="safety"><b>安心して使うために</b><p>個人情報・誹謗中傷・広告・不適切な内容は禁止。通報された投稿は管理者が確認します。返信も公開前に確認されます。</p></aside>
-<footer><span>KNOT STUDY · STUDY TOGETHER</span><a href="../">Studyホームへ戻る ↑</a></footer></main>
-<script define:vars={{supabaseUrl,supabaseAnonKey}}>
-const $=id=>document.getElementById(id),configured=!!(supabaseUrl&&supabaseAnonKey);
-let posts=[],likes=[],comments=[],category='すべて';
-const visitor=()=>{let v=localStorage.getItem('knot-ema-visitor');if(!v){v=crypto.randomUUID();localStorage.setItem('knot-ema-visitor',v)}return v};
-const headers=()=>({apikey:supabaseAnonKey,Authorization:'Bearer '+supabaseAnonKey,'Content-Type':'application/json'});
-async function api(path,options={}){const r=await fetch(supabaseUrl.replace(/\/$/,'')+'/rest/v1/'+path,{...options,headers:{...headers(),...(options.headers||{})}});if(!r.ok)throw Error(await r.text());const raw=await r.text();return raw?JSON.parse(raw):null}
-const date=v=>new Intl.DateTimeFormat('ja-JP',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}).format(new Date(v));
-function render(){
- const root=$('posts');root.replaceChildren();
- const rows=posts.filter(p=>category==='すべて'||p.category===category).map(p=>({...p,n:likes.filter(x=>x.post_id===p.id).length,liked:likes.some(x=>x.post_id===p.id&&x.visitor_id===visitor())}));
- rows.sort((a,b)=>$('sort').value==='popular'?b.n-a.n:new Date(b.created_at)-new Date(a.created_at));
- $('count').textContent=rows.length+'件';$('empty').hidden=rows.length>0;
- for(const p of rows){
-  const card=document.createElement('article');card.className='ema-card';
-  const top=document.createElement('div');top.className='plaque-top';const cat=document.createElement('span');cat.className='tag';cat.textContent=p.category;const time=document.createElement('time');time.textContent=date(p.created_at);top.append(cat,time);
-  const h=document.createElement('h3');h.textContent=p.title;const body=document.createElement('p');body.textContent=p.body;
-  const actions=document.createElement('div');actions.className='actions';
-  const like=document.createElement('button');like.type='button';like.textContent=(p.liked?'♥':'♡')+' 応援 '+p.n;like.className=p.liked?'liked':'';like.onclick=()=>toggleLike(p.id,p.liked);
-  const reply=document.createElement('button');reply.type='button';reply.textContent='返信 '+comments.filter(c=>c.post_id===p.id).length;actions.append(like,reply);
-  const area=document.createElement('div');area.className='reply-area';area.hidden=true;
-  for(const c of comments.filter(c=>c.post_id===p.id)){const line=document.createElement('p');line.textContent=c.body;area.append(line)}
-  const form=document.createElement('form');form.className='reply-form';const input=document.createElement('input');input.maxLength=160;input.placeholder='応援メッセージ（160字まで）';input.required=true;const send=document.createElement('button');send.textContent='送信';send.type='submit';form.append(input,send);form.onsubmit=e=>{e.preventDefault();sendComment(p.id,input.value,send)};area.append(form);reply.onclick=()=>area.hidden=!area.hidden;
-  const report=document.createElement('button');report.type='button';report.className='report';report.textContent='通報';report.onclick=()=>reportPost(p.id);
-  const foot=document.createElement('div');foot.className='foot';foot.append(actions,report);card.append(top,h,body,foot,area);root.append(card);
- }
-}
-async function load(){if(!configured){$('status').textContent='掲示板の接続設定が未完了です。管理者によるデータベース設定後に利用できます。';return}
- try{[posts,likes,comments]=await Promise.all([api('ema_posts?select=id,category,title,body,created_at&status=eq.approved&order=created_at.desc&limit=100'),api('ema_likes?select=post_id,visitor_id'),api('ema_comments?select=id,post_id,body,created_at&status=eq.approved&order=created_at.asc&limit=300')]);render();$('status').textContent='公開中の投稿を表示しています'}
- catch(e){$('status').textContent='掲示板を読み込めません。管理者に知らせてね。';console.error(e)}}
-async function toggleLike(id,liked){try{if(liked){await api('ema_likes?post_id=eq.'+id+'&visitor_id=eq.'+visitor(),{method:'DELETE'});likes=likes.filter(x=>!(x.post_id===id&&x.visitor_id===visitor()))}else{await api('ema_likes',{method:'POST',headers:{Prefer:'return=minimal'},body:JSON.stringify({post_id:id,visitor_id:visitor()})});likes.push({post_id:id,visitor_id:visitor()})}render()}catch{$('status').textContent='応援を反映できませんでした。'}}
-async function sendComment(id,value,button){const body=value.trim();if(!body||body.length>160)return;button.disabled=true;try{await api('ema_comments',{method:'POST',headers:{Prefer:'return=minimal'},body:JSON.stringify({post_id:id,body,visitor_id:visitor(),status:'pending'})});$('status').textContent='返信を受け付けました。確認後に表示されます。'}catch{$('status').textContent='返信を送信できませんでした。'}finally{button.disabled=false}}
-async function reportPost(id){const reason=prompt('通報理由（個人情報・誹謗中傷など）');if(!reason?.trim())return;try{await api('ema_reports',{method:'POST',headers:{Prefer:'return=minimal'},body:JSON.stringify({post_id:id,reason:reason.trim().slice(0,120),visitor_id:visitor()})});$('status').textContent='通報を受け付けました。'}catch{$('status').textContent='通報できませんでした。'}}
-$('ema-form').onsubmit=async e=>{e.preventDefault();if(!configured){$('form-status').textContent='現在は準備中です。接続設定が完了するまで投稿できません。';return}
- const button=e.currentTarget.querySelector('button[type=submit]');button.disabled=true;
- try{await api('ema_posts',{method:'POST',headers:{Prefer:'return=minimal'},body:JSON.stringify({category:$('category').value,title:$('title').value.trim(),body:$('body').value.trim(),visitor_id:visitor(),status:'pending'})});e.currentTarget.reset();$('chars').textContent='0 / 240';$('form-status').textContent='投稿を受け付けました。確認後に公開されます。'}
- catch{$('form-status').textContent='投稿できませんでした。時間をおいて再度試してね。'}finally{button.disabled=false}};
-$('body').oninput=()=>$('chars').textContent=$('body').value.length+' / 240';
-$('filters').onclick=e=>{const b=e.target.closest('[data-cat]');if(!b)return;category=b.dataset.cat;document.querySelectorAll('.filter').forEach(x=>x.classList.toggle('active',x===b));render()};
-$('sort').onchange=render;load();if(configured)setInterval(load,45000);
-</script>
-<style>
-.ema-page{max-width:960px;margin:auto;padding:26px 0 52px}.back{font-size:12px;color:var(--muted)}.hero{padding:34px 0 25px}.eyebrow{font:9px ui-monospace,monospace;letter-spacing:.16em;color:var(--accent);font-weight:850;margin:0 0 9px}.hero h1{font-size:clamp(34px,6vw,52px);letter-spacing:-.07em;line-height:1.2;margin:0}.hero h1 span{display:block;color:var(--accent)}.hero>p:not(.eyebrow){font-size:12px;color:var(--muted);line-height:1.8}.hero-stats{display:flex;gap:8px;flex-wrap:wrap}.hero-stats span{border:1px solid var(--line);border-radius:8px;padding:8px;font-size:9px;color:var(--muted)}.panel{padding:23px;border:1px solid var(--line);border-radius:16px;background:var(--surface);margin-bottom:18px}.section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:17px}.section-head h2{font-size:21px;margin:0}.section-head>span:not(.wood-mark){font-size:10px;color:var(--muted)}.wood-mark{display:grid;place-items:center;width:46px;height:49px;background:linear-gradient(145deg,#d9b77d,#a9783e);clip-path:polygon(50% 0,100% 17%,90% 100%,10% 100%,0 17%);color:#51351e;font-size:11px;font-weight:900}form label{display:block;font-size:11px;font-weight:800;margin:13px 0 6px}form input,form textarea,form select,#sort{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--text);padding:12px;font:inherit;font-size:12px}form textarea{resize:vertical;line-height:1.8}.form-bottom{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:14px}.form-bottom span,.privacy,.status{font-size:10px;color:var(--muted);line-height:1.8}.submit{border:0;border-radius:9px;background:var(--accent);color:#081323;padding:12px 17px;font-size:11px;font-weight:900}.submit:disabled{opacity:.5}.toolbar{display:flex;justify-content:space-between;gap:10px;margin-bottom:17px}.filters{display:flex;gap:6px;flex-wrap:wrap}.filter{border:1px solid var(--line);border-radius:99px;background:var(--bg);color:var(--muted);padding:7px 10px;font-size:10px}.filter.active{background:var(--accent);color:#081323}.toolbar select{width:auto}.ema-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.ema-card{padding:18px;background:linear-gradient(145deg,#d9b77d,#c89a5d 55%,#b98249);border:1px solid #8f6137;border-radius:6px 6px 13px 13px;color:#382719;box-shadow:0 7px 18px #0002}.plaque-top,.foot,.actions{display:flex;align-items:center;justify-content:space-between;gap:8px}.tag{font-size:9px;font-weight:900;border:1px solid #6f492b77;border-radius:4px;padding:4px 7px}.plaque-top time{font-size:9px;color:#62452e}.ema-card h3{text-align:center;font-size:18px;line-height:1.5;margin:17px 0 8px;overflow-wrap:anywhere}.ema-card>p{text-align:center;font-size:11px;line-height:1.8;white-space:pre-wrap;overflow-wrap:anywhere}.actions button,.report,.reply-form button{border:1px solid #6f492b77;background:#ffffff40;color:#382719;border-radius:7px;padding:7px 10px;font-size:10px}.actions button.liked{font-weight:900;background:#fff4e4}.report{border:0;text-decoration:underline}.reply-area{border-top:1px solid #6f492b66;margin-top:12px;padding-top:10px}.reply-area[hidden]{display:none}.reply-area>p{background:#ffffff40;padding:7px;border-radius:7px}.reply-form{display:flex;gap:6px}.reply-form input{min-width:0;padding:8px;background:#fff9;color:#382719}.reply-form button{background:#654529;color:white}.empty{text-align:center;padding:28px;color:var(--muted);font-size:11px}.safety{padding:15px;border:1px solid var(--line);border-radius:12px;background:var(--surface);margin:18px 0}.safety b{font-size:11px}.safety p{font-size:10px;color:var(--muted);line-height:1.8;margin:6px 0 0}.ema-page footer{display:flex;justify-content:space-between;padding:17px 2px;border-top:1px solid var(--line);font:9px ui-monospace,monospace;color:var(--muted)}.ema-page footer a{color:var(--accent)}@media(max-width:700px){.ema-page{padding:17px 0 38px}.panel{padding:17px}.ema-grid{grid-template-columns:1fr}.toolbar{flex-direction:column}.toolbar select{width:100%}}
-</style>
-</StudyLayout>
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <meta http-equiv="refresh" content="0;url=https://knotspace.github.io/study/" />
+  <link rel="canonical" href="https://knotspace.github.io/study/" />
+  <title>新しいStudyへ移動します</title>
+  <script>location.replace("https://knotspace.github.io/study/");</script>
+</head>
+<body>
+  <main>
+    <h1>新しいStudyへ移動します</h1>
+    <p>Studyは新しいサイトに移行しました。</p>
+    <p><a href="https://knotspace.github.io/study/">新しいStudyを開く</a></p>
+  </main>
+</body>
+</html>

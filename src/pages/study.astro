@@ -1,75 +1,21 @@
 ---
-import StudyLayout from '../layouts/StudyLayout.astro';
-import foundationData from '../data/study/study-foundation.json';
-const foundation = foundationData.questions;
-const science = foundation.filter(q => q.subject === 'science').length;
-const social = foundation.filter(q => q.subject === 'social').length;
 ---
-<StudyLayout title="基礎網羅問題｜KNOT Study" description="理科・社会の7分野を基礎から確認できる問題演習。">
-<main class="study-dashboard">
-  <section class="welcome">
-    <p class="eyebrow">KNOT STUDY / FOUNDATION</p>
-    <h1>今日も、<span>一歩ずつ。</span></h1>
-    <p>理科と社会の基礎を、問題を解きながら着実に身につけよう。</p>
-    <a class="start-button" href="./foundation/">基礎網羅問題を始める <span>→</span></a>
-  </section>
-  <section class="stats-strip" aria-label="収録問題数">
-    <div><small>TOTAL</small><strong>{foundation.length.toLocaleString('ja-JP')}</strong><span>収録問題</span></div>
-    <div><small>SCIENCE</small><strong>{science.toLocaleString('ja-JP')}</strong><span>理科</span></div>
-    <div><small>SOCIAL</small><strong>{social.toLocaleString('ja-JP')}</strong><span>社会</span></div>
-  </section>
-  <section class="main-card">
-    <div><p class="eyebrow">LEARN / REVIEW / MASTER</p><h2>基礎網羅問題</h2><p>教科・分野・問題数を選んで学習。解答後は解説を確認でき、間違えた問題は苦手リストから何度でも復習できる。</p></div>
-    <a href="./foundation/">学習を始める <span>→</span></a>
-  </section>
-  <section class="main-card exam-entry-card">
-    <div><p class="eyebrow">PUBLIC HIGH SCHOOL / EXAM PREP</p><h2>公立高校入試問題精講</h2><p>栃木県立高校入試の出題テーマを参考にした理科・社会の四択演習。解答と詳しい解説つき。</p></div>
-    <a href="./public-exam/">問題精講へ <span>→</span></a>
-  </section>
-  <section class="main-card"><div><p class="eyebrow">ARCHIVE / PAST EXAMS</p><h2>過去問データベース</h2><p>栃木県立高校入試の年度別・教科別資料を検索。出典と確認状況も表示。</p></div><a href="./past-exams/">データベースへ <span>→</span></a></section>
-  <section class="main-card summary-entry-card">
-    <div><p class="eyebrow">TEXTBOOK / KEY POINTS</p><h2>要点まとめ</h2><p>理科・社会の重要事項を、図解・比較表・重要語句で体系的に整理。単元ごとに理解を深められる。</p></div>
-    <a href="./summary/">まとめを読む <span>→</span></a>
-  </section>
-  <section class="main-card ema-entry-card">
-    <div><p class="eyebrow">WISH / YOUR PROMISE</p><h2>合格祈願の絵馬</h2><p>志望校への願いや学習の決意を絵馬に残そう。自分だけの絵馬帳として保存できる。</p></div>
-    <a href="./ema/">絵馬を書く <span>→</span></a>
-  </section>
-  <section class="main-card secret-mode-card">
-    <div><p class="eyebrow">PRIVATE / EXTRA</p><h2>秘密モード</h2><p>パスワードを入力すると、特別な演習ページに入れる。</p></div>
-    <a href="./quiet-practice-7c2e91/">開く <span>→</span></a>
-  </section>
-  <section class="record-block">
-    <div class="section-heading"><div><p class="eyebrow">YOUR RECORD</p><h2>学習の記録</h2></div><span id="today-label"></span></div>
-    <div class="record-grid">
-      <div><small>今日の回答数</small><strong id="today-answered">0</strong><span>問</span></div>
-      <div><small>累計回答数</small><strong id="record-answered">0</strong><span>問</span></div>
-      <div><small>正答率</small><strong id="record-accuracy">—</strong><span>%</span></div>
-      <div><small>苦手な問題</small><strong id="record-weak">0</strong><span>問</span></div>
-    </div>
-    <p id="record-note">まずは10問解いてみよう。取り組んだ分だけ記録されるよ。</p>
-  </section>
-  <footer><a href="../">KNOT本体へ戻る ↗</a><span>KNOT STUDY · KEEP LEARNING</span></footer>
-</main>
-<script>
-try {
- const record = JSON.parse(localStorage.getItem('knot-foundation-v1') || 'null') || {};
- const daily = JSON.parse(localStorage.getItem('knot-study-daily-v1') || 'null') || {};
- const answered = Number.isFinite(record.answered) ? record.answered : 0;
- const correct = Number.isFinite(record.correct) ? record.correct : 0;
- const wrong = Array.isArray(record.wrong) ? record.wrong.length : 0;
- const today = new Date();
- const key = [today.getFullYear(),String(today.getMonth()+1).padStart(2,'0'),String(today.getDate()).padStart(2,'0')].join('-');
- const count = daily.date === key && Number.isFinite(daily.answered) ? daily.answered : 0;
- document.getElementById('today-label').textContent = new Intl.DateTimeFormat('ja-JP',{month:'long',day:'numeric',weekday:'long'}).format(today);
- document.getElementById('today-answered').textContent = count.toLocaleString('ja-JP');
- document.getElementById('record-answered').textContent = answered.toLocaleString('ja-JP');
- document.getElementById('record-accuracy').textContent = answered ? Math.round(correct/answered*100) : '—';
- document.getElementById('record-weak').textContent = wrong.toLocaleString('ja-JP');
- document.getElementById('record-note').textContent = answered ? answered.toLocaleString('ja-JP')+'問に挑戦済み。苦手な問題を復習していこう。' : 'まずは10問解いてみよう。取り組んだ分だけ記録されるよ。';
-} catch {}
-</script>
-<style>
-.study-dashboard{max-width:920px;margin:0 auto;padding:30px 0 45px}.welcome{padding:clamp(26px,5vw,48px);border:1px solid var(--line);border-radius:22px;background:linear-gradient(120deg,color-mix(in srgb,var(--accent) 14%,var(--surface)),var(--surface))}.eyebrow{font:9px ui-monospace,monospace;letter-spacing:.16em;color:var(--accent);font-weight:850;margin:0 0 10px}.welcome h1{font-size:clamp(34px,6vw,54px);letter-spacing:-.07em;margin:0}.welcome h1 span{color:var(--accent)}.welcome>p:not(.eyebrow){font-size:13px;color:var(--muted);line-height:1.9;margin:12px 0 22px}.start-button,.main-card>a{display:inline-flex;align-items:center;gap:20px;padding:13px 18px;border-radius:10px;background:var(--accent);color:#071426;font-size:12px;font-weight:900}.start-button span,.main-card>a span{font-size:17px}.stats-strip{display:grid;grid-template-columns:repeat(3,1fr);margin:15px 0 25px;border:1px solid var(--line);border-radius:14px;background:var(--surface);overflow:hidden}.stats-strip>div{display:grid;gap:4px;padding:15px 19px;border-right:1px solid var(--line)}.stats-strip>div:last-child{border:0}.stats-strip small,.record-grid small{font:9px ui-monospace,monospace;letter-spacing:.1em;color:var(--muted)}.stats-strip strong{font-size:23px}.stats-strip span,.record-grid span{font-size:10px;color:var(--muted)}.main-card,.record-block{padding:22px;border:1px solid var(--line);border-radius:15px;background:var(--surface);margin:18px 0}.main-card{display:flex;align-items:center;justify-content:space-between;gap:20px}.main-card h2,.section-heading h2{font-size:22px;margin:0;letter-spacing:-.04em}.main-card p:not(.eyebrow){max-width:560px;font-size:12px;line-height:1.9;color:var(--muted);margin:9px 0 0}.main-card>a{white-space:nowrap}.section-heading{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:16px}.section-heading .eyebrow{margin-bottom:5px}.section-heading>span{font-size:10px;color:var(--muted)}.record-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.record-grid>div{display:grid;gap:5px;padding:13px;border-radius:10px;background:var(--surface-soft)}.record-grid strong{font-size:25px}.record-block>p:last-child{font-size:10px;color:var(--muted);margin:13px 0 0}.study-dashboard footer{display:flex;justify-content:space-between;gap:10px;padding:18px 2px;border-top:1px solid var(--line);font-size:9px;color:var(--muted)}.study-dashboard footer a{color:var(--accent)}.study-dashboard footer span{font:8px ui-monospace,monospace;letter-spacing:.1em}@media(max-width:620px){.study-dashboard{padding:16px 0 30px}.stats-strip>div{padding:12px 9px}.stats-strip strong{font-size:18px}.main-card{display:block;padding:18px}.main-card>a{margin-top:17px}.record-grid{grid-template-columns:repeat(2,1fr)}.welcome{padding:25px 20px}}
-</style>
-</StudyLayout>
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <meta http-equiv="refresh" content="0;url=https://knotspace.github.io/study/" />
+  <link rel="canonical" href="https://knotspace.github.io/study/" />
+  <title>新しいStudyへ移動します</title>
+  <script>location.replace("https://knotspace.github.io/study/");</script>
+</head>
+<body>
+  <main>
+    <h1>新しいStudyへ移動します</h1>
+    <p>Studyは新しいサイトに移行しました。</p>
+    <p><a href="https://knotspace.github.io/study/">新しいStudyを開く</a></p>
+  </main>
+</body>
+</html>

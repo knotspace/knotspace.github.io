@@ -1,21 +1,21 @@
 ---
-import StudyLayout from '../../layouts/StudyLayout.astro';
-import quotesData from '../../data/study/study-quotes.json';
-const quotes = quotesData.quotes;
 ---
-<StudyLayout title="偉人の名言集｜KNOT Study" description="学びや挑戦の背中を押してくれる偉人たちの言葉。">
-<main class="quotes">
-  <a class="back" href="../">← Studyトップへ</a>
-  <header><p class="eyebrow">WORDS TO KEEP</p><h1>偉人の名言集</h1><p>勉強の合間に、気分を変えたいときに読んでみてね。</p></header>
-  <div class="quote-list">
-    {quotes.map((quote, index) => <article class="quote">
-      <span class="number">{String(index + 1).padStart(2, '0')}</span>
-      <div><blockquote>「{quote.text}」</blockquote><h2>{quote.name}</h2><small>{quote.era}</small><p>{quote.note}</p></div>
-    </article>)}
-  </div>
-  <p class="footnote">※一部は原文の趣旨を伝えるための意訳・要約です。出典や訳文は今後も確認・整備していきます。</p>
-</main>
-<style>
-.quotes{max-width:820px;margin:0 auto;padding:28px 0 55px}.back{font-size:12px;color:var(--muted)}header{padding:45px 0 30px}.eyebrow{font:10px ui-monospace,monospace;letter-spacing:.14em;color:var(--accent);font-weight:800}header h1{font-size:clamp(32px,6vw,48px);letter-spacing:-.06em;margin:10px 0}header>p:last-child{font-size:13px;color:var(--muted)}.quote-list{border-top:1px solid var(--line)}.quote{display:grid;grid-template-columns:48px 1fr;gap:15px;padding:25px 5px;border-bottom:1px solid var(--line)}.number{font:11px ui-monospace,monospace;color:var(--accent);padding-top:7px}.quote blockquote{font-size:clamp(18px,3vw,23px);font-weight:750;line-height:1.8;letter-spacing:-.025em;margin:0 0 15px}.quote h2{display:inline;font-size:13px;margin:0 9px 0 0}.quote small{font-size:10px;color:var(--muted)}.quote p{font-size:12px;color:var(--muted);line-height:1.8;margin:9px 0 0}.footnote{font-size:10px;color:var(--muted);line-height:1.8;margin-top:20px}@media(max-width:600px){.quotes{padding:22px 0 40px}.quote{grid-template-columns:30px 1fr;gap:10px}}
-</style>
-</StudyLayout>
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <meta http-equiv="refresh" content="0;url=https://knotspace.github.io/study/" />
+  <link rel="canonical" href="https://knotspace.github.io/study/" />
+  <title>新しいStudyへ移動します</title>
+  <script>location.replace("https://knotspace.github.io/study/");</script>
+</head>
+<body>
+  <main>
+    <h1>新しいStudyへ移動します</h1>
+    <p>Studyは新しいサイトに移行しました。</p>
+    <p><a href="https://knotspace.github.io/study/">新しいStudyを開く</a></p>
+  </main>
+</body>
+</html>
