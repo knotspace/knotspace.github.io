@@ -58,7 +58,7 @@ for (const file of htmlFiles) {
   const html = fs.readFileSync(file, 'utf8');
   for (const match of html.matchAll(/\bhref=(?:"([^"]*)"|'([^']*)')/gi)) {
     const href = match[1] ?? match[2] ?? '';
-    if (!href || href.startsWith('javascript:')) continue;
+    if (!href || href.startsWith('javascript:') || href.includes('${') || /['\"]\\s*\\+|\\+\\s*['\"]/.test(href)) continue;
     let url;
     try { url = new URL(href, 'https://knotspace.github.io' + route); } catch { continue; }
     if (url.origin !== 'https://knotspace.github.io') continue;
@@ -140,6 +140,15 @@ try {
                 htmlWidth: document.documentElement.scrollWidth,
                 bodyWidth: document.body?.scrollWidth ?? 0,
                 title: document.title,
+                overflowNodes: [...document.querySelectorAll('body *')].filter(element => {
+                  const rect = element.getBoundingClientRect();
+                  const style = getComputedStyle(element);
+                  return rect.width > 0 && (rect.right > window.innerWidth + 2 || rect.left < -2) &&
+                    !['absolute', 'fixed'].includes(style.position) && style.display !== 'none' && style.visibility !== 'hidden';
+                }).slice(0, 12).map(element => {
+                  const rect = element.getBoundingClientRect();
+                  return { tag: element.tagName, id: element.id, className: String(element.className || '').slice(0, 100), left: Math.round(rect.left), right: Math.round(rect.right), width: Math.round(rect.width), position: getComputedStyle(element).position };
+                }),
               }));
               checkedStates++;
               if (metrics.htmlWidth > viewport.width + 1 || metrics.bodyWidth > viewport.width + 1) {
