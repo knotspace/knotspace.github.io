@@ -2,7 +2,7 @@
 
 ## 監査結果
 
-<badge>Pass</badge> はGitHub Actions上での最終確認結果。実機の物理端末ではなく、Chromiumのレスポンシブ表示検査である。
+**最終検査：PASS**（GitHub Actions上での確認結果）。実機の物理端末ではなく、Chromiumのレスポンシブ表示検査である。
 
 - 生成された公開HTML：48ルート
 - 画面幅：390px（スマートフォン）、768px（タブレット）、1440px（PC）
