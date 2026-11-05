@@ -58,10 +58,20 @@ function walk(dir) {
 }
 // The game intentionally displays official public crisis-support hotlines; these are not personal contact details.
 const publicHelplineFiles = new Set([
+  // 青の分岐点 and its retained one-life/university copies share the same
+  // official public crisis-support contacts. These are not personal contacts.
   'public/青の分岐点/index.html',
   'public/青の分岐点/i18n/en.json',
   'public/青の分岐点/i18n/ko.json',
-  'public/青の分岐点/i18n/zh.json'
+  'public/青の分岐点/i18n/zh.json',
+  'public/one-life/index.html',
+  'public/one-life/i18n/en.json',
+  'public/one-life/i18n/ko.json',
+  'public/one-life/i18n/zh.json',
+  'public/game/university/index.html',
+  'public/game/university/i18n/en.json',
+  'public/game/university/i18n/ko.json',
+  'public/game/university/i18n/zh.json'
 ]);
 // These files use grade labels as generic fictional simulation stages, not as personal profile data.
 const gradeLabelFiles = new Set([
