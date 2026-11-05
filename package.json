@@ -8,9 +8,9 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "prebuild": "node scripts/copy-decap-cms.mjs",
-    "postbuild": "node scripts/seo-audit.mjs",
+    "prebuild": "npm run study:sync && node scripts/copy-decap-cms.mjs",
     "import:schools": "node scripts/import-mext-schools.mjs",
+    "study:sync": "node scripts/study/sync-question-bank.mjs",
     "study:validate": "node scripts/study/validate-question-banks.mjs",
     "test:responsive": "node scripts/responsive-audit.mjs"
   },
