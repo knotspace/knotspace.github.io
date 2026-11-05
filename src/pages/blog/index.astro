@@ -571,7 +571,7 @@ const timeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTim
   .category-list{padding:0 14px 10px}
   .total-count{padding-bottom:12px}
   .random-button{border-radius:3px}
-  @media(max-width:780px){.content-layout{grid-template-columns:1fr}.sidebar{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media(max-width:780px){.content-layout{grid-template-columns:minmax(0,1fr)}.main-column,.sidebar{min-width:0}.category-filters{width:100%;min-width:0}.sidebar{grid-template-columns:repeat(2,minmax(0,1fr))}}
   @media(max-width:520px){.post-card{grid-template-columns:112px minmax(0,1fr);gap:12px}.post-thumbnail{width:112px;height:88px}.post-info p{display:block}.sidebar{display:flex}.category-filters{width:100%;overflow-x:auto}.filter-button{white-space:nowrap}}
 
 </style>
