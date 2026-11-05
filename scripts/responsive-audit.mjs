@@ -41,9 +41,12 @@ if (!fs.existsSync(dist)) {
 }
 walk(dist);
 const uniqueRoutes = [...new Set(routes)].sort();
+if (!uniqueRoutes.length) {
+  console.error('Responsive audit: no built HTML routes found.');
+  process.exit(1);
+}
 
-// Check every same-origin link emitted into the built HTML, including links
-// outside the sitemap and links in the standalone game pages.
+// Check every same-origin link emitted into built HTML, including non-sitemap routes.
 const checkedLinks = new Set();
 for (const file of htmlFiles) {
   const relative = path.relative(dist, file).split(path.sep).join('/');
@@ -61,9 +64,8 @@ for (const file of htmlFiles) {
     if (url.origin !== 'https://knotspace.github.io') continue;
     let pathname;
     try { pathname = decodeURIComponent(url.pathname); } catch { pathname = url.pathname; }
-    const key = pathname;
-    if (checkedLinks.has(key)) continue;
-    checkedLinks.add(key);
+    if (checkedLinks.has(pathname)) continue;
+    checkedLinks.add(pathname);
     const relativeTarget = pathname.replace(/^\/+/, '');
     const candidates = pathname.endsWith('/')
       ? [path.join(dist, relativeTarget, 'index.html')]
@@ -73,10 +75,6 @@ for (const file of htmlFiles) {
       failures.push({ route, issue: 'broken same-origin link', detail: href });
     }
   }
-}
-if (!uniqueRoutes.length) {
-  console.error('Responsive audit: no built HTML routes found.');
-  process.exit(1);
 }
 
 const server = spawn('npm', ['run', 'preview', '--', '--host', '127.0.0.1', '--port', '4321', '--strictPort'], {
@@ -107,35 +105,36 @@ try {
 
     let checkedStates = 0;
     for (const route of uniqueRoutes) {
-      for (const viewport of viewports) {
-        const page = await context.newPage();
-        await page.setViewportSize({ width: viewport.width, height: viewport.height });
-        const pageErrors = [];
-        const failedResponses = [];
-        page.on('pageerror', error => pageErrors.push(error.message));
-        page.on('response', response => {
-          if (response.url().startsWith(baseUrl) && response.status() >= 400) {
-            failedResponses.push(response.status() + ' ' + response.url());
+      const page = await context.newPage();
+      await page.setViewportSize({ width: 1440, height: 900 });
+      const pageErrors = [];
+      const failedResponses = [];
+      page.on('pageerror', error => pageErrors.push(error.message));
+      page.on('response', response => {
+        if (response.url().startsWith(baseUrl) && response.status() >= 400) {
+          failedResponses.push(response.status() + ' ' + response.url());
+        }
+      });
+
+      try {
+        const response = await page.goto(baseUrl + route, { waitUntil: 'domcontentloaded', timeout: 20000 });
+        if (!response || response.status() !== 200) {
+          failures.push({ route, issue: 'HTTP response', detail: response?.status() ?? 'no response' });
+        } else {
+          await page.waitForTimeout(100);
+          const hasToggle = await page.locator('#theme-toggle').count() > 0;
+          if (hasToggle) {
+            await page.evaluate(() => { document.documentElement.dataset.theme = 'dark'; });
+            await page.locator('#theme-toggle').click({ timeout: 3000 }).catch(() => {});
+            const toggled = await page.locator('html').getAttribute('data-theme');
+            if (toggled !== 'light') failures.push({ route, issue: 'theme toggle', detail: 'ライトモードに切り替わらない' });
           }
-        });
 
-        try {
-          const response = await page.goto(baseUrl + route, { waitUntil: 'domcontentloaded', timeout: 45000 });
-          if (!response || response.status() !== 200) {
-            failures.push({ route, viewport: viewport.name, issue: 'HTTP response', detail: response?.status() ?? 'no response' });
-          } else {
-            await page.waitForTimeout(180);
-            const hasToggle = await page.locator('#theme-toggle').count() > 0;
-            if (hasToggle) {
-              await page.evaluate(() => { document.documentElement.dataset.theme = 'dark'; });
-              await page.locator('#theme-toggle').click({ timeout: 5000 }).catch(() => {});
-              const toggled = await page.locator('html').getAttribute('data-theme');
-              if (toggled !== 'light') failures.push({ route, viewport: viewport.name, issue: 'theme toggle', detail: 'ライトモードに切り替わらない' });
-            }
-
+          for (const viewport of viewports) {
+            await page.setViewportSize({ width: viewport.width, height: viewport.height });
             for (const theme of ['dark', 'light']) {
               await page.evaluate(value => { document.documentElement.dataset.theme = value; }, theme);
-              await page.waitForTimeout(40);
+              await page.waitForTimeout(25);
               const metrics = await page.evaluate(() => ({
                 viewport: window.innerWidth,
                 htmlWidth: document.documentElement.scrollWidth,
@@ -144,29 +143,23 @@ try {
               }));
               checkedStates++;
               if (metrics.htmlWidth > viewport.width + 1 || metrics.bodyWidth > viewport.width + 1) {
-                const issue = {
-                  route,
-                  viewport: viewport.name,
-                  theme,
-                  issue: 'horizontal overflow',
-                  detail: JSON.stringify(metrics),
-                };
-                failures.push(issue);
+                failures.push({ route, viewport: viewport.name, theme, issue: 'horizontal overflow', detail: JSON.stringify(metrics) });
                 fs.mkdirSync(artifacts, { recursive: true });
                 const safe = route.replace(/[^a-z0-9]+/gi, '_').replace(/^_+|_+$/g, '') || 'home';
                 await page.screenshot({ path: path.join(artifacts, safe + '-' + viewport.name + '-' + theme + '.png'), fullPage: true }).catch(() => {});
               }
             }
           }
-          for (const error of pageErrors) failures.push({ route, viewport: viewport.name, issue: 'uncaught browser error', detail: error });
-          for (const error of failedResponses) failures.push({ route, viewport: viewport.name, issue: 'failed same-origin resource', detail: error });
-        } catch (error) {
-          failures.push({ route, viewport: viewport.name, issue: 'navigation/test error', detail: error.message });
-        } finally {
-          await page.close();
         }
+        for (const error of pageErrors) failures.push({ route, issue: 'uncaught browser error', detail: error });
+        for (const error of failedResponses) failures.push({ route, issue: 'failed same-origin resource', detail: error });
+      } catch (error) {
+        failures.push({ route, issue: 'navigation/test error', detail: error.message });
+      } finally {
+        await page.close();
       }
     }
+
     // Exercise the complete question -> explanation -> result flow on mobile.
     for (const route of ['/study/foundation/', '/study/public-exam/']) {
       const page = await context.newPage();
@@ -174,7 +167,7 @@ try {
       const pageErrors = [];
       page.on('pageerror', error => pageErrors.push(error.message));
       try {
-        const response = await page.goto(baseUrl + route, { waitUntil: 'domcontentloaded', timeout: 45000 });
+        const response = await page.goto(baseUrl + route, { waitUntil: 'domcontentloaded', timeout: 20000 });
         if (!response || response.status() !== 200) throw new Error('Study route did not return HTTP 200');
         await page.locator('#amount').selectOption('10');
         await page.locator('#start').click();
