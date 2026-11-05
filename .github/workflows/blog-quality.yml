@@ -57,7 +57,7 @@ jobs:
         run: npm run build
       - name: Trigger deployment after automatic correction
         if: steps.autofix.outputs.changed == 'true' && github.event_name != 'pull_request'
-        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3
         with:
           script: |
             await github.rest.actions.createWorkflowDispatch({
@@ -68,7 +68,7 @@ jobs:
             });
       - name: Close resolved quality incident
         if: success() && github.event_name != 'pull_request'
-        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3
         with:
           script: |
             const title = '[Blog Quality] 自動検査で問題を検出';
@@ -79,7 +79,7 @@ jobs:
             }
       - name: Report detected issue
         if: failure() && github.event_name != 'pull_request'
-        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3
         with:
           script: |
             const title = '[Blog Quality] 自動検査で問題を検出';
