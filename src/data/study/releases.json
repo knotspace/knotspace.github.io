@@ -1,6 +1,19 @@
 {
   "releases": [
     {
+      "id": "4c973db",
+      "publishedAt": "2026-11-05T19:47:36+09:00",
+      "title": "Correct Study home footer path on math summary",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "Study画面・機能"
+      ],
+      "files": [
+        "src/pages/study/summary/math.astro"
+      ]
+    },
+    {
       "id": "0509efb",
       "publishedAt": "2026-11-04T21:30:59+09:00",
       "title": "Remove literal newline escape text from Study page",
