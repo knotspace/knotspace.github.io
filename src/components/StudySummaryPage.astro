@@ -14,7 +14,7 @@ const terms = foundationData.questions.filter(q => (subject === '全教科' || q
 ---
 <StudyLayout title={title + '｜要点まとめ｜KNOT Study'} description={description}>
 <main class="summary-page">
-  <a class="summary-back" href="../">← Studyホーム</a>
+  <a class="summary-back" href="../../">← Studyホーム</a>
   <header class="summary-hero">
     <div class="summary-kicker">KNOT STUDY / TEXTBOOK NOTES</div>
     <div class="summary-hero-grid">
@@ -23,7 +23,7 @@ const terms = foundationData.questions.filter(q => (subject === '全教科' || q
     </div>
     <div class="summary-progress-note"><span>LEARN → UNDERSTAND → REMEMBER</span><span>読むだけで終わらせず、説明できる状態へ。</span></div>
   </header>
-  <nav class="summary-tools" aria-label="ページ内メニュー"><a href="#units">単元別まとめ</a><a href="#terms">重要語句</a><a href="../foundation/">問題演習へ →</a><label class="summary-search"><span>⌕</span><input id="summary-search" type="search" placeholder="単元・用語を検索"></label></nav>
+  <nav class="summary-tools" aria-label="ページ内メニュー"><a href="#units">単元別まとめ</a><a href="#terms">重要語句</a><a href="../../foundation/">問題演習へ →</a><label class="summary-search"><span>⌕</span><input id="summary-search" type="search" placeholder="単元・用語を検索"></label></nav>
 
   {examFocus && <section class="exam-focus" aria-labelledby="exam-focus-title">
     <div class="exam-focus-top"><div><p>03 / PAST EXAM ANALYSIS</p><h2 id="exam-focus-title">過去問から見る入試重点</h2></div><span>栃木県立入試・令和6〜7年度</span></div>
@@ -49,10 +49,10 @@ const terms = foundationData.questions.filter(q => (subject === '全教科' || q
     </section>)}
   </section>
   <section class="summary-section terms-section" id="terms"><div class="summary-section-head"><div><p>02 / REMEMBER</p><h2>重要語句・確認ポイント</h2></div><span>タップして解説を確認</span></div>
-    <div class="term-grid">{terms.map((q,index) => <details class="term-card" data-search-card><summary><span class="term-index">{String(index+1).padStart(2,'0')}</span><span><strong>{q.term}</strong><small>{q.prompt}</small></span><b>＋</b></summary><div class="term-explanation"><p>{q.explanation}</p><a href="../foundation/">この単元の問題を解く →</a></div></details>)}</div>
+    <div class="term-grid">{terms.map((q,index) => <details class="term-card" data-search-card><summary><span class="term-index">{String(index+1).padStart(2,'0')}</span><span><strong>{q.term}</strong><small>{q.prompt}</small></span><b>＋</b></summary><div class="term-explanation"><p>{q.explanation}</p><a href="../../foundation/">この単元の問題を解く →</a></div></details>)}</div>
   </section>
-  <section class="summary-finish"><p>CHECK YOUR UNDERSTANDING</p><h2>読んだら、問題で確かめよう。</h2><span>知識を「見たことがある」から「自分で使える」へ。</span><a href="../foundation/">基礎網羅問題に挑戦する <b>→</b></a></section>
-  <footer class="summary-footer"><span>KNOT STUDY / TEXTBOOK NOTES</span><a href="./">要点まとめ一覧へ ↑</a></footer>
+  <section class="summary-finish"><p>CHECK YOUR UNDERSTANDING</p><h2>読んだら、問題で確かめよう。</h2><span>知識を「見たことがある」から「自分で使える」へ。</span><a href="../../foundation/">基礎網羅問題に挑戦する <b>→</b></a></section>
+  <footer class="summary-footer"><span>KNOT STUDY / TEXTBOOK NOTES</span><a href="../">要点まとめ一覧へ ↑</a></footer>
 </main>
 <script is:inline>
 (() => {
