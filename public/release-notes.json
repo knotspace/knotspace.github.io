@@ -1,11 +1,19 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-04",
+  "updatedAt": "2026-11-05",
   "apps": {
     "knot": {
       "title": "KNOT サイト",
       "editUrl": "https://github.com/knotspace/knotspace.github.io/edit/main/public/release-notes.json",
       "notes": [
+        {
+          "date": "2026-11-05",
+          "version": "v1.0.1",
+          "type": "fix",
+          "audience": "all",
+          "title": "タブレット表示とレスポンシブ表示を改善",
+          "description": "ブログ一覧のタブレット幅で発生していた横スクロールを修正。公開48ページをPC・タブレット・スマートフォン幅、ライト・ダーク表示で自動検査する仕組みを追加しました。"
+        },
         {
           "date": "2026-11-04",
           "version": "v1.0.0",
@@ -28,6 +36,14 @@
       "title": "KNOT Study",
       "editUrl": "https://github.com/knotspace/knotspace.github.io/edit/main/public/release-notes.json",
       "notes": [
+        {
+          "date": "2026-11-05",
+          "version": "v1.0.1",
+          "type": "fix",
+          "audience": "all",
+          "title": "Studyの演習エラーとページ内リンクを修正",
+          "description": "問題バンクの配列読み込みを修正し、要点まとめ・タイマーからの移動先を整理。問題開始から解説・結果までのスマートフォン操作を自動検証できるようにしました。"
+        },
         {
           "date": "2026-11-04",
           "version": "v1.0.0",
@@ -121,6 +137,14 @@
       "title": "受験戦争",
       "editUrl": "https://github.com/knotspace/knotspace.github.io/edit/main/public/release-notes.json",
       "notes": [
+        {
+          "date": "2026-11-05",
+          "version": "v30.0.1",
+          "type": "fix",
+          "audience": "all",
+          "title": "学校データの欠落を修復",
+          "description": "一部の学校データファイルが空になっていた問題を修復。47個のデータファイルが共通データと一致することを確認しました。ゲームの進行仕様やセーブ領域は変更していません。"
+        },
         {
           "date": "2026-11-04",
           "version": "v30.0",
