@@ -101,7 +101,8 @@ const topics = [...new Set(regularQuestions.map(q => q.topic))];
   <footer class="note">※過去問モードには、令和7・8年度の出題内容を参考にした再構成問題39問を収録。数学は大問1〜4を読み込んだβ版。原本の問題文・図表は公開リポジトリへ転載せず、出題意図を保った四択再構成問題として掲載。</footer>
 </main>
 <script>
-import bank from '../../data/study/private-practice-bank.json';
+import questionsData from '../../data/study/private-practice-bank.json';
+const bank = questionsData.questions;
 import pastBankData from '../../data/study/private-past-bank.json';
 import mathBeta from '../../data/study/private-math-beta.json';
 const pastBank = [...pastBankData.questions, ...mathBeta.questions];
