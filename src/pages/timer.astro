@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 ---
 <Layout title="KNOT Focus Timer｜集中タイマー" description="KNOTの単体ポモドーロタイマー。勉強にも作業にも使える集中タイマー。">
 <main class="standalone">
-  <nav><a href="./study/">← KNOT Study</a><span>KNOT / FOCUS</span></nav>
+  <nav><a href="../study/">← KNOT Study</a><span>KNOT / FOCUS</span></nav>
   <section class="panel">
     <p class="eyebrow">FOCUS SESSION</p><h1>Focus Timer</h1><p class="sub">勉強にも、作業にも。ここだけで使える集中タイマー。</p>
     <div class="presets"><button data-min="25" class="selected">25分</button><button data-min="50">50分</button><button data-min="5">5分休憩</button><button data-min="15">15分休憩</button></div>
@@ -13,7 +13,7 @@ import Layout from '../layouts/Layout.astro';
     <p id="status" role="status">時間を選んでスタート。</p>
     <label class="sound"><input id="sound" type="checkbox" checked> 終了音を鳴らす</label>
   </section>
-  <footer>Timer works independently · <a href="./study/tools/">学習ツール・記録はこちら</a></footer>
+  <footer>Timer works independently · <a href="../study/tools/">学習ツール・記録はこちら</a></footer>
 </main>
 <script>
 const $=id=>document.getElementById(id);let total=1500,left=1500,endAt=0,run=false,handle=null,ctx=null;
