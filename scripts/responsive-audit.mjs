@@ -53,7 +53,7 @@ for (const file of htmlFiles) {
       ? '/' + relative.slice(0, -'index.html'.length)
       : '/' + relative;
   const html = fs.readFileSync(file, 'utf8');
-  for (const match of html.matchAll(/\\bhref=(?:"([^"]*)"|'([^']*)')/gi)) {
+  for (const match of html.matchAll(/\bhref=(?:"([^"]*)"|'([^']*)')/gi)) {
     const href = match[1] ?? match[2] ?? '';
     if (!href || href.startsWith('javascript:')) continue;
     let url;
@@ -64,7 +64,7 @@ for (const file of htmlFiles) {
     const key = pathname;
     if (checkedLinks.has(key)) continue;
     checkedLinks.add(key);
-    const relativeTarget = pathname.replace(/^\\/+/, '');
+    const relativeTarget = pathname.replace(/^\/+/, '');
     const candidates = pathname.endsWith('/')
       ? [path.join(dist, relativeTarget, 'index.html')]
       : [path.join(dist, relativeTarget), path.join(dist, relativeTarget, 'index.html')];
