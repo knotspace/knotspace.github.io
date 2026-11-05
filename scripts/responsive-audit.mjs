@@ -58,7 +58,7 @@ for (const file of htmlFiles) {
   const html = fs.readFileSync(file, 'utf8');
   for (const match of html.matchAll(/\bhref=(?:"([^"]*)"|'([^']*)')/gi)) {
     const href = match[1] ?? match[2] ?? '';
-    if (!href || href.startsWith('javascript:') || href.includes('${') || /['\"]\\s*\\+|\\+\\s*['\"]/.test(href)) continue;
+    if (!href || href.startsWith('javascript:') || href.includes('${') || /['"]\s*\+|\+\s*['"]/.test(href)) continue;
     let url;
     try { url = new URL(href, 'https://knotspace.github.io' + route); } catch { continue; }
     if (url.origin !== 'https://knotspace.github.io') continue;
