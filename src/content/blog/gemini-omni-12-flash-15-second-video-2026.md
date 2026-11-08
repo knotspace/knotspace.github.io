@@ -1,10 +1,15 @@
----
+------
 title: "Gemini Omni 1.2 Flashで動画はどう変わる？最大15秒・編集機能を解説"
 description: "Googleが発表した動画生成AI Gemini Omni 1.2 Flash。最大15秒の動画、参照画像への一貫性、会話しながらの編集、料金や利用条件を公式情報から整理します。"
 pubDate: "2026-11-08T13:15:00+09:00"
 category: "AI・テクノロジー"
+heroImage: "/blog-art/editorial-gemini-omni-12-flash-15-second-video-2026.svg"
+updatedDate: 2026-11-08
 ---
 
+
+
+<figure class="knot-figure"><img src="/blog-art/editorial-gemini-omni-12-flash-15-second-video-2026.svg" alt="動画生成AIの最大尺・参照素材・会話編集を整理した図解" loading="lazy" decoding="async" width="1200" height="630" /><figcaption>図版：KNOT制作・記事の要点を整理したオリジナル図解</figcaption></figure>
 AIで動画を作るとき、「人物の服が途中で変わる」「背景を少し直したいだけなのに最初から作り直しになる」といった悩みが出ることがあります。
 
 Googleは2026年11月5日、動画生成・編集モデル「Gemini Omni 1.2 Flash」の一般提供開始を発表しました。最大15秒の動画生成や、参照画像・動画に合わせる性能の改善、会話を続けながら同じ動画を編集できる機能などが特徴です。
