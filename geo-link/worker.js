@@ -18,7 +18,7 @@ export default {
    const destination=mode==="redirect"?cleanUrl(b.destination):null;
    if(mode==="redirect"&&!destination)return json({error:"転送先URLはhttp/httpsで指定してください"},400);
    const id=makeId();
-   await env.DB.prepare("INSERT INTO links (id,mode,destination,created_at) VALUES (?,?,?,?)").bind(id,mode,destination,new Date().toISOString()).run();
+   await env.DB.prepare("INSERT INTO links (id,mode,destination,created_at) VALUES (?,?,?,?)").bind(id,mode,destination||"",new Date().toISOString()).run();
    return json({id,mode});
   }
   if(p==="/api/visit"&&req.method==="POST"){
