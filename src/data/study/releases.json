@@ -7,14 +7,14 @@
       "type": "STUDY UPDATE",
       "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
       "details": [
-        "高専問題データ",
+        "発展演習データ",
         "学習コンテンツ・データ",
         "基礎問題データ",
         "演習問題データ",
         "名言データ"
       ],
       "files": [
-        "src/data/study/kosen-questions.json",
+        "演習データ",
         "src/data/study/legacy-questions.js",
         "src/data/study/study-foundation.json",
         "src/data/study/study-questions.json",
@@ -41,10 +41,10 @@
       "type": "STUDY UPDATE",
       "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
       "details": [
-        "高専対策"
+        "発展演習"
       ],
       "files": [
-        "src/pages/study/kosen.astro"
+        "発展演習ページ"
       ]
     },
     {
@@ -81,7 +81,7 @@
       "summary": "Studyで現在使える機能と使い方をまとめたページを追加しました。今後はStudyの機能や問題データを更新するたびに、更新内容と更新日時が自動で記録されます。",
       "details": [
         "現在使える機能を一覧で確認できるようになりました。",
-        "基礎演習・高専対策・過去問模試・要点まとめ・学習ツールなどの使い方を掲載しました。",
+        "基礎演習・発展演習・過去問模試・要点まとめ・学習ツールなどの使い方を掲載しました。",
         "更新履歴には日本時間の更新日時と変更内容が表示されます。"
       ],
       "files": [
