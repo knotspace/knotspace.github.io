@@ -12,6 +12,14 @@ const posts = (await getCollection('blog'))
 
 const categories = [...new Set(posts.map((post) => post.data.category))];
 const readingTime = (body = '') => Math.max(1, Math.ceil(body.replace(/\s/g, '').length / 500));
+const recommendationScore = (post) => {
+  const text = `${post.data.title} ${post.data.description} ${post.body}`;
+  const specialistTerms = ['API','CLI','SDK','GitHub','Git','SQL','データベース','アルゴリズム','プログラミング','ソースコード','コマンドライン','サーバー構築','ネットワーク構成','機械学習','統計解析','微分積分','線形代数','暗号化','プロトコル','フレームワーク','ライブラリ','デプロイ','コンパイル','Docker','Linux','正規表現'];
+  const termCount = specialistTerms.reduce((sum, term) => sum + (text.toLowerCase().split(term.toLowerCase()).length - 1), 0);
+  const categoryPenalty = /プログラミング|技術解説|数学|情報技術|開発/.test(post.data.category) ? 18 : 0;
+  const lengthPenalty = Math.max(0, Math.floor((post.body.length - 6500) / 3500)) * 3;
+  return Math.max(0, 100 - Math.min(55, termCount * 4) - categoryPenalty - lengthPenalty);
+};
 
 const BASE = import.meta.env.BASE_URL.endsWith('/')
   ? import.meta.env.BASE_URL
