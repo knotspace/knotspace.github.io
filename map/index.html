@@ -15,7 +15,7 @@
 <div class="head"><h2>All sites</h2><span id="total">7 SITES</span></div><div class="grid" id="cards"></div>
 <footer class="foot"><span>KNOTSPACE · SITE MAP</span><span>Made to connect the things we build.</span></footer></div></main>
 <script>
-const PASS_HASH="c7b1d675e55fd995fed77980346f993e8fbe87b0efc1ffa4d83fdcca5e86da70";
+const PASS_HASH="60be9861750facbfad8758254a2f76c0cfe78d54459a3bc187d49b1401fcd8e8";
 async function digest(s){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}
 function unlock(){document.getElementById("gate").style.display="none";document.getElementById("app").style.display="block";draw()}
 document.getElementById("login").addEventListener("submit",async e=>{e.preventDefault();if(await digest(document.getElementById("password").value)===PASS_HASH){sessionStorage.setItem("knot-map-open","1");unlock()}else{document.getElementById("error").textContent="パスワードが違います。";document.getElementById("password").select()}});
