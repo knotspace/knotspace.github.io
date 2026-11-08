@@ -11,6 +11,7 @@ const blog = defineCollection({
     updatedDate: z.coerce.date().optional(),
     category: z.string().default('BLOG'),
     contentType: z.enum(['article', 'trend']).optional(),
+    aiGenerated: z.boolean().default(false),
     popularity: z.number().int().min(0).default(0),
     heroImage: z.string().url().or(z.string().startsWith('/')).optional(),
     blocks: z.array(z.any()).optional(),
