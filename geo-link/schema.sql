@@ -14,6 +14,9 @@ CREATE TABLE IF NOT EXISTS visits (
  isp TEXT,
  org TEXT,
  asn TEXT,
+ gps_lat REAL,
+ gps_lon REAL,
+ gps_at TEXT,
  created_at TEXT NOT NULL,
  FOREIGN KEY(link_id) REFERENCES links(id)
 );
