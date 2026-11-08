@@ -4,6 +4,7 @@ description: "相次ぐ不正アクセスや情報流出を受け、日本政府
 pubDate: "2026-11-09T07:45:00+09:00"
 category: "テクノロジー・セキュリティ"
 aiGenerated: true
+heroImage: "/blog-art/cybersecurity-response.svg"
 updatedDate: 2026-11-09
 ---
 
