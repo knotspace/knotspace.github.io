@@ -1,0 +1,88 @@
+/* Final override: Decap uses generated class names, so style its whole tree. */
+:root[data-theme="dark"],
+:root[data-theme="dark"] body {
+  color-scheme: dark !important;
+  background: #252c30 !important;
+  color: #d2dadd !important;
+}
+:root[data-theme="dark"] #nc-root,
+:root[data-theme="dark"] #nc-root > div {
+  background: #252c30 !important;
+  color: #d2dadd !important;
+}
+:root[data-theme="dark"] #nc-root * {
+  background-color: transparent !important;
+  color: inherit;
+  border-color: #465258 !important;
+  box-shadow: none !important;
+  transition: none !important;
+  animation: none !important;
+}
+:root[data-theme="dark"] #nc-root nav,
+:root[data-theme="dark"] #nc-root aside,
+:root[data-theme="dark"] #nc-root [role="navigation"],
+:root[data-theme="dark"] #nc-root header,
+:root[data-theme="dark"] #nc-root [role="banner"] {
+  background-color: #2b3439 !important;
+  color: #d2dadd !important;
+}
+:root[data-theme="dark"] #nc-root button,
+:root[data-theme="dark"] #nc-root input,
+:root[data-theme="dark"] #nc-root textarea,
+:root[data-theme="dark"] #nc-root select,
+:root[data-theme="dark"] #nc-root [role="textbox"],
+:root[data-theme="dark"] #nc-root [contenteditable="true"] {
+  background-color: #30393e !important;
+  color: #d2dadd !important;
+  border: 1px solid #465258 !important;
+}
+:root[data-theme="dark"] #nc-root a {
+  color: #a9c0ca !important;
+}
+:root[data-theme="dark"] #nc-root button:hover {
+  background-color: #354046 !important;
+}
+:root[data-theme="dark"] #knot-theme-toggle {
+  background: #30393e !important;
+  color: #d2dadd !important;
+  border-color: #465258 !important;
+}
+
+/* KNOT visual block editor */
+.knot-block-editor{display:grid;gap:14px;padding:16px;border:1px solid var(--border,#d8dce5);border-radius:14px;background:var(--background,#fff)}
+.knot-block-editor-head,.knot-block-card-head,.knot-block-add,.knot-block-actions{display:flex;align-items:center;gap:8px}
+.knot-block-editor-head,.knot-block-card-head{justify-content:space-between}
+.knot-block-editor-head strong{display:block;font-size:15px}.knot-block-editor-head small{display:block;margin-top:4px;opacity:.7}
+.knot-block-count,.knot-block-type{font-size:12px;font-weight:700;padding:5px 9px;border-radius:999px;background:rgba(110,125,150,.14)}
+.knot-block-card{min-width:0;padding:14px;border:1px solid var(--border,#d8dce5);border-radius:12px;background:var(--background,#fff)}
+.knot-block-card-head{margin-bottom:12px}.knot-block-actions button,.knot-block-add button{border:1px solid var(--border,#ccd2df);border-radius:8px;padding:6px 10px;background:transparent;cursor:pointer;font:inherit;font-size:12px}
+.knot-block-actions button:disabled{opacity:.35;cursor:not-allowed}.knot-block-actions .is-danger{color:#c44}
+.knot-block-fields{display:grid;grid-template-columns:1fr;gap:10px}.knot-block-field{display:grid;gap:5px;font-size:12px;font-weight:650}
+.knot-block-field input,.knot-block-field textarea,.knot-block-field select,.knot-block-add select{box-sizing:border-box;width:100%;min-width:0;border:1px solid var(--border,#ccd2df);border-radius:8px;padding:9px 10px;background:var(--background,#fff);color:inherit;font:inherit;font-size:14px}
+.knot-block-field textarea{resize:vertical;line-height:1.65}.knot-block-check{display:flex;align-items:center;gap:8px;font-size:13px}
+.knot-block-help,.knot-block-empty{margin:0;padding:14px;border-radius:9px;background:rgba(110,125,150,.1);font-size:13px}
+.knot-block-add{padding-top:12px;border-top:1px solid var(--border,#d8dce5)}.knot-block-add select{max-width:220px}.knot-block-add button{background:#263b65;color:white;border-color:#263b65;font-weight:700;padding:9px 14px}
+@media(max-width:600px){.knot-block-editor{padding:10px}.knot-block-card{padding:10px}.knot-block-card-head{align-items:flex-start;flex-wrap:wrap}.knot-block-actions{flex-wrap:wrap}.knot-block-add{align-items:stretch;flex-direction:column}.knot-block-add select{max-width:none}}
+
+
+/* Direct-editing canvas for KNOT's visual block editor */
+.knot-live-canvas{min-height:64px;padding:16px 18px;border:1px solid var(--border,#d8dce5);border-radius:10px;background:rgba(110,125,150,.045);cursor:text}
+.knot-inline-edit{outline:none;white-space:pre-wrap;overflow-wrap:anywhere;min-height:1.6em;line-height:1.85}
+.knot-inline-edit:focus{outline:2px solid #7696c8;outline-offset:4px;border-radius:3px}
+.knot-inline-edit:empty:before{content:attr(data-placeholder);opacity:.42;pointer-events:none}
+.knot-live-canvas h2{font-size:1.55em;font-weight:750;margin:0;line-height:1.45}
+.knot-live-canvas h3{font-size:1.25em;font-weight:700;margin:0;line-height:1.5}
+.knot-live-canvas p{margin:0;font-size:15px}
+.knot-live-quote blockquote{margin:0;padding:8px 14px;border-left:4px solid #8298b5;font-size:15px}
+.knot-live-callout{border-color:#b6c5d8;background:rgba(110,145,190,.1)}
+.knot-block-inline-setting{display:inline-flex;align-items:center;gap:8px;margin-top:12px;font-size:12px}
+.knot-block-inline-setting select{border:1px solid var(--border,#ccd2df);border-radius:7px;padding:5px 8px;background:transparent;color:inherit}
+.knot-image-preview{display:grid;gap:6px;margin-top:8px;max-width:420px}
+.knot-image-preview img{display:block;max-width:100%;max-height:220px;object-fit:contain;border-radius:10px}
+.knot-image-preview small,.knot-divider-preview small{opacity:.65;font-size:11px}
+.knot-list-preview{padding:10px 14px;border-radius:8px;background:rgba(110,125,150,.08);line-height:1.9}
+.knot-button-preview{display:inline-block;margin-top:8px;padding:9px 18px;border-radius:999px;background:#263b65;color:#fff;font-weight:700;font-size:13px}
+.knot-divider-preview hr{border:0;border-top:1px solid var(--border,#ccd2df);margin:14px 0}
+
+/* Separate the legacy Markdown field from the visual Gutenberg editor. */
+.knot-gutenberg-widget{margin-bottom:48px!important}

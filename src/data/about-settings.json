@@ -1,0 +1,15 @@
+{
+  "eyebrow": "ABOUT KNOT",
+  "headingLine1": "こんにちは。",
+  "headingLine2": "KNOTを運営しています。",
+  "lead": "好きなことを、好きなペースで記録する個人ブログです。",
+  "storyEyebrow": "MY STORY",
+  "storyTitle": "Web制作との再会",
+  "storyParagraphs": [
+    "以前HTMLやCSSに触れたことをきっかけに、プログラミングに興味を持ちました。",
+    "しばらく離れていましたが、最近またWeb制作を始めたところ、すっかり夢中に。GitHubを活用しながら、静的サイトをベースにJavaScriptなどで機能を加えた、動きのあるWebサイトづくりに挑戦しています。",
+    "このKNOTでは、日々興味を持ったことや、実際に使ってよかったもの、趣味について発信しています。"
+  ],
+  "interests": "Web Development / Running",
+  "tech": "HTML / CSS / JavaScript / Astro"
+}

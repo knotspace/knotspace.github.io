@@ -1,0 +1,73 @@
+{
+  "releases": [
+    {
+      "id": "855f13c",
+      "publishedAt": "2026-11-03T19:43:45+09:00",
+      "title": "Add 100 deduplicated KNOT Study questions",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "演習問題データ"
+      ],
+      "files": [
+        "src/data/study/study-questions.json"
+      ]
+    },
+    {
+      "id": "343de9c",
+      "publishedAt": "2026-11-03T19:30:53+09:00",
+      "title": "Track daily Study progress across practice sessions",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "高専対策"
+      ],
+      "files": [
+        "src/pages/study/kosen.astro"
+      ]
+    },
+    {
+      "id": "81adea1",
+      "publishedAt": "2026-11-03T16:44:48+09:00",
+      "title": "feat(study): add motivation center",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "Study画面・機能"
+      ],
+      "files": [
+        "src/pages/study/motivation.astro"
+      ]
+    },
+    {
+      "id": "0a9b342",
+      "publishedAt": "2026-11-03T16:42:38+09:00",
+      "title": "style(study): refresh future-life section heading",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "Study画面・機能"
+      ],
+      "files": [
+        "src/pages/study/why.astro"
+      ]
+    },
+    {
+      "id": "ac9e59a",
+      "publishedAt": "2026-11-03T16:39:00+09:00",
+      "title": "Studyのリリースノートを公開",
+      "type": "NEW",
+      "summary": "Studyで現在使える機能と使い方をまとめたページを追加しました。今後はStudyの機能や問題データを更新するたびに、更新内容と更新日時が自動で記録されます。",
+      "details": [
+        "現在使える機能を一覧で確認できるようになりました。",
+        "基礎演習・高専対策・過去問模試・要点まとめ・学習ツールなどの使い方を掲載しました。",
+        "更新履歴には日本時間の更新日時と変更内容が表示されます。"
+      ],
+      "files": [
+        "src/pages/study/updates.astro",
+        "src/layouts/StudyLayout.astro",
+        "src/pages/study.astro"
+      ]
+    }
+  ]
+}
