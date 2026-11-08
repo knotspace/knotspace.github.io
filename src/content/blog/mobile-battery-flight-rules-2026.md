@@ -8,6 +8,9 @@ aiGenerated: true
 heroImage: "/blog-art/mobile-battery-flight-rules-2026.svg"
 ---
 
+**AI生成記事**：公開資料をもとにAIを活用して作成し、出典と制度内容を確認しています。航空会社・通信会社の最新案内も利用前に確認してください。
+
+
 <figure class="knot-figure"><img src="/blog-art/mobile-battery-flight-rules-2026.svg" alt="モバイルバッテリーの機内持ち込みは2個まで、160Wh以下、機内での充電は禁止という2026年のルールを整理した図" loading="lazy" decoding="async" width="1200" height="630" /><figcaption>図版：KNOT制作・国土交通省の案内をもとにしたオリジナル図解</figcaption></figure>
 
 旅行や帰省の準備で、スマートフォン用のモバイルバッテリーをバッグに入れる人は多いと思います。ところが、飛行機に乗る場合は、普段の外出と同じ感覚で持ち込めるとは限りません。
