@@ -1,8 +1,9 @@
 ---
-title: "Knotへようこそ！ブログ兼備忘録をスタートします"
-description: "KNOTを始めた理由や、このブログで書いていきたいことを紹介します。"
+title: "KNOTブログを始めました｜Web制作・読書・勉強の記録"
+description: "KNOTという個人ブログを始めた理由と、これから書いていくテーマを紹介。Webサイト制作、PCやアプリ、本・読書、勉強で気づいたことを記録していきます。"
 pubDate: "2026-10-31"
 category: "お知らせ"
+keywords: ["KNOT ブログ","個人ブログ","Web制作 記録","ブログ 開設","読書記録","勉強記録"]
 heroImage: "/blog-art/welcome.svg"
 ---
 

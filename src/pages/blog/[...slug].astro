@@ -51,7 +51,7 @@ const articleJsonLd = {
   headline: post.data.title,
   description: post.data.description,
   datePublished: post.data.pubDate.toISOString(),
-  ...(post.data.updatedDate ? { dateModified: post.data.updatedDate.toISOString() } : {}),
+  dateModified: (post.data.updatedDate ?? post.data.pubDate).toISOString(),
   mainEntityOfPage: { '@type': 'WebPage', '@id': articleUrl },
   url: articleUrl,
   author: { '@type': 'Person', name: 'KNOT Editor' },

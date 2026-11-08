@@ -13,6 +13,32 @@ const posts = (await getCollection('blog'))
 const categories = [...new Set(posts.map((post) => post.data.category))];
 const readingTime = (body = '') => Math.max(1, Math.ceil(body.replace(/\s/g, '').length / 500));
 
+const archiveUrl = new URL('/blog/', Astro.site ?? Astro.url).href;
+const archiveJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'KNOTブログの記事一覧',
+  description: 'Web制作、PCソフト、Androidアプリ、読書、英検や高校受験の勉強法など、KNOTで公開している記事一覧です。',
+  url: archiveUrl,
+  inLanguage: 'ja-JP',
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListOrder: 'https://schema.org/ItemListOrderDescending',
+    numberOfItems: posts.length,
+    itemListElement: posts.map((post, index) => ({
+      '@type': 'ListItem', position: index + 1, name: post.data.title,
+      url: new URL(`/blog/${post.id}/`, Astro.site ?? Astro.url).href,
+    })),
+  },
+};
+const archiveBreadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: 'https://knotspace.github.io/' },
+    { '@type': 'ListItem', position: 2, name: '記事一覧', item: archiveUrl },
+  ],
+};
 const BASE = import.meta.env.BASE_URL.endsWith('/')
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
@@ -23,13 +49,14 @@ const timeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTim
 ---
 
 <Layout
-  title="記事一覧 | KNOT"
-  description="KNOTの記事一覧。Web制作、PC・フリーソフト、Androidアプリ、本・読書、英検や高校受験などの記事を掲載しています。"
+  title="KNOTブログの記事一覧｜Web制作・PCソフト・Android・読書・勉強"
+  description="KNOTの記事一覧です。Web制作やプログラミング、Windowsの無料ソフト、Androidアプリ、本・小説、英検や高校受験の勉強法など、日々の興味や調べたことをまとめています。"
+  structuredData={[archiveJsonLd, archiveBreadcrumbJsonLd]}
 >
   <section class="archive-header">
     <span class="eyebrow">THE JOURNAL</span>
     <h1>記事一覧</h1>
-    <p>これまでに書いた記事をまとめています。</p>
+    <p>Web制作・PCソフト・Androidアプリ・読書・勉強法など、KNOTで公開している記事をカテゴリーやキーワードから探せます。</p>
     <div class="archive-actions">
       <span class="post-count">{posts.length} ARTICLES</span>
       <button type="button" id="random-article" class="random-button">✦ ランダムに読む</button>

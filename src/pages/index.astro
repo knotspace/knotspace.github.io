@@ -13,12 +13,22 @@ const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', { year: 'num
 const dateTimeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Tokyo' });
 ---
 
-<Layout title="KNOT｜気ままに書く、個人ブログ" description="日々気になったことや、使ってよかったもの、本のこと、勉強のことなどを気ままに書いているブログです。">
+<Layout title="KNOT｜Web制作・PCソフト・Androidアプリ・読書・勉強の個人ブログ" description="KNOTは、Web制作やプログラミング、Windowsの無料ソフト、Androidアプリ、本・読書、英検や高校受験の勉強法を、実際に調べたことや日々の気づきとともに紹介する個人ブログです。">
   <div class="personal-home">
     <section class="intro">
       <div class="intro-topline"><span class="intro-kicker"><span class="live-dot"></span> MY PERSONAL BLOG</span><span class="intro-year">ゆるく更新中</span></div>
       <div class="intro-main"><h1>KNOT<span class="intro-period">.</span></h1><p>好きなことを、好きなように。<br/>日々のあれこれを、気ままに書いてます。</p></div>
       <div class="intro-bottom"><span>日々のメモと、ちょっとした記録</span><span>気になる記事をどうぞ ↓</span></div>
+    </section>
+
+    <section class="home-seo-intro" aria-labelledby="home-topics-title">
+      <h2 id="home-topics-title">Web制作から読書、勉強まで。気になったことを記録するブログ。</h2>
+      <p>KNOTでは、Webサイト制作やプログラミング、Windowsで使える無料ソフト、Androidアプリ、本・小説の感想、英検や高校受験の勉強法などを紹介しています。実際に調べたことや、使ってみて気づいたことを、読みやすくまとめています。</p>
+      <div class="home-topic-links">
+        {categories.map((category) => <a href={`${BASE}blog/?category=${encodeURIComponent(category)}`}>{category}の記事</a>)}
+        <a href={`${BASE}study/`}>KNOT Study</a>
+        <a href={`${BASE}blog/`}>すべての記事</a>
+      </div>
     </section>
 
     <div class="home-rule"><span>人気の記事</span><span>注目の4記事</span></div>
@@ -100,6 +110,7 @@ const dateTimeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocal
 
 <style>
 
+.home-seo-intro{margin:28px 5.5% 34px;padding:20px 22px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}.home-seo-intro h2{margin:0 0 9px;font-size:17px;line-height:1.65;letter-spacing:-.035em}.home-seo-intro p{margin:0;color:var(--muted);font-size:11px;line-height:2}.home-topic-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.home-topic-links a{padding:6px 10px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:10px}.home-topic-links a:hover{border-color:var(--home-accent);color:var(--home-accent)}
 .popular-section{padding:28px 5.5% 0}
 .popular-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 28px}.popular-card:nth-child(n+5){display:none}
 .popular-card{position:relative;display:grid;grid-template-columns:112px minmax(0,1fr) 18px;gap:15px;align-items:center;padding:17px 0;border-bottom:1px solid var(--line);min-width:0}
@@ -172,7 +183,7 @@ const dateTimeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocal
  .personal-home{padding-top:14px}.intro{padding:25px 3% 16px}.intro-main{padding:37px 0 25px;align-items:flex-start;flex-direction:column;gap:17px}.intro h1{font-size:clamp(78px,20vw,120px)}.intro-main p{font-size:11px}.intro-bottom{font-size:7px}
  .home-rule{padding:11px 3%}.lead-story{grid-template-columns:1fr;gap:22px;padding:23px 3% 31px}
  .lead-image{aspect-ratio:1.45}.lead-copy{padding:0 2px}.lead-copy h2{font-size:26px;margin:13px 0 9px}
- .popular-section{padding:20px 3% 0}.popular-list{grid-template-columns:1fr}.popular-card{grid-template-columns:88px minmax(0,1fr) 15px;gap:11px;padding:14px 0}.popular-thumb{width:88px;height:72px}.popular-copy h2{font-size:13px;margin:5px 0}.popular-copy>p{font-size:9px}.story-meta{font-size:9px;gap:8px}.bottom-note{grid-template-columns:1fr;gap:12px;margin:43px 3% 0;padding-top:20px}
+ .home-seo-intro{margin:20px 3% 26px;padding:17px}.home-seo-intro h2{font-size:15px}.home-topic-links{gap:6px}.popular-section{padding:20px 3% 0}.popular-list{grid-template-columns:1fr}.popular-card{grid-template-columns:88px minmax(0,1fr) 15px;gap:11px;padding:14px 0}.popular-thumb{width:88px;height:72px}.popular-copy h2{font-size:13px;margin:5px 0}.popular-copy>p{font-size:9px}.story-meta{font-size:9px;gap:8px}.bottom-note{grid-template-columns:1fr;gap:12px;margin:43px 3% 0;padding-top:20px}
  .bottom-note>a{grid-column:1}.home-foot{margin:14px 3% 0;align-items:flex-start;flex-direction:column;gap:12px}
 }
 @media(prefers-reduced-motion:reduce){.lead-image img,.image-open,.text-link span,.story-row,.row-thumb img,.row-arrow{transition:none!important}}
