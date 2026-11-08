@@ -1,0 +1,22 @@
+{
+  "id": "./",
+  "name": "KNOTSPACE MAP",
+  "short_name": "KNOT MAP",
+  "description": "KNOTSPACEの公開サイトと小サイトをまとめたサイトマップ",
+  "lang": "ja",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#090d16",
+  "theme_color": "#090d16",
+  "categories": ["utilities", "navigation"],
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
