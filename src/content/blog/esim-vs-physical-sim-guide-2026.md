@@ -265,8 +265,6 @@ eSIMは、カードを差し替えずに回線を設定できる便利な仕組�
 
 - Apple サポート「iPhoneでeSIMを設定する」（公開日：2026年10月26日）  
   https://support.apple.com/ja-jp/118669
-- Apple サポート「eSIMについて」  
-  https://support.apple.com/ja-jp/119606
 - NTTドコモ「eSIMについて」  
   https://www.docomo.ne.jp/support/uimcard/esim/
 - NTTドコモ「SIM情報設定方法」  
