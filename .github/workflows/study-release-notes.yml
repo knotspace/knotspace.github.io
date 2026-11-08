@@ -1,0 +1,86 @@
+name: KNOT Study Release Notes
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "src/pages/study/**"
+      - "src/data/study/**"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: study-release-notes
+  cancel-in-progress: false
+
+jobs:
+  record-release:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Record Study update
+        env:
+          BEFORE_SHA: ${{ github.event.before }}
+          HEAD_SHA: ${{ github.sha }}
+          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+          COMMIT_TIME: ${{ github.event.head_commit.timestamp }}
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import { execFileSync } from 'node:child_process';
+          const file = 'src/data/study/releases.json';
+          const before = process.env.BEFORE_SHA;
+          const head = process.env.HEAD_SHA;
+          let changed = [];
+          if (before && !/^0+$/.test(before)) {
+            changed = execFileSync('git', ['diff', '--name-only', before, head, '--', 'src/pages/study', 'src/data/study'], { encoding: 'utf8' }).trim().split('\n').filter(path => path && path !== file);
+          } else {
+            changed = execFileSync('git', ['diff-tree', '--no-commit-id', '--name-only', '-r', head, '--', 'src/pages/study', 'src/data/study'], { encoding: 'utf8' }).trim().split('\n').filter(Boolean);
+          }
+          if (!changed.length) {
+            console.log('No Study source changes found; skipping release entry.');
+            process.exit(0);
+          }
+          const data = JSON.parse(fs.readFileSync(file, 'utf8'));
+          const subject = (process.env.COMMIT_MESSAGE || 'Studyを更新').split('\n')[0].trim();
+          const labels = {
+            'foundation.astro': '基礎演習',
+            'kosen.astro': '高専対策',
+            'mock.astro': '過去問模試',
+            'tools.astro': '学習ツール',
+            'quotes.astro': '名言集',
+            'study-foundation.json': '基礎問題データ',
+            'kosen-questions.json': '高専問題データ',
+            'study-questions.json': '演習問題データ',
+            'study-quotes.json': '名言データ',
+          };
+          const details = [...new Set(changed.map(path => {
+            const name = path.split('/').at(-1);
+            return labels[name] || (path.startsWith('src/data/study/') ? '学習コンテンツ・データ' : 'Study画面・機能');
+          }))];
+          const entry = {
+            id: head.slice(0, 7),
+            publishedAt: process.env.COMMIT_TIME || new Date().toISOString(),
+            title: subject,
+            type: 'STUDY UPDATE',
+            summary: 'Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。',
+            details,
+            files: changed.slice(0, 20)
+          };
+          data.releases = Array.isArray(data.releases) ? data.releases : [];
+          if (!data.releases.some(item => item.id === entry.id)) data.releases.unshift(entry);
+          data.releases = data.releases.slice(0, 100);
+          fs.writeFileSync(file, JSON.stringify(data, null, 2) + '\n');
+          execFileSync('git', ['config', 'user.name', 'github-actions[bot]']);
+          execFileSync('git', ['config', 'user.email', '41898282+github-actions[bot]@users.noreply.github.com']);
+          execFileSync('git', ['add', file]);
+          execFileSync('git', ['commit', '-m', 'docs(study): record automatic release notes']);
+          execFileSync('git', ['push']);
+          console.log(`Recorded Study update ${entry.id}: ${subject}`);
+          NODE

@@ -1,0 +1,8 @@
+title = "KNOT Gitleaks configuration"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Supabase publishable browser keys are designed to be public; database access is protected by Supabase policies."
+regexes = ['''sb_publishable_[A-Za-z0-9_-]+''']

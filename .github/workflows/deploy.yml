@@ -1,0 +1,112 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: "*/15 * * * *"
+    - cron: "0 15 30 11 *"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      due: ${{ steps.profile.outputs.due || steps.schedule.outputs.due }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Trigger annual age refresh
+        id: profile
+        if: github.event.schedule == '0 15 30 11 *'
+        run: echo "due=true" >> "$GITHUB_OUTPUT"
+      - name: Release scheduled articles
+        id: schedule
+        if: github.event_name == 'schedule'
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import path from 'node:path';
+          const dir = 'src/content/blog';
+          const now = Date.now();
+          let released = 0;
+          for (const name of fs.readdirSync(dir).filter((n) => n.endsWith('.md'))) {
+            const file = path.join(dir, name);
+            const source = fs.readFileSync(file, 'utf8');
+            const match = source.match(/^publishAt:\s*["']?([^\r\n"']+)/m);
+            if (!match) continue;
+            const timestamp = Date.parse(match[1].trim());
+            if (!Number.isFinite(timestamp) || timestamp > now) continue;
+            const next = source.replace(/^publishAt:.*(?:\r?\n)?/m, '');
+            fs.writeFileSync(file, next);
+            released++;
+          }
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `due=${released > 0}\n`);
+          if (released > 0) {
+            console.log(`Released ${released} scheduled article(s).`);
+            const { execFileSync } = await import('node:child_process');
+            execFileSync('git', ['config', 'user.name', 'github-actions[bot]']);
+            execFileSync('git', ['config', 'user.email', '41898282+github-actions[bot]@users.noreply.github.com']);
+            execFileSync('git', ['add', 'src/content/blog']);
+            execFileSync('git', ['commit', '-m', 'Publish scheduled articles']);
+            execFileSync('git', ['push']);
+          } else {
+            console.log('No articles are due for publication.');
+          }
+          NODE
+
+  build:
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    needs: prepare
+    if: github.event_name != 'schedule' || needs.prepare.outputs.due == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24
+          package-manager-cache: false
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Build Astro site
+        run: npm run build
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9
+        with:
+          path: ./dist
+
+  deploy:
+    permissions:
+      pages: write
+      id-token: write
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346

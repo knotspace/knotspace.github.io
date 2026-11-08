@@ -1,0 +1,971 @@
+
+---
+import { type CollectionEntry, getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import sanitizeHtml from 'sanitize-html';
+
+const safeInline = (value: unknown) => sanitizeHtml(String(value ?? ''), {
+  allowedTags: ['a', 'strong', 'b', 'em', 'i', 'u', 's', 'del', 'code', 'br', 'sub', 'sup', 'span'],
+  allowedAttributes: { a: ['href', 'title', 'target', 'rel'], span: ['class'] },
+  allowedSchemes: ['http', 'https', 'mailto'],
+  transformTags: { a: sanitizeHtml.simpleTransform('a', { rel: 'nofollow noopener noreferrer' }, true) },
+});
+
+const safeBlockHtml = (value: unknown) => sanitizeHtml(String(value ?? ''), {
+  allowedTags: ['address','article','aside','blockquote','br','caption','cite','code','col','colgroup','dd','del','details','div','dl','dt','em','figcaption','figure','h1','h2','h3','h4','h5','h6','hr','i','img','kbd','li','ol','p','pre','s','small','span','strong','sub','summary','sup','table','tbody','td','tfoot','th','thead','tr','u','ul','video','audio','source','a'],
+  allowedAttributes: {
+    '*': ['class','id','style','aria-label','aria-hidden','role'],
+    a: ['href','target','rel','title'], img: ['src','alt','width','height','loading'],
+    td: ['colspan','rowspan'], th: ['colspan','rowspan','scope'],
+    ol: ['start','type'], video: ['controls','src','poster'], audio: ['controls','src'],
+    source: ['src','type'], col: ['span']
+  },
+  allowedSchemes: ['http','https','mailto','tel'],
+  allowedSchemesByTag: { img: ['http','https','data'] },
+  transformTags: { a: sanitizeHtml.simpleTransform('a', { rel: 'nofollow noopener noreferrer' }, true) }
+});
+
+
+export async function getStaticPaths() {
+  const now = new Date();
+  const posts = (await getCollection('blog')).filter((post) => !post.data.publishAt || post.data.publishAt <= now);
+
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props as Props;
+const { Content, headings } = await render(post);
+const contentBlocks = Array.isArray(post.data.blocks) ? post.data.blocks : [];
+const hasLegacyBody = Boolean((post.body ?? '').trim());
+
+const BASE = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+
+const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+
+const toc = headings.filter((heading) =>
+  heading.depth === 2 || heading.depth === 3
+);
+
+const isDateOnly = post.data.pubDate.getUTCHours() === 0 && post.data.pubDate.getUTCMinutes() === 0 && post.data.pubDate.getUTCSeconds() === 0;
+const date = post.data.pubDate.toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric', timeZone: isDateOnly ? 'UTC' : 'Asia/Tokyo' });
+const time = isDateOnly ? '00:00' : post.data.pubDate.toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Tokyo' });
+const articleText = (post.body ?? '').replace(/\!\[[^\]]*\]\([^)]*\)/g, ' ').replace(/<[^>]+>/g, ' ').replace(/[#>*_\x60~|\[\](){}]/g, ' ');
+const readingMinutes = Math.max(1, Math.ceil(articleText.replace(/\s/g, '').length / 500));
+const allPosts = (await getCollection('blog'))
+  .filter((item) => item.id !== post.id && (!item.data.publishAt || item.data.publishAt <= new Date()))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf() || b.id.localeCompare(a.id));
+const relatedPosts = allPosts.filter((item) => item.data.category === post.data.category).slice(0, 3);
+const recommendations = relatedPosts.length ? relatedPosts : allPosts.slice(0, 3);
+const articleUrl = new URL(`/blog/${post.id}/`, Astro.site ?? Astro.url).href;
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.pubDate.toISOString(),
+  ...(post.data.updatedDate ? { dateModified: post.data.updatedDate.toISOString() } : {}),
+  mainEntityOfPage: { '@type': 'WebPage', '@id': articleUrl },
+  url: articleUrl,
+  author: { '@type': 'Person', name: 'KNOT Editor' },
+  publisher: { '@type': 'Organization', name: 'KNOT', url: 'https://knotspace.github.io/' },
+  inLanguage: 'ja-JP',
+  articleSection: post.data.category,
+  keywords: [...new Set([post.data.category, ...post.data.title.split(/[｜|：:、,\s]+/).filter((word) => word.length >= 2)])],
+  timeRequired: `PT${readingMinutes}M`,
+  isAccessibleForFree: true,
+  ...(post.data.heroImage ? { image: new URL(post.data.heroImage, Astro.url).href } : {}),
+};
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'ホーム', item: 'https://knotspace.github.io/' },
+    { '@type': 'ListItem', position: 2, name: '記事一覧', item: 'https://knotspace.github.io/blog/' },
+    { '@type': 'ListItem', position: 3, name: post.data.title, item: articleUrl },
+  ],
+};
+---
+
+<Layout
+  title={`${post.data.title} | KNOT`}
+  description={post.data.description}
+  image={post.data.heroImage}
+  structuredData={[articleJsonLd, breadcrumbJsonLd]}
+>
+  <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
+  <div class="article-layout">
+  <article class="post" data-post-slug={post.id}>
+    <div class="article-tools"><span>この記事を読む</span><div class="tool-actions"><button id="share-button" type="button">↗ リンクをコピー</button><button id="bookmark-button" type="button" aria-pressed="false">☆ あとで読む</button></div></div>
+    <a class="back-link" href={`${BASE}blog/`}>
+      ← 記事一覧に戻る
+    </a>
+
+    <header class="post-header">
+      <div class="post-meta">
+        <time datetime={post.data.pubDate.toISOString()}>
+          {date} {time}
+        </time>
+
+        <span class="meta-divider"></span>
+        <span class="category-chip">{post.data.category}</span>
+        <span class="reading-time">約{readingMinutes}分で読めます</span>
+
+        {post.data.updatedDate && (
+          <>
+            <span class="meta-divider"></span>
+            <span>更新：{dateFormat(post.data.updatedDate)}</span>
+          </>
+        )}
+      </div>
+
+      <h1>{post.data.title}</h1>
+      <p class="description">{post.data.description}</p>
+      <div class="article-byline"><span>✎ KNOT</span><span>読了目安 約{readingMinutes}分</span><span>本文をゆっくり読んでね。</span></div>
+    </header>
+
+    {post.data.heroImage && (
+      <>
+        <img class="hero-image" src={post.data.heroImage} alt={post.data.title} loading="eager" fetchpriority="high" decoding="async" width="1200" height="630" />
+        {post.data.heroImage.startsWith('/blog-art/') && <p class="hero-image-credit">図版：KNOT制作のオリジナルイラスト</p>}
+      </>
+    )}
+
+
+
+    {toc.length > 0 && <nav class="article-toc" aria-label="この記事の目次">
+      <details open>
+        <summary><span>この記事の目次</span><span class="article-toc-count">{toc.length}項目</span></summary>
+        <ol>{toc.map((heading) => <li class:list={[`toc-level-${heading.depth}`]}><a href={`#${heading.slug}`} data-toc-link={heading.slug}>{heading.text}</a></li>)}</ol>
+      </details>
+    </nav>}
+
+    <div class="article-content">
+      {contentBlocks.length > 0 ? contentBlocks.map((block: any) => {
+        if (block.type === 'wordpress' && block.html) return <div class="wordpress-block-content" set:html={safeBlockHtml(block.html)} />;
+        const type = block.type || block.blockType || 'paragraph';
+        if (type === 'heading') {
+          const level = Number(block.level) === 3 ? 3 : 2;
+          return level === 3 ? <h3 set:html={safeInline(block.text)} /> : <h2 set:html={safeInline(block.text)} />;
+        }
+        if (type === 'image') return <figure><img src={block.src || block.image || ''} alt={block.alt || ''} loading="lazy" decoding="async" />{block.caption && <figcaption set:html={safeInline(block.caption)} />}</figure>;
+        if (type === 'quote') return <blockquote><p set:html={safeInline(block.text)} />{block.attribution && <cite>{block.attribution}</cite>}</blockquote>;
+        if (type === 'callout') return <aside class:list={['knot-box', `knot-box-${block.style || 'note'}`]}><strong set:html={safeInline(block.title || 'ポイント')} /><p set:html={safeInline(block.text)} /></aside>;
+        if (type === 'list') {
+          const items = String(block.items || '').split('\n').map((item: string) => item.trim()).filter(Boolean);
+          return block.ordered ? <ol>{items.map((item: string) => <li set:html={safeInline(item)} />)}</ol> : <ul>{items.map((item: string) => <li set:html={safeInline(item)} />)}</ul>;
+        }
+        if (type === 'button') return <p><a class="knot-content-button" href={block.url || '#'}>{block.label || '詳しく見る'} ↗</a></p>;
+        if (type === 'divider') return <hr />;
+        if (type === 'code') return <pre class="knot-code"><code>{block.code || block.text || ''}</code></pre>;
+        if (type === 'table') return <div class="knot-table-wrap"><table>{block.head?.length > 0 && <thead><tr>{block.head.map((cell: any) => <th>{cell.content || ''}</th>)}</tr></thead>}<tbody>{(block.rows || []).map((row: any) => <tr>{(row.cells || []).map((cell: any) => <td>{cell.content || ''}</td>)}</tr>)}</tbody></table></div>;
+        if (type === 'accordion') return <details class="knot-accordion"><summary>{block.title || '詳しく見る'}</summary><p>{block.text || ''}</p></details>;
+        if (type === 'notice') return <aside class:list={['knot-box', `knot-box-${block.tone || 'note'}`]}><strong>{block.title || 'お知らせ'}</strong><p>{block.text || ''}</p></aside>;;
+        return <p set:html={safeInline(block.text)} />;
+      }) : hasLegacyBody ? <Content /> : <p>この記事の本文は準備中です。</p>}
+    </div>
+
+    <div class="article-reaction">
+      <p>この記事がよかったら、リアクションしてね。</p>
+      <button id="like-button" type="button" aria-pressed="false">♡ <span id="like-label">いいね</span></button>
+      <small><span id="like-count">読み込み中...</span> ・ 閲覧 <span id="view-count">読み込み中...</span></small>
+    </div>
+
+    <section class="share-panel" aria-label="記事をシェア">
+      <div><span class="comments-label">SHARE THIS ARTICLE</span><h2>この記事をシェアする</h2><p>気に入ったら、友だちにも教えてね。</p></div>
+      <div class="share-actions">
+        <a class="share-x" href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.data.title)}&url=${encodeURIComponent(articleUrl)}`} target="_blank" rel="noopener noreferrer">𝕏　Xでシェア</a>
+        <a class="share-line" href={`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(articleUrl)}`} target="_blank" rel="noopener noreferrer">LINEで送る</a>
+        <button class="share-copy" type="button" data-share-copy>URLをコピー</button>
+      </div>
+    </section>
+
+    <div class="post-end">
+      <span class="end-mark">✳</span>
+      <p>最後まで読んでくれてありがとう。</p>
+      <a href={`${BASE}blog/`}>
+        ほかの記事も読んでみる
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    {recommendations.length > 0 && <section class="related"><span class="comments-label">KEEP READING</span><h2>関連記事</h2><div class="related-list">{recommendations.map((item) => <a href={`${BASE}blog/${item.id}/`}><span>{item.data.category}</span><strong>{item.data.title}</strong><small>記事を読む →</small></a>)}</div></section>}
+
+    <!-- コメント欄 -->
+    <section class="comments" aria-label="コメント">
+      <div class="comments-heading">
+        <span class="comments-label">DISCUSSION</span>
+        <h2>コメント</h2>
+        <p>この記事について、気軽にコメントしてね。</p>
+      </div>
+
+      <div class="giscus-container">
+        <script is:inline
+          src="https://giscus.app/client.js"
+          data-repo="knotspace/knotspace.github.io"
+          data-repo-id="R_kgDOVfFtzQ"
+          data-category="General"
+          data-category-id="DIC_kwDOVfFtzc4DKNL2"
+          data-mapping="pathname"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="bottom"
+          data-theme="preferred_color_scheme"
+          data-lang="ja"
+          crossorigin="anonymous"
+          async
+        ></script>
+      </div>
+    </section>
+  </article>
+  <aside class="article-sidebar" aria-label="記事ナビゲーション">
+    <section class="article-side-widget"><h2>お知らせ</h2><p>KNOTの記事を読んでくれてありがとう！新しい記事も随時更新中。</p><a href={`${BASE}blog/`}>記事一覧を見る »</a></section>
+    {toc.length > 0 && <nav class="article-side-widget side-toc" aria-label="サイドバーの目次">
+      <h2>目次</h2>
+      <ol>{toc.map((heading) => <li class:list={[`toc-level-${heading.depth}`]}><a href={`#${heading.slug}`} data-toc-link={heading.slug}>{heading.text}</a></li>)}</ol>
+    </nav>}
+  </aside>
+  </div>
+</Layout>
+
+<script is:inline>
+(() => {
+  const links = Array.from(document.querySelectorAll('[data-toc-link]'));
+  const headings = links.map(link => document.getElementById(link.dataset.tocLink)).filter(Boolean);
+  if (!links.length || !headings.length) return;
+  const activate = (id) => links.forEach(link => {
+    const active = link.dataset.tocLink === id;
+    link.classList.toggle('is-current', active);
+    if (active) link.setAttribute('aria-current', 'location');
+    else link.removeAttribute('aria-current');
+  });
+  const observer = new IntersectionObserver(entries => {
+    const visible = entries.filter(entry => entry.isIntersecting).sort((a,b) => a.boundingClientRect.top - b.boundingClientRect.top);
+    if (visible[0]) activate(visible[0].target.id);
+  }, { rootMargin: '-12% 0px -72% 0px', threshold: 0 });
+  headings.forEach(heading => observer.observe(heading));
+  if (location.hash) activate(decodeURIComponent(location.hash.slice(1)));
+  else activate(headings[0].id);
+})();
+</script>
+
+<script is:inline>
+(() => {
+  const progress = document.getElementById('reading-progress');
+  const bookmarkButton = document.getElementById('bookmark-button');
+  const shareButton = document.getElementById('share-button');
+  const likeButton = document.getElementById('like-button');
+  const article = document.querySelector('[data-post-slug]');
+  // Markdown本文内の画像も遅延読み込みに統一し、表示負荷を抑える。
+  document.querySelectorAll('.article-content img').forEach((img) => {
+    if (!img.hasAttribute('loading')) img.loading = 'lazy';
+    if (!img.hasAttribute('decoding')) img.decoding = 'async';
+    img.style.maxWidth = '100%';
+    img.style.height = 'auto';
+  });
+  const safeRead = (storage, key, fallback = null) => {
+    try {
+      const value = storage.getItem(key);
+      return value === null ? fallback : value;
+    } catch {
+      return fallback;
+    }
+  };
+  const safeWrite = (storage, key, value) => {
+    try {
+      storage.setItem(key, value);
+      return true;
+    } catch {
+      return false;
+    }
+  };
+
+  if (progress) {
+    const update = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.width = (max > 0 ? Math.min(100, window.scrollY / max * 100) : 0) + '%';
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  }
+
+  const copyArticleUrl = async (target) => {
+    let copied = false;
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(location.href);
+        copied = true;
+      } else {
+        const field = document.createElement('textarea');
+        field.value = location.href;
+        field.setAttribute('readonly', '');
+        field.style.position = 'fixed';
+        field.style.opacity = '0';
+        document.body.appendChild(field);
+        field.select();
+        copied = document.execCommand('copy');
+        field.remove();
+      }
+    } catch {
+      copied = false;
+    }
+    target.textContent = copied ? '✓ コピーしました' : 'コピーできませんでした';
+    window.setTimeout(() => {
+      target.textContent = target.dataset.shareCopy !== undefined ? 'URLをコピー' : '↗ リンクをコピー';
+    }, 1800);
+  };
+
+  if (shareButton) shareButton.addEventListener('click', () => copyArticleUrl(shareButton));
+  document.querySelectorAll('[data-share-copy]').forEach((target) => {
+    target.addEventListener('click', () => copyArticleUrl(target));
+  });
+
+  if (likeButton && article) {
+    const SUPABASE_URL = 'https://rtzorqaigpeechqywjie.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_-yhc0QqTEEZTBWi9jTcFRA_-AVi-iP6';
+    const slug = article.dataset.postSlug || '';
+    const likedKey = 'knot-liked:' + slug;
+    const visitorKey = 'knot-visitor-id';
+    const label = document.getElementById('like-label');
+    const likeCount = document.getElementById('like-count');
+    const viewCount = document.getElementById('view-count');
+    let likedInThisPage = false;
+    let visitorIdInMemory = '';
+
+    const getVisitorId = () => {
+      let id = safeRead(localStorage, visitorKey, '');
+      if (!id) {
+        try {
+          id = crypto.randomUUID();
+        } catch {
+          id = 'visitor-' + Math.random().toString(36).slice(2) + Date.now().toString(36);
+        }
+        if (!safeWrite(localStorage, visitorKey, id)) visitorIdInMemory = id;
+      }
+      return id || visitorIdInMemory;
+    };
+
+    const headers = {
+      apikey: SUPABASE_KEY,
+      Authorization: 'Bearer ' + SUPABASE_KEY,
+      'Content-Type': 'application/json',
+    };
+
+    const paintLike = () => {
+      const liked = likedInThisPage || safeRead(localStorage, likedKey, '') === '1';
+      likeButton.setAttribute('aria-pressed', String(liked));
+      likeButton.classList.toggle('liked', liked);
+      likeButton.disabled = liked;
+      if (label) label.textContent = liked ? 'ありがとう！' : 'いいね';
+      likeButton.firstChild.textContent = liked ? '♥ ' : '♡ ';
+    };
+
+    const loadStats = async () => {
+      try {
+        const response = await fetch(
+          SUPABASE_URL + '/rest/v1/article_stats?slug=eq.' + encodeURIComponent(slug) + '&select=views,likes',
+          { headers }
+        );
+        if (!response.ok) throw new Error('stats request failed');
+        const rows = await response.json();
+        const stats = rows[0] || { views: 0, likes: 0 };
+        if (likeCount) likeCount.textContent = Number(stats.likes || 0).toLocaleString('ja-JP') + ' いいね';
+        if (viewCount) viewCount.textContent = Number(stats.views || 0).toLocaleString('ja-JP') + ' 回';
+      } catch {
+        if (likeCount) likeCount.textContent = 'いいね数を取得できません';
+        if (viewCount) viewCount.textContent = '閲覧数を取得できません';
+      }
+    };
+
+    const countView = async () => {
+      const today = new Date().toISOString().slice(0, 10);
+      const viewedKey = 'knot-viewed:' + slug + ':' + today;
+      if (safeRead(sessionStorage, viewedKey, '') === '1') return;
+      try {
+        const response = await fetch(SUPABASE_URL + '/rest/v1/rpc/increment_article_view', {
+          method: 'POST',
+          headers,
+          body: JSON.stringify({ article_slug: slug }),
+        });
+        if (!response.ok) throw new Error('view count failed');
+        safeWrite(sessionStorage, viewedKey, '1');
+      } catch {
+        // Do not mark a failed request as counted; a later visit can retry.
+      }
+      await loadStats();
+    };
+
+    paintLike();
+    loadStats();
+    countView();
+
+    likeButton.addEventListener('click', async () => {
+      if (likedInThisPage || safeRead(localStorage, likedKey, '') === '1') return;
+      likeButton.disabled = true;
+      if (label) label.textContent = '送信中…';
+      try {
+        const response = await fetch(SUPABASE_URL + '/rest/v1/rpc/like_article', {
+          method: 'POST',
+          headers,
+          body: JSON.stringify({
+            article_slug: slug,
+            p_visitor_id: getVisitorId(),
+          }),
+        });
+        if (!response.ok) throw new Error('like request failed');
+        likedInThisPage = true;
+        safeWrite(localStorage, likedKey, '1');
+        paintLike();
+        await loadStats();
+      } catch {
+        likeButton.disabled = false;
+        if (label) label.textContent = '通信エラー・再試行';
+      }
+    });
+  }
+
+  if (bookmarkButton && article) {
+    const key = 'knot-bookmarks';
+    const slug = article.dataset.postSlug || '';
+    const read = () => {
+      try {
+        const value = JSON.parse(safeRead(localStorage, key, '[]'));
+        return Array.isArray(value) ? value.filter(item => typeof item === 'string') : [];
+      } catch {
+        return [];
+      }
+    };
+    const paint = () => {
+      const saved = read().includes(slug);
+      bookmarkButton.textContent = saved ? '★ 保存済み' : '☆ あとで読む';
+      bookmarkButton.setAttribute('aria-pressed', String(saved));
+    };
+    paint();
+    bookmarkButton.addEventListener('click', () => {
+      const items = read();
+      const next = items.includes(slug) ? items.filter(item => item !== slug) : [...items, slug];
+      if (!safeWrite(localStorage, key, JSON.stringify(next))) {
+        bookmarkButton.textContent = '保存できませんでした';
+        window.setTimeout(paint, 1800);
+        return;
+      }
+      paint();
+    });
+  }
+})();
+</script>
+
+<style>
+  .article-layout{display:grid;grid-template-columns:minmax(0,760px) 270px;gap:38px;align-items:start;max-width:1100px;margin:0 auto}
+  .article-layout .post{width:100%;max-width:none;min-width:0}
+  .article-sidebar{position:sticky;top:24px;display:flex;flex-direction:column;gap:18px;padding-top:48px}
+  .article-side-widget{border:1px solid var(--line);background:var(--surface);padding:0}
+  .article-side-widget h2{margin:0;padding:12px 14px;border-bottom:1px solid var(--line);border-left:4px solid var(--accent);font-size:14px}
+  .article-side-widget p{margin:12px 14px;color:var(--muted);font-size:11px;line-height:1.8}
+  .article-side-widget>a{display:block;margin:0 14px 14px;color:var(--accent);font-size:11px;font-weight:700}
+  .side-toc{max-height:calc(100vh - 170px);overflow:auto}
+  .side-toc ol{list-style:none;margin:0;padding:9px 12px 12px}
+  .side-toc li{margin:0;padding:0}
+  .side-toc li a{display:block;padding:8px 9px;border-left:2px solid transparent;color:var(--muted);font-size:11px;line-height:1.65;transition:color .15s,border-color .15s,background .15s}
+  .side-toc li.toc-level-3{padding-left:12px}
+  .side-toc li a:hover{color:var(--accent)}
+  .side-toc li a.is-current{border-left-color:var(--accent);color:var(--accent);background:var(--surface-soft);font-weight:800}
+  @media(max-width:1050px){.article-layout{grid-template-columns:minmax(0,1fr) 235px;gap:24px}}
+  @media(max-width:760px){.article-layout{display:flex;flex-direction:column;gap:24px}.article-layout .post{padding-top:25px}.article-sidebar{position:static;width:100%;padding-top:0;display:grid;grid-template-columns:1fr}.side-toc{max-height:none}.side-toc ol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}}
+  .reading-progress{position:fixed;z-index:1000;top:0;left:0;width:0;height:3px;background:var(--accent);transition:width .08s linear}
+  .article-tools{display:flex;justify-content:space-between;align-items:center;margin:0 0 20px;color:var(--muted);font-size:11px}
+  .tool-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.article-tools button{border:1px solid var(--line);border-radius:999px;padding:8px 13px;background:var(--surface);color:var(--text);font-size:11px;font-weight:700;cursor:pointer}
+  .article-reaction{display:flex;flex-direction:column;align-items:center;gap:9px;margin:38px 0 12px;padding:24px 16px;border:1px solid var(--line);border-radius:16px;background:var(--surface)}
+  .share-panel{display:flex;align-items:center;justify-content:space-between;gap:20px;margin:22px 0 12px;padding:22px;border:1px solid var(--line);border-radius:15px;background:var(--surface)}
+  .share-panel h2{margin:6px 0;font-size:18px;color:var(--text)}.share-panel p{margin:0;color:var(--muted);font-size:11px}
+  .share-actions{display:flex;gap:8px;flex-wrap:wrap}.share-actions a,.share-actions button{display:inline-flex;align-items:center;justify-content:center;padding:10px 13px;border:1px solid var(--line);border-radius:999px;background:var(--bg);color:var(--text);font:700 11px system-ui;text-decoration:none;cursor:pointer}.share-actions .share-x{background:#111;color:#fff;border-color:#111}.share-actions .share-line{color:#159b49;border-color:#159b49}
+  .article-reaction p{margin:0;color:var(--muted);font-size:12px}
+  .article-reaction button{border:1px solid var(--line);background:var(--bg);color:var(--text);border-radius:999px;padding:10px 22px;font-size:13px;font-weight:800;cursor:pointer}
+  .article-reaction button.liked{color:#e66b8a;border-color:#e66b8a}
+  .article-reaction small{color:var(--muted);font-size:10px}
+  .related{margin-top:55px;padding-top:32px;border-top:1px solid var(--line)}.related h2{margin:8px 0 18px;color:var(--text);font-size:23px}.related-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.related-list a{display:flex;flex-direction:column;gap:9px;padding:18px;border:1px solid var(--line);border-radius:13px;background:var(--surface)}.related-list span,.related-list small{color:var(--muted);font-size:10px}.related-list strong{color:var(--text);font-size:13px;line-height:1.7}.related-list small{margin-top:auto;color:var(--accent)}
+  .post {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 45px 0 20px;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 34px;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    transition: color .2s;
+  }
+
+  .back-link:hover {
+    color: var(--accent);
+  }
+
+  .post-header {
+    padding-bottom: 29px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  .meta-divider {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  h1 {
+    margin: 21px 0 13px;
+    font-size: clamp(30px, 5vw, 47px);
+    line-height: 1.4;
+    letter-spacing: -.065em;
+    font-weight: 900;
+    color: var(--text);
+  }
+
+  .description {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 2;
+  }
+  .category-chip{padding:4px 9px;border-radius:3px;background:var(--accent);color:#fff;font-size:10px;font-weight:800}
+  .reading-time{color:var(--muted);font-size:10px}
+  .article-byline{display:flex;gap:16px;flex-wrap:wrap;margin-top:18px;padding-top:13px;border-top:1px solid var(--line);color:var(--muted);font-size:10px}
+  .article-byline span:first-child{color:var(--accent);font-weight:800}
+
+
+  .hero-image {
+    display: block;
+    width: 100%;
+    max-height: 410px;
+    margin: 30px 0 38px;
+    border-radius: 17px;
+    object-fit: cover;
+  }
+
+  /* 目次 */
+  .toc {
+    margin: 32px 0 42px;
+    padding: 23px 26px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--surface);
+  }
+
+  .toc-heading {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line);
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 800;
+  }
+
+  .toc-icon {
+    color: var(--accent);
+    font-size: 18px;
+  }
+
+  .toc-count {
+    margin-left: auto;
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 500;
+  }
+
+  .toc ol {
+    margin: 13px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .toc li {
+    margin: 0;
+    padding: 0;
+  }
+
+  .toc li a {
+    display: block;
+    padding: 7px 0;
+    color: var(--article-text);
+    font-size: 12px;
+    line-height: 1.7;
+    text-decoration: none;
+    transition: color .2s, transform .2s;
+  }
+
+  .toc li a::before {
+    content: "›";
+    margin-right: 9px;
+    color: var(--accent);
+  }
+
+  .toc li a:hover {
+    color: var(--accent);
+    transform: translateX(3px);
+  }
+
+  .toc .toc-level-3 {
+    padding-left: 19px;
+  }
+
+  .toc .toc-level-3 a {
+    color: var(--muted);
+    font-size: 11px;
+  }
+
+  /* 記事本文 */
+  .article-content {
+    color: var(--text);
+    font-size: 15px;
+    line-height: 2.15;
+    overflow-wrap: anywhere;
+  }
+
+  .article-content :global(h2) {
+    scroll-margin-top: 24px;
+    margin: 2.2em 0 .8em;
+    padding-left: 15px;
+    border-left: 3px solid var(--accent);
+    color: var(--text);
+    font-size: 23px;
+    line-height: 1.5;
+    letter-spacing: -.04em;
+  }
+
+  .article-content :global(h3) {
+    scroll-margin-top: 24px;
+    margin: 2em 0 .65em;
+    color: var(--text);
+    font-size: 18px;
+  }
+
+  .article-content :global(p) {
+    margin: 1.15em 0;
+    color: var(--article-text);
+  }
+
+  .article-content :global(strong) {
+    color: var(--text);
+    font-weight: 800;
+  }
+
+  .article-content :global(a) {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .article-content :global(ul),
+  .article-content :global(ol) {
+    padding-left: 1.5em;
+    color: var(--article-text);
+  }
+
+  .article-content :global(li) {
+    padding-left: .25em;
+    margin: .35em 0;
+  }
+
+  .article-content :global(blockquote) {
+    margin: 1.8em 0;
+    padding: 5px 20px;
+    border-left: 2px solid var(--accent);
+    color: var(--article-text);
+    background: var(--surface);
+  }
+
+  .article-content :global(blockquote p) {
+    color: var(--article-text);
+  }
+
+  .article-content :global(code) {
+    padding: .15em .4em;
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    background: var(--code-bg);
+    color: var(--accent);
+    font-size: .88em;
+  }
+
+  .article-content :global(pre) {
+    overflow-x: auto;
+    padding: 18px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--code-bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  .article-content :global(pre code) {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+  }
+
+  .article-content :global(hr) {
+    margin: 2.5em 0;
+    border: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  /* 記事の最後 */
+  .post-end {
+    margin-top: 65px;
+    padding: 28px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+    text-align: center;
+  }
+
+  .end-mark {
+    color: var(--accent);
+    font-size: 23px;
+  }
+
+  .post-end p {
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .post-end a {
+    display: inline-block;
+    margin-top: 8px;
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  /* コメント欄 */
+  .comments {
+    margin-top: 65px;
+    padding-top: 35px;
+    border-top: 1px solid var(--line);
+  }
+
+  .comments-heading {
+    margin-bottom: 25px;
+  }
+
+  .comments-label {
+    color: var(--accent);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .16em;
+  }
+
+  .comments-heading h2 {
+    margin: 8px 0;
+    color: var(--text);
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: -.05em;
+  }
+
+  .comments-heading p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.8;
+  }
+
+  .giscus-container {
+    min-height: 150px;
+    width: 100%;
+  }
+
+  @media (max-width: 600px) {
+    .share-panel{align-items:flex-start;flex-direction:column;padding:18px}.share-actions{width:100%}.share-actions a,.share-actions button{flex:1}
+    .reading-progress{position:fixed;z-index:1000;top:0;left:0;width:0;height:3px;background:var(--accent);transition:width .08s linear}
+  .article-tools{display:flex;justify-content:space-between;align-items:center;margin:0 0 20px;color:var(--muted);font-size:11px}
+  .tool-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.article-tools button{border:1px solid var(--line);border-radius:999px;padding:8px 13px;background:var(--surface);color:var(--text);font-size:11px;font-weight:700;cursor:pointer}
+  .article-reaction{display:flex;flex-direction:column;align-items:center;gap:9px;margin:38px 0 12px;padding:24px 16px;border:1px solid var(--line);border-radius:16px;background:var(--surface)}
+  .article-reaction p{margin:0;color:var(--muted);font-size:12px}
+  .article-reaction button{border:1px solid var(--line);background:var(--bg);color:var(--text);border-radius:999px;padding:10px 22px;font-size:13px;font-weight:800;cursor:pointer}
+  .article-reaction button.liked{color:#e66b8a;border-color:#e66b8a}
+  .article-reaction small{color:var(--muted);font-size:10px}
+  .related{margin-top:55px;padding-top:32px;border-top:1px solid var(--line)}.related h2{margin:8px 0 18px;color:var(--text);font-size:23px}.related-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.related-list a{display:flex;flex-direction:column;gap:9px;padding:18px;border:1px solid var(--line);border-radius:13px;background:var(--surface)}.related-list span,.related-list small{color:var(--muted);font-size:10px}.related-list strong{color:var(--text);font-size:13px;line-height:1.7}.related-list small{margin-top:auto;color:var(--accent)}
+  .post {
+      padding-top: 30px;
+    }
+
+    .article-content {
+      font-size: 14px;
+    }
+
+    .article-content :global(h2) {
+      font-size: 21px;
+    }
+
+    .hero-image {
+      margin: 22px 0 28px;
+    }
+
+    .toc {
+      padding: 19px;
+      margin: 25px 0 34px;
+    }
+
+    .related-list{grid-template-columns:1fr}
+    .comments {
+      margin-top: 50px;
+      padding-top: 28px;
+    }
+  }
+
+  /* Traditional editorial article layout */
+  .post{max-width:790px;padding-top:28px}
+  .back-link{margin-bottom:20px}
+  .post-header{padding-bottom:20px}
+  .post-header h1{font-size:clamp(27px,4vw,38px);letter-spacing:-.035em;line-height:1.5}
+  .article-byline{border-top:0;margin-top:12px;padding-top:0}
+  .hero-image{max-height:430px;margin:22px 0 28px;border-radius:3px}
+  .toc{border-radius:2px;padding:18px 22px;margin:25px 0 32px}
+  .article-content{font-size:15px;line-height:2.05}
+  .article-toc{margin:24px 0 34px;border:1px solid var(--line);border-radius:18px;background:var(--surface);overflow:hidden}
+  .article-toc details{padding:0}
+  .article-toc summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 19px;cursor:pointer;list-style:none;font-size:13px;font-weight:850;color:var(--text)}
+  .article-toc summary::-webkit-details-marker{display:none}
+  .article-toc summary::after{content:"＋";color:var(--accent);font-size:16px}
+  .article-toc details[open] summary::after{content:"−"}
+  .article-toc-count{margin-left:auto;color:var(--muted);font-size:10px;font-weight:600}
+  .article-toc ol{display:flex;flex-direction:column;gap:2px;margin:0;padding:4px 18px 17px;list-style:none}
+  .article-toc li{min-width:0;margin:0;padding:0}
+  .article-toc li.toc-level-3{padding-left:13px}
+  .article-toc a{display:block;padding:7px 10px;border-radius:9px;color:var(--article-text);font-size:11px;line-height:1.6;text-decoration:none;overflow-wrap:anywhere}
+  .article-toc a:hover,.article-toc a.is-current{background:var(--surface-soft);color:var(--accent)}
+  .article-content :global(h2),.article-content :global(h3){scroll-margin-top:88px}
+  @media(max-width:760px){.article-sidebar .side-toc{display:none}}@media(max-width:560px){.article-toc{margin:20px 0 28px}}
+  .article-content :global(h2){border-left:4px solid var(--accent);padding:5px 0 5px 13px;margin:2em 0 .8em;font-size:22px}
+  .article-content :global(h3){font-size:18px;margin:1.7em 0 .6em}
+  .article-content :global(img){display:block;max-width:100%;height:auto;border-radius:14px;box-shadow:0 8px 26px rgba(0,0,0,.10)}
+  .article-content :global(table){display:block;width:100%;max-width:100%;overflow-x:auto;border-collapse:collapse;border-spacing:0;margin:24px 0;font-size:13px;line-height:1.8}
+  .article-content :global(th),.article-content :global(td){min-width:110px;padding:11px 13px;border:1px solid var(--line);text-align:left;vertical-align:top}
+  .article-content :global(th){background:var(--surface);color:var(--text);font-weight:800}
+  .article-content :global(td){color:var(--article-text)}
+  .article-content :global(tr:nth-child(even) td){background:var(--surface-soft)}
+  .hero-image{border-radius:16px}
+  .hero-image-credit{margin:-18px 0 26px;text-align:right;color:var(--muted);font-size:10px;line-height:1.6}
+  .article-content :global(figure){margin:1.8em 0}
+  .article-content :global(.book-cover-figure){width:min(100%,260px);margin:28px auto 34px;text-align:center}
+  .article-content :global(.book-cover-figure img){display:block;width:auto;max-width:100%;max-height:390px;height:auto;object-fit:contain;margin:0 auto;border-radius:5px;box-shadow:0 8px 24px rgba(0,0,0,.13)}
+  .article-content :global(.book-cover-figure figcaption){margin-top:9px;font-size:11px;line-height:1.7;color:var(--muted)}
+  .article-content :global(.book-cover-figure figcaption a){font-weight:700}
+  .article-content :global(figure img){display:block;margin:auto}
+  .article-content :global( figcaption){font-size:11px;color:var(--muted);text-align:center}
+  .post-end,.article-reaction,.share-panel,.related-list a{border-radius:3px}
+  .related{margin-top:42px}
+  @media(max-width:600px){.post{padding-top:20px}.hero-image{margin:18px 0 23px}.post-header h1{font-size:26px}}
+
+  /* KNOT article blocks inserted from the admin editor */
+  .article-content :global(.knot-balloon){position:relative;display:flex;flex-direction:column;gap:5px;width:fit-content;max-width:min(88%,560px);margin:24px 0;padding:13px 17px;border:1px solid var(--line);border-radius:15px;background:var(--surface);box-shadow:0 2px 8px rgba(0,0,0,.035)}
+  .article-content :global(.knot-balloon.knot-left){margin-right:auto;border-bottom-left-radius:4px}
+  .article-content :global(.knot-balloon.knot-right){margin-left:auto;border-bottom-right-radius:4px;background:var(--surface-soft)}
+  .article-content :global(.knot-balloon-name){font-size:11px;font-weight:800;color:var(--accent)}
+  .article-content :global(.knot-balloon-text){font-size:14px;line-height:1.85;color:var(--article-text)}
+  .article-content :global(.knot-box){margin:25px 0;padding:18px 20px;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:4px;background:var(--surface);font-size:14px;line-height:1.9;color:var(--article-text)}
+  .article-content :global(.knot-box-title){margin:0 0 7px;font-size:12px;font-weight:900;letter-spacing:.04em;color:var(--accent)}
+  .article-content :global(.knot-box p){margin:.35em 0}
+  .article-content :global(.knot-box-point){border-left-color:var(--accent)}
+  .article-content :global(.knot-box-note){border-left-color:#6d9fba}
+  .article-content :global(.knot-box-note .knot-box-title){color:#6d9fba}
+  .article-content :global(.knot-box-warning){border-left-color:#c68b4b}
+  .article-content :global(.knot-box-warning .knot-box-title){color:#c68b4b}
+  .article-content :global(.knot-box-summary){border:1px solid var(--accent);background:var(--surface-soft)}
+  .article-content :global(.knot-compare){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:24px 0}
+  .article-content :global(.knot-compare-item){padding:15px;border:1px solid var(--line);border-radius:5px;background:var(--surface)}
+  .article-content :global(.knot-compare-item strong){display:block;margin-bottom:6px;color:var(--accent);font-size:13px}
+  .article-content :global(.knot-compare-item p){margin:0;font-size:13px;line-height:1.8}
+  .article-content :global(.knot-figure){margin:28px 0;text-align:center}
+  .article-content :global(.knot-figure img){display:block;max-width:100%;height:auto;margin:auto;border-radius:4px}
+  .article-content :global(.knot-figure figcaption){margin-top:8px;color:var(--muted);font-size:11px}
+  @media(max-width:560px){.article-content :global(.knot-compare){grid-template-columns:1fr}.article-content :global(.knot-balloon){max-width:94%}}
+
+
+  /* Softer article imagery and rounded table of contents */
+  .hero-image,
+  .article-content img,
+  .article-content picture,
+  .article-content figure img,
+  .article-content video,
+  .article-content iframe{border-radius:18px;overflow:hidden}
+  .article-content img{display:block;max-width:100%;height:auto;margin:24px auto;}
+  .article-side-widget.side-toc{border-radius:16px;overflow:hidden;box-shadow:0 8px 28px rgba(0,0,0,.07)}
+  .side-toc h2{border-left:0;border-bottom:1px solid var(--line);padding:14px 16px;background:var(--surface-soft)}
+  .side-toc ol{padding:10px 12px 14px}
+  .side-toc li a{border:0;border-radius:9px;padding:9px 11px;transition:background .18s,color .18s}
+  .side-toc li a:hover{background:var(--surface-soft)}
+  .side-toc li a.is-current{border:0;border-radius:9px;background:color-mix(in srgb,var(--accent) 12%,var(--surface));}
+  .side-toc li.toc-level-3{padding-left:12px}
+
+
+  /* Sidebar TOC: fully rounded, soft navigation items */
+  .article-sidebar .article-side-widget.side-toc{
+    border:1px solid var(--line);
+    border-radius:20px;
+    overflow:hidden;
+    clip-path:inset(0 round 20px);
+    background:var(--surface);
+  }
+  .article-sidebar .side-toc h2{
+    border:0;
+    border-bottom:1px solid var(--line);
+    border-radius:0;
+    padding:15px 17px;
+    background:var(--surface-soft);
+  }
+  .article-sidebar .side-toc ol{padding:12px}
+  .article-sidebar .side-toc li{margin:3px 0}
+  .article-sidebar .side-toc li a{
+    border:0;
+    border-radius:12px;
+    padding:10px 12px;
+    background:transparent;
+    transform:none;
+    transition:background .2s ease,color .2s ease;
+  }
+  .article-sidebar .side-toc li a:hover{
+    border:0;
+    border-radius:12px;
+    background:var(--surface-soft);
+  }
+  .article-sidebar .side-toc li a.is-current{
+    border:0;
+    border-radius:12px;
+    background:color-mix(in srgb,var(--accent) 13%,var(--surface));
+    color:var(--accent);
+  }
+
+</style>
