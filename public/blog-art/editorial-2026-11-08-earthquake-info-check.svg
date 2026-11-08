@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+<title id="title">地震情報を見分ける｜KNOTオリジナル図解</title><desc id="desc">情報の確認手順。発信元 / 震度と規模 / 更新時刻。拡散前に公式発表を確認。</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#101a2a"/><stop offset="1" stop-color="#172c40"/></linearGradient><linearGradient id="line" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#54d6c7"/><stop offset="1" stop-color="#83aaff"/></linearGradient></defs>
+<rect width="1200" height="630" fill="url(#bg)"/><circle cx="1060" cy="80" r="220" fill="#3b82f6" opacity=".08"/><circle cx="110" cy="570" r="260" fill="#2dd4bf" opacity=".06"/>
+<text x="84" y="92" fill="#7ce6d6" font-family="sans-serif" font-size="22" font-weight="700" letter-spacing="4">KNOT / GUIDE</text>
+<text x="84" y="180" fill="#ffffff" font-family="sans-serif" font-size="54" font-weight="700">地震情報を見分ける</text>
+<text x="84" y="228" fill="#bdcadd" font-family="sans-serif" font-size="25">情報の確認手順</text>
+<path d="M84 275H1116" stroke="url(#line)" stroke-width="3" opacity=".8"/>
+<g font-family="sans-serif"><rect x="84" y="330" width="320" height="155" rx="22" fill="#ffffff" opacity=".08" stroke="#ffffff" stroke-opacity=".16"/><rect x="440" y="330" width="320" height="155" rx="22" fill="#ffffff" opacity=".08" stroke="#ffffff" stroke-opacity=".16"/><rect x="796" y="330" width="320" height="155" rx="22" fill="#ffffff" opacity=".08" stroke="#ffffff" stroke-opacity=".16"/>
+<circle cx="126" cy="374" r="13" fill="#59d6c8"/><circle cx="482" cy="374" r="13" fill="#80a8ff"/><circle cx="838" cy="374" r="13" fill="#f6c66b"/>
+<text x="116" y="427" fill="#ffffff" font-size="25" font-weight="700">発信元</text><text x="472" y="427" fill="#ffffff" font-size="25" font-weight="700">震度と規模</text><text x="828" y="427" fill="#ffffff" font-size="25" font-weight="700">更新時刻</text>
+<text x="116" y="463" fill="#b9c8d8" font-size="17">基礎を押さえる</text><text x="472" y="463" fill="#b9c8d8" font-size="17">根拠を確かめる</text><text x="828" y="463" fill="#b9c8d8" font-size="17">次の行動につなげる</text></g>
+<text x="84" y="560" fill="#c4d1df" font-family="sans-serif" font-size="20">拡散前に公式発表を確認</text><text x="1116" y="560" text-anchor="end" fill="#7ce6d6" font-family="sans-serif" font-size="18" letter-spacing="2">KNOT ORIGINAL</text>
+</svg>
