@@ -10,7 +10,7 @@ const posts = (await getCollection('blog'))
     b.data.pubDate.valueOf() - a.data.pubDate.valueOf() || b.id.localeCompare(a.id)
   );
 
-const trendPosts = posts.filter((post) => post.data.contentType === 'trend' || /(earthquake-info-check|docomo-data-leak|gemini-omni|meta-muse|vivant-betsuhan|wired-earphones)/.test(post.id));
+const trendPosts = posts.filter((post) => post.data.contentType === 'trend');
 const regularPosts = posts.filter((post) => !trendPosts.some((trend) => trend.id === post.id));
 const categories = [...new Set(regularPosts.map((post) => post.data.category))];
 const featuredPost = regularPosts[0];
