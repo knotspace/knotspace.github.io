@@ -57,7 +57,7 @@ const timeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTim
         <div class="sort-controls" role="group" aria-label="記事の並び順">
           <span class="sort-label">並び順</span>
           <button class="sort-button active" type="button" data-sort="newest" aria-pressed="true">最新順</button>
-          <button class="sort-button" type="button" data-sort="recommended" aria-pressed="false">おすすめ順</button>
+          <button class="sort-button" type="button" data-sort="recommended" aria-pressed="false" title="専門用語が少なく、初めてでも読みやすい記事を上位に表示">おすすめ順</button>
           <button class="sort-button" type="button" data-sort="popular" aria-pressed="false">人気順</button>
         </div>
         <div class="category-filters">
@@ -173,7 +173,7 @@ const timeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTim
     const sorted = [...cards].sort((a, b) => {
       if (activeSort === 'recommended') {
         return Number(b.dataset.readability || 0) - Number(a.dataset.readability || 0)
-          || new Date(b.querySelector('time')?.dateTime || 0).getTime() - new Date(a.querySelector('time')?.dateTime || 0).getTime();
+          || new Date(b.querySelector('time')?.getAttribute('datetime') || 0).getTime() - new Date(a.querySelector('time')?.dateTime || 0).getTime();
       }
       if (activeSort === 'popular') {
         const scoreA = popularity.get(a.dataset.title || '') ?? Number(a.dataset.popularity || 0);
