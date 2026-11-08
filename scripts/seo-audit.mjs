@@ -41,6 +41,8 @@ for (const file of htmlFiles) {
   const canonical = html.match(/<link\b(?=[^>]*\brel=["']canonical["'])[^>]*\bhref=["']([^"']+)["'][^>]*>/i)?.[1] ?? '';
   const robots = metaContent(html, 'robots').toLowerCase();
   const noindex = robots.includes('noindex');
+  // Redirect/utility pages marked noindex are intentionally excluded from indexable-page metadata checks.
+  if (noindex) continue;
 
   if (!title) errors.push(relative + ': titleタグがありません');
   if (!description) errors.push(relative + ': meta descriptionがありません');
