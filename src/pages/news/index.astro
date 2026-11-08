@@ -92,7 +92,7 @@ const sourceLinks = [
     </section>
 
     <section class="news-feed" id="domestic">
-      <div class="section-title"><div><span class="kicker">LATEST / VERIFIED</span><h2>今日のニュース</h2></div><p>Yahoo! JAPANの主要見出しを入口に、配信元・公式発表を確認して整理しています。</p></div>
+      <div class="section-title"><div><span class="kicker">LATEST / VERIFIED</span><h2>今日のニュース</h2></div><p>警察庁などの公式発表と報道機関の情報を確認し、出典を明記して整理しています。</p></div>
       <div class="feed-list">
         {stories.map((story, i) => <article class="feed-card" id={i === 1 ? 'world' : i === 2 ? 'sports' : i === 3 ? 'entertainment' : i === 0 ? 'science' : undefined}>
           <span class="feed-index">{String(i + 1).padStart(2, '0')}</span>
