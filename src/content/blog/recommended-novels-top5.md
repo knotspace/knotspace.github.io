@@ -1,15 +1,18 @@
----
+------
 title: "読んでみてほしい小説TOP5"
 description: "ミステリーから不思議な世界観の作品まで、気になった小説を5作品紹介します。"
 pubDate: 2026-11-02
 heroImage: "/blog-art/novels.svg"
-updatedDate: 2026-11-03
+updatedDate: 2026-11-08
 category: "本・読書"
 ---
 
 
 <figure class="knot-figure"><img src="https://images.unsplash.com/photo-1724500307168-16a378a149ca?auto=format&fit=crop&w=1400&q=80" alt="読書を連想させる本の積み重ね" loading="lazy" decoding="async" width="1400" height="933" /><figcaption>写真：Yazid N／<a href="https://unsplash.com/photos/a-stack-of-books-sitting-on-top-of-a-table-nl87AdK20JQ" target="_blank" rel="noopener noreferrer">Unsplash掲載ページ</a>（Unsplash License）・閲覧日：2026年11月8日</figcaption></figure>
 
+
+
+<figure class="knot-figure"><img src="/blog-art/editorial-recommended-novels-top5.svg" alt="小説5作品をジャンルと読書体験で整理した図解" loading="lazy" decoding="async" width="1200" height="630" /><figcaption>図版：KNOT制作・記事の要点を整理したオリジナル図解</figcaption></figure>
 ## 読んでみてほしい小説TOP5
 
 小説って、読み始めるまでにちょっと気合いがいりませんか？でも、一度物語に入り込んじゃうと、気づいたら時間が消えてる！あの感じ、たまらないんですよね。
