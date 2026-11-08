@@ -1,4 +1,4 @@
-/* Shared question-solving UI for Foundation and KOSEN */
+/* Shared question-solving UI for Foundation and advanced practice */
 .shared-quiz-meta{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:11px}
 .shared-progress{height:6px;background:var(--line);border-radius:20px;overflow:hidden;margin:10px 0 20px}
 .shared-progress i{display:block;width:0;height:100%;background:var(--accent);transition:width .2s}
@@ -7,11 +7,11 @@
 #foundationExplanation p{margin:6px 0 0;color:var(--muted)}
 #foundationExplanation[hidden]{display:none!important}
 @media(min-width:621px){
- html.quiz-active #answers,html.kosen-quiz-active .choices{display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:none!important;gap:12px!important}
- html.quiz-active #answers>.answer,html.kosen-quiz-active .choices>.choice{width:100%;min-height:78px!important;height:auto!important;padding:17px 20px!important;border-radius:18px!important;font-size:15px!important;line-height:1.6!important}
+ html.quiz-active #answers,html.advanced-quiz-active .choices{display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:none!important;gap:12px!important}
+ html.quiz-active #answers>.answer,html.advanced-quiz-active .choices>.choice{width:100%;min-height:78px!important;height:auto!important;padding:17px 20px!important;border-radius:18px!important;font-size:15px!important;line-height:1.6!important}
 }
 @media(max-width:620px){
- html.quiz-active,html.kosen-quiz-active{overflow-x:hidden!important}
- html.quiz-active #answers,html.kosen-quiz-active .choices{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:none!important;gap:10px!important}
- html.quiz-active #answers>.answer,html.kosen-quiz-active .choices>.choice{width:100%;min-height:72px!important;height:auto!important;padding:15px 14px!important;border-radius:17px!important;font-size:14px!important;line-height:1.6!important}
+ html.quiz-active,html.advanced-quiz-active{overflow-x:hidden!important}
+ html.quiz-active #answers,html.advanced-quiz-active .choices{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:none!important;gap:10px!important}
+ html.quiz-active #answers>.answer,html.advanced-quiz-active .choices>.choice{width:100%;min-height:72px!important;height:auto!important;padding:15px 14px!important;border-radius:17px!important;font-size:14px!important;line-height:1.6!important}
 }
