@@ -52,9 +52,7 @@ heroImage: "/blog-art/mobile-battery-flight-rules-2026.svg"
 
 mAhだけでは容量を正確に比較できません。電圧も関係するため、次の式でWhに換算します。
 
-[
-Wh = rac{mAh \times V}{1000}
-]
+Wh = (mAh × V) ÷ 1,000
 
 たとえば、電池の公称電圧を3.7Vとして計算すると、次のようになります。
 
