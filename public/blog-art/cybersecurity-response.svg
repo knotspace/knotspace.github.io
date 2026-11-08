@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+<title id="title">サイバーセキュリティ対策の仕組み</title><desc id="desc">盾を中心に、AIによる分析、被害企業への初動支援、官民の情報共有を表したオリジナル図版。</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#101722"/><stop offset="1" stop-color="#1b2d3c"/></linearGradient><linearGradient id="shield" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#a9d6c7"/><stop offset="1" stop-color="#4b907e"/></linearGradient></defs>
+<rect width="1200" height="630" fill="url(#bg)"/>
+<g stroke="#83b8a8" stroke-opacity=".14" stroke-width="1"><path d="M0 105H1200M0 210H1200M0 315H1200M0 420H1200M0 525H1200"/><path d="M100 0V630M220 0V630M340 0V630M460 0V630M580 0V630M700 0V630M820 0V630M940 0V630M1060 0V630"/></g>
+<text x="76" y="80" fill="#b5d0c7" font-family="Arial,sans-serif" font-size="18" letter-spacing="5">KNOT / TECHNOLOGY EXPLAINER</text>
+<text x="76" y="158" fill="#f5f6f2" font-family="'Noto Sans JP',sans-serif" font-size="50" font-weight="700">サイバー攻撃に、組織で備える。</text>
+<text x="78" y="203" fill="#b7c4c7" font-family="'Noto Sans JP',sans-serif" font-size="21">AI分析・初動支援・官民連携で守りと復旧を強化</text>
+<path d="M600 252L760 314V416c0 86-67 141-160 180-93-39-160-94-160-180V314z" fill="url(#shield)" opacity=".96"/>
+<path d="M600 289L716 333V412c0 62-46 105-116 139-70-34-116-77-116-139V333z" fill="#18353a"/>
+<path d="M545 398l38 38 76-88" fill="none" stroke="#bfe7d8" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/>
+<g fill="#d5e9e1" stroke="#5b9e8b" stroke-width="3"><circle cx="240" cy="330" r="40"/><circle cx="960" cy="330" r="40"/><circle cx="600" cy="535" r="40"/></g>
+<g fill="none" stroke="#a4cdbf" stroke-width="5" stroke-linecap="round"><path d="M280 330L435 370"/><path d="M920 330L765 370"/><path d="M600 495V450"/></g>
+<g fill="#17343a"><path d="M223 340l17-25 17 25z"/><path d="M945 316h30v28h-30z"/><path d="M585 535h30m-15-15v30"/></g>
+<rect x="88" y="405" width="305" height="92" rx="16" fill="#f0f1eb"/><text x="240" y="442" text-anchor="middle" fill="#18353a" font-family="'Noto Sans JP',sans-serif" font-size="19" font-weight="700">AIによる分析</text><text x="240" y="473" text-anchor="middle" fill="#52656a" font-family="'Noto Sans JP',sans-serif" font-size="14">弱点・異常の把握を支援</text>
+<rect x="807" y="405" width="305" height="92" rx="16" fill="#f0f1eb"/><text x="960" y="442" text-anchor="middle" fill="#18353a" font-family="'Noto Sans JP',sans-serif" font-size="19" font-weight="700">被害企業の初動支援</text><text x="960" y="473" text-anchor="middle" fill="#52656a" font-family="'Noto Sans JP',sans-serif" font-size="14">状況把握・復旧をサポート</text>
+<rect x="430" y="566" width="340" height="42" rx="21" fill="#ffffff" opacity=".11"/><text x="600" y="593" text-anchor="middle" fill="#d8e7e1" font-family="'Noto Sans JP',sans-serif" font-size="15" letter-spacing="2">PUBLIC &amp; PRIVATE COOPERATION</text>
+</svg>
