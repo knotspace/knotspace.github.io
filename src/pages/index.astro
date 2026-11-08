@@ -7,7 +7,7 @@ const profile = getProfileStatus(new Date());
 
 const now = new Date();
 const posts = (await getCollection('blog'))
-  .filter((post) => !post.data.publishAt || post.data.publishAt <= now)
+  .filter((post) => post.data.contentType !== 'trend' && (!post.data.publishAt || post.data.publishAt <= now))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf() || b.id.localeCompare(a.id));
 const categories = [...new Set(posts.map((post) => post.data.category))];
 const BASE = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
@@ -35,7 +35,7 @@ const dateTimeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocal
               <span class="popular-number">{String(index + 1).padStart(2, '0')}</span>
             </div>
             <div class="popular-copy">
-              <div class="story-meta"><span>{post.data.category}</span><time datetime={post.data.pubDate.toISOString()}>{dateFormat(post.data.pubDate)} {dateTimeFormat(post.data.pubDate)}</time></div>
+              <div class="story-meta"><span>{post.data.category}</span>{post.data.aiGenerated && <span class="ai-generated-label">AI生成記事</span>}<time datetime={post.data.pubDate.toISOString()}>{dateFormat(post.data.pubDate)} {dateTimeFormat(post.data.pubDate)}</time></div>
               <h2>{post.data.title}</h2>
               <p>{post.data.description}</p>
               <span class="popular-stats" data-stats-for={post.id}>閲覧数を集計中…</span>
@@ -149,7 +149,8 @@ const dateTimeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocal
 .image-open{position:absolute;right:14px;top:14px;display:grid;place-items:center;width:35px;height:35px;border-radius:50%;background:rgba(10,12,16,.68);color:#fff;font-size:16px;transition:transform .2s}
 .lead-image:hover .image-open{transform:rotate(45deg)}
 .lead-copy{padding:14px 0}
-.story-meta{display:flex;align-items:center;gap:13px;font-size:10px;color:var(--muted)}
+.story-meta{display:flex;align-items:center;gap:13px;flex-wrap:wrap;font-size:10px;color:var(--muted)}
+.ai-generated-label{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px;padding:2px 6px;font-size:8px;font-weight:700;letter-spacing:.02em;color:var(--muted);white-space:nowrap}
 .story-meta>span{color:var(--home-accent);font-weight:850;letter-spacing:.04em}
 .story-meta time{font-variant-numeric:tabular-nums}
 .lead-copy h2{margin:19px 0 13px;font-size:clamp(24px,3vw,35px);line-height:1.48;letter-spacing:-.055em;font-weight:850}
