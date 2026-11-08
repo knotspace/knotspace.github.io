@@ -1,4 +1,4 @@
-const CACHE = "knot-map-v11";
+const CACHE = "knot-map-v12";
 const SHELL = ["./", "./index.html", "./site.webmanifest", "./icon.svg"];
 
 self.addEventListener("install", (event) => {
