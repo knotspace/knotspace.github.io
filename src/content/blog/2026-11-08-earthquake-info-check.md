@@ -11,6 +11,18 @@ category: "暮らし・防災"
 
 今回は、地震の速報やSNSの投稿を確認するときに知っておきたいポイントを、気象庁や政府の公開資料をもとに整理します。
 
+
+<figure class="knot-figure">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Primary_Seismic_Station_PS22_Matsushiro%2C_Japan_%2813287614343%29.jpg" alt="長野県松代の地震観測施設。観測所の建物と設備を確認できる写真" loading="lazy" decoding="async" width="800" height="600" />
+  <figcaption>長野県松代の地震観測施設（2009年撮影）。地震観測を支える施設の一例です。写真：The Official CTBTO Photostream / <a href="https://commons.wikimedia.org/wiki/File:Primary_Seismic_Station_PS22_Matsushiro,_Japan_(13287614343).jpg">Wikimedia Commons掲載ページ</a> / CC BY 2.0。改変なし。閲覧日：2026年11月8日。</figcaption>
+</figure>
+
+<figure class="knot-figure">
+  <img src="https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/styles/full_width/public/media/images/SEH_Landers_portable_seismometer.jpg?itok=Ib1jY0gW" alt="米国地質調査所が使用した携帯型地震計の写真" loading="lazy" decoding="async" width="1000" height="1000" />
+  <figcaption>携帯型地震計の例。1992年の米国カリフォルニア州の地震後に設置された機器です。写真：Susan E. Hough / U.S. Geological Survey。<a href="https://www.usgs.gov/media/images/seismometer-0">USGS掲載ページ</a> / Public Domain。閲覧日：2026年11月8日。</figcaption>
+</figure>
+
+
 ※この記事は情報の確認方法をまとめたものです。実際に揺れを感じた場合は、まず身の安全を確保し、自治体・消防・警察などの指示に従ってください。
 
 ## 1. 最初に確認するのは「発信元」
