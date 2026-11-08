@@ -7,6 +7,11 @@ category: "高校受験"
 tags: ["高校受験", "下野模試", "模試", "偏差値"]
 ---
 
+
+<figure class="knot-figure"><img src="https://images.unsplash.com/photo-1766961557635-c1dd55b31ab9?auto=format&fit=crop&w=1400&q=80" alt="筆記用具とノートを並べた学習デスク" loading="lazy" decoding="async" width="1400" height="933" /><figcaption>写真：Jess Bailey／<a href="https://unsplash.com/photos/desk-supplies-including-pens-markers-and-glasses-qnpR1whefEw" target="_blank" rel="noopener noreferrer">Unsplash掲載ページ</a>（Unsplash License）・閲覧日：2026年11月8日</figcaption></figure>
+
+<figure class="knot-figure"><img src="https://images.unsplash.com/photo-1675453987881-003500b1d65e?auto=format&fit=crop&w=1400&q=80" alt="ノートと鉛筆を使った学習風景" loading="lazy" decoding="async" width="1400" height="933" /><figcaption>写真：Kawê Rodrigues／<a href="https://unsplash.com/photos/a-desk-with-a-notebook-pen-and-pencil-on-it-Aiu_QeLt23s" target="_blank" rel="noopener noreferrer">Unsplash掲載ページ</a>（Unsplash License）・閲覧日：2026年11月8日</figcaption></figure>
+
 ## 下野模試とは？結果の見方と受験勉強への生かし方
 
 高校受験が近づくと、模試を受ける機会が一気に増えてきますよね！
