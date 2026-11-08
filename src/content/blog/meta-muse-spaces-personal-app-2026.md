@@ -1,10 +1,15 @@
----
+------
 title: "MetaのAI「Muse」で自分専用アプリを作れる？新機能Spaceの仕組み"
 description: "MetaのパーソナルAIエージェントMuseに、自分用のアプリを作れるSpace機能が登場。何ができるのか、通常のチャットAIとの違い、使う前に知りたい注意点を整理します。"
 pubDate: "2026-11-08T13:05:00+09:00"
 category: "AI・アプリ"
+heroImage: "/blog-art/editorial-meta-muse-spaces-personal-app-2026.svg"
+updatedDate: 2026-11-08
 ---
 
+
+
+<figure class="knot-figure"><img src="/blog-art/editorial-meta-muse-spaces-personal-app-2026.svg" alt="MuseのSpaceで作成・調整・再利用する流れ" loading="lazy" decoding="async" width="1200" height="630" /><figcaption>図版：KNOT制作・記事の要点を整理したオリジナル図解</figcaption></figure>
 「毎日の予定を整理するアプリがほしい」「プレゼント候補を一覧にしたい」。そんな小さな希望を、AIとの会話から形にする機能が登場しました。
 
 MetaのパーソナルAIエージェント「Muse」に追加された「Space（スペース）」です。2026年11月7日付のImpress Watchの報道によると、Museにやりたいことを伝えると、年末ギフトの管理表やワードゲーム、DIYの計画ボードなど、自分向けのアプリのような機能を作れるといいます。
