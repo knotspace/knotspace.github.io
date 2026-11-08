@@ -1,11 +1,11 @@
-const CACHE = "knot-map-v1";
-const CORE = ["/map/", "/map/site.webmanifest", "/map/icon.svg"];
+const CACHE = "knot-map-v2-2026-11-09";
+const CORE = ["/map/", "/map/index.html", "/map/site.webmanifest", "/map/icon.svg"];
 self.addEventListener("install", event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(CORE)));
   self.skipWaiting();
 });
 self.addEventListener("activate", event => {
-  event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key !== CACHE).map(key => caches.delete(key)))));
+  event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key.startsWith("knot-map-") && key !== CACHE).map(key => caches.delete(key)))));
   self.clients.claim();
 });
 self.addEventListener("fetch", event => {
