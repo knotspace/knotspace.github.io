@@ -1,6 +1,27 @@
 {
   "releases": [
     {
+      "id": "3f96cfd",
+      "publishedAt": "2026-11-08T18:52:35+09:00",
+      "title": "Restore KNOT homepage and blog",
+      "type": "STUDY UPDATE",
+      "summary": "Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。",
+      "details": [
+        "高専問題データ",
+        "学習コンテンツ・データ",
+        "基礎問題データ",
+        "演習問題データ",
+        "名言データ"
+      ],
+      "files": [
+        "src/data/study/kosen-questions.json",
+        "src/data/study/legacy-questions.js",
+        "src/data/study/study-foundation.json",
+        "src/data/study/study-questions.json",
+        "src/data/study/study-quotes.json"
+      ]
+    },
+    {
       "id": "855f13c",
       "publishedAt": "2026-11-03T19:43:45+09:00",
       "title": "Add 100 deduplicated KNOT Study questions",
