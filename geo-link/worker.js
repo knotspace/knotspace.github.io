@@ -30,13 +30,21 @@ export default {
    let geo={};
    if(ip!=="unavailable"){try{const r=await fetch("https://ipwho.is/"+encodeURIComponent(ip));const d=await r.json();if(d.success)geo={country:d.country||"",region:d.region||"",city:d.city||"",isp:d.connection?.isp||"",org:d.connection?.org||"",asn:d.connection?.asn||""};}catch{}}
    const country=geo.country||cf.country||"",region=geo.region||cf.region||"",city=geo.city||cf.city||"";
+   const visitRecordId=makeId();
    await env.DB.prepare("INSERT INTO visits (id,link_id,ip,country,region,city,isp,org,asn,created_at) VALUES (?,?,?,?,?,?,?,?,?,?)")
-    .bind(makeId(),link.id,ip,country,region,city,geo.isp||"",geo.org||"",geo.asn||"",new Date().toISOString()).run();
-   return json({mode:link.mode,destination:link.destination,ip,region:region||"地域不明",city:city||"市区町村不明",country:country||"不明",isp:geo.isp||"不明"});
+    .bind(visitRecordId,link.id,ip,country,region,city,geo.isp||"",geo.org||"",geo.asn||"",new Date().toISOString()).run();
+   return json({mode:link.mode,destination:link.destination,visitRecordId,ip,region:region||"地域不明",city:city||"市区町村不明",country:country||"不明",isp:geo.isp||"不明"});
+  }
+  if(p==="/api/gps"&&req.method==="POST"){
+   let b;try{b=await req.json()}catch{return json({error:"Invalid JSON"},400)}
+   if(typeof b.visitRecordId!=="string"||!/^[a-f0-9]{20}$/.test(b.visitRecordId)||typeof b.latitude!=="number"||typeof b.longitude!=="number"||Math.abs(b.latitude)>90||Math.abs(b.longitude)>180)return json({error:"Invalid GPS coordinates"},400);
+   const result=await env.DB.prepare("UPDATE visits SET gps_lat=?,gps_lon=?,gps_at=? WHERE id=?").bind(b.latitude,b.longitude,new Date().toISOString(),b.visitRecordId).run();
+   if(!result.meta?.changes)return json({error:"Visit record not found"},404);
+   return json({ok:true});
   }
   if(p==="/api/results"&&req.method==="GET"){
    if(!auth(req,env))return json({error:"Unauthorized"},401);
-   const q=await env.DB.prepare("SELECT v.id,v.link_id,l.mode,v.ip,v.country,v.region,v.city,v.isp,v.org,v.asn,v.created_at FROM visits v LEFT JOIN links l ON l.id=v.link_id ORDER BY v.created_at DESC LIMIT 200").all();
+   const q=await env.DB.prepare("SELECT v.id,v.link_id,l.mode,v.ip,v.country,v.region,v.city,v.isp,v.org,v.asn,v.gps_lat,v.gps_lon,v.gps_at,v.created_at FROM visits v LEFT JOIN links l ON l.id=v.link_id ORDER BY v.created_at DESC LIMIT 200").all();
    return json({results:q.results||[]});
   }
   return json({error:"Not found"},404);
