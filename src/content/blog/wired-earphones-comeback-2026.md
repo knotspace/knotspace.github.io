@@ -12,7 +12,7 @@ updatedDate: 2026-11-08
 <figure class="knot-figure"><img src="/blog-art/editorial-wired-earphones-comeback-2026.svg" alt="有線イヤホンの特徴とワイヤレスとの比較" loading="lazy" decoding="async" width="1200" height="630" /><figcaption>図版：KNOT制作・記事の要点を整理したオリジナル図解</figcaption></figure>
 ワイヤレスイヤホンがすっかり当たり前になった今、少し意外なものが再び注目を集めています。それが、コードでスマートフォンなどにつなぐ**有線イヤホン**です。
 
-<figure class="knot-figure"><img src="https://images.unsplash.com/photo-1608156639585-b3a032ef9689?auto=format&fit=crop&w=1400&q=80" alt="白い有線イヤホンとケーブルのクローズアップ" loading="lazy" decoding="async" width="1400" height="933" /><figcaption>写真：Unsplash（<a href="https://unsplash.com/s/photos/earphone" target="_blank" rel="noopener noreferrer">イヤホン写真コレクション</a>）</figcaption></figure>
+<figure class="knot-figure"><img src="https://images.pexels.com/photos/14788073/pexels-photo-14788073.jpeg?cs=srgb&dl=pexels-thijs-lintermans-326719686-14788073.jpg&fm=jpg" alt="スマートフォンにつないだ白い有線イヤホン" loading="lazy" decoding="async" width="750" height="1000" /><figcaption>写真：Thijs Lintermans / <a href="https://www.pexels.com/photo/a-close-up-shot-of-wired-earphones-plugged-in-a-smartphone-14788073/" target="_blank" rel="noopener noreferrer">Pexels掲載ページ</a>（Pexels License）</figcaption></figure>
 
 
 2026年11月7日、TBS NEWS DIGは有線イヤホンの再流行を取り上げました。コードにビーズやチャームを付けたり、毛糸や刺しゅう糸を編み込んだりして、自分らしくアレンジする人も増えているそうです。家電量販店では取り扱い商品が増え、BOSEも約11年ぶりに有線イヤホンを発売したと紹介されています。
