@@ -4,6 +4,7 @@ description: "2026年11月9日、警察と金融機関による不正利用口�
 pubDate: "2026-11-09T07:30:00+09:00"
 category: "暮らし・セキュリティ"
 aiGenerated: true
+heroImage: "/blog-art/police-bank-information-sharing.svg"
 updatedDate: 2026-11-09
 ---
 
