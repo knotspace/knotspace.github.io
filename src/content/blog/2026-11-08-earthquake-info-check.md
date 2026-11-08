@@ -1,10 +1,15 @@
----
+------
 title: "地震の情報をSNSで見たら？まず確認したい5つのポイント"
 description: "地震関連の検索が注目された今、速報やSNSの投稿をどう確認すればいい？気象庁・政府の公式情報をもとに、落ち着いて情報を見分ける手順をまとめました。"
 pubDate: "2026-11-08T15:00:00+09:00"
 category: "暮らし・防災"
+heroImage: "/blog-art/editorial-2026-11-08-earthquake-info-check.svg"
+updatedDate: 2026-11-08
 ---
 
+
+
+<figure class="knot-figure"><img src="/blog-art/editorial-2026-11-08-earthquake-info-check.svg" alt="地震情報を見分けるの要点を整理したKNOTオリジナル図解" loading="lazy" decoding="async" width="1200" height="630" /><figcaption>図版：KNOT制作・記事の要点を整理したオリジナル図解</figcaption></figure>
 地震が起きたとき、まずスマホでニュースやSNSを確認する人は多いと思います。
 
 実際、2026年11月8日の日本向けGoogleトレンドでは、地震に関する検索語が急上昇ワードとして表示されていました。こういうときに気になるのが、「SNSで見た情報は本当なの？」「どこを見れば正確な震度が分かるの？」ということ。
