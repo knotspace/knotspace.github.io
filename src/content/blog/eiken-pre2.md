@@ -1,4 +1,4 @@
----
+------
 title: "英検準2級に合格する勉強法"
 description: "英検準2級に挑戦した経験をもとに、単語・読解・リスニング・英作文の勉強法をまとめました。"
 pubDate: "2026-11-01T00:00:00.000Z"
@@ -12,6 +12,9 @@ category: "英検・勉強法"
 
 <figure class="knot-figure"><img src="https://images.unsplash.com/photo-1675453987881-003500b1d65e?auto=format&fit=crop&w=1400&q=80" alt="ノートとペンを使った勉強風景" loading="lazy" decoding="async" width="1400" height="933" /><figcaption>写真：Kawê Rodrigues／<a href="https://unsplash.com/photos/a-desk-with-a-notebook-pen-and-pencil-on-it-Aiu_QeLt23s" target="_blank" rel="noopener noreferrer">Unsplash掲載ページ</a>（Unsplash License）・閲覧日：2026年11月8日</figcaption></figure>
 
+
+
+<figure class="knot-figure"><img src="/blog-art/editorial-eiken-pre2.svg" alt="英検準2級の単語・読解・リスニング・英作文の学習ポイント" loading="lazy" decoding="async" width="1200" height="630" /><figcaption>図版：KNOT制作・記事の要点を整理したオリジナル図解</figcaption></figure>
 ## 英検準2級に合格するまでに意識したこと
 
 「準2級って高校中級程度って書いてあるけど、そんなに早く挑戦できるの？」って思ったこと、ない？
