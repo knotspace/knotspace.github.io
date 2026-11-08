@@ -12,7 +12,7 @@ export async function GET({ site }) {
   const now = new Date();
   const pages = (await getCollection('pages')).filter((page) => !page.data.noindex);
   const posts = (await getCollection('blog'))
-    .filter((post) => !post.data.publishAt || post.data.publishAt <= now)
+    .filter((post) => post.data.contentType !== 'trend' && (!post.data.publishAt || post.data.publishAt <= now))
     .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
   // Public, indexable routes only. Account, bookmarks, editor, and error pages are excluded.
@@ -20,12 +20,12 @@ export async function GET({ site }) {
     '/',
     '/about/',
     '/blog/',
+    '/news/',
+    '/release-notes/',
     '/study/',
     '/study/foundation/',
-    '/study/kosen/',
     '/study/mock/',
     '/study/quotes/',
-    '/study/solve/',
     '/study/summary/',
     '/study/summary/biology/',
     '/study/summary/chemistry/',
