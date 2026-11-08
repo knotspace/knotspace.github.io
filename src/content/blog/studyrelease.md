@@ -1,9 +1,10 @@
----
+------
 title: "KNOT Studyを公開！理科・社会の問題演習を作ってみた"
 description: "理科・社会の問題を収録したKNOT Studyを紹介。作るときにこだわった点や、実際に開発して気づいたことをまとめました。"
 pubDate: 2026-11-02
 heroImage: "/blog-art/study-release.svg"
 category: "KNOT開発記録"
+updatedDate: 2026-11-08
 ---
 
 
@@ -11,6 +12,9 @@ category: "KNOT開発記録"
 
 <figure class="knot-figure"><img src="https://images.unsplash.com/photo-1759215524630-a6572b3cfb86?auto=format&fit=crop&w=1400&q=80" alt="スマートフォンとノートパソコンを使うデスク" loading="lazy" decoding="async" width="1400" height="933" /><figcaption>写真：Swello／<a href="https://unsplash.com/photos/smartphone-on-notebook-and-laptop-on-table-CGvC8yWgC-g" target="_blank" rel="noopener noreferrer">Unsplash掲載ページ</a>（Unsplash License）・閲覧日：2026年11月8日</figcaption></figure>
 
+
+
+<figure class="knot-figure"><img src="/blog-art/editorial-studyrelease.svg" alt="KNOT Studyの問題演習の流れを示す図解" loading="lazy" decoding="async" width="1200" height="630" /><figcaption>図版：KNOT制作・記事の要点を整理したオリジナル図解</figcaption></figure>
 ## KNOT Studyを公開しました！
 
 お待たせしました！KNOTに新しい学習コンテンツ「KNOT Study」を追加しました！
