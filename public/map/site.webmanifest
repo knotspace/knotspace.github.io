@@ -1,0 +1,12 @@
+{
+  "name": "KNOTSPACE MAP",
+  "short_name": "KNOT MAP",
+  "start_url": "/map/",
+  "scope": "/map/",
+  "display": "standalone",
+  "background_color": "#090d16",
+  "theme_color": "#090d16",
+  "icons": [
+    { "src": "/map/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
