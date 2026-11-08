@@ -58,7 +58,7 @@ const articleJsonLd = {
   publisher: { '@type': 'Organization', name: 'KNOT', url: 'https://knotspace.github.io/' },
   inLanguage: 'ja-JP',
   articleSection: post.data.category,
-  keywords: post.data.keywords?.length ? post.data.keywords : [...new Set([post.data.category, ...post.data.title.split(/[｜|：:、,\\s]+/).filter((word) => word.length >= 2)])],
+  keywords: post.data.keywords?.length ? post.data.keywords : [post.data.category, post.data.title],
   timeRequired: `PT${readingMinutes}M`,
   isAccessibleForFree: true,
   ...(post.data.heroImage ? { image: new URL(post.data.heroImage, Astro.url).href } : {}),
