@@ -10,8 +10,7 @@ const posts = (await getCollection('blog'))
     b.data.pubDate.valueOf() - a.data.pubDate.valueOf() || b.id.localeCompare(a.id)
   );
 
-const trendPosts = posts.filter((post) => post.data.contentType === 'trend');
-const regularPosts = posts.filter((post) => !trendPosts.some((trend) => trend.id === post.id));
+const regularPosts = posts.filter((post) => post.data.contentType !== 'trend');
 const categories = [...new Set(regularPosts.map((post) => post.data.category))];
 const featuredPost = regularPosts[0];
 const discoveryPosts = regularPosts.slice(1, 4);
@@ -130,7 +129,7 @@ const timeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTim
       <p class="no-results" id="no-results" hidden>
         該当する記事はありません。
       </p>
-      {trendPosts.length > 0 && <section class="trend-desk" aria-label="今日のトレンド記事"><div class="trend-heading"><div><span class="section-kicker">TREND / DAILY BRIEFING</span><h2>いま知っておきたいニュースと知識</h2><p>話題の背景や、暮らしに役立つポイントをまとめています。</p></div><span class="trend-count">{trendPosts.length} STORIES</span></div><div class="trend-grid">{trendPosts.map((post) => <a class="trend-card" href={`${BASE}blog/${post.id}/`}><div class="trend-thumb">{post.data.heroImage ? <img src={post.data.heroImage} alt={post.data.title} loading="lazy" decoding="async" width="480" height="320" /> : <span>TREND</span>}</div><div><span class="trend-category">{post.data.category}</span><h3>{post.data.title}</h3><p>{post.data.description}</p><small>{dateFormat(post.data.pubDate)}</small></div></a>)}</div></section>}
+      <a class="news-page-link" href={`${BASE}news/`}><span class="section-kicker">NEWS / DAILY BRIEFING</span><strong>今日のニュースと知っておきたい知識を読む ↗</strong></a>
     </section>
 
     <aside class="sidebar">
@@ -297,6 +296,7 @@ const timeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTim
 <style>
   :global(html:has(.archive-header)){color-scheme:dark;--bg:#08090c;--surface:#111318;--text:#f2f3f5;--muted:#a2a5ad;--line:#292c34;--accent:#c6a36a;background:#08090c;color:#f2f3f5}
   :global(html:has(.archive-header) body){background:#08090c;color:#f2f3f5}
+  .news-page-link{display:flex;flex-direction:column;gap:9px;margin:42px 0 0;padding:22px 24px;border:1px solid #30343d;background:#111318;color:#f2f3f5;text-decoration:none}.news-page-link .section-kicker{font:10px ui-monospace,monospace;letter-spacing:.16em;color:#c6a36a}.news-page-link strong{font-size:16px}.news-page-link:hover{border-color:#c6a36a}
   .editorial-feature{margin:18px 0 46px;padding:24px;border:1px solid #292c34;background:linear-gradient(135deg,#15171d,#0c0d11);}
   .feature-kicker,.section-kicker{display:flex;gap:12px;align-items:center;color:#c6a36a;font-size:9px;font-weight:800;letter-spacing:.18em}
   .feature-kicker{justify-content:space-between;margin-bottom:17px}
