@@ -6,3 +6,6 @@ compatibility_date = "2026-11-08"
 binding = "DB"
 database_name = "trace-lab"
 database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+
+[triggers]
+crons = ["0 3 * * *"]
