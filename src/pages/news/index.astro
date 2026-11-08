@@ -3,23 +3,58 @@ import Layout from '../../layouts/Layout.astro';
 
 const updated = '2026年11月9日 07:30';
 const stories = [
-  { category:'社会・防犯', time:'11月9日 運用開始', title:'警察と金融機関の不正口座情報共有、全国一元運用が開始', lead:'警察庁は、特殊詐欺などに使われた口座の情報を全国から集約し、協定を結んだ金融機関30機関へ一元的に提供する仕組みを11月9日から開始。金融機関が振込データを確認し、被害に遭うおそれのある人を警察へつなぐ仕組みです。', href:'https://www.npa.go.jp/bureau/criminal/souni/tokusyusagi/20261105.pdf', source:'警察庁', tag:'今日の重要ニュース' },
-  { category:'IT・安全', time:'11月6日発表 / 7日報道', title:'政府が緊急サイバー対策を発表、AI活用や支援チームを整備へ', lead:'政府は相次ぐ不正アクセスや情報流出を受け、総額100億円規模の緊急サイバーセキュリティ対策を発表。AIを活用して弱点を調べる専門チームや、被害企業の初動を支援する官民のチームを整備する方針です。', href:'https://apnews.com/article/japan-government-takaichi-cybersecurity-package-cyberattack-8ba038fde849e7ea9c49126ecd770972', source:'AP通信', tag:'サイバーセキュリティ' },
-  { category:'国際・IT', time:'11月5日発表', title:'警察庁とGoogleの連携で不正な中継インフラを停止', lead:'警察庁などはGoogleと連携し、住宅向けプロキシに関連するドメインやサーバーの停止につながったと発表。一般家庭のネット接続を不正な通信の中継に使う仕組みが、犯罪インフラとして悪用される問題への対策です。', href:'https://www.npa.go.jp/news/release/2026/20261104001.html', source:'警察庁', tag:'サイバー犯罪対策' },
-  { category:'スポーツ・卓球', time:'11月9日〜15日', title:'ITTF-Americas Masters Championshipsがカラカスで開幕', lead:'ITTFの2026年大会カレンダーでは、11月9日から15日までベネズエラのカラカスで大会が予定されています。大会日程は変更される場合があるため、参加者や結果は主催者の最新発表で確認してください。', href:'https://www.ittf.com/2026-events-calendar/', source:'ITTF', tag:'国際大会' },
+  {
+    category: '天気・暮らし',
+    time: '11月7日 05:55更新 / 11月9日の予報',
+    title: '北日本は初冬の寒さ、9日は広い範囲で雨や雪に注意',
+    lead: 'ウェザーニュースは、9日（月）は広い範囲で大気の状態が不安定になり、西日本・東日本では急な強い雨や雷、突風、北日本では短時間の強い雪やあられに注意が必要と予報しています。札幌市は11日まで最高気温5℃前後、東京都心は9日が13℃の予想。地域差が大きいため、出発前に目的地の最新予報を確認してください。',
+    href: 'https://weathernews.jp/news/202611/070031/',
+    source: 'ウェザーニュース',
+    tag: '今日の注目',
+  },
+  {
+    category: '国際',
+    time: '03:37 配信',
+    title: 'エジプトで旅客列車同士が衝突、7人死亡・112人けが',
+    lead: 'テレビ朝日の報道によると、エジプト当局は8日、カイロの南約70キロで旅客列車同士が衝突し、7人が死亡、112人がけがをしたと発表しました。2本はいずれも南向きで、一方がもう一方の後部に衝突したとされています。詳しい原因は発表されておらず、事故原因は未確定です。',
+    href: 'https://news.tv-asahi.co.jp/news_international/articles/000546256.html',
+    source: 'テレビ朝日',
+    tag: '国際ニュース',
+  },
+  {
+    category: 'スポーツ',
+    time: '11月8日 決勝 / 大会公式結果',
+    title: 'WTTチャンピオンズ・フランクフルト、日本勢が男女シングルスで優勝',
+    lead: '日本卓球協会の大会記録によると、男子シングルスは張本智和が決勝でパトリック・フランツィスカを4対2で破って優勝。女子シングルスは早田ひなが優勝し、大藤沙月が準優勝、張本美和が3位に入りました。大会は11月3日から8日までドイツ・フランクフルトで開催されました。',
+    href: 'https://jtta.or.jp/tour/36671',
+    source: '日本卓球協会',
+    tag: '大会結果',
+  },
+  {
+    category: 'エンタメ',
+    time: '11月8日 報道',
+    title: 'Aぇ! groupの紅白初出場「内定」との報道、正式発表とは区別して確認',
+    lead: '一部メディアが、第77回NHK紅白歌合戦への初出場が内定したと報じています。ただし、報道段階の情報と、NHKが出演者一覧を正式に発表した状態は別です。現時点では「内定報道」として扱い、確定した出演者情報としては断定しません。',
+    href: 'https://www.nikkansports.com/m/entertainment/news/amp/202611080001564.html',
+    source: '日刊スポーツ（報道）',
+    tag: '報道段階',
+  },
 ];
+
 const quickFacts = [
-  { n:'01', title:'銀行が不正口座を見つける仕組み', body:'警察が把握した不正利用口座の情報を金融機関へ提供し、金融機関は自分の銀行内の振込データを確認します。その口座へ送金した人の情報を警察へつなぐことで、被害に気付いていない人への連絡を早める狙いがあります。' },
-  { n:'02', title:'住宅向けプロキシとは？', body:'一般家庭のインターネット回線を、別の利用者が通信の中継地点として使う仕組みです。正規の用途もありますが、本人の知らないところで端末や回線が中継に使われると、迷惑行為や不正アクセスの発信元を隠すために悪用されるおそれがあります。' },
-  { n:'03', title:'サイバー対策は企業だけの話ではない', body:'スマートフォンやルーター、パソコンの更新を後回しにしないこと、使っていないアカウントを整理すること、同じパスワードを使い回さないことも、身近なセキュリティ対策です。' },
+  { n: '01', title: '天気は目的地ごとに確認する', body: '同じ寒気の影響を受けても、沿岸部・内陸部・標高によって気温や雨雪の降り方は変わります。出発地だけでなく、目的地と移動経路の時間別予報も確認しましょう。' },
+  { n: '02', title: '事故の原因は、確認された事実と分けて読む', body: '列車事故では死傷者数や発生場所が先に報じられても、原因の調査には時間がかかります。発表されていない原因を推測で断定せず、続報で確認することが大切です。' },
+  { n: '03', title: '「内定報道」と公式発表は同じではない', body: '関係者取材に基づく報道が出ても、主催者が正式な出演者一覧を発表するまでは確定情報とは限りません。記事の日付と発表主体を見て、情報の段階を区別しましょう。' },
 ];
+
 const sourceLinks = [
-  { label:'Yahoo! JAPAN ニュース', href:'https://www.yahoo.co.jp/' },
-  { label:'警察庁・金融機関との情報共有型連携（PDF）', href:'https://www.npa.go.jp/bureau/criminal/souni/tokusyusagi/20261105.pdf' },
-  { label:'警察庁・Google社と連携した犯罪インフラのテイクダウン', href:'https://www.npa.go.jp/news/release/2026/20261104001.html' },
-  { label:'警察庁・不正アクセスによる大規模情報流出への指示', href:'https://www.npa.go.jp/newlyarrived/?seq=20001' },
-  { label:'AP通信・日本の緊急サイバーセキュリティ対策', href:'https://apnews.com/article/japan-government-takaichi-cybersecurity-package-cyberattack-8ba038fde849e7ea9c49126ecd770972' },
-  { label:'ITTF・2026年大会カレンダー', href:'https://www.ittf.com/2026-events-calendar/' },
+  { label: 'Yahoo! JAPAN トップニュース（話題発見）', href: 'https://www.yahoo.co.jp/' },
+  { label: 'ウェザーニュース・11月9日を含む週間予報', href: 'https://weathernews.jp/news/202611/070031/' },
+  { label: '気象庁・全国の天気予報と防災情報', href: 'https://www.jma.go.jp/bosai/forecast/' },
+  { label: 'テレビ朝日・エジプトの列車衝突', href: 'https://news.tv-asahi.co.jp/news_international/articles/000546256.html' },
+  { label: '日本卓球協会・WTTチャンピオンズ フランクフルト公式結果', href: 'https://jtta.or.jp/tour/36671' },
+  { label: '日刊スポーツ・紅白初出場に関する報道', href: 'https://www.nikkansports.com/m/entertainment/news/amp/202611080001564.html' },
+  { label: 'NHKオンライン・第77回NHK紅白歌合戦の案内', href: 'https://www.event.nhk.or.jp/e-portal/' },
 ];
 
 ---
@@ -30,7 +65,7 @@ const sourceLinks = [
       <div class="masthead-top"><span>KNOT / INDEPENDENT NEWS DESK</span><span>JAPAN · DAILY EDITION</span></div>
       <div class="masthead-main"><a href="/news/" aria-label="KNOT NEWS">NEWS<span>.</span></a><p>今日のニュースを、背景までわかりやすく。</p></div>
       <nav class="news-categories" aria-label="ニュースカテゴリー">
-        <a href="#top">主要</a><a href="#domestic">国内</a><a href="#world">国際</a><a href="#economy">経済・暮らし</a><a href="#science">科学・防災</a><a href="#knowledge">今知っておきたい知識</a>
+        <a href="#top">主要</a><a href="#domestic">国内・天気</a><a href="#world">国際</a><a href="#sports">スポーツ</a><a href="#entertainment">エンタメ</a><a href="#knowledge">今知っておきたい知識</a>
       </nav>
     </div>
 
@@ -59,7 +94,7 @@ const sourceLinks = [
     <section class="news-feed" id="domestic">
       <div class="section-title"><div><span class="kicker">LATEST / VERIFIED</span><h2>今日のニュース</h2></div><p>Yahoo! JAPANの主要見出しを入口に、配信元・公式発表を確認して整理しています。</p></div>
       <div class="feed-list">
-        {stories.map((story, i) => <article class="feed-card" id={i === 1 ? 'world' : i === 2 ? 'economy' : i === 0 ? 'science' : undefined}>
+        {stories.map((story, i) => <article class="feed-card" id={i === 1 ? 'world' : i === 2 ? 'sports' : i === 3 ? 'entertainment' : i === 0 ? 'science' : undefined}>
           <span class="feed-index">{String(i + 1).padStart(2, '0')}</span>
           <div class="feed-content"><div class="feed-meta"><span>{story.category}</span><time>{story.time}</time></div><h3>{story.title}</h3><p>{story.lead}</p><div class="feed-bottom"><span>出典：{story.source}</span><a href={story.href} target="_blank" rel="noopener noreferrer">元記事・発表を確認 ↗</a></div></div>
         </article>)}
@@ -74,21 +109,20 @@ const sourceLinks = [
     </section>
 
     <section class="action-panel">
-      <div><span class="kicker">WHEN AN EARTHQUAKE HAPPENS</span><h2>地震のあとに確認すること</h2></div>
+      <div><span class="kicker">CHECK BEFORE YOU GO OUT</span><h2>外出前の確認ポイント</h2></div>
       <ol>
-        <li>まず頭を守り、家具・ガラス・落下物から離れる。</li>
-        <li>火気やガス臭、建物の損傷、避難経路を安全な範囲で確認する。</li>
-        <li>崖・斜面・擁壁の近くでは、亀裂や落石に注意して近づかない。</li>
-        <li>雨が降る地域では、自治体の避難情報と気象庁の土砂災害情報を確認する。</li>
-        <li>強い揺れが続く可能性を考え、靴・ライト・スマホの充電を手元に用意する。</li>
+        <li>出発地だけでなく、目的地と移動経路の時間別天気を確認する。</li>
+        <li>雨・雪・雷・強風の予報があれば、鉄道・航空・道路の運行情報も確認する。</li>
+        <li>事故や災害の速報は、自治体・気象庁・交通事業者などの更新を確認する。</li>
+        <li>未確定の情報は断定して拡散せず、公式発表や続報を待つ。</li>
       </ol>
-      <p>危険を感じた場合は、記事を読み続けず、自治体・消防・警察などの案内に従ってください。</p>
-    </section>
+      <p>警報や避難情報が出ている場合は、記事よりも自治体・気象庁などの案内を優先してください。</p>
+    </section></section>
 
     <section class="sources-section">
       <div><span class="kicker">PRIMARY SOURCES</span><h2>確認した情報源</h2></div>
       <ul>{sourceLinks.map((source) => <li><a href={source.href} target="_blank" rel="noopener noreferrer">{source.label} ↗</a></li>)}</ul>
-      <p>ニュースの確認基準：2026年11月8日。速報値や今後変更される可能性がある情報は、最新の公式発表を優先してください。</p>
+      <p>ニュースの確認基準：2026年11月9日 07:45 JST。予報や速報は更新されるため、リンク先の最新情報を確認してください。「内定」など未確定の報道は、正式発表と区別しています。</p>
     </section>
 
     <footer class="news-footer"><a href="/">KNOT.</a><span>INDEPENDENT NEWS & KNOWLEDGE / UPDATED DAILY</span><a href="/blog/">通常の記事一覧へ ↗</a></footer>
