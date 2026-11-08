@@ -1,9 +1,10 @@
----
-title: "Knotへようこそ！ブログ兼備忘録をスタートします"
+------
+title: "KNOTへようこそ！ブログを始めました"
 description: "KNOTを始めた理由や、このブログで書いていきたいことを紹介します。"
 pubDate: "2026-10-31"
 category: "お知らせ"
 heroImage: "/blog-art/welcome.svg"
+updatedDate: 2026-11-08
 ---
 
 
@@ -11,7 +12,10 @@ heroImage: "/blog-art/welcome.svg"
 
 <figure class="knot-figure"><img src="https://images.unsplash.com/photo-1769794371055-54436b54577e?auto=format&fit=crop&w=1400&q=80" alt="本とノートを広げた作業机" loading="lazy" decoding="async" width="1400" height="933" /><figcaption>写真：Yen Vu／<a href="https://unsplash.com/photos/desk-with-open-book-laptop-and-study-materials-HNjWq8WPyoY" target="_blank" rel="noopener noreferrer">Unsplash掲載ページ</a>（Unsplash License）・閲覧日：2026年11月8日</figcaption></figure>
 
-## Knotへようこそ！
+
+
+<figure class="knot-figure"><img src="/blog-art/editorial-first-post.svg" alt="KNOTブログのテーマと記事の読み方" loading="lazy" decoding="async" width="1200" height="630" /><figcaption>図版：KNOT制作・記事の要点を整理したオリジナル図解</figcaption></figure>
+## KNOTへようこそ！
 
 はじめまして！ついにブログ「KNOT」を始めました！
 
