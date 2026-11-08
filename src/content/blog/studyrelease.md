@@ -6,6 +6,11 @@ heroImage: "/blog-art/study-release.svg"
 category: "KNOT開発記録"
 ---
 
+
+<figure class="knot-figure"><img src="https://images.unsplash.com/photo-1769794371055-54436b54577e?auto=format&fit=crop&w=1400&q=80" alt="本やノート、パソコンを広げた学習環境" loading="lazy" decoding="async" width="1400" height="933" /><figcaption>写真：Yen Vu／<a href="https://unsplash.com/photos/desk-with-open-book-laptop-and-study-materials-HNjWq8WPyoY" target="_blank" rel="noopener noreferrer">Unsplash掲載ページ</a>（Unsplash License）・閲覧日：2026年11月8日</figcaption></figure>
+
+<figure class="knot-figure"><img src="https://images.unsplash.com/photo-1759215524630-a6572b3cfb86?auto=format&fit=crop&w=1400&q=80" alt="スマートフォンとノートパソコンを使うデスク" loading="lazy" decoding="async" width="1400" height="933" /><figcaption>写真：Swello／<a href="https://unsplash.com/photos/smartphone-on-notebook-and-laptop-on-table-CGvC8yWgC-g" target="_blank" rel="noopener noreferrer">Unsplash掲載ページ</a>（Unsplash License）・閲覧日：2026年11月8日</figcaption></figure>
+
 ## KNOT Studyを公開しました！
 
 お待たせしました！KNOTに新しい学習コンテンツ「KNOT Study」を追加しました！
