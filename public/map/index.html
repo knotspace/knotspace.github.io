@@ -18,8 +18,8 @@
 const PASS_HASH="60be9861750facbfad8758254a2f76c0cfe78d54459a3bc187d49b1401fcd8e8";
 async function digest(s){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}
 function unlock(){document.getElementById("gate").style.display="none";document.getElementById("app").style.display="block";draw()}
-document.getElementById("login").addEventListener("submit",async e=>{e.preventDefault();if(await digest(document.getElementById("password").value)===PASS_HASH){sessionStorage.setItem("knot-map-open","1");unlock()}else{document.getElementById("error").textContent="パスワードが違います。";document.getElementById("password").select()}});
-if(sessionStorage.getItem("knot-map-open")==="1")unlock();
+document.getElementById("login").addEventListener("submit",async e=>{e.preventDefault();if(await digest(document.getElementById("password").value)===PASS_HASH){localStorage.setItem("knot-map-open","1");unlock()}else{document.getElementById("error").textContent="パスワードが違います。";document.getElementById("password").select()}});
+if(localStorage.getItem("knot-map-open")==="1")unlock();
 const sites=[
 {name:"KNOTSPACE",url:"https://knotspace.github.io/",desc:"メインサイト・ブログ・お知らせ",type:"MAIN SITE",symbol:"K",children:[["ブログ一覧","https://knotspace.github.io/blog/"],["お知らせ・更新情報","https://knotspace.github.io/#news"]]},
 {name:"Study",url:"https://knotspace.github.io/study/",desc:"学習コンテンツ・問題演習",type:"STUDY",symbol:"S",children:[["基礎網羅問題","https://knotspace.github.io/study/"],["公立高校入試問題精講","https://knotspace.github.io/study/public-exam.html"],["問題バンク","https://knotspace.github.io/study/question-bank.html"],["要点まとめ","https://knotspace.github.io/study/summary.html"],["モチベーション","https://knotspace.github.io/study/motivation.html"],["更新履歴","https://knotspace.github.io/study/release-notes.html"],["S専用スペース","https://knotspace.github.io/study/s-exclusive.html"]]},
