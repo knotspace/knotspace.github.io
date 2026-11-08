@@ -1,11 +1,19 @@
----
+------
 title: "ワイヤレス全盛なのに、なぜ有線イヤホン？いま再び選ばれる理由"
 description: "有線イヤホンが再び注目されている。充電や接続のわずらわしさ、ファッションとしての楽しみ方、選ぶときの注意点まで、最近の動きをもとに整理する。"
 pubDate: "2026-11-08T12:14:00+09:00"
 category: "暮らし・テクノロジー"
+heroImage: "/blog-art/editorial-wired-earphones-comeback-2026.svg"
+updatedDate: 2026-11-08
 ---
 
+
+
+<figure class="knot-figure"><img src="/blog-art/editorial-wired-earphones-comeback-2026.svg" alt="有線イヤホンの特徴とワイヤレスとの比較" loading="lazy" decoding="async" width="1200" height="630" /><figcaption>図版：KNOT制作・記事の要点を整理したオリジナル図解</figcaption></figure>
 ワイヤレスイヤホンがすっかり当たり前になった今、少し意外なものが再び注目を集めています。それが、コードでスマートフォンなどにつなぐ**有線イヤホン**です。
+
+<figure class="knot-figure"><img src="https://images.unsplash.com/photo-1608156639585-b3a032ef9689?auto=format&fit=crop&w=1400&q=80" alt="白い有線イヤホンとケーブルのクローズアップ" loading="lazy" decoding="async" width="1400" height="933" /><figcaption>写真：Unsplash（<a href="https://unsplash.com/s/photos/earphone" target="_blank" rel="noopener noreferrer">イヤホン写真コレクション</a>）</figcaption></figure>
+
 
 2026年11月7日、TBS NEWS DIGは有線イヤホンの再流行を取り上げました。コードにビーズやチャームを付けたり、毛糸や刺しゅう糸を編み込んだりして、自分らしくアレンジする人も増えているそうです。家電量販店では取り扱い商品が増え、BOSEも約11年ぶりに有線イヤホンを発売したと紹介されています。
 
