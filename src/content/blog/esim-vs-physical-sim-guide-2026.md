@@ -11,7 +11,7 @@ heroImage: "/blog-art/esim-vs-physical-sim-2026.svg"
 **AI生成記事**：公開資料をもとにAIを活用して作成し、出典と制度内容を確認しています。航空会社・通信会社の最新案内も利用前に確認してください。
 
 
-<figure class="knot-figure"><img src="/blog-art/esim-vs-physical-sim-2026.svg" alt="物理SIMカードと端末に内蔵されるeSIMの違いを比較した図" loading="lazy" decoding="async" width="1200" height="630" /><figcaption>図版：KNOT制作・Appleと通信会社の公式案内をもとにしたオリジナル図解</figcaption></figure>
+
 
 スマートフォンを買い替えたり、通信会社を乗り換えたりするときに目にする「SIMカード」と「eSIM」。名前は似ていますが、使い始めるまでの手順や、機種変更の方法が少し違います。
 
