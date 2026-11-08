@@ -9,7 +9,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "prebuild": "node scripts/copy-decap-cms.mjs",
-    "postbuild": "node scripts/seo-audit.mjs && node scripts/copy-map.mjs"
+    "postbuild": "node scripts/copy-map.mjs && node scripts/seo-audit.mjs"
   },
   "dependencies": {
     "astro": "^7.4.5",
