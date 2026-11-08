@@ -11,6 +11,10 @@ const posts = (await getCollection('blog'))
   );
 
 const categories = [...new Set(posts.map((post) => post.data.category))];
+const trendPosts = posts.filter((post) => post.data.contentType === 'trend' || /(earthquake-info-check|docomo-data-leak|gemini-omni|meta-muse|vivant-betsuhan|wired-earphones)/.test(post.id));
+const regularPosts = posts.filter((post) => !trendPosts.some((trend) => trend.id === post.id));
+const featuredPost = posts[0];
+const discoveryPosts = posts.slice(1, 4);
 const readingTime = (body = '') => Math.max(1, Math.ceil(body.replace(/\s/g, '').length / 500));
 const recommendationScore = (post) => {
   const body = post.body || '';
@@ -47,6 +51,15 @@ const timeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTim
 
   <div class="content-layout">
     <section class="main-column">
+      {featuredPost && <section class="editorial-feature" aria-label="Featured article">
+        <div class="feature-kicker"><span>EDITOR'S PICK</span><span>THE KNOT JOURNAL</span></div>
+        <a class="feature-main" href={`${BASE}blog/${featuredPost.id}/`}>
+          <div class="feature-visual">{featuredPost.data.heroImage ? <img src={featuredPost.data.heroImage} alt={featuredPost.data.title} fetchpriority="high" decoding="async" width="1200" height="630" /> : <span>KNOT / FEATURE</span>}</div>
+          <div class="feature-copy"><span class="feature-category">{featuredPost.data.category}</span><h2>{featuredPost.data.title}</h2><p>{featuredPost.data.description}</p><span class="feature-link">記事を読む ↗</span></div>
+        </a>
+        {discoveryPosts.length > 0 && <div class="discovery-grid">{discoveryPosts.map((post) => <a class="discovery-card" href={`${BASE}blog/${post.id}/`}><span>{post.data.category}</span><strong>{post.data.title}</strong><small>{post.data.description}</small></a>)}</div>}
+      </section>}
+      <section class="category-discovery" aria-label="カテゴリーから探す"><div><span class="section-kicker">BROWSE BY CATEGORY</span><h2>興味のあるテーマから探す</h2></div><div class="category-discovery-grid">{categories.map((category) => <a href={`${BASE}blog/?category=${encodeURIComponent(category)}`}><span>{category}</span><b>↗</b></a>)}</div></section>
       <div class="filter-area">
         <input
           id="article-search"
@@ -78,7 +91,7 @@ const timeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTim
       </div>
 
       <div class="archive-list" id="archive-list">
-        {posts.map((post, index) => (
+        {regularPosts.map((post, index) => (
           <a
             class="post-card"
             href={`${BASE}blog/${post.id}/`}
@@ -117,6 +130,7 @@ const timeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTim
       <p class="no-results" id="no-results" hidden>
         該当する記事はありません。
       </p>
+      {trendPosts.length > 0 && <section class="trend-desk" aria-label="今日のトレンド記事"><div class="trend-heading"><div><span class="section-kicker">TREND / DAILY BRIEFING</span><h2>いま知っておきたいニュースと知識</h2><p>話題の背景や、暮らしに役立つポイントをまとめています。</p></div><span class="trend-count">{trendPosts.length} STORIES</span></div><div class="trend-grid">{trendPosts.map((post) => <a class="trend-card" href={`${BASE}blog/${post.id}/`}><div class="trend-thumb">{post.data.heroImage ? <img src={post.data.heroImage} alt={post.data.title} loading="lazy" decoding="async" width="480" height="320" /> : <span>TREND</span>}</div><div><span class="trend-category">{post.data.category}</span><h3>{post.data.title}</h3><p>{post.data.description}</p><small>{dateFormat(post.data.pubDate)}</small></div></a>)}</div></section>}
     </section>
 
     <aside class="sidebar">
@@ -281,6 +295,37 @@ const timeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTim
 </script>
 
 <style>
+  :global(html:has(.archive-header)){color-scheme:dark;--bg:#08090c;--surface:#111318;--text:#f2f3f5;--muted:#a2a5ad;--line:#292c34;--accent:#c6a36a;background:#08090c;color:#f2f3f5}
+  :global(html:has(.archive-header) body){background:#08090c;color:#f2f3f5}
+  .editorial-feature{margin:18px 0 46px;padding:24px;border:1px solid #292c34;background:linear-gradient(135deg,#15171d,#0c0d11);}
+  .feature-kicker,.section-kicker{display:flex;gap:12px;align-items:center;color:#c6a36a;font-size:9px;font-weight:800;letter-spacing:.18em}
+  .feature-kicker{justify-content:space-between;margin-bottom:17px}
+  .feature-main{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(260px,.75fr);gap:28px;align-items:center}
+  .feature-visual{aspect-ratio:16/9;overflow:hidden;background:#20232b}
+  .feature-visual img{width:100%;height:100%;object-fit:cover;display:block}
+  .feature-copy{padding:8px 12px}
+  .feature-category,.trend-category{color:#c6a36a;font-size:10px;font-weight:800;letter-spacing:.08em}
+  .feature-copy h2{font-size:clamp(24px,3vw,38px);line-height:1.35;letter-spacing:-.04em;margin:14px 0}
+  .feature-copy p{color:#a2a5ad;font-size:13px;line-height:1.9}
+  .feature-link{display:inline-block;margin-top:12px;color:#e6d0a8;font-size:11px;font-weight:800}
+  .discovery-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:22px}
+  .discovery-card{display:flex;flex-direction:column;gap:9px;padding:15px;border:1px solid #292c34;background:#101116;min-height:140px}
+  .discovery-card span{font-size:9px;color:#c6a36a}
+  .discovery-card strong{font-size:14px;line-height:1.55}
+  .discovery-card small{color:#a2a5ad;font-size:10px;line-height:1.65}
+  .category-discovery{margin:38px 0;padding:24px 0;border-top:1px solid #292c34;border-bottom:1px solid #292c34}
+  .category-discovery h2,.trend-heading h2{font-size:22px;letter-spacing:-.035em;margin:9px 0 18px}
+  .category-discovery-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+  .category-discovery-grid a{display:flex;justify-content:space-between;gap:10px;padding:13px 14px;border:1px solid #292c34;background:#111318;font-size:11px}
+  .category-discovery-grid b{color:#c6a36a}
+  .trend-desk{margin:55px 0 15px;padding:28px;border:1px solid #292c34;background:#101116}
+  .trend-heading{display:flex;justify-content:space-between;align-items:end;gap:18px;margin-bottom:20px}
+  .trend-heading h2{margin-bottom:7px}.trend-heading p{font-size:11px;color:#a2a5ad;margin:0}
+  .trend-count{font-size:9px;color:#c6a36a;letter-spacing:.12em;white-space:nowrap}
+  .trend-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+  .trend-card{display:grid;grid-template-columns:120px minmax(0,1fr);gap:14px;padding:12px;border:1px solid #292c34;background:#0b0c10}
+  .trend-thumb{aspect-ratio:3/2;background:#20232b;overflow:hidden}.trend-thumb img{width:100%;height:100%;object-fit:cover}
+  .trend-card h3{font-size:13px;line-height:1.55;margin:5px 0}.trend-card p{font-size:10px;line-height:1.65;color:#a2a5ad;margin:0 0 6px}.trend-card small{font-size:9px;color:#858994}
   .archive-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px}
   .random-button{border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:999px;padding:9px 14px;font-size:11px;font-weight:700;cursor:pointer}
   .random-button:hover{border-color:var(--accent)}
@@ -541,6 +586,7 @@ const timeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTim
   }
 
   @media (max-width: 780px) {
+    .feature-main{grid-template-columns:1fr}.feature-copy{padding:8px 0}.category-discovery-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.trend-grid{grid-template-columns:1fr}
     .content-layout {
       grid-template-columns: 1fr;
       gap: 25px;
@@ -557,6 +603,7 @@ const timeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTim
   }
 
   @media (max-width: 520px) {
+    .editorial-feature{padding:14px;margin-top:10px}.discovery-grid{grid-template-columns:1fr}.discovery-card{min-height:0}.trend-desk{padding:16px}.trend-card{grid-template-columns:92px minmax(0,1fr);gap:10px}.trend-heading{align-items:start}.trend-heading h2{font-size:18px}
     .post-card {
       grid-template-columns: 105px minmax(0, 1fr);
       gap: 12px;
