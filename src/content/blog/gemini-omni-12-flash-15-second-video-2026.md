@@ -10,6 +10,9 @@ updatedDate: 2026-11-08
 
 
 <figure class="knot-figure"><img src="/blog-art/editorial-gemini-omni-12-flash-15-second-video-2026.svg" alt="動画生成AIの最大尺・参照素材・会話編集を整理した図解" loading="lazy" decoding="async" width="1200" height="630" /><figcaption>図版：KNOT制作・記事の要点を整理したオリジナル図解</figcaption></figure>
+
+<figure class="knot-figure"><img src="https://images.pexels.com/photos/6253568/pexels-photo-6253568.jpeg?cs=srgb&dl=pexels-vito-gorican-10954628-6253568.jpg&fm=jpg" alt="動画編集ソフトのタイムライン画面。動画生成・編集の作業をイメージした写真" loading="lazy" decoding="async" width="1000" height="667" /><figcaption>写真：Vito Goričan / <a href="https://www.pexels.com/photo/close-up-shot-of-a-computer-screen-6253568/" target="_blank" rel="noopener noreferrer">Pexels掲載ページ</a>（Pexels License・<a href="https://www.pexels.com/ja-jp/license/" target="_blank" rel="noopener noreferrer">利用条件</a>）</figcaption></figure>
+
 AIで動画を作るとき、「人物の服が途中で変わる」「背景を少し直したいだけなのに最初から作り直しになる」といった悩みが出ることがあります。
 
 Googleは2026年11月5日、動画生成・編集モデル「Gemini Omni 1.2 Flash」の一般提供開始を発表しました。最大15秒の動画生成や、参照画像・動画に合わせる性能の改善、会話を続けながら同じ動画を編集できる機能などが特徴です。
