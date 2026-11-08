@@ -1,0 +1,202 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const updated = '2026年11月8日 19:45';
+const stories = [
+  {
+    category: '防災・科学',
+    time: '01:04 発生 / 19:23時点で確認',
+    title: '愛知県で最大震度5強。地震のあとに気を付けたいこと',
+    lead: '11月8日午前1時4分ごろ、静岡県西部を震源とする地震が発生。気象庁の発表ではマグニチュード5.7、深さ約41kmで、愛知県知多市で最大震度5強を観測しました。',
+    href: 'https://www.jma.go.jp/jma/press/2611/08a/202611080305.html',
+    source: '気象庁',
+    tag: '今日の重要ニュース',
+  },
+  {
+    category: '政治・国際',
+    time: '15:24 配信',
+    title: '高市首相、日朝首脳会談に意欲を表明',
+    lead: '拉致被害者の即時一括帰国を求める国民大集会で、金正恩委員長と会って率直に話し合いたいとの考えを示しました。発言と、実際に会談が決まったことは分けて受け止める必要があります。',
+    href: 'https://www.fnn.jp/articles/-/1148349?display=full',
+    source: 'FNNプライムオンライン',
+    tag: '政治',
+  },
+  {
+    category: '暮らし・経済',
+    time: '14:15 配信',
+    title: '緑茶飲料に逆風、麦茶やコーン茶の存在感が上昇',
+    lead: '食品産業新聞社の報道では、2026年1〜9月の茶系飲料販売金額は前年同期比2％減。緑茶飲料の伸び悩みや、麦茶・コーン茶の動きが紹介されています。市場全体と個別商品の売れ行きは区別して見ることが大切です。',
+    href: 'https://www.ssnp.co.jp/beverage/710672/',
+    source: '食品産業新聞社ニュースWEB',
+    tag: '消費・食品',
+  },
+  {
+    category: '安全・生活',
+    time: '10:25 配信',
+    title: 'スズメバチ対策の「疑似オニヤンマ」を検証',
+    lead: '北海道の河川管理現場で、トラ柄ロープとクリップを使った簡易的な対策を試した事例が報じられました。設置した場所で巣が確認されなかったという報告はありますが、これだけで効果が証明されたわけではありません。',
+    href: 'https://news.tv-asahi.co.jp/news_society/articles/000546148.html',
+    source: 'テレビ朝日',
+    tag: '暮らし',
+  },
+];
+
+const quickFacts = [
+  { n: '01', title: '震度とマグニチュードは別の数字', body: 'マグニチュードは地震そのものの規模を表す指標。震度は、ある場所でどれくらい揺れたかを示します。同じ地震でも、場所によって観測される震度は変わります。' },
+  { n: '02', title: '地震のあと、雨にも注意する理由', body: '強い揺れで斜面や地盤が緩むと、その後の雨で土砂災害が起きやすくなることがあります。気象庁は今回、知多市で土砂災害に関する警報等の発表基準を通常の8割に引き下げて運用すると発表しました。' },
+  { n: '03', title: '速報の数字はあとから変わることがある', body: '地震直後の震源・深さ・規模は速報値です。観測データの精査によって更新されるため、最初の通知だけでなく気象庁の最新情報を確認しましょう。' },
+];
+
+const sourceLinks = [
+  { label: 'Yahoo! JAPAN ニュース', href: 'https://www.yahoo.co.jp/' },
+  { label: '気象庁・地震情報', href: 'https://www.jma.go.jp/bosai/map.html#contents=earthquake_map' },
+  { label: '気象庁・地震後の土砂災害対応', href: 'https://www.jma.go.jp/jma/press/2611/08b/20261108_zantei.html' },
+  { label: '東海市・11月8日の地震への対応', href: 'https://www.city.tokai.aichi.jp/iza/bosai/1011661.html' },
+];
+---
+
+<Layout title="NEWS｜今日のニュースと知っておきたい知識 | KNOT" description="Yahoo! JAPANのニュース見出しを参考に、今日の重要ニュースと背景・暮らしに役立つ知識を一次情報とともに整理するKNOT NEWS。">
+  <main class="news-page">
+    <div class="news-masthead">
+      <div class="masthead-top"><span>KNOT / INDEPENDENT NEWS DESK</span><span>JAPAN · DAILY EDITION</span></div>
+      <div class="masthead-main"><a href="/news/" aria-label="KNOT NEWS">NEWS<span>.</span></a><p>今日のニュースを、背景までわかりやすく。</p></div>
+      <nav class="news-categories" aria-label="ニュースカテゴリー">
+        <a href="#top">主要</a><a href="#domestic">国内</a><a href="#world">国際</a><a href="#economy">経済・暮らし</a><a href="#science">科学・防災</a><a href="#knowledge">今知っておきたい知識</a>
+      </nav>
+    </div>
+
+    <section class="edition-line" id="top"><span>DAILY BRIEFING / 2026.11.08 SUN</span><span>最終確認：{updated} JST</span></section>
+
+    <section class="lead-grid">
+      <article class="lead-story">
+        <a class="lead-image" href={stories[0].href} target="_blank" rel="noopener noreferrer">
+          <div class="earth-graphic"><span>EARTHQUAKE</span><strong>5<span>+</span></strong><small>最大震度</small><i></i></div>
+          <span class="image-caption">静岡県西部を震源とする地震 / 気象庁発表</span>
+        </a>
+        <div class="lead-copy">
+          <span class="kicker">TOP STORY · 防災・科学</span>
+          <h1>愛知県で最大震度5強。<br/>地震のあとに気を付けたいこと</h1>
+          <p>11月8日未明に発生した地震。揺れそのものだけでなく、余震や雨による土砂災害への備えも重要です。確認できた情報と、今できる行動を整理します。</p>
+          <div class="lead-meta"><span>2026.11.08</span><span>約5分で読める要点</span></div>
+          <a class="read-link" href="#domestic">ニュースを読む <b>↘</b></a>
+        </div>
+      </article>
+      <aside class="side-brief">
+        <div class="side-heading"><span>ALSO IN FOCUS</span><span>02—04</span></div>
+        {stories.slice(1).map((story, i) => <a class="side-item" href={story.href} target="_blank" rel="noopener noreferrer"><span class="side-number">0{i + 2}</span><div><small>{story.category} · {story.time}</small><h2>{story.title}</h2><p>{story.source}</p></div><b>↗</b></a>)}
+      </aside>
+    </section>
+
+    <section class="news-feed" id="domestic">
+      <div class="section-title"><div><span class="kicker">LATEST / VERIFIED</span><h2>今日のニュース</h2></div><p>Yahoo! JAPANの主要見出しを入口に、配信元・公式発表を確認して整理しています。</p></div>
+      <div class="feed-list">
+        {stories.map((story, i) => <article class="feed-card" id={i === 1 ? 'world' : i === 2 ? 'economy' : i === 0 ? 'science' : undefined}>
+          <span class="feed-index">{String(i + 1).padStart(2, '0')}</span>
+          <div class="feed-content"><div class="feed-meta"><span>{story.category}</span><time>{story.time}</time></div><h3>{story.title}</h3><p>{story.lead}</p><div class="feed-bottom"><span>出典：{story.source}</span><a href={story.href} target="_blank" rel="noopener noreferrer">元記事・発表を確認 ↗</a></div></div>
+        </article>)}
+      </div>
+    </section>
+
+    <section class="knowledge-section" id="knowledge">
+      <div class="knowledge-head"><span class="kicker">KNOWLEDGE / EXPLAINED</span><h2>今知っておきたい知識</h2><p>ニュースを見て終わりにせず、知っておくと役立つ背景を短く整理。</p></div>
+      <div class="fact-grid">
+        {quickFacts.map((fact) => <article class="fact-card"><span>{fact.n} / QUICK KNOWLEDGE</span><h3>{fact.title}</h3><p>{fact.body}</p></article>)}
+      </div>
+    </section>
+
+    <section class="action-panel">
+      <div><span class="kicker">WHEN AN EARTHQUAKE HAPPENS</span><h2>地震のあとに確認すること</h2></div>
+      <ol>
+        <li>まず頭を守り、家具・ガラス・落下物から離れる。</li>
+        <li>火気やガス臭、建物の損傷、避難経路を安全な範囲で確認する。</li>
+        <li>崖・斜面・擁壁の近くでは、亀裂や落石に注意して近づかない。</li>
+        <li>雨が降る地域では、自治体の避難情報と気象庁の土砂災害情報を確認する。</li>
+        <li>強い揺れが続く可能性を考え、靴・ライト・スマホの充電を手元に用意する。</li>
+      </ol>
+      <p>危険を感じた場合は、記事を読み続けず、自治体・消防・警察などの案内に従ってください。</p>
+    </section>
+
+    <section class="sources-section">
+      <div><span class="kicker">PRIMARY SOURCES</span><h2>確認した情報源</h2></div>
+      <ul>{sourceLinks.map((source) => <li><a href={source.href} target="_blank" rel="noopener noreferrer">{source.label} ↗</a></li>)}</ul>
+      <p>ニュースの確認基準：2026年11月8日。速報値や今後変更される可能性がある情報は、最新の公式発表を優先してください。</p>
+    </section>
+
+    <footer class="news-footer"><a href="/">KNOT.</a><span>INDEPENDENT NEWS & KNOWLEDGE / UPDATED DAILY</span><a href="/blog/">通常の記事一覧へ ↗</a></footer>
+  </main>
+</Layout>
+
+<style>
+:global(html:has(.news-page)){color-scheme:dark;background:#08090b;color:#f4f2ee}
+:global(html:has(.news-page) body){background:#08090b;color:#f4f2ee}
+:global(html:has(.news-page) .site-shell){max-width:none}
+:global(html:has(.news-page) .site-header){max-width:1240px;margin:0 auto;background:#08090b;border-color:#292a2d}
+:global(html:has(.news-page) .site-footer){display:none}
+.news-page{--bg:#08090b;--panel:#111316;--line:#303136;--muted:#a1a2a5;--accent:#d9a66b;max-width:1240px;margin:0 auto;padding:16px 28px 50px;background:#08090b;color:#f4f2ee;font-family:Arial,"Noto Sans JP",sans-serif}
+.news-page a{color:inherit;text-decoration:none}
+.news-masthead{border-bottom:1px solid var(--line)}
+.masthead-top,.edition-line,.side-heading{display:flex;justify-content:space-between;gap:15px;color:var(--muted);font:10px ui-monospace,monospace;letter-spacing:.14em}
+.masthead-top{padding:17px 0;border-bottom:1px solid var(--line)}
+.masthead-main{display:flex;align-items:end;justify-content:space-between;padding:28px 0 25px;gap:20px}
+.masthead-main>a{font-size:clamp(52px,9vw,100px);font-weight:950;line-height:.8;letter-spacing:-.09em}
+.masthead-main>a span{color:var(--accent)}
+.masthead-main p{margin:0;color:#c1c0bd;font-size:13px;letter-spacing:.06em}
+.news-categories{display:flex;gap:0;overflow-x:auto;border-top:1px solid var(--line)}
+.news-categories a{white-space:nowrap;padding:15px 22px 14px 0;margin-right:25px;font-size:12px;font-weight:700;color:#d0d0ce}
+.news-categories a:hover,.read-link:hover,.feed-bottom a:hover{color:var(--accent)}
+.edition-line{padding:19px 0}
+.lead-grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(290px,.75fr);gap:36px;padding:14px 0 54px;border-bottom:1px solid var(--line)}
+.lead-story{display:grid;grid-template-columns:1.08fr .92fr;gap:28px;align-items:center}
+.lead-image{position:relative;display:flex;align-items:center;justify-content:center;min-height:340px;overflow:hidden;background:radial-gradient(circle at 50% 45%,#3a3028 0,#19191a 38%,#101114 74%);border:1px solid #373331}
+.earth-graphic{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;width:250px;height:250px;border:1px solid #8b6c50;border-radius:50%;box-shadow:0 0 0 18px #d9a66b0b,0 0 0 40px #d9a66b08}
+.earth-graphic:before,.earth-graphic:after{content:"";position:absolute;border:1px solid #d9a66b45;border-radius:50%;inset:25px -18px}
+.earth-graphic:after{inset:-18px 25px}
+.earth-graphic span{font:10px ui-monospace,monospace;letter-spacing:.25em;color:#d9a66b}
+.earth-graphic strong{font-size:116px;line-height:1;font-weight:300;letter-spacing:-.1em}.earth-graphic strong span{font-size:48px;color:#d9a66b}
+.earth-graphic small{font-size:11px;letter-spacing:.2em;color:#d4cec6}
+.earth-graphic i{position:absolute;bottom:45px;width:8px;height:8px;background:#e8b67e;border-radius:50%;box-shadow:0 0 20px 8px #d9a66b88}
+.image-caption{position:absolute;left:15px;bottom:13px;font-size:9px;color:#aaa}
+.lead-copy .kicker,.kicker{font:10px ui-monospace,monospace;letter-spacing:.18em;color:var(--accent)}
+.lead-copy h1{font-size:clamp(24px,3vw,38px);line-height:1.5;letter-spacing:-.05em;margin:17px 0}
+.lead-copy>p{font-size:13px;color:#b9b8b5;line-height:2.05;margin:0}
+.lead-meta{display:flex;gap:18px;margin-top:19px;font:10px ui-monospace,monospace;color:var(--muted)}
+.read-link{display:inline-flex;gap:35px;align-items:center;margin-top:24px;padding:11px 0;border-bottom:1px solid var(--accent);font-size:12px;font-weight:800}
+.read-link b{font-size:18px;color:var(--accent)}
+.side-heading{padding:8px 0 17px;border-bottom:1px solid var(--line)}
+.side-item{display:grid;grid-template-columns:32px minmax(0,1fr) 14px;gap:12px;padding:18px 0;border-bottom:1px solid var(--line);align-items:start}
+.side-number{font:12px ui-monospace,monospace;color:var(--accent)}
+.side-item small{font-size:9px;color:var(--muted)}
+.side-item h2{font-size:14px;line-height:1.6;margin:7px 0;font-weight:750}
+.side-item p{font-size:10px;color:var(--muted);margin:0}
+.side-item>b{font-size:13px;color:var(--muted)}
+.section-title{display:flex;justify-content:space-between;align-items:end;gap:20px;padding:38px 0 18px;border-bottom:1px solid var(--line)}
+.section-title h2,.knowledge-head h2,.sources-section h2,.action-panel h2{font-size:28px;letter-spacing:-.04em;margin:8px 0 0}
+.section-title>p,.knowledge-head>p{max-width:440px;color:var(--muted);font-size:11px;line-height:1.9;margin:0}
+.feed-card{display:grid;grid-template-columns:52px minmax(0,1fr);gap:16px;padding:25px 0;border-bottom:1px solid var(--line)}
+.feed-index{font:16px ui-monospace,monospace;color:var(--accent)}
+.feed-meta{display:flex;gap:14px;align-items:center;font-size:10px;color:var(--muted)}
+.feed-meta span{color:var(--accent);font-weight:700}
+.feed-content h3{font-size:19px;line-height:1.55;margin:8px 0}
+.feed-content>p{font-size:12px;line-height:2;color:#b8b8b7;margin:0;max-width:850px}
+.feed-bottom{display:flex;justify-content:space-between;gap:15px;margin-top:15px;font-size:10px;color:var(--muted)}
+.feed-bottom a{color:#e2c19b}
+.knowledge-section{padding:55px 0;border-bottom:1px solid var(--line)}
+.knowledge-head{margin-bottom:22px}.knowledge-head>p{margin-top:9px}
+.fact-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.fact-card{padding:22px;background:#111316;border:1px solid #2d2e32;min-height:185px}
+.fact-card>span{font:9px ui-monospace,monospace;letter-spacing:.12em;color:var(--accent)}
+.fact-card h3{font-size:16px;line-height:1.5;margin:18px 0 9px}
+.fact-card p{font-size:11px;line-height:1.95;color:#b6b5b3;margin:0}
+.action-panel{display:grid;grid-template-columns:.7fr 1.3fr;gap:10px 35px;padding:45px 0;border-bottom:1px solid var(--line)}
+.action-panel ol{margin:0;padding-left:22px;color:#d3d0ca;font-size:12px;line-height:2.2}
+.action-panel>p{grid-column:2;color:var(--muted);font-size:10px;line-height:1.8;margin:0}
+.sources-section{display:grid;grid-template-columns:.7fr 1.3fr;gap:20px;padding:40px 0}
+.sources-section ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.sources-section li a{font-size:11px;color:#d8bd9c}
+.sources-section>p{grid-column:2;font-size:10px;color:var(--muted);margin:0;line-height:1.8}
+.news-footer{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:22px 0 0;border-top:1px solid var(--line);font-size:10px;color:var(--muted)}
+.news-footer>a:first-child{font-size:22px;font-weight:900;letter-spacing:-.07em;color:#f4f2ee}
+.news-footer>a:last-child{color:var(--accent)}
+@media(max-width:850px){.lead-grid{grid-template-columns:1fr}.lead-story{grid-template-columns:1fr 1fr}.side-brief{display:grid;grid-template-columns:repeat(3,1fr);gap:0 18px}.side-heading{grid-column:1/-1}.side-item{grid-template-columns:25px 1fr}.side-item>b{display:none}.side-item h2{font-size:12px}.fact-grid{grid-template-columns:1fr}.fact-card{min-height:0}.action-panel,.sources-section{grid-template-columns:1fr}.action-panel>p,.sources-section>p{grid-column:1}}
+@media(max-width:600px){.news-page{padding:8px 16px 32px}.masthead-top{font-size:8px}.masthead-main{align-items:start;flex-direction:column;gap:14px}.masthead-main p{font-size:11px}.news-categories a{margin-right:12px;padding-right:10px;font-size:10px}.edition-line{font-size:8px}.lead-grid{gap:25px;padding-bottom:35px}.lead-story{grid-template-columns:1fr;gap:18px}.lead-image{min-height:260px}.earth-graphic{transform:scale(.8)}.lead-copy h1{font-size:25px}.side-brief{grid-template-columns:1fr}.side-item{grid-template-columns:28px 1fr}.side-item h2{font-size:14px}.section-title{align-items:start;flex-direction:column}.section-title h2,.knowledge-head h2,.sources-section h2,.action-panel h2{font-size:24px}.feed-card{grid-template-columns:30px 1fr;gap:8px}.feed-content h3{font-size:16px}.feed-bottom{flex-direction:column}.knowledge-section{padding:38px 0}.sources-section ul{grid-template-columns:1fr}.news-footer{flex-wrap:wrap}.news-footer>span{order:3;width:100%}}
+</style>
