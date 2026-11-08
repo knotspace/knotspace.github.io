@@ -46,6 +46,12 @@ const timeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTim
           aria-label="記事を検索"
         />
 
+        <div class="sort-controls" role="group" aria-label="記事の並び順">
+          <span class="sort-label">並び順</span>
+          <button class="sort-button active" type="button" data-sort="newest" aria-pressed="true">最新順</button>
+          <button class="sort-button" type="button" data-sort="recommended" aria-pressed="false">おすすめ順</button>
+          <button class="sort-button" type="button" data-sort="popular" aria-pressed="false">人気順</button>
+        </div>
         <div class="category-filters">
           <button class="filter-button active" type="button" data-filter="all">
             すべて
@@ -71,6 +77,8 @@ const timeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTim
             data-title={post.data.title}
             data-description={post.data.description}
             data-reading-time={readingTime(post.body)}
+            data-readability={recommendationScore(post)}
+            data-popularity={post.data.popularity}
           >
             <div class="post-thumbnail">
               {post.data.heroImage ? (
@@ -147,8 +155,32 @@ const timeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTim
     document.querySelectorAll<HTMLButtonElement>('[data-sidebar-filter]')
   );
   const noResults = document.querySelector<HTMLElement>('#no-results');
+  const sortButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-sort]'));
+  let activeSort = 'newest';
+  const popularity = new Map<string, number>();
 
   let activeCategory = new URLSearchParams(window.location.search).get('category') || 'all';
+
+  function applySort() {
+    const sorted = [...cards].sort((a, b) => {
+      if (activeSort === 'recommended') {
+        return Number(b.dataset.readability || 0) - Number(a.dataset.readability || 0)
+          || new Date(b.querySelector('time')?.dateTime || 0).getTime() - new Date(a.querySelector('time')?.dateTime || 0).getTime();
+      }
+      if (activeSort === 'popular') {
+        const scoreA = popularity.get(a.dataset.title || '') ?? Number(a.dataset.popularity || 0);
+        const scoreB = popularity.get(b.dataset.title || '') ?? Number(b.dataset.popularity || 0);
+        return scoreB - scoreA || new Date(b.querySelector('time')?.dateTime || 0).getTime() - new Date(a.querySelector('time')?.dateTime || 0).getTime();
+      }
+      return new Date(b.querySelector('time')?.dateTime || 0).getTime() - new Date(a.querySelector('time')?.dateTime || 0).getTime();
+    });
+    sorted.forEach((card) => document.querySelector('#archive-list')?.appendChild(card));
+    sortButtons.forEach((button) => {
+      const active = button.dataset.sort === activeSort;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', String(active));
+    });
+  }
 
   function filterPosts() {
     const keyword = searchInput?.value.trim().toLowerCase() ?? '';
@@ -207,8 +239,25 @@ const timeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTim
     });
   });
 
+  sortButtons.forEach((button) => button.addEventListener('click', () => {
+    activeSort = button.dataset.sort || 'newest';
+    applySort();
+    filterPosts();
+  }));
   filterButtons.forEach((item) => item.classList.toggle('active', item.dataset.filter === activeCategory));
+  applySort();
   filterPosts();
+  fetch('https://rtzorqaigpeechqywjie.supabase.co/rest/v1/article_stats?select=slug,views,likes', {
+    headers: { apikey: 'sb_publishable_-yhc0QqTEEZTBWi9jTcFRA_-AVi-iP6', Authorization: 'Bearer sb_publishable_-yhc0QqTEEZTBWi9jTcFRA_-AVi-iP6' }
+  }).then((response) => { if (!response.ok) throw new Error('stats unavailable'); return response.json(); })
+    .then((rows: Array<{slug:string;views:number;likes:number}>) => {
+      const bySlug = new Map(rows.map((row) => [row.slug, (Number(row.views) || 0) + (Number(row.likes) || 0) * 3]));
+      cards.forEach((card) => {
+        const slug = (card as HTMLAnchorElement).pathname.split('/').filter(Boolean).at(-1) || '';
+        popularity.set(card.dataset.title || '', bySlug.get(slug) || 0);
+      });
+      if (activeSort === 'popular') { applySort(); filterPosts(); }
+    }).catch(() => {});
   searchInput?.addEventListener('input', filterPosts);
   const randomButton = document.querySelector<HTMLButtonElement>('#random-article');
   randomButton?.addEventListener('click', () => {
@@ -268,6 +317,10 @@ const timeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTim
     padding-top: 30px;
   }
 
+  .sort-controls{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:0 0 14px}
+  .sort-label{font-size:10px;color:var(--muted);margin-right:4px}
+  .sort-button{border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:999px;padding:7px 13px;font-size:10px;font-weight:700;cursor:pointer}
+  .sort-button.active{background:var(--text);border-color:var(--text);color:var(--bg)}
   .filter-area {
     margin-bottom: 20px;
   }
@@ -558,6 +611,7 @@ const timeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTim
   .archive-header p{font-size:12px}
   .content-layout{grid-template-columns:minmax(0,1fr) 280px;gap:34px;padding-top:24px}
   .filter-area{padding:0 0 17px;background:none;border:0;border-bottom:1px solid var(--line);border-radius:0}
+  .sort-controls{margin-bottom:13px}.sort-button{border-radius:3px;padding:8px 13px}.sort-button.active{background:var(--accent);border-color:var(--accent);color:#fff}
   #article-search{border-radius:3px}
   .category-filters{gap:0;margin-top:10px;border:1px solid var(--line);width:max-content;max-width:100%}
   .filter-button{border:0;border-right:1px solid var(--line);border-radius:0;padding:8px 12px}
