@@ -1,61 +1,27 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 
-const updated = '2026年11月8日 19:45';
+const updated = '2026年11月9日 07:30';
 const stories = [
-  {
-    category: '防災・科学',
-    time: '01:04 発生 / 19:23時点で確認',
-    title: '愛知県で最大震度5強。地震のあとに気を付けたいこと',
-    lead: '11月8日午前1時4分ごろ、静岡県西部を震源とする地震が発生。気象庁の発表ではマグニチュード5.7、深さ約41kmで、愛知県知多市で最大震度5強を観測しました。',
-    href: 'https://www.jma.go.jp/jma/press/2611/08a/202611080305.html',
-    source: '気象庁',
-    tag: '今日の重要ニュース',
-  },
-  {
-    category: '政治・国際',
-    time: '15:24 配信',
-    title: '高市首相、日朝首脳会談に意欲を表明',
-    lead: '拉致被害者の即時一括帰国を求める国民大集会で、金正恩委員長と会って率直に話し合いたいとの考えを示しました。発言と、実際に会談が決まったことは分けて受け止める必要があります。',
-    href: 'https://www.fnn.jp/articles/-/1148349?display=full',
-    source: 'FNNプライムオンライン',
-    tag: '政治',
-  },
-  {
-    category: '暮らし・経済',
-    time: '14:15 配信',
-    title: '緑茶飲料に逆風、麦茶やコーン茶の存在感が上昇',
-    lead: '食品産業新聞社の報道では、2026年1〜9月の茶系飲料販売金額は前年同期比2％減。緑茶飲料の伸び悩みや、麦茶・コーン茶の動きが紹介されています。市場全体と個別商品の売れ行きは区別して見ることが大切です。',
-    href: 'https://www.ssnp.co.jp/beverage/710672/',
-    source: '食品産業新聞社ニュースWEB',
-    tag: '消費・食品',
-  },
-  {
-    category: '安全・生活',
-    time: '10:25 配信',
-    title: 'スズメバチ対策の「疑似オニヤンマ」を検証',
-    lead: '北海道の河川管理現場で、トラ柄ロープとクリップを使った簡易的な対策を試した事例が報じられました。設置した場所で巣が確認されなかったという報告はありますが、これだけで効果が証明されたわけではありません。',
-    href: 'https://news.tv-asahi.co.jp/news_society/articles/000546148.html',
-    source: 'テレビ朝日',
-    tag: '暮らし',
-  },
+  { category:'社会・防犯', time:'11月9日 運用開始', title:'警察と金融機関の不正口座情報共有、全国一元運用が開始', lead:'警察庁は、特殊詐欺などに使われた口座の情報を全国から集約し、協定を結んだ金融機関30機関へ一元的に提供する仕組みを11月9日から開始。金融機関が振込データを確認し、被害に遭うおそれのある人を警察へつなぐ仕組みです。', href:'https://www.npa.go.jp/bureau/criminal/souni/tokusyusagi/20261105.pdf', source:'警察庁', tag:'今日の重要ニュース' },
+  { category:'IT・安全', time:'11月6日発表 / 7日報道', title:'政府が緊急サイバー対策を発表、AI活用や支援チームを整備へ', lead:'政府は相次ぐ不正アクセスや情報流出を受け、総額100億円規模の緊急サイバーセキュリティ対策を発表。AIを活用して弱点を調べる専門チームや、被害企業の初動を支援する官民のチームを整備する方針です。', href:'https://apnews.com/article/japan-government-takaichi-cybersecurity-package-cyberattack-8ba038fde849e7ea9c49126ecd770972', source:'AP通信', tag:'サイバーセキュリティ' },
+  { category:'国際・IT', time:'11月5日発表', title:'警察庁とGoogleの連携で不正な中継インフラを停止', lead:'警察庁などはGoogleと連携し、住宅向けプロキシに関連するドメインやサーバーの停止につながったと発表。一般家庭のネット接続を不正な通信の中継に使う仕組みが、犯罪インフラとして悪用される問題への対策です。', href:'https://www.npa.go.jp/news/release/2026/20261104001.html', source:'警察庁', tag:'サイバー犯罪対策' },
+  { category:'スポーツ・卓球', time:'11月9日〜15日', title:'ITTF-Americas Masters Championshipsがカラカスで開幕', lead:'ITTFの2026年大会カレンダーでは、11月9日から15日までベネズエラのカラカスで大会が予定されています。大会日程は変更される場合があるため、参加者や結果は主催者の最新発表で確認してください。', href:'https://www.ittf.com/2026-events-calendar/', source:'ITTF', tag:'国際大会' },
 ];
-
 const quickFacts = [
-  { n: '01', title: '震度とマグニチュードは別の数字', body: 'マグニチュードは地震そのものの規模を表す指標。震度は、ある場所でどれくらい揺れたかを示します。同じ地震でも、場所によって観測される震度は変わります。' },
-  { n: '02', title: '地震のあと、雨にも注意する理由', body: '強い揺れで斜面や地盤が緩むと、その後の雨で土砂災害が起きやすくなることがあります。気象庁は今回、知多市で土砂災害に関する警報等の発表基準を通常の8割に引き下げて運用すると発表しました。' },
-  { n: '03', title: '速報の数字はあとから変わることがある', body: '地震直後の震源・深さ・規模は速報値です。観測データの精査によって更新されるため、最初の通知だけでなく気象庁の最新情報を確認しましょう。' },
+  { n:'01', title:'銀行が不正口座を見つける仕組み', body:'警察が把握した不正利用口座の情報を金融機関へ提供し、金融機関は自分の銀行内の振込データを確認します。その口座へ送金した人の情報を警察へつなぐことで、被害に気付いていない人への連絡を早める狙いがあります。' },
+  { n:'02', title:'住宅向けプロキシとは？', body:'一般家庭のインターネット回線を、別の利用者が通信の中継地点として使う仕組みです。正規の用途もありますが、本人の知らないところで端末や回線が中継に使われると、迷惑行為や不正アクセスの発信元を隠すために悪用されるおそれがあります。' },
+  { n:'03', title:'サイバー対策は企業だけの話ではない', body:'スマートフォンやルーター、パソコンの更新を後回しにしないこと、使っていないアカウントを整理すること、同じパスワードを使い回さないことも、身近なセキュリティ対策です。' },
+];
+const sourceLinks = [
+  { label:'Yahoo! JAPAN ニュース', href:'https://www.yahoo.co.jp/' },
+  { label:'警察庁・金融機関との情報共有型連携（PDF）', href:'https://www.npa.go.jp/bureau/criminal/souni/tokusyusagi/20261105.pdf' },
+  { label:'警察庁・Google社と連携した犯罪インフラのテイクダウン', href:'https://www.npa.go.jp/news/release/2026/20261104001.html' },
+  { label:'警察庁・不正アクセスによる大規模情報流出への指示', href:'https://www.npa.go.jp/newlyarrived/?seq=20001' },
+  { label:'AP通信・日本の緊急サイバーセキュリティ対策', href:'https://apnews.com/article/japan-government-takaichi-cybersecurity-package-cyberattack-8ba038fde849e7ea9c49126ecd770972' },
+  { label:'ITTF・2026年大会カレンダー', href:'https://www.ittf.com/2026-events-calendar/' },
 ];
 
-const sourceLinks = [
-  { label: 'Yahoo! JAPAN ニュース', href: 'https://www.yahoo.co.jp/' },
-  { label: 'FNN・日朝首脳会談に関する発言', href: 'https://www.fnn.jp/articles/-/1148349?display=full' },
-  { label: '食品産業新聞社・茶系飲料市場', href: 'https://www.ssnp.co.jp/beverage/710672/' },
-  { label: 'テレビ朝日・スズメバチ対策の検証', href: 'https://news.tv-asahi.co.jp/news_society/articles/000546148.html' },
-  { label: '気象庁・地震情報', href: 'https://www.jma.go.jp/bosai/map.html#contents=earthquake_map' },
-  { label: '気象庁・地震後の土砂災害対応', href: 'https://www.jma.go.jp/jma/press/2611/08b/20261108_zantei.html' },
-  { label: '東海市・11月8日の地震への対応', href: 'https://www.city.tokai.aichi.jp/iza/bosai/1011661.html' },
-];
 ---
 
 <Layout title="NEWS｜今日のニュースと知っておきたい知識 | KNOT" description="Yahoo! JAPANのニュース見出しを参考に、今日の重要ニュースと背景・暮らしに役立つ知識を一次情報とともに整理するKNOT NEWS。">
@@ -68,19 +34,19 @@ const sourceLinks = [
       </nav>
     </div>
 
-    <section class="edition-line" id="top"><span>DAILY BRIEFING / 2026.11.08 SUN</span><span>最終確認：{updated} JST</span></section>
+    <section class="edition-line" id="top"><span>DAILY BRIEFING / 2026.11.09 MON</span><span>最終確認：{updated} JST</span></section>
 
     <section class="lead-grid">
       <article class="lead-story">
         <a class="lead-image" href={stories[0].href} target="_blank" rel="noopener noreferrer">
-          <div class="earth-graphic"><span>EARTHQUAKE</span><strong>5<span>+</span></strong><small>最大震度</small><i></i></div>
-          <span class="image-caption">静岡県西部を震源とする地震 / 気象庁発表</span>
+          <div class="earth-graphic"><span>FRAUD PREVENTION</span><strong>30</strong><small>協定金融機関</small><i></i></div>
+          <span class="image-caption">警察庁の発表 / 2026年11月9日運用開始</span>
         </a>
         <div class="lead-copy">
-          <span class="kicker">TOP STORY · 防災・科学</span>
-          <h1>愛知県で最大震度5強。<br/>地震のあとに気を付けたいこと</h1>
-          <p>11月8日未明に発生した地震。揺れそのものだけでなく、余震や雨による土砂災害への備えも重要です。確認できた情報と、今できる行動を整理します。</p>
-          <div class="lead-meta"><span>2026.11.08</span><span>約5分で読める要点</span></div>
+          <span class="kicker">TOP STORY · 社会・防犯</span>
+          <h1>警察と金融機関の情報共有が全国で開始</h1>
+          <p>特殊詐欺の被害拡大を防ぐため、警察と金融機関が不正利用口座の情報を全国規模で共有する仕組みが始まりました。</p>
+          <div class="lead-meta"><span>2026.11.09</span><span>約5分で読める要点</span></div>
           <a class="read-link" href="#domestic">ニュースを読む <b>↘</b></a>
         </div>
       </article>
