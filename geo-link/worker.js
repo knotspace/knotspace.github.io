@@ -2,7 +2,7 @@ const cors={"Access-Control-Allow-Origin":"*","Access-Control-Allow-Methods":"GE
 const json=(data,status=200)=>new Response(JSON.stringify(data),{status,headers:{...cors,"Content-Type":"application/json; charset=utf-8"}});
 const auth=(r,e)=>r.headers.get("Authorization")==="Bearer "+e.ADMIN_KEY;
 const id=()=>crypto.randomUUID().replace(/-/g,"").slice(0,18);
-export default {async fetch(req,env){
+export default {async scheduled(event,env,ctx){ctx.waitUntil(Promise.all([env.DB.prepare("DELETE FROM visits WHERE created_at < ?").bind(new Date(Date.now()-7*86400000).toISOString()).run(),env.DB.prepare("DELETE FROM links WHERE created_at < ?").bind(new Date(Date.now()-30*86400000).toISOString()).run()]));},async fetch(req,env){
  if(req.method==="OPTIONS")return new Response(null,{headers:cors});
  const u=new URL(req.url),p=u.pathname;
  if(p==="/api/create"&&req.method==="POST"){if(!auth(req,env))return json({error:"Unauthorized"},401);const b=await req.json();const token=id();await env.DB.prepare("INSERT INTO links (id,destination,created_at) VALUES (?,?,?)").bind(token,b.destination||"https://example.com",new Date().toISOString()).run();return json({id:token});}
