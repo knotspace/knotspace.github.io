@@ -6,6 +6,11 @@ heroImage: "/blog-art/eiken-pre2.svg"
 category: "英検・勉強法"
 ---
 
+
+<figure class="knot-figure"><img src="https://images.unsplash.com/photo-1769794371055-54436b54577e?auto=format&fit=crop&w=1400&q=80" alt="ノートや本を広げた学習デスク" loading="lazy" decoding="async" width="1400" height="933" /><figcaption>写真：Yen Vu／<a href="https://unsplash.com/photos/desk-with-open-book-laptop-and-study-materials-HNjWq8WPyoY" target="_blank" rel="noopener noreferrer">Unsplash掲載ページ</a>（Unsplash License）・閲覧日：2026年11月8日</figcaption></figure>
+
+<figure class="knot-figure"><img src="https://images.unsplash.com/photo-1675453987881-003500b1d65e?auto=format&fit=crop&w=1400&q=80" alt="ノートとペンを使った勉強風景" loading="lazy" decoding="async" width="1400" height="933" /><figcaption>写真：Kawê Rodrigues／<a href="https://unsplash.com/photos/a-desk-with-a-notebook-pen-and-pencil-on-it-Aiu_QeLt23s" target="_blank" rel="noopener noreferrer">Unsplash掲載ページ</a>（Unsplash License）・閲覧日：2026年11月8日</figcaption></figure>
+
 ## 英検準2級に合格するまでに意識したこと
 
 「準2級って高校中級程度って書いてあるけど、そんなに早く挑戦できるの？」って思ったこと、ない？
