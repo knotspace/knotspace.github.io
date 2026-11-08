@@ -1,10 +1,15 @@
----
+------
 title: "ドコモの情報流出で何をすべき？不審SMSへの対策と確認ポイント"
 description: "NTTドコモが公表した最大約30万件の顧客情報流出。対象情報、ドコモからの案内の確認方法、不審なSMS・電話への対処を公式発表をもとに整理します。"
 pubDate: "2026-11-08T13:00:00+09:00"
 category: "スマホ・セキュリティ"
+heroImage: "/blog-art/editorial-docomo-data-leak-what-to-do-2026.svg"
+updatedDate: 2026-11-08
 ---
 
+
+
+<figure class="knot-figure"><img src="/blog-art/editorial-docomo-data-leak-what-to-do-2026.svg" alt="情報流出の確認手順を公式案内・不審SMS・認証に分けた図解" loading="lazy" decoding="async" width="1200" height="630" /><figcaption>図版：KNOT制作・記事の要点を整理したオリジナル図解</figcaption></figure>
 NTTドコモは2026年11月6日、ドコモオンラインショップとMy docomoへの不正アクセスに関する第三報を公表しました。対象は最大約30万件で、氏名や住所、連絡先に加え、本人確認書類の番号や契約内容などが含まれると説明しています。
 
 ニュースを見て「自分も何か手続きしたほうがいいの？」「SMSが届いたら本物？」と不安になった人もいるはずです。ここでは、現時点で公表されている内容と、利用者が落ち着いて確認したいことをまとめます。
