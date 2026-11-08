@@ -24,9 +24,9 @@ const dateTimeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocal
       <div class="intro-bottom"><span>PERSONAL NOTES &amp; JOURNAL</span><span>SCROLL TO EXPLORE ↓</span></div>
     </section>
 
-    <div class="home-rule"><span>人気の記事</span><span>注目の4記事</span></div>
+    <div class="home-rule"><span>最新記事</span><span>新しく公開した4記事</span></div>
 
-    <section class="popular-section" aria-label="人気記事">
+    <section class="popular-section" aria-label="最新記事">
       <div class="popular-list" id="popular-list">
         {posts.map((post, index) => (
           <a class="popular-card" href={`${BASE}blog/${post.id}/`} data-slug={post.id} data-pubdate={post.data.pubDate.toISOString()} data-fallback-rank={index}>
@@ -38,7 +38,6 @@ const dateTimeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocal
               <div class="story-meta"><span>{post.data.category}</span><time datetime={post.data.pubDate.toISOString()}>{dateFormat(post.data.pubDate)} {dateTimeFormat(post.data.pubDate)}</time></div>
               <h2>{post.data.title}</h2>
               <p>{post.data.description}</p>
-              <span class="popular-stats" data-stats-for={post.id}>閲覧数を集計中…</span>
             </div>
             <span class="popular-arrow">↗</span>
           </a>
@@ -63,43 +62,12 @@ const dateTimeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocal
   const list = document.getElementById('popular-list');
   if (!list) return;
   const cards = Array.from(list.querySelectorAll('.popular-card'));
-  const SUPABASE_URL = 'https://rtzorqaigpeechqywjie.supabase.co';
-  const SUPABASE_KEY = 'sb_publishable_-yhc0QqTEEZTBWi9jTcFRA_-AVi-iP6';
-  const headers = { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` };
-  const showTop = () => cards.forEach((card, index) => {
+  cards.forEach((card, index) => {
     card.hidden = index >= 4;
     const number = card.querySelector('.popular-number');
     if (number) number.textContent = String(index + 1).padStart(2, '0');
   });
-  list.dataset.ready = "false";
-  fetch(`${SUPABASE_URL}/rest/v1/article_stats?select=slug,views,likes`, { headers })
-    .then(response => { if (!response.ok) throw new Error('stats unavailable'); return response.json(); })
-    .then(rows => {
-      const stats = new Map(rows.map(row => [row.slug, { views: Number(row.views) || 0, likes: Number(row.likes) || 0 }]));
-      cards.sort((a, b) => {
-        const sa = stats.get(a.dataset.slug) || { views: 0, likes: 0 };
-        const sb = stats.get(b.dataset.slug) || { views: 0, likes: 0 };
-        const scoreA = sa.views + sa.likes * 3;
-        const scoreB = sb.views + sb.likes * 3;
-        return scoreB - scoreA || new Date(b.dataset.pubdate).getTime() - new Date(a.dataset.pubdate).getTime() || a.dataset.slug.localeCompare(b.dataset.slug);
-      });
-      cards.forEach(card => {
-        list.appendChild(card);
-        const stat = stats.get(card.dataset.slug) || { views: 0, likes: 0 };
-        const label = card.querySelector('.popular-stats');
-        if (label) label.textContent = `いいね ${stat.likes.toLocaleString('ja-JP')}`;
-      });
-      showTop();
-      list.dataset.ready = "true";
-    })
-    .catch(() => {
-      cards.forEach(card => {
-        const label = card.querySelector('.popular-stats');
-        if (label) label.textContent = '';
-      });
-      showTop();
-      list.dataset.ready = "true";
-    });
+  list.dataset.ready = 'true';
 })();
 </script>
 </Layout>
