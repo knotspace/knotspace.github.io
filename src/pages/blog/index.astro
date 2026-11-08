@@ -13,8 +13,8 @@ const posts = (await getCollection('blog'))
 const trendPosts = posts.filter((post) => post.data.contentType === 'trend' || /(earthquake-info-check|docomo-data-leak|gemini-omni|meta-muse|vivant-betsuhan|wired-earphones)/.test(post.id));
 const regularPosts = posts.filter((post) => !trendPosts.some((trend) => trend.id === post.id));
 const categories = [...new Set(regularPosts.map((post) => post.data.category))];
-const featuredPost = posts[0];
-const discoveryPosts = posts.slice(1, 4);
+const featuredPost = regularPosts[0];
+const discoveryPosts = regularPosts.slice(1, 4);
 const readingTime = (body = '') => Math.max(1, Math.ceil(body.replace(/\s/g, '').length / 500));
 const recommendationScore = (post) => {
   const body = post.body || '';
@@ -44,7 +44,7 @@ const timeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTim
     <h1>記事一覧</h1>
     <p>これまでに書いた記事をまとめています。</p>
     <div class="archive-actions">
-      <span class="post-count">{posts.length} ARTICLES</span>
+      <span class="post-count">{regularPosts.length} ARTICLES</span>
       <button type="button" id="random-article" class="random-button">✦ ランダムに読む</button>
     </div>
   </section>
@@ -158,7 +158,7 @@ const timeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTim
 
       <section class="widget">
         <h2 class="widget-title">記事数</h2>
-        <p class="total-count">{posts.length} 件の記事を公開中</p>
+        <p class="total-count">{regularPosts.length} 件の記事を公開中</p>
       </section>
     </aside>
   </div>
