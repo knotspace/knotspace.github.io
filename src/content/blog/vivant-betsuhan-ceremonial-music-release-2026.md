@@ -1,10 +1,15 @@
----
+------
 title: "VIVANT「別班儀礼曲」が11月9日配信へ。曲の背景と一緒に聴きたいポイント"
 description: "ドラマ『VIVANT』で話題になった別班儀礼曲が2026年11月9日に先行配信。作曲者や同時配信曲、劇中音楽を楽しむためのポイントを公式情報から紹介します。"
 pubDate: "2026-11-08T13:10:00+09:00"
 category: "エンタメ・音楽"
+heroImage: "/blog-art/editorial-vivant-betsuhan-ceremonial-music-release-2026.svg"
+updatedDate: 2026-11-08
 ---
 
+
+
+<figure class="knot-figure"><img src="/blog-art/editorial-vivant-betsuhan-ceremonial-music-release-2026.svg" alt="VIVANTの劇中音楽と配信予定の2曲を整理した図解" loading="lazy" decoding="async" width="1200" height="630" /><figcaption>図版：KNOT制作・記事の要点を整理したオリジナル図解</figcaption></figure>
 ドラマを見終わったあとも、頭から離れない音楽がある。そんな経験はありませんか。
 
 日曜劇場『VIVANT』の劇中で使われた「別班儀礼曲」が、2026年11月9日に先行配信されることが発表されました。作曲を担当した千住明さんの公式サイトが11月7日に告知し、同時に「Qarabağ Şikəstəsi in VIVANT」も配信されると案内しています。
