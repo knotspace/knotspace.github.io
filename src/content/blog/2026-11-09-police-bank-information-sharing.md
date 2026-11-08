@@ -190,4 +190,4 @@ updatedDate: 2026-11-09
 - 警察庁「令和8年9月末の特殊詐欺の認知・検挙状況等について」
   https://www.npa.go.jp/newlyarrived/?seq=20001
 
-- 金融庁「振り込め詐欺等の被害にあわれた方へ」\n  https://www.fsa.go.jp/policy/kyuusai/furikome/\n- 金融庁「被害回復等を装った詐欺（二次被害トラブル）への注意喚起」\n  https://www.fsa.go.jp/ordinary/chuui/20260901.html\n\n※本記事は公開資料をもとに制度の概要を整理したものです。個別の被害相談や口座の取扱いについては、警察・金融機関の正式な窓口へ確認してください。
+- 金融庁「振り込め詐欺等の被害にあわれた方へ」\n  https://www.fsa.go.jp/policy/kyuusai/furikome/\n- 預金保険機構「振り込め詐欺救済法に基づく公告・手続案内」\n  https://furikomesagi.dic.go.jp/\n- 金融庁「被害回復等を装った詐欺（二次被害トラブル）への注意喚起」\n  https://www.fsa.go.jp/ordinary/chuui/20260901.html\n\n※本記事は公開資料をもとに制度の概要を整理したものです。個別の被害相談や口座の取扱いについては、警察・金融機関の正式な窓口へ確認してください。
