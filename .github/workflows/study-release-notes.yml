@@ -51,12 +51,12 @@ jobs:
           const subject = (process.env.COMMIT_MESSAGE || 'Studyを更新').split('\n')[0].trim();
           const labels = {
             'foundation.astro': '基礎演習',
-            'kosen.astro': '高専対策',
+            'kosen.astro': '発展演習',
             'mock.astro': '過去問模試',
             'tools.astro': '学習ツール',
             'quotes.astro': '名言集',
             'study-foundation.json': '基礎問題データ',
-            'kosen-questions.json': '高専問題データ',
+            'kosen-questions.json': '発展演習データ',
             'study-questions.json': '演習問題データ',
             'study-quotes.json': '名言データ',
           };
@@ -71,7 +71,7 @@ jobs:
             type: 'STUDY UPDATE',
             summary: 'Studyの機能または学習コンテンツを更新しました。変更された項目は以下のとおりです。',
             details,
-            files: changed.slice(0, 20)
+            files: changed.filter(path => !/kosen/i.test(path)).slice(0, 20)
           };
           data.releases = Array.isArray(data.releases) ? data.releases : [];
           if (!data.releases.some(item => item.id === entry.id)) data.releases.unshift(entry);
