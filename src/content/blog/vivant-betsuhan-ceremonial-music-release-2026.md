@@ -10,6 +10,9 @@ updatedDate: 2026-11-08
 
 
 <figure class="knot-figure"><img src="/blog-art/editorial-vivant-betsuhan-ceremonial-music-release-2026.svg" alt="VIVANTの劇中音楽と配信予定の2曲を整理した図解" loading="lazy" decoding="async" width="1200" height="630" /><figcaption>図版：KNOT制作・記事の要点を整理したオリジナル図解</figcaption></figure>
+
+<figure class="knot-figure"><img src="https://images.pexels.com/photos/32545976/pexels-photo-32545976.jpeg?cs=srgb&dl=pexels-jonas-baumann-204162293-32545976.jpg&fm=jpg" alt="コンサートホールでオーケストラを指揮する指揮者。作品そのものの写真ではなく、劇中音楽をイメージした写真" loading="lazy" decoding="async" width="1000" height="667" /><figcaption>写真：Jonas Baumann / <a href="https://www.pexels.com/photo/dynamic-orchestra-conductor-leading-performance-32545976/" target="_blank" rel="noopener noreferrer">Pexels掲載ページ</a>（Pexels License・<a href="https://www.pexels.com/ja-jp/license/" target="_blank" rel="noopener noreferrer">利用条件</a>）</figcaption></figure>
+
 ドラマを見終わったあとも、頭から離れない音楽がある。そんな経験はありませんか。
 
 日曜劇場『VIVANT』の劇中で使われた「別班儀礼曲」が、2026年11月9日に先行配信されることが発表されました。作曲を担当した千住明さんの公式サイトが11月7日に告知し、同時に「Qarabağ Şikəstəsi in VIVANT」も配信されると案内しています。
