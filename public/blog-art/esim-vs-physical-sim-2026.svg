@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="t d">
+<title id="t">物理SIMとeSIMの違い</title><desc id="d">物理SIMはカードを差し込む方式、eSIMは端末に内蔵されたデジタルSIM。</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#172a45"/><stop offset="1" stop-color="#080f1c"/></linearGradient><linearGradient id="card" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#9fd7c5"/><stop offset="1" stop-color="#4f9d88"/></linearGradient></defs>
+<rect width="1200" height="630" fill="url(#bg)"/>
+<circle cx="1030" cy="110" r="260" fill="#8bd3c0" opacity=".08"/>
+<text x="74" y="92" fill="#91cbb9" font-size="21" font-family="system-ui,sans-serif" letter-spacing="5">SMARTPHONE / CONNECTIVITY</text>
+<text x="74" y="185" fill="#f4f6fa" font-size="62" font-weight="800" font-family="system-ui,sans-serif">SIMカードとeSIM</text>
+<text x="74" y="255" fill="#f4f6fa" font-size="42" font-weight="700" font-family="system-ui,sans-serif">何が違う？</text>
+<g transform="translate(120 318)">
+ <rect width="360" height="205" rx="20" fill="#1d344e" stroke="#5d7798" stroke-width="2"/>
+ <rect x="112" y="32" width="138" height="112" rx="14" fill="url(#card)" stroke="#d6f3e8" stroke-width="3"/>
+ <path d="M112 69 H250 M160 32 V144 M204 32 V144" stroke="#397d6b" stroke-width="3" opacity=".7"/>
+ <text x="180" y="180" text-anchor="middle" fill="#e9f2fb" font-size="24" font-weight="700" font-family="system-ui,sans-serif">物理SIM</text>
+</g>
+<g transform="translate(620 318)">
+ <rect width="360" height="205" rx="20" fill="#1d344e" stroke="#5d7798" stroke-width="2"/>
+ <rect x="130" y="20" width="100" height="138" rx="17" fill="#0b1727" stroke="#91cbb9" stroke-width="3"/>
+ <rect x="145" y="37" width="70" height="105" rx="8" fill="#243d58"/>
+ <rect x="159" y="60" width="42" height="42" rx="8" fill="url(#card)"/>
+ <path d="M180 65 V97 M165 81 H195" stroke="#17483f" stroke-width="4"/>
+ <text x="180" y="188" text-anchor="middle" fill="#e9f2fb" font-size="24" font-weight="700" font-family="system-ui,sans-serif">eSIM</text>
+</g>
+<path d="M500 418 H580 M560 398 L580 418 L560 438" stroke="#91cbb9" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="300" y="568" text-anchor="middle" fill="#b9c9dc" font-size="18" font-family="system-ui,sans-serif">カードを差し込む</text>
+<text x="800" y="568" text-anchor="middle" fill="#b9c9dc" font-size="18" font-family="system-ui,sans-serif">情報をダウンロード</text>
+</svg>
