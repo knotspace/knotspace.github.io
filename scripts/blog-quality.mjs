@@ -58,7 +58,11 @@ function walk(dir) {
 }
 for (const dir of dirs) for (const file of walk(path.join(root,dir))) {
   const content=fs.readFileSync(file,'utf8');
-  for (const p of patterns) if(p.regex.test(content)) failures.push(path.relative(root,file)+':個人情報の可能性 ('+p.label+')');
+  for (const p of patterns) {
+    // Grade labels in application logic are UI copy, not personal profile disclosures.
+    if (p.label === 'specific school grade' && !file.includes(path.join('src','content','blog')) && !file.includes(path.join('src','content','pages'))) continue;
+    if (p.regex.test(content)) failures.push(path.relative(root,file)+':個人情報の可能性 ('+p.label+')');
+  }
 }
 if (fix && fixed) console.log('自動修正: 重複画像 ' + fixed + ' 件');
 if (failures.length) {
