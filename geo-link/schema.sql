@@ -10,6 +10,11 @@ CREATE TABLE IF NOT EXISTS visits (
   country TEXT,
   region TEXT,
   city TEXT,
+  isp TEXT,
+  org TEXT,
+  asn TEXT,
+  latitude REAL,
+  longitude REAL,
   created_at TEXT NOT NULL,
   FOREIGN KEY(link_id) REFERENCES links(id)
 );
