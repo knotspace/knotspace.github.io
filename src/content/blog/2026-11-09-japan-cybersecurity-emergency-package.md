@@ -54,9 +54,9 @@ updatedDate: 2026-11-09
 
 ### AIを活用した専門人材・検証チーム
 
-会議資料では、IPAに高性能AIの活用環境を整え、専門家が脆弱性診断や模擬攻撃テストを進めるための体制を整備する方針が示されています。いわゆる「トップガン人材」など、高度な知識を持つ人材を育成・活用し、民間のセキュリティ事業者が検証を行うための環境やツールも支援する考えです。
+AP通信の11月6日付報道では、経済産業省が11月末までにサイバーセキュリティの専門家チームを設置し、AIを使って攻撃への対処やネットワークの弱点の発見に取り組むとされています。技術企業や、友好国の高度なAI開発者との協力も計画されています。これは今後設置する方針として報じられたもので、11月9日時点ですでに全国の企業へサービス提供が始まったという意味ではありません。
 
-ここでいう模擬攻撃テストは、許可されたシステムに対して、攻撃者が利用しそうな弱点を安全な手順で確認する検査です。実際の犯罪行為や、許可なく他人のシステムへ侵入することとは異なります。AIは大量の情報を整理したり、弱点の候補を探したりする補助に使われますが、結果の評価や修正の優先順位は専門家が確認する必要があります。
+ここでいう脆弱性診断や模擬攻撃テストは、管理者の許可を得たシステムに対して、攻撃者が利用しそうな弱点を安全な手順で確認する検査です。実際の犯罪行為や、許可なく他人のシステムへ侵入することとは異なります。AIは大量の情報を整理したり、弱点の候補を探したりする補助に使われますが、結果の評価や修正の優先順位は専門家が確認する必要があります。
 
 ### アウトリーチ・チーム
 
@@ -185,7 +185,7 @@ AP通信は、国家安全保障上の脅威が想定される場合に、防衛
 
 ## 参考にした情報
 
-- 首相官邸「サイバーセキュリティに関する関係閣僚会議」（2026年11月6日）\n  https://www.kantei.go.jp/jp/105/actions/202611/06kaigi_cyber.html\n- 内閣官房「サイバーセキュリティに関する関係閣僚会議（第2回）議事次第・配布資料」（2026年11月6日）\n  https://www.cas.go.jp/jp/seisaku/cybersecurity_kakuryokaigi/dai2/gijishidai.html\n- 内閣官房「サイバーセキュリティ緊急対策パッケージ」（2026年11月6日）\n  https://www.cas.go.jp/jp/seisaku/cybersecurity_kakuryokaigi/pdf/countermeasure.pdf\n- 国家サイバー統括室「サイバー対応特設サイト・相談窓口案内」\n  https://www.cyber.go.jp/tokusetsu/contactpoint_advisory_hub/index.html\n- Associated Press, “Japan announces emergency cybersecurity package following a wave of attacks”（2026年11月7日）
+- 首相官邸「サイバーセキュリティに関する関係閣僚会議」（2026年11月6日）\n  https://www.kantei.go.jp/jp/105/actions/202611/06kaigi_cyber.html\n- 内閣官房「サイバーセキュリティに関する関係閣僚会議（第2回）議事次第・配布資料」（2026年11月6日）\n  https://www.cas.go.jp/jp/seisaku/cybersecurity_kakuryokaigi/dai2/gijishidai.html\n- 内閣官房「サイバーセキュリティ緊急対策パッケージ」（2026年11月6日）\n  https://www.cas.go.jp/jp/seisaku/cybersecurity_kakuryokaigi/index.html\n- 国家サイバー統括室「サイバー対応特設サイト・相談窓口案内」\n  https://www.cyber.go.jp/tokusetsu/contactpoint_advisory_hub/index.html\n- Associated Press, “Japan announces emergency cybersecurity package following a wave of attacks”（2026年11月7日）
   https://apnews.com/article/8ba038fde849e7ea9c49126ecd770972
 - 警察庁「新着情報」（2026年11月6日：大規模な個人情報等の流出事案に係る警察庁長官の指示）
   https://www.npa.go.jp/newlyarrived/?seq=20001
