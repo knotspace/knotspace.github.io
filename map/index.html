@@ -35,6 +35,7 @@ function draw(){const q=document.getElementById("search").value.trim().toLowerCa
 document.getElementById("search").addEventListener("input",draw);
 let installPrompt=null;
 const installButton=document.getElementById("install-app");
+if(/iphone|ipad|ipod/i.test(navigator.userAgent))installButton.classList.add("ready");
 window.addEventListener("beforeinstallprompt",event=>{event.preventDefault();installPrompt=event;installButton.classList.add("ready")});
 installButton.addEventListener("click",async()=>{
  if(installPrompt){installPrompt.prompt();await installPrompt.userChoice;installPrompt=null;installButton.classList.remove("ready");return}
