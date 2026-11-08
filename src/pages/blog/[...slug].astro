@@ -121,6 +121,7 @@ const breadcrumbJsonLd = {
 
         <span class="meta-divider"></span>
         <span class="category-chip">{post.data.category}</span>
+        {post.data.aiGenerated && <span class="category-chip">AI生成記事</span>}
         <span class="reading-time">約{readingMinutes}分で読めます</span>
 
         {post.data.updatedDate && (
