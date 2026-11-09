@@ -11,6 +11,7 @@ const posts = (await getCollection('blog'))
   );
 
 const regularPosts = posts.filter((post) => post.data.contentType !== 'trend');
+const aiSummaryPosts = posts.filter((post) => post.data.contentType === 'trend' && post.data.aiGenerated);
 const categories = [...new Set(regularPosts.map((post) => post.data.category))];
 const readingTime = (body = '') => Math.max(1, Math.ceil(body.replace(/\s/g, '').length / 500));
 const recommendationScore = (post) => {
@@ -46,8 +47,14 @@ const timeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTim
     </div>
   </section>
 
+  <nav class="archive-tabs" role="tablist" aria-label="記事の種類">
+    <button class="archive-tab active" type="button" role="tab" aria-selected="true" aria-controls="regular-panel" id="regular-tab" data-panel="regular-panel">記事一覧 <span>${regularPosts.length}</span></button>
+    <button class="archive-tab" type="button" role="tab" aria-selected="false" aria-controls="ai-panel" id="ai-tab" data-panel="ai-panel">AIまとめ記事 <span>${aiSummaryPosts.length}</span></button>
+  </nav>
+
   <div class="content-layout">
     <section class="main-column">
+      <div id="regular-panel" class="archive-panel" role="tabpanel" aria-labelledby="regular-tab">
       <div class="filter-area">
         <input
           id="article-search"
@@ -119,6 +126,39 @@ const timeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTim
       <p class="no-results" id="no-results" hidden>
         該当する記事はありません。
       </p>
+      </div>
+
+      <div id="ai-panel" class="archive-panel" role="tabpanel" aria-labelledby="ai-tab" hidden>
+        <div class="ai-panel-heading">
+          <span class="post-count">{aiSummaryPosts.length} ARTICLES</span>
+          <p>話題の出来事やニュースをAIで整理したまとめ記事です。</p>
+        </div>
+        <div class="archive-list">
+          {aiSummaryPosts.map((post, index) => (
+            <a class="post-card" href={`${BASE}blog/${post.id}/`}>
+              <div class="post-thumbnail">
+                {post.data.heroImage ? (
+                  <img src={post.data.heroImage} alt={post.data.title} loading="lazy" decoding="async" width="380" height="254" />
+                ) : (
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                )}
+              </div>
+              <div class="post-info">
+                <div class="post-meta">
+                  <time datetime={post.data.pubDate.toISOString()}>{dateFormat(post.data.pubDate)} {timeFormat(post.data.pubDate)}</time>
+                  <span class="category-label">{post.data.category}</span>
+                  <span class="category-label">AIまとめ</span>
+                  <span class="reading-time">約{readingTime(post.body)}分</span>
+                </div>
+                <h2>{post.data.title}</h2>
+                <p>{post.data.description}</p>
+                <span class="read-more">続きを読む →</span>
+              </div>
+            </a>
+          ))}
+        </div>
+        {aiSummaryPosts.length === 0 && <p class="no-results">AIまとめ記事はまだありません。</p>}
+      </div>
       <a class="news-page-link" href={`${BASE}news/`}><span class="section-kicker">NEWS / DAILY BRIEFING</span><strong>今日のニュースと知っておきたい知識を読む ↗</strong></a>
     </section>
 
@@ -158,6 +198,18 @@ const timeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTim
 </Layout>
 
 <script>
+  const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('.archive-tab'));
+  const panels = Array.from(document.querySelectorAll<HTMLElement>('.archive-panel'));
+  tabs.forEach((tab) => tab.addEventListener('click', () => {
+    const target = tab.dataset.panel;
+    tabs.forEach((item) => {
+      const active = item === tab;
+      item.classList.toggle('active', active);
+      item.setAttribute('aria-selected', String(active));
+    });
+    panels.forEach((panel) => { panel.hidden = panel.id !== target; });
+  }));
+
   const searchInput = document.querySelector<HTMLInputElement>('#article-search');
   const cards = Array.from(document.querySelectorAll<HTMLElement>('.post-card'));
   const filterButtons = Array.from(
@@ -284,6 +336,13 @@ const timeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTim
 </script>
 
 <style>
+  .archive-tabs{display:flex;gap:8px;margin:20px 0 0;border-bottom:1px solid var(--line)}
+  .archive-tab{display:flex;align-items:center;gap:9px;padding:12px 16px;border:0;border-bottom:2px solid transparent;background:transparent;color:var(--muted);font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+  .archive-tab span{font-size:10px;color:var(--muted);padding:2px 7px;border:1px solid var(--line);border-radius:999px}
+  .archive-tab.active{color:var(--text);border-bottom-color:var(--accent)}
+  .archive-panel[hidden]{display:none}
+  .ai-panel-heading{padding:12px 0 8px}
+  .ai-panel-heading p{margin:5px 0 0;color:var(--muted);font-size:12px;line-height:1.8}
   .news-page-link{display:flex;flex-direction:column;gap:7px;margin:32px 0 0;padding:18px 20px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--text);text-decoration:none}.news-page-link .section-kicker{font-size:10px;letter-spacing:.12em;color:var(--muted)}.news-page-link strong{font-size:14px}.news-page-link:hover{border-color:var(--accent)}
   .archive-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px}
   .random-button{border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:999px;padding:9px 14px;font-size:11px;font-weight:700;cursor:pointer}
