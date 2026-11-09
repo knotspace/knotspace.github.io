@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 
-const updated = '2026年11月9日 08:32';
+const updated = '2026年11月9日 16:03';
 const stories = [
   {
     category: '国内・防犯',
@@ -57,15 +57,26 @@ const stories = [
     source: 'スポニチアネックス（報道）',
     tag: '報道段階',
   },
+  {
+    category: '天気・防災',
+    time: '11月9日 09:18配信',
+    title: '台風32号、10〜11日に小笠原諸島へ接近のおそれ',
+    lead: 'tenki.jpの9日朝の解説によると、台風32号は日本の南を北西へ進み、10日には一時的に非常に強い勢力となった後、10日から11日にかけて強い勢力で小笠原諸島へ接近する見込みです。小笠原諸島では雨や風が強まり、11日にかけて大しけとなるおそれがあります。沖縄・奄美や本州太平洋側でもうねりを伴う高波の可能性があるため、最新の気象庁情報と自治体の案内を確認してください。',
+    href: 'https://news.livedoor.com/article/detail/32767026/',
+    source: 'tenki.jp（ライブドアニュース掲載）',
+    tag: '台風情報',
+  },
 ];
 
 const quickFacts = [
   { n: '01', title: '情報共有は、被害の早期発見が目的', body: '警察が把握した不正利用口座の情報を金融機関へ提供し、金融機関が自行の振込データを確認。該当する顧客情報を警察へ返し、警察が本人へ接触する流れです。返金や補償を保証する制度ではありません。' },
   { n: '02', title: '11月9日は「119番の日」', body: '119番では、住所・階層・近くの目標物、何が起きたか、けが人や逃げ遅れの有無などを聞かれます。住所が分からない場合も、近くの目印を伝え、指令員の質問に落ち着いて答えましょう。救急車を呼ぶか迷う場合の相談窓口「#7119」は、一部地域では利用できないため事前確認が必要です。' },
   { n: '03', title: '「内定報道」と公式発表は同じではない', body: '関係者取材に基づく報道が出ても、主催者が正式な出演者一覧を発表するまでは確定情報とは限りません。記事の日付と発表主体を見て、情報の段階を区別しましょう。' },
+  { n: '04', title: '台風が離れていても高波に注意', body: '台風の中心から離れた地域でも、うねりが届いて海岸の波が高くなることがあります。海岸や港、防波堤には近づかず、気象庁の台風情報・波浪警報と自治体の避難情報を確認しましょう。' },
 ];
 
 const sourceLinks = [
+  { label: 'tenki.jp・台風32号の進路と小笠原諸島への影響（11月9日 09:18）', href: 'https://news.livedoor.com/article/detail/32767026/' },
   { label: 'Yahoo! JAPAN トップニュース（話題発見）', href: 'https://www.yahoo.co.jp/' },
   { label: '警察庁・情報共有型連携の全国一元運用（11月5日資料）', href: 'https://www.npa.go.jp/bureau/criminal/souni/tokusyusagi/20261105.pdf' },
   { label: 'ウェザーニュース・11月9日の天気予報（05:10発表）', href: 'https://weathernews.jp/news/202611/090021/' },
@@ -143,7 +154,7 @@ const sourceLinks = [
     <section class="sources-section">
       <div><span class="kicker">PRIMARY SOURCES</span><h2>確認した情報源</h2></div>
       <ul>{sourceLinks.map((source) => <li><a href={source.href} target="_blank" rel="noopener noreferrer">{source.label} ↗</a></li>)}</ul>
-      <p>ニュースの確認基準：2026年11月9日 08:32 JST。Yahoo! JAPANの主要見出しを手掛かりに、警察庁・消防庁・日本卓球協会などの公式資料と報道機関の配信時刻を確認しました。死傷者数や天気予報は更新される場合があります。「内定」など未確定の報道は、正式発表と区別しています。</p>
+      <p>ニュースの確認基準：2026年11月9日 16:03 JST。Yahoo! JAPANの主要見出しを手掛かりに、警察庁・消防庁・日本卓球協会などの公式資料と報道機関の配信時刻を確認しました。死傷者数や天気予報は更新される場合があります。「内定」など未確定の報道は、正式発表と区別しています。</p>
     </section>
 
     <footer class="news-footer"><a href="/">KNOT.</a><span>INDEPENDENT NEWS & KNOWLEDGE / UPDATED DAILY</span><a href="/blog/">通常の記事一覧へ ↗</a></footer>
