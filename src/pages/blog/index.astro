@@ -48,8 +48,8 @@ const timeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTim
   </section>
 
   <nav class="archive-tabs" role="tablist" aria-label="記事の種類">
-    <button class="archive-tab active" type="button" role="tab" aria-selected="true" aria-controls="regular-panel" id="regular-tab" data-panel="regular-panel">記事一覧 <span>${regularPosts.length}</span></button>
-    <button class="archive-tab" type="button" role="tab" aria-selected="false" aria-controls="ai-panel" id="ai-tab" data-panel="ai-panel">AIまとめ記事 <span>${aiSummaryPosts.length}</span></button>
+    <button class="archive-tab active" type="button" role="tab" aria-selected="true" aria-controls="regular-panel" id="regular-tab" data-panel="regular-panel">記事一覧 <span>{regularPosts.length}</span></button>
+    <button class="archive-tab" type="button" role="tab" aria-selected="false" aria-controls="ai-panel" id="ai-tab" data-panel="ai-panel">AIまとめ記事 <span>{aiSummaryPosts.length}</span></button>
   </nav>
 
   <div class="content-layout">
