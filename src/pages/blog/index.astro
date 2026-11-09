@@ -211,7 +211,7 @@ const timeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTim
   }));
 
   const searchInput = document.querySelector<HTMLInputElement>('#article-search');
-  const cards = Array.from(document.querySelectorAll<HTMLElement>('.post-card'));
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('#archive-list .post-card'));
   const filterButtons = Array.from(
     document.querySelectorAll<HTMLButtonElement>('[data-filter]')
   );
