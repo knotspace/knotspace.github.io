@@ -1,7 +1,7 @@
 ---
 title: "iPhoneの容量がいっぱい！何を消せばいい？安全に空きを作る順番"
 description: "写真・動画・アプリ・メッセージのどれが容量を使っているか確認し、消してよいものから整理する手順をApple公式案内に沿って紹介します。"
-pubDate: "2026-11-09T16:25:00+09:00"
+pubDate: "2026-11-09T16:21:00+09:00"
 category: "スマホ・通信"
 contentType: "article"
 aiGenerated: true
