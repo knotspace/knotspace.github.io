@@ -19,7 +19,7 @@
 <li>問題データバンク（kosen-question-bank）：オリジナル問題50問（数学20・理科20・社会10）を追加。従来152問と合わせて202問。追加分は全問 `review` のままにし、公開承認済みとは扱わない。READMEとリリースノートを更新。</li>
 <li>TT INSIGHT：用具カタログ56製品のID重複0件を確認。STIGA DNA Dragon Power 55、andro SYNTELIAC VCI OFF、andro SYNTELIAC ZCI OFFの3製品をメーカー資料で照合し、公式確認済みを52件から55件へ更新。ZCIの重量は公式公表範囲83〜89gで表示できるよう、一覧・比較・詳細ページの表示処理を更新。技術ガイドは既存70項目を確認。</li>
 <li>ORBIT LAB：SCIENCE VISUAL LABのCanvas描画を、タブ非表示時に停止し、OSの視差・動きを減らす設定でも連続アニメーションを行わないよう改善。制作Journalにも変更内容を追加。</li>
-<li>GAME：ポータルからリンクされる `青の分岐点/index.html` と `jukenwar/index.html` がGitHub上で0バイトであることを検出。元の単一HTMLソースが同リポジトリ内で見つからず、今回の実行ではゲーム本体の復元は未完了。空ページを復旧済みとは扱わない。</li>
+<li>GAME：0バイトだった `青の分岐点/index.html` と `jukenwar/index.html` を、白紙表示を避ける復旧状況ページへ置換。青の分岐点のService Workerキャッシュをv3へ更新。元のゲーム本体ソースは確認できず、進行エンジンの復元は未完了。GAMEコミット：5fd9975b / 6f82877c / e21c3bdd。</li>
 <li>デプロイ確認：KNOTのNEWS・ブログ・MAP更新コミットでVercelの2チェック成功を確認。TT INSIGHT、ORBIT LAB、問題データバンクはGitHubのファイル更新を確認したが、本番URLの実機表示は未確認。</li>
 <li>未完了：Studyの公立入試問題50問追加、卓球用具・技術の新規50件ずつの追加、GAMEの2ページ復元、全9リポジトリの実機表示・リンク総点検、VOTE MATCH・TRACE LAB等の追加改善。</li>
 </ul></article><article class="release-item">
