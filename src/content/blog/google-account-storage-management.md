@@ -1,7 +1,7 @@
 ---
 title: "Googleの保存容量がいっぱいになったら？Gmail・Drive・フォトをまとめて整理"
 description: "Googleアカウントの容量はGmail、Google Drive、Googleフォトなどで共有されています。何が容量を使っているか確認し、安全に空きを作る手順をまとめます。"
-pubDate: "2026-11-09T16:30:00+09:00"
+pubDate: "2026-11-09T16:21:00+09:00"
 category: "スマホ・PC"
 contentType: "article"
 aiGenerated: true
