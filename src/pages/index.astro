@@ -14,9 +14,26 @@ const BASE = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 const isDateOnly = (date: Date) => date.getUTCHours() === 0 && date.getUTCMinutes() === 0 && date.getUTCSeconds() === 0;
 const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', { year: 'numeric', month: 'short', day: 'numeric', timeZone: isDateOnly(date) ? 'UTC' : 'Asia/Tokyo' });
 const dateTimeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Tokyo' });
+const homeJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'KNOT｜Web・テクノロジー・読書・学びの個人ブログ',
+  description: siteSettings.siteDescription,
+  url: new URL('/', Astro.site ?? Astro.url).href,
+  inLanguage: 'ja-JP',
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: posts.slice(0, 4).map((post, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      url: new URL(`/blog/${post.id}/`, Astro.site ?? Astro.url).href,
+      name: post.data.title,
+    })),
+  },
+};
 ---
 
-<Layout title="KNOT｜Web制作・PCソフト・Androidアプリ・読書の個人ブログ" description={siteSettings.siteDescription}>
+<Layout title="KNOT｜Web制作・テクノロジー・読書・学びの個人ブログ" description={siteSettings.siteDescription} structuredData={homeJsonLd}>
   <div class="personal-home">
     <section class="intro">
       <div class="intro-topline"><span class="intro-kicker"><span class="live-dot"></span> {siteSettings.introKicker}</span><span class="intro-year">NO. 001 / 2026—</span></div>
