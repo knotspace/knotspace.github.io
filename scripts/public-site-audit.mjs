@@ -14,6 +14,7 @@ const targets = [
 ];
 
 const sitemapUrls = [
+  'https://knotspace.github.io/sitemap.xml',
   'https://knotspace.github.io/study/sitemap.xml',
   'https://knotspace.github.io/game/sitemap.xml',
   'https://knotspace.github.io/sport/sitemap.xml',
