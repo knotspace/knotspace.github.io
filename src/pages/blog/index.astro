@@ -10,7 +10,7 @@ const posts = (await getCollection('blog'))
     b.data.pubDate.valueOf() - a.data.pubDate.valueOf() || b.id.localeCompare(a.id)
   );
 
-const isAiPost = (post) => post.data.aiGenerated || /^\\*\\*AI生成記事\\*\\*/.test((post.body ?? '').trimStart());
+const isAiPost = (post) => post.data.aiGenerated || (post.body ?? '').trimStart().startsWith('**AI生成記事**');
 const regularPosts = posts.filter((post) => !isAiPost(post) && post.data.contentType !== 'trend');
 const aiSummaryPosts = [];
 const categories = [...new Set(regularPosts.map((post) => post.data.category))];
