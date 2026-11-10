@@ -12,7 +12,6 @@ const posts = (await getCollection('blog'))
 
 const isAiPost = (post) => post.data.aiGenerated || (post.body ?? '').trimStart().startsWith('**AI生成記事**');
 const regularPosts = posts.filter((post) => !isAiPost(post) && post.data.contentType !== 'trend');
-const aiSummaryPosts = [];
 const categories = [...new Set(regularPosts.map((post) => post.data.category))];
 const readingTime = (body = '') => Math.max(1, Math.ceil(body.replace(/\s/g, '').length / 500));
 const recommendationScore = (post) => {
@@ -47,11 +46,6 @@ const timeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTim
       <button type="button" id="random-article" class="random-button">✦ ランダムに読む</button>
     </div>
   </section>
-
-  <nav class="archive-tabs" role="tablist" aria-label="記事の種類">
-    <button class="archive-tab active" type="button" role="tab" aria-selected="true" aria-controls="regular-panel" id="regular-tab" data-panel="regular-panel">記事一覧 <span>{regularPosts.length}</span></button>
-    
-  </nav>
 
   <div class="content-layout">
     <section class="main-column">
@@ -112,7 +106,6 @@ const timeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTim
                   {dateFormat(post.data.pubDate)} {timeFormat(post.data.pubDate)}
                 </time>
                 <span class="category-label">{post.data.category}</span>
-                {post.data.aiGenerated && <span class="category-label">AI生成記事</span>}
                 <span class="reading-time">約{readingTime(post.body)}分</span>
               </div>
 
