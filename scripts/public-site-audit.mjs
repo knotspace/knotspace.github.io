@@ -13,6 +13,15 @@ const targets = [
   ['Location quiz', 'https://knotspace.github.io/ichiate/'],
 ];
 
+const sitemapUrls = [
+  'https://knotspace.github.io/study/sitemap.xml',
+  'https://knotspace.github.io/game/sitemap.xml',
+  'https://knotspace.github.io/sport/sitemap.xml',
+  'https://knotspace.github.io/orbit-lab/sitemap.xml',
+  'https://knotspace.github.io/aaa/sitemap.xml',
+  'https://knotspace.github.io/ichiate/sitemap.xml',
+];
+
 const viewports = [
   { name: 'mobile', width: 390, height: 844 },
   { name: 'desktop', width: 1440, height: 960 },
@@ -20,9 +29,27 @@ const viewports = [
 const browser = await chromium.launch({ headless: true });
 const failures = [];
 const report = [];
+const allTargets = new Map(targets.map(([site, url]) => [url, site]));
+
+for (const sitemapUrl of sitemapUrls) {
+  try {
+    const response = await fetch(sitemapUrl);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const xml = await response.text();
+    for (const match of xml.matchAll(/<loc>(.*?)<\\/loc>/g)) {
+      const url = match[1].trim();
+      if (url.startsWith('https://knotspace.github.io/')) {
+        allTargets.set(url, new URL(url).pathname.split('/').filter(Boolean)[0] || 'KNOT');
+      }
+    }
+  } catch (error) {
+    failures.push({ site: 'sitemap', viewport: 'n/a', url: sitemapUrl, issues: [String(error)] });
+    console.log(JSON.stringify(failures.at(-1)));
+  }
+}
 
 try {
-  for (const [site, url] of targets) {
+  for (const [url, site] of allTargets) {
     for (const viewport of viewports) {
       const page = await browser.newPage({ viewport });
       const pageErrors = [];
