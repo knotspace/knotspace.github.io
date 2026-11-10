@@ -3,12 +3,13 @@ import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 
 const now = new Date();
+const lastUpdated = (post) => new Date(Math.max(post.data.pubDate.valueOf(), post.data.updatedDate?.valueOf() ?? 0));
 const today = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Tokyo', year: 'numeric', month: '2-digit', day: '2-digit' }).format(now);
 const aiPosts = (await getCollection('blog'))
   .filter((post) => (post.data.aiGenerated || (post.body ?? '').trimStart().startsWith('**AI生成記事**')) && (!post.data.publishAt || post.data.publishAt <= now))
-  .sort((a, b) => (b.data.updatedDate ?? b.data.pubDate).valueOf() - (a.data.updatedDate ?? a.data.pubDate).valueOf() || b.id.localeCompare(a.id));
+  .sort((a, b) => lastUpdated(b).valueOf() - lastUpdated(a).valueOf() || b.id.localeCompare(a.id));
 const todayPosts = aiPosts.filter((post) => {
-  const date = post.data.updatedDate ?? post.data.pubDate;
+  const date = lastUpdated(post);
   return new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Tokyo', year: 'numeric', month: '2-digit', day: '2-digit' }).format(date) === today;
 });
 const archivePosts = aiPosts;
@@ -56,7 +57,7 @@ const newsBreadcrumbJsonLd = {
       {todayPosts.length > 0 ? <div class="ai-news-grid">
         {todayPosts.map((post, index) => <a class="ai-news-card ai-news-card-feature" href={`${BASE}blog/${post.id}/`}>
           <div class="ai-news-thumb">{post.data.heroImage ? <img src={post.data.heroImage} alt="" loading={index < 2 ? 'eager' : 'lazy'} decoding="async" width="720" height="420" /> : <span>NEWS / {String(index + 1).padStart(2,'0')}</span>}<b>AI GENERATED</b></div>
-          <div class="ai-news-card-copy"><div class="ai-news-meta"><span>{post.data.category}</span><time datetime={(post.data.updatedDate ?? post.data.pubDate).toISOString()}>{dateLabel(post.data.updatedDate ?? post.data.pubDate)} {timeLabel(post.data.updatedDate ?? post.data.pubDate)}</time></div><h3>{post.data.title}</h3><p>{post.data.description}</p><div class="ai-news-card-foot"><span>AI生成記事</span><span>約{readingTime(post.body)}分 ↗</span></div></div>
+          <div class="ai-news-card-copy"><div class="ai-news-meta"><span>{post.data.category}</span><time datetime={lastUpdated(post).toISOString()}>{dateLabel(lastUpdated(post))} {timeLabel(lastUpdated(post))}</time></div><h3>{post.data.title}</h3><p>{post.data.description}</p><div class="ai-news-card-foot"><span>AI生成記事</span><span>約{readingTime(post.body)}分 ↗</span></div></div>
         </a>)}
       </div> : <div class="ai-news-empty"><strong>今日の新しい記事はまだありません。</strong><p>新しいAI生成記事が公開されると、ここに自動で表示されます。過去の記事は下の一覧から読めます。</p></div>}
     </section>
