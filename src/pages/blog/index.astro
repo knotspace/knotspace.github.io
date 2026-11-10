@@ -10,8 +10,8 @@ const posts = (await getCollection('blog'))
     b.data.pubDate.valueOf() - a.data.pubDate.valueOf() || b.id.localeCompare(a.id)
   );
 
-const regularPosts = posts.filter((post) => post.data.contentType !== 'trend');
-const aiSummaryPosts = posts.filter((post) => post.data.contentType === 'trend' && post.data.aiGenerated);
+const regularPosts = posts.filter((post) => !post.data.aiGenerated && post.data.contentType !== 'trend');
+const aiSummaryPosts = [];
 const categories = [...new Set(regularPosts.map((post) => post.data.category))];
 const readingTime = (body = '') => Math.max(1, Math.ceil(body.replace(/\s/g, '').length / 500));
 const recommendationScore = (post) => {
@@ -49,7 +49,7 @@ const timeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTim
 
   <nav class="archive-tabs" role="tablist" aria-label="記事の種類">
     <button class="archive-tab active" type="button" role="tab" aria-selected="true" aria-controls="regular-panel" id="regular-tab" data-panel="regular-panel">記事一覧 <span>{regularPosts.length}</span></button>
-    <button class="archive-tab" type="button" role="tab" aria-selected="false" aria-controls="ai-panel" id="ai-tab" data-panel="ai-panel">AIまとめ記事 <span>{aiSummaryPosts.length}</span></button>
+    
   </nav>
 
   <div class="content-layout">
@@ -128,38 +128,7 @@ const timeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTim
       </p>
       </div>
 
-      <div id="ai-panel" class="archive-panel" role="tabpanel" aria-labelledby="ai-tab" hidden>
-        <div class="ai-panel-heading">
-          <span class="post-count">{aiSummaryPosts.length} ARTICLES</span>
-          <p>話題の出来事やニュースをAIで整理したまとめ記事です。</p>
-        </div>
-        <div class="archive-list">
-          {aiSummaryPosts.map((post, index) => (
-            <a class="post-card" href={`${BASE}blog/${post.id}/`}>
-              <div class="post-thumbnail">
-                {post.data.heroImage ? (
-                  <img src={post.data.heroImage} alt={post.data.title} loading="lazy" decoding="async" width="380" height="254" />
-                ) : (
-                  <span>{String(index + 1).padStart(2, '0')}</span>
-                )}
-              </div>
-              <div class="post-info">
-                <div class="post-meta">
-                  <time datetime={post.data.pubDate.toISOString()}>{dateFormat(post.data.pubDate)} {timeFormat(post.data.pubDate)}</time>
-                  <span class="category-label">{post.data.category}</span>
-                  <span class="category-label">AIまとめ</span>
-                  <span class="reading-time">約{readingTime(post.body)}分</span>
-                </div>
-                <h2>{post.data.title}</h2>
-                <p>{post.data.description}</p>
-                <span class="read-more">続きを読む →</span>
-              </div>
-            </a>
-          ))}
-        </div>
-        {aiSummaryPosts.length === 0 && <p class="no-results">AIまとめ記事はまだありません。</p>}
-      </div>
-      <a class="news-page-link" href={`${BASE}news/`}><span class="section-kicker">NEWS / DAILY BRIEFING</span><strong>今日のニュースと知っておきたい知識を読む ↗</strong></a>
+      <a class="news-page-link" href={`${BASE}news/`}><span class="section-kicker">NEWS / AI GENERATED ARTICLES</span><strong>今日の更新と、これまでに生成したAI記事を見る ↗</strong></a>
     </section>
 
     <aside class="sidebar">
