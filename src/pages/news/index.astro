@@ -6,7 +6,7 @@ const now = new Date();
 const lastUpdated = (post) => new Date(Math.max(post.data.pubDate.valueOf(), post.data.updatedDate?.valueOf() ?? 0));
 const today = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Tokyo', year: 'numeric', month: '2-digit', day: '2-digit' }).format(now);
 const aiPosts = (await getCollection('blog'))
-  .filter((post) => (post.data.aiGenerated || (post.body ?? '').trimStart().startsWith('**AI生成記事**')) && (!post.data.publishAt || post.data.publishAt <= now))
+  .filter((post) => (post.data.aiGenerated || post.data.contentType === 'trend' || (post.body ?? '').trimStart().startsWith('**AI生成記事**')) && (!post.data.publishAt || post.data.publishAt <= now))
   .sort((a, b) => lastUpdated(b).valueOf() - lastUpdated(a).valueOf() || b.id.localeCompare(a.id));
 const todayPosts = aiPosts.filter((post) => {
   const date = lastUpdated(post);
