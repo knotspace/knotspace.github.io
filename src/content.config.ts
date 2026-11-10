@@ -15,6 +15,8 @@ const blog = defineCollection({
     popularity: z.number().int().min(0).default(0),
     heroImage: z.string().url().or(z.string().startsWith('/')).optional(),
     blocks: z.array(z.any()).optional(),
+  }).refine((post) => post.contentType !== 'trend' || post.aiGenerated, {
+    message: 'Trend posts must set aiGenerated: true so they are disclosed and listed in News.',
   }),
 });
 
