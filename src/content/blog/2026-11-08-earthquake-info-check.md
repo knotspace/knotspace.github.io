@@ -1,12 +1,16 @@
-------
+---
 title: "地震の情報をSNSで見たら？まず確認したい5つのポイント"
 description: "地震関連の検索が注目された今、速報やSNSの投稿をどう確認すればいい？気象庁・政府の公式情報をもとに、落ち着いて情報を見分ける手順をまとめました。"
 pubDate: "2026-11-08T15:00:00+09:00"
 category: "暮らし・防災"
+contentType: trend
+aiGenerated: true
 heroImage: "/blog-art/editorial-2026-11-08-earthquake-info-check.svg"
 updatedDate: 2026-11-08
 ---
 
+
+**AI生成記事**：この記事はAIを活用して作成しています。公開情報をもとに構成し、参照元を掲載しています。最新情報や重要な内容は、リンク先の公式資料・一次情報もご確認ください。
 
 
 <figure class="knot-figure"><img src="/blog-art/editorial-2026-11-08-earthquake-info-check.svg" alt="地震情報を見分けるの要点を整理したKNOTオリジナル図解" loading="lazy" decoding="async" width="1200" height="630" /><figcaption>図版：KNOT制作・記事の要点を整理したオリジナル図解</figcaption></figure>
