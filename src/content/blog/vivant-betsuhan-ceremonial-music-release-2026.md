@@ -1,12 +1,16 @@
-------
+---
 title: "VIVANT「別班儀礼曲」が11月9日配信へ。曲の背景と一緒に聴きたいポイント"
 description: "ドラマ『VIVANT』で話題になった別班儀礼曲が2026年11月9日に先行配信。作曲者や同時配信曲、劇中音楽を楽しむためのポイントを公式情報から紹介します。"
 pubDate: "2026-11-08T13:10:00+09:00"
 category: "エンタメ・音楽"
+contentType: trend
+aiGenerated: true
 heroImage: "/blog-art/editorial-vivant-betsuhan-ceremonial-music-release-2026.svg"
 updatedDate: 2026-11-08
 ---
 
+
+**AI生成記事**：この記事はAIを活用して作成しています。公開情報をもとに構成し、参照元を掲載しています。最新情報や重要な内容は、リンク先の公式資料・一次情報もご確認ください。
 
 
 <figure class="knot-figure"><img src="/blog-art/editorial-vivant-betsuhan-ceremonial-music-release-2026.svg" alt="VIVANTの劇中音楽と配信予定の2曲を整理した図解" loading="lazy" decoding="async" width="1200" height="630" /><figcaption>図版：KNOT制作・記事の要点を整理したオリジナル図解</figcaption></figure>
