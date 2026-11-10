@@ -1,12 +1,16 @@
-------
+---
 title: "ワイヤレス全盛なのに、なぜ有線イヤホン？いま再び選ばれる理由"
 description: "有線イヤホンが再び注目されている。充電や接続のわずらわしさ、ファッションとしての楽しみ方、選ぶときの注意点まで、最近の動きをもとに整理する。"
 pubDate: "2026-11-08T12:14:00+09:00"
 category: "暮らし・テクノロジー"
+contentType: trend
+aiGenerated: true
 heroImage: "/blog-art/editorial-wired-earphones-comeback-2026.svg"
 updatedDate: 2026-11-08
 ---
 
+
+**AI生成記事**：この記事はAIを活用して作成しています。公開情報をもとに構成し、参照元を掲載しています。最新情報や重要な内容は、リンク先の公式資料・一次情報もご確認ください。
 
 
 <figure class="knot-figure"><img src="/blog-art/editorial-wired-earphones-comeback-2026.svg" alt="有線イヤホンの特徴とワイヤレスとの比較" loading="lazy" decoding="async" width="1200" height="630" /><figcaption>図版：KNOT制作・記事の要点を整理したオリジナル図解</figcaption></figure>
