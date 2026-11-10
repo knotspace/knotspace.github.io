@@ -94,7 +94,7 @@ const breadcrumbJsonLd = {
   '@type': 'BreadcrumbList',
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'ホーム', item: 'https://knotspace.github.io/' },
-    { '@type': 'ListItem', position: 2, name: '記事一覧', item: 'https://knotspace.github.io/blog/' },
+    { '@type': 'ListItem', position: 2, name: isAiGenerated ? 'News' : '記事一覧', item: isAiGenerated ? 'https://knotspace.github.io/news/' : 'https://knotspace.github.io/blog/' },
     { '@type': 'ListItem', position: 3, name: post.data.title, item: articleUrl },
   ],
 };
@@ -110,8 +110,8 @@ const breadcrumbJsonLd = {
   <div class="article-layout">
   <article class="post" data-post-slug={post.id}>
     <div class="article-tools"><span>この記事を読む</span><div class="tool-actions"><button id="share-button" type="button">↗ リンクをコピー</button><button id="bookmark-button" type="button" aria-pressed="false">☆ あとで読む</button></div></div>
-    <a class="back-link" href={`${BASE}blog/`}>
-      ← 記事一覧に戻る
+    <a class="back-link" href={isAiGenerated ? `${BASE}news/` : `${BASE}blog/`}>
+      ← {isAiGenerated ? "Newsに戻る" : "記事一覧に戻る"}
     </a>
 
     <header class="post-header">
@@ -199,8 +199,8 @@ const breadcrumbJsonLd = {
     <div class="post-end">
       <span class="end-mark">✳</span>
       <p>最後まで読んでくれてありがとう。</p>
-      <a href={`${BASE}blog/`}>
-        ほかの記事も読んでみる
+      <a href={isAiGenerated ? `${BASE}news/` : `${BASE}blog/`}>
+        {isAiGenerated ? "ほかのAI生成記事も読む" : "ほかの記事も読んでみる"}
         <span aria-hidden="true">→</span>
       </a>
     </div>
