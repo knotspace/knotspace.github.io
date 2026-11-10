@@ -5,7 +5,7 @@ import Layout from '../../layouts/Layout.astro';
 const now = new Date();
 const today = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Tokyo', year: 'numeric', month: '2-digit', day: '2-digit' }).format(now);
 const aiPosts = (await getCollection('blog'))
-  .filter((post) => post.data.aiGenerated && (!post.data.publishAt || post.data.publishAt <= now))
+  .filter((post) => (post.data.aiGenerated || (post.body ?? '').trimStart().startsWith('**AI生成記事**')) && (!post.data.publishAt || post.data.publishAt <= now))
   .sort((a, b) => (b.data.updatedDate ?? b.data.pubDate).valueOf() - (a.data.updatedDate ?? a.data.pubDate).valueOf() || b.id.localeCompare(a.id));
 const todayPosts = aiPosts.filter((post) => {
   const date = post.data.updatedDate ?? post.data.pubDate;
