@@ -1,237 +1,120 @@
 ---
+import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 
-const updated = '2026年11月9日 16:03';
-const stories = [
-  {
-    category: '国内・防犯',
-    time: '11月5日発表 / 11月9日運用開始',
-    title: '警察と30金融機関の不正利用口座情報共有、全国一元運用が開始',
-    lead: '警察庁は11月9日、特殊詐欺などの被害拡大を防ぐ「情報共有型連携」の全国一元運用を開始しました。47都道府県警察が把握した不正利用口座の情報を警察庁が集約し、協定を結んだ30金融機関へ提供。金融機関は自行の振込データを確認し、該当口座へ送金した可能性のある顧客情報を警察へ返します。警察はその情報をもとに本人へ接触し、被害の拡大防止を図ります。',
-    href: 'https://www.npa.go.jp/bureau/criminal/souni/tokusyusagi/20261105.pdf',
-    source: '警察庁（報道資料）',
-    tag: '今日から開始',
+const now = new Date();
+const today = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Tokyo', year: 'numeric', month: '2-digit', day: '2-digit' }).format(now);
+const aiPosts = (await getCollection('blog'))
+  .filter((post) => post.data.aiGenerated && (!post.data.publishAt || post.data.publishAt <= now))
+  .sort((a, b) => (b.data.updatedDate ?? b.data.pubDate).valueOf() - (a.data.updatedDate ?? a.data.pubDate).valueOf() || b.id.localeCompare(a.id));
+const todayPosts = aiPosts.filter((post) => {
+  const date = post.data.updatedDate ?? post.data.pubDate;
+  return new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Tokyo', year: 'numeric', month: '2-digit', day: '2-digit' }).format(date) === today;
+});
+const archivePosts = aiPosts;
+const dateLabel = (date: Date) => date.toLocaleDateString('ja-JP', { timeZone: 'Asia/Tokyo', year: 'numeric', month: 'long', day: 'numeric' });
+const timeLabel = (date: Date) => date.toLocaleTimeString('ja-JP', { timeZone: 'Asia/Tokyo', hour: '2-digit', minute: '2-digit' });
+const readingTime = (body = '') => Math.max(1, Math.ceil(body.replace(/\\s/g, '').length / 500));
+const BASE = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const newsJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'KNOT NEWS｜AI生成記事',
+  description: 'KNOTがAIを活用して作成したニュース・トレンド記事。今日の更新と過去の記事を掲載。',
+  url: new URL('/news/', Astro.site ?? Astro.url).href,
+  inLanguage: 'ja-JP',
+  mainEntity: {
+    '@type': 'ItemList',
+    numberOfItems: aiPosts.length,
+    itemListElement: aiPosts.map((post, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      url: new URL(`/blog/${post.id}/`, Astro.site ?? Astro.url).href,
+      name: post.data.title,
+    })),
   },
-  {
-    category: '天気・暮らし',
-    time: '11月9日 05:10発表',
-    title: '関東や北日本は初冬の寒さ、広い範囲で雨や雪',
-    lead: 'ウェザーニュースの9日朝の予報では、低気圧や前線の通過で広い範囲の天気が崩れる見込みです。関東は一日を通して雨が降りやすく、昼間も気温が上がりにくい予想。北海道の日本海側では雪や積雪の増加、落雷・突風への注意が呼びかけられています。地域差があるため、出発前に目的地の最新予報と交通情報を確認してください。',
-    href: 'https://weathernews.jp/news/202611/090021/',
-    source: 'ウェザーニュース',
-    tag: '今日の天気',
-  },
-  {
-    category: '国際',
-    time: '11月9日 03:37配信',
-    title: 'エジプトで旅客列車同士が衝突、7人死亡・112人けが',
-    lead: 'テレビ朝日の報道によると、エジプト当局は8日、カイロの南約70キロで旅客列車同士が衝突し、7人が死亡、112人がけがをしたと発表しました。2本はいずれも南向きで、一方の列車がもう一方の後部に衝突したとされています。事故原因は調査中で、現時点で詳しい原因は公表されていません。',
-    href: 'https://news.tv-asahi.co.jp/news_international/articles/000546256.html',
-    source: 'テレビ朝日（当局発表を引用）',
-    tag: '国際ニュース',
-  },
-  {
-    category: '国内・事故',
-    time: '11月8日 18:00報道',
-    title: '愛媛県でパラグライダーが墜落、操縦していた女性が死亡',
-    lead: 'FNNプライムオンラインの報道によると、愛媛県四国中央市で8日、パラグライダーが飛行中に墜落し、操縦していた55歳の女性が死亡しました。女性は初心者向けイベントに参加し、午後に単独飛行へ挑戦していたとされています。警察が事故の詳しい原因などを調べており、原因はまだ確定していません。',
-    href: 'https://www.fnn.jp/articles/-/1148474',
-    source: 'FNNプライムオンライン（警察の調べを引用）',
-    tag: '事故・続報確認',
-  },
-  {
-    category: 'スポーツ',
-    time: '11月8日 決勝 / 大会公式結果',
-    title: 'WTTチャンピオンズ・フランクフルト、日本勢が男女シングルスで優勝',
-    lead: '日本卓球協会の大会記録によると、男子シングルスは張本智和が決勝でパトリック・フランツィスカを4対2で破って優勝。女子シングルスは早田ひなが優勝し、大藤沙月が準優勝、張本美和が3位に入りました。大会は11月3日から8日までドイツ・フランクフルトで開催されました。',
-    href: 'https://jtta.or.jp/tour/36671',
-    source: '日本卓球協会（大会記録）',
-    tag: '大会結果',
-  },
-  {
-    category: 'エンタメ',
-    time: '11月9日 04:00報道',
-    title: 'Aぇ! groupの紅白初出場「内定」との報道、正式発表とは区別して確認',
-    lead: 'スポーツニッポンの取材に基づき、Aぇ! groupが第77回NHK紅白歌合戦に初出場する方向で内定したと報じられています。ただし、これは報道段階の情報です。NHKが正式な出演者一覧を発表したこととは区別し、確定情報として断定しないようにします。',
-    href: 'https://news.livedoor.com/article/detail/32765687/',
-    source: 'スポニチアネックス（報道）',
-    tag: '報道段階',
-  },
-  {
-    category: '天気・防災',
-    time: '11月9日 15:45発表 / 15:00現在',
-    title: '台風32号、進路にあたる海域はしけ〜大しけに警戒',
-    lead: '日本気象協会 tenki.jpの9日15:45発表によると、強い台風32号は15時現在、日本の南にあり、中心気圧980hPa、中心付近の最大風速35m/sで北西へ進んでいます。予報では12日9時に南鳥島近海へ進み、14日9時までには同海域で熱帯低気圧に変わる見込みです。台風周辺海域と進路にあたる海域はしけ〜大しけとなるため、海上では厳重な警戒が必要です。朝の予報から進路・予報時刻が更新されているため、最新の台風情報を確認してください。',
-    href: 'https://tenki.jp/bousai/typhoon/',
-    source: '日本気象協会 tenki.jp（15:45発表）',
-    tag: '台風情報',
-  },
-];
-
-const quickFacts = [
-  { n: '01', title: '情報共有は、被害の早期発見が目的', body: '警察が把握した不正利用口座の情報を金融機関へ提供し、金融機関が自行の振込データを確認。該当する顧客情報を警察へ返し、警察が本人へ接触する流れです。返金や補償を保証する制度ではありません。' },
-  { n: '02', title: '11月9日は「119番の日」', body: '119番では、住所・階層・近くの目標物、何が起きたか、けが人や逃げ遅れの有無などを聞かれます。住所が分からない場合も、近くの目印を伝え、指令員の質問に落ち着いて答えましょう。救急車を呼ぶか迷う場合の相談窓口「#7119」は、一部地域では利用できないため事前確認が必要です。' },
-  { n: '03', title: '「内定報道」と公式発表は同じではない', body: '関係者取材に基づく報道が出ても、主催者が正式な出演者一覧を発表するまでは確定情報とは限りません。記事の日付と発表主体を見て、情報の段階を区別しましょう。' },
-  { n: '04', title: '台風が離れていても高波に注意', body: '台風の中心から離れた地域でも、うねりが届いて海岸の波が高くなることがあります。海岸や港、防波堤には近づかず、気象庁の台風情報・波浪警報と自治体の避難情報を確認しましょう。' },
-];
-
-const sourceLinks = [
-  { label: '日本気象協会 tenki.jp・台風32号の最新情報（11月9日 15:45発表）', href: 'https://news.livedoor.com/article/detail/32767026/' },
-  { label: 'Yahoo! JAPAN トップニュース（話題発見）', href: 'https://www.yahoo.co.jp/' },
-  { label: '警察庁・情報共有型連携の全国一元運用（11月5日資料）', href: 'https://www.npa.go.jp/bureau/criminal/souni/tokusyusagi/20261105.pdf' },
-  { label: 'ウェザーニュース・11月9日の天気予報（05:10発表）', href: 'https://weathernews.jp/news/202611/090021/' },
-  { label: '気象庁・全国の天気予報と防災情報', href: 'https://www.jma.go.jp/bosai/forecast/' },
-  { label: '消防庁・119番緊急通報の案内', href: 'https://www.fdma.go.jp/publication/ugoki/items/rei_0811_27.pdf' },
-  { label: 'テレビ朝日・エジプトの列車衝突', href: 'https://news.tv-asahi.co.jp/news_international/articles/000546256.html' },
-  { label: 'FNNプライムオンライン・愛媛県のパラグライダー事故', href: 'https://www.fnn.jp/articles/-/1148474' },
-  { label: '日本卓球協会・WTTチャンピオンズ フランクフルト公式結果', href: 'https://jtta.or.jp/tour/36671' },
-  { label: 'スポニチアネックス・紅白初出場に関する報道', href: 'https://news.livedoor.com/article/detail/32765687/' },
-  { label: '消防庁・令和8年11月「消防の動き」', href: 'https://www.fdma.go.jp/publication/ugoki/2026/' },
-];
-
+};
 ---
+<Layout title="NEWS｜AI生成ニュース・トレンド記事 | KNOT" description="KNOTがAIを活用して作成したニュース・トレンド記事を掲載。今日更新した記事と、これまでに生成した記事をまとめて確認できます。" structuredData={newsJsonLd}>
+  <main class="ai-news">
+    <header class="ai-news-head">
+      <div class="ai-news-topline"><a href={BASE}>KNOT.</a><span>AI-ASSISTED NEWS & TREND DESK</span><span>{today.replaceAll('-', '.')}</span></div>
+      <div class="ai-news-title"><span class="ai-news-kicker">NEWS / AI GENERATED ARTICLES</span><h1>News<span>.</span></h1><p>AIを活用して作成したニュース・トレンド記事をまとめています。</p></div>
+      <nav class="ai-news-nav" aria-label="News内ナビゲーション"><a href="#today">今日の更新 <b>{todayPosts.length}</b></a><a href="#archive">これまでの記事 <b>{aiPosts.length}</b></a><a href={`${BASE}blog/`}>通常の記事一覧 ↗</a></nav>
+    </header>
 
-<Layout title="NEWS｜今日のニュースと知っておきたい知識 | KNOT" description="Yahoo! JAPANのニュース見出しを参考に、今日の重要ニュースと背景・暮らしに役立つ知識を一次情報とともに整理するKNOT NEWS。">
-  <main class="news-page">
-    <div class="news-masthead">
-      <div class="masthead-top"><span>KNOT / INDEPENDENT NEWS DESK</span><span>JAPAN · DAILY EDITION</span></div>
-      <div class="masthead-main"><a href="/news/" aria-label="KNOT NEWS">NEWS<span>.</span></a><p>今日のニュースを、背景までわかりやすく。</p></div>
-      <nav class="news-categories" aria-label="ニュースカテゴリー">
-        <a href="#top">主要</a><a href="#domestic">国内・天気</a><a href="#world">国際</a><a href="#sports">スポーツ</a><a href="#entertainment">エンタメ</a><a href="#knowledge">今知っておきたい知識</a>
-      </nav>
-    </div>
-
-    <section class="edition-line" id="top"><span>DAILY BRIEFING / 2026.11.09 MON</span><span>最終確認：{updated} JST</span></section>
-
-    <section class="lead-grid">
-      <article class="lead-story">
-        <a class="lead-image" href={stories[0].href} target="_blank" rel="noopener noreferrer">
-          <div class="earth-graphic"><span>FRAUD PREVENTION</span><strong>30</strong><small>協定金融機関</small><i></i></div>
-          <span class="image-caption">警察庁の発表 / 2026年11月9日運用開始</span>
-        </a>
-        <div class="lead-copy">
-          <span class="kicker">TOP STORY · 社会・防犯</span>
-          <h1>警察と金融機関の情報共有が全国で開始</h1>
-          <p>警察庁が47都道府県警察の情報を集約し、協定を結ぶ30金融機関と連携。詐欺に使われた口座へ送金した可能性のある人を早く見つけ、被害の拡大を防ぐ仕組みが始まりました。</p>
-          <div class="lead-meta"><span>2026.11.09</span><span>約5分で読める要点</span></div>
-          <a class="read-link" href="#domestic">ニュースを読む <b>↘</b></a>
-        </div>
-      </article>
-      <aside class="side-brief">
-        <div class="side-heading"><span>ALSO IN FOCUS</span><span>02—04</span></div>
-        {stories.slice(1).map((story, i) => <a class="side-item" href={story.href} target="_blank" rel="noopener noreferrer"><span class="side-number">0{i + 2}</span><div><small>{story.category} · {story.time}</small><h2>{story.title}</h2><p>{story.source}</p></div><b>↗</b></a>)}
-      </aside>
+    <section class="ai-news-section" id="today">
+      <div class="ai-news-section-heading"><div><span>TODAY / {today.replaceAll('-', '.')}</span><h2>今日更新した記事</h2></div><small>{todayPosts.length} ARTICLES</small></div>
+      {todayPosts.length > 0 ? <div class="ai-news-grid">
+        {todayPosts.map((post, index) => <a class="ai-news-card ai-news-card-feature" href={`${BASE}blog/${post.id}/`}>
+          <div class="ai-news-thumb">{post.data.heroImage ? <img src={post.data.heroImage} alt="" loading={index < 2 ? 'eager' : 'lazy'} decoding="async" width="720" height="420" /> : <span>NEWS / {String(index + 1).padStart(2,'0')}</span>}<b>AI GENERATED</b></div>
+          <div class="ai-news-card-copy"><div class="ai-news-meta"><span>{post.data.category}</span><time datetime={(post.data.updatedDate ?? post.data.pubDate).toISOString()}>{dateLabel(post.data.updatedDate ?? post.data.pubDate)} {timeLabel(post.data.updatedDate ?? post.data.pubDate)}</time></div><h3>{post.data.title}</h3><p>{post.data.description}</p><div class="ai-news-card-foot"><span>AI生成記事</span><span>約{readingTime(post.body)}分 ↗</span></div></div>
+        </a>)}
+      </div> : <div class="ai-news-empty"><strong>今日の新しい記事はまだありません。</strong><p>新しいAI生成記事が公開されると、ここに自動で表示されます。過去の記事は下の一覧から読めます。</p></div>}
     </section>
 
-    <section class="news-feed" id="domestic">
-      <div class="section-title"><div><span class="kicker">LATEST / VERIFIED</span><h2>今日のニュース</h2></div><p>警察庁などの公式発表と報道機関の情報を確認し、出典を明記して整理しています。</p></div>
-      <div class="feed-list">
-        {stories.map((story, i) => <article class="feed-card" id={story.category === '国際' ? 'world' : story.category === 'スポーツ' ? 'sports' : story.category === 'エンタメ' ? 'entertainment' : story.category === '国内・防犯' ? 'domestic' : undefined}>
-          <span class="feed-index">{String(i + 1).padStart(2, '0')}</span>
-          <div class="feed-content"><div class="feed-meta"><span>{story.category}</span><time>{story.time}</time></div><h3>{story.title}</h3><p>{story.lead}</p><div class="feed-bottom"><span>出典：{story.source}</span><a href={story.href} target="_blank" rel="noopener noreferrer">元記事・発表を確認 ↗</a></div></div>
-        </article>)}
+    <section class="ai-news-section ai-news-archive" id="archive">
+      <div class="ai-news-section-heading"><div><span>ALL STORIES / ARCHIVE</span><h2>これまでに生成した記事</h2></div><small>{aiPosts.length} ARTICLES</small></div>
+      <div class="ai-news-list">
+        {archivePosts.map((post) => <a class="ai-news-row" href={`${BASE}blog/${post.id}/`}>
+          <div class="ai-news-row-date"><time datetime={(post.data.updatedDate ?? post.data.pubDate).toISOString()}>{dateLabel(post.data.updatedDate ?? post.data.pubDate)}</time><span>{timeLabel(post.data.updatedDate ?? post.data.pubDate)}</span></div>
+          <div class="ai-news-row-content"><div class="ai-news-meta"><span>{post.data.category}</span><b>AI生成記事</b></div><h3>{post.data.title}</h3><p>{post.data.description}</p></div><span class="ai-news-arrow">↗</span>
+        </a>)}
       </div>
+      {aiPosts.length === 0 && <p class="ai-news-empty">公開中のAI生成記事はまだありません。</p>}
     </section>
-
-    <section class="knowledge-section" id="knowledge">
-      <div class="knowledge-head"><span class="kicker">KNOWLEDGE / EXPLAINED</span><h2>今知っておきたい知識</h2><p>ニュースを見て終わりにせず、知っておくと役立つ背景を短く整理。</p></div>
-      <div class="fact-grid">
-        {quickFacts.map((fact) => <article class="fact-card"><span>{fact.n} / QUICK KNOWLEDGE</span><h3>{fact.title}</h3><p>{fact.body}</p></article>)}
-      </div>
-    </section>
-
-    <section class="action-panel">
-      <div><span class="kicker">CHECK BEFORE YOU GO OUT</span><h2>外出前の確認ポイント</h2></div>
-      <ol>
-        <li>出発地だけでなく、目的地と移動経路の時間別天気を確認する。</li>
-        <li>雨・雪・雷・強風の予報があれば、鉄道・航空・道路の運行情報も確認する。</li>
-        <li>事故や災害の速報は、自治体・気象庁・交通事業者などの更新を確認する。</li>
-        <li>未確定の情報は断定して拡散せず、公式発表や続報を待つ。</li>
-      </ol>
-      <p>警報や避難情報が出ている場合は、記事よりも自治体・気象庁などの案内を優先してください。</p>
-    </section>
-
-    <section class="sources-section">
-      <div><span class="kicker">PRIMARY SOURCES</span><h2>確認した情報源</h2></div>
-      <ul>{sourceLinks.map((source) => <li><a href={source.href} target="_blank" rel="noopener noreferrer">{source.label} ↗</a></li>)}</ul>
-      <p>ニュースの確認基準：2026年11月9日 16:03 JST。Yahoo! JAPANの主要見出しを手掛かりに、警察庁・消防庁・日本卓球協会などの公式資料と報道機関の配信時刻を確認しました。死傷者数や天気予報は更新される場合があります。「内定」など未確定の報道は、正式発表と区別しています。</p>
-    </section>
-
-    <footer class="news-footer"><a href="/">KNOT.</a><span>INDEPENDENT NEWS & KNOWLEDGE / UPDATED DAILY</span><a href="/blog/">通常の記事一覧へ ↗</a></footer>
+    <footer class="ai-news-footer"><a href={BASE}>KNOT.</a><span>AIを活用して作成した記事を掲載しています。内容・数値は必ず参照元もご確認ください。</span><a href={`${BASE}blog/`}>通常の記事一覧へ ↗</a></footer>
   </main>
 </Layout>
 
 <style>
-:global(html:has(.news-page)){color-scheme:dark;background:#08090b;color:#f4f2ee}
-:global(html:has(.news-page) body){background:#08090b;color:#f4f2ee}
-:global(html:has(.news-page) .site-shell){max-width:none}
-:global(html:has(.news-page) .site-header){max-width:1240px;margin:0 auto;background:#08090b;border-color:#292a2d}
-:global(html:has(.news-page) .site-footer){display:none}
-.news-page{--bg:#08090b;--panel:#111316;--line:#303136;--muted:#a1a2a5;--accent:#d9a66b;max-width:1240px;margin:0 auto;padding:16px 28px 50px;background:#08090b;color:#f4f2ee;font-family:Arial,"Noto Sans JP",sans-serif}
-.news-page a{color:inherit;text-decoration:none}
-.news-masthead{border-bottom:1px solid var(--line)}
-.masthead-top,.edition-line,.side-heading{display:flex;justify-content:space-between;gap:15px;color:var(--muted);font:10px ui-monospace,monospace;letter-spacing:.14em}
-.masthead-top{padding:17px 0;border-bottom:1px solid var(--line)}
-.masthead-main{display:flex;align-items:end;justify-content:space-between;padding:28px 0 25px;gap:20px}
-.masthead-main>a{font-size:clamp(52px,9vw,100px);font-weight:950;line-height:.8;letter-spacing:-.09em}
-.masthead-main>a span{color:var(--accent)}
-.masthead-main p{margin:0;color:#c1c0bd;font-size:13px;letter-spacing:.06em}
-.news-categories{display:flex;gap:0;overflow-x:auto;border-top:1px solid var(--line)}
-.news-categories a{white-space:nowrap;padding:15px 22px 14px 0;margin-right:25px;font-size:12px;font-weight:700;color:#d0d0ce}
-.news-categories a:hover,.read-link:hover,.feed-bottom a:hover{color:var(--accent)}
-.edition-line{padding:19px 0}
-.lead-grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(290px,.75fr);gap:36px;padding:14px 0 54px;border-bottom:1px solid var(--line)}
-.lead-story{display:grid;grid-template-columns:1.08fr .92fr;gap:28px;align-items:center}
-.lead-image{position:relative;display:flex;align-items:center;justify-content:center;min-height:340px;overflow:hidden;background:radial-gradient(circle at 50% 45%,#3a3028 0,#19191a 38%,#101114 74%);border:1px solid #373331}
-.earth-graphic{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;width:250px;height:250px;border:1px solid #8b6c50;border-radius:50%;box-shadow:0 0 0 18px #d9a66b0b,0 0 0 40px #d9a66b08}
-.earth-graphic:before,.earth-graphic:after{content:"";position:absolute;border:1px solid #d9a66b45;border-radius:50%;inset:25px -18px}
-.earth-graphic:after{inset:-18px 25px}
-.earth-graphic span{font:10px ui-monospace,monospace;letter-spacing:.25em;color:#d9a66b}
-.earth-graphic strong{font-size:116px;line-height:1;font-weight:300;letter-spacing:-.1em}.earth-graphic strong span{font-size:48px;color:#d9a66b}
-.earth-graphic small{font-size:11px;letter-spacing:.2em;color:#d4cec6}
-.earth-graphic i{position:absolute;bottom:45px;width:8px;height:8px;background:#e8b67e;border-radius:50%;box-shadow:0 0 20px 8px #d9a66b88}
-.image-caption{position:absolute;left:15px;bottom:13px;font-size:9px;color:#aaa}
-.lead-copy .kicker,.kicker{font:10px ui-monospace,monospace;letter-spacing:.18em;color:var(--accent)}
-.lead-copy h1{font-size:clamp(24px,3vw,38px);line-height:1.5;letter-spacing:-.05em;margin:17px 0}
-.lead-copy>p{font-size:13px;color:#b9b8b5;line-height:2.05;margin:0}
-.lead-meta{display:flex;gap:18px;margin-top:19px;font:10px ui-monospace,monospace;color:var(--muted)}
-.read-link{display:inline-flex;gap:35px;align-items:center;margin-top:24px;padding:11px 0;border-bottom:1px solid var(--accent);font-size:12px;font-weight:800}
-.read-link b{font-size:18px;color:var(--accent)}
-.side-heading{padding:8px 0 17px;border-bottom:1px solid var(--line)}
-.side-item{display:grid;grid-template-columns:32px minmax(0,1fr) 14px;gap:12px;padding:18px 0;border-bottom:1px solid var(--line);align-items:start}
-.side-number{font:12px ui-monospace,monospace;color:var(--accent)}
-.side-item small{font-size:9px;color:var(--muted)}
-.side-item h2{font-size:14px;line-height:1.6;margin:7px 0;font-weight:750}
-.side-item p{font-size:10px;color:var(--muted);margin:0}
-.side-item>b{font-size:13px;color:var(--muted)}
-.section-title{display:flex;justify-content:space-between;align-items:end;gap:20px;padding:38px 0 18px;border-bottom:1px solid var(--line)}
-.section-title h2,.knowledge-head h2,.sources-section h2,.action-panel h2{font-size:28px;letter-spacing:-.04em;margin:8px 0 0}
-.section-title>p,.knowledge-head>p{max-width:440px;color:var(--muted);font-size:11px;line-height:1.9;margin:0}
-.feed-card{display:grid;grid-template-columns:52px minmax(0,1fr);gap:16px;padding:25px 0;border-bottom:1px solid var(--line)}
-.feed-index{font:16px ui-monospace,monospace;color:var(--accent)}
-.feed-meta{display:flex;gap:14px;align-items:center;font-size:10px;color:var(--muted)}
-.feed-meta span{color:var(--accent);font-weight:700}
-.feed-content h3{font-size:19px;line-height:1.55;margin:8px 0}
-.feed-content>p{font-size:12px;line-height:2;color:#b8b8b7;margin:0;max-width:850px}
-.feed-bottom{display:flex;justify-content:space-between;gap:15px;margin-top:15px;font-size:10px;color:var(--muted)}
-.feed-bottom a{color:#e2c19b}
-.knowledge-section{padding:55px 0;border-bottom:1px solid var(--line)}
-.knowledge-head{margin-bottom:22px}.knowledge-head>p{margin-top:9px}
-.fact-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.fact-card{padding:22px;background:#111316;border:1px solid #2d2e32;min-height:185px}
-.fact-card>span{font:9px ui-monospace,monospace;letter-spacing:.12em;color:var(--accent)}
-.fact-card h3{font-size:16px;line-height:1.5;margin:18px 0 9px}
-.fact-card p{font-size:11px;line-height:1.95;color:#b6b5b3;margin:0}
-.action-panel{display:grid;grid-template-columns:.7fr 1.3fr;gap:10px 35px;padding:45px 0;border-bottom:1px solid var(--line)}
-.action-panel ol{margin:0;padding-left:22px;color:#d3d0ca;font-size:12px;line-height:2.2}
-.action-panel>p{grid-column:2;color:var(--muted);font-size:10px;line-height:1.8;margin:0}
-.sources-section{display:grid;grid-template-columns:.7fr 1.3fr;gap:20px;padding:40px 0}
-.sources-section ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.sources-section li a{font-size:11px;color:#d8bd9c}
-.sources-section>p{grid-column:2;font-size:10px;color:var(--muted);margin:0;line-height:1.8}
-.news-footer{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:22px 0 0;border-top:1px solid var(--line);font-size:10px;color:var(--muted)}
-.news-footer>a:first-child{font-size:22px;font-weight:900;letter-spacing:-.07em;color:#f4f2ee}
-.news-footer>a:last-child{color:var(--accent)}
-@media(max-width:850px){.lead-grid{grid-template-columns:1fr}.lead-story{grid-template-columns:1fr 1fr}.side-brief{display:grid;grid-template-columns:repeat(3,1fr);gap:0 18px}.side-heading{grid-column:1/-1}.side-item{grid-template-columns:25px 1fr}.side-item>b{display:none}.side-item h2{font-size:12px}.fact-grid{grid-template-columns:1fr}.fact-card{min-height:0}.action-panel,.sources-section{grid-template-columns:1fr}.action-panel>p,.sources-section>p{grid-column:1}}
-@media(max-width:600px){.news-page{padding:8px 16px 32px}.masthead-top{font-size:8px}.masthead-main{align-items:start;flex-direction:column;gap:14px}.masthead-main p{font-size:11px}.news-categories a{margin-right:12px;padding-right:10px;font-size:10px}.edition-line{font-size:8px}.lead-grid{gap:25px;padding-bottom:35px}.lead-story{grid-template-columns:1fr;gap:18px}.lead-image{min-height:260px}.earth-graphic{transform:scale(.8)}.lead-copy h1{font-size:25px}.side-brief{grid-template-columns:1fr}.side-item{grid-template-columns:28px 1fr}.side-item h2{font-size:14px}.section-title{align-items:start;flex-direction:column}.section-title h2,.knowledge-head h2,.sources-section h2,.action-panel h2{font-size:24px}.feed-card{grid-template-columns:30px 1fr;gap:8px}.feed-content h3{font-size:16px}.feed-bottom{flex-direction:column}.knowledge-section{padding:38px 0}.sources-section ul{grid-template-columns:1fr}.news-footer{flex-wrap:wrap}.news-footer>span{order:3;width:100%}}
+:global(html:has(.ai-news)){background:#f5f5f2;color:#191a1b}
+:global(html:has(.ai-news) body){background:#f5f5f2;color:#191a1b}
+:global(html:has(.ai-news) .site-header){max-width:1180px;background:transparent;border:0;border-bottom:1px solid #d8d8d2;border-radius:0;box-shadow:none}
+:global(html:has(.ai-news) .site-footer){display:none}
+.ai-news{--ink:#191a1b;--muted:#737570;--line:#d9dad5;--accent:#d34c3f;max-width:1180px;margin:auto;padding:12px 28px 50px;color:var(--ink);font-family:Arial,"Noto Sans JP",sans-serif}
+.ai-news a{color:inherit;text-decoration:none}
+.ai-news-topline{display:flex;justify-content:space-between;gap:14px;padding:16px 0;border-bottom:1px solid var(--line);font:10px ui-monospace,monospace;letter-spacing:.12em;color:var(--muted)}
+.ai-news-topline a{font:900 17px Arial,sans-serif;letter-spacing:-.07em;color:var(--ink)}
+.ai-news-title{padding:54px 0 36px;border-bottom:1px solid var(--line)}
+.ai-news-kicker,.ai-news-section-heading>div>span{font:10px ui-monospace,monospace;letter-spacing:.17em;color:var(--accent);font-weight:700}
+.ai-news-title h1{font-size:clamp(66px,12vw,130px);letter-spacing:-.1em;line-height:.9;margin:17px 0 15px;font-weight:950}
+.ai-news-title h1 span{color:var(--accent)}
+.ai-news-title p{font-size:14px;color:var(--muted);margin:0}
+.ai-news-nav{display:flex;gap:25px;align-items:center;padding:16px 0;border-bottom:1px solid var(--line);font-size:11px;font-weight:700}
+.ai-news-nav a:hover,.ai-news-row:hover h3{color:var(--accent)}
+.ai-news-nav b{margin-left:5px;color:var(--accent)}
+.ai-news-section{padding:44px 0 20px}
+.ai-news-section-heading{display:flex;justify-content:space-between;align-items:end;gap:15px;margin-bottom:20px}
+.ai-news-section-heading h2{font-size:clamp(24px,3vw,34px);letter-spacing:-.05em;margin:9px 0 0}
+.ai-news-section-heading>small{font:10px ui-monospace,monospace;color:var(--muted)}
+.ai-news-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.ai-news-card{display:block;border:1px solid var(--line);background:#fff;min-width:0;transition:transform .2s,box-shadow .2s}
+.ai-news-card:hover{transform:translateY(-3px);box-shadow:0 12px 30px #0000000b}
+.ai-news-thumb{height:210px;position:relative;background:#e6e6e1;overflow:hidden;display:grid;place-items:center}
+.ai-news-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.ai-news-thumb>span{font:800 25px Arial;color:#888}
+.ai-news-thumb>b{position:absolute;left:12px;bottom:12px;background:#191a1b;color:#fff;padding:6px 9px;font:9px ui-monospace,monospace;letter-spacing:.12em}
+.ai-news-card-copy{padding:19px 20px 17px}
+.ai-news-meta{display:flex;gap:12px;align-items:center;flex-wrap:wrap;font-size:10px;color:var(--muted)}
+.ai-news-meta>span{color:var(--accent);font-weight:800}
+.ai-news-meta time{font-variant-numeric:tabular-nums}
+.ai-news-card h3{font-size:19px;line-height:1.55;letter-spacing:-.03em;margin:12px 0 8px}
+.ai-news-card-copy>p,.ai-news-row-content>p{font-size:12px;line-height:1.9;color:var(--muted);margin:0}
+.ai-news-card-foot{display:flex;justify-content:space-between;margin-top:17px;padding-top:12px;border-top:1px solid #eee;font-size:10px;color:var(--muted)}
+.ai-news-card-foot span:first-child{color:var(--accent);font-weight:800}
+.ai-news-empty{border:1px dashed #c8c9c3;padding:25px;background:#fff}
+.ai-news-empty p{font-size:12px;color:var(--muted);line-height:1.8}
+.ai-news-archive{border-top:1px solid var(--line);margin-top:40px}
+.ai-news-list{border-top:1px solid var(--line)}
+.ai-news-row{display:grid;grid-template-columns:120px minmax(0,1fr) 22px;gap:22px;padding:20px 8px;border-bottom:1px solid var(--line);align-items:center}
+.ai-news-row-date{display:flex;flex-direction:column;gap:5px;font-size:11px;font-variant-numeric:tabular-nums}
+.ai-news-row-date span{font-size:10px;color:var(--muted)}
+.ai-news-row-content h3{font-size:17px;line-height:1.5;margin:7px 0 5px}
+.ai-news-meta b{font-size:9px;color:var(--accent);border:1px solid #e5b8b1;padding:2px 6px;font-weight:700}
+.ai-news-arrow{font-size:18px;color:var(--muted)}
+.ai-news-footer{display:flex;justify-content:space-between;gap:20px;align-items:center;border-top:1px solid var(--line);padding:24px 0 0;margin-top:40px;font-size:10px;color:var(--muted)}
+.ai-news-footer>a:first-child{font-size:17px;font-weight:900;color:var(--ink)}
+.ai-news-footer>a:last-child{font-weight:800;color:var(--ink);white-space:nowrap}
+@media(max-width:700px){.ai-news{padding:8px 16px 35px}.ai-news-topline{font-size:8px;flex-wrap:wrap}.ai-news-title{padding:43px 0 28px}.ai-news-title p{font-size:12px;line-height:1.8}.ai-news-nav{gap:14px;overflow-x:auto;font-size:10px;white-space:nowrap}.ai-news-section{padding-top:32px}.ai-news-grid{grid-template-columns:1fr;gap:14px}.ai-news-thumb{height:190px}.ai-news-row{grid-template-columns:1fr 20px;gap:7px;padding:17px 2px}.ai-news-row-date{grid-column:1/-1;flex-direction:row;align-items:center}.ai-news-row-content h3{font-size:15px}.ai-news-footer{align-items:flex-start;flex-direction:column;gap:12px;line-height:1.7}}
 </style>
