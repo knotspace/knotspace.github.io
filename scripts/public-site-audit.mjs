@@ -36,8 +36,8 @@ for (const sitemapUrl of sitemapUrls) {
     const response = await fetch(sitemapUrl);
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const xml = await response.text();
-    for (const match of xml.matchAll(/<loc>(.*?)<\\/loc>/g)) {
-      const url = match[1].trim();
+    for (const entry of xml.split('<loc>').slice(1)) {
+      const url = entry.split('</loc>')[0].trim();
       if (url.startsWith('https://knotspace.github.io/')) {
         allTargets.set(url, new URL(url).pathname.split('/').filter(Boolean)[0] || 'KNOT');
       }
