@@ -14,7 +14,7 @@ const todayPosts = aiPosts.filter((post) => {
 const archivePosts = aiPosts;
 const dateLabel = (date: Date) => date.toLocaleDateString('ja-JP', { timeZone: 'Asia/Tokyo', year: 'numeric', month: 'long', day: 'numeric' });
 const timeLabel = (date: Date) => date.toLocaleTimeString('ja-JP', { timeZone: 'Asia/Tokyo', hour: '2-digit', minute: '2-digit' });
-const readingTime = (body = '') => Math.max(1, Math.ceil(body.replace(/\\s/g, '').length / 500));
+const readingTime = (body = '') => Math.max(1, Math.ceil(body.length / 1000));
 const BASE = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 const newsJsonLd = {
   '@context': 'https://schema.org',
