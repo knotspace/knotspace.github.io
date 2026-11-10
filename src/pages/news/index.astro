@@ -33,7 +33,7 @@ const newsJsonLd = {
       name: post.data.title,
     })),
   },
-};,
+};
 const newsBreadcrumbJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
@@ -42,7 +42,8 @@ const newsBreadcrumbJsonLd = {
     { '@type': 'ListItem', position: 2, name: 'NEWS｜AI生成記事', item: 'https://knotspace.github.io/news/' },
   ],
 };
----｜AI生成ニュース・トレンド記事 | KNOT" description="KNOTがAIを活用して作成したニュース・トレンド記事を掲載。今日更新した記事と、これまでに生成した記事をまとめて確認できます。" structuredData={[newsJsonLd, newsBreadcrumbJsonLd]}>
+---
+<Layout title="NEWS｜AI生成ニュース・トレンド記事 | KNOT" description="KNOTがAIを活用して作成したニュース・トレンド記事を掲載。今日更新した記事と、これまでに生成した記事をまとめて確認できます。" structuredData={[newsJsonLd, newsBreadcrumbJsonLd]}>
   <main class="ai-news">
     <header class="ai-news-head">
       <div class="ai-news-topline"><a href={BASE}>KNOT.</a><span>AI-ASSISTED NEWS & TREND DESK</span><span>{today.replaceAll('-', '.')}</span></div>
