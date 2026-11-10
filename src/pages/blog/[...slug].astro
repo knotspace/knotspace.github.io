@@ -41,7 +41,7 @@ interface Props {
 }
 
 const { post } = Astro.props as Props;
-const isAiGenerated = post.data.aiGenerated || /^\\*\\*AI生成記事\\*\\*/.test((post.body ?? '').trimStart());
+const isAiGenerated = post.data.aiGenerated || (post.body ?? '').trimStart().startsWith('**AI生成記事**');
 const { Content, headings } = await render(post);
 const contentBlocks = Array.isArray(post.data.blocks) ? post.data.blocks : [];
 const hasLegacyBody = Boolean((post.body ?? '').trim());
@@ -66,7 +66,7 @@ const time = isDateOnly ? '00:00' : post.data.pubDate.toLocaleTimeString('ja-JP'
 const articleText = (post.body ?? '').replace(/\!\[[^\]]*\]\([^)]*\)/g, ' ').replace(/<[^>]+>/g, ' ').replace(/[#>*_\x60~|\[\](){}]/g, ' ');
 const readingMinutes = Math.max(1, Math.ceil(articleText.replace(/\s/g, '').length / 500));
 const allPosts = (await getCollection('blog'))
-  .filter((item) => item.id !== post.id && !item.data.aiGenerated && !/^\\*\\*AI生成記事\\*\\*/.test((item.body ?? '').trimStart()) && (!item.data.publishAt || item.data.publishAt <= new Date()))
+  .filter((item) => item.id !== post.id && !item.data.aiGenerated && !(item.body ?? '').trimStart().startsWith('**AI生成記事**') && (!item.data.publishAt || item.data.publishAt <= new Date()))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf() || b.id.localeCompare(a.id));
 const relatedPosts = allPosts.filter((item) => item.data.category === post.data.category).slice(0, 3);
 const recommendations = relatedPosts.length ? relatedPosts : allPosts.slice(0, 3);
