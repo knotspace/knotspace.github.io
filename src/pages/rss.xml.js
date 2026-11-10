@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 export async function GET(context) {
   const now = new Date();
   const posts = (await getCollection('blog'))
-    .filter((post) => post.data.contentType !== 'trend' && (!post.data.publishAt || post.data.publishAt <= now))
+    .filter((post) => !post.data.aiGenerated && post.data.contentType !== 'trend' && (!post.data.publishAt || post.data.publishAt <= now))
     .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
   const site = context.site ?? new URL('https://knotspace.github.io');
