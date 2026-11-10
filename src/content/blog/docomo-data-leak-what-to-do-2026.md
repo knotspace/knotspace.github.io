@@ -1,12 +1,16 @@
-------
+---
 title: "ドコモの情報流出で何をすべき？不審SMSへの対策と確認ポイント"
 description: "NTTドコモが公表した最大約30万件の顧客情報流出。対象情報、ドコモからの案内の確認方法、不審なSMS・電話への対処を公式発表をもとに整理します。"
 pubDate: "2026-11-08T13:00:00+09:00"
 category: "スマホ・セキュリティ"
+contentType: trend
+aiGenerated: true
 heroImage: "/blog-art/editorial-docomo-data-leak-what-to-do-2026.svg"
 updatedDate: 2026-11-08
 ---
 
+
+**AI生成記事**：この記事はAIを活用して作成しています。公開情報をもとに構成し、参照元を掲載しています。最新情報や重要な内容は、リンク先の公式資料・一次情報もご確認ください。
 
 
 <figure class="knot-figure"><img src="/blog-art/editorial-docomo-data-leak-what-to-do-2026.svg" alt="情報流出の確認手順を公式案内・不審SMS・認証に分けた図解" loading="lazy" decoding="async" width="1200" height="630" /><figcaption>図版：KNOT制作・記事の要点を整理したオリジナル図解</figcaption></figure>
