@@ -31,11 +31,30 @@ const BASE = import.meta.env.BASE_URL.endsWith('/')
 const isDateOnly = (date: Date) => date.getUTCHours() === 0 && date.getUTCMinutes() === 0 && date.getUTCSeconds() === 0;
 const dateFormat = (date: Date) => date.toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric', timeZone: isDateOnly(date) ? 'UTC' : 'Asia/Tokyo' });
 const timeFormat = (date: Date) => isDateOnly(date) ? '00:00' : date.toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Tokyo' });
+const blogJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: '記事一覧 | KNOT',
+  description: 'KNOTの通常ブログ記事一覧。Web制作、テクノロジー、読書、学習などの記録。',
+  url: new URL('/blog/', Astro.site ?? Astro.url).href,
+  inLanguage: 'ja-JP',
+  mainEntity: {
+    '@type': 'ItemList',
+    numberOfItems: regularPosts.length,
+    itemListElement: regularPosts.map((post, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      url: new URL(`/blog/${post.id}/`, Astro.site ?? Astro.url).href,
+      name: post.data.title,
+    })),
+  },
+};
 ---
 
 <Layout
   title="記事一覧 | KNOT"
   description="KNOTの記事一覧。Web制作、PC・フリーソフト、Androidアプリ、本・読書、英検や高校受験などの記事を掲載しています。"
+  structuredData={blogJsonLd}
 >
   <section class="archive-header">
     <span class="eyebrow">THE JOURNAL</span>
