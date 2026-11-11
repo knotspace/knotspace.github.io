@@ -15,21 +15,30 @@ const result = spawnSync(command, ["tinacms", "build"], { stdio: "inherit", env:
 if (result.error) throw result.error;
 if (result.status !== 0) process.exit(result.status ?? 1);
 
-// TinaCMS generates its admin app in public/admin. Add a small, isolated
-// Japanese UI layer after each build so it survives clean CI deployments.
 const adminDir = resolve("public/admin");
 const adminHtml = resolve(adminDir, "index.html");
 const localeSource = resolve("scripts/tina-ja.js");
+const pwaSource = resolve("public/admin-pwa");
 
 try {
   await mkdir(adminDir, { recursive: true });
   await copyFile(localeSource, resolve(adminDir, "knot-ja.js"));
+  for (const file of ["manifest.webmanifest", "icon.svg", "offline.html", "sw.js"]) {
+    await copyFile(resolve(pwaSource, file), resolve(adminDir, file));
+  }
+
   let html = await readFile(adminHtml, "utf8");
   if (!html.includes("knot-ja.js")) {
-    html = html.replace("</body>", '  <script src="./knot-ja.js"></script>\n</body>');
-    await writeFile(adminHtml, html, "utf8");
+    html = html.replace("</body>", '  <script src="./knot-ja.js"></script>\\n</body>');
   }
-  console.log("[TinaCMS] 管理画面に日本語UI補助を適用しました。");
+  if (!html.includes('rel="manifest"')) {
+    html = html.replace("</head>", '  <link rel="manifest" href="./manifest.webmanifest">\\n  <meta name="theme-color" content="#0b1220">\\n</head>');
+  }
+  if (!html.includes("knot-admin-pwa")) {
+    html = html.replace("</body>", '  <script id="knot-admin-pwa">if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("/admin/sw.js", { scope: "/admin/" }).catch(() => {}));</script>\\n</body>');
+  }
+  await writeFile(adminHtml, html, "utf8");
+  console.log("[TinaCMS] 日本語UI補助とKNOT Admin PWAを適用しました。");
 } catch (error) {
-  console.warn("[TinaCMS] 日本語UI補助を適用できませんでした:", error.message);
+  console.warn("[TinaCMS] 管理画面の追加機能を適用できませんでした:", error.message);
 }
