@@ -28,6 +28,7 @@ export default defineConfig({
             showFirst: true,
             description: "記事URLに使うファイル名（スラッグ）です。英数字とハイフンがおすすめです。",
           },
+          router: ({ document }) => `/blog/${document._sys.filename}/`,
         },
         fields: [
           { type: "string", name: "title", label: "タイトル", isTitle: true, required: true },
