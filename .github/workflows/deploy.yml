@@ -90,6 +90,9 @@ jobs:
       - name: Install dependencies
         run: npm install --no-audit --no-fund
       - name: Build Astro site
+        env:
+          TINA_CLIENT_ID: ${{ secrets.TINA_CLIENT_ID }}
+          TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
         run: npm run build
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9
