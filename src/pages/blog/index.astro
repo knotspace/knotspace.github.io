@@ -682,4 +682,10 @@ const blogJsonLd = {
   @media(max-width:780px){.content-layout{grid-template-columns:1fr}.sidebar{grid-template-columns:repeat(2,minmax(0,1fr))}}
   @media(max-width:520px){.post-card{grid-template-columns:112px minmax(0,1fr);gap:12px}.post-thumbnail{width:112px;height:88px}.post-info p{display:block}.sidebar{display:flex}.category-filters{width:100%;overflow-x:auto}.filter-button{white-space:nowrap}}
 
+
+  .category-filters{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;border:0;width:auto;max-width:100%}
+  .filter-button{border:1px solid var(--line);border-radius:999px;padding:9px 15px;background:var(--surface);color:var(--muted);font-size:11px;font-weight:750;transition:background .18s,color .18s,border-color .18s}
+  .filter-button.active,.filter-button:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+  @media(max-width:700px){.category-filters{flex-wrap:nowrap;overflow-x:auto;padding:2px 0 7px;scrollbar-width:thin}.filter-button{flex:0 0 auto}}
+
 </style>
