@@ -10,9 +10,6 @@ updatedDate: 2026-11-08
 ---
 
 
-**AI生成記事**：この記事はAIを活用して作成しています。公開情報をもとに構成し、参照元を掲載しています。最新情報や重要な内容は、リンク先の公式資料・一次情報もご確認ください。
-
-
 <figure class="knot-figure"><img src="/blog-art/editorial-vivant-betsuhan-ceremonial-music-release-2026.svg" alt="VIVANTの劇中音楽と配信予定の2曲を整理した図解" loading="lazy" decoding="async" width="1200" height="630" /><figcaption>図版：KNOT制作・記事の要点を整理したオリジナル図解</figcaption></figure>
 
 <figure class="knot-figure"><img src="https://images.pexels.com/photos/32545976/pexels-photo-32545976.jpeg?cs=srgb&dl=pexels-jonas-baumann-204162293-32545976.jpg&fm=jpg" alt="コンサートホールでオーケストラを指揮する指揮者。作品そのものの写真ではなく、劇中音楽をイメージした写真" loading="lazy" decoding="async" width="1000" height="667" /><figcaption>写真：Jonas Baumann / <a href="https://www.pexels.com/photo/dynamic-orchestra-conductor-leading-performance-32545976/" target="_blank" rel="noopener noreferrer">Pexels掲載ページ</a>（Pexels License・<a href="https://www.pexels.com/ja-jp/license/" target="_blank" rel="noopener noreferrer">利用条件</a>）</figcaption></figure>
