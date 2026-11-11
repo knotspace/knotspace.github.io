@@ -29,13 +29,13 @@ try {
 
   let html = await readFile(adminHtml, "utf8");
   if (!html.includes("knot-ja.js")) {
-    html = html.replace("</body>", '  <script src="./knot-ja.js"></script>\\n</body>');
+    html = html.replace("</body>", '  <script src="./knot-ja.js"></script>\n</body>');
   }
   if (!html.includes('rel="manifest"')) {
-    html = html.replace("</head>", '  <link rel="manifest" href="./manifest.webmanifest">\\n  <meta name="theme-color" content="#0b1220">\\n</head>');
+    html = html.replace("</head>", '  <link rel="manifest" href="./manifest.webmanifest">\n  <meta name="theme-color" content="#0b1220">\n</head>');
   }
   if (!html.includes("knot-admin-pwa")) {
-    html = html.replace("</body>", '  <script id="knot-admin-pwa">if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("/admin/sw.js", { scope: "/admin/" }).catch(() => {}));</script>\\n</body>');
+    html = html.replace("</body>", '  <script id="knot-admin-pwa">if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("/admin/sw.js", { scope: "/admin/" }).catch(() => {}));</script>\n</body>');
   }
   await writeFile(adminHtml, html, "utf8");
   console.log("[TinaCMS] 日本語UI補助とKNOT Admin PWAを適用しました。");
