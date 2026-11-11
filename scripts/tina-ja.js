@@ -4,6 +4,9 @@
   const translations = new Map([
     ["Welcome to Tina! This is your dashboard for editing or creating content. Select a collection on the left to begin.", "TinaCMSへようこそ。左側の「ブログ記事」から記事を選択・作成できます。"],
     ["Create New", "新規作成"],
+    ["Raw Markdown", "Markdown編集"],
+    ["Raw", "Markdown編集"],
+    ["Edit Markdown", "Markdown編集"],
     ["Create new", "新規作成"],
     ["Save", "保存"],
     ["Reset", "リセット"],
