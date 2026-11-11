@@ -688,4 +688,39 @@ const blogJsonLd = {
   .filter-button.active,.filter-button:hover{background:var(--accent);border-color:var(--accent);color:#fff}
   @media(max-width:700px){.category-filters{flex-wrap:nowrap;overflow-x:auto;padding:2px 0 7px;scrollbar-width:thin}.filter-button{flex:0 0 auto}}
 
+  /* Mobile archive: prevent nested grids and long labels from forcing overflow. */
+  .content-layout,.main-column,.archive-panel,.archive-list,.post-card,.post-info{min-width:0}
+  .post-info h2,.post-info p{overflow-wrap:anywhere}
+  #article-search{display:block;max-width:100%;min-width:0}
+  .category-filters{max-width:100%;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+  .filter-button{flex:0 0 auto;white-space:nowrap}
+  .post-thumbnail img{display:block}
+  @media(max-width:700px){
+    .content-layout{display:flex;flex-direction:column;gap:24px;padding-top:18px}
+    .main-column,.sidebar{width:100%}
+    .archive-header{padding:24px 0 18px}
+    .archive-actions{align-items:center;flex-wrap:wrap}
+    .filter-area{width:100%;padding-bottom:14px}
+    .sort-controls{display:flex;flex-wrap:nowrap;overflow-x:auto;padding:2px 0 7px;margin-bottom:8px}
+    .sort-label,.sort-button{flex:0 0 auto;white-space:nowrap}
+    .category-filters{display:flex;flex-wrap:nowrap;overflow-x:auto;width:100%;padding:2px 1px 9px;margin-top:10px}
+    .post-card{grid-template-columns:minmax(104px,30%) minmax(0,1fr);gap:13px;padding:15px 0;min-height:0}
+    .post-thumbnail{width:100%;height:auto;aspect-ratio:4/3;min-width:0}
+    .post-info{display:flex;flex-direction:column;align-items:flex-start}
+    .post-meta{display:flex;flex-wrap:wrap;gap:5px 7px;line-height:1.5}
+    .post-info h2{font-size:clamp(13px,3.8vw,15px);line-height:1.55;margin:7px 0 5px}
+    .post-info p{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;font-size:11px;line-height:1.65}
+    .read-more{display:inline-block;margin-top:6px;font-size:10px}
+    .sidebar{display:flex;flex-direction:column;gap:13px}
+    .widget{width:100%}
+    .news-page-link{margin-top:22px;padding:15px}
+  }
+  @media(max-width:380px){
+    .site-shell{width:calc(100% - 24px)}
+    .post-card{grid-template-columns:96px minmax(0,1fr);gap:10px}
+    .post-meta{font-size:9px}
+    .category-label{padding:3px 6px}
+    .archive-header h1{font-size:25px}
+  }
+
 </style>
