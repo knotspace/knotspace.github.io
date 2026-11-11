@@ -20,8 +20,8 @@ const BASE = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 const newsJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
-  name: 'KNOT NEWS｜AI生成記事',
-  description: 'KNOTがAIを活用して作成したニュース・トレンド記事。今日の更新と過去の記事を掲載。',
+  name: 'KNOT NEWS',
+  description: '今日のニュース・トレンド記事と、これまでの記事を掲載。',
   url: new URL('/news/', Astro.site ?? Astro.url).href,
   inLanguage: 'ja-JP',
   mainEntity: {
@@ -40,15 +40,15 @@ const newsBreadcrumbJsonLd = {
   '@type': 'BreadcrumbList',
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'ホーム', item: 'https://knotspace.github.io/' },
-    { '@type': 'ListItem', position: 2, name: 'NEWS｜AI生成記事', item: 'https://knotspace.github.io/news/' },
+    { '@type': 'ListItem', position: 2, name: 'NEWS', item: 'https://knotspace.github.io/news/' },
   ],
 };
 ---
-<Layout title="NEWS｜AI生成ニュース・トレンド記事 | KNOT" description="KNOTがAIを活用して作成したニュース・トレンド記事を掲載。今日更新した記事と、これまでに生成した記事をまとめて確認できます。" structuredData={[newsJsonLd, newsBreadcrumbJsonLd]}>
+<Layout title="NEWS・トレンド記事 | KNOT" description="今日のニュース・トレンド記事と、これまでの記事をまとめて確認できます。" structuredData={[newsJsonLd, newsBreadcrumbJsonLd]}>
   <main class="ai-news">
     <header class="ai-news-head">
       <div class="ai-news-topline"><a href={BASE}>KNOT.</a><span>AI-ASSISTED NEWS & TREND DESK</span><span>{today.replaceAll('-', '.')}</span></div>
-      <div class="ai-news-title"><span class="ai-news-kicker">NEWS / AI GENERATED ARTICLES</span><h1>News<span>.</span></h1><p>AIを活用して作成したニュース・トレンド記事をまとめています。</p></div>
+      <div class="ai-news-title"><span class="ai-news-kicker">NEWS / TOPICS</span><h1>News<span>.</span></h1><p>気になるニュースや、いま知っておきたい話題をまとめています。</p></div>
       <nav class="ai-news-nav" aria-label="News内ナビゲーション"><a href="#today">今日の更新 <b>{todayPosts.length}</b></a><a href="#archive">これまでの記事 <b>{aiPosts.length}</b></a><a href={`${BASE}blog/`}>通常の記事一覧 ↗</a></nav>
     </header>
 
@@ -56,23 +56,23 @@ const newsBreadcrumbJsonLd = {
       <div class="ai-news-section-heading"><div><span>TODAY / {today.replaceAll('-', '.')}</span><h2>今日更新した記事</h2></div><small>{todayPosts.length} ARTICLES</small></div>
       {todayPosts.length > 0 ? <div class="ai-news-grid">
         {todayPosts.map((post, index) => <a class="ai-news-card ai-news-card-feature" href={`${BASE}blog/${post.id}/`}>
-          <div class="ai-news-thumb">{post.data.heroImage ? <img src={post.data.heroImage} alt="" loading={index < 2 ? 'eager' : 'lazy'} decoding="async" width="720" height="420" /> : <span>NEWS / {String(index + 1).padStart(2,'0')}</span>}<b>AI GENERATED</b></div>
-          <div class="ai-news-card-copy"><div class="ai-news-meta"><span>{post.data.category}</span><time datetime={lastUpdated(post).toISOString()}>{dateLabel(lastUpdated(post))} {timeLabel(lastUpdated(post))}</time></div><h3>{post.data.title}</h3><p>{post.data.description}</p><div class="ai-news-card-foot"><span>AI生成記事</span><span>約{readingTime(post.body)}分 ↗</span></div></div>
+          <div class="ai-news-thumb">{post.data.heroImage ? <img src={post.data.heroImage} alt="" loading={index < 2 ? 'eager' : 'lazy'} decoding="async" width="720" height="420" /> : <span>NEWS / {String(index + 1).padStart(2,'0')}</span>}</div>
+          <div class="ai-news-card-copy"><div class="ai-news-meta"><span>{post.data.category}</span><time datetime={lastUpdated(post).toISOString()}>{dateLabel(lastUpdated(post))} {timeLabel(lastUpdated(post))}</time></div><h3>{post.data.title}</h3><p>{post.data.description}</p><div class="ai-news-card-foot"><span>記事を読む</span><span>約{readingTime(post.body)}分 ↗</span></div></div>
         </a>)}
-      </div> : <div class="ai-news-empty"><strong>今日の新しい記事はまだありません。</strong><p>新しいAI生成記事が公開されると、ここに自動で表示されます。過去の記事は下の一覧から読めます。</p></div>}
+      </div> : <div class="ai-news-empty"><strong>今日の新しい記事はまだありません。</strong><p>新しい記事が公開されると、ここに表示されます。過去の記事は下の一覧から読めます。</p></div>}
     </section>
 
     <section class="ai-news-section ai-news-archive" id="archive">
-      <div class="ai-news-section-heading"><div><span>ALL STORIES / ARCHIVE</span><h2>これまでに生成した記事</h2></div><small>{aiPosts.length} ARTICLES</small></div>
+      <div class="ai-news-section-heading"><div><span>ALL STORIES / ARCHIVE</span><h2>これまでの記事</h2></div><small>{aiPosts.length} ARTICLES</small></div>
       <div class="ai-news-list">
         {archivePosts.map((post) => <a class="ai-news-row" href={`${BASE}blog/${post.id}/`}>
           <div class="ai-news-row-date"><time datetime={(post.data.updatedDate ?? post.data.pubDate).toISOString()}>{dateLabel(post.data.updatedDate ?? post.data.pubDate)}</time><span>{timeLabel(post.data.updatedDate ?? post.data.pubDate)}</span></div>
-          <div class="ai-news-row-content"><div class="ai-news-meta"><span>{post.data.category}</span><b>AI生成記事</b></div><h3>{post.data.title}</h3><p>{post.data.description}</p></div><span class="ai-news-arrow">↗</span>
+          <div class="ai-news-row-content"><div class="ai-news-meta"><span>{post.data.category}</span></div><h3>{post.data.title}</h3><p>{post.data.description}</p></div><span class="ai-news-arrow">↗</span>
         </a>)}
       </div>
-      {aiPosts.length === 0 && <p class="ai-news-empty">公開中のAI生成記事はまだありません。</p>}
+      {aiPosts.length === 0 && <p class="ai-news-empty">公開中の記事はまだありません。</p>}
     </section>
-    <footer class="ai-news-footer"><a href={BASE}>KNOT.</a><span>AIを活用して作成した記事を掲載しています。内容・数値は必ず参照元もご確認ください。</span><a href={`${BASE}blog/`}>通常の記事一覧へ ↗</a></footer>
+    <footer class="ai-news-footer"><a href={BASE}>KNOT.</a><span>気になる話題を、出典とあわせて分かりやすく紹介します。</span><a href={`${BASE}blog/`}>通常の記事一覧へ ↗</a></footer>
   </main>
 </Layout>
 
