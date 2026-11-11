@@ -5,6 +5,10 @@
   "siteDescription": "Web制作・プログラミング、Windowsの無料ソフト、Androidアプリ、本・読書、英検や高校受験の勉強法。実際に調べたり使ったりしたことを記録するKNOTの個人ブログ。",
   "navigation": [
     {
+      "label": "HOME",
+      "url": "/"
+    },
+    {
       "label": "記事",
       "url": "/blog/"
     },
