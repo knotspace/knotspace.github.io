@@ -8,20 +8,14 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "prebuild": "node scripts/copy-decap-cms.mjs && node scripts/build-tina.mjs",
+    "prebuild": "node scripts/build-tina.mjs",
     "postbuild": "node scripts/copy-map.mjs && node scripts/seo-audit.mjs",
     "cms:dev": "tinacms dev -c \"astro dev\"",
     "cms:build": "tinacms build"
   },
   "dependencies": {
     "astro": "^7.4.5",
-    "decap-cms": "3.17.3",
     "pdfjs-dist": "4.10.38",
-    "@wordpress/block-editor": "^19.0.0",
-    "@wordpress/block-library": "^12.0.0",
-    "@wordpress/blocks": "^17.0.0",
-    "@wordpress/components": "^43.0.0",
-    "@wordpress/element": "^9.0.0",
     "sanitize-html": "^2.17.0",
     "tinacms": "latest"
   },
@@ -29,7 +23,6 @@
     "trim": "^0.0.3"
   },
   "devDependencies": {
-    "esbuild": "^0.25.0",
     "@tinacms/cli": "latest",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
