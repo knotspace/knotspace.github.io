@@ -30,6 +30,8 @@
   },
   "devDependencies": {
     "esbuild": "^0.25.0",
-    "@tinacms/cli": "latest"
+    "@tinacms/cli": "latest",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
   }
 }
