@@ -52,7 +52,7 @@ const homeJsonLd = {
               <span class="popular-number">{String(index + 1).padStart(2, '0')}</span>
             </div>
             <div class="popular-copy">
-              <div class="story-meta"><span>{post.data.category}</span>{post.data.aiGenerated && <span class="ai-generated-label">AI生成記事</span>}<time datetime={post.data.pubDate.toISOString()}>{dateFormat(post.data.pubDate)} {dateTimeFormat(post.data.pubDate)}</time></div>
+              <div class="story-meta"><span>{post.data.category}</span><time datetime={post.data.pubDate.toISOString()}>{dateFormat(post.data.pubDate)} {dateTimeFormat(post.data.pubDate)}</time></div>
               <h2>{post.data.title}</h2>
               <p>{post.data.description}</p>
               <span class="popular-stats" data-stats-for={post.id}>閲覧数を集計中…</span>
