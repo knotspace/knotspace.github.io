@@ -1,15 +1,15 @@
 ---
-title: "Googleの保存容量がいっぱいになったら？Gmail・Drive・フォトをまとめて整理"
-description: "Googleアカウントの容量はGmail、Google Drive、Googleフォトなどで共有されています。何が容量を使っているか確認し、安全に空きを作る手順をまとめます。"
-pubDate: "2026-11-09T16:21:00+09:00"
-category: "スマホ・PC"
-contentType: "article"
+title: Googleの保存容量がいっぱいになったら？Gmail・Drive・フォトをまとめて整理
+description: Googleアカウントの容量はGmail、Google Drive、Googleフォトなどで共有されています。何が容量を使っているか確認し、安全に空きを作る手順をまとめます。
+pubDate: 2026-11-09T07:21:00.000Z
+category: スマホ・PC
+contentType: article
 aiGenerated: true
 ---
 
 Gmailにメールが届かない、Googleフォトのバックアップが止まった、Driveにファイルをアップロードできない。こうしたトラブルが同時に起きたら、Googleアカウントの保存容量が上限に達しているかもしれません。
 
-Googleの保存容量は、Gmail・Google Drive・Googleフォトなどで共有されています。写真だけを整理しても、メールの添付ファイルやDriveの大きなデータが多ければ、空き容量はあまり増えないことがあります。
+Googleの保存容量は、Gmail・Google Drive・Googleフォトなどで共有されています。写真だけを整理しても、メールの添付ファイルやDriveの大きなデータが多ければ、空き容量はあまり増えないことがあります。　あああ
 
 ## まず、どのサービスが容量を使っているか確認
 
@@ -64,7 +64,9 @@ Googleの公式ヘルプによると、保存容量の上限に達すると、Dr
 
 Googleの容量不足は、Gmail・Drive・フォトをまとめて確認するのが近道です。まず内訳を見て、大きなファイルや不要なメールを探し、必要なデータを保存してから削除しましょう。写真の同期や共有ファイルは、削除したときの影響を確認してから操作するのが安全です。
 
----
+***
+
 **参考資料**
-- Google ドライブ ヘルプ「ドライブ、Gmail、フォトの保存容量を管理する」 https://support.google.com/drive/answer/6374270?hl=ja （2026年11月9日閲覧）
-- Google フォト「Google フォトについて」 https://www.google.com/intl/ja/photos/about/ （2026年11月9日閲覧）
+
+* Google ドライブ ヘルプ「ドライブ、Gmail、フォトの保存容量を管理する」 [https://support.google.com/drive/answer/6374270?hl=ja](https://support.google.com/drive/answer/6374270?hl=ja) （2026年11月9日閲覧）
+* Google フォト「Google フォトについて」 [https://www.google.com/intl/ja/photos/about/](https://www.google.com/intl/ja/photos/about/) （2026年11月9日閲覧）
