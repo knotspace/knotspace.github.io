@@ -107,7 +107,7 @@ const navHref = (path: string) => /^https?:\/\//i.test(path) ? path : BASE + pat
         </a>
 
         <nav aria-label="メインナビゲーション">
-          {siteSettings.navigation.map((item) => <a href={navHref(item.url)}>{item.label}</a>)}<button
+          {siteSettings.navigation.map((item) => { const target = navHref(item.url); const current = item.url === "/" ? Astro.url.pathname === BASE : Astro.url.pathname.startsWith(target); return <a href={target} class:list={{ "nav-active": current }} aria-current={current ? "page" : undefined}>{item.label}</a>; })}<button
             class="theme-toggle"
             id="theme-toggle"
             type="button"
