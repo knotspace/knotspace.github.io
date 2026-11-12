@@ -56,7 +56,8 @@ for (const sitemapUrl of sitemapUrls) {
 try {
   for (const [url, site] of allTargets) {
     for (const viewport of viewports) {
-      const page = await browser.newPage({ viewport });
+      const context = await browser.newContext({ viewport });
+      const page = await context.newPage();
       const pageErrors = [];
       const failedAssets = [];
       page.on('pageerror', error => pageErrors.push(error.message));
@@ -110,7 +111,7 @@ try {
         failures.push(result);
         console.log(JSON.stringify(result));
       } finally {
-        await page.close();
+        await context.close();
       }
     }
   }

@@ -1,9 +1,9 @@
 ---
 title: 新しいブログ編集環境を導入しました！
-description: ブログの編集環境を新しくしました。
+description: ブログの編集・公開作業を進めやすくするため、新しい編集環境を導入しました。今回の変更点と、今後の更新方針を簡単に紹介します。
 pubDate: 2026-11-11T11:34:07.433Z
 category: お知らせ
-contentType: ''
+contentType: article
 aiGenerated: false
 ---
 
