@@ -5,8 +5,14 @@ import Layout from '../../layouts/Layout.astro';
 const now = new Date();
 const lastUpdated = (post) => new Date(Math.max(post.data.pubDate.valueOf(), post.data.updatedDate?.valueOf() ?? 0));
 const today = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Tokyo', year: 'numeric', month: '2-digit', day: '2-digit' }).format(now);
+const excludedStudyNews = /英検|英語資格|資格試験|受験勉強|受験対策|入試対策|高校受験|大学受験|参考書|問題集|勉強法|学習法|勉強時間|学習計画|学習教材|教材レビュー|模試対策|過去問演習/i;
+const isStudyNews = (post) => {
+  const metadata = [post.id, post.data.title, post.data.description, post.data.category].filter(Boolean).join(' ');
+  const opening = (post.body ?? '').slice(0, 1600);
+  return excludedStudyNews.test(metadata) || excludedStudyNews.test(opening);
+};
 const aiPosts = (await getCollection('blog'))
-  .filter((post) => (post.data.aiGenerated || post.data.contentType === 'trend' || (post.body ?? '').trimStart().startsWith('**AI生成記事**')) && (!post.data.publishAt || post.data.publishAt <= now))
+  .filter((post) => (post.data.aiGenerated || post.data.contentType === 'trend' || (post.body ?? '').trimStart().startsWith('**AI生成記事**')) && !isStudyNews(post) && (!post.data.publishAt || post.data.publishAt <= now))
   .sort((a, b) => lastUpdated(b).valueOf() - lastUpdated(a).valueOf() || b.id.localeCompare(a.id));
 const todayPosts = aiPosts.filter((post) => {
   const date = lastUpdated(post);
