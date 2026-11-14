@@ -5,11 +5,11 @@ import Layout from '../../layouts/Layout.astro';
 const now = new Date();
 const lastUpdated = (post) => new Date(Math.max(post.data.pubDate.valueOf(), post.data.updatedDate?.valueOf() ?? 0));
 const today = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Tokyo', year: 'numeric', month: '2-digit', day: '2-digit' }).format(now);
-const excludedStudyNews = /英検|資格|受験|入試|模試|過去問|参考書|問題集|勉強法|学習法|勉強時間|学習計画|学習教材|教材レビュー|高校受験|大学受験/i;
+const excludedStudyNews = /英検|英語資格|資格試験|資格対策|受験勉強|受験対策|入試対策|模試|過去問|参考書|問題集|勉強法|学習法|勉強時間|学習計画|学習教材|教材レビュー|高校受験|大学受験|exam prep|study method/i;
 const isStudyNews = (post) => {
   const metadata = [post.id, post.data.title, post.data.description, post.data.category].filter(Boolean).join(' ');
-  const opening = (post.body ?? '').slice(0, 1600);
-  return excludedStudyNews.test(metadata) || excludedStudyNews.test(opening);
+  const body = post.body ?? '';
+  return excludedStudyNews.test(metadata) || excludedStudyNews.test(body);
 };
 const aiPosts = (await getCollection('blog'))
   .filter((post) => (post.data.aiGenerated || post.data.contentType === 'trend' || (post.body ?? '').trimStart().startsWith('**AI生成記事**')) && !isStudyNews(post) && (!post.data.publishAt || post.data.publishAt <= now))
@@ -19,6 +19,7 @@ const todayPosts = aiPosts.filter((post) => {
   return new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Tokyo', year: 'numeric', month: '2-digit', day: '2-digit' }).format(date) === today;
 });
 const archivePosts = aiPosts;
+const newsCategories = [...new Set(aiPosts.map((post) => post.data.category).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'ja'));
 const dateLabel = (date: Date) => date.toLocaleDateString('ja-JP', { timeZone: 'Asia/Tokyo', year: 'numeric', month: 'long', day: 'numeric' });
 const timeLabel = (date: Date) => date.toLocaleTimeString('ja-JP', { timeZone: 'Asia/Tokyo', hour: '2-digit', minute: '2-digit' });
 const readingTime = (body = '') => Math.max(1, Math.ceil(body.length / 1000));
@@ -58,10 +59,20 @@ const newsBreadcrumbJsonLd = {
       <nav class="ai-news-nav" aria-label="News内ナビゲーション"><a href="#today">今日の更新 <b>{todayPosts.length}</b></a><a href="#archive">これまでの記事 <b>{aiPosts.length}</b></a><a href={`${BASE}blog/`}>通常の記事一覧 ↗</a></nav>
     </header>
 
+    <section class="ai-news-tools" aria-label="ニュースの検索と絞り込み">
+      <label class="ai-news-search"><span class="sr-only">ニュースを検索</span><input id="news-search" type="search" placeholder="キーワードでニュースを検索" autocomplete="off" /></label>
+      <div class="ai-news-filters" role="group" aria-label="カテゴリで絞り込み">
+        <button type="button" class="is-active" data-news-filter="all" aria-pressed="true">すべて</button>
+        {newsCategories.map((category) => <button type="button" data-news-filter={category} aria-pressed="false">{category}</button>)}
+      </div>
+      <p id="news-filter-status" aria-live="polite">全{aiPosts.length}記事を表示</p>
+      <p id="news-filter-empty" hidden>条件に合うニュースはありません。</p>
+    </section>
+
     <section class="ai-news-section" id="today">
       <div class="ai-news-section-heading"><div><span>TODAY / {today.replaceAll('-', '.')}</span><h2>今日更新した記事</h2></div><small>{todayPosts.length} ARTICLES</small></div>
       {todayPosts.length > 0 ? <div class="ai-news-grid">
-        {todayPosts.map((post, index) => <a class="ai-news-card ai-news-card-feature" href={`${BASE}blog/${post.id}/`}>
+        {todayPosts.map((post, index) => <a class="ai-news-card ai-news-card-feature" href={`${BASE}blog/${post.id}/`} data-news-item data-news-id={post.id} data-news-category={post.data.category}>
           <div class="ai-news-thumb">{post.data.heroImage ? <img src={post.data.heroImage} alt="" loading={index < 2 ? 'eager' : 'lazy'} decoding="async" width="720" height="420" /> : <span>NEWS / {String(index + 1).padStart(2,'0')}</span>}</div>
           <div class="ai-news-card-copy"><div class="ai-news-meta"><span>{post.data.category}</span><time datetime={lastUpdated(post).toISOString()}>{dateLabel(lastUpdated(post))} {timeLabel(lastUpdated(post))}</time></div><h3>{post.data.title}</h3><p>{post.data.description}</p><div class="ai-news-card-foot"><span>記事を読む</span><span>約{readingTime(post.body)}分 ↗</span></div></div>
         </a>)}
@@ -71,7 +82,7 @@ const newsBreadcrumbJsonLd = {
     <section class="ai-news-section ai-news-archive" id="archive">
       <div class="ai-news-section-heading"><div><span>ALL STORIES / ARCHIVE</span><h2>これまでの記事</h2></div><small>{aiPosts.length} ARTICLES</small></div>
       <div class="ai-news-list">
-        {archivePosts.map((post) => <a class="ai-news-row" href={`${BASE}blog/${post.id}/`}>
+        {archivePosts.map((post) => <a class="ai-news-row" href={`${BASE}blog/${post.id}/`} data-news-item data-news-id={post.id} data-news-category={post.data.category}>
           <div class="ai-news-row-date"><time datetime={(post.data.updatedDate ?? post.data.pubDate).toISOString()}>{dateLabel(post.data.updatedDate ?? post.data.pubDate)}</time><span>{timeLabel(post.data.updatedDate ?? post.data.pubDate)}</span></div>
           <div class="ai-news-row-content"><div class="ai-news-meta"><span>{post.data.category}</span></div><h3>{post.data.title}</h3><p>{post.data.description}</p></div><span class="ai-news-arrow">↗</span>
         </a>)}
@@ -81,6 +92,44 @@ const newsBreadcrumbJsonLd = {
     <footer class="ai-news-footer"><a href={BASE}>KNOT.</a><span>気になる話題を、出典とあわせて分かりやすく紹介します。</span><a href={`${BASE}blog/`}>通常の記事一覧へ ↗</a></footer>
   </main>
 </Layout>
+
+
+<script>
+  const search = document.querySelector('#news-search');
+  const filterButtons = [...document.querySelectorAll('[data-news-filter]')];
+  const newsItems = [...document.querySelectorAll('[data-news-item]')];
+  const status = document.querySelector('#news-filter-status');
+  const empty = document.querySelector('#news-filter-empty');
+  let activeCategory = 'all';
+
+  function updateNewsFilter() {
+    const query = (search?.value ?? '').trim().toLocaleLowerCase('ja');
+    const visibleIds = new Set();
+    for (const item of newsItems) {
+      const categoryMatches = activeCategory === 'all' || item.dataset.newsCategory === activeCategory;
+      const textMatches = !query || item.textContent.toLocaleLowerCase('ja').includes(query);
+      const visible = categoryMatches && textMatches;
+      item.hidden = !visible;
+      if (visible) visibleIds.add(item.dataset.newsId);
+    }
+    const count = visibleIds.size;
+    if (status) status.textContent = count + '記事を表示';
+    if (empty) empty.hidden = count > 0;
+  }
+
+  search?.addEventListener('input', updateNewsFilter);
+  for (const button of filterButtons) {
+    button.addEventListener('click', () => {
+      activeCategory = button.dataset.newsFilter ?? 'all';
+      for (const candidate of filterButtons) {
+        const active = candidate === button;
+        candidate.classList.toggle('is-active', active);
+        candidate.setAttribute('aria-pressed', String(active));
+      }
+      updateNewsFilter();
+    });
+  }
+</script>
 
 <style>
 :global(html:has(.ai-news)){background:#080b10;color:#f3f6f8;color-scheme:dark}
@@ -101,6 +150,16 @@ const newsBreadcrumbJsonLd = {
 .ai-news-nav a{color:#dce5eb}
 .ai-news-nav a:hover,.ai-news-row:hover h3{color:var(--accent)}
 .ai-news-nav b{margin-left:5px;color:var(--accent)}
+
+.ai-news-tools{display:grid;gap:13px;padding:20px 0;border-bottom:1px solid var(--line)}
+.ai-news-search input{width:100%;max-width:520px;min-height:44px;padding:0 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font:inherit;font-size:13px}
+.ai-news-search input:focus-visible,.ai-news-filters button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.ai-news-filters{display:flex;flex-wrap:wrap;gap:8px}
+.ai-news-filters button{border:1px solid var(--line);border-radius:999px;background:var(--surface-soft);color:var(--muted);padding:8px 12px;font-size:11px;cursor:pointer}
+.ai-news-filters button.is-active{border-color:var(--accent);background:#183126;color:var(--accent)}
+#news-filter-status,#news-filter-empty{margin:0;font-size:11px;color:var(--muted)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+[data-news-item][hidden]{display:none!important}
 .ai-news-section{padding:44px 0 20px}
 .ai-news-section-heading{display:flex;justify-content:space-between;align-items:end;gap:15px;margin-bottom:20px}
 .ai-news-section-heading h2{font-size:clamp(24px,3vw,34px);letter-spacing:-.05em;margin:9px 0 0;color:var(--ink)}
